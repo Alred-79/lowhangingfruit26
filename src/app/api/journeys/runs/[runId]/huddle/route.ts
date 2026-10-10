@@ -4,7 +4,7 @@ import { resolveHuddleItem, startHuddle } from "@/lib/journey/collab";
 import { finalize } from "@/lib/journey/runner";
 import { stageRuns } from "@/lib/journey/store";
 
-/** Team huddle. Body: { action: "start" } | { action: "resolve", entryId, text } | { action: "close" } */
+/** Team huddle. Body: { action: "start" } | { action: "resolve", entryId, text } | { action: "close" }. Closing returns at once; the worker writes the plan and evaluation. */
 export async function POST(req: Request, ctx: { params: Promise<{ runId: string }> }) {
   const { runId } = await ctx.params;
   const r = await runFor(runId);
@@ -17,6 +17,12 @@ export async function POST(req: Request, ctx: { params: Promise<{ runId: string 
     if (!text) return bad("Say how you would settle this item.");
     return longJson(async () => ({ huddle: await resolveHuddleItem(runId, String(b.entryId || ""), text) }));
   }
-  if (b.action === "close") return longJson(() => finalize(runId));
+  if (b.action === "close") {
+    try {
+      return Response.json(finalize(runId));
+    } catch (e) {
+      return bad((e as Error).message);
+    }
+  }
   return bad("Unknown huddle action.");
 }

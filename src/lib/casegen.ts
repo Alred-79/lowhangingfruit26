@@ -1,4 +1,5 @@
 import { chatJSON, MODELS } from "./llm";
+import { makePortrait } from "./portrait";
 import { profession } from "./professions";
 import { FACT_CATEGORIES } from "./types";
 import type { CaseProfile, Fact, ClinicalAction, Artifact } from "./types";
@@ -320,6 +321,8 @@ ${o.clinicalStory}`;
   // The long lists are written in parallel. The fact list is the longest, so it is split into two
   // halves with disjoint categories.
   const t1 = Date.now();
+  // The portrait is drawn while the lists are being written, so it adds no waiting time.
+  const portrait = input.portrait ? Promise.resolve(input.portrait) : makePortrait(o.patient);
   const [who, f1, f2, r] = await Promise.all([
     stage<Pick<CaseProfile, "summary" | "persona" | "scenario" | "answerKey">>(
       "persona and scenario",
@@ -386,7 +389,8 @@ ${o.clinicalStory}`;
     knowledge: [],
     rubricId: "default",
   };
-  if (input.portrait) profile.patient.portrait = input.portrait;
+  const face = await portrait;
+  if (face) profile.patient.portrait = face;
   return normalizeCase(profile);
 }
 

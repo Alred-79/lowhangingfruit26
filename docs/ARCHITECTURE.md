@@ -36,19 +36,22 @@ flowchart LR
   APP --> DB[("SQLite file<br/>cases, encounters,<br/>messages, state")]
   APP --> FS[("Disk<br/>uploads")]
   APP -->|instance role| BR["Amazon Bedrock<br/>Claude Haiku 4.5<br/>Claude Sonnet 4.5<br/>Claude Sonnet 5"]
-  APP -->|instance role| PO["Amazon Polly<br/>generative voices"]
+  APP -->|instance role| PO["Amazon Polly<br/>generative voices (fallback)"]
+  APP -->|API key, optional| EL["ElevenLabs<br/>text to speech"]
+  AS["AI assistant or script<br/>(personal access key)"] -->|"/api/mcp, /api/episodes"| CF
 ```
 
 One Next.js application (App Router, React 19, TypeScript) serves pages and API routes. State is in
 one SQLite file through better-sqlite3. Model calls go to Amazon Bedrock through the Converse API
-(`lib/llm.ts`); speech goes to Amazon Polly (`lib/tts.ts`). There is no separate backend service,
-queue or vector store.
+(`lib/llm.ts`). Speech goes to ElevenLabs when `ELEVENLABS_API_KEY` is set and to Amazon Polly
+otherwise or on any ElevenLabs failure (`lib/tts.ts`, section 13). There is no separate backend
+service, queue or vector store.
 
 Three models are used, chosen by job (`MODELS` in `lib/llm.ts`, overridable by environment variable):
 
 | Tier | Model | Used for | Why |
 |---|---|---|---|
-| `fast` | Claude Haiku 4.5 | Per-turn gatekeeper, order matching, reply audit, patient's memory of a visit | Runs on every turn, so latency matters; the tasks are classification over a short list |
+| `fast` | Claude Haiku 4.5 | Per-turn gatekeeper, order matching, reply reconciliation (audit), patient's memory of a visit | Runs on every turn, so latency matters; the tasks are classification over a short list |
 | `chat` | Claude Sonnet 4.5 | The patient's voice; AI clinicians in Care Journeys; clarifying questions in the studio | Streams conversational text; needs to hold a persona |
 | `smart` | Claude Sonnet 5 | Case drafting, clinical consistency review, guide patches, variants, feedback scoring, journey extraction and synthesis | Long structured output where quality matters more than speed |
 
@@ -107,13 +110,47 @@ start from an empty profile (`components/studio/NewCaseWizard.tsx`).
 1. **Clarify.** For a free-text description, a short call asks at most three questions, and only
    about things that would make two case writers produce clinically different cases
    (`clarify()` in `lib/studio/ai.ts`). If that call fails, drafting proceeds without it.
-2. **Draft.** One call to the `smart` model fills a schema that mirrors `CaseProfile`
-   (`generateCase()` in `lib/casegen.ts`): 25 to 40 facts, 8 to 18 actions, 3 to 7 documents, 3 to 6
-   objectives, the answer key and one or two mismatches. It is one call rather than a pipeline of
-   small ones so that the history, medication list, lab tables and answer key are written together
-   and agree; the cost is a wait of one to two minutes with no partial result. If required
-   sections are missing the call is retried once. An uploaded source document is passed as guidance
-   and attached as a knowledge source.
+2. **Draft.** `generateCase()` in `lib/casegen.ts` runs a staged pipeline (`generateStaged()`),
+   every stage on the `smart` model with a forced schema:
+   1. **Outline**, one short call. It fixes the title, who the patient is, how they talk, the reason
+      for the visit, and a 300 to 450 word clinical story that states every specific that must
+      agree across the case: timeline, each medication with dose and how it is really taken, vitals,
+      each lab value with units, exam findings, relevant negatives, what the patient is slow to
+      admit, the patient-versus-chart mismatches and the red herrings.
+   2. **Four calls in parallel**, each given the outline and told not to change any name, value or
+      date in it: (a) faculty summary, persona, the scenario the learner sees and the answer key;
+      (b) the medical half of the facts (presenting complaint, history, review of systems,
+      medications, allergies; 18 to 22 facts); (c) the personal half (family, social, substance,
+      nutrition, function, psychosocial, goals, adherence; 14 to 18 facts); (d) the chart-at-start
+      items, the exams and orders with their fixed results, and the chart documents.
+   3. **Linking**, one short call. It is shown the facts, actions and documents that now exist, with
+      their ids, and writes the learning objectives and the mismatches against those ids.
+
+   A stage whose output fails a minimum check (for example fewer than 8 medical facts, or no
+   documents) is retried once. If the staged pipeline fails, the previous single-call generator
+   (`generateSingle()`) runs as the fallback. An uploaded source document is passed as guidance and
+   attached as a knowledge source.
+
+   Why staged: the earlier design was one call, chosen so that history, medication list, lab tables
+   and answer key were written together and agreed. It took two to four minutes and sometimes
+   dropped a section. The outline now carries the agreement instead: every number is decided once,
+   before any list is written, and the list writers copy from it. Drafting takes about 80 seconds.
+   The cost is that the four parallel writers do not see each other's output, so a detail the
+   outline did not fix can still differ between, say, a fact and a document; that is one of the
+   things the consistency check in step 6 looks for.
+
+   The case-writing rules in the system prompt apply to every stage. Three are recent additions:
+   - **No diagnosis in what the learner sees.** The title, summary and answer key are for faculty.
+     The student brief and tasks must not name the diagnosis, the hidden problem or any finding
+     ("Take a focused history of the presenting concern", not "Identify medication overuse
+     headache"). Chart-at-start items, documents released at the start and action results must not
+     reveal a reluctant or guarded fact either. `scripts/scrub-briefs.ts` applied the same rule to
+     the existing seed cases.
+   - **Chart wording records what the patient reports**, in clinician language, and never the
+     hidden truth. If the patient under-reports, the fact reads "Reports taking sumatriptan 10-12
+     days a month" and the real figure lives only in a document; that gap is the mismatch.
+   - **Actions are things the learner does or reviews** (an examination, a measurement, a named
+     screening instrument, a record review), never an interview question.
 3. **Normalise.** `normalizeCase()` repairs ids, removes references to items that do not exist,
    repairs release rules that point nowhere and makes action-to-document links symmetrical, so the
    engine can trust the profile.
@@ -145,6 +182,23 @@ Trade-off: the consistency check establishes that a case agrees with itself. It 
 that the medicine is right. That is the faculty member's review, and the label exists to show
 whether it has happened.
 
+### Students can make their own practice patient
+
+`POST /api/practice` (the card "Make your own practice patient" on the student Practice page). The
+student describes a patient or a skill in a sentence or two and picks a level; the same
+`generateCase()` drafts a case for the student's own profession and a practice visit starts on it.
+The case is stored as a draft owned by the student (`origin = 'ai_draft'`, `reviewed = 0`). It is
+never published, it is not in the practice library or in any faculty member's Studio library, and
+the student sees only the visit, not the case file. Nobody reviews it: there is no clarify step, no
+consistency check and no faculty approval, and the page says so ("Private to you. Written by AI and
+not reviewed by faculty.").
+
+### What students see of a case
+
+Case titles and summaries are written for faculty and usually name the diagnosis. Student-facing
+pages and API responses use a label built by `lib/courses/label.ts` from the patient's first name
+and age, the kind of visit and the specialty ("Denise, 41 · Diagnostic interview · Neurology").
+
 ## 5. The per-turn pipeline
 
 ```mermaid
@@ -154,9 +208,10 @@ flowchart TD
     G["1. Gatekeeper model (Haiku 4.5, temperature 0)<br/>sees: locked facts, last 6 messages, the new message<br/>proposes: which locked facts were asked for, direct or related,<br/>question type, communication signals, patient emotion"]
     G --> D["2. decide(): deterministic policy<br/>rapport update, then tier + rapport + difficulty rules<br/>output: reveal[], deflect[]"]
     D --> L["3. Ledger update<br/>state.disclosed, state.deflected, question-mix counters,<br/>documents released by rule"]
-    L --> P["4. Patient model (Sonnet 4.5, streamed)<br/>sees: persona, facts already told, facts to reveal now,<br/>topics to deflect, topic labels only for the rest"]
-    P --> A["5. Grounding audit (Haiku 4.5, temperature 0)<br/>reply vs. the facts the patient was allowed to use<br/>output: unsupported clinical claims"]
-    A --> W["6. Persist<br/>patient message + decision metadata + state snapshot,<br/>system notice if anything was flagged"]
+    L --> P["4. Patient model (Sonnet 4.5, streamed)<br/>sees: persona, chart-at-start record, facts already told,<br/>facts to reveal now, topics to deflect with the truth<br/>it must not contradict, topic labels only for the rest"]
+    P --> A["5. Reconciliation (Haiku 4.5, temperature 0)<br/>reply vs. ALL case facts: told, new this turn, still locked<br/>output: not_conveyed[], also_conveyed[], unsupported[]"]
+    A --> R["6. Ledger corrected by code<br/>released but not said: back to locked<br/>true fact said early: filed<br/>documents re-checked"]
+    R --> W["7. Persist<br/>patient message + decision metadata + state snapshot,<br/>'Outside the case record' notice if anything unsupported"]
   end
   P -. "text deltas (SSE)" .-> UI["Left: transcript, captions, voice"]
   W --> C["chartView(): built from case data + ledger only"]
@@ -197,27 +252,65 @@ The model can therefore propose anything it likes; a guarded fact still does not
 student has earned it, and the reason it did or did not come out is a number that can be shown.
 
 **3. The ledger is updated** before the patient speaks: `state.disclosed[factId] = { turn, how }`,
-deflection counts, question-mix counters, and any document whose release rule now fires.
+deflection counts, question-mix counters, and any document whose release rule now fires. This entry
+is provisional until step 5 has checked what the patient actually said.
 
 **4. The patient speaks.** `patientSystem()` in `lib/engine/patient.ts` builds the prompt for this
 one turn: who the patient is, how they feel now (from rapport and the gatekeeper's emotion),
-difficulty and variation instructions, the `says` wording of everything already told, the `says`
-wording of what is being revealed now, the topics to deflect, and the **topic labels only** of the
-remaining locked facts so the patient stays non-committal instead of denying them. The `chart` and
-`says` wording of unreleased facts is never in the prompt, so the model cannot leak them. The hard
-rules tell it that its medical story is exactly those lists: asked about any other symptom, drug,
-result or family history, the true answer is no or "I don't know". The reply streams to the browser
-as server-sent events and to the voice a sentence at a time.
+difficulty and variation instructions, and then five lists:
 
-**5. The reply is audited.** `auditReply()` gives a fast model the reply and the only clinical facts
-the patient was allowed to use, and asks for clinical details asserted as true that are not among
-them. Anything found is stored on the message and shown to the student as a notice: "Not in the
-approved case record: ... Treat this as unverified. It is not filed in the chart and does not count
-for or against you."
+- **What is on the record** (`chartAtStart`): the items the clinician can already see in the chart.
+  The patient is told they know these too and that what they say must agree with them; asked to read
+  a pill bottle or a dose, they give exactly what is there or say they do not have it to hand.
+- **What they have already told**, in `says` wording.
+- **What they share in this reply**, in `says` wording, with the instruction to say each one.
+- **What they are not ready to admit**: the topics being deflected this turn, each with its `says`
+  wording marked as the truth they are keeping to themselves. The purpose is to stop a patient who
+  is told only to dodge "alcohol use" from inventing a reassuring figure that contradicts the fact
+  when it is finally released. The instruction is to say less, never something false: no amount,
+  frequency, name or detail that differs from the truth.
+- **Topic labels only** of the remaining locked facts, so the patient stays non-committal on them
+  instead of denying them.
 
-**6. Everything is persisted**, including a snapshot of the encounter state on each patient message.
-If the patient model fails mid-stream the turn is rolled back, so nothing is recorded as disclosed
-that the patient never said.
+So the wording of a locked fact reaches the patient model in exactly one case: the student has asked
+about it directly and the policy has refused it this turn. For every other locked fact the model has
+the topic label and nothing else. The hard rules tell it that its medical story is exactly those
+lists: asked about any other symptom, drug, result or family history, the true answer is no or "I
+don't know". The reply streams to the browser as server-sent events and to the voice a sentence at
+a time.
+
+**5. The reply is reconciled with the case.** `auditReply()` in `lib/engine/gatekeeper.ts` gives a
+fast model the finished reply and **all** the case facts in three lists (already shared, new this
+turn, not yet shared), each with its chart and patient wording, plus the non-medical background, the
+chart-at-start record, and allowed context (the patient's memory of earlier visits and what the
+student just said, so the patient repeating a clinician's words is not flagged). It returns:
+
+- `not_conveyed`: facts released this turn whose substance the reply did not communicate;
+- `also_conveyed`: still-locked facts the reply stated with their specifics anyway (a vague or
+  played-down version does not count);
+- `unsupported`: concrete clinical details asserted as true that are in no case fact, or that
+  contradict one (a different drug, dose, amount, frequency, symptom, diagnosis, result or family
+  history). Denials, "I don't know", feelings, non-medical life details and rewordings are excluded.
+  At most three are kept.
+
+Ids the model returns that are not in the corresponding list are discarded.
+
+**6. Code corrects the ledger** from that result (`runTurn()`): a `not_conveyed` fact is removed
+from `state.disclosed` and is locked again, so it is not shown in the chart or counted as elicited;
+an `also_conveyed` fact is filed as disclosed this turn (it is a true case fact, and otherwise
+feedback would later call it missed); document release rules are run again. Unsupported claims are
+stored on the message and shown to the student as a notice in the transcript: "Outside the case
+record: ... The simulated patient went beyond the approved case here. Treat it as unverified; it is
+not filed in the chart."
+
+**7. Everything is persisted**, including a snapshot of the encounter state on each patient
+message. If the patient model fails mid-stream the turn is rolled back, so nothing is recorded as
+disclosed that the patient never said.
+
+Limits of steps 5 and 6: the audit runs after the text has streamed, so the student has already read
+the sentence when a notice appears, and the chart updates only when the audit returns. The auditor is
+a model and can be wrong in either direction. If the audit call fails it returns empty lists:
+nothing is flagged and the ledger stays as the policy set it in step 3.
 
 **The chart.** `chartView()` builds the right-hand side from the case and the ledger and from nothing
 else: disclosed facts in their `chart` wording grouped by category, results of actions done,
@@ -230,27 +323,39 @@ Stated as precisely as the code allows.
 
 **Guaranteed by construction**
 
-- Text written to the chart is faculty-approved text from the case, verbatim. No model writes to it.
+- Clinical findings and results written to the chart are the case's own text, verbatim: the `chart`
+  wording of a fact, the `result` of an action, the documents in the case. No model writes to the
+  chart during a visit. (That text is faculty-approved only if a faculty member reviewed the case;
+  see "Not guaranteed". On a class-shared patient the chart also holds earlier students' write-ups
+  as notes, labelled with the author and role; those are student text, not case text.)
 - An exam, test or record request can only return the `result` of an action in the case (section 7).
 - A document appears only when its release rule fires.
-- The patient model is never given the content of an unreleased fact, so it cannot reveal one by
-  being asked cleverly. It is given the topic labels of unreleased facts, which are written to be
-  non-revealing.
-- What counts as elicited or missed in feedback, and whether an objective linked to facts or actions
-  was met, is read from the ledger (section 10).
+- A fact can only be filed in the chart if it is a fact of the case. The reconciliation step can
+  add or remove ledger entries, but only by id from the case's own fact list.
+- The patient model is not given the content of a locked fact unless the student has asked about it
+  directly and been refused this turn (step 4). For all other locked facts it has the topic label,
+  which is written to be non-revealing.
+- What counts as elicited or missed in feedback is read from the ledger (section 10).
 - If the gatekeeper is unavailable, nothing is disclosed.
 
 **Not guaranteed**
 
 - **The patient's wording.** The patient model is constrained by its prompt, not by a filter. It can
   still add a symptom, a number or a family history that is not in the case, most often when asked a
-  leading closed question. The audit is a second model that catches such claims and flags them; it
-  can miss one or flag something harmless. The flag is added after the reply has streamed, so the
-  student has already read the sentence. If the audit call itself fails, nothing is flagged for that
-  turn. Unsupported statements never reach the chart, the ledger or the elicited list.
-- **That a released fact was actually spoken.** The ledger records a fact as disclosed when the
-  policy releases it. The patient model is instructed to say each released fact in that reply, and
-  the code does not verify that it did.
+  leading closed question. The reconciliation step is a second model that catches such claims and
+  flags them as "Outside the case record"; it can miss one or flag something harmless. The flag is
+  added after the reply has streamed, so the student has already read the sentence. If the audit
+  call itself fails, nothing is flagged for that turn. Unsupported statements never reach the chart,
+  the ledger or the elicited list.
+- **That a deflected fact stays unsaid.** When a topic is deflected, its true wording is in the
+  prompt so the patient does not contradict it. The model is told not to admit it, and can still
+  do so. If it states the specifics, the reconciliation step files the fact (the student did hear
+  it); the tier rule was then bypassed for that fact by the model, not by the student's skill.
+- **That the ledger matches what was spoken.** The policy's release is checked against the reply
+  and corrected (steps 5 and 6), which closes the gap the earlier design left open. The check is a
+  model's reading of one reply, so a fact can still be recorded as disclosed when it was only
+  hinted at, or sent back to locked when it was said. When the audit call fails, the ledger records
+  what the policy released, unchecked.
 - **The gatekeeper's matching.** It can miss a fact the student did ask about (the fact stays locked
   and may be reported as missed) or match one the student only brushed against. The policy limits
   the damage of over-matching for reluctant and guarded facts; it does not for volunteered ones.
@@ -359,9 +464,9 @@ where they overlap the deterministic half wins.
   Distractors are excluded. A missed fact the patient deflected is marked "you asked; the patient
   was not ready to say".
 - Exams and orders done, important ones not done, and requests that had no approved result.
-- Each learning objective that is linked to facts or actions: met if all were obtained, partial if
-  some, not met if none. The model writes the comment but cannot change the status. (The studio
-  warns when an objective is linked to nothing; such an objective falls back to the model's judgement.)
+- For each learning objective that is linked to facts or actions, a ledger status: met if all were
+  obtained, partial if some, not met if none. This is one of two inputs to the objective's final
+  status (see "Verification by code").
 
 **From the scoring model (Claude Sonnet 5)**
 
@@ -381,7 +486,18 @@ and three to five concrete actions for the next attempt.
   stated turn it is kept. If it is found in a different turn the turn number is corrected. If it is
   not found anywhere the quote is removed and only the note is kept. The score for that domain is
   not changed by this step; what is prevented is a fabricated quote being shown as evidence.
-- Scores are clamped to the rubric's range. The percentage excludes domains marked not applicable.
+- **A scoring reply without scores is a failure, not a zero.** If the model returns fewer than two
+  usable domain scores, the call is repeated, up to three attempts in all. If the third also fails,
+  scoring throws, the visit stays submitted with its transcript and write-up, and the student can
+  press **Score this visit** to try again. Earlier this case was stored as 0/0.
+- **An objective is met only when the ledger and the examiner agree.** The ledger shows that the
+  information came out; the examiner judges whether the skill was shown. The final status is the
+  lower of the two (not met < partial < met), so the label never contradicts the comment beside
+  it. An objective linked to nothing uses the examiner's status alone; the studio warns about such
+  objectives.
+- Scores are clamped to the rubric's range. Total and maximum are summed over the domains that
+  received a score (domains marked not applicable are left out of both), and the percentage is
+  `round(total / max * 100)`.
 - The visit is flagged for instructor review if a domain marked as review-triggering scores 1 or if
   any safety concern is raised.
 
@@ -401,6 +517,40 @@ Trade-off: the rubric scores are a model's judgement and have not been compared 
 The design reduces how much rests on that judgement (ledger for findings and objectives, quote
 verification, review flags, a faculty override), but it does not remove it.
 
+### The running score, turn by turn
+
+`timeline()` in `lib/engine/timeline.ts`. It is arithmetic over what is already stored with each
+patient message (the state snapshot, the gatekeeper's signals and question type), so it needs no
+model call and exists while the visit is still in progress. For each turn:
+
+```
+weight        critical = 3, important = 2, minor = 1
+coverage      = weight of findings disclosed + non-minor exams/orders done
+                / weight of all findings (distractors excluded) + all non-minor exams/orders
+expected      = min(0.8, turn / 12 * 0.8)          # a steady interview reaches 80% by turn 12
+pace          = min(1, coverage / expected)
+
+mark          = 0.6
+                + 0.25 empathy or validated emotion   + 0.15 sensitive framing
+                + 0.10 open question                  + 0.10 introduced self
+                - 0.45 judgmental   - 0.35 dismissive - 0.20 jargon   - 0.20 rushed
+                - 0.15 stacked questions              - 0.10 leading question
+                clamped to 0..1
+communication = mark on the first turn, then 0.6 * previous + 0.4 * mark
+comfort       = rapport / 100
+
+score         = 0.45 * pace + 0.35 * communication + 0.20 * comfort
+```
+
+It is shown in two places: on the feedback page as "The visit, turn by turn" (four lines: running
+score, findings covered, communication, patient comfort, with a per-turn note such as "empathy, 2
+new findings" linked to the transcript), and in the instructor's Live Visits console while the visit
+is running. During the visit it is returned to faculty only; the student sees it afterwards.
+
+It is a different number from the rubric score and does not feed it, the gradebook or the adaptive
+rating. The weights are reasoned defaults, not calibrated values, and the inputs are the
+gatekeeper's per-turn classifications, so it inherits their errors.
+
 ## 11. Memory within a visit, across attempts and across visits
 
 - **Within a visit.** The patient model receives the full student/patient history plus the list of
@@ -411,14 +561,51 @@ verification, review flags, a faculty override), but it does not remove it.
   (`rewind()`), so they can try the same moment differently. Branches do not move the adaptive rating.
 - **Attempts.** `attemptHistory()` compares scored attempts at the same case: domain scores, what was
   new this time, what was found last time and not this time.
-- **Follow-up visits.** When a visit is scored, `rememberVisit()` writes a row in
-  `patient_relationships` for that student and patient: the fact ids disclosed, the actions done,
-  the final rapport, and a short first-person memory written by the fast model from the transcript
-  ("only use what was actually said"). A follow-up visit starts with those facts already in the
-  chart as "on record", earlier results and their documents present, rapport carried over (clamped
-  to 15 to 85), and the memory in the patient's prompt, with an instruction to greet the student as
-  someone they know and not to retell the whole story. A student who was dismissive last time meets
-  a less trusting patient.
+- **Start over or follow up.** After a scored visit the student has two choices, on the practice
+  library and on the feedback page. **Start over** is a clean repetition: a new encounter with an
+  empty ledger and the level's starting rapport, optionally with a persona variation. **Follow-up
+  visit** (`followUp` in `createEncounter()`) continues the relationship.
+- **What a follow-up carries.** When a visit is scored, `rememberVisit()` in
+  `lib/engine/feedback.ts` writes a row in `patient_relationships` for that student and patient:
+  the visit count, the fact ids disclosed, the actions done, the final rapport, and a short
+  first-person memory written by the fast model from the transcript ("Only use what was actually
+  said"), appended to the memories of earlier visits. A follow-up visit starts with those facts
+  already in the chart as "on record", earlier results and their documents present, rapport carried
+  over (clamped to 15 to 85), a brief that says it is a follow-up, and the memory in the patient's
+  prompt with an instruction to greet the student as someone they know and not to retell the whole
+  story. A student who was dismissive last time meets a less trusting patient. Follow-ups are for
+  self-started practice; assignment visits do not use them, and care-journey visits carry
+  continuity through the journey's own shared state.
+
+### One patient shared by a class
+
+An assignment (homework or practice, not an exam) can turn on **One shared patient for the class**
+(`sharedPatient` in `lib/courses/settings.ts`). Every student's visit on that assignment is then a
+visit to the same continuing patient, using the same mechanism as a follow-up with the relationship
+keyed to the assignment instead of to one student (`teamScope = "team:<assignmentId>"`):
+
+- **The patient's state continues.** Facts disclosed and tests done in earlier students' scored
+  visits are on record for the next student, and trust carries over, good or bad.
+- **The patient remembers each student by name.** `rememberVisit()` writes each memory as "Visit N
+  with <name> (<role>)". The prompt tells the patient that the person on this call is probably new,
+  that they expect the team to talk to each other, and that if this person says something that
+  conflicts with what an earlier person told them they should say so and name that person.
+- **Earlier write-ups are in the chart.** `addTeamNotes()` adds each earlier scored visit's written
+  wrap-up to this visit's copy of the case as a note document titled "Visit N note: <role>", with
+  the student's name as author, available from the start.
+- **Each student acts in their own profession**, whatever the case was written for: the role in the
+  patient's prompt, the wrap-up form and the scorer's expectations come from the student's own
+  profession.
+- **Teammates can read each other's visits** on that assignment through the Episodes page
+  (section 17).
+
+Limits: the shared record is updated when a visit is scored, so two students who are in the room at
+the same time do not see each other's findings; visits are meant to be taken in turn. The case
+content is still one case written for one profession, so a second profession can only uncover what
+that case contains. The conflict the patient points out depends on the fast model's memory summary
+having kept the advice and on the patient model acting on the instruction; neither is checked by
+code. This is a lighter mechanism than a Care Journey: no shared patient state with provenance, no
+SBAR and no AI colleagues.
 
 ## 12. Live instructor assist
 
@@ -430,17 +617,31 @@ more deflected topics. The console (`components/courses/LiveConsole.tsx`) refres
 seconds and shows the transcript and chart so far. The instructor can pause the visit with a note
 (the student sees an overlay and cannot send messages) and can send a coaching note that appears in
 the student's transcript labelled "Instructor". Both are stored as messages, so they are part of
-the record the scorer and later reviewers see.
+the record the scorer and later reviewers see. The console also shows the running score for the
+visit so far (section 10).
+
+**The visit clock.** A visit's clock starts when the student leaves the waiting room
+(`POST /api/encounters/:id/start` sets `started_at` at that moment, not when the visit was
+created). While an instructor has the visit paused the clock is stopped, and on resume the pause
+route moves `started_at` forward by the length of the pause, so paused time does not count against
+a time limit.
 
 ## 13. Voice and the "video call"
 
 - **Student speech** uses the browser's `SpeechRecognition` API (Chrome, Edge, Safari). A final
   transcript is sent as a normal message. Recognition is paused while the patient is speaking and
   restarted after silence. Where the API is missing the microphone control is disabled.
-- **Patient speech** uses Amazon Polly with the generative engine (`lib/tts.ts`). The voice is
-  chosen from a small pool by the patient's sex and a hash of their name, so a patient always
-  sounds the same. Replies are synthesised one sentence at a time as they stream, so speech starts
-  before the reply is complete.
+- **Patient speech** (`speak()` in `lib/tts.ts`). When `ELEVENLABS_API_KEY` is set, speech comes
+  from ElevenLabs with the flash model (`eleven_flash_v2_5`, overridable with `ELEVENLABS_MODEL`).
+  The voice is picked from pools grouped by sex and age band (women under and over 38; men under
+  32, 32 to 61, and 62 and over) and then by a hash of the patient's name, so a 72-year-old does
+  not sound 25 and a patient always sounds the same. On any ElevenLabs error or a 12-second
+  timeout, and whenever no key is set, the same sentence is synthesised by Amazon Polly with the
+  generative engine, with the voice chosen by sex and name hash. Audio is cached in memory per
+  speaker and sentence.
+- **Sentence by sentence.** The visit screen (`components/visit/Visit.tsx`) sends each finished
+  sentence to `POST /api/tts` as the reply streams and plays the clips in order, so the patient
+  starts talking before the reply is complete.
 - **The patient on screen** is a still portrait in a call frame with a speaking state, captions and
   the comfort meter. It is not lip-synced or animated. The student's camera, if turned on, is a
   local self-view only.
@@ -476,14 +677,15 @@ while the case format is still changing. Core tables are in `lib/db.ts`; additio
 | Table | Holds |
 |---|---|
 | `users` | Account, role (`faculty`, `student`, `admin`), profession |
-| `cases` | `profile` (CaseProfile JSON), `status` (draft, published, archived), `origin` (faculty, sample, ai_draft), `reviewed`, last `consistency` result |
+| `cases` | `profile` (CaseProfile JSON), `owner_id`, `status` (draft, published, archived), `origin` (faculty, sample, ai_draft), `reviewed`, last `consistency` result |
 | `rubrics` | Custom rubrics |
 | `uploads` | Uploaded files and the text extracted from them |
 | `courses`, `enrollments`, `assignments` | Courses with join codes; homework, exam and practice assignments with their settings |
-| `encounters` | One visit: `config`, `state`, `case_snapshot`, `wrapup`, `feedback`, `score`, faculty note and adjusted score, `parent_id` for rewound branches |
+| `encounters` | One visit: `config`, `state`, `case_snapshot`, `wrapup`, `feedback`, `score`, faculty note and adjusted score, `parent_id` for rewound branches, `started_at` and `paused_at` for the clock |
 | `messages` | Every line of every visit with speaker, turn and decision metadata |
 | `skill_ratings`, `skill_events` | The adaptive model: current rating and its full history |
-| `patient_relationships` | Per student and patient: visits, rapport, disclosed facts, actions, memory |
+| `patient_relationships` | Per student and patient (or per assignment and patient, for a class-shared patient): visits, rapport, disclosed facts, actions, memory |
+| `api_keys` | Personal access keys for the episode API and the MCP endpoint |
 | `journeys`, `clinicians`, `journey_runs`, `journey_stage_runs`, `state_entries`, `state_links`, `handoffs`, `team_messages` | Care Journeys; see the journeys document |
 
 Sessions are a signed cookie (HS256 JWT, 14 days); passwords are hashed with bcrypt (`lib/auth.ts`).
@@ -498,10 +700,17 @@ strings; the JSON columns map to `jsonb`.
 - One EC2 instance runs the Next.js server; CloudFront in front provides HTTPS at
   `https://d3k6ssmfceay1x.cloudfront.net`.
 - The server reaches Bedrock and Polly through its instance role. No AWS keys are stored on the
-  server; locally the same code uses credentials from `.env.local`.
+  server; locally the same code uses credentials from `.env.local`. The ElevenLabs key, when used,
+  is an environment variable.
 - A systemd timer on the server polls the `main` branch of the GitHub repository every minute. Each
-  new commit is built in its own release directory and the service switches to it when the build
-  succeeds. `GET /api/health` reports the running commit.
+  new commit is built in its own release directory (`npm ci`, `npm run build`); only when the build
+  succeeds is the `current` link repointed and the service restarted. A failed build is recorded
+  and skipped, leaving the previous release running. `GET /api/health` reports the running commit.
+- On the running server the build is run at low CPU priority so that visits in progress keep
+  responding while it runs (this setting was made on the instance and is not yet in
+  `infra/userdata.sh`). The switch itself is a restart of about two seconds (the unit is given 4
+  seconds to stop and restarts after 1). A restart still drops any reply that is streaming and any
+  care-journey worker running in the process, so pushing during a demo is not advised.
 - `scripts/ship.sh` is the developer side: it type-checks and runs a production build locally and
   only then commits and pushes, so a commit that cannot build is not offered to the server.
 - CloudFront closes a connection that is silent for 60 seconds, and case drafting, scoring and
@@ -512,11 +721,70 @@ strings; the JSON columns map to `jsonb`.
 - `DB_PATH` and `UPLOAD_DIR` let the database and uploaded files live outside the per-commit
   release directories, so a new release does not replace them.
 
-The commands and config used to create all of this (instance role, security group, instance
-bootstrap with the systemd units, CloudFront distribution) are in `infra/`. They are plain AWS CLI
-scripts, not a template, and the hackathon AWS account they were run on is temporary.
+The files used to create all of this are in `infra/`: `provision.sh` (the AWS CLI commands in
+order: instance role and profile, key pair, security group, instance, Elastic IP, CloudFront
+distribution), `userdata.sh` (instance bootstrap: Node, the environment file, the systemd service,
+the deploy script and its timer), `ec2-trust-policy.json` and `cloudfront.json`. They are plain
+AWS CLI scripts, not a template, and the hackathon AWS account they were run on is temporary.
 
-## 17. Extensibility
+## 17. Episodes, privacy and the integration API
+
+An **episode** is the stored record of one visit: who the patient was, who the professional was and
+in which role, the transcript, what was disclosed, the results, the write-up and the score.
+`lib/episodes.ts` is the one module that searches them, and three surfaces share it.
+
+**Who can see what** (`visibleClause()` in `lib/episodes.ts`; the same rule for acting on a visit
+is in `lib/access.ts`):
+
+| Visit | The student | Faculty | Other students |
+|---|---|---|---|
+| Self-started practice, including on a patient the student made | yes | no | no |
+| Assignment visit | yes | yes | no |
+| Assignment visit on a class-shared patient | yes | yes | students enrolled in that course |
+| Care-journey visit | yes | yes | no |
+| A faculty member's own test visit | n/a | that faculty member | no |
+
+The visit screen and the feedback page label each visit accordingly: "Private practice" (only the
+student sees the visit and its feedback; it still updates their own progress) or "Recorded for
+instructor". Faculty cannot open a student's private practice by guessing its URL: the encounter
+routes, the feedback page and the episode search apply the same test. Rewound branches and
+abandoned visits are not listed. Case titles are returned to faculty only, and feedback an
+instructor is holding is not returned to the student.
+
+**The three surfaces**
+
+- **The page** `/episodes` ("Episodes" for faculty, "My visits" for students): search by patient
+  name, by who took part, by role, or by words said in the visit or written in the write-up. A text
+  search shows the first matching transcript line.
+- **REST**: `GET /api/episodes?patient=&participant=&role=&text=&caseId=&limit=` searches (newest
+  first, at most 100), and `GET /api/episodes?id=<episodeId>` returns one episode in full.
+  Authentication is the session cookie or a personal access key.
+- **MCP**: `POST /api/mcp` (`app/api/mcp/route.ts`) is a Model Context Protocol server over
+  Streamable HTTP, stateless, answering each JSON-RPC request with a JSON response (no event
+  stream; `GET` returns 405). It implements `initialize`, `ping`, `tools/list` and `tools/call`
+  with four tools:
+
+  | Tool | Returns |
+  |---|---|
+  | `search_episodes` | Episode summaries filtered by patient, participant, role, transcript text or case id |
+  | `get_episode` | One episode: transcript by turn, disclosed findings, results, write-up, feedback summary |
+  | `list_patients` | Patients in the library: for students, published ones without titles |
+  | `get_patient_record` | For faculty the whole case, answer key included; for students only what is in the chart before the first question |
+
+  An assistant that speaks MCP can therefore answer "find the visits where a nursing student asked
+  Walter Greene about alcohol" against the store, with the key owner's permissions.
+
+**Personal access keys** (`lib/apikeys.ts`, `/api/keys`, managed at the bottom of the Episodes
+page). A key is `rk_` followed by 32 random characters, is shown once when created, is sent as
+`Authorization: Bearer <key>`, resolves to its owner's account, records when it was last used and
+can be revoked. Every tool and endpoint then applies the visibility rules above for that account.
+
+Limits: keys are stored unhashed in the database, have no expiry and no scopes (a key can read
+whatever its owner can read), and there is no rate limiting. The API is read-only: it cannot start
+a visit, create a patient or write a grade. Search is SQL `LIKE` over message text, not a
+full-text or semantic index.
+
+## 18. Extensibility
 
 - **A new learner role** is one entry in `data/professions.json`. The studio's role picker, the
   case drafter's scope, the wrap-up form, the scorer's expectations and the care-journey stage
@@ -532,28 +800,44 @@ scripts, not a template, and the hackathon AWS account they were run on is tempo
 - **A new document type** is a string in the `Artifact.type` union plus, if it needs a new
   rendering, a case in `components/chart/ArtifactView.tsx`.
 - **Different models** are environment variables (`MODEL_FAST`, `MODEL_CHAT`, `MODEL_SMART`).
-- **LMS integration is future work.** Today a case exports and imports as JSON
-  (`GET /api/cases/:id/export`), a gradebook exports as CSV (`GET /api/assignments/:id/csv`), and
-  the application's own JSON API under `/api` is authenticated by the session cookie. A Canvas
+- **Integration.** What exists: the MCP endpoint and the episode REST endpoint with personal access
+  keys (section 17), case export and import as JSON (`GET /api/cases/:id/export`), and gradebook
+  export as CSV (`GET /api/assignments/:id/csv`). What does not: an LMS connector. A Canvas
   integration would add an LTI 1.3 launch that maps to a Rounds user and assignment, and grade
-  passback from `encounters.score`; both need token-based authentication that does not exist yet.
+  passback from `encounters.score`; neither is built, and the access keys are read-only.
+- **A new voice provider** is a function in `lib/tts.ts` beside `eleven()` and `polly()`.
 
-## 18. Known limits of this design
+## 19. Known limits of this design
 
 Collected from the sections above so they can be read in one place.
 
 - The patient's wording is constrained by prompt and audited after the fact; it is not filtered
-  before display (section 6).
-- The ledger records what was released, not what was verifiably spoken (section 6).
+  before display. A statement outside the case is flagged after the student has read it, and not
+  at all if the audit call fails (section 6).
+- The ledger is corrected against what the patient said by a model's reading of the reply, not by
+  an exact check; without the audit it records what was released (section 6).
+- A deflected fact's true wording is in the patient's prompt for that turn, so keeping it back
+  depends on the model following the instruction (sections 5 and 6).
 - The gatekeeper and the order matcher are models and can mis-match (sections 5 and 7).
 - Rubric scores are a model's judgement, unverified against human raters; the adaptive model
   inherits that (sections 9 and 10).
-- AI-drafted cases are internally checked, not clinically reviewed (section 4).
+- No case in the library has been reviewed by a clinician. The 73 AI-drafted patients and the 8
+  sample patients are all stored with `reviewed = false`; AI-drafted cases are internally checked
+  at most, and a student's own practice patient is not checked at all (section 4).
+- The four parallel drafting stages agree through the outline only; details it did not fix can
+  differ between them (section 4).
+- The running score uses uncalibrated weights and the gatekeeper's per-turn classifications
+  (section 10).
+- A class-shared patient is updated when a visit is scored, not live, and the patient pointing out
+  conflicting advice rests on a model-written memory (section 11).
+- Access keys are unhashed, unscoped and unexpiring, and the API is read-only (section 17).
 - Knowledge sources are passed in truncated form to the scorer and reviewer; there is no retrieval
   (section 6).
 - Three sequential model calls per turn (gatekeeper, patient, audit) add latency before the first
-  word and after the last one.
-- One process, one SQLite file, in-memory caches for synthesised speech (section 15).
+  word and after the last one. Measured on the deployed server, a reply starts in about 3 to 5
+  seconds; the chart updates after the audit returns.
+- One process, one SQLite file, in-memory caches for synthesised speech (section 15). A deploy
+  restarts that process (section 16).
 - Anyone can register, including as faculty; there is no SSO (section 15).
 - The chart is an Epic-style layout drawn from case data. It is not connected to any real health
   record system.

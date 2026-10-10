@@ -1,6 +1,7 @@
 import { all, get, newId, parse, run } from "../db";
 import { professions } from "../professions";
 import type { CaseProfile, Profession } from "../types";
+import { deriveStatus } from "./types";
 import type {
   EntryKind,
   EntrySource,
@@ -40,6 +41,7 @@ export interface RunRow {
   synthesis: string | null;
   evaluation: string | null;
   huddle: string | null;
+  error: string | null;
   created_at: string;
   ended_at: string | null;
 }
@@ -120,7 +122,14 @@ function displayName(o: { name?: string; credentials?: string; full_title?: stri
   return short ? `${name}, ${short}` : name;
 }
 
+/** A stage whose role none of the provided personas fits is played by a plain, named clinician of that profession: "generic:Name|Role". */
+export const genericClinicianId = (name: string, role: string) => `generic:${name.replace(/[|:]/g, " ").trim()}|${role.replace(/[|:]/g, " ").trim()}`;
+
 export function clinician(id: string | null | undefined): ClinicianInfo {
+  if (id?.startsWith("generic:")) {
+    const [name, role] = id.slice(8).split("|");
+    return { id, name: name || "Team clinician", role: role || "Clinician", specialty: "", profile: {} };
+  }
   const row = id ? get<ClinicianRow>("SELECT * FROM clinicians WHERE id = ?", id) : undefined;
   if (!row) return { id: id || "", name: "Team clinician", role: "Clinician", specialty: "", profile: {} };
   const profile = parse<Record<string, unknown>>(row.profile, {});
@@ -276,12 +285,10 @@ export function entriesOf(runId: string, links: StateLink[] = linksOf(runId)): S
   const rows = all<EntryRow>("SELECT * FROM state_entries WHERE run_id = ? ORDER BY stage_order, created_at, rowid", runId);
   const inbound = new Map<string, StateLink[]>();
   for (const l of links) inbound.set(l.to, [...(inbound.get(l.to) || []), l]);
+  const kindOf = new Map(rows.map((r) => [r.id, { kind: r.kind, source: r.source }]));
   return rows.map((r) => {
     const status = r.status as EntryStatus;
-    const inb = inbound.get(r.id) || [];
-    let effective = status;
-    if (inb.some((l) => l.relation === "resolves" || l.relation === "answers")) effective = "resolved";
-    else if (inb.some((l) => l.relation === "contradicts")) effective = "disputed";
+    const effective = deriveStatus(status, (inbound.get(r.id) || []).map((l) => ({ relation: l.relation, fromKind: kindOf.get(l.from)?.kind, fromSource: kindOf.get(l.from)?.source })));
     return {
       id: r.id,
       runId: r.run_id,
@@ -358,8 +365,12 @@ export function addMessage(runId: string, m: { thread: string; kind: string; fro
 
 export const norm = (s: string) => (s || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim();
 
-/** True when `quote` occurs (ignoring case and punctuation) in `text`. Quotes shorter than 3 words never verify. */
-export function quoteIn(quote: string, text: string): boolean {
+/**
+ * True when `quote` occurs (ignoring case and punctuation) in `text`. Quotes shorter than 3 words never
+ * verify. `minRun` is the shortest run of consecutive quoted words that counts when the whole quote is
+ * not found (models trim, stitch or re-punctuate); evaluation uses a shorter run than state extraction.
+ */
+export function quoteIn(quote: string, text: string, minRun = 8): boolean {
   const hay = norm(text);
   if (!hay) return false;
   // A quote may be stitched with ellipses; every fragment must be present.
@@ -368,7 +379,7 @@ export function quoteIn(quote: string, text: string): boolean {
   if (parts.every((p) => hay.includes(p))) return true;
   // Otherwise accept a long verbatim run (models sometimes trim or add a word at the edges).
   const words = norm(quote).split(" ");
-  for (let n = Math.min(words.length - 1, 14); n >= 8; n--) for (let i = 0; i + n <= words.length; i++) if (hay.includes(words.slice(i, i + n).join(" "))) return true;
+  for (let n = Math.min(words.length - 1, 14); n >= minRun; n--) for (let i = 0; i + n <= words.length; i++) if (hay.includes(words.slice(i, i + n).join(" "))) return true;
   return false;
 }
 
@@ -377,5 +388,12 @@ export function who(run: LoadedRun, stage: Stage, studentName: string) {
   const cl = clinician(stage.clinicianId);
   return { isStudent, name: isStudent ? studentName : cl.name, role: stage.roleTitle, isAi: !isStudent, clinician: cl };
 }
+
+/** How colleagues address the learner: first name only, never a title. */
+export const firstNameOf = (fullName: string) => (fullName || "").replace(/^(dr|mr|mrs|ms|prof)\.?\s+/i, "").trim().split(/\s+/)[0] || "the student";
+
+/** A line for prompts so a model never invents a title for the learner from their name. */
+export const learnerLine = (fullName: string, role: string) =>
+  `The learner is a student named ${fullName}, acting as ${role} in this journey. Address them by first name only ("${firstNameOf(fullName)}"). They are a student: never call them "Dr." and never treat any part of their name as a profession or title. When you refer to their work, use their role in this journey (${role}).`;
 
 export const studentNameOf = (userId: string) => get<{ name: string }>("SELECT name FROM users WHERE id = ?", userId)?.name || "Student";

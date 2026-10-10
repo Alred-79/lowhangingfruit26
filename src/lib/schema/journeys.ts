@@ -36,4 +36,5 @@ export const alters: string[] = [
   "ALTER TABLE state_entries ADD COLUMN meta TEXT",
   "ALTER TABLE journey_runs ADD COLUMN huddle TEXT",
   "ALTER TABLE journeys ADD COLUMN updated_at TEXT",
+  "ALTER TABLE journey_runs ADD COLUMN error TEXT",
 ];

@@ -18,6 +18,21 @@ export function aliasing(entries: StateEntry[]) {
   return { toAlias, fromAlias, resolve };
 }
 
+/** Models occasionally return an array field as a JSON string. Accept it rather than crash. */
+export function arr<T = unknown>(v: unknown): T[] {
+  if (Array.isArray(v)) return v as T[];
+  if (typeof v === "string") {
+    const t = v.trim();
+    try {
+      const j = JSON.parse(t.startsWith("[") ? t : t.slice(t.indexOf("["), t.lastIndexOf("]") + 1));
+      if (Array.isArray(j)) return j as T[];
+    } catch {
+      // not JSON
+    }
+  }
+  return [];
+}
+
 /** Removes prompt-only entry labels (E12) that a model let slip into text people will read. */
 export const clean = (s: string | undefined | null) =>
   (s || "")
@@ -62,14 +77,27 @@ export function inboxFor(runId: string, stageId: string): string {
   return msgs.map((m) => `${m.fromName} (${m.fromRole})${m.kind === "callout" ? " [call-out to the whole team]" : ""}: ${m.text}`).join("\n");
 }
 
+const DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+/** Day number of a simulated-time label such as "Week 2, Tue 11:00" or "Week 1, day 3"; null when it cannot be read. */
+export function simDay(label: string): number | null {
+  const w = /week\s*(\d+)/i.exec(label || "");
+  const d = /\b(mon|tue|wed|thu|fri|sat|sun)/i.exec(label || "");
+  const n = /\bday\s*(\d+)/i.exec(label || "");
+  if (!w && !d && !n) return null;
+  return ((w ? Number(w[1]) : 1) - 1) * 7 + (d ? DAYS.indexOf(d[1].toLowerCase()) : n ? Number(n[1]) - 1 : 0);
+}
+const ago = (days: number | null) => (days === null ? "on an earlier day" : days <= 0 ? "earlier today" : days === 1 ? "yesterday" : days < 7 ? `${days} days ago` : days < 10 ? "about a week ago" : `${days} days ago`);
+
 /**
- * What the patient remembers of earlier visits. Built without a model: who they saw, when, which
- * topics came up and which checks were done. The facts themselves reach the patient prompt through
- * the engine's disclosed-facts list, so the patient cannot "remember" anything that was not approved.
+ * What the patient remembers of earlier visits. Built without a model: who they saw, when (and how
+ * long ago that is today), which topics came up and which checks were done. The facts themselves
+ * reach the patient prompt through the engine's disclosed-facts list, so the patient cannot
+ * "remember" anything that was not approved.
  */
 export function patientMemory(run: LoadedRun, upcoming: Stage, entries: StateEntry[], upcomingName: string): string {
   const c: CaseProfile = run.c;
   const lines: string[] = [];
+  const today = simDay(upcoming.simTime);
   for (const s of run.stages) {
     if (s.order >= upcoming.order) continue;
     const mine = entries.filter((e) => e.stageId === s.id);
@@ -78,15 +106,18 @@ export function patientMemory(run: LoadedRun, upcoming: Stage, entries: StateEnt
     const name = isStudent ? "a student clinician" : clinician(s.clinicianId).name;
     const topics = [...new Set(mine.filter((e) => e.factId).map((e) => c.facts.find((f) => f.id === e.factId)?.topic).filter(Boolean))].slice(0, 10);
     const checks = mine.filter((e) => e.kind === "result").map((e) => e.text.split(":")[0]).slice(0, 5);
+    const then = simDay(s.simTime);
     lines.push(
-      `- ${s.simTime}: you spoke with ${name} (${s.roleTitle})${s.visitLabel ? `, ${s.visitLabel}` : ""}.` +
+      `- ${s.simTime} (${ago(today !== null && then !== null ? today - then : null)}): you spoke with ${name} (the ${s.roleTitle.toLowerCase()})${s.visitLabel ? `, ${s.visitLabel}` : ""}.` +
         (topics.length ? ` You talked about: ${topics.join(", ")}.` : "") +
         (checks.length ? ` They looked at: ${checks.join(", ")}.` : ""),
     );
   }
-  const today = `TODAY (${upcoming.simTime}) you are speaking with ${upcomingName}, ${upcoming.roleTitle}${upcoming.visitLabel ? ` (${upcoming.visitLabel})` : ""}. It is a different person from the earlier visits and part of the same care team.`;
-  if (!lines.length) return `${today}\nThis is your first contact with this care team.`;
-  return `${lines.join("\n")}\n${today}\nYou remember those earlier conversations. Anything you already told the team (it is in the list of things you have said) you do not need to be coaxed into saying again; you may say "like I told the other one..." when it comes up. You expect the team to have talked to each other, and you notice if they have not.`;
+  const now = `TODAY is ${upcoming.simTime}. You are speaking with ${upcomingName}, the ${upcoming.roleTitle.toLowerCase()}${upcoming.visitLabel ? ` (${upcoming.visitLabel})` : ""}. This is a telehealth video call from your home, like the others.`;
+  if (!lines.length) return `${now}\nThis is your first contact with this care team.`;
+  return `${lines.join("\n")}\n${now} It is a different person from the earlier visits and part of the same care team.
+You remember those earlier conversations. Anything you already told the team (it is in the list of things you have said) you do not need to be coaxed into saying again; you may say "like I told the other one..." when it comes up. You expect the team to have talked to each other, and you notice if they have not.
+Time has passed since those visits. Anything you described then as happening "today", "this morning" or "last night" happened on that earlier day, not today: if it comes up again, place it in time ("when I spoke to the doctor on Monday, that morning it was...") and do not present an earlier day's reading, meal or event as if it happened again today. You were at home between the visits; nobody admitted you to hospital or changed your medicines unless it is in the list of things on your record.`;
 }
 
 /**

@@ -4,7 +4,9 @@ Rounds is a telehealth virtual-patient simulator for health-professions educatio
 video-style visit with an AI patient on the left of the screen while an electronic chart on the right
 fills in as they learn things, then receives rubric feedback tied to quotes from the transcript.
 Faculty build the patients as data in a Patient Studio, and can chain one patient through several
-professional encounters as a Care Journey with a shared, traceable patient state.
+professional encounters as a Care Journey with a shared, traceable patient state. Patients remember
+earlier visits, one patient can be shared by a whole class, and every stored visit is searchable
+from a page, a REST endpoint and an MCP endpoint.
 
 RU Health Hack 2026, School of Health Professions track. This repository is the team's entry for both
 challenges:
@@ -43,7 +45,11 @@ Use Chrome, Edge or Safari if you want to talk by microphone; typing works in an
   community), defined as data in `data/professions.json`.
 - **81 seed patients**, loaded on boot from `data/seed/cases/`, at least one per role. 73 were
   drafted by the model and are labelled "AI-drafted, not faculty-reviewed". 8 were expanded by the
-  same generator from the faculty-provided sample patient details and are labelled "Sample".
+  same generator from the faculty-provided sample patient details and are labelled "Sample". All
+  81 are stored with `reviewed = false`: none has been reviewed by a clinician.
+- **71 portraits** in `public/portraits/`. 63 belong to AI-drafted patients and were generated
+  with Stable Diffusion 3.5 Large on Amazon Bedrock (`scripts/gen-portraits.ts`); the other 8 are
+  the sample patients' portraits. The 10 AI-drafted patients without a portrait show initials.
 - **2 seed care journeys** built on the sample patients Marcus Ramirez (4 encounters) and Walter
   Greene (3 encounters), using the 5 provided clinician personas in `data/clinicians/`.
 - **One rubric by default**: the provided Patient Encounter Performance Rubric, 7 domains scored
@@ -51,9 +57,40 @@ Use Chrome, Edge or Safari if you want to talk by microphone; typing works in an
   either format.
 - **19 teamwork behaviours** in 4 TeamSTEPPS areas for Care Journeys.
 
+Features, each described in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md):
+
+- **Patient Studio.** A patient is drafted in about 80 seconds by a staged generator (an outline
+  that fixes the clinical story and every number, four parallel writers, a linking pass), then
+  edited, checked for consistency and published. No patient-specific code.
+- **The visit.** Code decides which facts are released, from each fact's tier, the rapport the
+  student has built and the difficulty level. After each reply a second model reconciles what the
+  patient said with the case: a released fact that was not said goes back to locked, a true fact
+  said early is filed, and anything outside the case is flagged "Outside the case record".
+- **Voice.** Browser speech recognition in; ElevenLabs out when a key is configured, Amazon Polly
+  generative voices otherwise, synthesised sentence by sentence while the reply streams.
+- **Feedback.** Rubric scores with quotes that code checks against the transcript, findings
+  elicited and missed from the disclosure ledger, and a running score for every turn computed
+  without a model.
+- **Start over or follow up.** "Start over" is a clean repetition. "Follow-up visit" continues the
+  relationship: facts already shared and tests already done are on record, trust carries over,
+  and the patient remembers the last visit.
+- **One shared patient for a class.** An assignment setting. Students of different professions see
+  the same continuing patient in turn; the patient remembers each of them by name and can point out
+  conflicting advice, and earlier students' write-ups are in the chart as notes.
+- **Make your own practice patient.** A student describes who or what they want to practise with
+  and gets a private, AI-drafted, unreviewed patient.
+- **Episodes.** Every stored visit, searchable by patient, participant, role and words said, on the
+  `/episodes` page, through `GET /api/episodes`, and through an MCP endpoint at `/api/mcp` with
+  personal access keys.
+- **Privacy labels.** Self-started practice is "Private practice" and faculty cannot open it.
+  Assignment and care-journey visits are "Recorded for instructor". Students never see case titles.
+- **Courses.** Join codes, homework/exam/practice assignments, a gradebook, and a Live Visits
+  console where an instructor can watch a visit, see its running score, pause it and send a note.
+- **Care Journeys** (Challenge 2). See [docs/ARCHITECTURE-journeys.md](docs/ARCHITECTURE-journeys.md).
+
 ## Walkthrough: Challenge 1 (create a patient, publish, run the visit, read the feedback)
 
-Wall-clock time is about 8 minutes, of which one to two minutes is the model drafting the patient and
+Wall-clock time is about 8 minutes, of which about 80 seconds is the model drafting the patient and
 about 1 minute is scoring. To skip the drafting wait, open any existing patient in Patient Studio and
 start at step 5.
 
@@ -64,8 +101,10 @@ start at step 5.
    description and learning goals and sets the learner to Medicine). Optional: set a target
    difficulty, or attach a guideline as a PDF under **Source document**. Click **Continue**.
 4. If the page **A few quick questions** appears, click a suggested answer for each (or skip them)
-   and click **Draft the patient**. A progress page shows the elapsed time. One model call writes
-   the whole case, so there is nothing partial to show until it finishes.
+   and click **Draft the patient**. A progress page shows the elapsed time; drafting takes about 80
+   seconds (the page's own text still says one to two minutes). An outline call fixes the clinical
+   story, four calls write the parts in parallel and a last call links the objectives, so there is
+   nothing partial to show until it finishes.
 5. The editor opens on the new draft. In the left-hand section list look at:
    - **Facts and disclosure**: each fact has patient wording, chart wording and a tier
      (Volunteered, When asked, Needs trust, Guarded).
@@ -82,11 +121,14 @@ start at step 5.
 8. Click **Test visit** (top bar) to run the visit exactly as a student would. Alternatively sign in
    as `student@rounds.demo`, open **Practice**, find the patient and click **Start visit**.
 9. In the waiting room, tick **Use my microphone** if you want voice, then **Join visit**.
-10. Interview the patient. Things to try:
+10. Interview the patient. The clock starts when you join, and a reply starts in about 3 to 5
+    seconds. Things to try:
     - an open question ("What brings you in today?"), then a specific one;
     - a sensitive question asked bluntly, then again after acknowledging how the patient feels:
       the patient deflects the first time and the comfort meter moves;
-    - a closed question about a symptom the case does not contain: the patient says no;
+    - a closed question about a symptom the case does not contain: the patient should say no. If
+      the patient does add something that is not in the case, a notice headed "Outside the case
+      record" appears under the reply and nothing is filed in the chart;
     - chart tab **Results & orders**: request "ECG" or "lipid panel", then something the case does
       not have ("brain MRI") to see the refusal;
     - chart tabs **This visit**, **Chart review** and **Activity** as they fill in;
@@ -94,13 +136,46 @@ start at step 5.
 11. Click the red **End visit** button, fill in the write-up, click **Submit for feedback**.
 12. After about a minute the feedback page opens: rubric score per domain with quoted evidence and
     turn numbers, findings elicited and missed, learning objectives, patient-versus-chart
-    mismatches, safety and accuracy, how the interview was built, what to do next time, and the
-    annotated transcript. From here **Book a follow-up visit** starts a second visit in which the
-    patient remembers the first.
+    mismatches, safety and accuracy, how the interview was built, what to do next time, **The
+    visit, turn by turn** (the running score with findings covered, communication and patient
+    comfort for every turn), and the annotated transcript.
+13. Under "For your next attempt": **Start over with this patient** is a clean repetition.
+    **Book a follow-up visit** starts a second visit in which the patient greets you as someone
+    they know, what they told you is already in the chart, and their trust is where you left it.
+
+### More to try (a few minutes each)
+
+- **Make your own practice patient.** As `student@rounds.demo`: **Practice**, the card **Make your
+  own practice patient**. Type a sentence or click a suggestion, pick a level, **Create and
+  start**. After about 80 seconds the visit opens. The patient is private to that student and is
+  not reviewed by anyone.
+- **Private and recorded.** The visit top bar and the feedback page say "Private practice" or
+  "Recorded for instructor". As faculty, open **Episodes**: assignment and care-journey visits are
+  listed; students' self-started practice is not.
+- **One shared patient for a class.** As faculty: **Courses**, create a course, **New assignment**
+  (homework or practice), choose a patient and turn on **One shared patient for the class**. Give
+  the join code to two student accounts of different professions (`dietetics@rounds.demo` and
+  `nursing@rounds.demo`). The first student completes and submits a visit. When the second student
+  starts theirs, the first student's write-up is in **Chart review** as "Visit 1 note", the
+  findings are on record, and the patient remembers the first student by name. Tell the patient
+  something that conflicts with what the first student advised and the patient may say so. The
+  shared record updates when a visit is scored, so take the visits one after the other.
+- **Episodes and MCP.** **Episodes** (faculty) or **My visits** (student): search by patient,
+  participant, role or words said in a visit. At the bottom, **Create key** gives a personal access
+  key and a ready-made MCP client configuration. The same search from a shell:
+
+  ```bash
+  curl -H "Authorization: Bearer rk_..." \
+    "https://d3k6ssmfceay1x.cloudfront.net/api/episodes?patient=walter&text=alcohol"
+  ```
+
+  The MCP endpoint is `https://d3k6ssmfceay1x.cloudfront.net/api/mcp` (Streamable HTTP, same
+  header) with the tools `search_episodes`, `get_episode`, `list_patients` and
+  `get_patient_record`. A key sees exactly what its owner's account sees.
 
 ## Walkthrough: Challenge 2 (join a care journey, watch colleagues, your visit, SBAR, huddle, integrated view)
 
-A full run does not fit in five minutes. Each AI colleague's encounter takes roughly 80 to 110
+A full run does not fit in five minutes. Each AI colleague's encounter takes roughly 80 to 100
 seconds, and the run also includes your own visit, scoring, and writing the care plan; allow about
 15 minutes for the three-encounter journey below. If you only have five minutes, do steps 1 to 5 to
 see continuity and provenance, then sign in as `faculty@rounds.demo`, open **Care Journeys**, open
@@ -143,7 +218,7 @@ Paths under `src/` unless they start with `data/`, `docs/` or `scripts/`.
 
 | Requirement | Where in the product | Where in the code |
 |---|---|---|
-| Faculty patient-profile creation (structured or descriptive) | Patient Studio > New patient: describe, fill in a form, import JSON, or start empty | `components/studio/NewCaseWizard.tsx`, `app/api/cases/generate`, `app/api/cases/clarify`, `lib/casegen.ts` |
+| Faculty patient-profile creation (structured or descriptive) | Patient Studio > New patient: describe, fill in a form, import JSON, or start empty. Drafting is staged (outline, four parallel writers, linking) and takes about 80 seconds | `components/studio/NewCaseWizard.tsx`, `app/api/cases/generate`, `app/api/cases/clarify`, `generateStaged()` in `lib/casegen.ts` |
 | Patient knowledge and artifact management | Editor sections Knowledge sources (paste or upload PDF/TXT/MD) and Documents (tables, trend charts, audiograms, report text, uploaded image or PDF) | `components/studio/sections/Knowledge.tsx`, `sections/Artifacts.tsx`, `lib/studio/uploads.ts` |
 | Define when information and artifacts become available | Fact tiers in Facts and disclosure; per-document rule "from the start", "when the student does an exam or order", "when the patient discloses a fact" | `Fact.tier` and `Artifact.release` in `lib/types.ts`; `decide()` in `lib/engine/gatekeeper.ts`; `releaseArtifacts()` in `lib/engine/encounter.ts` |
 | Review and correct generated information | Section editors; Ask the guide (proposed patch shown as a diff); Student preview | `components/studio/CaseEditor.tsx`, `GuidePanel.tsx`, `PatchDiff.tsx`, `lib/studio/patch.ts`, `lib/studio/ai.ts` |
@@ -152,29 +227,36 @@ Paths under `src/` unless they start with `data/`, `docs/` or `scripts/`.
 | Multiple reusable profiles | Patient Studio library with search and filters, duplicate, archive, export/import; variants for repeat practice | `components/studio/CaseLibrary.tsx`, `lib/studio/store.ts`, `app/api/cases/[id]/{duplicate,export,variants}` |
 | Complete student encounter with any published profile, no patient-specific code | Practice > Start visit; the engine reads only the case JSON | `lib/engine/encounter.ts`, `components/visit/Visit.tsx` |
 | Split screen: interaction left, dynamic record right | Visit screen: video panel and transcript on the left; chart tabs Summary, This visit, Results & orders, Chart review, Activity on the right | `components/visit/Visit.tsx`, `components/visit/ChartPanel.tsx`, `components/chart/ArtifactView.tsx` |
-| Progressive information disclosure | Facts appear in This visit only when asked for and released; reluctant facts need rapport | `gatekeep()` and `decide()` in `lib/engine/gatekeeper.ts` |
-| Patient identity, memory and state | Same persona and prior statements every turn; comfort meter; follow-up visits | `lib/engine/patient.ts`, `EncounterState` in `lib/types.ts`, `patient_relationships` table |
-| Clinical grounding and consistency | Patient model sees only released facts; orders return only approved results; unsupported claims are flagged in the transcript | `patientSystem()`, `auditReply()`, `matchActions()`, `runAction()` |
-| Record of what was disclosed | Activity tab during the visit; annotated transcript on the feedback page | `EncounterState.disclosed`, `messages.meta` |
-| Encounter logging | Every encounter, message, order, state snapshot and feedback is stored | `encounters` and `messages` tables in `lib/db.ts` |
-| Feedback driven by faculty objectives, explainable | Feedback page | `lib/engine/feedback.ts`, `app/encounter/[id]/feedback/page.tsx` |
+| Progressive information disclosure | Facts appear in This visit only when asked for and released; reluctant facts need rapport; a released fact the patient did not actually say is not filed | `gatekeep()`, `decide()` and `auditReply()` in `lib/engine/gatekeeper.ts`; `runTurn()` in `lib/engine/encounter.ts` |
+| Patient identity, memory and state | Same persona, chart-at-start record and prior statements every turn; comfort meter; Follow-up visit; one shared patient for a class | `lib/engine/patient.ts`, `EncounterState` in `lib/types.ts`, `patient_relationships` table, `rememberVisit()` in `lib/engine/feedback.ts`, `followUp` and `teamScope` in `createEncounter()` |
+| Clinical grounding and consistency | Chart text and order results come only from the case; each reply is checked against all case facts and anything outside them is shown as "Outside the case record" | `patientSystem()`, `auditReply()`, `matchActions()`, `runAction()` |
+| Record of what was disclosed | Activity tab during the visit; annotated transcript on the feedback page; Episodes | `EncounterState.disclosed`, `messages.meta`, `lib/episodes.ts` |
+| Encounter logging | Every encounter, message, order, state snapshot and feedback is stored and searchable on Episodes | `encounters` and `messages` tables in `lib/db.ts`, `lib/episodes.ts`, `app/episodes/page.tsx` |
+| Feedback driven by faculty objectives, explainable | Feedback page: rubric with checked quotes; objectives met only when the ledger and the examiner agree; "The visit, turn by turn" running score | `lib/engine/feedback.ts`, `lib/engine/timeline.ts`, `app/encounter/[id]/feedback/page.tsx` |
 
 ### Challenge 1, Stretch
 
 | Requirement | Status | Where |
 |---|---|---|
-| Real-time voice interaction | Built. Microphone input through the browser's speech recognition; patient speech through Amazon Polly generative voices, synthesised sentence by sentence while the reply streams. | `components/visit/Visit.tsx`, `lib/tts.ts`, `app/api/tts` |
+| Real-time voice interaction | Built. Microphone input through the browser's speech recognition. Patient speech through ElevenLabs (flash model, voice chosen by the patient's age and sex) when `ELEVENLABS_API_KEY` is set, with Amazon Polly generative voices as the fallback; synthesised sentence by sentence while the reply streams. | `components/visit/Visit.tsx`, `lib/tts.ts`, `app/api/tts` |
 | Avatar-based interaction | Partial. A still portrait in a video-call frame with a speaking state and captions. No lip-sync or animated avatar. | `components/visit/Visit.tsx`, `public/portraits/` |
 | Multimodal interaction | Partial. Voice and text in; voice, text, tables, plotted charts, images and PDFs out. The student's camera is a local self-view only; nothing is analysed. | `components/chart/ArtifactView.tsx` |
 | Adaptive patient behavior | Built. Five difficulty levels, seven persona variations for repeat attempts, faculty-approved variants, rapport-dependent disclosure, and an Elo-style learner model that sets the next level. | `lib/engine/difficulty.ts`, `lib/adaptive.ts`, `app/student/progress` |
-| Advanced memory/state | Built. Per-turn state snapshots (rewind to an earlier turn and branch), follow-up visits with patient memory and carried-over trust. | `rewind()` in `lib/engine/encounter.ts`, `rememberVisit()` in `lib/engine/feedback.ts` |
+| Advanced memory/state | Built. Per-turn state snapshots (rewind to an earlier turn and branch). Follow-up visits: facts already shared, tests done, trust and a first-person memory carry over. One shared patient for a class: the patient remembers each student by name, and earlier students' write-ups are chart notes. | `rewind()`, `createEncounter()` and `addTeamNotes()` in `lib/engine/encounter.ts`, `rememberVisit()` in `lib/engine/feedback.ts`, `sharedPatient` in `lib/courses/settings.ts` |
 | Clinical artifact generation and interaction | Built. Generated lab tables with reference flags, trend charts, audiograms, notes; documents released by orders or disclosures; deliberate patient-versus-chart mismatches scored in feedback. | `lib/casegen.ts`, `components/chart/ArtifactView.tsx` |
-| Integration APIs (Canvas and similar) | Not built. What exists: case export and import as JSON, gradebook export as CSV, and a JSON HTTP API under `/api` that uses a session cookie. LTI or a Canvas grade passback is future work. | `app/api/cases/[id]/export`, `app/api/assignments/[id]/csv` |
+| Integration APIs (Canvas and similar) | Partial. Built: an MCP endpoint at `/api/mcp` (Streamable HTTP, stateless; tools `search_episodes`, `get_episode`, `list_patients`, `get_patient_record`), a REST endpoint `GET /api/episodes`, personal access keys sent as a Bearer token, gradebook export as CSV, and case export and import as JSON. All of it is read-only apart from case import, and every call applies the same visibility rules as the Episodes page. Not built: an LTI launch, a Canvas connector or grade passback. | `app/api/mcp/route.ts`, `app/api/episodes`, `lib/episodes.ts`, `lib/apikeys.ts`, `app/api/keys`, `app/api/cases/[id]/export`, `app/api/assignments/[id]/csv` |
 
-Also built, beyond the brief: courses with join codes, homework/exam/practice assignments with
-attempt limits and held feedback, a gradebook with the most-missed findings per assignment, faculty
-review notes and score adjustment, and a Live Visits console where an instructor can watch a visit,
-pause it and send a note (`lib/courses/`, `components/courses/`, `app/faculty/`).
+Also built, beyond the brief:
+
+| What | Where in the product | Where in the code |
+|---|---|---|
+| Courses, assignments, gradebook, faculty review notes and score adjustment | Courses | `lib/courses/`, `components/courses/`, `app/faculty/` |
+| Live Visits console: watch a visit, see its running score, pause it (the visit clock stops), send a note | Live Visits | `components/courses/LiveConsole.tsx`, `app/api/live`, `app/api/encounters/[id]/pause` |
+| Running score per turn, no model call | Feedback page; Live Visits | `lib/engine/timeline.ts` |
+| One shared patient for a class | Assignment setting "One shared patient for the class" | `lib/courses/settings.ts`, `app/api/encounters/route.ts`, `addTeamNotes()` |
+| Students make their own private practice patient | Practice > Make your own practice patient | `app/api/practice/route.ts`, `components/courses/MakePatient.tsx` |
+| Private practice versus recorded visits; no case titles shown to students | Labels on the visit and feedback pages | `lib/access.ts`, `visibleClause()` in `lib/episodes.ts`, `lib/courses/label.ts` |
+| Episode search and personal access keys | Episodes / My visits | `lib/episodes.ts`, `lib/apikeys.ts`, `app/episodes/page.tsx` |
 
 ### Challenge 2
 
@@ -198,7 +280,7 @@ All code paths are under `src/lib/journey/` unless stated.
 
 Requirements: Node.js 20 or later, and AWS credentials that can call Amazon Bedrock (Claude Haiku
 4.5, Claude Sonnet 4.5 and Claude Sonnet 5) and Amazon Polly generative voices. The default region
-is `us-west-2`.
+is `us-west-2`. An ElevenLabs API key is optional; without it the patient's voice is Polly.
 
 ```bash
 npm install
@@ -207,8 +289,10 @@ npm run dev                  # http://localhost:3000
 ```
 
 `.env.example` lists the variables: `AWS_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`,
-`AWS_SESSION_TOKEN`, `SESSION_SECRET`. Optional overrides read by the code: `MODEL_FAST`,
-`MODEL_CHAT`, `MODEL_SMART` (Bedrock model ids), `DB_PATH`, `UPLOAD_DIR`, `JOURNEY_AI_TURNS`.
+`AWS_SESSION_TOKEN`, `SESSION_SECRET`, `ELEVENLABS_API_KEY` (optional). Optional overrides read by
+the code: `MODEL_FAST`, `MODEL_CHAT`, `MODEL_SMART` (Bedrock model ids), `ELEVENLABS_MODEL`,
+`CASEGEN_SINGLE=1` (use the single-call case generator), `DB_PATH`, `UPLOAD_DIR`,
+`JOURNEY_AI_TURNS`.
 
 On first start the server creates `data/app.db`, loads the seed patients, clinician personas, seed
 journeys and the four demo accounts. Without AWS credentials the pages load but every model call
@@ -233,40 +317,60 @@ data/
   seed/cases/             81 seed patients, loaded on boot
   seed/journeys/          2 seed care journeys
 docs/                     architecture, pitch, developer notes, challenge video transcripts
-public/portraits/         patient portraits
-scripts/                  seed-library generation and checks, portraits, engine smoke test, ship.sh
+infra/                    AWS CLI provisioning script, instance bootstrap (systemd units,
+                          deploy timer), CloudFront config
+public/portraits/         71 patient portraits
+scripts/                  seed-library generation and checks, brief scrubbing, portraits,
+                          engine smoke test, ship.sh
 src/
   app/                    Next.js App Router: pages and API routes
     faculty/              Patient Studio, Care Journeys, Courses, Live Visits
     student/              home, practice library, care journeys, progress
     encounter/[id]/       the visit screen and the feedback page
     journey/[runId]/      care journey hub and integrated view
-    api/                  cases, encounters, journeys, courses, assignments, rubrics, uploads, tts
-  components/             studio, visit, chart, journey, courses
+    episodes/             episode search and access keys
+    api/                  cases, encounters, practice, journeys, courses, assignments, rubrics,
+                          uploads, tts, live, episodes, keys, mcp
+  components/             studio, visit, chart, journey, courses, episodes
   lib/
     types.ts              CaseProfile and the other shared types; read this first
-    casegen.ts            case drafting and normalisation
-    engine/               gatekeeper, patient prompt, encounter loop, feedback, difficulty
+    casegen.ts            staged case drafting and normalisation
+    engine/               gatekeeper and reply audit, patient prompt, encounter loop, feedback,
+                          running-score timeline, difficulty
     adaptive.ts           learner model
     studio/               consistency checks, patches, uploads, rubric validation
     journey/              care journeys: runner, shared state, SBAR, huddle, synthesis
-    courses/              courses, assignments, gradebook
-    llm.ts, tts.ts        Bedrock and Polly clients
+    courses/              courses, assignments, gradebook, student-facing case labels
+    episodes.ts           episode search and visibility rules (page, REST, MCP)
+    apikeys.ts, access.ts personal access keys; who may open a visit
+    llm.ts, tts.ts        Bedrock client; ElevenLabs and Polly speech
     db.ts, schema/        SQLite schema
 ```
 
 ## Limitations
 
-- **Clinical content has not been checked by a clinician.** The 73 AI-drafted library patients are
-  labelled "AI-drafted, not faculty-reviewed". The 8 "Sample" patients start from the
-  faculty-provided details but were expanded into full cases by the same generator. The consistency
-  check finds contradictions inside a case; it does not establish that the case is clinically correct.
-- **Grounding is strong for the chart and weaker for the patient's wording.** Which facts are
-  released, what is written to the chart, and what an order returns are decided by code from case
-  data. The patient's sentences are generated: the model is given only released facts and told to
-  deny anything else, and a second model audits each reply and flags unapproved clinical claims in
-  the transcript. That is a prompt plus a detector, not a guarantee. The flag appears after the
-  reply has been shown, and if the audit call fails nothing is flagged.
+- **Clinical content has not been checked by a clinician.** All 81 library patients are stored
+  as unreviewed. The 73 AI-drafted ones are labelled "AI-drafted, not faculty-reviewed". The 8
+  "Sample" patients start from the faculty-provided details but were expanded into full cases by
+  the same generator. The consistency check finds contradictions inside a case; it does not
+  establish that the case is clinically correct.
+- **Student-made practice patients are not reviewed at all.** They are AI-drafted on request,
+  skip the consistency check and are seen only by the student who asked for them.
+- **The patient can still say something outside the case, and it is flagged after the fact.**
+  Which facts are released, what is written to the chart, and what an order returns are decided by
+  code from case data. The patient's sentences are generated. A second model then checks each
+  reply against all the case facts and marks anything else "Outside the case record"; it is not
+  filed in the chart. That is a prompt plus a detector, not a guarantee: the notice appears after
+  the reply has been shown and spoken, the detector can miss a claim or flag a harmless one, and
+  if the audit call fails nothing is flagged for that turn.
+- **The disclosure record is corrected by a model.** The same check moves a released fact back to
+  locked when the patient did not say it and files a true fact the patient said early. It is a
+  model's reading of one reply and can be wrong either way.
+- **The running score is uncalibrated.** Its weights are reasoned defaults and it does not feed
+  the rubric score or the gradebook.
+- **A class-shared patient is updated between visits, not during them.** Students are expected to
+  see the patient in turn. Whether the patient points out conflicting advice depends on a
+  model-written memory of the earlier visit.
 - **Not validated with learners.** Nothing here has been tested with real students or faculty, and
   the rubric scores have not been compared with human raters.
 - **Not an EHR integration.** The chart is an Epic-style layout rendered from case data. There is no
@@ -274,12 +378,14 @@ src/
 - **Voice input depends on the browser.** It uses the browser's speech recognition (Chrome, Edge,
   Safari). Elsewhere the microphone button is disabled and the student types.
 - **The "avatar" is a still portrait** with a speaking state and captions, not lip-synced video.
-  Seed patients without a portrait show initials.
+  Seed patients without a portrait show initials. Most portraits are AI-generated images.
 - **Knowledge sources are not retrieved during the conversation.** They are given to the case
   drafter, the consistency review and the feedback scorer (truncated). The patient does not read them.
-- **No LMS integration.** Export is JSON and CSV only.
+- **No LMS connector.** There is no LTI launch, Canvas integration or grade passback. The MCP and
+  REST endpoints are read-only; access keys have no expiry or scopes and are stored unhashed.
 - **Single instance.** SQLite in one file on one EC2 instance, with in-process background workers
-  for care journeys. No horizontal scaling.
+  for care journeys. No horizontal scaling. A deploy restarts the process in about two seconds,
+  which still drops a reply that is streaming; do not push during a demo.
 - **Open registration.** Anyone can create an account, including a faculty account. There is no
   SSO and no email verification.
 - **Infrastructure is scripted, not templated.** `infra/` holds the AWS CLI commands, instance

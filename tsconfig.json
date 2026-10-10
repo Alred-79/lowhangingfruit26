@@ -46,7 +46,9 @@
     ".next-journeys/types/**/*.ts",
     ".next-journeys/dev/types/**/*.ts",
     ".next-fix/types/**/*.ts",
-    ".next-fix/dev/types/**/*.ts"
+    ".next-fix/dev/types/**/*.ts",
+    ".next-jfix/types/**/*.ts",
+    ".next-jfix/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

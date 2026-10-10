@@ -34,42 +34,91 @@ export interface Live {
   phase: string;
 }
 
-/** Loads a run and keeps it current: live events over SSE while the server is working, with polling as a fallback. */
+const MIN_GAP_MS = 2500;
+const POLL_MS = 8000;
+
+/**
+ * Loads a run and keeps it current. While the server is working (a colleague's visit, state
+ * extraction, the final write-up) it listens to the live stream and polls slowly as a fallback;
+ * when the run is waiting on the learner it makes no requests at all.
+ *
+ * `refresh()` is the only way the run is fetched: one request in flight at a time, at least
+ * MIN_GAP_MS between background fetches, and a call made while one is in flight is folded into a
+ * single follow-up. `refresh(true)` (after the learner did something) skips the gap, not the queue.
+ */
 export function useRun(runId: string, opts: { opened?: string } = {}) {
   const [view, setView] = useState<RunView | null>(null);
   const [error, setError] = useState("");
   const [live, setLive] = useState<Live>({ stageId: null, lines: [], phase: "" });
-  const seq = useRef(0);
+  const seq = useRef<{ n: number; epoch: string } | null>(null);
   const opened = opts.opened;
+  const flight = useRef<{ busy: boolean; last: number; again: boolean; urgent: boolean; timer: ReturnType<typeof setTimeout> | null; waiters: ((v: RunView | null) => void)[] }>({ busy: false, last: 0, again: false, urgent: false, timer: null, waiters: [] });
 
-  const refresh = useCallback(async () => {
-    try {
-      const res = await fetch(`/api/journeys/runs/${runId}${opened ? `?opened=${encodeURIComponent(opened)}` : ""}`, { cache: "no-store" });
-      const j = await res.json();
-      if (j.error) setError(j.error);
-      else {
-        setView(j);
-        setError("");
-      }
-      return j as RunView;
-    } catch {
-      setError("Could not load the care journey.");
-      return null;
-    }
-  }, [runId, opened]);
+  const refresh = useCallback(
+    (now?: boolean): Promise<RunView | null> => {
+      const f = flight.current;
+      return new Promise<RunView | null>((resolve) => {
+        f.waiters.push(resolve);
+        const go = async () => {
+          f.timer = null;
+          if (f.busy) return void (f.again = true);
+          f.busy = true;
+          f.again = false;
+          f.urgent = false;
+          const waiters = f.waiters.splice(0);
+          let out: RunView | null = null;
+          try {
+            const res = await fetch(`/api/journeys/runs/${runId}${opened ? `?opened=${encodeURIComponent(opened)}` : ""}`, { cache: "no-store" });
+            const j = await res.json();
+            if (j.error) setError(j.error);
+            else {
+              setView(j);
+              setError("");
+              out = j as RunView;
+            }
+          } catch {
+            setError("Could not load the care journey.");
+          }
+          f.busy = false;
+          f.last = Date.now();
+          waiters.forEach((w) => w(out));
+          if (f.again || f.waiters.length) schedule(f.urgent);
+        };
+        const schedule = (immediate: boolean) => {
+          if (f.busy) return void (f.again = true);
+          const wait = immediate ? 0 : Math.max(0, f.last + MIN_GAP_MS - Date.now());
+          if (f.timer) {
+            if (!immediate) return; // a fetch is already scheduled
+            clearTimeout(f.timer);
+          }
+          f.timer = setTimeout(go, wait);
+        };
+        if (now) f.urgent = true;
+        schedule(!!now || f.last === 0);
+      });
+    },
+    [runId, opened],
+  );
 
   useEffect(() => {
-    const t = setTimeout(refresh, 0);
-    return () => clearTimeout(t);
+    const f = flight.current;
+    refresh(true);
+    return () => {
+      if (f.timer) clearTimeout(f.timer);
+      f.timer = null;
+    };
   }, [refresh]);
 
-  const waiting = !!view && (view.busy || view.next.kind === "wait");
+  const waiting = !!view && (view.busy || view.next.kind === "wait" || view.next.kind === "finish");
   useEffect(() => {
     if (!waiting) return;
-    const es = new EventSource(`/api/journeys/runs/${runId}/stream?after=${seq.current}`);
+    const at = seq.current;
+    const es = new EventSource(`/api/journeys/runs/${runId}/stream${at ? `?after=${at.n}&epoch=${at.epoch}` : ""}`);
     es.onmessage = (m) => {
       const e = JSON.parse(m.data);
-      seq.current = Math.max(seq.current, e.seq || 0);
+      // Drop anything already seen (the browser reconnects the stream on its own with the original URL).
+      if (seq.current && e.epoch === seq.current.epoch && e.seq <= seq.current.n) return;
+      seq.current = { n: e.seq || 0, epoch: e.epoch || "" };
       if (e.type === "stage_start") setLive({ stageId: e.stageId, lines: [], phase: "" });
       else if (e.type === "clinician") setLive((l) => ({ stageId: e.stageId, phase: "", lines: [...(l.stageId === e.stageId ? l.lines : []), { turn: e.turn, speaker: "clinician", text: e.text }] }));
       else if (e.type === "patient_delta")
@@ -87,9 +136,10 @@ export function useRun(runId: string, opts: { opened?: string } = {}) {
         });
       else if (e.type === "action") setLive((l) => ({ ...l, lines: [...l.lines, { turn: e.turn, speaker: "chart", text: e.text }] }));
       else if (e.type === "phase") setLive((l) => ({ ...l, stageId: e.stageId, phase: e.label }));
-      else if (e.type === "stage_done" || e.type === "idle" || e.type === "error") refresh();
+      // Replayed history never triggers a fetch; only news does, and refresh() rate-limits itself.
+      else if (!e.replay && (e.type === "stage_done" || e.type === "idle" || e.type === "error" || e.type === "updated")) refresh();
     };
-    const poll = setInterval(refresh, 6000);
+    const poll = setInterval(() => refresh(), POLL_MS);
     return () => {
       es.close();
       clearInterval(poll);

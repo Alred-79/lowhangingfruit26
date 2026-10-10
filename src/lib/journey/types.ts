@@ -15,7 +15,32 @@ export interface Stage {
   simTime: string;
   /** Short description of the kind of contact, e.g. "ED follow-up video call". */
   visitLabel?: string;
+  /** Shown to the student in the waiting room when they take this stage. Must not give away findings. */
+  brief?: string;
+  /** The student's tasks for this stage (shown with the brief). */
+  tasks?: string[];
+  /** Why the patient is seeing THIS clinician today, in the patient's own words. */
+  patientReason?: string;
+  /** Booked reason for this stage's visit, shown in the chart header. */
+  reason?: string;
 }
+
+/** What a student is told about a stage. Never falls back to the source case's own (single-profession) brief. */
+export function stageBrief(stage: Stage, patientName: string, total: number): string {
+  if (stage.brief?.trim()) return stage.brief.trim();
+  return `You are the ${stage.roleTitle.toLowerCase()} in encounter ${stage.order} of ${total} of ${patientName || "the patient"}'s care journey${stage.visitLabel ? ` (${stage.visitLabel})` : ""}. Start from the shared record and any handoff you received, find out what your profession needs to know, and hand off to the next professional with an SBAR.`;
+}
+export function stageTasks(stage: Stage, first: boolean, last: boolean): string[] {
+  if (stage.tasks?.length) return stage.tasks;
+  return [
+    first ? "Review the existing record before you start (Care team tab)" : "Read the handoff you received and the shared patient state (Care team tab)",
+    "Interview the patient within your role, and follow up on anything earlier information leaves open",
+    "Request the checks or records you need from the chart",
+    last ? "Write an SBAR handoff to the whole team ahead of the huddle" : "Write an SBAR handoff to the next professional",
+  ];
+}
+export const stageReason = (stage: Stage) => stage.reason?.trim() || `${stage.visitLabel ? stage.visitLabel[0].toUpperCase() + stage.visitLabel.slice(1) : "Telehealth visit"} with the ${stage.roleTitle.toLowerCase()}`;
+export const stagePatientReason = (stage: Stage) => stage.patientReason?.trim() || `They told me someone from the care team, the ${stage.roleTitle.toLowerCase()}, wanted to talk with me today. I'm not completely sure what it's about.`;
 
 export interface JourneySpec {
   summary: string;
@@ -77,6 +102,60 @@ export interface StateEntry {
   simTime: string;
   createdAt: string;
   meta: { unverifiedValues?: string[]; owner?: string; importance?: string; abnormal?: boolean; flags?: string[] } | null;
+}
+
+/** How an entry's displayed status is derived from the relations pointing at it. One rule, used everywhere. */
+export function deriveStatus(status: EntryStatus, inbound: { relation: Relation; fromKind?: string; fromSource?: string }[]): EntryStatus {
+  if (inbound.some((l) => l.relation === "resolves" || l.relation === "answers")) return "resolved";
+  // An approved result or record that confirms a statement settles it, whatever a clinician remarked.
+  const confirmed = inbound.some((l) => l.relation === "confirms" && (l.fromKind === "result" || l.fromKind === "record" || l.fromSource === "exam" || l.fromSource === "test" || l.fromSource === "record"));
+  if (confirmed) return status === "resolved" ? "resolved" : "established";
+  // Only a recorded disagreement (two incompatible factual claims) disputes an entry.
+  if (inbound.some((l) => l.relation === "contradicts" && (l.fromKind === undefined || l.fromKind === "disagreement"))) return "disputed";
+  return status;
+}
+
+export interface StatusBoard {
+  groups: Record<EntryStatus, StateEntry[]>;
+  counts: Record<EntryStatus, number>;
+  /** uncertain + disputed + unanswered. */
+  unresolved: number;
+  total: number;
+  /** Open items restated by a later entry (for example in the huddle); the later entry carries them, so they are not counted twice. */
+  restated: number;
+}
+
+/**
+ * Status counts for the header, the board and the evolution chart. `upTo` gives the counts as they
+ * stood after that point in the journey (entries and relations recorded up to it).
+ */
+export function statusBoard(entries: StateEntry[], links: StateLink[], upTo?: number): StatusBoard {
+  const byId = new Map(entries.map((e) => [e.id, e]));
+  const inScope = (e?: StateEntry) => !!e && (upTo === undefined || e.stageOrder <= upTo);
+  const live = links.filter((l) => inScope(byId.get(l.from)) && inScope(byId.get(l.to)));
+  const inbound = new Map<string, StateLink[]>();
+  for (const l of live) inbound.set(l.to, [...(inbound.get(l.to) || []), l]);
+  const all: EntryStatus[] = ["established", "patient_reported", "resolved", "uncertain", "disputed", "open_question"];
+  const groups = Object.fromEntries(all.map((s) => [s, [] as StateEntry[]])) as Record<EntryStatus, StateEntry[]>;
+  let restated = 0;
+  for (const e of entries) {
+    if (!inScope(e)) continue;
+    const inb = (inbound.get(e.id) || []).map((l) => ({ relation: l.relation, fromKind: byId.get(l.from)?.kind, fromSource: byId.get(l.from)?.source }));
+    const eff = deriveStatus(e.status, inb);
+    if (["uncertain", "disputed", "open_question"].includes(eff) && (inbound.get(e.id) || []).some((l) => l.relation === "updates" && ["open_question", "uncertain", "disputed"].includes(byId.get(l.from)?.status || ""))) {
+      restated++;
+      continue;
+    }
+    groups[eff].push(e);
+  }
+  const counts = Object.fromEntries(all.map((s) => [s, groups[s].length])) as Record<EntryStatus, number>;
+  return { groups, counts, unresolved: counts.uncertain + counts.disputed + counts.open_question, total: all.reduce((n, s) => n + counts[s], 0), restated };
+}
+
+/** Professions (stage roles) whose entries a set of entries comes from. The record and the huddle are not professions. */
+export function professionsOf(ids: string[], entries: StateEntry[], stageIds: string[]): string[] {
+  const byId = new Map(entries.map((e) => [e.id, e]));
+  return [...new Set(ids.map((id) => byId.get(id)).filter((e): e is StateEntry => !!e && stageIds.includes(e.stageId)).map((e) => e.contributorRole))];
 }
 
 export interface StateLink {
@@ -296,6 +375,10 @@ export interface RunView {
   busy: boolean;
   /** What the student should do next. */
   next: { kind: "wait" | "start_visit" | "continue_visit" | "write_handoff" | "huddle" | "finish" | "done" | "error"; stageId?: string; label: string };
+  /** Last event sequence number of the live stream and the worker's epoch, so a new page does not replay history. */
+  stream: { seq: number; epoch: string };
+  /** Run-level error (writing the care plan or evaluation failed). */
+  error: string | null;
 }
 
 export const STATUS_LABEL: Record<EntryStatus, string> = {

@@ -3,15 +3,16 @@ import { ensureProgress, subscribe } from "@/lib/journey/runner";
 
 /**
  * Server-sent events for a run: the colleague's visit as it happens (clinician lines, patient
- * reply chunks, results), phase changes, and `idle` when the worker has nothing left to do.
- * `?after=<seq>` resumes. The run keeps going if nobody is listening.
+ * reply chunks, results), phase changes, and `idle` when the worker finishes a piece of work.
+ * `?after=<seq>&epoch=<id>` resumes; without it the visit in progress is replayed, marked `replay`. The run keeps going if nobody is listening.
  */
 export async function GET(req: Request, ctx: { params: Promise<{ runId: string }> }) {
   const { runId } = await ctx.params;
   const r = await runFor(runId, { faculty: true });
   if (r instanceof Response) return r;
-  const after = Number(new URL(req.url).searchParams.get("after")) || 0;
-  if (r.run.row.user_id === r.user.id && r.run.row.status === "active") ensureProgress(runId);
+  const q = new URL(req.url).searchParams;
+  const after = q.has("after") ? Number(q.get("after")) || 0 : null;
+  if (r.run.row.user_id === r.user.id) ensureProgress(runId);
   const enc = new TextEncoder();
   let off = () => {};
   let beat: ReturnType<typeof setInterval> | undefined;
@@ -26,7 +27,7 @@ export async function GET(req: Request, ctx: { params: Promise<{ runId: string }
         }
       };
       send(": connected\n\n");
-      off = subscribe(runId, after, (e) => send(`data: ${JSON.stringify(e)}\n\n`));
+      off = subscribe(runId, after, q.get("epoch"), (e) => send(`data: ${JSON.stringify(e)}\n\n`));
       beat = setInterval(() => send(": keep-alive\n\n"), 10000);
       req.signal.addEventListener("abort", () => {
         off();

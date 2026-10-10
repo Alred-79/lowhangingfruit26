@@ -2,7 +2,7 @@ import { get } from "../db";
 import { studentJourneyLabel } from "../courses/label";
 import { messagesOf } from "../engine/encounter";
 import { clinician, entriesOf, handoffsOf, linksOf, loadRun, messagesOfRun, RECORD_STAGE, resolveProfession, stageRuns, studentNameOf } from "./store";
-import type { Chain, ChainStep, Handoff, PillarRow, RunView, StageView, StateEntry, StateLink, Synthesis } from "./types";
+import { stageBrief, type Chain, type ChainStep, type Handoff, type PillarRow, type RunView, type StageView, type StateEntry, type StateLink, type Synthesis } from "./types";
 
 const OPEN = ["uncertain", "disputed", "open_question"];
 
@@ -121,7 +121,12 @@ export function buildView(runId: string, viewerId: string, busy: boolean): RunVi
   const student = studentNameOf(run.row.user_id);
   const srs = stageRuns(runId);
 
-  const stages: StageView[] = run.stages.map((stage) => {
+  // Journey and case titles, and each stage's faculty-facing focus, are written for faculty and may name
+  // conditions. A student viewer gets the patient, the roles and the neutral stage brief instead.
+  const viewer = get<{ role: string }>("SELECT role FROM users WHERE id = ?", viewerId);
+  const facultyViewer = viewer?.role === "faculty" || viewer?.role === "admin";
+  const stages: StageView[] = run.stages.map((raw) => {
+    const stage = facultyViewer ? raw : { ...raw, focus: stageBrief(raw, run.c.patient?.name || "", run.stages.length) };
     const sr = srs.find((x) => x.stage_id === stage.id);
     const cl = clinician(stage.clinicianId);
     const isStudent = stage.id === run.row.student_stage_id;
@@ -154,21 +159,19 @@ export function buildView(runId: string, viewerId: string, busy: boolean): RunVi
 
   const firstOpen = stages.find((s) => s.status !== "complete");
   let next: RunView["next"];
-  if (firstOpen?.status === "error") next = { kind: "error", stageId: firstOpen.stage.id, label: firstOpen.error || "This stage stopped with an error." };
+  if (firstOpen && (firstOpen.status === "error" || firstOpen.error)) next = { kind: "error", stageId: firstOpen.stage.id, label: firstOpen.error || "This stage stopped with an error." };
   else if (firstOpen && !firstOpen.isStudent) next = { kind: "wait", stageId: firstOpen.stage.id, label: `${firstOpen.clinicianName} is seeing the patient.` };
   else if (firstOpen) {
     if (firstOpen.status === "awaiting_handoff") next = { kind: "write_handoff", stageId: firstOpen.stage.id, label: "Write your SBAR handoff." };
-    else if (firstOpen.encounterStatus === "scored" || firstOpen.encounterStatus === "submitted") next = { kind: "wait", stageId: firstOpen.stage.id, label: "Adding what you found to the shared patient state." };
+    else if (firstOpen.encounterStatus === "scored" || firstOpen.encounterStatus === "submitted") next = { kind: "wait", stageId: firstOpen.stage.id, label: "Adding what you found to the shared patient state. This usually takes 30 to 60 seconds." };
     else if (!firstOpen.encounterId) next = { kind: "wait", stageId: firstOpen.stage.id, label: "Preparing your visit." };
     else next = { kind: firstOpen.transcript.length ? "continue_visit" : "start_visit", stageId: firstOpen.stage.id, label: firstOpen.transcript.length ? "Continue your visit." : "Start your visit." };
   } else if (run.row.status === "complete") next = { kind: "done", label: "The journey is complete." };
-  else if (run.huddle?.status === "closed") next = { kind: "finish", label: "Writing the integrated care plan and your evaluation." };
+  else if (run.huddle?.status === "closed" && run.row.error) next = { kind: "error", label: `Writing the care plan and evaluation did not finish (${run.row.error}). Nothing is lost; try again.` };
+  else if (run.huddle?.status === "closed") next = { kind: "finish", label: "Writing the integrated care plan and your teamwork evaluation. This usually takes 60 to 90 seconds; you can leave this page and come back." };
   else next = { kind: "huddle", label: "Join the team huddle." };
 
   const stageName = (id: string) => run.stages.find((s) => s.id === id)?.roleTitle || "Existing record";
-  // Journey and case titles are written for faculty and name the diagnoses. A student viewer gets the patient and roles instead.
-  const viewer = get<{ role: string }>("SELECT role FROM users WHERE id = ?", viewerId);
-  const facultyViewer = viewer?.role === "faculty" || viewer?.role === "admin";
   const neutral = studentJourneyLabel(run.c.patient?.name, run.stages.map((s) => s.roleTitle));
   return {
     id: runId,
@@ -191,5 +194,7 @@ export function buildView(runId: string, viewerId: string, busy: boolean): RunVi
     pillars: buildPillars(run, entries, links, handoffs, student),
     busy,
     next,
+    stream: { seq: 0, epoch: "" },
+    error: run.row.error || null,
   };
 }
