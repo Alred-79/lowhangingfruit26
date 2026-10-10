@@ -64,7 +64,7 @@
     "id": "a7",
     "kind": "assessment",
     "name": "Measure extent of erythema (patient marks border with pen, measures with tape)",
-    "result": "Erythema border now 11 cm proximal to original surgical margin marked at discharge; was 4 cm at discharge per home log photo",
+    "result": "Erythema border now 11 cm proximal to original surgical margin, measured by patient self-marking with pen and tape via camera guidance; was 4 cm at discharge per clinician measurement from wound margin using photo documentation (home log photo). Note: the two measurements were taken by different observers using different techniques, so the comparison should be treated as an approximate trend rather than a precise, directly comparable measurement.",
     "abnormal": true,
     "importance": "critical",
     "artifactIds": [
@@ -95,7 +95,7 @@
     "id": "a10",
     "kind": "record",
     "name": "Review hospital discharge summary",
-    "result": "Discharged after 6 days IV antibiotics and surgical debridement for right first-toe diabetic foot infection with surrounding cellulitis; osteomyelitis not evident on plain films at that time (plain films have limited sensitivity and do not definitively exclude bone infection). Cultures grew MRSA and Enterobacter; discharged on amoxicillin-clavulanate 875/125 mg PO BID x14 days, new insulin glargine 14 units subcutaneous nightly, home dressing changes BID with wife as caregiver, follow-up in clinic in 9 days.",
+    "result": "Discharged after 6 days IV antibiotics and surgical debridement for right first-toe diabetic foot infection with surrounding cellulitis; osteomyelitis not evident on plain films at that time (plain films have limited sensitivity and do not definitively exclude bone infection). Cultures grew methicillin-susceptible Staphylococcus aureus (MSSA) and group B Streptococcus; discharged on amoxicillin-clavulanate 875/125 mg PO BID x14 days, new insulin glargine 14 units subcutaneous nightly, home dressing changes BID with wife as caregiver, follow-up in clinic in 9 days.",
     "abnormal": false,
     "importance": "critical",
     "artifactIds": []
@@ -187,7 +187,7 @@
     "Contact dermatitis or dressing irritation (does not explain fever/drainage)"
    ],
    "keyFindings": [
-    "Spreading erythema (4 cm at discharge to 11 cm now) with foul-smelling greenish drainage",
+    "Spreading erythema (approximately 4 cm at discharge, clinician-measured from wound margin via photo, to approximately 11 cm now, patient self-marked and tape-measured) with foul-smelling greenish drainage; note the two measurements used different observers and techniques, so the magnitude of change should be interpreted as an approximate trend, not an exact comparison",
     "Subjective fever 38.1C and tachycardia 102 bpm with chills overnight",
     "Delayed capillary refill in the affected toe",
     "Hyperglycemia 260-340 mg/dL with inconsistent insulin administration",
@@ -196,18 +196,18 @@
     "Insulin pen technique has gaps (no priming, uncertain site rotation) contributing to erratic glucose control"
    ],
    "plan": [
-    "Escalate immediately to the discharging provider/surgical team via SBAR: new fever, tachycardia, spreading erythema, purulent malodorous drainage, and hyperglycemia in a patient 2 days post-op for diabetic foot infection with known MRSA/Enterobacter culture — recommend urgent in-person evaluation today, not wait for the 9-day follow-up",
+    "Escalate immediately to the discharging provider/surgical team via SBAR: new fever, tachycardia, markedly increased erythema, purulent malodorous drainage, and hyperglycemia in a patient 2 days post-op for diabetic foot infection with known MSSA/group B Streptococcus culture — recommend urgent in-person evaluation today, not wait for the 9-day follow-up",
     "Do not independently diagnose sepsis or change antibiotic/insulin orders; this is outside RN scope — communicate findings and let the provider determine disposition (ED vs urgent clinic vs home health escalation)",
     "Reinforce strict non-weight-bearing/offloading of the right foot until seen; discuss safe alternatives for getting to the corral (cane, wheelchair, asking spouse/family for help, deferring non-essential tasks)",
     "Provide focused teaching on insulin pen priming and injection site rotation; arrange follow-up teaching or home health nursing visit if available",
     "Educate on glucose log reporting and the importance of taking insulin at the prescribed time (nightly) rather than variable administration",
-    "Document objective wound measurements, photos if system allows, and vital signs trend to support the SBAR handoff",
+    "Document objective wound measurements, photos if system allows, and vital signs trend to support the SBAR handoff, noting that discharge and current erythema measurements were taken by different observers using different techniques and should be framed as a trend rather than a precise delta",
     "Arrange transportation given 70-mile distance from hospital; ask about resources (family, community health transport) to get to care today",
     "Advise patient and wife on signs of worsening sepsis to seek emergency care immediately (confusion, worsening fever, rapid heart rate, inability to keep fluids down) while awaiting provider callback"
    ],
    "redFlags": [
     "Fever and tachycardia in a post-surgical diabetic foot infection patient",
-    "Rapidly spreading erythema nearly tripling in extent over 2 days",
+    "Markedly increased erythema extent over 2 days (clinician-measured 4 cm at discharge vs. patient self-measured 11 cm now, measured differently but still concerning for rapid spread)",
     "Purulent, foul-smelling drainage suggesting uncontrolled or recurrent infection",
     "Delayed capillary refill in the affected digit",
     "Persistent hyperglycemia with inconsistent insulin dosing increasing infection risk and impairing healing",
@@ -219,7 +219,8 @@
     "Insulin pens must be primed before each use to ensure accurate dosing, and injection sites should be rotated to avoid lipohypertrophy and absorption problems",
     "Consistent nightly basal insulin dosing is important for glucose control and wound healing; skipping or shifting timing increases risk of hyperglycemia",
     "Offloading (not walking on the healing foot) is as important as antibiotics and dressing changes for wound healing",
-    "Patients living in rural/remote areas need an explicit, realistic transportation plan built into any urgent referral"
+    "Patients living in rural/remote areas need an explicit, realistic transportation plan built into any urgent referral",
+    "When comparing wound measurements over time, note whether the same observer and technique were used; mixing clinician-measured and patient self-measured values introduces imprecision and should be acknowledged when reporting trends"
    ]
   },
   "artifacts": [
@@ -232,7 +233,7 @@
     "release": {
      "when": "start"
     },
-    "body": "68-year-old male with type 2 diabetes mellitus admitted for right first-toe diabetic foot infection with surrounding cellulitis. Underwent surgical debridement of right great toe. Wound cultures grew MRSA and Enterobacter cloacae, sensitive to the prescribed regimen. Plain films at admission did not show osteomyelitis; given the known low sensitivity of plain radiographs for early bone infection, this does not definitively rule it out. Treated with 6 days IV vancomycin and ceftriaxone, transitioned to oral amoxicillin-clavulanate 875/125 mg PO BID to complete a 14-day course. Started on insulin glargine 14 units SC nightly for persistently elevated inpatient glucose (metformin to be continued). Discharged home with wife performing BID dressing changes using provided supplies. Wound boot provided; patient instructed on strict non-weight-bearing/offloading of right foot. Follow-up in surgical clinic in 9 days or sooner if concerns. At discharge, erythema margin marked and measured at 4 cm from incision edge, photo on file."
+    "body": "68-year-old male with type 2 diabetes mellitus admitted for right first-toe diabetic foot infection with surrounding cellulitis. Underwent surgical debridement of right great toe. Wound cultures grew methicillin-susceptible Staphylococcus aureus and group B Streptococcus, both susceptible to the discharge antibiotic. Plain films at admission did not show osteomyelitis; given the known low sensitivity of plain radiographs for early bone infection, this does not definitively rule it out. Treated with 6 days IV ampicillin-sulbactam, transitioned to oral amoxicillin-clavulanate 875/125 mg PO BID to complete a 14-day course. Started on insulin glargine 14 units SC nightly for persistently elevated inpatient glucose (metformin to be continued). Discharged home with wife performing BID dressing changes using provided supplies. Wound boot provided; patient instructed on strict non-weight-bearing/offloading of right foot. Follow-up in surgical clinic in 9 days or sooner if concerns. At discharge, erythema margin marked and measured at 4 cm from incision edge, photo on file."
    },
    {
     "id": "d2",
@@ -405,7 +406,7 @@
     "id": "d5",
     "type": "flowsheet",
     "title": "Vital Signs Flowsheet, This Visit",
-    "author": "RN telehealth assessment",
+    "author": "Patient-reported, charted by RN",
     "date": "today",
     "release": {
      "when": "action",
@@ -445,7 +446,7 @@
      "when": "action",
      "ref": "a7"
     },
-    "body": "At discharge, right great toe surgical site with mild surrounding erythema measured 4 cm from wound margin, no purulent drainage noted, dressing dry and intact. Photo documented in record for comparison at next visit."
+    "body": "At discharge, right great toe surgical site with mild surrounding erythema measured 4 cm from wound margin by clinician using photo documentation, no purulent drainage noted, dressing dry and intact. Photo documented in record for comparison at next visit. Note: this clinician-measured discharge value and the patient's self-marked, tape-measured value today use different observers and techniques, so the comparison should be interpreted as an approximate trend rather than a precise measurement."
    },
    {
     "id": "d7",
@@ -498,7 +499,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Type 2 diabetes mellitus (newly started on insulin), right great toe surgical site infection post-debridement (MRSA/Enterobacter), diabetic peripheral neuropathy, hypertension"
+    "value": "Type 2 diabetes mellitus (newly started on insulin), right great toe surgical site infection post-debridement (MSSA/group B Streptococcus), diabetic peripheral neuropathy, hypertension"
    },
    {
     "label": "Medications",
@@ -823,11 +824,11 @@
   "mismatches": [
    {
     "id": "m1",
-    "factId": "f10",
-    "artifactId": "d8",
-    "patientClaim": "Patient states he has taken amoxicillin-clavulanate exactly as prescribed with no missed doses.",
-    "recordEvidence": "Despite reported perfect antibiotic adherence, the pharmacy dispensing record shows no early refill was needed and the clinical picture (spreading erythema, fever, purulent drainage) shows the infection progressing rather than improving, suggesting either a resistant/worsening infection despite good adherence or that the full clinical picture needs closer scrutiny.",
-    "teachingPoint": "Reported medication adherence does not guarantee treatment response; worsening clinical signs despite stated adherence and an unremarkable dispensing record are themselves a red flag requiring escalation, not reassurance."
+    "factId": "f1",
+    "artifactId": "d6",
+    "patientClaim": "Patient says the foot 'looks about the same' as when he left hospital.",
+    "recordEvidence": "The discharge wound note records mild erythema about 4 cm from the wound margin with a dry, intact dressing and no purulent drainage. Today the dressing is soaked with foul-smelling greenish drainage and the redness reaches the mid-foot and beyond.",
+    "teachingPoint": "A stoic patient with neuropathy may sincerely report no change. Compare what you see with the documented baseline rather than relying on the patient's summary, and name the difference to him plainly and without blame."
    },
    {
     "id": "m2",
@@ -926,7 +927,8 @@
    "ethnicity": "Navajo (Diné)",
    "occupation": "Retired heavy-equipment operator",
    "language": "English",
-   "appearance": "An older man with a weathered, sun-worn face and short gray hair, wearing a plain flannel shirt. He is seated in a modestly furnished living room with wood paneling, leaning forward slightly with his right foot propped on a stool wrapped in a bulky dressing. His expression is calm but tired, and he pauses to think before answering each question."
+   "appearance": "An older man with a weathered, sun-worn face and short gray hair, wearing a plain flannel shirt. He is seated in a modestly furnished living room with wood paneling, leaning forward slightly with his right foot propped on a stool wrapped in a bulky dressing. His expression is calm but tired, and he pauses to think before answering each question.",
+   "portrait": "/portraits/nursing-raymond-tso-foot-wound.jpg"
   },
   "persona": {
    "personality": "Quiet, thoughtful, stoic; does not volunteer complaints readily and tends to downplay symptoms.",

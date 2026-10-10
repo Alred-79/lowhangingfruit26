@@ -99,14 +99,6 @@
     "result": "Patient shows an open lens case with visibly discolored, cloudy soaking solution and a lens case that appears old and overdue for replacement.",
     "importance": "important",
     "artifactIds": []
-   },
-   {
-    "id": "a12",
-    "kind": "test",
-    "name": "Ask about pain level and foreign body sensation (patient self-report scale)",
-    "result": "Patient rates pain 7/10 in right eye, describes it as a 'gritty, burning' sensation that started yesterday morning and has worsened.",
-    "importance": "important",
-    "artifactIds": []
    }
   ],
   "artifacts": [
@@ -253,12 +245,12 @@
    "plan": [
     "Instruct patient to remove and discontinue contact lens wear in right eye (and left eye) immediately",
     "Advise against use of the borrowed steroid-antibiotic drop; discontinue immediately given risk of worsening infection/masking pseudomonas or fungal/Acanthamoeba keratitis with steroid component",
-    "Arrange same-day in-person emergency evaluation (ophthalmology or optometry with corneal scraping capability) for corneal culture/scraping and smear, given sight-threatening presentation",
+    "Arrange same-day urgent referral to ophthalmology (cornea specialist or on-call ED ophthalmology) for corneal culture/scraping and smear, given sight-threatening presentation; corneal scraping and initiation of fortified topical antibiotics are outside optometry's scope and must be performed by ophthalmology - the optometrist's role is to recognize the emergency, stop harmful self-treatment, and ensure urgent hand-off",
     "Instruct patient to bring current contact lenses and lens case/solution to the in-person visit for culture",
     "Do not patch the eye; do not delay referral for home remedies",
-    "Counsel patient that this is outside safe scope for telehealth management alone - visual acuity loss and corneal infiltrate require urgent in-person slit lamp assessment and likely culture-directed fortified topical antibiotics",
-    "Document and report risk factors (extended wear, overnight wear, water exposure, non-prescribed steroid drop) for the receiving clinician",
-    "Arrange follow-up communication/contact with the in-person clinician or ED to confirm the patient was seen"
+    "Counsel patient that this is outside safe scope for telehealth management alone and outside optometric scope for definitive treatment - visual acuity loss and corneal infiltrate require urgent in-person ophthalmologic slit lamp assessment and likely culture-directed fortified topical antibiotics",
+    "Document and report risk factors (extended wear, overnight wear, water exposure, non-prescribed steroid drop) for the receiving ophthalmology clinician",
+    "Arrange follow-up communication/contact with the in-person ophthalmology clinician or ED to confirm the patient was seen"
    ],
    "redFlags": [
     "Marked reduction in visual acuity (counts fingers) in the affected eye",
@@ -272,9 +264,10 @@
     "Contact lens wearers with a painful red eye and vision change must be treated as having presumed microbial keratitis until an in-person slit lamp exam and culture rule it out",
     "Overnight wear, extended replacement beyond manufacturer schedule, and water exposure (swimming, tap water rinsing) are major modifiable risk factors for contact-lens-related keratitis including Pseudomonas and Acanthamoeba",
     "Topical steroids should never be used for a red eye of unclear or infectious cause without ophthalmic evaluation, as they can worsen bacterial, fungal, and Acanthamoeba keratitis and promote corneal melting",
-    "A corneal infiltrate with vision loss and significant pain is outside the scope of telehealth-only management and requires urgent in-person care, including possible corneal scraping for microbiology",
+    "A corneal infiltrate with vision loss and significant pain is outside the scope of telehealth-only management and outside optometric scope for definitive treatment (corneal scraping, fortified antibiotics); it requires urgent referral to ophthalmology for in-person care and possible corneal scraping for microbiology",
     "Patients may minimize or normalize risky lens hygiene behaviors ('I take care of them normally') and may need direct, nonjudgmental questioning to reveal the full history",
-    "Lens cases should be replaced regularly (e.g., every 1-3 months) and not allowed to accumulate cloudy or discolored solution, as biofilm formation increases infection risk"
+    "Lens cases should be replaced regularly (e.g., every 1-3 months) and not allowed to accumulate cloudy or discolored solution, as biofilm formation increases infection risk",
+    "Optometrists play a critical triage role in recognizing sight-threatening presentations and must know the limits of their scope, ensuring timely referral to ophthalmology rather than attempting procedures like corneal scraping themselves"
    ]
   },
   "chartAtStart": [
@@ -617,7 +610,7 @@
   "objectives": [
    {
     "id": "o1",
-    "text": "Elicit a complete contact lens history including replacement schedule, overnight wear, and water exposure despite initial minimization by the patient",
+    "text": "Elicit a complete contact lens history including replacement schedule, overnight wear, and water exposure despite initial minimization by the patient, using direct interview questions beyond the patient's initial general reassurance",
     "factIds": [
      "f9",
      "f10",
@@ -626,8 +619,7 @@
      "f25"
     ],
     "actionIds": [
-     "a8",
-     "a11"
+     "a8"
     ]
    },
    {

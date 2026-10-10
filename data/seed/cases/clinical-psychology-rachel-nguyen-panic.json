@@ -66,7 +66,7 @@
     "id": "a6",
     "kind": "record",
     "name": "Review current medication list",
-    "result": "No prescribed psychiatric medications or benzodiazepines on the medication reconciliation list. No other medications listed except occasional OTC omeprazole for heartburn.",
+    "result": "Medication reconciliation list on file shows no prescribed psychiatric medications, benzodiazepines, or other prescriptions - only occasional OTC omeprazole for heartburn. No unprescribed or borrowed medication use is documented anywhere in this list, since reconciliation only captures prescribed medications.",
     "importance": "important",
     "aliases": [
      "medication reconciliation"
@@ -385,7 +385,7 @@
    },
    {
     "label": "Medications",
-    "value": "None prescribed; OTC omeprazole PRN"
+    "value": "Not yet reviewed in this record"
    },
    {
     "label": "Allergies",
@@ -809,7 +809,8 @@
    "ethnicity": "Vietnamese-American",
    "occupation": "Emergency department unit clerk",
    "language": "English (primary), understands conversational Vietnamese",
-   "appearance": "A woman in her early thirties with shoulder-length black hair pulled into a loose ponytail, wearing hospital-system scrubs with an ID badge still clipped on. She is seated at a kitchen table at home, posture slightly tense with arms crossed, occasionally glancing at her phone as if checking the time, and her affect shifts from flat/guarded to visibly anxious when describing her symptoms."
+   "appearance": "A woman in her early thirties with shoulder-length black hair pulled into a loose ponytail, wearing hospital-system scrubs with an ID badge still clipped on. She is seated at a kitchen table at home, posture slightly tense with arms crossed, occasionally glancing at her phone as if checking the time, and her affect shifts from flat/guarded to visibly anxious when describing her symptoms.",
+   "portrait": "/portraits/clinical-psychology-rachel-nguyen-panic.jpg"
   },
   "persona": {
    "personality": "Pragmatic, hardworking, and somewhat guarded; prides herself on being capable and self-sufficient, which makes it hard to accept a psychological explanation for her symptoms.",
@@ -851,7 +852,7 @@
     "Panic Disorder with mild agoraphobic avoidance (primary)",
     "Acute Stress Disorder / evolving PTSD given temporal link to witnessed death and intrusive memories (f6, f7) - warrants further trauma-focused assessment",
     "Generalized Anxiety Disorder (GAD-7 11/21) - likely secondary/overlapping anticipatory anxiety rather than primary diagnosis",
-    "Caffeine-induced anxiety symptoms as an exacerbating/contributory factor (not sole explanation given symptom pattern predates/exceeds typical caffeine reactions)",
+    "Caffeine-induced anxiety symptoms as an exacerbating/contributory factor - patient reports an inconsistent relationship between coffee intake and attack onset (f13), so caffeine should be addressed as a plausible contributor rather than assumed to be causal or distinct from typical caffeine reactions",
     "Cardiac or endocrine etiology - ruled out by three negative ED workups (ECG, troponin, TSH/free T4) per d2, d3, d4; not primary differential but important to acknowledge given patient's conviction",
     "Mild depressive symptoms (PHQ-9 8) secondary to functional impairment, not meeting criteria for Major Depressive Disorder"
    ],
@@ -862,7 +863,7 @@
     "Agoraphobic avoidance of freeway driving, gym, and being alone at home, with associated functional impairment (2 missed work days)",
     "Symptom onset two weeks after witnessing an in-hospital death of a similarly aged patient, with ongoing intrusive memories - possible co-occurring trauma response requiring further evaluation",
     "Unauthorized use of partner's lorazepam approximately 6 times in the past month, not reflected in medication reconciliation (mismatch m1)",
-    "High caffeine intake (~500mg/day) as a plausible symptom exacerbant",
+    "High caffeine intake (~500mg/day) with an inconsistent temporal link to attacks, as a plausible symptom exacerbant",
     "C-SSRS and direct questioning negative for current suicidal ideation, intent, plan, or lethal means access",
     "Strong, persistent belief in missed cardiac diagnosis despite objective negative evidence (mismatch m2) and skepticism about psychotherapy as appropriate treatment"
    ],
@@ -872,7 +873,7 @@
     "Introduce CBT as first-line evidence-based treatment, outlining components: psychoeducation, cognitive restructuring of catastrophic misinterpretations, interoceptive exposure exercises (e.g., controlled hyperventilation, straw breathing, stair climbing) to desensitize fear of bodily sensations, and graded in-vivo exposure to avoided situations (freeway, gym, being alone)",
     "Address unauthorized benzodiazepine use directly: discuss risks of unprescribed/borrowed medication use, recommend she discuss appropriate pharmacologic options with her primary care physician or a psychiatrist rather than continuing to use her partner's lorazepam, and refer for medication consultation given this role's scope does not include prescribing",
     "Recommend further assessment of trauma-related symptoms (intrusive memories of witnessed death) in a subsequent session to clarify whether a co-occurring trauma-related diagnosis needs independent treatment (e.g., trauma-focused CBT) alongside panic-focused treatment",
-    "Discuss caffeine reduction as an adjunctive behavioral target given plausible symptom exacerbation, in collaboration with patient's own observations",
+    "Discuss caffeine intake as an adjunctive behavioral target to explore collaboratively, noting the patient's own observation that the timing relationship to attacks is inconsistent",
     "Reinforce that current risk screening shows no acute safety concerns but agree to monitor mood and reassess PHQ-9/suicide risk at each session given mild depressive symptoms",
     "Validate cultural context around mental health stigma and normalize her hesitation, inviting her partner into future sessions if she is willing, to build support outside session"
    ],
@@ -885,7 +886,7 @@
    "educationPoints": [
     "Panic disorder is a clinical diagnosis made after appropriate medical rule-out; a psychologist's role is not to re-litigate the medical workup but to help the patient understand and manage the mind-body fear cycle once organic causes have been reasonably excluded",
     "Interoceptive exposure is a core CBT technique for panic disorder that intentionally induces feared bodily sensations (e.g., via hyperventilation, spinning) in a controlled way to break the association between benign sensations and catastrophe",
-    "High caffeine intake can mimic or exacerbate panic symptoms through sympathetic activation and should be assessed and addressed as part of a comprehensive behavioral treatment plan",
+    "High caffeine intake can mimic or exacerbate panic symptoms through sympathetic activation and should be assessed and addressed as part of a comprehensive behavioral treatment plan, even when the patient's own report of timing is inconsistent rather than clearly causal",
     "Unauthorized use of a partner's or family member's controlled medication is a common but underreported coping behavior in panic disorder; routine medication reconciliation will not capture this, and it must be asked about directly and non-judgmentally",
     "Witnessing a sudden death, especially of someone demographically similar to oneself, is a recognized precipitant for both panic disorder and trauma-related symptoms; clinicians should screen for both and avoid anchoring on a single diagnosis",
     "Cultural stigma around mental health, especially within some immigrant family contexts, can delay help-seeking and should be addressed with cultural humility rather than assumption",

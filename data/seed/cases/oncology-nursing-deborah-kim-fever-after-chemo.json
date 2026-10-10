@@ -17,8 +17,8 @@
     "id": "a2",
     "kind": "vitals",
     "name": "Current heart rate / pulse",
-    "result": "Pulse 108 bpm, regular, measured by patient at wrist per instruction",
-    "importance": "critical",
+    "result": "Pulse 108 bpm, regular, measured by patient at wrist per instruction (self-palpated, not an exam-grade reading — screening value only)",
+    "importance": "important",
     "abnormal": true,
     "artifactIds": []
    },
@@ -98,7 +98,7 @@
     "id": "a11",
     "kind": "record",
     "name": "Review most recent CBC with differential (post-cycle 1 nadir)",
-    "result": "ANC 0.6 x10^9/L (severe neutropenia) drawn on day 10 after cycle 1, approximately 23 days before cycle 2; no growth factor support ordered at that time",
+    "result": "ANC 0.6 x10^9/L (severe neutropenia) drawn on day 10 after cycle 1, approximately 23 days before cycle 2 (i.e., about 32 days ago); no growth factor support ordered at that time",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": [
@@ -299,7 +299,7 @@
        "cells": [
         "Last night, ~9 PM",
         "38.4°C (101.1°F)",
-        "Felt shivery, chills, took acetaminophen 650 mg"
+        "Felt shivery, took acetaminophen 650 mg"
        ]
       },
       {
@@ -349,7 +349,7 @@
     "type": "note",
     "title": "Prior Oncology Visit - Growth Factor Discussion (after Cycle 1 nadir)",
     "author": "Oncology NP",
-    "date": "approx. 10 days after cycle 1 (about 32 days ago)",
+    "date": "approx. 32 days ago (day 10 after cycle 1)",
     "release": {
      "when": "action",
      "ref": "a11"
@@ -679,7 +679,7 @@
    },
    {
     "id": "o2",
-    "text": "Recognize signs of febrile neutropenia (recent fever ≥38.0°C, prior severe neutropenia nadir, current tachycardia, port site erythema) and act with urgency rather than reassurance.",
+    "text": "Recognize signs of febrile neutropenia (recent fever ≥38.0°C with rigors, prior severe neutropenia nadir, self-measured tachycardia requiring corroboration, port site erythema) and act with urgency rather than reassurance.",
     "factIds": [
      "f8",
      "f9",
@@ -844,7 +844,7 @@
    "timeLimitMin": 25
   },
   "answerKey": {
-   "primaryProblem": "Suspected febrile neutropenia 9 days after cycle 2 of doxorubicin/cyclophosphamide (AC), in a patient with a documented severe nadir ANC (0.6 x10^9/L) after cycle 1 who did not receive growth factor support, now presenting with fever overnight (38.4°C with rigors), masked by acetaminophen, current low-grade temperature (37.9°C), tachycardia (HR 108 by patient-measured pulse), and a possible port-site source of infection (localized erythema and tenderness).",
+   "primaryProblem": "Suspected febrile neutropenia 9 days after cycle 2 of doxorubicin/cyclophosphamide (AC), in a patient with a documented severe nadir ANC (0.6 x10^9/L) after cycle 1 who did not receive growth factor support, now presenting with fever overnight (38.4°C with rigors), masked by acetaminophen, current low-grade temperature (37.9°C), self-measured tachycardia (HR 108 by patient-palpated wrist pulse), and a possible port-site source of infection (localized erythema and tenderness).",
    "differential": [
     "Febrile neutropenia with port-site cellulitis as possible source",
     "Febrile neutropenia without clear localizing source (occult bacteremia)",
@@ -854,25 +854,25 @@
    ],
    "keyFindings": [
     "Fever 38.4°C with rigors overnight, partially masked by acetaminophen; current temp 37.9°C",
-    "Heart rate 108 bpm (tachycardic) by patient self-palpation at wrist — a less precise measure than an exam-based reading, so corroborate with other signs (dizziness on standing, RR, overall clinical picture) rather than relying on this value alone",
+    "Heart rate 108 bpm by patient self-palpation at wrist — an imprecise screening measurement, not an exam-grade vital; should be corroborated with other signs (dizziness on standing, respiratory status, overall clinical picture) and confirmed on in-person arrival rather than used alone as a hard red flag",
     "Erythema and tenderness around implanted port site, no drainage",
     "Day 9 after cycle 2 AC chemotherapy, within expected ANC nadir window",
-    "Prior cycle 1 nadir ANC 0.6 x10^9/L (severe neutropenia), no growth factor given due to cost/deferral",
+    "Prior cycle 1 nadir ANC 0.6 x10^9/L (severe neutropenia), drawn ~23 days before cycle 2 (about 32 days ago); no growth factor given due to cost/deferral",
     "Poor oral intake x2 days from mucositis, mild dizziness on standing, one episode loose stool",
     "Patient minimized and delayed reporting fever due to not wanting to 'bother' the team and business demands"
    ],
    "plan": [
     "Instruct patient to go immediately (within the hour) to the emergency department or oncology urgent-visit location for in-person evaluation — do not wait or take another dose of acetaminophen before being seen",
     "Notify the on-call oncology provider now by phone/page to report suspected febrile neutropenia with SBAR handoff",
-    "Advise patient not to delay for transportation arrangements if any delay — call 911 or arrange immediate transport if needed, especially given dizziness and self-reported tachycardia",
-    "Recommend stat CBC with differential, blood cultures from two sites (including from the port if accessed) and peripheral site, and lactate upon arrival, per febrile neutropenia protocol — to be ordered by evaluating provider, not nursing student",
+    "Advise patient not to delay for transportation arrangements if any delay — call 911 or arrange immediate transport if needed, especially given dizziness and reported possible tachycardia",
+    "Recommend stat CBC with differential, blood cultures from two sites (including from the port if accessed) and peripheral site, and lactate upon arrival, per febrile neutropenia protocol — to be ordered by evaluating provider, not nursing student, and to include an exam-grade heart rate to confirm the self-measured reading",
     "Document encounter using SBAR and nursing note; flag for medical oncology team the gap in growth factor support after a severe cycle 1 nadir for reassessment of prophylaxis for future cycles",
     "Provide brief safety-net teaching: acetaminophen lowers fever but does not treat infection, and any fever during the nadir window after chemo requires urgent evaluation even if it comes down with medication",
     "Follow up on psychosocial/financial barriers (business coverage, ER cost concerns) by looping in oncology social work after acute issue addressed — not something to resolve in this call before escalation"
    ],
    "redFlags": [
     "Fever ≥38.0°C or rigors in a patient with known severe neutropenia nadir — medical emergency requiring immediate evaluation and antibiotics, regardless of symptom resolution with antipyretics",
-    "Reported tachycardia (self-measured) and dizziness on standing, raising concern for early sepsis physiology and warranting confirmation with an exam-grade reading on arrival",
+    "Reported possible tachycardia (self-measured, uncorroborated) and dizziness on standing, raising concern for early sepsis physiology and warranting confirmation with an exam-grade reading on arrival rather than acceptance at face value",
     "Localized erythema at port site as a potential source requiring urgent assessment and possible line management by the treating team",
     "Delay in seeking care due to minimization or desire not to 'bother' the team — a pattern that increases risk and should prompt clear, direct safety-netting instructions"
    ],
@@ -881,7 +881,7 @@
     "Any single oral temperature ≥38.0°C (100.4°F) or sustained temperature ≥38.0°C for an hour in a patient at risk for neutropenia is considered a potential oncologic emergency warranting same-day/same-hour evaluation",
     "Growth factor support (e.g., pegfilgrastim) is often recommended after a severe neutropenic nadir to reduce the risk of febrile neutropenia in subsequent cycles; cost barriers to this should be flagged to the care team rather than silently deferred",
     "Patients may minimize or delay reporting fever due to not wanting to be a burden or due to work/financial pressures; clinicians should proactively and non-judgmentally ask directly about fever and chills every between-cycle contact",
-    "Mild tachycardia (even if self-measured), dizziness on standing, and poor oral intake in the setting of fever should raise concern for early systemic infection/sepsis physiology and are not simply attributable to fatigue or dehydration alone; telehealth vitals obtained by patient self-measurement are a useful screening tool but should be corroborated with other exam findings and confirmed on in-person arrival"
+    "Patient self-measured vitals (e.g., wrist pulse palpation) obtained via telehealth are useful screening data but are inherently less reliable than exam-grade measurements; they should be corroborated with other findings (dizziness, respiratory effort, overall clinical picture) and explicitly confirmed with an in-person measurement rather than treated alone as definitive evidence of a critical finding"
    ]
   },
   "title": "Possible Febrile Neutropenia Nine Days After Second AC Chemotherapy Cycle",

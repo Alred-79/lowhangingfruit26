@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "vitals",
     "name": "Review home BP log (3 weeks)",
-    "result": "Home readings over 3 weeks: average 156/96 mmHg, range 148-168/90-102, taken morning and evening with home cuff, patient reports device validated at pharmacy last year.",
+    "result": "Home readings over 3 weeks: average 156/95 mmHg, range 148-168/90-102, taken morning and evening with home cuff, patient reports device validated at pharmacy last year.",
     "importance": "critical",
     "artifactIds": []
    },

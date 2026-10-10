@@ -19,7 +19,7 @@
     "id": "a2",
     "kind": "record",
     "name": "Review weight trend in chart",
-    "result": "Weight 68.0 kg three months ago; 66.2 kg six weeks ago; 64.0 kg today. Overall 4 kg (5.9%) weight loss over 3 months, with a steady downward trend across all three recorded points, flagged as significant unintentional weight loss.",
+    "result": "Weight 68.0 kg three months ago; 66.2 kg six weeks ago; 64.0 kg today. Steady downward trend across all three recorded points.",
     "importance": "critical",
     "artifactIds": [
      "d2",

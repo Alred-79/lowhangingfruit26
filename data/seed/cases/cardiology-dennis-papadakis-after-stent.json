@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "vitals",
     "name": "Review home blood pressure/heart rate log",
-    "result": "Home BP log (past 2 weeks): averages 138/86 mmHg, HR 78-92 bpm, with several isolated readings showing HR >100 (up to 110) on scattered days",
+    "result": "Home BP log (past 2 weeks): averages 138/86 mmHg, HR 80-96 bpm at baseline, with isolated spikes to 104 and 110 on scattered days",
     "importance": "important",
     "artifactIds": [
      "d7"
@@ -587,7 +587,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Anterior STEMI s/p DES to proximal LAD (6 weeks ago); reduced LVEF 40%; dyslipidemia; former/current tobacco use"
+    "value": "Anterior STEMI s/p DES to proximal LAD (6 weeks ago); reduced LVEF 40%; dyslipidemia; current tobacco use"
    },
    {
     "label": "Medications",
@@ -1014,7 +1014,8 @@
    "ethnicity": "Greek-American",
    "occupation": "Restaurant owner",
    "language": "English",
-   "appearance": "Stocky build, salt-and-pepper hair, wearing a plain polo shirt; appears to be seated in a small office at the back of his restaurant with a desk and stacked boxes visible behind him, lighting slightly dim. He smiles frequently and gestures with his hands while talking, but his eyes look tired and his smile sometimes doesn't reach them."
+   "appearance": "Stocky build, salt-and-pepper hair, wearing a plain polo shirt; appears to be seated in a small office at the back of his restaurant with a desk and stacked boxes visible behind him, lighting slightly dim. He smiles frequently and gestures with his hands while talking, but his eyes look tired and his smile sometimes doesn't reach them.",
+   "portrait": "/portraits/cardiology-dennis-papadakis-after-stent.jpg"
   },
   "persona": {
    "personality": "Warm, proud, and used to being the one who takes care of others; deflects vulnerability with humor and bravado",

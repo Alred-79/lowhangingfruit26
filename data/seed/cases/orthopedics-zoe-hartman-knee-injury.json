@@ -121,7 +121,7 @@
     "type": "imaging",
     "title": "MRI Right Knee Without Contrast",
     "author": "Radiology — Dr. A. Nguyen",
-    "date": "5 days ago",
+    "date": "2 days ago",
     "release": {
      "when": "start"
     },
@@ -628,8 +628,8 @@
     "factId": "f30",
     "artifactId": "d6",
     "patientClaim": "Patient believes a 6-8 week return to sport is realistic based on online information.",
-    "recordEvidence": "Range of motion trend chart shows slow, incomplete recovery of motion even at 3 weeks (125 degrees active flexion, not yet symmetric with contralateral 140 degrees), illustrating that early motion alone is not synonymous with readiness for cutting/pivoting sport, which standard ACL reconstruction protocols place at 9-12 months.",
-    "teachingPoint": "Online anecdotes about rapid return to sport often reflect selection bias or non-pivoting sports; evidence-based ACL reconstruction rehabilitation timelines (9-12 months) are grounded in graft maturation and neuromuscular readiness testing, not just symptom resolution or motion milestones."
+    "recordEvidence": "Range of motion trend chart shows slow, incomplete recovery of motion even at 3 weeks (125 degrees active flexion, not yet symmetric with contralateral 140 degrees), illustrating that early motion alone is not synonymous with readiness for cutting/pivoting sport, which standard ACL reconstruction protocols require passing criteria-based testing with a minimum of about 9 months and often longer.",
+    "teachingPoint": "Online anecdotes about rapid return to sport often reflect selection bias or non-pivoting sports; evidence-based ACL reconstruction rehabilitation is criteria-based (minimum ~9 months, graft maturation and neuromuscular readiness testing), not determined by symptom resolution or motion milestones alone."
    }
   ],
   "objectives": [
@@ -687,7 +687,7 @@
    },
    {
     "id": "o5",
-    "text": "Set a realistic, evidence-based return-to-sport timeline (9-12 months) and address the patient's goal conflict with the 10-week showcase tournament with empathy.",
+    "text": "Set a realistic, evidence-based return-to-sport expectation (criteria-based testing, minimum ~9 months, potentially well beyond 12 months) and address the patient's goal conflict with the 10-week showcase tournament with empathy.",
     "factIds": [
      "f10",
      "f11",
@@ -779,7 +779,7 @@
     "Explain MRI findings in plain language to patient and mother, emphasizing complete ACL tear with closed growth plates allowing standard adult-type reconstruction technique if surgery chosen",
     "Counsel against return to pivoting/cutting sport (including the 10-week showcase) in a brace alone given confirmed complete ACL tear, ongoing instability episodes, and risk of further meniscal/chondral injury",
     "Discuss operative (ACL reconstruction, timing options including graft choice discussion deferred to full surgical consult) versus non-operative management (activity modification, bracing, physical therapy) and shared decision-making given patient's competitive pivoting sport goals",
-    "Set realistic return-to-sport expectation at approximately 9-12 months post-reconstruction based on graft maturation and functional/neuromuscular testing criteria, not just symptom resolution or motion milestones",
+    "Set realistic return-to-sport expectations: criteria-based clearance with a minimum of approximately 9 months post-reconstruction, based on graft maturation and validated functional/neuromuscular/strength testing rather than a fixed calendar date, and explain that timing can extend well beyond 12 months if objective criteria are not yet met",
     "Address the gap in prehabilitation: escalate/expedite physical therapy referral for prehab (quadriceps strengthening, effusion control, ROM) prior to any surgical date",
     "Advise strict avoidance of further unsupervised pivoting/jogging trials pending stabilization plan to reduce risk of secondary meniscal or chondral injury",
     "Arrange follow-up visit for shared decision on surgical timing and formal surgical consent discussion if family elects reconstruction; involve mother in decision-making given patient's age"
@@ -792,7 +792,7 @@
    "educationPoints": [
     "A complete ACL tear with closed growth plates in a skeletally mature teenager is treated using standard adult ACL reconstruction principles, not pediatric growth-plate-sparing techniques",
     "Playing competitive pivoting sport on a torn ACL, even with a brace, does not restore rotational stability and carries meaningful risk of further meniscal or cartilage injury",
-    "Return-to-sport timelines for ACL reconstruction are 9-12 months and are driven by graft biological maturation and validated functional/strength testing, not by motion milestones or how a knee 'feels'",
+    "Return-to-sport after ACL reconstruction should be criteria-based rather than purely time-based: current evidence supports a minimum of approximately 9 months, driven by graft biological maturation and passing validated functional/strength/neuromuscular testing, with return often extending well past 12 months if criteria are not met",
     "Prehabilitation (quadriceps strengthening, effusion control, achieving full motion) before surgery improves post-operative outcomes and should begin promptly",
     "Shared decision-making should explicitly involve both the patient and parent given the patient's age, balancing athletic goals with safety"
    ]

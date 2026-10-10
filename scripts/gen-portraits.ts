@@ -84,7 +84,20 @@ async function one(file: string): Promise<string> {
         body: JSON.stringify({ prompt, negative_prompt: ageHint(data.profile.patient.age).negative + NEGATIVE, mode: "text-to-image", aspect_ratio: "2:3", output_format: "png" }),
       }),
     );
-    const out = JSON.parse(new TextDecoder().decode(res.body)) as { images?: string[]; finish_reasons?: (string | null)[] };
+    let out = JSON.parse(new TextDecoder().decode(res.body)) as { images?: string[]; finish_reasons?: (string | null)[] };
+    if (out.finish_reasons?.[0]) {
+      // The content filter sometimes trips on the free-text appearance; retry once without it.
+      const plain = promptFor({ ...data.profile, patient: { ...data.profile.patient, appearance: "" } });
+      const res2 = await client.send(
+        new InvokeModelCommand({
+          modelId: MODEL,
+          contentType: "application/json",
+          accept: "application/json",
+          body: JSON.stringify({ prompt: plain, negative_prompt: NEGATIVE, mode: "text-to-image", aspect_ratio: "2:3", output_format: "png" }),
+        }),
+      );
+      out = JSON.parse(new TextDecoder().decode(res2.body));
+    }
     const reason = out.finish_reasons?.[0];
     if (reason) throw new Error("filtered by the model: " + reason);
     if (!out.images?.[0]) throw new Error("no image returned");
@@ -96,10 +109,12 @@ async function one(file: string): Promise<string> {
       fs.rmSync(png, { force: true });
     }
   }
+  // Re-read before writing: the image call takes a while and the case may have been edited meanwhile.
   const portrait = `/portraits/${slug}.jpg`;
-  if (data.profile.patient.portrait !== portrait) {
-    data.profile.patient.portrait = portrait;
-    fs.writeFileSync(full, JSON.stringify(data, null, 1));
+  const fresh = JSON.parse(fs.readFileSync(full, "utf8")) as { profile: CaseProfile };
+  if (fresh.profile.patient.portrait !== portrait) {
+    fresh.profile.patient.portrait = portrait;
+    fs.writeFileSync(full, JSON.stringify(fresh, null, 1));
   }
   return "ok";
 }

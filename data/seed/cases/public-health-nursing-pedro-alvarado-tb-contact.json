@@ -13,14 +13,6 @@
     "artifactIds": []
    },
    {
-    "id": "a2",
-    "kind": "assessment",
-    "name": "Ask patient to screen for active TB symptoms (cough, hemoptysis, night sweats, weight loss, fever)",
-    "result": "Denies cough, coughing blood, night sweats, fevers, or unintentional weight loss. No red-flag symptoms of progression to active TB today.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
     "id": "a3",
     "kind": "assessment",
     "name": "Camera inspection of skin/sclera for jaundice",
@@ -68,14 +60,6 @@
     "artifactIds": [
      "d4"
     ]
-   },
-   {
-    "id": "a8",
-    "kind": "test",
-    "name": "Ask patient to self-report any current side effects (nausea, dark urine, abdominal pain, rash, bruising)",
-    "result": "Denies any current nausea, abdominal pain, rash, or easy bruising. No current urine color changes reported today.",
-    "importance": "important",
-    "artifactIds": []
    },
    {
     "id": "a9",
@@ -279,9 +263,9 @@
    {
     "id": "d7",
     "type": "chart",
-    "title": "Rifampin Adherence Timeline",
+    "title": "Pharmacy-Based Adherence Estimate",
     "date": "Current",
-    "author": "Public Health Nursing",
+    "author": "Community Pharmacy / Public Health Nursing record review",
     "release": {
      "when": "action",
      "ref": "a4"
@@ -289,10 +273,10 @@
     "chart": {
      "kind": "line",
      "xLabel": "Week since treatment start",
-     "yLabel": "Doses taken (of 7 expected per week)",
+     "yLabel": "Doses available (of 7 expected per week), based on pharmacy fill only",
      "series": [
       {
-       "name": "Reported/expected doses per week",
+       "name": "Doses available per week based on single 30-day fill",
        "points": [
         {
          "x": "Week 1",
@@ -300,15 +284,15 @@
         },
         {
          "x": "Week 2",
-         "y": 6
+         "y": 7
         },
         {
          "x": "Week 3",
-         "y": 0
+         "y": 7
         },
         {
          "x": "Week 4",
-         "y": 0
+         "y": 7
         },
         {
          "x": "Week 5",
@@ -636,8 +620,7 @@
      "f7"
     ],
     "actionIds": [
-     "a7",
-     "a8"
+     "a7"
     ]
    },
    {
@@ -649,7 +632,6 @@
      "f12"
     ],
     "actionIds": [
-     "a2",
      "a9"
     ]
    },

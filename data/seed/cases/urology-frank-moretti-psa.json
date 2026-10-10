@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "record",
     "name": "Review PSA trend history",
-    "result": "PSA 3.1 ng/mL (2 years ago) → 4.4 ng/mL (1 year ago) → 6.8 ng/mL (3 months ago, drawn after stationary cycling that morning) → repeat 6.5 ng/mL (6 weeks ago, no cycling prior). Free PSA % pending.",
+    "result": "PSA 3.1 ng/mL (2 years ago) → 4.4 ng/mL (1 year ago) → 6.8 ng/mL (3 months ago) → repeat 6.5 ng/mL (6 weeks ago). Free PSA % pending.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -71,7 +71,7 @@
     "id": "a8",
     "kind": "record",
     "name": "Review current medication/supplement list",
-    "result": "No prescription medications. Saw palmetto 320 mg daily (self-started, OTC). No alpha-blocker or 5-ARI on record.",
+    "result": "No prescription medications. Saw palmetto 320 mg daily (self-started, OTC, start date not documented on medication list). No alpha-blocker or 5-ARI on record.",
     "importance": "important",
     "artifactIds": []
    },
@@ -161,7 +161,7 @@
       },
       {
        "cells": [
-        "PSA, total (3 months ago, same-day cycling)",
+        "PSA, total (3 months ago)",
         "6.8",
         "ng/mL",
         "0.0 - 4.0"
@@ -310,7 +310,7 @@
     "release": {
      "when": "start"
     },
-    "body": "Mr. Moretti is a 62-year-old male referred for evaluation of rising PSA. Two years of PSA tracking show an increase from 3.1 to 6.8 ng/mL, with a repeat value of 6.5 ng/mL after the patient reported vigorous stationary cycling prior to the initial elevated draw. Digital rectal exam deferred in office; recommend urology perform DRE as part of workup. No gross hematuria, dysuria, or fever reported. Patient endorses nocturia and weak urinary stream for approximately 18 months. Family history significant for paternal prostate cancer (deceased age 74) and a brother treated for prostate cancer at age 60. Referred to Urology for further workup including consideration of prostate MRI and possible biopsy."
+    "body": "Mr. Moretti is a 62-year-old male referred for evaluation of rising PSA. Two years of PSA tracking show an increase from 3.1 to 6.8 ng/mL, with a repeat value of 6.5 ng/mL six weeks later. Digital rectal exam deferred in office; recommend urology perform DRE as part of workup. No gross hematuria, dysuria, or fever reported. Patient endorses nocturia and weak urinary stream for approximately 18 months. Family history significant for paternal prostate cancer (deceased age 74) and a brother treated for prostate cancer at age 60. Referred to Urology for further workup including consideration of prostate MRI and possible biopsy."
    },
    {
     "id": "d5",
@@ -796,7 +796,7 @@
     "Perform digital rectal exam as part of urology's own evaluation rather than relying solely on the referring note",
     "Order multiparametric prostate MRI (PI-RADS scoring) prior to any biopsy decision to risk-stratify and guide targeted biopsy if indicated",
     "If MRI shows a suspicious lesion (PI-RADS 3-5) or risk remains elevated by calculator, proceed to MRI-targeted (+/- systematic) prostate biopsy, performed by urology; discuss biopsy risks (bleeding, infection, transient worsening of urinary/erectile symptoms) explicitly",
-    "Address LUTS: discuss BPH management options (watchful waiting, alpha-blocker, 5-alpha-reductase inhibitor) separate from cancer workup; advise discontinuing or disclosing saw palmetto use as it is unregulated and of unproven benefit, and does not need to be stopped before MRI but should be documented",
+    "Address LUTS: discuss BPH management options (watchful waiting, alpha-blocker, 5-alpha-reductase inhibitor) separate from cancer workup; advise discontinuing or disclosing saw palmetto use since it is unregulated, has no established effect on PSA, and is not a periprocedural bleeding risk requiring special guidance before MRI or biopsy, but its use should still be documented and discussed as part of a complete medication history",
     "Directly and sensitively ask about erectile function and any fears about how treatment might affect it; validate the patient's fear once uncovered, explain that pre-existing mild-moderate ED exists independent of any procedure, discuss that treatment approaches (active surveillance, surgery, radiation if cancer found) carry different sexual side-effect profiles, and that this will be part of shared decision-making if cancer is diagnosed",
     "Encourage open conversation with spouse about sexual health concerns if patient is comfortable; offer referral to sexual health counseling or further ED workup as appropriate within urology scope",
     "Advise against repeating PSA immediately after vigorous exercise or ejaculation in the future to avoid false elevation on surveillance labs",
@@ -898,18 +898,17 @@
    {
     "id": "m1",
     "factId": "f16",
-    "artifactId": "d1",
-    "patientClaim": "Frank reports he rides the stationary bike most mornings as a regular habit, and specifically rode vigorously the morning of his first elevated PSA draw (6.8 ng/mL).",
-    "recordEvidence": "The PSA trend table (d1) shows the 6.8 ng/mL draw was explicitly noted as same-day post-cycling, while the repeat draw 6 weeks later (6.5 ng/mL) without pre-draw exercise remained elevated at 6.5, showing the exercise only partially explains the elevation and true PSA elevation persists.",
-    "teachingPoint": "Learners should recognize that while vigorous exercise can transiently elevate PSA, a repeat value drawn without that confounder remaining significantly elevated confirms a true abnormality requiring further workup, not dismissal of the result."
+    "patientClaim": "Frank reports he rides the stationary bike most mornings as a regular habit, and specifically rode vigorously the morning of his first elevated PSA draw (6.8 ng/mL) — a detail he volunteers only when asked directly about exercise around the time of testing.",
+    "recordEvidence": "The PSA trend table (d1/a1) shows only bare values and draw dates: 6.8 ng/mL three months ago and a repeat 6.5 ng/mL six weeks later with no exercise history recorded. The repeat draw, obtained without any noted pre-draw exertion, remained elevated at 6.5, showing that exercise only partially explains the picture and a true PSA elevation persists.",
+    "teachingPoint": "Learners should recognize that while vigorous exercise can transiently elevate PSA, this history must be actively elicited from the patient rather than read off a lab report; a repeat value drawn without that confounder remaining significantly elevated confirms a true abnormality requiring further workup, not dismissal of the result."
    },
    {
     "id": "m2",
     "factId": "f30",
     "artifactId": "d5",
-    "patientClaim": "Frank says he started saw palmetto after being told his PSA was high, implying it could not have caused the initial elevation but might be an attempt to self-treat.",
-    "recordEvidence": "Medication list (d5) and referral note (d4) show saw palmetto was documented as current at the time of urology referral but the PSA trend (d1) shows PSA was already elevated at 4.4 ng/mL one year ago, before supplement initiation 4 months ago, confirming the trend is independent of the supplement.",
-    "teachingPoint": "Clarifying the timeline of supplement use relative to lab draws prevents incorrectly attributing or dismissing PSA changes to unregulated OTC products, and reinforces the importance of a thorough medication timeline when interpreting trends."
+    "patientClaim": "Frank says he started saw palmetto about 4 months ago, after being told his PSA was high, implying it could not have caused the initial elevation but might be an attempt to self-treat.",
+    "recordEvidence": "Medication list (d5) lists saw palmetto as a current supplement but has no column or entry for when it was started. The PSA trend (d1) shows PSA was already elevated at 4.4 ng/mL one year ago, well before the patient's reported 4-month supplement start, so the trend predates and is independent of the supplement regardless of its exact start date.",
+    "teachingPoint": "Medication lists often capture only current status, not start dates; clarifying the timeline of supplement use relative to lab draws by direct questioning prevents incorrectly attributing or dismissing PSA changes to unregulated OTC products."
    }
   ],
   "professions": [

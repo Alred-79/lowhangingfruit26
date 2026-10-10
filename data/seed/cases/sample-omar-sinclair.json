@@ -1,6 +1,6 @@
 {
  "origin": "sample",
- "reviewed": true,
+ "reviewed": false,
  "profile": {
   "version": 1,
   "actions": [
@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "vitals",
     "name": "Review vital signs flowsheet",
-    "result": "BP 148/92 mmHg, HR 82 bpm, Temp 98.4°F, RR 16, SpO2 97% (from today's intake)",
+    "result": "BP 148/92 mmHg, HR 82 bpm, Temp 98.4\u00b0F, RR 16, SpO2 97% (from today's intake)",
     "importance": "important",
     "artifactIds": []
    },
@@ -16,7 +16,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "Measure/confirm anthropometrics (height, weight, BMI, waist circumference)",
-    "result": "Height 5'10\" (178 cm), Weight 228 lb (103.4 kg), BMI 29.2 kg/m², Waist circumference 43 in, estimated body fat 28%",
+    "result": "Height 5'10\" (178 cm), Weight 228 lb (103.4 kg), BMI 29.2 kg/m\u00b2, Waist circumference 43 in, estimated body fat 28%",
     "importance": "critical",
     "artifactIds": []
    },
@@ -361,7 +361,7 @@
       {
        "cells": [
         "Temperature",
-        "98.4°F"
+        "98.4\u00b0F"
        ]
       },
       {
@@ -391,7 +391,7 @@
       {
        "cells": [
         "BMI",
-        "29.2 kg/m²"
+        "29.2 kg/m\u00b2"
        ],
        "flag": "H"
       },

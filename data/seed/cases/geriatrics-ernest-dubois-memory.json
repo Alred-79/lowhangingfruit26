@@ -29,18 +29,10 @@
     "artifactIds": []
    },
    {
-    "id": "a4",
-    "kind": "assessment",
-    "name": "Ask patient and caregiver about falls circumstances (home fall history review)",
-    "result": "Two falls in past 6 months: one tripping over a boat rope coiled in the carport, one nocturnal fall getting up to urinate, no loss of consciousness either time, no fracture, bruised hip after second fall, did not seek care either time.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
     "id": "a5",
     "kind": "test",
     "name": "Guide caregiver through orthostatic blood pressure check at home (manual cuff, lying then standing)",
-    "result": "Supine 142/82 mmHg, pulse 76. Standing at 1 minute: 122/70 mmHg, pulse 82. Standing at 3 minutes: 118/68 mmHg, pulse 86. Patient reports feeling 'a little woozy' on standing.",
+    "result": "Supine 142/82 mmHg, pulse 76. Standing at 1 minute: 122/70 mmHg, pulse 82. Standing at 3 minutes: 118/68 mmHg, pulse 86. Patient reports feeling 'a little woozy' on standing. Drop of 24/14 mmHg meets criteria for orthostatic hypotension; pulse rise of only 10 bpm despite this magnitude of BP drop is a blunted compensatory response, suggestive of possible autonomic impairment and/or rate-limiting medication effect rather than simple volume depletion.",
     "abnormal": true,
     "importance": "critical",
     "artifactIds": [
@@ -100,14 +92,6 @@
     "artifactIds": [
      "d5"
     ]
-   },
-   {
-    "id": "a12",
-    "kind": "assessment",
-    "name": "Elicit patient's own goals and what matters most ('What Matters' conversation)",
-    "result": "Patient states he wants to 'stay in my own house, not be a burden, and keep driving my truck.' Does not want to go to a nursing home. Has not discussed a healthcare proxy or advance directive. No prior conversation about goals of care documented.",
-    "importance": "critical",
-    "artifactIds": []
    },
    {
     "id": "a13",
@@ -842,7 +826,6 @@
      "f21"
     ],
     "actionIds": [
-     "a4",
      "a5",
      "a6"
     ]
@@ -872,7 +855,6 @@
      "f31"
     ],
     "actionIds": [
-     "a12",
      "a15"
     ]
    },
@@ -908,10 +890,10 @@
     "IADL decline: finances, medication management, meal preparation, and driving all impaired per caregiver report",
     "Pill organizer shows multiple missed doses despite patient's insistence he manages medications independently (mismatch)",
     "Patient's anosognosia: denies any memory problem despite objective testing and corroborated incidents (mismatch)",
-    "Two falls in 6 months plus orthostatic hypotension (142/82 supine to 118/68 standing at 3 min) and prolonged Timed Up and Go (14.2 sec)",
+    "Two falls in 6 months plus orthostatic hypotension (142/82 supine to 118/68 standing at 3 min, a 24/14 mmHg drop) with a blunted pulse response (76 to 86 bpm) suggesting possible autonomic impairment or rate-limiting medication effect, plus prolonged Timed Up and Go (14.2 sec)",
     "High anticholinergic burden from nightly OTC diphenhydramine plus oxybutynin, both associated with cognitive impairment and fall risk in older adults",
     "CT head: mild atrophy with moderate chronic small-vessel ischemic disease supporting mixed dementia etiology",
-    "Low-normal B12 (210 pg/mL) and inconsistent glucose control with a symptomatic hypoglycemic episode (68 mg/dL)",
+    "Low-normal B12 (210 pg/mL) and suboptimal glycemic control (HbA1c 7.4%) with inconsistent monitoring and a symptomatic hypoglycemic episode (68 mg/dL) - a tension between overall hyperglycemia and episodic hypoglycemia that argues for loosening the glycemic target and reconsidering glipizide given this patient's falls and cognitive impairment",
     "Progressive untreated hearing loss likely compounding apparent cognitive/communication difficulty and social withdrawal",
     "Caregiver strain in daughter; financial exploitation (phone scam) revealing vulnerability; no advance directive or healthcare proxy in place",
     "Patient's clearly stated goals: remain at home, avoid burdening daughter, continue driving - in direct tension with safety findings"
@@ -920,22 +902,22 @@
     "Document comprehensive geriatric assessment using 4Ms framework; communicate findings and diagnostic impression (probable mixed dementia) back to referring Family Medicine physician for discussion of diagnosis, possible initiation of a cholinesterase inhibitor, and ongoing primary care management (outside independent prescribing scope of this consult note alone, but recommend specific medication discussion)",
     "Medications (M): Recommend discontinuing OTC diphenhydramine and reviewing oxybutynin for a bladder-friendly alternative with lower anticholinergic burden, in coordination with prescribing physician; recommend caregiver-supervised medication administration or blister-pack pharmacy service given demonstrated non-adherence",
     "Mentation (M): Recommend formal neuropsychological or further cognitive workup as needed, repletion/monitoring of low-normal B12, communicate CT findings; strongly recommend caregiver supervision of finances and continue daughter's involvement",
-    "Mobility (M): Address orthostatic hypotension (consider medication contribution from amlodipine timing, hydration counseling) and anticholinergic deprescribing to reduce fall risk; home safety evaluation and physical therapy referral for gait/balance given abnormal Timed Up and Go; remove home hazards (coiled rope in carport) and consider bedside urinal or motion-sensor lighting for nocturnal bathroom trips",
+    "Mobility (M): Address orthostatic hypotension (consider medication contribution from amlodipine timing, hydration counseling; note the blunted heart rate response raises concern for autonomic dysfunction warranting further evaluation if symptoms persist) and anticholinergic deprescribing to reduce fall risk; home safety evaluation and physical therapy referral for gait/balance given abnormal Timed Up and Go; remove home hazards (coiled rope in carport) and consider bedside urinal or motion-sensor lighting for nocturnal bathroom trips",
     "Driving safety: given corroborated lost-driving episode and cognitive/visuospatial impairment, recommend formal driving evaluation (occupational therapy driving assessment) and discuss with patient and family that driving cessation planning should begin now; refer to state-specific guidance/DMV medical review process as appropriate rather than this role unilaterally revoking driving privileges",
     "What Matters: Explicitly document patient's stated goals (remain home, avoid burdening family, maintain independence/driving) and revisit these as the basis for all recommendations; use motivational, dignity-preserving language rather than confrontation",
     "Advance care planning: initiate conversation about healthcare power of attorney and advance directive now, while patient retains capacity for these discussions; involve daughter",
     "Safety/vulnerability: discuss financial exploitation (phone scam) findings with family; recommend caregiver or social work follow-up regarding financial safeguards and consider report to local Adult Protective Services resources per standard practice; address with sensitivity to avoid shaming patient",
     "Hearing: refer to audiology for formal hearing evaluation and hearing aid fitting, as uncorrected hearing loss can mimic/worsen apparent cognitive impairment and contributes to social isolation",
-    "Diabetes/glucose: communicate hypoglycemic episode (68 mg/dL) and inconsistent monitoring to primary care/endocrine for glipizide regimen review, as sulfonylurea-related hypoglycemia carries high risk in this cognitively impaired, fall-prone patient",
+    "Diabetes/glucose: communicate elevated HbA1c (7.4%) alongside the hypoglycemic episode (68 mg/dL) and inconsistent monitoring to primary care/endocrine for glipizide regimen review; in an older adult with falls and cognitive impairment, standard geriatric diabetes guidelines favor a looser HbA1c target (e.g., <8%) and favor deprescribing/switching from a sulfonylurea given its high hypoglycemia risk, rather than tightening control to the elevated A1c",
     "Caregiver support: acknowledge and address daughter's caregiving strain; provide resources for caregiver support services, respite care, and local Area Agency on Aging programs",
     "Arrange follow-up comprehensive geriatric assessment visit to reassess function, falls, and reinforce goals-of-care discussion over time"
    ],
    "redFlags": [
     "Corroborated lost-driving episode indicating immediate road safety risk to patient and public",
-    "Orthostatic hypotension with symptomatic dizziness compounding fall risk in a patient already with two falls in six months",
+    "Orthostatic hypotension with symptomatic dizziness and a blunted compensatory heart rate response compounding fall risk in a patient already with two falls in six months",
     "Financial exploitation (scam victimization) indicating vulnerability to further abuse",
     "Significant anticholinergic medication burden in a cognitively impaired older adult, a reversible/modifiable contributor to both cognition and falls",
-    "Symptomatic hypoglycemia (68 mg/dL) in setting of unreliable medication/glucose monitoring adherence",
+    "Symptomatic hypoglycemia (68 mg/dL) alongside elevated HbA1c (7.4%) in setting of unreliable medication/glucose monitoring adherence, indicating a sulfonylurea regimen that is simultaneously too risky (hypoglycemia) and not well-controlled (high A1c) - a case for deprescribing/switching rather than intensifying",
     "No advance directive or healthcare power of attorney despite progressing cognitive impairment - window for patient-directed planning may be closing",
     "Patient's strong emotional resistance and anosognosia may lead to unsafe behaviors (continued driving, medication errors) if not addressed collaboratively with family"
    ],
@@ -944,9 +926,11 @@
     "The 4Ms framework (What Matters, Medications, Mentation, Mobility) provides a structured, patient-centered approach to geriatric assessment that centers the patient's own goals rather than a problem-list-only approach",
     "Direct observation (e.g., camera review of a pill organizer) is a powerful, low-tech telehealth tool that can reveal discrepancies between self-reported and actual function",
     "Anticholinergic medications (diphenhydramine, oxybutynin) carry significant risk in older adults for worsening cognition, causing or worsening delirium, and increasing fall risk; deprescribing should be considered and often requires coordination with prescribing clinicians",
+    "Orthostatic hypotension diagnosis requires a drop of ≥20 mmHg systolic or ≥10 mmHg diastolic within 3 minutes of standing; a blunted heart rate response to a significant BP drop (as seen here) suggests possible autonomic impairment or a rate-limiting medication effect and warrants further evaluation rather than being assumed to be simple volume depletion",
     "Driving cessation is a highly sensitive topic that benefits from a team-based approach (formal driving evaluation, family involvement, gradual negotiation) rather than unilateral revocation, and may involve state DMV medical review processes",
     "Financial exploitation is common in cognitive impairment and should be screened for directly; disclosure often requires trust-building given shame patients may feel",
     "Reversible or contributing metabolic factors (B12, thyroid, glycemic control) should always be evaluated in a new cognitive impairment workup even when a primary neurodegenerative or vascular process is suspected",
+    "In older adults with cognitive impairment and falls, geriatric diabetes guidelines favor looser glycemic targets and deprescribing hypoglycemia-prone agents (e.g., sulfonylureas) even when HbA1c runs on the higher side, prioritizing safety over tight control",
     "Caregiver burden assessment and support referral is a core part of comprehensive geriatric assessment, as caregiver capacity directly affects patient safety and care planning feasibility"
    ]
   },
@@ -958,7 +942,8 @@
    "ethnicity": "Cajun (French-Acadian descent, Louisiana)",
    "occupation": "Retired shrimp-boat captain",
    "language": "English (Cajun English dialect, no interpreter needed)",
-   "appearance": "An 84-year-old man with a weathered, sun-worn face, thinning white hair, and broad shoulders from decades of physical work, seated at a kitchen table in a modest home with a window showing a bayou view behind him. He wears a plaid button-up shirt, leans forward toward the camera as if trying to hear better, and his expression shifts between warm charm and visible irritation when memory or driving comes up; his daughter Annette sits beside him, visibly tired but attentive."
+   "appearance": "An 84-year-old man with a weathered, sun-worn face, thinning white hair, and broad shoulders from decades of physical work, seated at a kitchen table in a modest home with a window showing a bayou view behind him. He wears a plaid button-up shirt, leans forward toward the camera as if trying to hear better, and his expression shifts between warm charm and visible irritation when memory or driving comes up; his daughter Annette sits beside him, visibly tired but attentive.",
+   "portrait": "/portraits/geriatrics-ernest-dubois-memory.jpg"
   },
   "persona": {
    "personality": "Proud, charming, stubborn, quick with a joke to deflect, fiercely independent, protective of his dignity and reputation in his community",

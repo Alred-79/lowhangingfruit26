@@ -91,7 +91,7 @@
     "id": "a10",
     "kind": "record",
     "name": "Review problem list and medication list in chart",
-    "result": "Problem list: atrial fibrillation, hypertension. Medication list shows apixaban 5 mg twice daily and amlodipine 10 mg daily listed as active. Cross-checking pharmacy refill history reveals the apixaban was last filled 37 days ago (a 30-day supply), with no refill since - indicating approximately a 7-day gap in anticoagulation despite the chart listing it as active with no missed doses.",
+    "result": "Problem list: atrial fibrillation, hypertension. Medication list shows apixaban 5 mg twice daily and amlodipine 10 mg daily listed as active, with no refill alerts flagged in the chart itself. Pulling the pharmacy refill history (see attached) for cross-check: last apixaban fill was 37 days ago, a 30-day supply, with no refill logged since.",
     "importance": "important",
     "abnormal": true,
     "artifactIds": [
@@ -103,42 +103,6 @@
     "kind": "record",
     "name": "Review last clinic visit note",
     "result": "Visit 3 months ago: BP 148/88, AFib rate-controlled, apixaban continued for stroke prophylaxis, counseled on adherence.",
-    "importance": "minor",
-    "abnormal": false,
-    "artifactIds": []
-   },
-   {
-    "id": "a12",
-    "kind": "assessment",
-    "name": "Ask about chest pain, headache, vision change",
-    "result": "Denies chest pain. Denies headache. Reports vision seems 'a little blurry on the right side' since this started.",
-    "importance": "important",
-    "abnormal": true,
-    "artifactIds": []
-   },
-   {
-    "id": "a13",
-    "kind": "assessment",
-    "name": "Ask about swallowing / choking risk",
-    "result": "Patient reports feeling like his mouth 'won't work right' and some drooling; has not attempted to eat or drink since symptoms began.",
-    "importance": "critical",
-    "abnormal": true,
-    "artifactIds": []
-   },
-   {
-    "id": "a14",
-    "kind": "assessment",
-    "name": "Ask about recent trauma, surgery, or bleeding (anticoagulation risk screen)",
-    "result": "No recent falls, head injury, surgery, or bleeding reported.",
-    "importance": "important",
-    "abnormal": false,
-    "artifactIds": []
-   },
-   {
-    "id": "a15",
-    "kind": "assessment",
-    "name": "Ask about blood sugar / diabetes history",
-    "result": "No history of diabetes; has not checked a blood sugar today; no home glucometer available.",
     "importance": "minor",
     "abnormal": false,
     "artifactIds": []
@@ -321,7 +285,7 @@
      "when": "action",
      "ref": "a10"
     },
-    "body": "Apixaban 5 mg tablets, 60-count bottle (30-day supply at twice daily dosing). Last filled 37 days ago. No refill picked up since. Expected next refill date was 7 days before today's call; refill not yet requested by patient or pharmacy auto-refill not triggered."
+    "body": "Apixaban 5 mg tablets, 60-count bottle (30-day supply at twice daily dosing). Last filled 37 days ago. No refill picked up since. No auto-refill or refill request logged in the interim."
    },
    {
     "id": "d5",
@@ -732,9 +696,7 @@
     "factIds": [
      "f7"
     ],
-    "actionIds": [
-     "a13"
-    ]
+    "actionIds": []
    },
    {
     "id": "o6",
@@ -758,7 +720,8 @@
    "ethnicity": "Black",
    "occupation": "Retired grain-elevator operator",
    "language": "English",
-   "appearance": "An older man with a solid build and close-cropped gray hair, seated at his kitchen table in a plaid flannel shirt. The right corner of his mouth droops noticeably and his expression looks mildly asymmetric; the lighting is a bit dim with morning light coming through a window behind him. His wife Loretta can be heard and partially seen hovering just behind him, visibly worried."
+   "appearance": "An older man with a solid build and close-cropped gray hair, seated at his kitchen table in a plaid flannel shirt. The right corner of his mouth droops noticeably and his expression looks mildly asymmetric; the lighting is a bit dim with morning light coming through a window behind him. His wife Loretta can be heard and partially seen hovering just behind him, visibly worried.",
+   "portrait": "/portraits/emergency-nursing-earl-jackson-clumsy-hand.jpg"
   },
   "persona": {
    "personality": "Stoic, independent, mildly stubborn, used to toughing things out and not wanting to be a bother to others",

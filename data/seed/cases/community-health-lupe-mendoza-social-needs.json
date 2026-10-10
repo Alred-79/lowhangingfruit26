@@ -44,59 +44,11 @@
     ]
    },
    {
-    "id": "a5",
-    "kind": "assessment",
-    "name": "Ask about medication-taking pattern in a nonjudgmental, open way",
-    "result": "Patient discloses she stretches her insulin supply by taking a reduced dose some nights when funds are low, rather than running out before the next paycheck or pantry visit. She reports feeling nervous telling the clinic this.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a6",
-    "kind": "assessment",
-    "name": "Ask about home glucose monitoring supplies",
-    "result": "Patient reports she has had a glucose meter for about 2 years but has been out of test strips for roughly 4 weeks; she has not checked her blood sugar at home during that time.",
-    "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a7",
-    "kind": "assessment",
-    "name": "Ask about foot sensation symptoms",
-    "result": "Patient reports nightly burning/tingling in both feet for several months, worse at night; denies foot injury, open sores, or color change.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
     "id": "a8",
     "kind": "assessment",
     "name": "Visual inspection of feet via camera (patient self-exam, CHW-guided)",
     "result": "Patient holds both feet up to camera one at a time. No visible open wounds, redness, or swelling noted on either foot by camera; skin appears intact. CHW notes this is not a substitute for a clinical foot exam and recommends one be scheduled.",
     "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a9",
-    "kind": "assessment",
-    "name": "Explore caregiving responsibilities and daily schedule",
-    "result": "Patient cares for 3 grandchildren (ages 4, 7, 9) on weekdays, 7am-5pm, while daughter works a factory shift. Clinic hours (8am-4pm weekdays) conflict directly with this schedule.",
-    "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a10",
-    "kind": "assessment",
-    "name": "Ask about transportation to appointments",
-    "result": "Patient relies on public bus requiring two transfers, approximately 70-90 minutes each way; no personal vehicle; daughter's car is used for daughter's work commute.",
-    "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a11",
-    "kind": "assessment",
-    "name": "Explore patient's own goals and readiness for change (patient-chosen language)",
-    "result": "Patient states in her own words she wants to 'get back on track' with her sugar and would like help finding a way to afford her insulin and get to appointments without missing work time for her daughter. She identifies walking with her neighbor and simplifying pantry-food meals as things she is willing to try.",
-    "importance": "critical",
     "artifactIds": []
    },
    {
@@ -128,14 +80,6 @@
     "kind": "record",
     "name": "Review patient assistance program options for insulin cost",
     "result": "Manufacturer patient assistance program and a local Rx assistance fund both list eligibility for uninsured/underinsured residents; application requires proof of income and a prescription from the prescribing clinic - CHW can assist with paperwork but cannot adjust the prescription.",
-    "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a16",
-    "kind": "assessment",
-    "name": "Ask about health insurance/coverage status",
-    "result": "Patient has state Medicaid coverage; copay for insulin pen is reported by patient as about $35/month, which she describes as hard to manage some months.",
     "importance": "important",
     "artifactIds": []
    }
@@ -242,7 +186,7 @@
     "topic": "insulin routine description",
     "chart": "Patient states she takes insulin as prescribed because she does not want to be scolded by the clinic.",
     "says": "I tell them I take it just like the doctor said, I don't want them getting on me about it.",
-    "tier": "reluctant",
+    "tier": "hidden",
     "importance": "critical"
    },
    {
@@ -660,16 +604,14 @@
   "objectives": [
    {
     "id": "o1",
-    "text": "Build rapport and trust sufficient to elicit sensitive disclosure of cost-driven insulin dose reduction, recognizing patients may underreport nonadherence to avoid judgment.",
+    "text": "Build rapport and trust sufficient to elicit sensitive disclosure of cost-driven insulin dose reduction and the patient's reasons for underreporting it to the clinic, recognizing patients may underreport nonadherence to avoid judgment.",
     "factIds": [
      "f8",
      "f9",
      "f10",
      "f26"
     ],
-    "actionIds": [
-     "a5"
-    ]
+    "actionIds": []
    },
    {
     "id": "o2",
@@ -693,7 +635,6 @@
      "f13"
     ],
     "actionIds": [
-     "a7",
      "a13"
     ]
    },
@@ -705,9 +646,7 @@
      "f24",
      "f25"
     ],
-    "actionIds": [
-     "a11"
-    ]
+    "actionIds": []
    },
    {
     "id": "o5",
@@ -730,8 +669,7 @@
      "f9"
     ],
     "actionIds": [
-     "a2",
-     "a5"
+     "a2"
     ]
    }
   ],

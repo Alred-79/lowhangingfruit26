@@ -201,38 +201,55 @@ export const caseFacts = (c: CaseProfile, knobs: Knobs) => c.facts.filter((f) =>
 
 const AUDIT_SCHEMA = {
   type: "object",
-  required: ["unsupported"],
+  required: ["unsupported", "not_conveyed"],
   properties: {
     unsupported: {
       type: "array",
       description: "Clinical details the patient asserted as true that are not supported by the approved list. Empty if none.",
       items: { type: "string", description: "The unsupported claim, in a few words, quoting the patient where possible" },
     },
+    not_conveyed: {
+      type: "array",
+      description: "ids from the NEW THIS TURN list whose content the reply did not actually communicate. Empty if all were conveyed.",
+      items: { type: "string" },
+    },
   },
 };
 
+export interface Audit {
+  unsupported: string[];
+  /** ids of facts that were released this turn but that the patient did not actually say. */
+  notConveyed: string[];
+}
+
 /**
- * Checks a finished patient reply against the facts the patient was allowed to use. Anything
- * clinical that was asserted but is not approved is reported so it can be flagged in the chart.
+ * Checks a finished patient reply against the facts the patient was allowed to use:
+ * (1) anything clinical asserted beyond the approved facts is reported so it can be flagged;
+ * (2) any fact released this turn that the patient did not actually say is reported so the
+ *     ledger only records what was really disclosed.
  */
-export async function auditReply(reply: string, allowed: Fact[], background: string, openingLine: string): Promise<string[]> {
+export async function auditReply(reply: string, known: Fact[], reveal: Fact[], background: string, openingLine: string): Promise<Audit> {
   try {
-    const res = await chatJSON<{ unsupported: string[] }>({
+    const res = await chatJSON<{ unsupported: string[]; not_conveyed: string[] }>({
       model: MODELS.fast,
       temperature: 0,
-      maxTokens: 300,
+      maxTokens: 400,
       schema: AUDIT_SCHEMA,
       system:
-        "You audit a simulated patient's reply for a medical education simulator. You are given the only clinical facts the patient was approved to state, plus their non-medical background. List clinical details the reply ASSERTS AS TRUE that are not supported by that material: new symptoms, diagnoses, medications or doses, test results, numbers, dates of medical events, or family members' health. Do not list: denials, 'I don't know', vague non-answers, feelings and opinions, everyday non-medical life details, or reasonable rewording of an approved fact. Be strict about real additions and silent about everything else.",
+        "You audit a simulated patient's reply for a medical education simulator. You are given the only clinical facts the patient was approved to state, plus their non-medical background.\n1. unsupported: list clinical details the reply ASSERTS AS TRUE that are not supported by that material: new symptoms, diagnoses, medications or doses, test results, numbers, dates of medical events, or family members' health. Do not list denials, 'I don't know', vague non-answers, feelings and opinions, everyday non-medical life details, or reasonable rewording of an approved fact. Be strict about real additions and silent about everything else.\n2. not_conveyed: for each fact under NEW THIS TURN, decide whether the reply communicated its substance (paraphrase counts). List the ids that were not communicated at all.",
       messages: [
         {
           role: "user",
-          text: `APPROVED CLINICAL FACTS:\n${allowed.map((f) => `- ${f.chart} (patient wording: ${f.says})`).join("\n") || "(none yet)"}\n- Reason for visit, in the patient's words: ${openingLine}\n\nNON-MEDICAL BACKGROUND:\n${background}\n\nPATIENT REPLY TO AUDIT:\n${reply}`,
+          text: `ALREADY SHARED EARLIER:\n${known.map((f) => `- ${f.chart} (patient wording: ${f.says})`).join("\n") || "(none)"}\n- Reason for visit, in the patient's words: ${openingLine}\n\nNEW THIS TURN:\n${reveal.map((f) => `${f.id}: ${f.chart} (patient wording: ${f.says})`).join("\n") || "(none)"}\n\nNON-MEDICAL BACKGROUND:\n${background}\n\nPATIENT REPLY TO AUDIT:\n${reply}`,
         },
       ],
     });
-    return (res.unsupported || []).filter((x) => typeof x === "string" && x.trim()).slice(0, 4);
+    const ids = new Set(reveal.map((f) => f.id));
+    return {
+      unsupported: (res.unsupported || []).filter((x) => typeof x === "string" && x.trim()).slice(0, 4),
+      notConveyed: (res.not_conveyed || []).filter((id) => ids.has(id)),
+    };
   } catch {
-    return [];
+    return { unsupported: [], notConveyed: [] };
   }
 }

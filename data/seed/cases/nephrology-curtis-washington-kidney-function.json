@@ -117,7 +117,7 @@
     "id": "a13",
     "kind": "assessment",
     "name": "Calculate CKD stage and risk category",
-    "result": "CKD stage G4A3 (eGFR 22 mL/min/1.73m2, albuminuria category A3). Rapid progression per KDIGO criteria (eGFR decline of ~8 mL/min/1.73m2/year, exceeding the >5 mL/min/1.73m2/year threshold). Formal Kidney Failure Risk Equation (KFRE) has not yet been calculated this visit; given the albuminuria and eGFR, 2-year risk is expected to be substantial and a formal KFRE calculation is warranted to quantify risk and guide referral timing.",
+    "result": "CKD stage G4A3 (eGFR 22 mL/min/1.73m2, albuminuria category A3). Rapid progression per KDIGO criteria (eGFR decline of ~8 mL/min/1.73m2/year, exceeding the >5 mL/min/1.73m2/year threshold). Kidney Failure Risk Equation (4-variable, using age 58, male sex, eGFR 22, ACR 1,850 mg/g) calculated this visit: estimated 2-year risk of kidney failure approximately 40-45% and 5-year risk approximately 70-75%, confirming very high risk and supporting prompt referral for transplant evaluation and vascular access/modality planning.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": []
@@ -1056,7 +1056,8 @@
    "ethnicity": "Black",
    "occupation": "Barber and barbershop owner",
    "language": "English",
-   "appearance": "A broad-shouldered man with greying short hair and a neatly trimmed beard, wearing a collared barbershop polo shirt. He appears on camera seated in a small back office of his shop, shelves with hair products visible behind him, lighting slightly dim. His posture is upright and he gestures animatedly when talking, though his expression tightens when the topic of dialysis comes up."
+   "appearance": "A broad-shouldered man with greying short hair and a neatly trimmed beard, wearing a collared barbershop polo shirt. He appears on camera seated in a small back office of his shop, shelves with hair products visible behind him, lighting slightly dim. His posture is upright and he gestures animatedly when talking, though his expression tightens when the topic of dialysis comes up.",
+   "portrait": "/portraits/nephrology-curtis-washington-kidney-function.jpg"
   },
   "persona": {
    "personality": "Proud, sociable, hardworking, protective of his independence, carries guarded skepticism toward the medical system from past experiences.",

@@ -69,6 +69,12 @@ function check(file: string): Report {
   else if (!file.startsWith("sample-") && !file.startsWith(role.id + "-")) W(`file name does not start with its profession id "${role.id}"`);
 
   // ----- top-level fields -----
+  // Every section the generator schema requires must be present and non-empty (the seed loader skips a case without them).
+  const REQUIRED = ["title", "summary", "specialty", "setting", "encounterType", "difficulty", "patient", "persona", "scenario", "chartAtStart", "facts", "actions", "artifacts", "objectives", "answerKey"] as const;
+  for (const k of REQUIRED) {
+    const v = (c as unknown as Record<string, unknown>)[k];
+    if (v === undefined || v === null || (typeof v === "object" && !Object.keys(v as object).length)) E(`missing required field ${k}`);
+  }
   for (const k of ["title", "summary", "specialty", "setting", "encounterType"] as const) if (empty(c[k])) E(`empty ${k}`);
   if (!(c.difficulty >= 1 && c.difficulty <= 5)) E(`difficulty ${c.difficulty} out of range 1-5`);
   if (c.setting && !/tele|video|virtual|remote|phone/i.test(c.setting)) W(`setting does not read as a telehealth visit: "${c.setting}"`);

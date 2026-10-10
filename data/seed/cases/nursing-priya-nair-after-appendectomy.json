@@ -21,14 +21,6 @@
     "artifactIds": []
    },
    {
-    "id": "a3",
-    "kind": "assessment",
-    "name": "Ask patient to self-palpate abdomen for tenderness/rigidity",
-    "result": "Patient reports mild diffuse tenderness and bloating sensation, no guarding or rigidity, abdomen soft on self-palpation",
-    "importance": "important",
-    "artifactIds": []
-   },
-   {
     "id": "a4",
     "kind": "assessment",
     "name": "Pain assessment (0-10 scale, location, triggers)",
@@ -60,14 +52,6 @@
     "name": "Bowel function, GI symptom, and medication adherence screen",
     "result": "No bowel movement in 3 days (since before surgery); reports bloating and feeling 'full'; passing flatus intermittently; no nausea or vomiting; no blood in stool reported. When asked generally about taking her medications as prescribed, patient is initially vague about the stool softener and says she has 'mostly' kept up with her meds; a more direct, rapport-based follow-up question may be needed to clarify actual docusate adherence.",
     "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a8",
-    "kind": "assessment",
-    "name": "Ask about voiding/urinary function",
-    "result": "Voiding normally, no dysuria, urine clear yellow",
-    "importance": "minor",
     "artifactIds": []
    },
    {
@@ -116,7 +100,7 @@
     "id": "a14",
     "kind": "record",
     "name": "Medication reconciliation and OTC product screen",
-    "result": "Patient reports taking a daytime cold/flu combination product for a scratchy throat, two doses so far today, in addition to her two scheduled 650 mg acetaminophen doses for incision pain. She does not think the cold product 'counts' as real medicine. Based on her report, today's acetaminophen intake so far is approximately 1950 mg (1300 mg scheduled + ~650 mg from the cold product, pending confirmation of its acetaminophen content). If she continues her current pattern through the day (up to 4 scheduled 650 mg doses = 2600 mg, plus continued cold-product dosing), her projected 24-hour acetaminophen total could reach or exceed the 3000-3250 mg/24h safe maximum, creating a hepatotoxicity risk that needs same-day correction.",
+    "result": "Patient reports taking a daytime cold/flu combination product for a scratchy throat, two doses so far today, in addition to her two scheduled 650 mg acetaminophen doses for incision pain. She does not think the cold product 'counts' as real medicine. Based on her report, today's acetaminophen intake so far is approximately 1950 mg (1300 mg scheduled + ~650 mg from the cold product, pending confirmation of its acetaminophen content). If she continues this same pattern for the rest of the day (2 more scheduled 650 mg doses = 1300 mg more, plus 2 more cold-product tablets = 650 mg more), her projected 24-hour acetaminophen total could reach approximately 3900 mg - well above the 3000-3250 mg/24h safe maximum, creating a hepatotoxicity risk that needs same-day correction.",
     "importance": "critical",
     "artifactIds": [
      "d5"
@@ -312,7 +296,7 @@
      "when": "fact",
      "ref": "f14"
     },
-    "body": "Patient-reported product: 'DayQuil-type' daytime cold and flu combination tablet. Label lists: Acetaminophen 325 mg, Dextromethorphan HBr 10 mg, Phenylephrine HCl 5 mg per tablet. Patient has taken 2 tablets so far today (first dose this morning, second dose at lunchtime) in addition to two scheduled 650 mg acetaminophen doses for incision pain. Measured intake so far today: approximately 1950 mg acetaminophen (1300 mg scheduled + 650 mg from cold product). Projected 24-hour total if she continues this pattern (4 scheduled 650 mg doses = 2600 mg, plus 2 more cold-product tablets = 650 mg) is approximately 3250 mg, at or above the safe maximum of 3000-3250 mg/24h."
+    "body": "Patient-reported product: 'DayQuil-type' daytime cold and flu combination tablet. Label lists: Acetaminophen 325 mg, Dextromethorphan HBr 10 mg, Phenylephrine HCl 5 mg per tablet. Patient has taken 2 tablets so far today (first dose this morning, second dose at lunchtime) in addition to two scheduled 650 mg acetaminophen doses for incision pain. Measured intake so far today: approximately 1950 mg acetaminophen (1300 mg scheduled + 650 mg from cold product). Projected 24-hour total if she continues this same pattern (2 more scheduled 650 mg doses = 1300 mg, plus 2 more cold-product tablets = 650 mg) is approximately 3900 mg - well above the safe maximum of 3000-3250 mg/24h, representing a significant overdose risk that requires same-day correction."
    },
    {
     "id": "d6",
@@ -403,7 +387,7 @@
     "factId": "f14",
     "artifactId": "d5",
     "patientClaim": "Priya says she's 'just taking the cold medicine and my regular pain pills like they told me, nothing extra' and doesn't think the cold tablets count as a real medication.",
-    "recordEvidence": "The cold/flu combination product label (artifact d5) shows it contains 325 mg acetaminophen per tablet. Her measured intake today so far (two scheduled 650 mg doses plus two cold-product tablets) is already about 1950 mg, and if she continues this same dosing pattern for the rest of the day, her projected 24-hour acetaminophen total would reach approximately 3250 mg - at or above the 3000-3250 mg/24h safe maximum, risking hepatotoxicity if not corrected now.",
+    "recordEvidence": "The cold/flu combination product label (artifact d5) shows it contains 325 mg acetaminophen per tablet. Her measured intake today so far (two scheduled 650 mg doses plus two cold-product tablets) is already about 1950 mg, and if she continues this same dosing pattern for the rest of the day, her projected 24-hour acetaminophen total would reach approximately 3900 mg - well above the 3000-3250 mg/24h safe maximum, risking hepatotoxicity if not corrected now.",
     "teachingPoint": "Patients often do not recognize that OTC cold/flu combination products contain acetaminophen, leading to unintentional overdose when combined with prescribed scheduled acetaminophen. Nurses must specifically ask about all OTC products, calculate both the current measured intake and the projected 24-hour total based on the patient's dosing pattern, and intervene before the safe maximum is reached."
    }
   ],
@@ -415,7 +399,8 @@
    "ethnicity": "Indian-American",
    "occupation": "Graphic designer",
    "language": "English",
-   "appearance": "A young woman with shoulder-length dark hair pulled into a loose bun, sitting propped up on pillows on her couch wearing a loose grey t-shirt. The room is softly lit with daylight through a window; she shifts position a few times during the call and holds a hand loosely over her lower abdomen when she laughs or moves."
+   "appearance": "A young woman with shoulder-length dark hair pulled into a loose bun, sitting propped up on pillows on her couch wearing a loose grey t-shirt. The room is softly lit with daylight through a window; she shifts position a few times during the call and holds a hand loosely over her lower abdomen when she laughs or moves.",
+   "portrait": "/portraits/nursing-priya-nair-after-appendectomy.jpg"
   },
   "persona": {
    "personality": "Pleasant, cooperative, and a little anxious about doing things 'right' during recovery; appreciates clear, simple explanations.",
@@ -792,12 +777,12 @@
     "No bowel movement in 3 days with bloating; passing flatus intermittently",
     "Shoulder-tip pain is positional, non-exertional, without chest pain or dyspnea - consistent with referred gas pain",
     "Patient has not been reliably taking prescribed stool softener as directed",
-    "Patient's measured acetaminophen intake today (~1950 mg) is combining a scheduled regimen with an OTC cold remedy; if this pattern continues, her projected 24-hour total (~3250 mg) would approach/exceed the safe maximum, requiring same-day correction",
+    "Patient's measured acetaminophen intake today (~1950 mg) is combining a scheduled regimen with an OTC cold remedy; if this pattern continues, her projected 24-hour total (~3900 mg) would substantially exceed the safe maximum, requiring same-day correction",
     "No signs of DVT, infection, or cardiopulmonary compromise"
    ],
    "plan": [
     "Educate patient that shoulder-tip pain is a common, expected effect of residual CO2 gas from laparoscopic surgery irritating the diaphragm, and reassure regarding cardiac concern given reassuring exam/vitals/ROS, while advising her to report any chest pain, shortness of breath, or worsening symptoms immediately",
-    "Educate on safe acetaminophen dosing: stop the OTC combination cold product or reduce scheduled acetaminophen so that the projected total daily acetaminophen (prescribed + OTC) does not reach or exceed the safe maximum (generally 3000-3250 mg/24h); advise reading labels of all OTC products for hidden acetaminophen before her current measured intake (~1950 mg) progresses to the projected at-risk total (~3250 mg) later today",
+    "Educate on safe acetaminophen dosing: stop the OTC combination cold product or reduce scheduled acetaminophen so that the projected total daily acetaminophen (prescribed + OTC) does not exceed the safe maximum (generally 3000-3250 mg/24h); advise reading labels of all OTC products for hidden acetaminophen before her current measured intake (~1950 mg) progresses to the projected at-risk total (~3900 mg) later today",
     "Resume and reinforce adherence to prescribed docusate stool softener; encourage increased fluid intake, gentle ambulation, and gradual reintroduction of fiber (fruits, vegetables, whole grains) to address constipation",
     "Advise if no bowel movement within another 24-48 hours despite measures, or if abdominal distension/pain worsens, to contact the surgical provider",
     "Provide activity teaching: may shower now that >24 hours have passed since surgery (per discharge instructions), pat incisions dry, no soaking/baths/swimming until surgeon clears; no driving for 24-48h or while taking oxycodone; no lifting greater than 10 lbs for 2 weeks (clarify with patient regarding lifting her cat)",
@@ -816,7 +801,7 @@
     "Signs/symptoms of acetaminophen toxicity: right upper quadrant pain, nausea, jaundice (relevant given projected combined OTC/prescribed dosing)"
    ],
    "educationPoints": [
-    "OTC combination cold and flu products frequently contain acetaminophen; patients should always check active ingredients to avoid unintentional overdose when also taking scheduled acetaminophen, especially before the day's dosing pattern pushes the projected total over the safe maximum",
+    "OTC combination cold and flu products frequently contain acetaminophen; patients should always check active ingredients to avoid unintentional overdose when also taking scheduled acetaminophen, especially before the day's dosing pattern pushes the projected total well over the safe maximum",
     "Shoulder-tip pain after laparoscopic surgery is a well-recognized, benign, self-limited symptom caused by residual CO2 gas irritating the diaphragm and phrenic nerve, typically resolving within a few days",
     "Opioid analgesics and reduced oral intake commonly contribute to post-operative constipation; stool softeners should be taken as prescribed proactively rather than only once symptoms develop",
     "Clear, specific activity guidance (showering, driving, lifting thresholds) reduces patient anxiety and supports safe recovery adherence",
@@ -828,7 +813,7 @@
   ],
   "knowledge": [],
   "rubricId": "default",
-  "difficulty": 3,
+  "difficulty": 1,
   "variants": [],
   "title": "Post-operative day 1 telehealth follow-up after laparoscopic appendectomy in a 28-year-old with acetaminophen overdose risk",
   "summary": "A 28-year-old woman one day after uncomplicated laparoscopic appendectomy presents for routine discharge follow-up. She is recovering well but has inadvertently combined prescribed paracetamol with an OTC cold remedy also containing paracetamol, creating overdose risk. She also has typical post-operative constipation and referred shoulder-tip gas pain she fears is cardiac. This case teaches safe post-operative assessment via telehealth, medication reconciliation to identify polypharmacy risks, and differentiation of expected recovery findings from complications requiring escalation.",

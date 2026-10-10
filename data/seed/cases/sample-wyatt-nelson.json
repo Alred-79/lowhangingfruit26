@@ -1,6 +1,6 @@
 {
  "origin": "sample",
- "reviewed": true,
+ "reviewed": false,
  "profile": {
   "version": 1,
   "actions": [
@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "vitals",
     "name": "Review vital signs (from recent in-clinic check)",
-    "result": "HR 78 bpm, BP 128/84 mmHg, RR 16/min, Temp 98.4°F, SpO2 99%",
+    "result": "HR 78 bpm, BP 128/84 mmHg, RR 16/min, Temp 98.4\u00b0F, SpO2 99%",
     "importance": "important",
     "artifactIds": []
    },
@@ -24,7 +24,7 @@
     "id": "a3",
     "kind": "lab",
     "name": "Review HbA1c",
-    "result": "HbA1c 8.9% (goal <7%) — uncontrolled",
+    "result": "HbA1c 8.9% (goal <7%) \u2014 uncontrolled",
     "importance": "critical",
     "artifactIds": []
    },
@@ -173,13 +173,13 @@
    ],
    "plan": [
     "Nutrition diagnosis/PES statement(s) addressing excessive sugar/refined carb intake and inadequate fiber intake linked to labs and GI symptoms",
-    "Collaborative, non-judgmental goal-setting using motivational interviewing — elicit his own reasons tied to soccer performance/energy",
+    "Collaborative, non-judgmental goal-setting using motivational interviewing \u2014 elicit his own reasons tied to soccer performance/energy",
     "Practical, low-barrier substitutions: swap 1 sugary soda/day for water or a diet/zero-sugar option as a first step; add one fruit or vegetable per day with strategies to improve palatability (smoothies, dips, texture modification)",
     "Address constipation with gradual fiber increase (soluble fiber sources less likely to cause bloating) plus increased water intake, paired with reassurance and normalization to reduce embarrassment",
-    "Coordinate with prescriber regarding metformin GI side effects — consider extended-release formulation or dose timing adjustment; counsel to take with full meal to reduce nausea rather than skipping doses",
+    "Coordinate with prescriber regarding metformin GI side effects \u2014 consider extended-release formulation or dose timing adjustment; counsel to take with full meal to reduce nausea rather than skipping doses",
     "Provide budget-friendly, quick-prep meal/snack ideas suitable for a teen with limited cooking skills and time (e.g., batch-prepared items, affordable produce options, pairing protein+fiber for satiety and glycemic control)",
     "Address breakfast skipping and irregular meal timing to support more stable glucose control and reduce large late-night dinners",
-    "Discuss sports nutrition specifically — appropriate pre/post-practice fueling without relying on sugary sports drinks/soda",
+    "Discuss sports nutrition specifically \u2014 appropriate pre/post-practice fueling without relying on sugary sports drinks/soda",
     "Identify and leverage support system: parents for shopping/meal prep, consider school nutrition services, consider referral to school nurse/counselor given reported absences/declining attention",
     "Schedule follow-up visit to reassess adherence, labs trend (repeat HbA1c in 3 months), and readiness to change; use SMART, patient-generated goals",
     "Screen for and address psychosocial stress and weight-related self-consciousness with empathetic, weight-neutral language focused on performance/health rather than appearance"

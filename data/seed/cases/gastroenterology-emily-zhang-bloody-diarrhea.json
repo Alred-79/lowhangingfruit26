@@ -145,7 +145,7 @@
     "id": "a15",
     "kind": "assessment",
     "name": "Calculate partial Mayo score from reported symptoms",
-    "result": "Partial Mayo score approximately 6 (stool frequency subscore 2, rectal bleeding subscore 2, physician global assessment 2) consistent with moderately active disease",
+    "result": "Partial Mayo score (sum of stool frequency, rectal bleeding, and physician global assessment subscores, each 0-3; endoscopy subscore excluded, so maximum is 9) approximately 6: stool frequency subscore 2 (5-7 stools/day), rectal bleeding subscore 2 (blood present most days), physician global assessment 2 (moderate disease). Total of 6/9 is consistent with moderately active disease.",
     "importance": "important",
     "artifactIds": []
    },
@@ -921,7 +921,8 @@
    "ethnicity": "Chinese-American",
    "occupation": "Law student",
    "language": "English",
-   "appearance": "A young woman with shoulder-length dark hair, wearing a plain gray sweater, sitting at a small desk in a dimly lit studio apartment with a bookshelf full of law textbooks visible behind her. She sits upright and speaks carefully, with a slightly guarded posture and occasional pauses before answering personal questions."
+   "appearance": "A young woman with shoulder-length dark hair, wearing a plain gray sweater, sitting at a small desk in a dimly lit studio apartment with a bookshelf full of law textbooks visible behind her. She sits upright and speaks carefully, with a slightly guarded posture and occasional pauses before answering personal questions.",
+   "portrait": "/portraits/gastroenterology-emily-zhang-bloody-diarrhea.jpg"
   },
   "persona": {
    "personality": "Precise, private, intellectually organized; prefers facts and data over emotional language but is clearly anxious underneath a controlled exterior",

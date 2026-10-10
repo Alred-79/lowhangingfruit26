@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "assessment",
     "name": "Mental Status Examination",
-    "result": "Alert, oriented x3. Appearance: casual home clothes, mild grooming neglect noted (same t-shirt as prior visit per patient report). Behavior: frequent pacing within camera frame, shifting weight foot to foot, unable to remain seated for more than ~1 minute. Speech: normal rate/volume, coherent. Mood: 'okay I guess, just restless.' Affect: anxious, mildly guarded. Thought process: linear, goal-directed. Thought content: denies current paranoia toward interviewer; no bizarre or disorganized thought content voiced today; further exploration of hallucinatory content requires direct questioning. Insight: partial. Judgment: fair.",
+    "result": "Alert, oriented x3. Appearance: casual home clothes, mild grooming neglect noted. Behavior: frequent pacing within camera frame, shifting weight foot to foot, unable to remain seated for more than ~1 minute. Speech: normal rate/volume, coherent. Mood: 'okay I guess, just restless.' Affect: anxious, mildly guarded. Thought process: linear, goal-directed. Thought content: denies current paranoia toward interviewer; no bizarre or disorganized thought content voiced today; further exploration of hallucinatory content requires direct questioning. Insight: partial. Judgment: fair.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -23,9 +23,9 @@
    {
     "id": "a3",
     "kind": "assessment",
-    "name": "Abnormal Involuntary Movement Scale (AIMS) - visual screen via camera",
-    "result": "No orofacial dyskinesia, no choreoathetoid limb or truncal movements observed. Movements present are consistent with restless, repetitive leg/foot shifting and pacing rather than dyskinesia.",
-    "importance": "important",
+    "name": "Abnormal Involuntary Movement Scale (AIMS) - baseline visual screen via camera",
+    "result": "Baseline screen given recent antipsychotic initiation (not yet an expected timeframe for tardive dyskinesia). No orofacial dyskinesia, no choreoathetoid limb or truncal movements observed. Movements present are consistent with restless, repetitive leg/foot shifting and pacing rather than dyskinesia. Establishes baseline for future comparison; BARS and rigidity exam are the appropriate tools for assessing today's acute EPS presentation.",
+    "importance": "minor",
     "artifactIds": []
    },
    {
@@ -82,9 +82,9 @@
    },
    {
     "id": "a10",
-    "kind": "test",
-    "name": "Urine toxicology screen (ordered this visit, result pending prior labs on file)",
-    "result": "No urine toxicology on file; none performed today as this is a remote visit without home collection capability. Deferred to in-person psychiatry follow-up.",
+    "kind": "record",
+    "name": "Review of chart for prior toxicology testing",
+    "result": "No urine toxicology screen on file. None was performed at discharge or since; this is a remote telehealth visit without home collection capability, so any indicated testing would need to be arranged at the in-person outpatient psychiatry follow-up.",
     "importance": "minor",
     "artifactIds": []
    },
@@ -576,7 +576,6 @@
     ],
     "actionIds": [
      "a1",
-     "a3",
      "a4",
      "a5"
     ]
@@ -739,7 +738,7 @@
     "Cannabis-related anxiety or intoxication effect (possible minor contributor given recent use, but restlessness pattern and timeline fit akathisia better)"
    ],
    "keyFindings": [
-    "Pacing/restlessness and inability to sit still beginning 3-4 days after starting risperidone 4 mg nightly, consistent with akathisia",
+    "Pacing/restlessness and inability to sit still beginning 3-4 days after starting risperidone 4 mg nightly, consistent with akathisia on BARS (moderate) with stiffness on rigidity exam suggesting mild parkinsonism",
     "Subjective stiffness in arms/jaw suggesting mild parkinsonian rigidity",
     "Patient reports adherence but pharmacy fill history shows only a single 7-tablet fill with no refills since discharge, and patient later discloses skipping the last 3 nights due to worsening restlessness after dosing",
     "Residual auditory hallucinations present but quieter, non-command, occurring mainly evenings; no SI/HI on C-SSRS screen",
@@ -748,7 +747,7 @@
    ],
    "plan": [
     "Within nursing scope: validate and normalize side effect experience, correct misattribution that restlessness means 'getting sicker,' and reinforce that this is a common, treatable medication effect",
-    "Communicate findings urgently to prescribing psychiatrist via SBAR: akathisia/rigidity symptoms, probable covert non-adherence (3 missed doses, pharmacy fill discrepancy), residual but stable hallucinations, cannabis use, no acute SI/HI - request medication review (e.g., dose adjustment or adjunct for akathisia) rather than nurse independently changing or stopping the medication",
+    "Communicate findings urgently to prescribing psychiatrist via SBAR: akathisia/rigidity symptoms (BARS moderate, positive rigidity exam), probable covert non-adherence (3 missed doses, pharmacy fill discrepancy), residual but stable hallucinations, cannabis use, no acute SI/HI - request medication review (e.g., dose adjustment or adjunct for akathisia) rather than nurse independently changing or stopping the medication",
     "Encourage patient to keep the already-scheduled outpatient psychiatry appointment in 4 days; advocate for sooner appointment if possible given distress level and non-adherence risk",
     "Provide brief psychoeducation on akathisia versus psychotic symptoms, and on interaction risks between cannabis and antipsychotic efficacy/adherence, in a non-judgmental way",
     "Reinforce confidentiality limits honestly (what must be reported, e.g., imminent safety risk) to rebuild trust given his fear of involuntary rehospitalization",
@@ -767,7 +766,8 @@
     "Self-reported adherence is often inaccurate; cross-referencing pharmacy fill/refill history is a practical, low-friction way to objectively assess adherence in a telehealth visit.",
     "Nursing scope in medication monitoring includes identifying and escalating side effects and adherence concerns to the prescriber, not independently adjusting antipsychotic dosing.",
     "Building trust around confidentiality and non-punitive intent is essential to eliciting sensitive disclosures (missed doses, substance use, fear of rehospitalization) in patients recently discharged from involuntary or urgent psychiatric care.",
-    "Residual, quieter hallucinations without command content or distress escalation can be monitored rather than treated as an immediate crisis, but should still be documented and communicated to the prescribing team."
+    "Residual, quieter hallucinations without command content or distress escalation can be monitored rather than treated as an immediate crisis, but should still be documented and communicated to the prescribing team.",
+    "AIMS is designed to monitor for tardive dyskinesia with chronic antipsychotic exposure and is not the primary tool for assessing acute EPS shortly after starting an antipsychotic; BARS (for akathisia) and a rigidity exam (for parkinsonism) are the appropriate instruments in this early timeframe."
    ]
   },
   "title": "Post-Discharge Check-In After First-Episode Psychosis: Restlessness, Hidden Non-Adherence, and Residual Voices",

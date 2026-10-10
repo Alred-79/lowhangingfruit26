@@ -1,6 +1,6 @@
 {
  "origin": "sample",
- "reviewed": true,
+ "reviewed": false,
  "profile": {
   "version": 1,
   "actions": [
@@ -14,7 +14,7 @@
     "importance": "critical",
     "kind": "vitals",
     "name": "Current weight and recent change",
-    "result": "Weight 198 lbs (89.8 kg), down from 208 lbs one month ago (10 lb unintentional loss). Height 5'8\". BMI 31.2 kg/m². Waist circumference 43 in.",
+    "result": "Weight 198 lbs (89.8 kg), down from 208 lbs one month ago (10 lb unintentional loss). Height 5'8\". BMI 31.2 kg/m\u00b2. Waist circumference 43 in.",
     "artifactIds": []
    },
    {
@@ -28,7 +28,7 @@
     "importance": "important",
     "kind": "vitals",
     "name": "Vital signs",
-    "result": "BP 158/92 mmHg, HR 78 bpm, RR 18/min, Temp 98.6°F, SpO2 96% room air.",
+    "result": "BP 158/92 mmHg, HR 78 bpm, RR 18/min, Temp 98.6\u00b0F, SpO2 96% room air.",
     "artifactIds": []
    },
    {
@@ -68,7 +68,7 @@
     "importance": "critical",
     "kind": "lab",
     "name": "Renal function panel",
-    "result": "BUN 28 mg/dL (High), Creatinine 1.6 mg/dL (High) — consistent with CKD stage 3.",
+    "result": "BUN 28 mg/dL (High), Creatinine 1.6 mg/dL (High) \u2014 consistent with CKD stage 3.",
     "artifactIds": []
    },
    {
@@ -148,7 +148,7 @@
     "importance": "important",
     "kind": "assessment",
     "name": "Estimated sodium intake pattern",
-    "result": "Based on recall, estimated intake >3000-4000 mg sodium/day from canned soups, restaurant 'special order' entrees, and processed convenience foods — well above recommended <2000 mg/day for HF/CKD.",
+    "result": "Based on recall, estimated intake >3000-4000 mg sodium/day from canned soups, restaurant 'special order' entrees, and processed convenience foods \u2014 well above recommended <2000 mg/day for HF/CKD.",
     "artifactIds": []
    },
    {
@@ -255,7 +255,7 @@
    "keyFindings": [
     "HbA1c 8.7% and fasting glucose 165 mg/dL indicate uncontrolled T2DM",
     "BP 158/92 with 2+ pitting edema and crackles suggest volume overload consistent with HF decompensation risk",
-    "Unintentional 10 lb weight loss in 1 month despite perceived 'eating less' — red flag for cardiac cachexia/sarcopenia risk, not a dieting success",
+    "Unintentional 10 lb weight loss in 1 month despite perceived 'eating less' \u2014 red flag for cardiac cachexia/sarcopenia risk, not a dieting success",
     "Creatinine 1.6 / BUN 28 reflect CKD stage 3, narrowing safe potassium/protein/fluid parameters and raising concern about NSAID (ibuprofen) use",
     "Diet history reveals high sodium (canned soups, restaurant 'specials'), high refined carbohydrate, low fiber/fruit-vegetable intake, soda-based hydration, and irregular meal pattern (skips breakfast)",
     "Low health literacy: patient does not understand the physiologic link between diabetes and heart failure, or why sodium/NSAIDs matter",
@@ -269,18 +269,18 @@
     "Provide practical, culturally relevant lower-sodium swaps for favorite foods (seasoning blends instead of salt, rinsing canned soup, smaller portion fried chicken paired with vegetable side)",
     "Address breakfast skipping and irregular meal timing to support glucose control and prevent large unopposed lunch intake",
     "Discuss fluid/sodium balance in lay terms connecting swelling, breathing, and salty food without overwhelming jargon",
-    "Flag ibuprofen use to the medical team given CKD stage 3 and HF — recommend discussion of safer analgesic alternatives (e.g., topical agents, acetaminophen per renal dosing) with PCP/cardiology",
+    "Flag ibuprofen use to the medical team given CKD stage 3 and HF \u2014 recommend discussion of safer analgesic alternatives (e.g., topical agents, acetaminophen per renal dosing) with PCP/cardiology",
     "Flag metformin GI side effects and inconsistent adherence to prescriber for possible dose/formulation adjustment (e.g., extended release) to improve tolerability and adherence",
     "Recommend interprofessional referrals: diabetes educator, social worker (food resources/financial barriers), cardiology/nephrology follow-up, physical therapy for deconditioning/back pain",
     "Set a realistic monitoring plan: follow-up telehealth visit in 2-4 weeks to reassess weight trend, readiness to change, and self-selected goal adherence",
-    "Address unintentional weight loss directly — clarify this is not a positive outcome of 'eating less,' explore appetite, energy, and intake patterns further, consider malnutrition risk screening"
+    "Address unintentional weight loss directly \u2014 clarify this is not a positive outcome of 'eating less,' explore appetite, energy, and intake patterns further, consider malnutrition risk screening"
    ],
    "redFlags": [
-    "Unintentional weight loss of 10 lbs in 1 month in a patient with HF/CKD/DM — concern for cardiac cachexia, malnutrition, or impending decompensation requiring prompt communication with medical team",
-    "2+ bilateral pitting edema plus crackles plus elevated BP — possible early heart failure decompensation; coordinate with cardiology/PCP, not solely a dietary issue",
-    "Chronic NSAID (ibuprofen) use in a patient with CKD stage 3 and HF — nephrotoxic and can worsen fluid retention/BP; needs prompt provider communication",
-    "Inconsistent adherence to metformin and eplerenone with uncontrolled glucose and hypertension — adherence/safety issue needing interprofessional follow-up",
-    "Expressed hopelessness/fatalism ('who cares') combined with fear of dying — screen for depression/psychosocial distress and consider social work/behavioral health referral"
+    "Unintentional weight loss of 10 lbs in 1 month in a patient with HF/CKD/DM \u2014 concern for cardiac cachexia, malnutrition, or impending decompensation requiring prompt communication with medical team",
+    "2+ bilateral pitting edema plus crackles plus elevated BP \u2014 possible early heart failure decompensation; coordinate with cardiology/PCP, not solely a dietary issue",
+    "Chronic NSAID (ibuprofen) use in a patient with CKD stage 3 and HF \u2014 nephrotoxic and can worsen fluid retention/BP; needs prompt provider communication",
+    "Inconsistent adherence to metformin and eplerenone with uncontrolled glucose and hypertension \u2014 adherence/safety issue needing interprofessional follow-up",
+    "Expressed hopelessness/fatalism ('who cares') combined with fear of dying \u2014 screen for depression/psychosocial distress and consider social work/behavioral health referral"
    ],
    "educationPoints": [
     "Explain in plain language how diabetes and heart failure interact: high blood sugar damages blood vessels and strains the heart, while a weakened heart struggles to manage fluid, which excess salt makes worse",
@@ -500,7 +500,7 @@
       {
        "cells": [
         "Temperature",
-        "98.6°F (37.0°C)"
+        "98.6\u00b0F (37.0\u00b0C)"
        ]
       },
       {
@@ -524,7 +524,7 @@
       {
        "cells": [
         "BMI",
-        "31.2 kg/m²"
+        "31.2 kg/m\u00b2"
        ]
       },
       {
@@ -610,7 +610,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "BP 158/92 mmHg, HR 78 bpm, Weight 198 lbs, BMI 31.2 kg/m²"
+    "value": "BP 158/92 mmHg, HR 78 bpm, Weight 198 lbs, BMI 31.2 kg/m\u00b2"
    },
    {
     "label": "Care team",

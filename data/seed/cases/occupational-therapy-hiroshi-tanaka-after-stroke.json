@@ -34,7 +34,7 @@
     "id": "a4",
     "kind": "test",
     "name": "Observed functional reach and scanning - letter cancellation style task (ask patient to find all red dots on a sheet taped to the left and right walls)",
-    "result": "Patient consistently misses all targets placed on the left wall and left half of a page held centrally; redirecting attention verbally allows him to find them, but he does not self-correct.",
+    "result": "Patient consistently misses targets placed on the left wall and left half of a page held centrally; when the examiner verbally redirects his attention to that side, he is able to find them, but he does not spontaneously self-correct or re-scan leftward on his own.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": []
@@ -138,7 +138,7 @@
     "release": {
      "when": "start"
     },
-    "body": "70-year-old man s/p right MCA territory ischemic stroke (5 weeks prior to discharge) presenting with left hemiparesis (upper limb > lower limb), left-sided visual-spatial inattention/neglect documented by inpatient OT and PT, mild left upper limb sensory impairment, and fatigue. Ambulates with a single-point cane, modified independence. Discharged home with wife as primary support. Recommendations: outpatient OT for upper limb retraining, ADL retraining, cognitive-perceptual (neglect) strategies, and home safety evaluation; outpatient PT for gait and endurance; follow-up with neurology in 1 month. Patient did not consistently participate in neglect-specific compensatory strategy training during admission due to limited length of stay."
+    "body": "70-year-old man s/p right MCA territory ischemic stroke (5 weeks prior to discharge) presenting with left hemiparesis (upper limb > lower limb), left-sided omissions noted on inpatient OT and PT screening tasks, mild left upper limb sensory impairment, and fatigue. Ambulates with a single-point cane, modified independence. Discharged home with wife as primary support. Recommendations: outpatient OT for upper limb retraining, ADL retraining, cognitive-perceptual strategies, and home safety evaluation; outpatient PT for gait and endurance; follow-up with neurology in 1 month. Patient did not consistently participate in compensatory strategy training during admission due to limited length of stay."
    },
    {
     "id": "d2",
@@ -289,7 +289,7 @@
     "release": {
      "when": "start"
     },
-    "body": "Line bisection and letter cancellation tasks performed during admission showed left-sided omissions consistent with mild left spatial neglect. Family was educated on neglect and strategies to cue attention to the left side. Recommended continued outpatient monitoring and compensatory strategy training, noting that length of stay limited the extent of in-depth training completed prior to discharge."
+    "body": "Line bisection and letter cancellation tasks performed during admission showed left-sided omissions. Family was educated on strategies to cue attention to the left side. Recommended continued outpatient monitoring and compensatory strategy training, noting that length of stay limited the extent of in-depth training completed prior to discharge."
    }
   ],
   "facts": [
@@ -592,7 +592,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Right MCA ischemic stroke (5 weeks ago); left hemiparesis; left spatial neglect (inpatient finding); type 2 diabetes mellitus; hypertension; retired, prior independent in all ADLs/IADLs"
+    "value": "Right MCA ischemic stroke (5 weeks ago); left hemiparesis; left-sided omissions noted on inpatient screening (etiology to be characterized); type 2 diabetes mellitus; hypertension; retired, prior independent in all ADLs/IADLs"
    },
    {
     "label": "Medications",
@@ -703,8 +703,8 @@
     "factId": "f12",
     "artifactId": "d6",
     "patientClaim": "Patient states he sees everything fine on his left side and denies any visual or attentional problem.",
-    "recordEvidence": "Inpatient OT note documents left-sided omissions on line bisection and letter cancellation consistent with mild left spatial neglect, and notes the patient minimized this finding when asked during admission.",
-    "teachingPoint": "Anosognosia/denial of neglect is common after right-hemisphere stroke; self-report alone is unreliable, and the OT must rely on observed performance (cancellation task, burn injury, doorway bumping) rather than the patient's verbal denial to guide safety planning."
+    "recordEvidence": "Inpatient OT note documents left-sided omissions on line bisection and letter cancellation tasks during admission, and the current camera-guided cancellation task replicates this pattern with no spontaneous self-correction - findings that are inconsistent with the patient's confident denial of any left-sided problem.",
+    "teachingPoint": "Anosognosia/denial of neglect is common after right-hemisphere stroke; self-report alone is unreliable, and the OT must integrate observed performance (cancellation task, burn injury, doorway bumping) with prior documentation rather than accept the patient's verbal denial at face value, reasoning to the diagnosis themselves rather than having it stated outright in the chart."
    },
    {
     "id": "m2",
@@ -722,7 +722,8 @@
    "ethnicity": "Japanese-American",
    "occupation": "Retired sushi chef",
    "language": "English (fluent, occasional Japanese phrases with family)",
-   "appearance": "A lean, upright 70-year-old man with close-cropped gray hair, seated in a kitchen chair wearing a buttoned cardigan over a t-shirt; his left arm rests slightly flexed in his lap. The video shows a tidy but dated kitchen behind him with a gas stove, overhead fluorescent lighting, and a cane leaning against the table within reach."
+   "appearance": "A lean, upright 70-year-old man with close-cropped gray hair, seated in a kitchen chair wearing a buttoned cardigan over a t-shirt; his left arm rests slightly flexed in his lap. The video shows a tidy but dated kitchen behind him with a gas stove, overhead fluorescent lighting, and a cane leaning against the table within reach.",
+   "portrait": "/portraits/occupational-therapy-hiroshi-tanaka-after-stroke.jpg"
   },
   "persona": {
    "personality": "Proud, stoic, and private; values competence and self-reliance built over decades as a professional chef; dry sense of humor that surfaces when he feels safe.",

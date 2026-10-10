@@ -240,7 +240,7 @@ ${role.wrapUp.map((f) => `${f.label}:\n${wrap[f.id] || "(left blank)"}`).join("\
 
   run("UPDATE encounters SET feedback = ?, score = ?, status = 'scored', ended_at = COALESCE(ended_at, datetime('now')) WHERE id = ?", JSON.stringify(feedback), percent, encId);
   if (!row.parent_id && cfg.mode !== "journey") await rememberVisit(encId).catch((e) => console.error("rememberVisit", e));
-  // Rewound branches and journey stages do not move the adaptive rating twice.
+  // Rewound branches do not move the adaptive rating a second time.
   if (!row.parent_id) recordSkill(row.user_id, cfg.professionId, encId, cfg.knobs.level, rubric.type === "domain4" ? domains : []);
   return feedback;
 }

@@ -20,7 +20,9 @@
     "name": "Review urgent care X-ray report",
     "result": "Lumbar spine X-ray (3 weeks ago): mild degenerative disc space narrowing L4-L5, no fracture, no spondylolisthesis, vertebral body heights preserved, no destructive lesion",
     "importance": "important",
-    "artifactIds": []
+    "artifactIds": [
+     "d1"
+    ]
    },
    {
     "id": "a3",

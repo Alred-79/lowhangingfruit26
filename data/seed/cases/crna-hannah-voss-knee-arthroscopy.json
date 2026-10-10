@@ -126,7 +126,7 @@
     "id": "a15",
     "kind": "assessment",
     "name": "Postoperative nausea and vomiting (PONV) risk assessment (Apfel score)",
-    "result": "Risk factors present: female sex, nonsmoker, history of PONV/severe nausea-vomiting after prior sedation, and planned postoperative opioid use. All four classic Apfel criteria met. Apfel score estimated 4/4, high risk for PONV; multimodal antiemetic prophylaxis recommended.",
+    "result": "Risk factors present: female sex, nonsmoker, prior severe nausea/vomiting after sedation (used here as a surrogate for the classic 'history of PONV or motion sickness' criterion), and planned postoperative opioid use. Using this proxy, all four Apfel criteria are met. Apfel score estimated 4/4, high risk for PONV; multimodal antiemetic prophylaxis recommended.",
     "importance": "important",
     "artifactIds": []
    },
@@ -150,8 +150,8 @@
    ],
    "keyFindings": [
     "Maternal uncle had a near-fatal hyperthermic reaction during anesthesia for appendectomy; cousin advised to wear a medical alert bracelet — classic red flag for MH susceptibility, never previously documented or explained to patient",
-    "History of severe nausea/vomiting after wisdom tooth sedation — significant PONV risk factor",
-    "Weekly semaglutide, last dose 5 days prior to surgery, no current GI symptoms — reassuring but still requires standard aspiration precautions per current society guidance",
+    "History of severe nausea/vomiting after wisdom tooth sedation — significant PONV risk factor, used here as a surrogate for the classic Apfel 'history of PONV/motion sickness' criterion",
+    "Weekly semaglutide, last dose 5 days prior to this visit (approximately 11 days before surgery), no current GI symptoms — satisfies current ASA guidance to hold the weekly dose for a full week before surgery, but standard aspiration precautions should still be applied if any uncertainty remains",
     "BMI 33 with reassuring airway exam, low STOP-BANG score, good functional capacity",
     "Daily ginkgo biloba and high-dose fish oil, both with antiplatelet/bleeding-risk potential, not yet addressed for perioperative hold",
     "No prior personal anesthesia complications other than PONV; this would be her first general anesthetic exposure since dental sedation"
@@ -162,7 +162,7 @@
     "Flag the possible need for genetics or neuromuscular specialist referral or caffeine-halothane contracture/genetic testing as a question for the anesthesia team to decide, and note this is outside CRNA independent scope",
     "Implement multimodal PONV prophylaxis per Apfel score (e.g., combination antiemetics, consider regional/avoid volatile agents if feasible)",
     "Advise holding ginkgo biloba and fish oil supplements per standard preoperative supplement guidance (typically 5-7 days prior) in coordination with surgical team",
-    "Reinforce standard ASA NPO guidance and confirm semaglutide dosing timeline relative to surgery date",
+    "Reinforce standard ASA NPO guidance; confirm semaglutide dosing timeline relative to surgery date and apply current ASA guidance (hold the weekly dose for a full week preoperatively when feasible) — the reported timeline of last dose 5 days before this visit (~11 days before surgery) satisfies this recommendation",
     "Confirm no pregnancy, reasonable functional capacity, and reassuring airway/cardiopulmonary exam; proceed with case contingent on anesthesia team review of MH risk"
    ],
    "redFlags": [
@@ -174,9 +174,9 @@
    "educationPoints": [
     "Always ask specifically about family history of anesthesia complications; patients may not recognize vague stories ('ran a very high fever,' 'medical alert bracelet') as medically significant",
     "Malignant hyperthermia is a pharmacogenetic risk; a suggestive family history should prompt escalation to the anesthesia care team for a collaborative decision about anesthetic technique, even without confirmatory testing on the day",
-    "GLP-1 receptor agonists are associated with delayed gastric emptying; current society guidance should be applied to timing of last dose and NPO counseling",
+    "GLP-1 receptor agonists are associated with delayed gastric emptying; current ASA guidance recommends holding the weekly dose for a full week before surgery when feasible, which should be applied explicitly to dose timing and NPO counseling",
     "Common herbal supplements (ginkgo, fish oil) carry bleeding risk and should be addressed in preoperative medication reconciliation",
-    "Apfel scoring (female sex, nonsmoker, history of PONV/motion sickness, planned postoperative opioids) helps standardize PONV risk assessment and prophylaxis planning",
+    "Apfel scoring (female sex, nonsmoker, history of PONV/motion sickness, planned postoperative opioids) helps standardize PONV risk assessment and prophylaxis planning; when a patient reports vomiting after prior sedation rather than a clearly established history of PONV/motion sickness, this should be documented as a reasonable surrogate for the criterion rather than a verified classic match",
     "This case models a patient-vs-chart mismatch: the intake form marked family history 'noncontributory,' which does not reflect the family anesthetic history disclosed verbally, underscoring the importance of directly eliciting this history through specific questioning rather than relying on the record alone"
    ]
   },
@@ -901,7 +901,8 @@
    "ethnicity": "White",
    "occupation": "Veterinary technician",
    "language": "English",
-   "appearance": "A woman in her mid-30s with shoulder-length brown hair pulled into a ponytail, wearing a casual zip-up fleece, seated at a kitchen table with a coffee mug nearby. Lighting is bright and even; her affect is upbeat and relaxed, with occasional glances off-camera toward a dog heard briefly in the background."
+   "appearance": "A woman in her mid-30s with shoulder-length brown hair pulled into a ponytail, wearing a casual zip-up fleece, seated at a kitchen table with a coffee mug nearby. Lighting is bright and even; her affect is upbeat and relaxed, with occasional glances off-camera toward a dog heard briefly in the background.",
+   "portrait": "/portraits/crna-hannah-voss-knee-arthroscopy.jpg"
   },
   "persona": {
    "personality": "Cheerful, practical, and a bit of a problem-solver; approaches the call with casual confidence and light humor.",

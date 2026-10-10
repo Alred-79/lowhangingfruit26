@@ -1,6 +1,6 @@
 {
  "origin": "sample",
- "reviewed": true,
+ "reviewed": false,
  "profile": {
   "version": 1,
   "actions": [
@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "vitals",
     "name": "Blood pressure (home cuff reading, reported)",
-    "result": "BP 155/110 mmHg (seated, repeat reading confirms), HR 78 bpm, RR 18, Temp 98.6°F, SpO2 99% on room air",
+    "result": "BP 155/110 mmHg (seated, repeat reading confirms), HR 78 bpm, RR 18, Temp 98.6\u00b0F, SpO2 99% on room air",
     "importance": "critical",
     "artifactIds": []
    },
@@ -32,7 +32,7 @@
     "id": "a4",
     "kind": "lab",
     "name": "HbA1c",
-    "result": "8.5% (goal <7% per ADA for this patient) — H",
+    "result": "8.5% (goal <7% per ADA for this patient) \u2014 H",
     "importance": "critical",
     "artifactIds": []
    },
@@ -40,7 +40,7 @@
     "id": "a5",
     "kind": "lab",
     "name": "Fasting glucose",
-    "result": "145 mg/dL (ref 70-99 mg/dL) — H",
+    "result": "145 mg/dL (ref 70-99 mg/dL) \u2014 H",
     "importance": "important",
     "artifactIds": []
    },
@@ -112,7 +112,7 @@
     "id": "a14",
     "kind": "record",
     "name": "Review allergy list",
-    "result": "Penicillin — rash. No food allergies documented.",
+    "result": "Penicillin \u2014 rash. No food allergies documented.",
     "importance": "minor",
     "artifactIds": []
    },
@@ -469,7 +469,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "BP 155/110 mmHg; HR 78; RR 18; Temp 98.6°F; SpO2 99%; Weight 178 lb; BMI 34.0 kg/m2"
+    "value": "BP 155/110 mmHg; HR 78; RR 18; Temp 98.6\u00b0F; SpO2 99%; Weight 178 lb; BMI 34.0 kg/m2"
    },
    {
     "label": "Care team",

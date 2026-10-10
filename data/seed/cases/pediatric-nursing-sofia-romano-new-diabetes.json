@@ -68,15 +68,6 @@
     "artifactIds": []
    },
    {
-    "id": "a8",
-    "kind": "vitals",
-    "name": "Ask caregiver to report Sofia's current home glucose reading on this call",
-    "result": "Fingerstick glucose this morning (prior to call): 268 mg/dL.",
-    "abnormal": true,
-    "importance": "important",
-    "artifactIds": []
-   },
-   {
     "id": "a9",
     "kind": "assessment",
     "name": "Assess Sofia's hydration and general appearance via camera/caregiver report",
@@ -85,44 +76,10 @@
     "artifactIds": []
    },
    {
-    "id": "a10",
-    "kind": "assessment",
-    "name": "Ask about Sofia's appetite and typical meal pattern",
-    "result": "Caregiver reports Sofia eats most of her usual meals but portions vary day to day; snacks between meals are inconsistent in timing.",
-    "importance": "minor",
-    "artifactIds": []
-   },
-   {
     "id": "a11",
     "kind": "assessment",
     "name": "Screen for symptoms of recurrent DKA (nausea, vomiting, abdominal pain, rapid breathing, fruity breath)",
     "result": "Caregiver denies vomiting, abdominal pain, rapid/labored breathing, or unusual breath odor since discharge.",
-    "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a12",
-    "kind": "assessment",
-    "name": "Ask whether school nurse or school staff have received diabetes training/orders",
-    "result": "Caregiver states school nurse has the discharge paperwork but has not received hands-on training on insulin dosing, glucagon use, or recognizing lows; no written 504 plan or Diabetes Medical Management Plan (DMMP) has been completed yet.",
-    "abnormal": true,
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a13",
-    "kind": "assessment",
-    "name": "Ask about involvement of Sofia's father / co-parent in diabetes care",
-    "result": "Caregiver confirms Sofia's father has shared custody and cares for Sofia on alternating weekends but has not attended any diabetes teaching and does not currently have insulin or glucagon at his home.",
-    "abnormal": true,
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a14",
-    "kind": "assessment",
-    "name": "Ask caregiver about her own sleep, stress, and support at home",
-    "result": "Caregiver reports sleeping 3-4 hours per night checking on Sofia, feels overwhelmed, works as a hairdresser with irregular hours, no other family nearby to help overnight.",
     "importance": "important",
     "artifactIds": []
    },
@@ -883,7 +840,6 @@
     ],
     "actionIds": [
      "a3",
-     "a8",
      "a15"
     ]
    },
@@ -895,10 +851,7 @@
      "f15",
      "f19"
     ],
-    "actionIds": [
-     "a12",
-     "a13"
-    ]
+    "actionIds": []
    },
    {
     "id": "o5",
@@ -909,9 +862,7 @@
      "f18",
      "f32"
     ],
-    "actionIds": [
-     "a14"
-    ]
+    "actionIds": []
    },
    {
     "id": "o6",

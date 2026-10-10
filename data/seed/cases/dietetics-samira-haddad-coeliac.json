@@ -74,7 +74,7 @@
     "id": "a8",
     "kind": "assessment",
     "name": "Take detailed gluten-free diet history (sources, labels, eating out)",
-    "result": "Patient reports reading labels mainly for the word 'wheat' but is unsure what else to look for (barley, rye, malt); says she assumed tabbouleh and kibbeh were fine since they are 'basically a salad' with 'just a little' grain; believed oats are naturally gluten-free and never checked for a gluten-free certification; thought soy sauce was 'just soybeans' and didn't know it could contain wheat.",
+    "result": "Patient reports reading labels mainly for the word 'wheat' but is unsure what else to look for (barley, rye, malt); says she assumed tabbouleh and kibbeh were fine since they are 'basically a salad' with 'just a little' grain; believed oats are naturally gluten-free and never thought to look for a gluten-free certification; thought soy sauce was 'just soybeans' and didn't realize it could contain wheat.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -883,7 +883,8 @@
    "ethnicity": "Lebanese-American",
    "occupation": "Architect",
    "language": "English (also speaks Arabic at home with family)",
-   "appearance": "A woman in her mid-30s with shoulder-length dark hair, wearing a navy blazer, seated at a home office desk with a bookshelf and architectural drawings visible behind her. She appears composed but slightly tense, occasionally glancing down at notes, with a focused, earnest expression."
+   "appearance": "A woman in her mid-30s with shoulder-length dark hair, wearing a navy blazer, seated at a home office desk with a bookshelf and architectural drawings visible behind her. She appears composed but slightly tense, occasionally glancing down at notes, with a focused, earnest expression.",
+   "portrait": "/portraits/dietetics-samira-haddad-coeliac.jpg"
   },
   "persona": {
    "personality": "Detail-oriented, well-read, and a self-described perfectionist; takes pride in doing things thoroughly and is unsettled by the idea that she's been making mistakes.",

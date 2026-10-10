@@ -17,7 +17,7 @@
     "id": "a2",
     "kind": "vitals",
     "name": "Heart rate and general vitals review",
-    "result": "Heart rate 96 bpm (patient-counted via home pulse oximeter), BP 112/70 from home cuff, respiratory rate 18. No chills reported at time of call, though she had chills last night.",
+    "result": "Heart rate 96 bpm (patient-counted via home pulse oximeter), BP 112/70 from home cuff, respiratory rate 18. Confirms chills last night along with the fever and body aches she described.",
     "importance": "important",
     "abnormal": true,
     "artifactIds": []
@@ -53,7 +53,7 @@
     "id": "a6",
     "kind": "assessment",
     "name": "Edinburgh Postnatal Depression Scale (EPDS) administration",
-    "result": "Total score 14/30. Item 10 ('thoughts of harming myself') scored 0. Elevated score on items for guilt, anxiety, and feeling overwhelmed; endorses crying 'quite often.'",
+    "result": "Total score 14/30. Item 10 ('thoughts of harming myself') scored 0. Elevated responses on items for guilt, anxiety, feeling overwhelmed, and sleep disturbance; endorses crying 'quite often.'",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": [
@@ -117,8 +117,8 @@
    {
     "id": "a13",
     "kind": "test",
-    "name": "Home blood pressure log review (if hypertension screening needed)",
-    "result": "Home BP log over past week: range 108-118/64-74 mmHg, no readings above 130/80.",
+    "name": "Home blood pressure log review",
+    "result": "Home BP log over past week: range 108-118/64-74 mmHg, no readings above 130/80. Same log also shows the temperature trend (36.8-37.0°C baseline rising to 38.0-38.2°C over the last two days), corroborating the fever onset timeline; today's home-reported oral temperature (38.2°C) and heart rate (96 bpm) match this log.",
     "importance": "minor",
     "abnormal": false,
     "artifactIds": [
@@ -326,7 +326,7 @@
      "when": "action",
      "ref": "a6"
     },
-    "body": "Total score: 14/30 (score ≥13 suggests probable depression, warrants further assessment). Item-by-item notable responses: Item 1 (laugh/see funny side) - 'not quite so much,' Item 3 (blamed self unnecessarily) - 'yes, some of the time,' Item 7 (unhappy, difficulty sleeping) - 'yes, quite often,' Item 9 (sad/miserable) - 'yes, quite often,' Item 10 (thoughts of harming myself) - 'never' (score 0). No endorsement of self-harm ideation."
+    "body": "Total score: 14/30 (score ≥13 suggests probable depression, warrants further assessment). Item-by-item responses: Item 1 (laugh/see funny side) - 'not quite so much' (1), Item 2 (looked forward to things) - 'rather less than I used to' (1), Item 3 (blamed self unnecessarily) - 'yes, some of the time' (2), Item 4 (anxious/worried for no good reason) - 'yes, quite often' (2), Item 5 (scared/panicky for no good reason) - 'no, not much' (1), Item 6 (things getting on top of her) - 'yes, sometimes I haven't been coping as well' (1), Item 7 (unhappy, difficulty sleeping) - 'yes, quite often' (2), Item 8 (sad or miserable) - 'yes, quite often' (2), Item 9 (crying) - 'yes, quite often' (2), Item 10 (thoughts of harming myself) - 'never' (0). Sum of items = 14/30. No endorsement of self-harm ideation."
    },
    {
     "id": "d6",
@@ -872,7 +872,8 @@
    "ethnicity": "Somali-American",
    "occupation": "Pharmacy student (currently on parental leave)",
    "language": "English (fluent, primary language at home is a mix of English and Somali)",
-   "appearance": "A young woman with a slim build, wearing a loose patterned hijab and a comfortable nursing top, sits on a couch in a softly lit living room with a bassinet visible in the background. She appears tired, with slight under-eye circles, and speaks calmly and politely, occasionally shifting the baby monitor on the table beside her."
+   "appearance": "A young woman with a slim build, wearing a loose patterned hijab and a comfortable nursing top, sits on a couch in a softly lit living room with a bassinet visible in the background. She appears tired, with slight under-eye circles, and speaks calmly and politely, occasionally shifting the baby monitor on the table beside her.",
+   "portrait": "/portraits/nurse-midwife-aaliyah-hassan-postpartum.jpg"
   },
   "persona": {
    "personality": "Composed, polite, intellectually engaged, and reluctant to complain or seem ungrateful; takes a methodical approach to problems, consistent with her pharmacy training.",

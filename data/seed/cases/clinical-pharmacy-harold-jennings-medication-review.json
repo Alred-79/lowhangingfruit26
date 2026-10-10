@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "record",
     "name": "Review medication list / fill history in EHR",
-    "result": "Active prescriptions per EHR: amlodipine 10 mg daily, lisinopril 20 mg daily, tamsulosin 0.4 mg daily, oxybutynin 5 mg BID, glipizide 10 mg BID, metformin 500 mg BID, atorvastatin 20 mg daily, omeprazole 20 mg daily, gabapentin 300 mg TID, lorazepam 0.5 mg QHS, apixaban 5 mg BID. No dose change documented in >1 year. No other medications reported by patient at this time; OTC/herbal product use not yet assessed.",
+    "result": "Active prescriptions per EHR: amlodipine 10 mg daily, lisinopril 20 mg daily, tamsulosin 0.4 mg daily, oxybutynin 5 mg BID, glipizide 10 mg BID, metformin 500 mg BID, atorvastatin 20 mg daily, omeprazole 20 mg daily, gabapentin 300 mg TID, lorazepam 0.5 mg QHS, apixaban 5 mg BID. No other medications reported by patient at this time; OTC/herbal product use not yet assessed.",
     "importance": "critical",
     "aliases": [
      "medication reconciliation",
@@ -116,7 +116,7 @@
     "id": "a10",
     "kind": "assessment",
     "name": "Apply anticholinergic burden screening (ACB-type tool) to current regimen",
-    "result": "Oxybutynin (score 3) + diphenhydramine (score 3, OTC, unlisted) + gabapentin (mild additive sedative, not anticholinergic itself) → cumulative anticholinergic burden score ≥6, high-risk category associated with falls, confusion, and cognitive impairment in older adults.",
+    "result": "ACB-scored anticholinergics: oxybutynin (ACB score 3) + diphenhydramine (ACB score 3, OTC, unlisted) = cumulative ACB score 6, meeting high-risk category (≥3) associated with falls, confusion, and cognitive impairment in older adults. Lorazepam and gabapentin are not scored on the ACB anticholinergic scale (lorazepam is a sedative/CNS depressant, gabapentin a sedating non-anticholinergic agent); they contribute additional sedative burden that compounds fall/confusion risk but should be tracked separately from the anticholinergic score itself.",
     "importance": "critical",
     "aliases": [
      "anticholinergic burden score",
@@ -155,7 +155,7 @@
     "id": "a13",
     "kind": "lab",
     "name": "Review gabapentin renal dosing adequacy given current CrCl",
-    "result": "Current gabapentin dose 300 mg TID (900 mg/day) exceeds typical renal-adjusted dosing for CrCl ~29 mL/min. Common renal dosing references suggest a maintenance dose of approximately 200-700 mg/day in 2-3 divided doses for CrCl 15-29 mL/min (lower end for seizure/general use, allowing for higher end when treating neuropathic pain), so 900 mg/day is above range; current regimen is supratherapeutic for renal function and increases sedation/fall risk.",
+    "result": "Current gabapentin dose 300 mg TID (900 mg/day) for diabetic peripheral neuropathy exceeds typical renal-adjusted dosing for CrCl ~29 mL/min. For CrCl 15-29 mL/min, manufacturer renal dosing tables suggest a maintenance total daily dose of approximately 200-700 mg/day given in 2-3 divided doses for neuropathic pain indications (post-herpetic neuralgia/diabetic neuropathy dosing table); this differs from the lower epilepsy maintenance range at the same CrCl, so the neuropathic-pain-specific range is the appropriate comparator here. At 900 mg/day, the current regimen is above the indication-appropriate renal-dosing range and increases sedation/fall risk; recommend renal dose reduction and retitration coordinated with the prescriber.",
     "importance": "important",
     "aliases": [
      "gabapentin dose check"
@@ -1037,7 +1037,8 @@
    "ethnicity": "White",
    "occupation": "Retired machinist",
    "language": "English",
-   "appearance": "An elderly man with thinning white hair and a stocky build, seated in a worn armchair in a dimly lit living room with family photos visible on the wall behind him. He wears a flannel shirt, leans in toward the camera to hear better, and has a genial, slightly puzzled expression; a weekly pill organizer and a few loose medication bottles are visible on the side table next to him."
+   "appearance": "An elderly man with thinning white hair and a stocky build, seated in a worn armchair in a dimly lit living room with family photos visible on the wall behind him. He wears a flannel shirt, leans in toward the camera to hear better, and has a genial, slightly puzzled expression; a weekly pill organizer and a few loose medication bottles are visible on the side table next to him.",
+   "portrait": "/portraits/clinical-pharmacy-harold-jennings-medication-review.jpg"
   },
   "persona": {
    "speechExamples": [

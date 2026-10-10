@@ -72,7 +72,7 @@
     "id": "a8",
     "kind": "record",
     "name": "Review current medication list and refill/pharmacy fill history",
-    "result": "Fluticasone propionate HFA 110 mcg, 2 puffs BID prescribed 3 months ago (120-dose canister, ~15-day supply at prescribed dosing); pharmacy refill history shows only 1 refill in 3 months (2 canisters total, 240 doses over ~90 days), consistent with roughly 2.5-3 puffs/day average use rather than prescribed 4 puffs/day - partial underuse, less severe than patient's 'when I remember' framing might suggest but still below prescribed dosing.",
+    "result": "Fluticasone propionate HFA 110 mcg, 2 puffs BID prescribed 3 months ago (120-dose canister = ~30-day supply at prescribed dosing of 4 puffs/day); pharmacy refill history shows only 1 refill in 3 months (2 canisters total, 240 doses over ~90 days), consistent with roughly 2.5-3 puffs/day average use rather than prescribed 4 puffs/day - partial underuse, less severe than patient's 'when I remember' framing might suggest but still below prescribed dosing.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": []
@@ -760,16 +760,8 @@
     "factId": "f5",
     "artifactId": "d2",
     "patientClaim": "Jaylen says he takes his fluticasone inhaler 'when I remember,' implying inconsistent but regular-ish use.",
-    "recordEvidence": "Medication list/refill history shows only 1 refill in 3 months for a 120-dose canister prescribed at 4 puffs/day (2 canisters = 240 doses over ~90 days, ~2.5-3 puffs/day average) - below the prescribed 4 puffs/day but higher than a casual 'when I remember' framing might suggest, indicating partial but meaningful underuse.",
+    "recordEvidence": "Medication list/refill history shows only 1 refill in 3 months for a 120-dose canister that should last ~30 days at the prescribed 4 puffs/day (2 canisters = 240 doses over ~90 days, ~2.5-3 puffs/day average) - below the prescribed 4 puffs/day but higher than a casual 'when I remember' framing might suggest, indicating partial but meaningful underuse rather than near-total nonadherence.",
     "teachingPoint": "Self-reported adherence often doesn't match objective refill data in either direction; refill/pharmacy data and demonstrated technique provide more objective evidence and should be explored supportively, not punitively."
-   },
-   {
-    "id": "m2",
-    "factId": "f8",
-    "artifactId": "d1",
-    "patientClaim": "Nothing in the ED note or initial history suggests a trigger beyond exertion/possible viral URI; vaping is not mentioned anywhere in the prior record.",
-    "recordEvidence": "ED note attributes exacerbation only to exertion/possible viral illness, with no substance use history documented.",
-    "teachingPoint": "Adolescents often will not disclose vaping/substance use to acute care providers or in front of family; a private, confidentiality-explained conversation at a follow-up visit may uncover contributors missed in prior encounters."
    }
   ],
   "patient": {

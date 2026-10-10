@@ -47,14 +47,6 @@
     "artifactIds": []
    },
    {
-    "id": "a6",
-    "kind": "record",
-    "name": "Explain in plain language why repeat blood draw is needed",
-    "result": "Explained to patient: today's potassium reading is very high and could be dangerous if real, but the way the sample was collected and the delay getting it to the lab can falsely raise this result. The only way to know the true number safely is a fresh, carefully drawn sample tested right away.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
     "id": "a7",
     "kind": "record",
     "name": "Arrange urgent same-day recollection with special handling instructions",
@@ -83,25 +75,9 @@
    {
     "id": "a10",
     "kind": "record",
-    "name": "Ask about diet and salt substitute use",
-    "result": "Patient mentions trying to eat healthier and cut back on salt per her doctor's advice; when asked more specifically about any salt substitutes or seasonings used regularly, she becomes a little hesitant before confirming she uses a 'no-salt' seasoning at most meals.",
+    "name": "Ask about diet and salt substitute use, and check patient's understanding of its contents",
+    "result": "Patient mentions trying to eat healthier and cut back on salt per her doctor's advice; when asked more specifically about any salt substitutes or seasonings used regularly, she becomes a little hesitant before confirming she uses a 'no-salt' seasoning at most meals. When the learner explains that this type of substitute is typically potassium chloride-based and checks her understanding, she expresses surprise, saying she thought it was just a 'healthier salt' and did not know it contained potassium.",
     "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a11",
-    "kind": "record",
-    "name": "Ask about timing of last meal/medication relative to draw",
-    "result": "Patient took her morning lisinopril and spironolactone as usual before yesterday's draw; last ate breakfast about 3 hours before the blood draw, nothing unusual eaten.",
-    "importance": "minor",
-    "artifactIds": []
-   },
-   {
-    "id": "a12",
-    "kind": "record",
-    "name": "Ask about recent muscle injury, strenuous exercise, or injections in the draw arm",
-    "result": "Patient denies recent injury, injections, IV lines, or strenuous exercise of the arm used for venipuncture in the past 48 hours.",
-    "importance": "minor",
     "artifactIds": []
    },
    {
@@ -212,7 +188,7 @@
     "release": {
      "when": "start"
     },
-    "body": "Hemolysis index: 2+ (moderate-to-marked hemolysis, visible pink/red tinge in serum). Specimen type: serum separator tube, received NOT centrifuged. Time from collection to receipt: 5 hours 0 minutes (collected 2:10 PM, received 7:05 PM). Transport condition: ambient temperature, non-refrigerated courier van; outdoor ambient temperature recorded at 89°F at time of transport. Collection site notes: 'Draw described as difficult by collecting staff; patient reported discomfort during procedure.' Specific details of number of attempts, tourniquet duration, and technique were not recorded in this QA report. QA comment: Result flagged for pre-analytical review prior to release; critical value called per protocol pending recollection recommendation."
+    "body": "Hemolysis index: 2+ (moderate-to-marked hemolysis, visible pink/red tinge in serum). LDH disproportionately elevated relative to other analytes, consistent with in vitro hemolysis (see chemistry panel for value). Specimen type: serum separator tube, received NOT centrifuged. Time from collection to receipt: 5 hours 0 minutes (collected 2:10 PM, received 7:05 PM). Transport condition: ambient temperature, non-refrigerated courier van; outdoor ambient temperature recorded at 89°F at time of transport. Collection site notes: 'Draw described as difficult by collecting staff; patient reported discomfort during procedure.' Specific details of number of attempts, tourniquet duration, and technique were not recorded in this QA report. QA comment: Result flagged for pre-analytical review prior to release; critical value called per protocol pending recollection recommendation."
    },
    {
     "id": "d3",
@@ -699,7 +675,6 @@
      "f28"
     ],
     "actionIds": [
-     "a6",
      "a7",
      "a14"
     ]
@@ -798,7 +773,8 @@
    "ethnicity": "Ghanaian-American",
    "occupation": "Home health aide",
    "language": "English (fluent, Ghanaian-accented)",
-   "appearance": "A woman in her mid-fifties with a sturdy build, short natural hair pulled back under a patterned headwrap, wearing light blue scrubs from her job. She is seated in what looks like a car parked outside a client's house, late-morning light coming through the windshield, phone propped on the dashboard, occasionally glancing at the time."
+   "appearance": "A woman in her mid-fifties with a sturdy build, short natural hair pulled back under a patterned headwrap, wearing light blue scrubs from her job. She is seated in what looks like a car parked outside a client's house, late-morning light coming through the windshield, phone propped on the dashboard, occasionally glancing at the time.",
+   "portrait": "/portraits/medical-laboratory-science-joyce-mensah-potassium-recollect.jpg"
   },
   "persona": {
    "personality": "Practical, plain-spoken, a little guarded about admitting she skipped details, but warms up with respectful, clear explanation.",

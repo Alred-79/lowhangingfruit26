@@ -79,7 +79,7 @@
     "id": "a8",
     "kind": "assessment",
     "name": "Vestibular-ocular motor screening (VOMS) guided self-administration",
-    "result": "Smooth pursuit: 0/10 symptom change, no provocation. Saccades (horizontal/vertical): 1/10 headache provoked. Convergence: near point 8 cm (abnormal, normal <5cm), 1/10 symptom provocation. VOR horizontal: 2/10 dizziness provoked. VOR vertical: 1/10 symptom provocation. VMS (visual motion sensitivity): 2/10 headache, 1/10 dizziness provoked.",
+    "result": "Smooth pursuit: 0/10 symptom change, no provocation. Saccades (horizontal/vertical): 1/10 headache provoked. Convergence: near point distance 8 cm (abnormal; normal <5cm) with 1/10 symptom provocation reported at near point. VOR horizontal: 2/10 dizziness provoked. VOR vertical: 1/10 symptom provocation. VMS (visual motion sensitivity): 2/10 headache, 1/10 dizziness provoked.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": []
@@ -415,7 +415,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "HR 68, BP 110/70, Temp 98.2F (recorded at day-3 follow-up)"
+    "value": "Not documented since day of injury; no vitals recorded at day-3 follow-up"
    },
    {
     "label": "Immunizations",
@@ -831,7 +831,8 @@
    "ethnicity": "Black",
    "occupation": "high school student, varsity point guard; part-time weekend retail job",
    "language": "English",
-   "appearance": "A fit, athletic-looking teenager with braided hair pulled into a high ponytail, wearing a hoodie with her school's basketball logo. She is seated at a kitchen table at home, lighting is a bit dim behind her with blinds partially drawn, and she sits upright with her arms crossed, projecting confidence but with brief flickers of tension around her eyes when certain topics come up."
+   "appearance": "A fit, athletic-looking teenager with braided hair pulled into a high ponytail, wearing a hoodie with her school's basketball logo. She is seated at a kitchen table at home, lighting is a bit dim behind her with blinds partially drawn, and she sits upright with her arms crossed, projecting confidence but with brief flickers of tension around her eyes when certain topics come up.",
+   "portrait": "/portraits/athletic-training-destiny-williams-concussion.jpg"
   },
   "persona": {
    "personality": "Competitive, guarded, likeable, proud of her work ethic, protective of her image as tough and reliable.",

@@ -230,7 +230,7 @@
      "when": "action",
      "ref": "a3"
     },
-    "body": "ALERT 1 (Contraindication - Major): Combined hormonal contraceptive + migraine with aura -> increased risk of ischemic stroke. Classified as Category 4 (unacceptable health risk) under the WHO Medical Eligibility Criteria, and correspondingly under the UK MEC and US MEC (CDC) adaptations of this same classification system. ALERT 2 (Drug-Herb Interaction - Moderate): St John's wort (Hypericum perforatum) induces CYP3A4 and may reduce serum levels and efficacy of ethinylestradiol/levonorgestrel, increasing risk of breakthrough bleeding and contraceptive failure. ALERT 3 (Missing Data): No blood pressure documented within past 12 months; baseline BP required before initiating combined hormonal contraceptive per clinical guidelines."
+    "body": "ALERT 1 (Contraindication - Major): Combined hormonal contraceptive + migraine with aura -> increased risk of ischemic stroke. Classified as Category 4 (unacceptable health risk) under the WHO Medical Eligibility Criteria (MEC) for this specific indication; the UK MEC and US MEC (CDC) similarly classify migraine with aura as Category 4 for combined hormonal contraceptives, though these national adaptations are not identical to WHO MEC across all conditions (for example, postpartum VTE risk categories differ) and should not be assumed interchangeable in general. ALERT 2 (Drug-Herb Interaction - Moderate): St John's wort (Hypericum perforatum) induces CYP3A4 and may reduce serum levels and efficacy of ethinylestradiol/levonorgestrel, increasing risk of breakthrough bleeding and contraceptive failure. ALERT 3 (Missing Data): No blood pressure documented within past 12 months; baseline BP required before initiating combined hormonal contraceptive per clinical guidelines."
    },
    {
     "id": "d5",
@@ -731,7 +731,8 @@
    "ethnicity": "White",
    "occupation": "University senior (part-time barista)",
    "language": "English",
-   "appearance": "A young woman with shoulder-length brown hair in a loose ponytail, wearing a university hoodie, seated at a cluttered desk in what appears to be a bedroom with string lights and textbooks visible in the background. She glances at the clock occasionally, speaks quickly, and shifts in her seat or lowers her voice when certain topics come up."
+   "appearance": "A young woman with shoulder-length brown hair in a loose ponytail, wearing a university hoodie, seated at a cluttered desk in what appears to be a bedroom with string lights and textbooks visible in the background. She glances at the clock occasionally, speaks quickly, and shifts in her seat or lowers her voice when certain topics come up.",
+   "portrait": "/portraits/community-pharmacy-chloe-bennett-new-pill.jpg"
   },
   "persona": {
    "personality": "Friendly, upbeat, and talkative on neutral topics, but becomes visibly self-conscious and quieter when discussing contraception or her headaches in detail.",

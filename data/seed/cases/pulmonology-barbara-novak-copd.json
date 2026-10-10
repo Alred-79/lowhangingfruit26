@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "vitals",
     "name": "Review home pulse oximetry log",
-    "result": "Resting SpO2 on room air at home: 91% (recorded this morning before visit). Patient denies supplemental oxygen use.",
+    "result": "Resting SpO2 on room air at home: 91% (recorded this morning before visit). Patient denies supplemental oxygen use. Values over the past 2 weeks range 90-92%, mildly low but above the ≤88% threshold typically used for long-term oxygen therapy qualification.",
     "importance": "critical",
     "artifactIds": [
      "d4"
@@ -58,14 +58,6 @@
     "name": "Camera inspection - work of breathing and posture at rest",
     "result": "Patient appears comfortable at rest in the chair, speaks in full sentences, no accessory muscle use or pursed-lip breathing observed at rest on camera.",
     "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a7",
-    "kind": "exam",
-    "name": "Ask patient to self-palpate for ankle/leg swelling",
-    "result": "Patient reports no swelling felt in ankles or shins bilaterally; no visible edema on camera when she lifts pant leg. (Patient-reported/observed, not a clinician-performed exam.)",
-    "importance": "minor",
     "artifactIds": []
    },
    {
@@ -824,7 +816,7 @@
    },
    {
     "id": "o5",
-    "text": "Recognize resting hypoxemia on home oximetry (SpO2 91%) as a trigger for formal assessment for supplemental oxygen (e.g., arterial blood gas or in-clinic oxygen titration) and appropriately refer/escalate rather than prescribing home oxygen directly from a single reading.",
+    "text": "Recognize mildly low resting SpO2 on home oximetry (90-92%, not meeting the ≤88% standard oxygen qualification threshold) as a prompt for continued monitoring and objective testing (e.g., 6-minute walk test, overnight oximetry) rather than over-interpreting it as an urgent indication for home oxygen.",
     "factIds": [
      "f4",
      "f14"
@@ -848,7 +840,7 @@
    }
   ],
   "answerKey": {
-   "primaryProblem": "Severe COPD (GOLD 3, group E) with frequent exacerbations, inadequate inhaler technique, continued active smoking despite reported cessation, and resting hypoxemia on home oximetry warranting further oxygen assessment.",
+   "primaryProblem": "Severe COPD (GOLD 3, group E) with frequent exacerbations, inadequate inhaler technique, continued active smoking despite reported cessation, and mildly low resting SpO2 on home oximetry warranting further monitoring/assessment (not yet meeting standard oxygen qualification criteria).",
    "differential": [
     "COPD exacerbation risk driven by poor inhaler technique and ongoing active smoking (most likely explanation for frequent flares and high rescue inhaler use)",
     "Underlying cardiac contribution to dyspnea (e.g., early heart failure) - less likely given normal cardiac silhouette on chest X-ray, no edema, no orthopnea-associated weight gain, but orthopnea symptom warrants continued monitoring",
@@ -859,7 +851,7 @@
     "FEV1/FVC 0.52 and FEV1 48% predicted on spirometry: severe (GOLD 3) obstruction",
     "Two exacerbations requiring steroids/antibiotics in 8 months: GOLD group E (frequent exacerbator)",
     "Blood eosinophils 380 cells/microliter: elevated, supports ICS add-on consideration per GOLD guidance for exacerbation reduction",
-    "Resting home SpO2 91% with HR log showing values in 90-92% range: borderline hypoxemia requiring formal oxygen assessment",
+    "Resting home SpO2 91% with HR log showing values in 90-92% range: mildly low but does not meet standard ≤88% threshold for long-term oxygen therapy qualification; warrants continued monitoring and formal testing (e.g., 6-minute walk, overnight oximetry) rather than urgent oxygen initiation",
     "Positive serum cotinine despite patient's report of smoking cessation: ongoing active tobacco use is a major modifiable driver of exacerbations",
     "Observed inhaler technique errors on camera for both tiotropium and albuterol: likely reducing effective drug delivery despite reported adherence to dosing schedule",
     "mMRC grade 3 dyspnea and never referred to pulmonary rehabilitation: significant unaddressed opportunity for symptom and functional improvement",
@@ -871,12 +863,12 @@
     "Discuss escalation of maintenance therapy per GOLD group E with elevated eosinophils: consider adding inhaled corticosteroid to a LAMA/LABA combination (e.g., transition to triple therapy) to reduce exacerbation risk, factoring in her stated cost concerns and exploring patient assistance programs",
     "Refer to pulmonary rehabilitation given mMRC 3 dyspnea and functional limitation",
     "Address pneumococcal vaccination gap: coordinate with primary care or administer per current ACIP recommendations (PCV20 or PCV15+PPSV23)",
-    "Given resting SpO2 91% on repeated home readings, arrange formal assessment for supplemental oxygen need (e.g., overnight oximetry and/or arterial blood gas, or 6-minute walk test with oximetry) rather than diagnosing or prescribing home oxygen from a single home reading; this determination should follow guideline criteria and may involve durable medical equipment coordination",
+    "Given resting SpO2 90-92% on repeated home readings (mildly low but above the ≤88% formal LTOT qualification threshold), arrange objective follow-up testing (e.g., 6-minute walk test with oximetry, overnight oximetry, or arterial blood gas if clinically indicated) to monitor trend and determine whether formal oxygen qualification criteria are eventually met, rather than diagnosing or prescribing home oxygen from these readings alone",
     "Screen more formally for sleep-disordered breathing/orthopnea contribution given 3-pillow orthopnea; consider overnight oximetry or sleep study referral if symptoms persist after optimizing COPD therapy",
     "Schedule close follow-up (4-6 weeks) to reassess technique, oxygen saturation trend, and smoking status after initiating these changes"
    ],
    "redFlags": [
-    "Resting SpO2 91% - borderline for home oxygen qualification, needs formal assessment, not to be ignored",
+    "Resting SpO2 90-92% on repeated home readings - mildly low but does not meet standard ≤88% oxygen qualification threshold; should be trended and formally assessed, not ignored, but does not represent an urgent oxygenation emergency",
     "mMRC grade 3 dyspnea with significant functional limitation (unable to grocery shop)",
     "Two exacerbations in 8 months indicating high future exacerbation risk per GOLD classification",
     "Continued active smoking as an ongoing driver of lung function decline and exacerbation risk despite patient's belief she has quit"
@@ -885,7 +877,7 @@
     "Self-reported smoking status should be corroborated with biochemical markers (cotinine) when available, and discrepancies explored with empathy rather than confrontation to preserve therapeutic alliance",
     "Inhaler technique must be directly observed, as correct dosing frequency does not guarantee effective drug delivery",
     "GOLD group E classification (frequent exacerbations) combined with elevated blood eosinophils supports consideration of inhaled corticosteroid-containing regimens to reduce future exacerbation risk",
-    "Resting hypoxemia on home pulse oximetry is a prompt for formal oxygen qualification testing, not a basis for immediate home oxygen prescription from a single telehealth-reported reading",
+    "Standard long-term oxygen therapy qualification requires resting SpO2 ≤88% (or ≤89% with evidence of end-organ effects); readings of 90-92% are mildly low and warrant monitoring and objective exertional/overnight testing but do not by themselves meet qualification criteria, and clinicians should avoid overstating urgency based on a single or mildly low home reading",
     "Pulmonary rehabilitation and vaccination status (pneumococcal, influenza) are frequently overlooked components of comprehensive COPD care that should be reviewed at every follow-up",
     "Patient fears (e.g., fear of 'ending up on oxygen') and financial barriers to therapy should be explicitly elicited and incorporated into a shared, realistic care plan"
    ]

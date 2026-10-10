@@ -16,9 +16,10 @@
     "id": "a2",
     "kind": "vitals",
     "name": "Blood pressure (home cuff)",
-    "result": "148/86 mmHg, seated",
+    "result": "148/86 mmHg, seated (elevated compared to discharge BP of 126/78)",
     "importance": "important",
-    "artifactIds": []
+    "artifactIds": [],
+    "abnormal": true
    },
    {
     "id": "a3",
@@ -64,9 +65,9 @@
    },
    {
     "id": "a8",
-    "kind": "exam",
+    "kind": "assessment",
     "name": "Guided lung auscultation (caregiver/patient-assisted stethoscope or breath-sound description)",
-    "result": "Patient reports crackling/wet sound when taking deep breath, worse at bases; no stethoscope available to confirm. Visible increased work of breathing with exertion on camera (asked to walk to kitchen and back).",
+    "result": "No stethoscope available to confirm breath sounds; patient reports (symptom report, not an objective exam finding) a crackling/wet sound sensation when taking a deep breath, worse at bases. Visible increased work of breathing with exertion on camera (asked to walk to kitchen and back).",
     "importance": "important",
     "abnormal": true,
     "artifactIds": []
@@ -899,10 +900,11 @@
     "Weight gain of 3.4 kg over 8 days (71.2 kg to 74.6 kg), exceeding discharge threshold for concern",
     "SpO2 92% on room air (down from 97% at discharge)",
     "Respiratory rate 22/min with increased work of breathing on exertion",
+    "Blood pressure 148/86 mmHg today, up from 126/78 mmHg at discharge, consistent with volume overload rather than a primary hypertensive problem",
     "New orthopnea - sleeping upright in recliner x2 nights",
     "Bilateral pitting edema to mid-shin, worse than at discharge",
     "Possible jugular venous distension on camera exam",
-    "Reported bibasilar crackles sensation by patient on deep breath",
+    "Patient-reported crackling/wet breath sensation on deep breath (symptom report; no stethoscope available to objectively confirm crackles)",
     "Pillbox evidence showing missed furosemide doses on 2 days in the past week, pattern tied to bathroom access anxiety when leaving home",
     "Decreased urine output despite fluid overload, consistent with worsening heart failure physiology",
     "High-sodium dietary intake (canned soup, country ham) likely contributing to fluid retention",
@@ -922,7 +924,8 @@
     "SpO2 92% on room air in a patient with known heart failure",
     "New orthopnea requiring upright sleeping",
     "Rapid weight gain (3.4 kg in 8 days) indicating significant fluid retention",
-    "Signs suggestive of pulmonary edema (reported crackling sounds, increased work of breathing)",
+    "Blood pressure rise from 126/78 at discharge to 148/86 today, a change concerning for fluid overload in this context",
+    "Reported crackling breath sensation and increased work of breathing suggestive of possible pulmonary edema, though not confirmed by auscultation",
     "Decreased urine output in the setting of worsening fluid overload, suggesting progressing cardiorenal physiology",
     "Patient's reluctance to transport despite objective decompensation - requires physician involvement and careful informed refusal process if she persists in declining"
    ],
@@ -932,7 +935,8 @@
     "Treat-in-place protocols require honoring patient autonomy while still identifying objective red flags that mandate physician consultation and likely escalation to transport",
     "Rural patients face unique barriers (distance to hospital, limited transportation, fear of losing independence) that should be acknowledged and incorporated into shared decision-making without compromising safety",
     "Community-brought food, while well-intentioned, can undermine sodium restriction in heart failure patients and is a common, under-recognized contributor to decompensation",
-    "Decreasing urine output despite clinical fluid overload reflects worsening renal perfusion in cardiorenal syndrome and is a marker of more significant decompensation, not improvement"
+    "Decreasing urine output despite clinical fluid overload reflects worsening renal perfusion in cardiorenal syndrome and is a marker of more significant decompensation, not improvement",
+    "A symptom a patient describes (e.g., a sensation of crackling breath sounds) is not equivalent to a clinician-confirmed exam finding; without a stethoscope or auscultation, this should be documented and weighted as a reported symptom, not a verified sign"
    ]
   },
   "summary": "An 83-year-old woman with HFrEF (EF 35%) and atrial fibrillation presents 8 days after heart failure hospitalization with progressive dyspnea, orthopnea, and leg swelling during a community paramedicine video visit. The case teaches structured remote assessment of decompensation, reconciling a medication adherence mismatch (patient-reported versus pillbox evidence), and appropriate use of a treat-in-place protocol with physician consultation when transport is clinically indicated despite patient reluctance.",

@@ -88,7 +88,7 @@
     "id": "a10",
     "kind": "assessment",
     "name": "Sleep deprivation and precipitant screening",
-    "result": "Patient reports two nights of under 4 hours of sleep before the seizure due to thesis deadline; no alcohol binge or withdrawal reported; no recreational drug use reported.",
+    "result": "Patient reports two nights of under 4 hours of sleep before the seizure due to thesis deadline; also reports increased coffee intake (2-3 cups daily) during the thesis writing period; no alcohol binge or withdrawal reported; no recreational drug use reported.",
     "importance": "important",
     "artifactIds": []
    },
@@ -739,7 +739,8 @@
    "ethnicity": "Senegalese-American",
    "occupation": "Doctoral student in public health",
    "language": "English (also speaks Wolof and French at home)",
-   "appearance": "A young woman with short natural hair pulled back, wearing a gray university hoodie, seated at a desk in a small studio apartment with bookshelves visible behind her. She appears alert and articulate but shifts in her seat and glances away when discussing family reactions, otherwise maintaining steady eye contact with the camera."
+   "appearance": "A young woman with short natural hair pulled back, wearing a gray university hoodie, seated at a desk in a small studio apartment with bookshelves visible behind her. She appears alert and articulate but shifts in her seat and glances away when discussing family reactions, otherwise maintaining steady eye contact with the camera.",
+   "portrait": "/portraits/neurology-amara-diallo-first-seizure.jpg"
   },
   "persona": {
    "personality": "Thoughtful, articulate, and somewhat guarded about family and emotional topics, but direct and detail-oriented when discussing facts and research-mode problem solving.",

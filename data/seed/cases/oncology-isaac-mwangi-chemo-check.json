@@ -61,7 +61,7 @@
     "id": "a7",
     "kind": "assessment",
     "name": "Grade diarrhea using CTCAE criteria",
-    "result": "CTCAE Grade 1 diarrhea: increase of less than 4 stools/day over baseline; patient reports 4 loose stools/day versus baseline 1/day (increase of 3), no blood, no fever, no dehydration signs on report",
+    "result": "CTCAE Grade 1 diarrhea (unambiguous, not borderline Grade 2): Grade 1 = increase of <4 stools/day over baseline; Grade 2 = increase of 4-6 stools/day. Patient reports 4 loose stools/day versus baseline 1/day, an increase of 3 stools/day, which falls clearly within the Grade 1 range. No blood, no fever, no dehydration signs on report.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -147,7 +147,7 @@
     "id": "a16",
     "kind": "record",
     "name": "Review prior oxaliplatin dosing history for cumulative neurotoxicity risk",
-    "result": "Cumulative oxaliplatin dose through cycle 4 approximately 340 mg/m2; cumulative neuropathy risk rises substantially beyond 540-680 mg/m2",
+    "result": "Cumulative oxaliplatin dose through cycle 4 approximately 340 mg/m2 (85 mg/m2 x 4 cycles); cumulative neuropathy risk rises substantially beyond 540-680 mg/m2 (typically reached after ~6-8 cycles at full dose). Notably, this patient already has Grade 2 sensory neuropathy with ADL interference at only ~340 mg/m2, well below the usual threshold for severe neuropathy - this early-onset, disproportionate neurotoxicity is itself clinically significant and should prompt discontinuing or reducing oxaliplatin now rather than continuing to a higher cumulative dose.",
     "importance": "important",
     "artifactIds": []
    }
@@ -988,6 +988,7 @@
    ],
    "keyFindings": [
     "Grade 2 sensory peripheral neuropathy objectively demonstrated on camera (button/coin task) despite patient initially minimizing symptoms",
+    "Neuropathy has reached Grade 2 at a cumulative oxaliplatin dose of only ~340 mg/m2, well below the 540-680 mg/m2 range typically associated with severe cumulative neurotoxicity - this early, disproportionate severity is itself a red flag warranting oxaliplatin discontinuation/reduction now rather than dose-dependent waiting",
     "Symptom diary shows caregiver-reported escalation in neuropathy over the past 10 days that patient did not volunteer himself - a patient-vs-chart mismatch",
     "Patient discloses (with reluctance) that he has been underreporting symptoms for fear of treatment discontinuation",
     "CBC shows ANC 1.3 x10^9/L (CTCAE grade 2 neutropenia), platelets 98 x10^9/L (grade 1 thrombocytopenia), Hgb 10.4 g/dL (grade 1 anemia)",
@@ -997,23 +998,25 @@
    ],
    "plan": [
     "Discuss findings with attending oncologist (Dr. Patel) before finalizing Cycle 5 orders, as per fellow's scope",
-    "Hold or reduce oxaliplatin dose (e.g., discontinue oxaliplatin and continue 5-FU/leucovorin, or reduce oxaliplatin by 20-25%) given grade 2 neuropathy, per standard FOLFOX toxicity management guidelines - final dosing decision to be co-signed by attending",
+    "Hold or reduce oxaliplatin dose (e.g., discontinue oxaliplatin and continue 5-FU/leucovorin, or reduce oxaliplatin by 20-25%) given grade 2 neuropathy occurring at an unexpectedly low cumulative dose (~340 mg/m2), per standard FOLFOX toxicity management guidelines - final dosing decision to be co-signed by attending",
     "Reassess counts prior to Cycle 5; given ANC 1.3 (grade 2 neutropenia) and platelets 98, consider either brief treatment delay with recheck in several days or dose reduction of myelosuppressive agents (5-FU, oxaliplatin) per institutional protocol - defer final dose adjustment to attending-level sign-off",
     "Supportive care for grade 1 mucositis: oral hygiene, saline/baking soda rinses, avoid acidic/spicy foods; monitor for progression",
-    "Supportive care for grade 1 diarrhea: continue loperamide as needed within max dose, hydration counseling, instruct to call if diarrhea worsens to grade 2+ or if fever/blood occurs",
+    "Supportive care for grade 1 diarrhea: continue loperamide as needed within max dose, hydration counseling, instruct to call if diarrhea worsens to grade 2+ (4-6 stools/day over baseline) or if fever/blood occurs",
     "Address disclosure concerns directly: reassure patient that honest reporting leads to safer dose adjustments that aim to preserve both efficacy and his functional goals, not automatic discontinuation",
     "Open a goals-of-care conversation acknowledging his wish to attend the graduation in 4 months; offer to revisit prognosis discussion in more depth with attending oncologist present if he wishes",
     "Document caregiver's role in symptom reporting and encourage patient to communicate directly or jointly with wife to ensure accurate toxicity reporting going forward",
     "Schedule follow-up CBC recheck closer to planned Cycle 5 date to confirm counts have recovered sufficiently"
    ],
    "redFlags": [
-    "Grade 2 peripheral neuropathy with functional impairment (buttons, driving) that patient was minimizing - risk of progression to irreversible grade 3 if oxaliplatin continued at full dose unmodified",
+    "Grade 2 peripheral neuropathy with functional impairment (buttons, driving) that patient was minimizing, occurring at a relatively low cumulative oxaliplatin dose (~340 mg/m2) - risk of progression to irreversible grade 3 if oxaliplatin continued at full dose unmodified",
     "ANC 1.3 x10^9/L (grade 2 neutropenia) raises concern for neutropenic risk with further myelosuppressive chemotherapy - need count recheck/trend before Cycle 5",
     "Patient's admission of selective symptom reporting is a safety signal that should prompt a broader conversation about trust and shared decision-making, not just this visit's toxicities",
     "No current signs of febrile neutropenia, GI bleeding, or sepsis today, but patient should be instructed on when to seek urgent care (fever, severe diarrhea, bleeding)"
    ],
    "educationPoints": [
     "CTCAE grading of peripheral neuropathy depends on functional impact (ADLs) not just symptom presence - objective functional testing (buttoning, picking up objects) is a feasible and valuable telehealth exam technique",
+    "CTCAE diarrhea grading: Grade 1 = increase of <4 stools/day over baseline; Grade 2 = increase of 4-6 stools/day. A 3-stool/day increase (1 to 4) is unambiguously Grade 1, not borderline Grade 2 - precise anchoring to baseline and threshold avoids miscommunication in handoffs",
+    "Early-onset Grade 2 neuropathy at a cumulative oxaliplatin dose well below the typical 540-680 mg/m2 risk threshold is clinically notable and should itself prompt consideration of stopping oxaliplatin, independent of how many cycles remain to reach that threshold",
     "Patients may underreport toxicity due to fear that honesty will lead to treatment discontinuation; proactively normalizing disclosure and separating 'reporting symptoms' from 'automatically stopping treatment' builds trust",
     "Caregiver-entered symptom diaries can reveal discrepancies with patient self-report and should be reviewed before or during visits as a cross-check, not instead of direct conversation with the patient",
     "Dose modification decisions for oxaliplatin-based regimens in the context of cumulative neuropathy require weighing efficacy (partial response demonstrated) against quality of life and functional goals",

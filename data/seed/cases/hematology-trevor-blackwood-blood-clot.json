@@ -56,7 +56,9 @@
     "name": "Review renal function panel",
     "result": "Creatinine 0.9 mg/dL, eGFR >90 mL/min/1.73m2 — normal, confirms apixaban dosing is appropriate.",
     "importance": "important",
-    "artifactIds": []
+    "artifactIds": [
+     "d2"
+    ]
    },
    {
     "id": "a7",
@@ -114,14 +116,6 @@
     "kind": "record",
     "name": "Review prior hematology consult note (1 month ago)",
     "result": "Note documents unprovoked left proximal DVT, plan for apixaban 5 mg BID with reassessment at 3-6 months, counseling on adherence and bleeding symptoms given, no bleeding reported at that visit.",
-    "importance": "minor",
-    "artifactIds": []
-   },
-   {
-    "id": "a13",
-    "kind": "exam",
-    "name": "Ask patient to inspect for gum bleeding/mouth",
-    "result": "Patient reports no gum bleeding on inspection, no visible oral lesions.",
     "importance": "minor",
     "artifactIds": []
    },
@@ -333,7 +327,7 @@
       }
      ]
     },
-    "body": "Routine labs ordered by primary care at a visit 2 weeks ago as part of a general screen for easy bruising reported by the patient at that time; hematuria was not reported or known about when these were ordered."
+    "body": "Routine labs ordered by primary care at a visit 2 weeks ago as part of a general screen given the patient's reported easy bruising from work at that time; hematuria was not reported or known about when these were ordered."
    },
    {
     "id": "d5",
@@ -945,7 +939,8 @@
    "ethnicity": "white",
    "occupation": "HVAC technician",
    "language": "English",
-   "appearance": "A sturdily built man in his late 30s with short cropped hair and a short beard, wearing a faded work polo with a company logo. He is seated in what looks like a cluttered home office or kitchen table, fluorescent light overhead, with a coffee mug and a tape measure visible on the table beside his laptop."
+   "appearance": "A sturdily built man in his late 30s with short cropped hair and a short beard, wearing a faded work polo with a company logo. He is seated in what looks like a cluttered home office or kitchen table, fluorescent light overhead, with a coffee mug and a tape measure visible on the table beside his laptop.",
+   "portrait": "/portraits/hematology-trevor-blackwood-blood-clot.jpg"
   },
   "persona": {
    "personality": "Plain-spoken, practical, somewhat guarded about personal habits, mildly skeptical of medical authority but not hostile.",

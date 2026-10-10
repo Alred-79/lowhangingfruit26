@@ -262,6 +262,10 @@
         },
         {
          "x": "8 months ago (PCP visit)",
+         "y": 6
+        },
+        {
+         "x": "~3 months ago",
          "y": 7
         },
         {
@@ -702,7 +706,8 @@
    "ethnicity": "Nigerian-born, Black African",
    "occupation": "Pediatric nurse",
    "language": "English",
-   "appearance": "Seun appears as a fit man in his mid-30s with deeply pigmented skin, short closely-cropped hair, wearing navy scrub top, seated at a small desk in what looks like a home office with a bookshelf visible behind him. Lighting is good and even; he leans slightly toward the camera when showing his foot, and his affect is calm and attentive, with an occasional apologetic smile."
+   "appearance": "Seun appears as a fit man in his mid-30s with deeply pigmented skin, short closely-cropped hair, wearing navy scrub top, seated at a small desk in what looks like a home office with a bookshelf visible behind him. Lighting is good and even; he leans slightly toward the camera when showing his foot, and his affect is calm and attentive, with an occasional apologetic smile.",
+   "portrait": "/portraits/dermatology-seun-bello-foot-lesion.jpg"
   },
   "persona": {
    "personality": "Calm, polite, and slightly self-effacing; approaches his own health the way he approaches patient care at work - methodical and matter-of-fact, but visibly anxious underneath about what the lesion could mean.",

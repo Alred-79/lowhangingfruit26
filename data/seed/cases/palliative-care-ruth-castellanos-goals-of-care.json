@@ -118,7 +118,7 @@
     "id": "a14",
     "kind": "assessment",
     "name": "Caregiver burden and support check",
-    "result": "Son is primary caregiver, lives 20 minutes away, works full time; reports feeling exhausted and overwhelmed but has not sought respite care; no other local family support.",
+    "result": "Son is primary caregiver, lives 20 minutes away, works full time; patient observes he seems exhausted and overwhelmed but she has not asked him directly how he is coping; no other local family support.",
     "importance": "important",
     "artifactIds": []
    },
@@ -681,7 +681,7 @@
     "topic": "son's understanding of prognosis",
     "chart": "Son has not been given detailed prognostic information directly from oncology; patient believes he may be underestimating how serious things are.",
     "says": "I don't think my son really understands how bad the scan was. I don't think anyone's spelled it out for him.",
-    "tier": "reluctant",
+    "tier": "discoverable",
     "importance": "critical"
    },
    {

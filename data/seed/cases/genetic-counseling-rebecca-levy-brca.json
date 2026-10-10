@@ -26,16 +26,8 @@
    {
     "id": "a3",
     "kind": "assessment",
-    "name": "Apply personal/family history risk model (e.g., Tyrer-Cuzick / NCCN criteria)",
+    "name": "Apply personal/family history risk model (NCCN testing-eligibility criteria)",
     "result": "Family meets NCCN hereditary breast/ovarian cancer (HBOC) testing criteria based on: first-degree relative (mother) with breast cancer <45, second-degree relative (aunt) with ovarian cancer, and Ashkenazi Jewish ancestry. Clinical risk assessment supports offering germline genetic testing.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a4",
-    "kind": "test",
-    "name": "Discuss hereditary cancer multigene panel options",
-    "result": "Reviewed options: (1) targeted BRCA1/BRCA2 Ashkenazi Jewish founder mutation panel (3 common variants, lower cost, narrower scope), (2) full BRCA1/BRCA2 sequencing, (3) broader multigene hereditary cancer panel (includes BRCA1/2 plus PALB2, CHEK2, ATM, TP53, etc., higher chance of VUS). Discussed turnaround time (~2-3 weeks), cost/insurance coverage, and that a negative result does not rule out hereditary risk if a familial mutation is unknown.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -90,14 +82,6 @@
     "artifactIds": [
      "d6"
     ]
-   },
-   {
-    "id": "a11",
-    "kind": "assessment",
-    "name": "Discuss cascade testing implications for relatives",
-    "result": "Discussed that if a pathogenic variant is identified in the patient, targeted single-site testing would then be available and recommended for her sister (35) and brother (41), and in the future her daughters (currently 6 and 9), with testing for the daughters deferred until adulthood per professional guidelines for adult-onset conditions. Discussed general strategies for communicating genetic risk information with relatives and the importance of respecting each relative's autonomy, including their right not to pursue testing or not to know their own result.",
-    "importance": "critical",
-    "artifactIds": []
    },
    {
     "id": "a12",
@@ -712,9 +696,7 @@
      "f16",
      "f30"
     ],
-    "actionIds": [
-     "a11"
-    ]
+    "actionIds": []
    },
    {
     "id": "o6",
@@ -735,7 +717,8 @@
    "ethnicity": "Ashkenazi Jewish",
    "occupation": "Freelance journalist",
    "language": "English",
-   "appearance": "A trim woman in her late 30s with shoulder-length dark curly hair, wearing a cardigan, seated at a cluttered desk with bookshelves and a laptop visible behind her, in a home office with soft natural light. She leans toward the camera when speaking, speaks quickly, and has a notebook with handwritten questions open in front of her."
+   "appearance": "A trim woman in her late 30s with shoulder-length dark curly hair, wearing a cardigan, seated at a cluttered desk with bookshelves and a laptop visible behind her, in a home office with soft natural light. She leans toward the camera when speaking, speaks quickly, and has a notebook with handwritten questions open in front of her.",
+   "portrait": "/portraits/genetic-counseling-rebecca-levy-brca.jpg"
   },
   "persona": {
    "personality": "Quick-witted, articulate, and intellectually driven; copes with fear through research and information-gathering rather than open emotional expression.",

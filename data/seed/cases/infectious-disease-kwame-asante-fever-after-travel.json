@@ -35,7 +35,7 @@
     "id": "a4",
     "kind": "exam",
     "name": "Guided abdominal self-palpation (patient presses below left and right ribs)",
-    "result": "Patient reports mild fullness and tenderness to palpation in the left upper quadrant; no rebound or guarding reported.",
+    "result": "Patient reports mild fullness and tenderness to palpation in the left upper quadrant; no rebound or guarding reported. This is a patient-performed self-exam only, not a clinician-verified finding, and must be confirmed by formal abdominal exam in person.",
     "importance": "important",
     "abnormal": true,
     "artifactIds": []
@@ -102,16 +102,8 @@
    {
     "id": "a12",
     "kind": "lab",
-    "name": "Order STAT basic metabolic panel (creatinine, glucose, electrolytes)",
-    "result": "Order placed; to be drawn same-day in emergency department. Result pending at close of this telehealth visit.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a13",
-    "kind": "lab",
-    "name": "Order STAT total and direct bilirubin, AST/ALT",
-    "result": "Order placed; to be drawn same-day in emergency department. Result pending at close of this telehealth visit.",
+    "name": "Order STAT basic metabolic panel and hepatic function panel (creatinine, glucose, electrolytes, total/direct bilirubin, AST/ALT)",
+    "result": "Combined order placed for basic metabolic panel and hepatic function panel; to be drawn same-day in emergency department. Result pending at close of this telehealth visit.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -283,7 +275,7 @@
      "when": "action",
      "ref": "a8"
     },
-    "body": "S: 45-year-old male, 9 days post-return from 3-week trip to Kumasi, Ghana, presents with 4 days of high fever (Tmax 39.4°C), drenching sweats, headache, myalgias, one episode of vomiting, mild diarrhea, and new dark urine today. No malaria chemoprophylaxis taken. Took leftover amoxicillin x2 days without improvement. No rash, no bleeding. Son (age 12) traveled with patient and remains well.\n\nO: Vitals as above (febrile, tachycardic, borderline hypotensive). Mild scleral icterus. Reported LUQ fullness/tenderness on self-palpation. Urine visually dark on camera. No rash or petechiae. No neck stiffness.\n\nA: High pretest probability malaria, potentially severe given jaundice and possible splenomegaly/hemolysis. Treat as medical emergency.\n\nP: STAT ED referral for thick/thin smear, RDT, CBC, BMP, bilirubin/LFTs, glucose. Counsel patient on urgency, arrange transport, do not delay for outpatient labs."
+    "body": "S: 45-year-old male, 9 days post-return from 3-week trip to Kumasi, Ghana, presents with 4 days of high fever (Tmax 39.4°C), drenching sweats, headache, myalgias, one episode of vomiting, mild diarrhea, and new dark urine today. No malaria chemoprophylaxis taken. Took leftover amoxicillin x2 days without improvement. No rash, no bleeding. Son (age 12) traveled with patient and remains well.\n\nO: Vitals as above (febrile, tachycardic, borderline hypotensive). Mild scleral icterus. Patient-reported LUQ fullness/tenderness on self-palpation (not clinician-verified, requires in-person confirmation). Urine visually dark on camera. No rash or petechiae. No neck stiffness.\n\nA: High pretest probability malaria, potentially severe given jaundice and possible splenomegaly/hemolysis (splenomegaly unconfirmed pending formal exam). Treat as medical emergency.\n\nP: STAT ED referral for thick/thin smear, RDT, CBC, combined BMP/hepatic panel (bilirubin/LFTs, renal function, glucose). Counsel patient on urgency, arrange transport, do not delay for outpatient labs."
    }
   ],
   "chartAtStart": [
@@ -684,7 +676,7 @@
    },
    {
     "id": "o4",
-    "text": "Correctly order the appropriate same-day diagnostic workup for suspected malaria (thick/thin smear, rapid antigen test, CBC, renal function, bilirubin/LFTs, glucose) and recognize this cannot be deferred to routine outpatient labs.",
+    "text": "Correctly order the appropriate same-day diagnostic workup for suspected malaria (thick/thin smear, rapid antigen test, CBC, combined metabolic/hepatic panel for renal function, bilirubin/LFTs, and glucose) and recognize this cannot be deferred to routine outpatient labs.",
     "factIds": [
      "f6"
     ],
@@ -692,8 +684,7 @@
      "a9",
      "a10",
      "a11",
-     "a12",
-     "a13"
+     "a12"
     ]
    },
    {
@@ -736,7 +727,7 @@
     "4 days of high fever (Tmax 39.4°C) with drenching sweats, headache, myalgias",
     "New dark/tea-colored urine today, raising concern for possible hemolysis (unconfirmed, labs pending)",
     "Mild scleral icterus on camera exam",
-    "Reported left upper quadrant fullness/tenderness on self-palpation, raising concern for possible splenomegaly (not confirmed by formal exam)",
+    "Patient-reported left upper quadrant fullness/tenderness on self-palpation (not a clinician-verified exam finding), raising concern for possible splenomegaly that requires in-person confirmation",
     "Tachycardia (HR 112) and borderline hypotension on vitals",
     "Progressive fatigue/weakness over 2 days",
     "No rash, no bleeding, no neck stiffness, no confusion — helps narrow differential and assess for severity",
@@ -747,10 +738,9 @@
     "Arrange immediate referral to emergency department for STAT thick and thin blood smears for malaria parasites and species identification",
     "Order STAT rapid malaria antigen test as an adjunct, understanding smear remains gold standard",
     "Order STAT CBC with differential to assess for anemia, thrombocytopenia, parasitemia clues",
-    "Order STAT basic metabolic panel to assess renal function and glucose, given that hypoglycemia can occur in malaria and no home glucometer is available",
-    "Order STAT total/direct bilirubin and AST/ALT given scleral icterus and dark urine to evaluate for hemolysis vs hepatic involvement",
+    "Order STAT combined basic metabolic panel and hepatic function panel (renal function, glucose, total/direct bilirubin, AST/ALT) given scleral icterus, dark urine, and need to assess for hypoglycemia (no home glucometer available)",
     "Advise discontinuing further self-directed antibiotic use; amoxicillin has no role in treating malaria",
-    "Address patient's cost and work concerns empathetically while reinforcing non-negotiable urgency of same-day evaluation, explaining that current findings are concerning but require labs to confirm severity",
+    "Address patient's cost and work concerns empathetically while reinforcing non-negotiable urgency of same-day evaluation, explaining that current findings are concerning but require labs and formal exam to confirm severity",
     "Coordinate with emergency department / inpatient team for admission and initiation of appropriate antimalarial therapy once species and severity are confirmed, as this is beyond the scope of this telehealth visit to prescribe before results",
     "Provide travel health education for future trips, including need for chemoprophylaxis regardless of childhood history or perceived immunity",
     "Document mismatch between patient's belief in lasting immunity and documented missed travel counseling opportunity for future quality improvement"
@@ -758,7 +748,7 @@
    "redFlags": [
     "Fever in a returning traveler from a malaria-endemic area is a medical emergency until proven otherwise",
     "Jaundice/scleral icterus combined with dark urine raises concern for hemolysis, though this requires lab confirmation",
-    "Reported LUQ fullness, tachycardia, and borderline hypotension warrant urgent in-person assessment and formal exam, not deferred outpatient testing",
+    "Patient-reported LUQ fullness (unverified by formal exam), tachycardia, and borderline hypotension warrant urgent in-person assessment and formal exam, not deferred outpatient testing",
     "Risk of rapid clinical deterioration, including cerebral malaria, severe anemia, acute kidney injury, or hypoglycemia, can occur within hours in falciparum malaria if confirmed",
     "Delay in diagnosis and treatment due to patient reluctance (work, cost) must be addressed directly given life-threatening potential"
    ],
@@ -780,7 +770,8 @@
    "ethnicity": "Ghanaian-American",
    "occupation": "High school mathematics teacher",
    "language": "English",
-   "appearance": "A well-built man with short greying hair, appearing fatigued and flushed, wearing a plain grey t-shirt. He is seated on a couch in a dimly lit living room, occasionally wiping his forehead, with a blanket nearby and a glass of water visible on a side table."
+   "appearance": "A well-built man with short greying hair, appearing fatigued and flushed, wearing a plain grey t-shirt. He is seated on a couch in a dimly lit living room, occasionally wiping his forehead, with a blanket nearby and a glass of water visible on a side table.",
+   "portrait": "/portraits/infectious-disease-kwame-asante-fever-after-travel.jpg"
   },
   "persona": {
    "personality": "Articulate, practical, and somewhat stoic; tends to downplay symptoms initially but answers directly once asked.",

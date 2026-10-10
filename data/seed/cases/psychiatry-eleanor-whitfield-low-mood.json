@@ -18,7 +18,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "Columbia-Suicide Severity Rating Scale (C-SSRS) screening",
-    "result": "Documented outcome depends on how the interview is conducted. If the resident builds rapport and asks directly and sensitively about thoughts of death, self-harm, plan, intent, and access to means, the patient discloses a passive death wish and in-home access to potentially lethal items; if only asked in a brief, closed, or generic fashion, she denies any current thoughts of self-harm beyond what she already told her PCP, consistent with her reserved, self-effacing style and tendency to minimize distress to avoid 'taking up time.' No active suicidal ideation, plan, intent, or preparatory behavior is reported at any point, and there is no history of past attempts.",
+    "result": "No C-SSRS on file. The screener is completed by asking the patient its questions directly during the interview; record her answers as she gives them. PCP referral note documents only a brief denial of specific plan/intent during the office visit, without a full passive-ideation inquiry. No history of suicide attempts is documented anywhere in the record.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -26,7 +26,7 @@
     "id": "a3",
     "kind": "assessment",
     "name": "Mental status examination via video",
-    "result": "Alert, cooperative, well-groomed older woman. Speech soft, slow, decreased spontaneity. Mood 'tired, kind of empty.' Affect restricted, congruent, occasionally tearful. Thought process linear, no flight of ideas. Thought content: guilt-laden ruminations, passive death wish, no delusions. No hallucinations reported or observed. Cognition grossly intact on bedside screening. Insight and judgment intact; help-seeking appropriate.",
+    "result": "Alert, cooperative, well-groomed older woman. Speech soft, slow, decreased spontaneity. Mood 'tired, kind of empty.' Affect restricted, congruent, occasionally tearful. Thought process linear, no flight of ideas. Thought content: guilt-laden ruminations, no delusions; thoughts of death or self-harm to be assessed by direct questioning. No hallucinations reported or observed. Cognition grossly intact on bedside screening. Insight and judgment intact; help-seeking appropriate.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -91,7 +91,7 @@
     "id": "a10",
     "kind": "test",
     "name": "Alcohol Use Disorders Identification Test (AUDIT-C), administered verbally",
-    "result": "Score 4/12 (frequency: 5-7 days/week scored 3; typical quantity 1-2 drinks scored 1; no binge pattern). This meets/exceeds the standard AUDIT-C positive-screen cutoff of 3 for women, so the result is a positive screen warranting further assessment rather than a reassuring subthreshold finding. Clinically this reflects new nightly low-quantity use for sleep onset rather than an established alcohol use disorder, but it still requires discussion given its new onset, its role in self-medicating insomnia, and sedative interaction risk with any future sleep medication.",
+    "result": "Score 4/12 (frequency 4 or more times a week = 4; typical quantity 1-2 drinks = 0; six or more drinks on one occasion never = 0). This is at or above the positive-screen cutoff of 3 for women, so it is a positive screen that warrants further assessment. Clinically it reflects new nightly low-quantity use to get to sleep rather than an established alcohol use disorder, but it needs discussion given its new onset and the interaction risk with any sedating medication.",
     "importance": "important",
     "artifactIds": []
    },
@@ -115,7 +115,7 @@
     "id": "a13",
     "kind": "assessment",
     "name": "Lethal means access and safety planning assessment",
-    "result": "This is not a passive record lookup: specific findings about items in the home and the patient's willingness to have them removed are only obtained if the resident asks directly, sensitively, and non-judgmentally about firearms and medications in the house, after sufficient rapport has been established. A generic or indirect question yields only a general acknowledgment that 'there are some of my husband's things still around' without further detail. When asked specifically and kindly, the patient becomes willing to discuss what remains in the home and to consider a concrete removal plan with her son's help, and to identify reasons for living such as her faith and grandchildren.",
+    "result": "Nothing about firearms or stored medications is documented in the record. Lethal-means access can only be established by asking the patient directly; build the safety plan with her from what she tells you.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -528,7 +528,7 @@
     "Uncomplicated/normal bereavement (grief reaction) - less likely given pervasiveness of anhedonia beyond missing husband, persistent guilt, and functional impairment at 4 months",
     "Persistent complex bereavement disorder / prolonged grief disorder - consider but mood symptoms and anhedonia extend beyond grief-specific content",
     "Hypothyroidism-related mood/fatigue symptoms - ruled out by current normal TSH/free T4",
-    "Alcohol use disorder - screened, subthreshold currently, but new nightly use for self-medicated insomnia is a modifiable risk factor",
+    "Alcohol use disorder - AUDIT-C positive screen (4/12) without features of dependence; new nightly use for self-medicated insomnia is a modifiable risk factor",
     "Adjustment disorder with depressed mood - less likely given symptom severity and duration meeting full MDE criteria"
    ],
    "keyFindings": [
@@ -538,7 +538,7 @@
     "Early morning awakening around 3:30-4:00 AM nightly",
     "Passive death wish ('wish I wouldn't wake up') elicited only after rapport-building and a direct question; no plan or intent",
     "Access to lethal means in home: husband's leftover oxycodone (~20 tablets) and his unlocked hunting rifle",
-    "New nightly alcohol use (2 glasses sherry) for sleep, AUDIT-C 4/12, subthreshold but clinically relevant given insomnia and future sedative interaction risk",
+    "New nightly alcohol use (2 glasses sherry) for sleep, AUDIT-C 4/12 (positive screen for women), clinically relevant given insomnia and future sedative interaction risk",
     "TSH/free T4 normal, ruling out hypothyroid contribution despite patient's belief that her thyroid 'might be acting up again'",
     "Protective factors: strong faith community, close relationship with grandchildren, help-seeking behavior, no prior attempts",
     "Mental status exam: linear thought process, intact insight/judgment, normal cognitive screen"

@@ -90,11 +90,12 @@
     "id": "a11",
     "kind": "record",
     "name": "Review immunization record",
-    "result": "Immunizations up to date for age, including rotavirus series completed at 2, 4, and 6 months.",
+    "result": "Up to date through the 6-month visit, including a complete rotavirus series (2, 4 and 6 months). Not yet given: MMR and varicella (due at 12-15 months), hepatitis B dose 3. These were deferred at last week's well-child visit.",
     "artifactIds": [
      "d4"
     ],
-    "importance": "minor"
+    "importance": "minor",
+    "abnormal": true
    },
    {
     "id": "a12",
@@ -368,36 +369,6 @@
      "when": "start"
     },
     "body": "14-month well-child check. Weight 10.4 kg (50th percentile), length 76 cm (55th percentile). Development on track - walking independently, says 3-5 words, points to objects, feeds self with fingers. Diet: whole milk, table foods, daycare 4 days/week. No concerns raised by mother. Plan: routine vaccines deferred to catch-up schedule per family preference discussion; recheck growth at next visit."
-   },
-   {
-    "id": "d6",
-    "type": "other",
-    "title": "Pharmacy Purchase/Refill History",
-    "date": "Yesterday",
-    "release": {
-     "when": "fact",
-     "ref": "f14"
-    },
-    "table": {
-     "columns": [
-      "Date",
-      "Item",
-      "Quantity",
-      "Pharmacy/Source",
-      "Notes"
-     ],
-     "rows": [
-      {
-       "cells": [
-        "Yesterday",
-        "Loperamide HCl 2mg tablets (adult OTC)",
-        "1 package (12 tablets)",
-        "Purchased at mother's workplace pharmacy",
-        "Over-the-counter purchase, no prescription associated; recorded via loyalty/purchase history, not a pediatric prescription"
-       ]
-      }
-     ]
-    }
    }
   ],
   "chartAtStart": [
@@ -423,7 +394,7 @@
    },
    {
     "label": "Immunizations",
-    "value": "Up to date through 6-month visit; MMR/Varicella and Hep B #3 due, deferred per family catch-up schedule"
+    "value": "See immunization record"
    },
    {
     "label": "Care team",
@@ -718,16 +689,25 @@
     "tier": "discoverable",
     "importance": "minor",
     "distractor": true
+   },
+   {
+    "id": "f32",
+    "category": "pmh",
+    "topic": "immunization status",
+    "chart": "Mother reports immunizations are up to date; she is not aware that the 12-month vaccines are outstanding.",
+    "says": "Oh, he's had all his shots, we never miss those.",
+    "tier": "discoverable",
+    "importance": "important"
    }
   ],
   "mismatches": [
    {
     "id": "m1",
-    "factId": "f14",
-    "artifactId": "d6",
-    "patientClaim": "Mother says she gave only 'a little bit' of the adult Imodium, downplaying the dose",
-    "recordEvidence": "Pharmacy purchase history shows she bought a full package of adult-strength 2mg loperamide tablets the day before the visit, consistent with giving a full adult-strength tablet (2mg) rather than a small or partial amount to a 10 kg toddler",
-    "teachingPoint": "Caregivers may underestimate the significance of giving adult-formulated medication to a young child; always clarify exact product, strength, and dose given, and correct the record and counsel clearly on risk (antimotility agents can cause ileus or CNS depression in toddlers)."
+    "factId": "f32",
+    "artifactId": "d4",
+    "patientClaim": "Mother says Mateo has 'had all his shots'.",
+    "recordEvidence": "The immunization record shows MMR, varicella and hepatitis B dose 3 have not been given; the well-child note from a week ago records them as deferred.",
+    "teachingPoint": "Caregivers often believe a child is fully immunized when doses are outstanding. Check the record rather than relying on recall, mention the gap without blame, and arrange catch-up once he has recovered. Completed rotavirus vaccination makes rotavirus less likely but does not exclude viral gastroenteritis."
    },
    {
     "id": "m2",
@@ -812,7 +792,8 @@
     "id": "o6",
     "text": "Review growth and immunization records in context of an acute visit to confirm baseline health status and identify any care gaps to address at a future well visit",
     "factIds": [
-     "f20"
+     "f20",
+     "f32"
     ],
     "actionIds": [
      "a10",

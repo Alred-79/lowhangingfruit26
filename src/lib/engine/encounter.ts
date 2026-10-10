@@ -321,7 +321,13 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
   reply = reply.replace(/\*[^*\n]{1,80}\*/g, (m) => (d.deflect.length && cues++ === 0 ? m : ""));
   reply = reply.replace(/[ \t]+\n/g, "\n").replace(/\n{2,}/g, "\n").replace(/ {2,}/g, " ").trim() || "...";
   // Grounding audit: anything clinical the patient said beyond the approved facts is flagged, never filed.
-  const unsupported = await auditReply(reply, [...known, ...d.reveal], c.persona.background, c.scenario.openingLine);
+  const audit = await auditReply(reply, known, d.reveal, c.persona.background, c.scenario.openingLine);
+  const unsupported = audit.unsupported;
+  // The ledger records only what the patient actually said; anything skipped stays locked.
+  if (audit.notConveyed.length) {
+    for (const fid of audit.notConveyed) delete state.disclosed[fid];
+    d.reveal = d.reveal.filter((f) => !audit.notConveyed.includes(f.id));
+  }
   const inserted = addMessage(encId, state.turn, "patient", reply, {
     unsupported,
     revealed: d.reveal.map((f) => f.id),

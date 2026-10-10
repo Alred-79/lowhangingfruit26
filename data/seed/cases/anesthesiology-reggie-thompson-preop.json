@@ -140,7 +140,7 @@
     "id": "a11",
     "kind": "assessment",
     "name": "STOP-BANG screening (structured questions)",
-    "result": "Score 7/8: Snoring (yes), Tiredness (yes), Observed apneas (yes, per spouse), high blood Pressure (yes), BMI>35 (yes), Age>50 (yes), Neck circumference >40cm (yes, patient reports collar size 18.5in/47cm), male Gender (yes). High risk for OSA-related perioperative complications.",
+    "result": "Score 8/8: Snoring (yes), Tiredness (yes), Observed apneas (yes, per spouse), high blood Pressure (yes), BMI>35 (yes), Age>50 (yes), Neck circumference >40cm (yes, patient reports collar size 18.5in/47cm), male Gender (yes). Maximal score, very high risk for OSA-related perioperative complications.",
     "importance": "critical",
     "aliases": [
      "sleep apnea risk score"
@@ -201,7 +201,7 @@
    "keyFindings": [
     "BMI 44 kg/m2, severe OSA with AHI 42 on prior sleep study",
     "CPAP compliance download shows 0% use in last 90 days despite patient believing he uses it regularly",
-    "STOP-BANG score 7/8 (very high risk)",
+    "STOP-BANG score 8/8 (maximal, very high risk)",
     "Prior anesthesia record documents grade 3 Cormack-Lehane view and difficult intubation requiring bougie",
     "Camera airway exam: Mallampati III, short thick neck, reduced neck extension",
     "Functional capacity <4 METs (breathless climbing one flight of stairs)",
@@ -213,7 +213,7 @@
    "plan": [
     "Classify as anticipated difficult airway: arrange difficult airway cart, video laryngoscope first-line, have fiberoptic/awake intubation equipment available, plan for additional skilled personnel at induction and extubation",
     "Counsel patient clearly that CPAP data shows no recent use; reinforce importance of nightly CPAP use in the two weeks before surgery and arrange for device recheck or re-education before the procedure date",
-    "Advise holding GLP-1 agonist (semaglutide) per current ASA guidance (hold the week dose before surgery, i.e., skip the dose due in the week before the procedure) given risk of delayed gastric emptying and aspiration; confirm NPO status and consider liquid diet 24h prior per bariatric protocol or GI motility assessment if symptoms of delayed emptying",
+    "Advise holding GLP-1 agonist (semaglutide) per current ASA guidance: hold the weekly dose due in the week before surgery (i.e., skip the dose that would fall in that week) given risk of delayed gastric emptying and aspiration; recommend a clear liquid diet the day before surgery - this applies whether the patient continues semaglutide on his usual schedule or has any GI symptoms (nausea, early fullness, delayed emptying), not only in those with an irregular dosing schedule",
     "Instruct to continue amlodipine and metformin as usual up to the morning of surgery per standard dosing, hold metformin the morning of surgery (and resume once renal function and oral intake are confirmed postoperatively)",
     "Instruct to hold lisinopril (ACE inhibitor) the morning of surgery due to risk of intraoperative hypotension; may continue the evening dose the night before per routine practice",
     "Recommend review by primary care/surgical team regarding better blood pressure control before elective surgery given readings consistently above goal",
@@ -224,7 +224,7 @@
    ],
    "redFlags": [
     "Prior documented grade 3 difficult intubation with bougie use - mandates a structured difficult airway plan, not routine induction",
-    "Severe untreated OSA (AHI 42, STOP-BANG 7/8, no CPAP use in 90 days) - high risk for perioperative airway obstruction and desaturation",
+    "Severe untreated OSA (AHI 42, STOP-BANG 8/8, no CPAP use in 90 days) - high risk for perioperative airway obstruction and desaturation",
     "Functional capacity <4 METs with LVH on ECG - warrants cardiac risk discussion though not necessarily further testing if proceeding to low-moderate risk surgery, per shared decision-making",
     "Elevated home BP readings up to 156/96 despite two agents - uncontrolled hypertension on the day of surgery could require postponement if severely elevated",
     "GLP-1 agonist use close to surgery raising aspiration risk if not properly held/timed"
@@ -233,7 +233,7 @@
     "STOP-BANG and prior polysomnography together quantify OSA severity and should directly change airway and disposition planning, not just be noted",
     "A patient's sincere belief that they are using CPAP does not substitute for objective compliance data; always check the download when available",
     "A documented grade 3 view on a prior anesthesia record is one of the most reliable predictors of future difficult intubation and should trigger advance planning (equipment, personnel, technique) rather than being treated as an isolated past event",
-    "Current GLP-1 receptor agonist guidance (ASA) recommends holding the weekly dose the week before elective surgery due to delayed gastric emptying and aspiration risk, and considering a clear liquid diet the day before if the patient takes it on an irregular schedule or has GI symptoms",
+    "Current ASA guidance on GLP-1 receptor agonists recommends holding the weekly dose the week before elective surgery due to delayed gastric emptying and aspiration risk, and recommends a clear liquid diet the day before surgery for patients who continue the medication on their usual schedule through surgery or who have GI symptoms (nausea, vomiting, bloating), not only those with irregular dosing",
     "ACE inhibitors are typically held the morning of surgery due to risk of intraoperative hypotension and difficulty treating it under anesthesia, while most other antihypertensives (e.g., calcium channel blockers) are continued",
     "Functional capacity <4 METs combined with surgery-specific and patient-specific risk factors should prompt a structured conversation about cardiac risk, though it does not automatically mandate further cardiac testing if it will not change management"
    ]
@@ -1074,7 +1074,8 @@
    "ethnicity": "Black American",
    "occupation": "Postal carrier",
    "language": "English",
-   "appearance": "A heavily built man with a broad, friendly face and short graying hair, wearing his postal service uniform shirt as he joins the call from his living room, looking relaxed and smiling easily throughout. He sits close to the camera at a kitchen table with a cup of coffee nearby, occasionally shifting in his chair as if the seat is a bit tight."
+   "appearance": "A heavily built man with a broad, friendly face and short graying hair, wearing his postal service uniform shirt as he joins the call from his living room, looking relaxed and smiling easily throughout. He sits close to the camera at a kitchen table with a cup of coffee nearby, occasionally shifting in his chair as if the seat is a bit tight.",
+   "portrait": "/portraits/anesthesiology-reggie-thompson-preop.jpg"
   },
   "persona": {
    "personality": "Easy-going, upbeat, and eager to move forward with surgery; tends to downplay symptoms as normal parts of getting older or being overweight.",

@@ -88,7 +88,7 @@
     "id": "a11",
     "kind": "test",
     "name": "Ask patient to weigh himself on home scale on camera",
-    "result": "Weight 79 kg today versus documented pre-illness weight 90 kg (11 kg / ~12% weight loss) and 81 kg at hospital discharge 10 days ago",
+    "result": "Weight 79 kg today. Since hospital admission (90 kg): 11 kg loss, ~12.2% weight loss. Since hospital discharge 10 days ago (81 kg): 2 kg loss, ~2.5% weight loss.",
     "importance": "important",
     "artifactIds": [
      "d4"
@@ -842,7 +842,8 @@
    "ethnicity": "White",
    "occupation": "Dairy farmer",
    "language": "English",
-   "appearance": "A thin-framed man who appears older than his stated age, with close-cropped gray hair and visible temporal and limb muscle wasting under a loose flannel shirt. He is seated in a recliner in a modestly furnished farmhouse living room, posture slightly slumped, speaking in a hoarse, raspy voice; his wife Carol sits close beside him, occasionally touching his arm, with worried eyes and ready to add detail he leaves out."
+   "appearance": "A thin-framed man who appears older than his stated age, with close-cropped gray hair and visible temporal and limb muscle wasting under a loose flannel shirt. He is seated in a recliner in a modestly furnished farmhouse living room, posture slightly slumped, speaking in a hoarse, raspy voice; his wife Carol sits close beside him, occasionally touching his arm, with worried eyes and ready to add detail he leaves out.",
+   "portrait": "/portraits/critical-care-nursing-gary-lindstrom-after-icu.jpg"
   },
   "persona": {
    "personality": "Stoic, self-reliant, and used to pushing through physical discomfort; takes pride in being the one who works hard and provides, which makes acknowledging weakness or emotional distress uncomfortable for him.",

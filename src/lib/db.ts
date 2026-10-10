@@ -253,6 +253,15 @@ export function db(): Database.Database {
         }
       }
     }
+    // One-off data corrections, each applied once per database.
+    d.exec("CREATE TABLE IF NOT EXISTS applied_fixes (name TEXT PRIMARY KEY, at TEXT NOT NULL DEFAULT (datetime('now')))");
+    const once = (name: string, sql: string) => {
+      if (d.prepare("SELECT 1 FROM applied_fixes WHERE name = ?").get(name)) return;
+      d.exec(sql);
+      d.prepare("INSERT INTO applied_fixes (name) VALUES (?)").run(name);
+    };
+    // The provided sample patients were expanded by the case generator; no clinician has reviewed the expansion.
+    once("samples-not-reviewed", "UPDATE cases SET reviewed = 0 WHERE origin = 'sample'");
     g.__db = d;
   }
   return g.__db;

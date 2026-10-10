@@ -7,8 +7,8 @@
    {
     "id": "a1",
     "kind": "vitals",
-    "name": "Review home vitals/weight log",
-    "result": "Weight 71 kg (BMI 23.9), reported home BP 118/74 mmHg, HR 78 bpm. No recent weight change reported.",
+    "name": "Review home vitals/weight log (today)",
+    "result": "Today's home readings: Weight 71 kg (BMI 23.9), home BP 118/74 mmHg, HR 78 bpm. Consistent with prior documented vitals (6 months ago) and with the past-year home trend, with no interval weight change.",
     "importance": "minor",
     "artifactIds": []
    },
@@ -60,7 +60,7 @@
     "id": "a6",
     "kind": "lab",
     "name": "Order/review lipid panel",
-    "result": "Total cholesterol 198 mg/dL, LDL 118 mg/dL, HDL 42 mg/dL, Triglycerides 190 mg/dL (H).",
+    "result": "Total cholesterol 198 mg/dL, LDL 118 mg/dL (above the <100 mg/dL optimal reference range), HDL 42 mg/dL, Triglycerides 190 mg/dL (H).",
     "abnormal": true,
     "importance": "important",
     "artifactIds": [
@@ -457,7 +457,7 @@
         "LDL cholesterol",
         "118",
         "mg/dL",
-        "<100 (goal, T1DM)"
+        "<100 (optimal)"
        ],
        "flag": "H"
       },
@@ -999,7 +999,8 @@
    "ethnicity": "Colombian-American",
    "occupation": "Final-year university student; part-time bartender",
    "language": "English (primary), conversational Spanish",
-   "appearance": "A young man with short dark hair and an easy smile, wearing a university hoodie, seated in what looks like a small bedroom with a desk and string lights visible behind him. He gestures animatedly and often laughs or jokes before answering more serious questions, though his eyes look tired."
+   "appearance": "A young man with short dark hair and an easy smile, wearing a university hoodie, seated in what looks like a small bedroom with a desk and string lights visible behind him. He gestures animatedly and often laughs or jokes before answering more serious questions, though his eyes look tired.",
+   "portrait": "/portraits/endocrinology-diego-morales-type-1-diabetes.jpg"
   },
   "persona": {
    "personality": "Charming, quick-witted, uses humor to deflect from uncomfortable topics, generally likeable and sociable.",

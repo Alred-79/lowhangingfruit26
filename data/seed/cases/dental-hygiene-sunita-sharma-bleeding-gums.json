@@ -52,7 +52,7 @@
     "id": "a6",
     "kind": "record",
     "name": "Pull most recent periodontal charting from dental record",
-    "result": "Charting from 3 years ago: 4-5 mm probing depths in molar areas bilaterally with bleeding on probing noted at multiple sites; anterior pockets 2-3 mm at that time.",
+    "result": "Charting from 3 years ago: 4-5 mm probing depths in molar areas bilaterally with bleeding on probing noted at multiple sites; anterior pockets 2-3 mm at that time; moderate generalized plaque index with moderate supra- and subgingival calculus on mandibular anteriors and maxillary molars; recommendation at that visit was periodontal maintenance every 3-4 months, which patient did not follow up on.",
     "abnormal": true,
     "importance": "critical",
     "artifactIds": [
@@ -124,15 +124,6 @@
      "d3",
      "d4"
     ]
-   },
-   {
-    "id": "a14",
-    "kind": "assessment",
-    "name": "Ask about jaw pain, clicking, or clenching/grinding habits",
-    "result": "Patient denies jaw pain, clicking, or awareness of clenching or grinding.",
-    "abnormal": false,
-    "importance": "minor",
-    "artifactIds": []
    }
   ],
   "artifacts": [
@@ -271,7 +262,7 @@
     "release": {
      "when": "start"
     },
-    "body": "Patient presented for routine cleaning and exam. Periodontal charting revealed localized moderate periodontitis with 4-5 mm pockets and bleeding on probing in molar regions (see detailed charting). Home care reviewed; patient reported flossing daily and brushing twice daily at that visit. Recommended 3-4 month periodontal maintenance interval and improved interdental cleaning. Patient did not schedule follow-up. No further dental visits on file until today's tele-hygiene visit."
+    "body": "Patient presented for routine cleaning and exam. Home care reviewed; patient reported flossing daily and brushing twice daily at that visit. Patient did not schedule follow-up and has had no further dental visits on file until today's tele-hygiene visit. (See periodontal charting record for detailed probing depths and findings from this visit.)"
    },
    {
     "id": "d6",
@@ -736,7 +727,8 @@
    "ethnicity": "Indian-American",
    "occupation": "Bank branch manager",
    "language": "English (fluent, primary language at work; also speaks Hindi at home)",
-   "appearance": "A woman who appears her stated age, with shoulder-length dark hair neatly tied back, wearing a navy blazer suggesting she has stepped away from or into work. She is seated in a tidy home office with a bookshelf visible behind her, lighting is good and clear. Her posture is upright and professional, though she smiles a little nervously when discussing her mouth."
+   "appearance": "A woman who appears her stated age, with shoulder-length dark hair neatly tied back, wearing a navy blazer suggesting she has stepped away from or into work. She is seated in a tidy home office with a bookshelf visible behind her, lighting is good and clear. Her posture is upright and professional, though she smiles a little nervously when discussing her mouth.",
+   "portrait": "/portraits/dental-hygiene-sunita-sharma-bleeding-gums.jpg"
   },
   "persona": {
    "personality": "Polite, efficient, detail-oriented, slightly embarrassed about her oral hygiene habits",

@@ -47,14 +47,6 @@
     "artifactIds": []
    },
    {
-    "id": "a6",
-    "kind": "test",
-    "name": "Ask patient to make a fist and release (active motion test)",
-    "result": "Patient can only partially flex the finger and cannot make a full fist due to pain; no other fingers affected",
-    "importance": "important",
-    "artifactIds": []
-   },
-   {
     "id": "a7",
     "kind": "exam",
     "name": "Camera inspection of other fingers and hand for comparison",
@@ -684,7 +676,6 @@
     ],
     "actionIds": [
      "a5",
-     "a6",
      "a7"
     ]
    },

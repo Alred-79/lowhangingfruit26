@@ -82,7 +82,7 @@
     "id": "a9",
     "kind": "assessment",
     "name": "Sleep and appetite review",
-    "result": "Reports falling asleep without difficulty but waking 2-3 times nightly and feeling unrested; averages 5-6 hours/night (previously 7-8). Appetite decreased, skipping breakfast most days; mild unintentional weight change not yet quantified by patient.",
+    "result": "Reports falling asleep without difficulty but waking 2-3 times nightly and feeling unrested; estimates averaging 5-6 hours/night currently versus 7-8 hours baseline before her grandmother's death, based on general recall (no formal sleep log kept). Appetite decreased, skipping breakfast most days; mild unintentional weight change not yet quantified by patient.",
     "importance": "important",
     "abnormal": true,
     "artifactIds": [
@@ -690,7 +690,8 @@
    "ethnicity": "Black/African American",
    "occupation": "Full-time nursing student; part-time dining hall worker",
    "language": "English",
-   "appearance": "A young woman with box braids pulled back, wearing a campus dining-hall polo as if on a break between shifts. She sits on the edge of her dorm bed with a textbook visible on the desk behind her; the lighting is dim and the room is tidy but sparse. Her posture is slightly hunched, eyes often lowered, with a polite, careful expression that occasionally cracks into tearfulness before she composes herself again."
+   "appearance": "A young woman with box braids pulled back, wearing a campus dining-hall polo as if on a break between shifts. She sits on the edge of her dorm bed with a textbook visible on the desk behind her; the lighting is dim and the room is tidy but sparse. Her posture is slightly hunched, eyes often lowered, with a polite, careful expression that occasionally cracks into tearfulness before she composes herself again.",
+   "portrait": "/portraits/counseling-nia-thompson-first-year.jpg"
   },
   "persona": {
    "personality": "Soft-spoken, polite, conscientious, and guarded; carries herself with quiet dignity and a strong sense of duty to family.",

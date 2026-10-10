@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "assessment",
     "name": "PHQ-9 depression screen (administered)",
-    "result": "Score 14/27 (moderate depression). Positive on item 2 'feeling down, depressed, hopeless' nearly every day; item 9 'thoughts of being better off dead' scored 1 (several days). Denies intent or plan when screened; endorses passive wish not to wake up some mornings.",
+    "result": "Score 14/27 (moderate depression). See item-level detail in attached PHQ-9 form. Denies intent or plan when screened; endorses passive wish not to wake up some mornings.",
     "importance": "critical",
     "artifactIds": [
      "d4"
@@ -18,7 +18,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "Columbia Suicide Severity Rating Scale (C-SSRS) screening",
-    "result": "Passive ideation present ('no use to anybody'), no active plan, no intent, denies prior attempts. When asked directly about access to lethal means, patient is initially evasive and changes the subject. Protective factors: grandchildren he hopes to see, religious faith, dislike of being a burden to others.",
+    "result": "Structured screen: passive ideation present ('no use to anybody'), denies active plan, denies intent, denies prior attempts, denies current preparatory behavior. Separate interview observation (not part of C-SSRS scoring): when asked directly about access to lethal means, patient was initially evasive and changed the subject before disclosing further.",
     "importance": "critical",
     "artifactIds": []
    },

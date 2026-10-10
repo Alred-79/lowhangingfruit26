@@ -106,15 +106,6 @@
     "artifactIds": []
    },
    {
-    "id": "a12",
-    "kind": "exam",
-    "name": "Ask patient to describe headache character and response to acetaminophen",
-    "result": "Bilateral frontal/temporal pressure headache, 7/10, present 2 days, minimally relieved by acetaminophen, not positional, no fever.",
-    "importance": "important",
-    "abnormal": true,
-    "artifactIds": []
-   },
-   {
     "id": "a13",
     "kind": "record",
     "name": "Review obstetric history summary in chart",
@@ -838,7 +829,6 @@
      "a1",
      "a2",
      "a3",
-     "a12",
      "a14"
     ]
    },
@@ -913,7 +903,8 @@
    "ethnicity": "Native Hawaiian",
    "occupation": "Elementary school aide",
    "language": "English",
-   "appearance": "A woman in her early thirties with a visibly pregnant abdomen, dark hair pulled into a loose bun, wearing a soft cotton maternity dress. She is seated on a couch in a modestly lit living room, shifting position frequently as if uncomfortable, with a slightly puffy face visible on camera and her hands resting swollen in her lap."
+   "appearance": "A woman in her early thirties with a visibly pregnant abdomen, dark hair pulled into a loose bun, wearing a soft cotton maternity dress. She is seated on a couch in a modestly lit living room, shifting position frequently as if uncomfortable, with a slightly puffy face visible on camera and her hands resting swollen in her lap.",
+   "portrait": "/portraits/obgyn-leilani-kahale-headache-33-weeks.jpg"
   },
   "persona": {
    "personality": "Warm, practical, and a little stoic; tends to downplay symptoms and normalize discomfort rather than alarm easily.",

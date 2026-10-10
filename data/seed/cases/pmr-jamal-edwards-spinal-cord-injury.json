@@ -28,7 +28,7 @@
     "id": "a3",
     "kind": "exam",
     "name": "Guided spasticity exam (patient performs passive leg movement, reports resistance and spasm frequency)",
-    "result": "Increased resistance to passive knee extension bilaterally with 3-4 beats of clonus; patient reports 15-20 spasms/day, several nocturnal, interfering with transfers and sleep. Modified Ashworth equivalent by patient-report ~3/4",
+    "result": "Increased resistance to passive knee extension bilaterally with 3-4 beats of clonus noted on guided exam; patient separately reports 15-20 spasms/day, several nocturnal, interfering with transfers and sleep. Note: formal Modified Ashworth Scale grading requires in-person clinician palpation of resistance through range of motion and cannot be reliably assigned by patient-report alone; clonus and spasm frequency are not MAS components",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": []
@@ -46,11 +46,10 @@
     "id": "a5",
     "kind": "test",
     "name": "Review of home bladder catheterization log",
-    "result": "Log shows intermittent catheterization performed 2x/day most days over the last 3 weeks (goal was every 4-6 hours/4x daily); several entries show urine described as cloudy with strong odor",
+    "result": "Log shows intermittent catheterization performed only 1.9-2.3 times per day on average over the last 3 weeks, well below the prescribed goal of every 4-6 hours (4x daily)",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": [
-     "d4",
      "d3"
     ]
    },
@@ -315,7 +314,7 @@
    {
     "id": "d4",
     "type": "flowsheet",
-    "title": "Home Bladder and Bowel Program Log",
+    "title": "Home Bowel Program Log",
     "date": "Last 3 weeks",
     "author": "Patient/caregiver-reported, compiled by home health RN",
     "release": {
@@ -325,8 +324,6 @@
     "table": {
      "columns": [
       "Date",
-      "Catheterizations (count)",
-      "Urine appearance",
       "Bowel movement (Y/N)",
       "Stool consistency/notes"
      ],
@@ -334,8 +331,6 @@
       {
        "cells": [
         "21 days ago",
-        "2",
-        "Cloudy, strong odor",
         "N",
         "-"
        ]
@@ -343,8 +338,6 @@
       {
        "cells": [
         "18 days ago",
-        "2",
-        "Cloudy",
         "Y",
         "Hard, required 25 min + manual assist"
        ]
@@ -352,8 +345,6 @@
       {
        "cells": [
         "14 days ago",
-        "3",
-        "Clear",
         "N",
         "-"
        ]
@@ -361,8 +352,6 @@
       {
        "cells": [
         "11 days ago",
-        "2",
-        "Cloudy, strong odor",
         "N",
         "-"
        ]
@@ -370,8 +359,6 @@
       {
        "cells": [
         "9 days ago",
-        "2",
-        "Cloudy",
         "Y",
         "Hard, caregiver assisted"
        ]
@@ -379,8 +366,6 @@
       {
        "cells": [
         "5 days ago",
-        "2",
-        "Cloudy, strong odor",
         "N",
         "-"
        ]
@@ -388,8 +373,6 @@
       {
        "cells": [
         "2 days ago",
-        "2",
-        "Cloudy",
         "Y",
         "Hard"
        ]

@@ -1,6 +1,6 @@
 {
  "origin": "sample",
- "reviewed": true,
+ "reviewed": false,
  "profile": {
   "version": 1,
   "actions": [
@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "vitals",
     "name": "Review vital signs flowsheet",
-    "result": "BP 128/82 mmHg, HR 78 bpm, Temp 98.6°F, RR 16/min, measured at last clinic visit (home cuff not used today).",
+    "result": "BP 128/82 mmHg, HR 78 bpm, Temp 98.6\u00b0F, RR 16/min, measured at last clinic visit (home cuff not used today).",
     "importance": "important",
     "artifactIds": []
    },
@@ -16,7 +16,7 @@
     "id": "a2",
     "kind": "record",
     "name": "Review anthropometric data",
-    "result": "Height 5'9\" (175 cm), Weight 178 lbs (80.7 kg), BMI 27.8 kg/m² (overweight), weight up 5 lbs over past 3 months.",
+    "result": "Height 5'9\" (175 cm), Weight 178 lbs (80.7 kg), BMI 27.8 kg/m\u00b2 (overweight), weight up 5 lbs over past 3 months.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -24,7 +24,7 @@
     "id": "a3",
     "kind": "lab",
     "name": "Review HbA1c",
-    "result": "HbA1c 9.8% (goal <7.0%) — poorly controlled, drawn 1 week ago.",
+    "result": "HbA1c 9.8% (goal <7.0%) \u2014 poorly controlled, drawn 1 week ago.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -32,7 +32,7 @@
     "id": "a4",
     "kind": "lab",
     "name": "Review fasting glucose",
-    "result": "Fasting glucose 180 mg/dL (ref 70-99 mg/dL) — elevated.",
+    "result": "Fasting glucose 180 mg/dL (ref 70-99 mg/dL) \u2014 elevated.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -40,7 +40,7 @@
     "id": "a5",
     "kind": "lab",
     "name": "Review lipid panel",
-    "result": "Total cholesterol 220 mg/dL (ref <200 mg/dL) — mildly elevated; LDL and triglycerides also flagged high on report.",
+    "result": "Total cholesterol 220 mg/dL (ref <200 mg/dL) \u2014 mildly elevated; LDL and triglycerides also flagged high on report.",
     "importance": "important",
     "artifactIds": []
    },
@@ -64,7 +64,7 @@
     "id": "a8",
     "kind": "assessment",
     "name": "Take 24-hour dietary recall",
-    "result": "Patient reports: often skips breakfast; lunch is rice, beans, sometimes pork or pre-made food from a nearby stand; dinner with family includes rice, beans, plantains, occasional pork, coconut milk dishes; drinks pineapple juice ('jus de piña') and soda through the day, minimal plain water; snacks on sweet treats like quesillos in the evening, especially when stressed or can't sleep.",
+    "result": "Patient reports: often skips breakfast; lunch is rice, beans, sometimes pork or pre-made food from a nearby stand; dinner with family includes rice, beans, plantains, occasional pork, coconut milk dishes; drinks pineapple juice ('jus de pi\u00f1a') and soda through the day, minimal plain water; snacks on sweet treats like quesillos in the evening, especially when stressed or can't sleep.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -171,7 +171,7 @@
        "cells": [
         "HbA1c",
         "9.8 %",
-        "<5.7% normal / 5.7-6.4% prediabetes / ≥6.5% diabetes",
+        "<5.7% normal / 5.7-6.4% prediabetes / \u22656.5% diabetes",
         "H"
        ],
        "flag": "H"
@@ -295,7 +295,7 @@
       "Date",
       "BP (mmHg)",
       "HR (bpm)",
-      "Temp (°F)",
+      "Temp (\u00b0F)",
       "RR (breaths/min)",
       "Weight (lbs)"
      ],
@@ -641,7 +641,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "BP 128/82 mmHg, HR 78 bpm, Temp 98.6°F, RR 16/min, Weight 178 lbs, BMI 27.8"
+    "value": "BP 128/82 mmHg, HR 78 bpm, Temp 98.6\u00b0F, RR 16/min, Weight 178 lbs, BMI 27.8"
    },
    {
     "label": "Care team",
@@ -712,7 +712,7 @@
     "category": "nutrition",
     "topic": "beverage choices",
     "chart": "States preference for juice over water",
-    "says": "Honestly I like juice way more than water. The piña juice especially.",
+    "says": "Honestly I like juice way more than water. The pi\u00f1a juice especially.",
     "tier": "discoverable",
     "importance": "important"
    },

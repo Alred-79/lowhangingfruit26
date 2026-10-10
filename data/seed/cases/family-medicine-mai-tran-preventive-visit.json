@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "vitals",
     "name": "Review home vitals (BP cuff, weight)",
-    "result": "BP 128/82 mmHg, HR 76 bpm regular, weight 142 lb (stable per patient report), BMI 25.1",
+    "result": "BP 128/82 mmHg, HR 76 bpm regular, weight 142 lb (stable per patient report); height not recorded in available records, so BMI cannot be calculated today",
     "importance": "minor",
     "artifactIds": []
    },
@@ -72,7 +72,7 @@
     "id": "a8",
     "kind": "lab",
     "name": "Order FSH and estradiol",
-    "result": "FSH 38 mIU/L (H, reference 4.7-21.5 mIU/L follicular phase), Estradiol 22 pg/mL (L, reference 30-400 pg/mL depending on phase) - pattern consistent with perimenopause/early menopause transition",
+    "result": "FSH 38 mIU/L (H, reference 4.7-21.5 mIU/L follicular phase), Estradiol 22 pg/mL (L, reference 30-400 pg/mL depending on phase); cycle day of draw not documented, so follicular-phase reference range may not strictly apply - result is suggestive of, but not diagnostic for, perimenopause and should be interpreted alongside the clinical picture rather than as a stand-alone confirmatory test",
     "importance": "important",
     "artifactIds": [
      "d3"
@@ -159,7 +159,7 @@
   "answerKey": {
    "primaryProblem": "Perimenopausal vasomotor/sleep symptoms with overdue preventive cancer screening (cervical and colorectal) and unknown hepatitis B status in a patient born in an endemic region",
    "differential": [
-    "Perimenopause (most likely given age, irregular cycles, hot flushes, elevated FSH/low estradiol)",
+    "Perimenopause (most likely given age, irregular cycles, hot flushes, and supportive but non-diagnostic FSH/estradiol pattern)",
     "Primary ovarian insufficiency (less likely at 46 with gradual pattern)",
     "Thyroid dysfunction (ruled out by normal TSH)",
     "Occupational irritant contact dermatitis of hands (separate, lower-acuity issue)",
@@ -167,14 +167,14 @@
    ],
    "keyFindings": [
     "8 months of irregular periods, hot flushes, and poor sleep consistent with perimenopause",
-    "FSH elevated and estradiol low, supporting perimenopausal transition",
+    "FSH elevated and estradiol low on a single, non-cycle-timed draw - supportive of but not diagnostic for perimenopausal transition given expected hormonal fluctuation and undocumented cycle day",
     "Pap smear overdue by several years (last at ~39, now 46) with no documented HPV co-testing",
     "Never screened for colorectal cancer; father died of colon cancer at age 58 (first-degree relative, early-onset) raising her risk category",
     "Hepatitis B serostatus never checked despite birth in Vietnam, a region of intermediate/high endemicity",
     "Mild hand dermatitis temporally linked to acrylic/solvent exposure at work, improves with time off"
    ],
    "plan": [
-    "Discuss perimenopause as the likely cause of vasomotor symptoms and irregular cycles; reassure that labs support this and that further hormonal workup is not urgently needed unless symptoms worsen or red flags develop",
+    "Discuss perimenopause as the likely clinical diagnosis based on symptom pattern; explain that the FSH/estradiol result is supportive but, drawn without a documented cycle day, cannot be treated as definitive given normal perimenopausal hormone fluctuation; further hormonal workup is not urgently needed unless symptoms worsen or red flags develop",
     "Offer options for symptom management (lifestyle measures, consider low-dose hormonal or non-hormonal therapy per shared decision-making) and arrange follow-up to discuss further",
     "Schedule in-person Pap smear with HPV co-testing given 7-year interval and move her onto an appropriate screening schedule going forward",
     "Given father's colon cancer at 58 (first-degree relative under 60), recommend she needs colonoscopy rather than average-risk stool testing alone; refer to gastroenterology for a diagnostic/screening colonoscopy (action a17) and use FIT (action a12) only as an interim/bridge if colonoscopy will be delayed",
@@ -192,7 +192,7 @@
    "educationPoints": [
     "Family history of early-onset colorectal cancer in a first-degree relative changes screening strategy from average-risk stool-based testing to colonoscopy starting earlier/more intensively, with colonoscopy as the primary recommendation and FIT only as a bridge if colonoscopy is delayed",
     "Patients born in hepatitis B-endemic countries should be screened regardless of risk perception, since perinatal transmission is often asymptomatic for decades",
-    "Perimenopause is a clinical diagnosis; FSH/estradiol can support but are not required and fluctuate, so they should not be over-interpreted as a stand-alone test",
+    "Perimenopause is primarily a clinical diagnosis based on age and symptom pattern; a single random (non-cycle-timed) FSH/estradiol draw is unreliable in a patient with irregular cycles like hers (22-50 day range) because levels fluctuate widely across the cycle and from cycle to cycle, so the result should be used as supportive context rather than a stand-alone diagnostic test",
     "Culturally, patients who tend to agree readily ('yes doctor') may underreport symptoms or defer screening due to time/income pressure; explicit, non-judgmental elicitation and flexible scheduling matter",
     "Occupational irritant dermatitis in nail technicians is common and usually improves with barrier precautions rather than requiring systemic treatment"
    ]
@@ -524,7 +524,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "BP 128/82 mmHg, HR 76 bpm, Weight 142 lb (today, patient-reported via home device)"
+    "value": "BP 128/82 mmHg, HR 76 bpm, Weight 142 lb (today, patient-reported via home device); height not on file"
    },
    {
     "label": "Immunizations",

@@ -34,7 +34,7 @@
     "id": "a4",
     "kind": "test",
     "name": "Confrontation visual field screening by self-report (patient covers one eye, examiner moves finger/object on screen to four quadrants)",
-    "result": "Right eye: dense field cut in the lower-inner (inferonasal) quadrant - consistent with the patient's report of a shadow rising from the bottom, nose-side of his vision, and distinct from his temporal-sided flashes; patient does not see the object in that quadrant. Left eye: full field to confrontation.",
+    "result": "Right eye: dense field cut in the lower-inner (inferonasal) quadrant - consistent with the patient's report of a shadow rising from the bottom, nose-side of his vision; this field defect localizes to the same supero-temporal retinal area implicated by his temporal-sided flashes (flashes arise from vitreoretinal traction at the break itself, which is supero-temporal, while the field defect reflects the inverted projection of retina inferior and nasal to that same break). Patient does not see the object in the inferonasal quadrant. Left eye: full field to confrontation.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -90,7 +90,7 @@
     "id": "a11",
     "kind": "assessment",
     "name": "Risk stratification for retinal detachment based on history and remote exam findings",
-    "result": "High-risk presentation: acute photopsia and floaters with a new, persistent visual field defect ('curtain') in a highly myopic, pseudophakic eye. Field defect location (inferonasal) suggests a corresponding supero-temporal retinal break, since retinal breaks produce field defects that are inverted both vertically and horizontally relative to their anatomic location. Macula appears spared on functional testing but this does not exclude extramacular detachment requiring urgent repair.",
+    "result": "High-risk presentation: acute photopsia and floaters with a new, persistent visual field defect ('curtain') in a highly myopic, pseudophakic eye. The inferonasal visual field defect and the temporal-sided flashes are both consistent with a single supero-temporal retinal break: flashes arise from vitreoretinal traction directly at the break (supero-temporal retina, which projects to the temporal visual field... actually corresponds to the area of traction itself, independent of the inversion rule), while the field defect reflects detached retina inferior and nasal to the break, which projects (inverted vertically and horizontally) to the inferonasal visual field. Macula appears spared on functional testing but this does not exclude extramacular detachment requiring urgent repair.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -116,7 +116,7 @@
    ],
    "keyFindings": [
     "Three days of new floaters and photopsia, right eye only",
-    "New inferonasal visual field shadow since this morning, consistent with a supero-temporal retinal break",
+    "New inferonasal visual field shadow since this morning, with temporal flashes - both findings localize to a single supero-temporal retinal break (traction at the break produces flashes felt temporally; the detaching retina inferior/nasal to the break produces the inverted inferonasal field cut)",
     "High myopia (~-8 D) and pseudophakia in that eye, both major retinal detachment risk factors",
     "Central acuity relatively preserved (20/30) and Amsler grid intact, suggesting macula currently attached",
     "No pain, no redness - typical for retinal detachment, helps distinguish from inflammatory/infectious red eye causes",
@@ -145,7 +145,7 @@
     "Telehealth visual acuity, confrontation fields, and Amsler testing are useful triage tools but cannot replace dilated fundoscopy with scleral depression for peripheral retinal breaks/detachment",
     "Patients may minimize urgency due to competing life demands (e.g., work deadlines); clear, direct communication about vision-threatening risk is essential",
     "Diabetic retinopathy history is a relevant comorbidity but should not anchor the differential away from retinal detachment when classic risk factors and symptoms are present",
-    "Visual field defects are inverted both vertically and horizontally relative to the corresponding retinal pathology: an inferonasal field defect corresponds to a supero-temporal retinal break, not a supero-nasal one"
+    "Visual field defects from a retinal break are inverted both vertically and horizontally relative to detached retina: an inferonasal field defect corresponds to detachment of supero-temporal retina. Photopsia (flashes), however, arises from vitreoretinal traction directly at the break itself, so flashes are felt on the same side as the break's retinal location (supero-temporal retina correlating with flashes perceived temporally) - flashes and field-defect location are therefore both consistent with the same break, but should not be mapped by the same inversion rule used for the field defect."
    ]
   },
   "artifacts": [
@@ -342,7 +342,7 @@
     "title": "Telehealth Triage Note - Today",
     "author": "Ophthalmology Resident (self, in progress)",
     "date": "today",
-    "body": "S: 57-year-old man with high myopia and pseudophakia OD (s/p uncomplicated cataract surgery 2 years ago), type 2 diabetes with known mild NPDR, presents via video with 3 days of new floaters and flashing lights OD (flashes noted temporally/laterally), and since this morning a shadow/curtain rising from the inferonasal visual field (patient-reported as 'bottom corner, nose side'). No pain, no redness. Able to read with central vision when covering fellow eye. Concerned about work deadline, asks about drops or new glasses.\nO: Remote exam notable for right eye confrontation field defect in the inferonasal quadrant, visual acuity 20/30 OD (baseline 20/25), Amsler grid intact centrally OD. External exam unremarkable, no injection. Pupils grossly reactive on camera. Prior exam 11 months ago showed flat peripheral retina OU and mild NPDR without DME.\nA: Acute flashes/floaters with new field-corresponding visual field defect (inferonasal field, suggesting a supero-temporal retinal break) in high-risk eye (high myopia, pseudophakic) - presumed rhegmatogenous retinal detachment until proven otherwise by dilated exam with scleral depression. Macula appears attached by functional testing but this cannot be confirmed remotely.\nP: Same-day in-person dilated exam by retina service. Patient advised of urgency and sight-threatening nature; declined initial requests for drops/new glasses are not appropriate for this presentation. Will coordinate handoff and confirm patient has transportation/plan to be seen today.",
+    "body": "S: 57-year-old man with high myopia and pseudophakia OD (s/p uncomplicated cataract surgery 2 years ago), type 2 diabetes with known mild NPDR, presents via video with 3 days of new floaters and flashing lights OD (flashes noted temporally/laterally), and since this morning a shadow/curtain rising from the inferonasal visual field (patient-reported as 'bottom corner, nose side'). No pain, no redness. Able to read with central vision when covering fellow eye. Concerned about work deadline, asks about drops or new glasses.\nO: Remote exam notable for right eye confrontation field defect in the inferonasal quadrant, visual acuity 20/30 OD (baseline 20/25), Amsler grid intact centrally OD. External exam unremarkable, no injection. Pupils grossly reactive on camera. Prior exam 11 months ago showed flat peripheral retina OU and mild NPDR without DME.\nA: Acute flashes/floaters with a visual field defect pattern consistent with a single supero-temporal retinal break - the temporal flashes localize to the site of vitreoretinal traction itself, while the inferonasal field defect reflects the inverted projection of retina detaching inferior and nasal to that break - in a high-risk eye (high myopia, pseudophakic). Presumed rhegmatogenous retinal detachment until proven otherwise by dilated exam with scleral depression. Macula appears attached by functional testing but this cannot be confirmed remotely.\nP: Same-day in-person dilated exam by retina service. Patient advised of urgency and sight-threatening nature; declined initial requests for drops/new glasses are not appropriate for this presentation. Will coordinate handoff and confirm patient has transportation/plan to be seen today.",
     "release": {
      "when": "action",
      "ref": "a12"
@@ -664,7 +664,7 @@
     "id": "f32",
     "category": "hpi",
     "topic": "side of flashes vs shadow",
-    "chart": "Patient notes flashes temporally, shadow rising from inferonasal field - findings anatomically consistent with a supero-temporal retinal break",
+    "chart": "Patient notes flashes temporally, shadow rising from inferonasal field - findings consistent with a single supero-temporal retinal break (traction at the break causes temporal flashes; the detaching retina inferior/nasal to the break causes the inverted inferonasal field defect)",
     "says": "The flashes are more on the outside part, toward my ear side, but the dark curtain is coming up from the bottom, closer to my nose side.",
     "tier": "discoverable",
     "importance": "important"

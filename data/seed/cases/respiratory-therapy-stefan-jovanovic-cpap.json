@@ -54,8 +54,8 @@
    {
     "id": "a6",
     "kind": "test",
-    "name": "Review Epworth Sleepiness Scale (if on file)",
-    "result": "Baseline Epworth Sleepiness Scale score at CPAP start was 14/24 (consistent with excessive daytime sleepiness); not re-administered today.",
+    "name": "Administer Epworth Sleepiness Scale today and compare to baseline",
+    "result": "Baseline Epworth Sleepiness Scale score at CPAP start was 14/24 (consistent with excessive daytime sleepiness). Re-administered today: current score 12/24, a modest improvement but still in the excessive-sleepiness range, which is inconsistent with adequate therapy given the poor adherence and high residual AHI on download.",
     "importance": "minor",
     "artifactIds": []
    },
@@ -104,15 +104,6 @@
     "importance": "important",
     "abnormal": true,
     "artifactIds": []
-   },
-   {
-    "id": "a12",
-    "kind": "assessment",
-    "name": "Ask about nasal/oral dryness and claustrophobia symptoms",
-    "result": "Patient reports dry mouth most mornings and a sense of panic/smothering feeling when the mask is on, especially in the first 15-20 minutes after lying down.",
-    "importance": "critical",
-    "abnormal": true,
-    "artifactIds": []
    }
   ],
   "artifacts": [
@@ -148,7 +139,7 @@
       {
        "cells": [
         "Average use on nights used",
-        "2 h 10 min"
+        "2 h 18 min"
        ],
        "flag": "L"
       },

@@ -156,7 +156,7 @@
     "Hoarseness >6 weeks unresponsive to antibiotic/PPI trial, mandating laryngoscopy per guidelines",
     "Referred right otalgia (classic for hypopharyngeal/laryngeal lesion via vagal referral)",
     "Dysphagia to solids",
-    "Unintentional weight loss (~4 kg over ~3 months)",
+    "Unintentional weight loss of approximately 4 kg over 3 months (~6.2% of body weight, meeting criteria for clinically significant unintentional weight loss)",
     "New right neck mass, firm, non-tender, non-mobile, ~2 cm, present ~3 weeks",
     "40 pack-year smoking history and heavy nightly alcohol use (synergistic carcinogen risk)",
     "No airway compromise currently (no stridor, normal SpO2 and respiratory effort)"
@@ -174,7 +174,7 @@
     "Hoarseness persisting beyond 2 weeks without improvement after empiric therapy (ACR/AAO-HNS indication for laryngoscopy)",
     "Unilateral referred otalgia",
     "Progressive dysphagia",
-    "Unintentional weight loss",
+    "Unintentional weight loss (~6.2% body weight over 3 months)",
     "Palpable, firm, non-tender, enlarging neck mass",
     "Heavy combined tobacco and alcohol exposure"
    ],
@@ -184,7 +184,7 @@
     "Combined tobacco and heavy alcohol use multiplies head and neck cancer risk beyond either alone",
     "A telehealth visit can triage and expedite urgent in-person procedures but cannot replace direct laryngoscopy or tissue diagnosis",
     "Patients may minimize alcohol use initially ('socially') and disclose more accurately once rapport is established-screen directly and gently",
-    "Unintentional weight loss and new neck mass in a smoker are not to be attributed to reflux or minor infection without ruling out malignancy first"
+    "Unintentional weight loss (here, ~6.2% of body weight in 3 months) and new neck mass in a smoker are not to be attributed to reflux or minor infection without ruling out malignancy first"
    ]
   },
   "artifacts": [
@@ -847,7 +847,8 @@
    "ethnicity": "White",
    "occupation": "School bus dispatcher",
    "language": "English",
-   "appearance": "A woman who appears her age with a sturdy build, short gray-blonde hair, wearing a cardigan over a work polo shirt, seated at a kitchen table with a coffee mug visible. Lighting is a bit dim, and she speaks with a noticeably rough, raspy voice, occasionally touching the right side of her neck as she talks."
+   "appearance": "A woman who appears her age with a sturdy build, short gray-blonde hair, wearing a cardigan over a work polo shirt, seated at a kitchen table with a coffee mug visible. Lighting is a bit dim, and she speaks with a noticeably rough, raspy voice, occasionally touching the right side of her neck as she talks.",
+   "portrait": "/portraits/ent-patricia-lawson-hoarse-voice.jpg"
   },
   "persona": {
    "personality": "Chatty, warm, deflects from difficult topics with humor or small talk, but underneath is quite anxious",

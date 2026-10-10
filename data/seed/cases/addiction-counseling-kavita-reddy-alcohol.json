@@ -64,7 +64,7 @@
     "id": "a7",
     "kind": "record",
     "name": "Recognize need for medical referral for vital-sign/withdrawal risk exam",
-    "result": "No bedside vital-sign or physical withdrawal exam performed by this role; patient's self-reported home BP/pulse (128/82, 88 bpm) noted today, but any formal withdrawal risk exam (CIWA-Ar) and vital sign interpretation should be deferred to a medical provider",
+    "result": "No bedside vital-sign or physical withdrawal exam performed by this role; home BP/pulse already documented in chart (128/82 mmHg, HR 88) are not a substitute for a real-time CIWA-Ar exam, which requires live observation of tremor, sweats, agitation, and hallucinations - any formal withdrawal risk exam should be deferred to a medical provider",
     "importance": "important",
     "abnormal": false,
     "artifactIds": []
@@ -872,7 +872,8 @@
    "ethnicity": "Indian-American",
    "occupation": "Corporate attorney, partner at a law firm",
    "language": "English",
-   "appearance": "A composed woman in her late 40s with dark hair pulled back neatly, wearing a tailored blazer, seated at a polished desk in what appears to be a home office with law books visible on a shelf behind her. Her posture is upright and controlled, her expression measured, though there are faint shadows under her eyes and brief flickers of tension when certain topics arise."
+   "appearance": "A composed woman in her late 40s with dark hair pulled back neatly, wearing a tailored blazer, seated at a polished desk in what appears to be a home office with law books visible on a shelf behind her. Her posture is upright and controlled, her expression measured, though there are faint shadows under her eyes and brief flickers of tension when certain topics arise.",
+   "portrait": "/portraits/addiction-counseling-kavita-reddy-alcohol.jpg"
   },
   "persona": {
    "personality": "Highly intelligent, articulate, and accustomed to being in control of every conversation; approaches this visit somewhat like cross-examining a witness, deflecting and reframing when uncomfortable, but underneath is frightened and ashamed",

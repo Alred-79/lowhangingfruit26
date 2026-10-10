@@ -109,7 +109,7 @@
     "id": "a13",
     "kind": "vitals",
     "name": "Orthostatic vitals (patient-performed with home cuff)",
-    "result": "Lying BP 122/76 HR 90; standing BP 112/70 HR 104 after 1 minute; mild lightheadedness reported on standing",
+    "result": "Lying BP 122/76 HR 90; standing BP 100/68 HR 112 after 1 minute; mild lightheadedness reported on standing",
     "importance": "important",
     "abnormal": true,
     "artifactIds": []
@@ -981,7 +981,7 @@
     "Dark, tarry stools (melena) reported on direct questioning, patient initially embarrassed to disclose",
     "Chronic high-dose OTC naproxen use for approximately 8 months without medical supervision",
     "Hemoglobin trend shows progressive decline from 13.1 to 11.4 to 8.9 g/dL over 14 months, indicating an unaddressed, worsening process",
-    "Orthostatic vital changes and conjunctival pallor on exam supporting significant anemia",
+    "Orthostatic hypotension (systolic BP drop of 22 mmHg) with compensatory tachycardia (HR rise of 22 bpm) and conjunctival pallor on exam supporting significant anemia",
     "No prior colonoscopy follow-up in 12 years despite average screening interval recommendations",
     "No alarm features for weight loss, but anemia severity and melena still warrant malignancy workup"
    ],
@@ -995,7 +995,7 @@
     "Discuss safe use of OTC medications and the importance of reporting GI symptoms promptly in future"
    ],
    "redFlags": [
-    "Hemoglobin of 8.9 g/dL representing moderate-to-severe anemia with orthostatic changes, warranting prompt evaluation and likely same-week referral",
+    "Hemoglobin of 8.9 g/dL representing moderate-to-severe anemia with orthostatic hypotension, warranting prompt evaluation and likely same-week referral",
     "Melena in the setting of chronic NSAID use raising concern for active or recent GI bleeding",
     "12-year gap since last colonoscopy with new anemia and dark stools, requiring exclusion of colorectal malignancy regardless of absence of weight loss",
     "Progressive, unaddressed hemoglobin decline over the past 14 months indicating a chronic ongoing process rather than an acute, self-limited event"
@@ -1005,7 +1005,8 @@
     "Microcytic anemia with low ferritin and high TIBC/transferrin saturation is a reliable pattern for true iron deficiency, distinguishing it from anemia of chronic disease",
     "Patients may minimize or feel embarrassed about GI bleeding symptoms; using normalizing, direct language improves disclosure",
     "Any patient with iron-deficiency anemia needs a source identified, and in postmenopausal women this almost always means GI evaluation at both ends regardless of a prior 'normal' colonoscopy if enough time has passed",
-    "Reviewing longitudinal lab trends in the chart can reveal clinically important patterns the patient may not recall or recognize as significant"
+    "Reviewing longitudinal lab trends in the chart can reveal clinically important patterns the patient may not recall or recognize as significant",
+    "Formal orthostatic hypotension is defined as a systolic BP drop ≥20 mmHg or diastolic drop ≥10 mmHg within 3 minutes of standing; smaller BP changes with only a heart rate rise represent a postural tachycardic response, not true orthostatic hypotension"
    ]
   },
   "summary": "A 67-year-old woman presents by telehealth with three months of progressive fatigue and exertional dyspnea, found to have severe iron-deficiency anemia on recent labs linked to chronic OTC naproxen use and previously unrecognized melena. The case teaches history-taking around embarrassing GI symptoms, interpretation of iron studies, and appropriate escalation for malignancy exclusion despite a reassuring but remote prior colonoscopy.",

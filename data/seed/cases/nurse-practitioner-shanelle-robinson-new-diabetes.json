@@ -46,7 +46,7 @@
     "id": "a5",
     "kind": "lab",
     "name": "Review kidney function (eGFR, urine ACR)",
-    "result": "eGFR 98 mL/min/1.73m^2 (normal). Urine albumin-creatinine ratio 22 mg/g, which falls in the A1 category (normal to mildly increased, <30 mg/g) by KDIGO staging, though it is on the higher end of normal and warrants monitoring given new diabetes diagnosis.",
+    "result": "eGFR 98 mL/min/1.73m^2 (normal). Urine albumin-creatinine ratio 22 mg/g, which falls in the A1 category (normal to mildly increased, <30 mg/g) by KDIGO staging. No evidence of albuminuria at this time; routine periodic monitoring recommended given new diabetes diagnosis.",
     "importance": "important",
     "artifactIds": [
      "d1"
@@ -64,8 +64,8 @@
    {
     "id": "a7",
     "kind": "exam",
-    "name": "Camera inspection of feet (patient self-exam)",
-    "result": "Patient reports no cuts, sores, or color changes; skin appears intact on camera, no visible lesions. Sensation screening deferred given no device available.",
+    "name": "Camera inspection of feet (visual skin check only)",
+    "result": "Patient reports no cuts, sores, or color changes; skin appears intact on camera visual inspection, no visible lesions. This visual check does not substitute for a comprehensive diabetic foot exam (monofilament, vibration sense, pulses), which requires an in-person visit.",
     "importance": "minor",
     "artifactIds": []
    },
@@ -386,7 +386,7 @@
        "cells": [
         "Hepatitis B series",
         "Not documented as completed",
-        "Recommend completing series given diabetes diagnosis"
+        "Recommend completing series given diabetes diagnosis; ACIP recommends offering to adults with diabetes aged 19-59 (patient is 38)"
        ],
        "flag": ""
       },
@@ -763,7 +763,7 @@
    },
    {
     "id": "o4",
-    "text": "Identify and address gaps in diabetes-related preventive care: dilated eye exam referral, foot exam, immunizations, lipid management, and nephropathy screening/monitoring.",
+    "text": "Identify and address gaps in diabetes-related preventive care: dilated eye exam referral, in-person comprehensive foot exam referral, immunizations, lipid management, and nephropathy screening/monitoring.",
     "factIds": [
      "f15",
      "f16"
@@ -771,7 +771,7 @@
     "actionIds": [
      "a4",
      "a5",
-     "a10",
+     "a7",
      "a14"
     ]
    },
@@ -801,7 +801,7 @@
    }
   ],
   "answerKey": {
-   "primaryProblem": "New diagnosis of type 2 diabetes mellitus (HbA1c 8.6%, fasting glucose 178 mg/dL) in a 38-year-old woman with prior gestational diabetes, strong family history, obesity (BMI 34), and acanthosis nigricans, with concurrent hyperlipidemia and a urine albumin-creatinine ratio in the normal-to-mildly-increased (A1) range.",
+   "primaryProblem": "New diagnosis of type 2 diabetes mellitus (HbA1c 8.6%, fasting glucose 178 mg/dL) in a 38-year-old woman with prior gestational diabetes, strong family history, obesity (BMI 34), and acanthosis nigricans, with concurrent hyperlipidemia and a urine albumin-creatinine ratio in the normal (A1) range.",
    "differential": [
     "Type 2 diabetes mellitus (confirmed by HbA1c ≥6.5% and fasting glucose ≥126 mg/dL on two measures - lab and home log)",
     "Latent autoimmune diabetes in adults (less likely given age, obesity, acanthosis nigricans, and clinical picture consistent with insulin resistance rather than autoimmune beta-cell failure; not routinely tested for in this low-pretest-probability presentation)",
@@ -813,7 +813,7 @@
     "Classic osmotic symptoms (polyuria, polydipsia, fatigue) and recurrent candidal infections consistent with hyperglycemia",
     "Acanthosis nigricans on exam supporting insulin resistance",
     "LDL 142 mg/dL and total cholesterol 218 mg/dL indicate need for lipid management",
-    "Urine ACR 22 mg/g is in the A1 category (normal to mildly increased, <30 mg/g) but on the higher end of normal, warranting monitoring and nephroprotective strategy; eGFR 98 is normal",
+    "Urine ACR 22 mg/g is in the A1 category (normal, <30 mg/g); eGFR 98 is normal; routine periodic monitoring is still warranted given new diabetes diagnosis",
     "BMI 34 kg/m^2 (Obesity Class I) is a modifiable risk factor",
     "History of gestational diabetes and strong family history of diabetic nephropathy place her at elevated lifetime risk",
     "Home glucose log confirms persistently elevated fasting values (165-188 mg/dL) over 10 days, corroborating lab findings"
@@ -824,11 +824,11 @@
     "Confirm renal function supports metformin use (eGFR 98, normal) and plan to recheck renal function periodically",
     "Order repeat fasting lipid panel in 3 months; discuss statin therapy per ASCVD risk given LDL 142 and diabetes diagnosis (shared decision-making, likely moderate-intensity statin indicated)",
     "Refer for dilated eye exam (ophthalmology/optometry) within the next few months given no documented exam in the past year",
-    "Perform/arrange comprehensive diabetic foot exam (in-person visit or community resource) with monofilament and vibration testing not feasible by camera alone",
-    "Repeat urine albumin-creatinine ratio in 3-6 months to confirm it remains in the A1 range and monitor for progression; reinforce blood pressure control",
+    "Refer for an in-person comprehensive diabetic foot exam (monofilament, vibration sense, pulses); this cannot be completed by camera and the visual-only check performed today does not replace it",
+    "Repeat urine albumin-creatinine ratio in 3-6 months as routine monitoring given new diabetes diagnosis; reinforce blood pressure control",
     "Set collaborative, shift-work-sensitive goals: reduce sweet tea/energy drink intake, substitute lower-sugar hydration options during shifts, aim to not skip breakfast, consider small protein-containing meal before shift",
     "Recommend brief walking or activity bouts fitted around caregiving/work schedule rather than a generic exercise prescription",
-    "Address immunization gaps: offer influenza vaccine, Hepatitis B series (recommended for adults with diabetes under age 60), update Tdap timing per schedule, COVID-19 booster per current guidance",
+    "Address immunization gaps: offer influenza vaccine, Hepatitis B series (ACIP recommends offering to adults with diabetes aged 19-59; she is 38), update Tdap timing per schedule, COVID-19 booster per current guidance",
     "Screen for diabetes distress and depression (PHQ-9 administered, mild score; validated distress screen administered, moderate distress); offer diabetes self-management education and support (DSME/S) referral",
     "Discuss cost concerns: confirm metformin is low-cost/generic, explore patient assistance or $4 generic programs if needed",
     "Arrange follow-up visit in 4-6 weeks to assess metformin tolerance, titration, and glucose trends; reinforce home glucose monitoring technique and frequency",
@@ -876,7 +876,8 @@
    "ethnicity": "Black",
    "occupation": "Call-center supervisor",
    "language": "English",
-   "appearance": "A woman in her late 30s with shoulder-length braided hair, wearing a work polo shirt, seated at a kitchen table with a child's artwork visible taped to the wall behind her. She appears tired, with slightly furrowed brows, and glances occasionally toward the hallway as if listening for her kids; her affect is engaged but visibly anxious when discussing her mother."
+   "appearance": "A woman in her late 30s with shoulder-length braided hair, wearing a work polo shirt, seated at a kitchen table with a child's artwork visible taped to the wall behind her. She appears tired, with slightly furrowed brows, and glances occasionally toward the hallway as if listening for her kids; her affect is engaged but visibly anxious when discussing her mother.",
+   "portrait": "/portraits/nurse-practitioner-shanelle-robinson-new-diabetes.jpg"
   },
   "persona": {
    "personality": "Practical, hardworking, and protective of her children; carries herself with quiet strength but is emotionally guarded about her own health needs.",

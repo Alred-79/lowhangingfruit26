@@ -124,11 +124,12 @@
     "id": "a13",
     "kind": "record",
     "name": "Review anticoagulation clinic protocol for supratherapeutic INR with minor bleeding",
-    "result": "Protocol: for INR 5.0-9.0 with minor bleeding, hold warfarin, consider low-dose oral vitamin K, recheck INR in 24-48h, resume at reduced dose when therapeutic, address contributing cause",
+    "result": "Protocol: for INR 5.0-9.0 with minor bleeding, hold warfarin, recheck INR in 24-48h, resume at reduced dose when therapeutic, address contributing cause. Protocol notes oral vitamin K 1-2.5 mg 'may be considered' if bleeding risk is elevated, but current CHEST (2022) guidance favors holding warfarin alone without routine vitamin K for INR 4.5-10 without major bleeding; given this patient's mechanical valve, empiric vitamin K carries overcorrection and valve thrombosis risk and should be reserved for INR >10 or major bleeding, with any use discussed with cardiology/prescriber first.",
     "importance": "critical",
     "artifactIds": [
      "d6"
-    ]
+    ],
+    "abnormal": true
    },
    {
     "id": "a14",
@@ -386,7 +387,7 @@
     "release": {
      "when": "start"
     },
-    "body": "Supratherapeutic INR management (mechanical valve patients, no major bleeding): INR 5.0-9.0 with minor bleeding (e.g., gum bleeding, bruising) - hold warfarin 1-2 doses, consider oral vitamin K 1-2.5 mg if bleeding risk elevated, recheck INR in 24-48 hours, resume warfarin at reduced dose once INR <3.5, identify and address precipitating cause (drug interaction, dietary change, adherence). Notify prescribing cardiologist/surgeon for mechanical valve patients given thrombosis risk if dose held >48 hours without bridging discussion."
+    "body": "Supratherapeutic INR management (mechanical valve patients, no major bleeding): INR 5.0-9.0 with minor bleeding (e.g., gum bleeding, bruising) - hold warfarin 1-2 doses, recheck INR in 24-48 hours, resume warfarin at reduced dose once INR <3.5, identify and address precipitating cause (drug interaction, dietary change, adherence). Oral vitamin K 1-2.5 mg 'may be considered' if bleeding risk is felt to be elevated, but note that current CHEST (2022) guidance for INR 4.5-10 without major bleeding generally favors holding warfarin alone without routine vitamin K; in mechanical valve patients, unnecessary vitamin K risks overcorrection and valve thrombosis, so this should only be used after discussion with the covering cardiologist/prescriber. Notify prescribing cardiologist/surgeon for mechanical valve patients given thrombosis risk if dose held >48 hours without bridging discussion."
    },
    {
     "id": "d7",
@@ -821,7 +822,8 @@
    "ethnicity": "Iraqi-American",
    "occupation": "High school chemistry teacher",
    "language": "English (fluent, occasional Arabic phrases)",
-   "appearance": "A woman in her mid-50s with a neat hijab and glasses, seated at a kitchen table with a bookshelf of binders visible behind her, wearing a cardigan over a blouse. Her affect is alert and articulate but visibly anxious, with hands occasionally gesturing to emphasize numbers she mentions."
+   "appearance": "A woman in her mid-50s with a neat hijab and glasses, seated at a kitchen table with a bookshelf of binders visible behind her, wearing a cardigan over a blouse. Her affect is alert and articulate but visibly anxious, with hands occasionally gesturing to emphasize numbers she mentions.",
+   "portrait": "/portraits/clinical-pharmacy-fatima-al-sayed-warfarin.jpg"
   },
   "persona": {
    "personality": "Analytical, detail-oriented, and health-literate about her own condition; likes to track numbers precisely and asks clarifying questions.",
@@ -879,7 +881,7 @@
    ],
    "plan": [
     "Hold warfarin per collaborative practice protocol given INR 5.0-9.0 with minor bleeding; do not administer bridging anticoagulation for routine supratherapeutic INR without major bleeding",
-    "Consider recommending low-dose oral vitamin K (1-2.5 mg) per protocol given bleeding symptoms and mechanical valve thrombosis risk if correction is prolonged - communicate recommendation to prescriber/cardiology for order as pharmacist scope requires collaborative order or protocol authority",
+    "Do not routinely give oral vitamin K for this INR/bleeding level per current CHEST (ACCP) antithrombotic guidance; reserve vitamin K for INR >10 or major bleeding, and if considered despite minor bleeding, discuss with cardiology first given overcorrection/valve thrombosis risk in a mechanical valve patient",
     "Recommend INR recheck in 24-48 hours either via clinic lab or home monitor with lab confirmation",
     "Advise patient to discontinue turmeric-ginger supplement until cleared by anticoagulation team given its potential additive bleeding risk",
     "Counsel patient to maintain consistent (not necessarily increased) vitamin K intake going forward rather than drastic changes",
@@ -892,7 +894,8 @@
    "redFlags": [
     "Any report of black/tarry stools, hematemesis, hemoptysis, severe headache, neurological deficits, or heavy uncontrolled bleeding would require immediate referral to emergency care rather than routine protocol management",
     "INR greater than 9 or any major bleeding would require different protocol pathway (e.g., higher-dose vitamin K, possible emergency department evaluation) rather than outpatient telehealth management alone",
-    "Prolonged warfarin interruption without a recheck/resumption plan carries valve thrombosis risk and requires explicit cardiology coordination"
+    "Prolonged warfarin interruption without a recheck/resumption plan carries valve thrombosis risk and requires explicit cardiology coordination",
+    "Routine administration of vitamin K for minor bleeding at INR 5.0-9.0 (rather than reserving it for INR >10 or major bleeding) risks overcorrection and valve thrombosis in a mechanical valve patient"
    ],
    "educationPoints": [
     "Trimethoprim-sulfamethoxazole is a well-documented potent inhibitor of CYP2C9 and significantly potentiates warfarin's anticoagulant effect; patients and non-anticoagulation prescribers often underappreciate this interaction",
@@ -900,6 +903,7 @@
     "Dietary vitamin K consistency, not elimination, is the appropriate counseling message; sudden reductions (e.g., during fasting periods) can destabilize INR as much as sudden increases",
     "Many herbal supplements (turmeric, ginger, fish oil, vitamin E) carry additive bleeding or anticoagulant-potentiating risk and should be systematically screened for in anticoagulation management",
     "Collaborative practice protocols give pharmacists authority to manage routine supratherapeutic INR, but major bleeding, valve thrombosis concerns, or care coordination with other prescribers (e.g., urgent care) require timely communication and may exceed pharmacist unilateral scope",
+    "Current CHEST (2022) guidance for INR 4.5-10 without major bleeding generally favors holding warfarin alone without routine vitamin K; routine vitamin K use in this range, especially in a mechanical valve patient, risks overcorrection and valve thrombosis and should not be presented as a default protocol step without this caveat",
     "Clear, numeric, stepwise communication (dose, recheck timing, when to resume) helps address anxious patients' need for concrete guidance while reinforcing safety"
    ]
   },

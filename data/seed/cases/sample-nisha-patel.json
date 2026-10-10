@@ -1,6 +1,6 @@
 {
  "origin": "sample",
- "reviewed": true,
+ "reviewed": false,
  "profile": {
   "version": 1,
   "actions": [
@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "vitals",
     "name": "Review vital signs from recent visit",
-    "result": "BP 120/85 mmHg, HR 76 bpm, RR 12/min, Temp 98.6°F, SpO2 99% on room air (recorded at hospital discharge follow-up)",
+    "result": "BP 120/85 mmHg, HR 76 bpm, RR 12/min, Temp 98.6\u00b0F, SpO2 99% on room air (recorded at hospital discharge follow-up)",
     "importance": "important",
     "artifactIds": []
    },
@@ -16,7 +16,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "Obtain height, weight, calculate BMI",
-    "result": "Height 5'2\" (157 cm), Weight 145 lbs (65.8 kg), BMI 26.1 kg/m² (overweight range)",
+    "result": "Height 5'2\" (157 cm), Weight 145 lbs (65.8 kg), BMI 26.1 kg/m\u00b2 (overweight range)",
     "importance": "critical",
     "artifactIds": []
    },
@@ -24,7 +24,7 @@
     "id": "a3",
     "kind": "lab",
     "name": "Review HbA1c",
-    "result": "HbA1c 8.8% (target <7.0%) — drawn during recent hospitalization",
+    "result": "HbA1c 8.8% (target <7.0%) \u2014 drawn during recent hospitalization",
     "importance": "critical",
     "artifactIds": []
    },
@@ -48,7 +48,7 @@
     "id": "a6",
     "kind": "lab",
     "name": "Review renal function (BUN/creatinine)",
-    "result": "Urea nitrogen 17 mg/dL (normal), Creatinine 0.9 mg/dL (normal) — no current evidence of nephropathy",
+    "result": "Urea nitrogen 17 mg/dL (normal), Creatinine 0.9 mg/dL (normal) \u2014 no current evidence of nephropathy",
     "importance": "minor",
     "artifactIds": []
    },
@@ -56,7 +56,7 @@
     "id": "a7",
     "kind": "lab",
     "name": "Review liver function (bilirubin)",
-    "result": "Total bilirubin 1.2 mg/dL (upper normal/borderline) — no other LFTs abnormal reported",
+    "result": "Total bilirubin 1.2 mg/dL (upper normal/borderline) \u2014 no other LFTs abnormal reported",
     "importance": "minor",
     "artifactIds": []
    },
@@ -98,7 +98,7 @@
     "id": "a12",
     "kind": "assessment",
     "name": "Screen readiness to change (stage of change)",
-    "result": "Patient endorses understanding need for change but voices uncertainty about how to start and fear of failure — consistent with contemplation stage",
+    "result": "Patient endorses understanding need for change but voices uncertainty about how to start and fear of failure \u2014 consistent with contemplation stage",
     "importance": "important",
     "artifactIds": []
    },
@@ -348,7 +348,7 @@
       {
        "cells": [
         "Temperature",
-        "98.6 °F"
+        "98.6 \u00b0F"
        ]
       },
       {
@@ -372,7 +372,7 @@
       {
        "cells": [
         "BMI",
-        "26.1 kg/m²"
+        "26.1 kg/m\u00b2"
        ]
       }
      ]
@@ -448,7 +448,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "BP 120/85 mmHg, HR 76 bpm, RR 12/min, Temp 98.6°F, SpO2 99% RA"
+    "value": "BP 120/85 mmHg, HR 76 bpm, RR 12/min, Temp 98.6\u00b0F, SpO2 99% RA"
    },
    {
     "label": "Care team",
@@ -956,7 +956,7 @@
     "Use of unverified supplements that could interact with metformin or insulin"
    ],
    "educationPoints": [
-    "Diabetes is a chronic metabolic condition influenced by genetics, physiology, and environment — not simply a result of personal willpower",
+    "Diabetes is a chronic metabolic condition influenced by genetics, physiology, and environment \u2014 not simply a result of personal willpower",
     "Carbohydrate-consistent eating (balanced portions and timing) is generally more sustainable and effective than complete elimination diets",
     "Traditional foods like rice and roti can remain part of her diet through portion awareness and pairing with protein/fiber, not elimination",
     "Regular meal timing, including not skipping breakfast, helps stabilize blood glucose and may reduce evening overeating",

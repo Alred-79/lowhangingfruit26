@@ -26,7 +26,9 @@
     "name": "Review prior pregnancy/miscarriage history",
     "result": "Prior pregnancy loss approximately 1 year ago, diagnosed at ~9 weeks ultrasound; no surgical evacuation documented; no record of ectopic pregnancy in history.",
     "importance": "important",
-    "artifactIds": []
+    "artifactIds": [
+     "d3"
+    ]
    },
    {
     "id": "a4",
@@ -85,14 +87,6 @@
     "artifactIds": []
    },
    {
-    "id": "a11",
-    "kind": "assessment",
-    "name": "Explain transvaginal ultrasound procedure and obtain informed consent",
-    "result": "Procedure, sensations, and alternative of transabdominal-only imaging explained; patient verbalizes understanding and provides verbal consent to proceed with transvaginal portion if needed for better visualization, with option to stop at any time.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
     "id": "a12",
     "kind": "assessment",
     "name": "Offer and document chaperone preference",
@@ -112,7 +106,7 @@
     "id": "a14",
     "kind": "assessment",
     "name": "Review home pregnancy test and recent hCG result",
-    "result": "Home urine pregnancy test positive approximately 2 weeks ago; serum quantitative hCG 14,200 mIU/mL drawn 2 days prior to this call.",
+    "result": "Home urine pregnancy test positive approximately 2 weeks ago; serum quantitative hCG 14,200 mIU/mL drawn 2 days prior to this call. Note: a single hCG value cannot be plotted as a meaningful trend; the urine test only indicates a qualitative positive, not a quantitative hCG level.",
     "importance": "important",
     "artifactIds": [
      "d6"
@@ -235,8 +229,8 @@
     "author": "Dr. R. Okafor, OB/GYN",
     "date": "approx. 1 year ago",
     "release": {
-     "when": "fact",
-     "ref": "f9"
+     "when": "action",
+     "ref": "a3"
     },
     "body": "Patient presented at approximately 9 weeks gestation by dates for spotting. Transvaginal ultrasound performed showing no cardiac activity, consistent with missed miscarriage. Findings discussed with patient; patient expressed distress at the manner in which results were communicated during the visit. Expectant management offered and pursued. No evidence of ectopic pregnancy on that scan. No complications noted at follow-up."
    },
@@ -303,7 +297,7 @@
    {
     "id": "d6",
     "type": "chart",
-    "title": "Serum hCG Trend",
+    "title": "Serum hCG - Single Value (No Trend Available)",
     "author": "Lab/EHR Trend",
     "date": "Today",
     "release": {
@@ -311,7 +305,7 @@
      "ref": "a14"
     },
     "chart": {
-     "kind": "line",
+     "kind": "bar",
      "xLabel": "Days before this visit",
      "yLabel": "hCG (mIU/mL)",
      "series": [
@@ -319,17 +313,14 @@
        "name": "Quantitative hCG",
        "points": [
         {
-         "x": "-14 (home urine test positive)",
-         "y": 0
-        },
-        {
-         "x": "-2",
+         "x": "-2 (serum quantitative hCG)",
          "y": 14200
         }
        ]
       }
      ]
-    }
+    },
+    "body": "Only one quantitative hCG value is available (14,200 mIU/mL, drawn 2 days before this visit). The home urine pregnancy test positive approximately 2 weeks ago was qualitative only and did not include a numeric hCG value, so it cannot be plotted on this chart or used to establish a trend."
    }
   ],
   "chartAtStart": [
@@ -725,7 +716,6 @@
      "f32"
     ],
     "actionIds": [
-     "a11",
      "a12"
     ]
    },

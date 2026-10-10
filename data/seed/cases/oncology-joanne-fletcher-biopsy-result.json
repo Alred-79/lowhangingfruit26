@@ -331,7 +331,7 @@
     "title": "Primary Care Visit Note - 2 Weeks Prior to Diagnosis",
     "date": "5 weeks ago",
     "author": "Dr. L. Martinez, Family Medicine",
-    "body": "49-year-old female presents for annual exam. Reports feeling well overall, no new complaints. States she has been doing self breast exams 'off and on' but admits inconsistent given busy schedule with two teenagers and full-time teaching. Due for screening mammogram, referred today. Family history notable for maternal aunt with ovarian cancer diagnosed age 52; patient was not aware this could be relevant to her own breast cancer risk until counseled today.",
+    "body": "49-year-old female presents for annual exam. Reports feeling well overall, no new complaints. States she has been doing self breast exams 'off and on' but admits inconsistent given busy schedule with two teenagers and full-time teaching. Due for screening mammogram, referred today. Family history notable for maternal aunt with ovarian cancer diagnosed age 52.",
     "release": {
      "when": "start"
     }
@@ -581,8 +581,8 @@
     "id": "f18",
     "category": "family",
     "topic": "awareness of genetic risk",
-    "chart": "Patient was unaware that family history of ovarian cancer could be relevant to her own breast cancer risk until discussed by PCP.",
-    "says": "My doctor mentioned something about my aunt's cancer maybe being connected to mine, but I didn't really understand how that works.",
+    "chart": "Patient reports uncertainty about whether or how her aunt's ovarian cancer history relates to her own breast cancer risk.",
+    "says": "I don't really know if my aunt's cancer has anything to do with mine. Nobody's ever really explained that to me.",
     "tier": "discoverable",
     "importance": "important"
    },
@@ -931,7 +931,7 @@
   ],
   "knowledge": [],
   "rubricId": "default",
-  "difficulty": 3,
+  "difficulty": 4,
   "variants": [],
   "title": "Breaking the news of newly diagnosed stage II invasive breast cancer in a 49-year-old single mother",
   "summary": "A 49-year-old premenopausal woman with a screening-detected breast mass undergoes biopsy showing invasive ductal carcinoma (ER+/PR+/HER2-) with positive axillary node (clinical stage IIB). She expects benign news and asks directly about mortality when the diagnosis is disclosed. The case teaches breaking difficult news in oncology, explaining staging and receptor biology in plain language, responding to direct prognostic questions, recognizing genetic counseling indications, and coordinating multidisciplinary breast cancer care while addressing psychosocial distress in a single mother.",

@@ -32,8 +32,8 @@
     "id": "a4",
     "kind": "vitals",
     "name": "Ask patient to count her own respiratory rate for 30 seconds",
-    "result": "Respiratory rate 20/min, patient reports no sense of breathlessness while counting",
-    "importance": "important",
+    "result": "Respiratory rate 20/min (upper limit of normal), patient reports no sense of breathlessness while counting",
+    "importance": "minor",
     "artifactIds": []
    },
    {
@@ -215,7 +215,7 @@
       },
       {
        "cells": [
-        "Today",
+        "Today (same reading as reported at start of call)",
         "164/98",
         "104"
        ],

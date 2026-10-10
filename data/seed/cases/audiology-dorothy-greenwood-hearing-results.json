@@ -16,7 +16,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "Calculate pure tone average and compare interaural asymmetry",
-    "result": "PTA (500/1000/2000 Hz): Right 28 dB HL, Left 48 dB HL. Asymmetry of 20 dB confirmed at multiple frequencies, meeting criteria for asymmetric sensorineural hearing loss.",
+    "result": "PTA (500/1000/2000 Hz): Right 25 dB HL, Left 47 dB HL. Asymmetry of 20 dB confirmed at multiple frequencies, meeting criteria for asymmetric sensorineural hearing loss.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -87,27 +87,11 @@
     "artifactIds": []
    },
    {
-    "id": "a11",
-    "kind": "record",
-    "name": "Ask about family history of hearing loss or genetic ear conditions",
-    "result": "Patient reports her mother had gradual hearing loss in her 70s-80s; no known family history of sudden or asymmetric hearing loss, no known family history of acoustic neuroma or neurofibromatosis.",
-    "importance": "minor",
-    "artifactIds": []
-   },
-   {
     "id": "a12",
     "kind": "record",
     "name": "Review current medication list for ototoxic agents",
     "result": "Medication list reviewed; no ototoxic medications (e.g., aminoglycosides, high-dose loop diuretics, platinum chemotherapy) currently prescribed.",
     "importance": "minor",
-    "artifactIds": []
-   },
-   {
-    "id": "a13",
-    "kind": "assessment",
-    "name": "Discuss candidacy and counseling for hearing aid amplification pending medical clearance",
-    "result": "Patient counseled that bilateral amplification is likely appropriate once medical evaluation rules out other causes; recommend holding definitive hearing aid fitting decision until ENT/MRI results are back, though a trial device discussion can proceed in parallel if the patient wishes.",
-    "importance": "important",
     "artifactIds": []
    }
   ],
@@ -698,9 +682,7 @@
      "f25",
      "f30"
     ],
-    "actionIds": [
-     "a13"
-    ]
+    "actionIds": []
    }
   ],
   "answerKey": {
@@ -712,7 +694,7 @@
     "Sudden or progressive idiopathic unilateral sensorineural hearing loss of other etiology"
    ],
    "keyFindings": [
-    "Interaural asymmetry exceeding 20 dB at multiple frequencies (right PTA 28 dB HL vs left PTA 48 dB HL)",
+    "Interaural asymmetry exceeding 20 dB at multiple frequencies (right PTA 25 dB HL vs left PTA 47 dB HL)",
     "Left ear word recognition score (64%) poorer than predicted for degree of pure-tone loss",
     "Constant unilateral (left-sided) non-pulsatile tinnitus of 1 year duration",
     "Occasional brief unsteadiness with quick head turns, though no frank vertigo or falls",
@@ -750,7 +732,8 @@
    "ethnicity": "White",
    "occupation": "Retired court stenographer",
    "language": "English",
-   "appearance": "A trim, silver-haired woman sits upright at a kitchen table with good overhead lighting, wearing a crisp cardigan and reading glasses pushed up on her head. Her posture is alert and her expression is often wry or slightly guarded, with sharp, attentive eyes that track the screen closely. A faint ringing-related tension shows in brief pauses when she turns her head toward sounds off-camera."
+   "appearance": "A trim, silver-haired woman sits upright at a kitchen table with good overhead lighting, wearing a crisp cardigan and reading glasses pushed up on her head. Her posture is alert and her expression is often wry or slightly guarded, with sharp, attentive eyes that track the screen closely. A faint ringing-related tension shows in brief pauses when she turns her head toward sounds off-camera.",
+   "portrait": "/portraits/audiology-dorothy-greenwood-hearing-results.jpg"
   },
   "persona": {
    "personality": "Sharp-witted, proud, and a little defensive; values precision and self-sufficiency from decades of exacting courtroom work.",

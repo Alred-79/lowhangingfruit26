@@ -103,7 +103,7 @@
     "id": "a11",
     "kind": "record",
     "name": "Calculate CHA2DS2-VASc score",
-    "result": "CHA2DS2-VASc = 3 (hypertension 1 + diabetes 1 + age 61 does not add a point... ) -- recalculated: hypertension (1) + diabetes (1) + vascular disease (0) + age 65-74 (0, patient is 61) = 2 points; estimated annual stroke risk approximately 2.2%.",
+    "result": "CHA2DS2-VASc = 2 (hypertension 1 point + diabetes 1 point + age 61 [0, below 65 threshold] + male sex [0 points]); estimated annual stroke risk approximately 2.2%.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -111,16 +111,7 @@
     "id": "a12",
     "kind": "test",
     "name": "Administer STOP-BANG obstructive sleep apnea screening questionnaire",
-    "result": "Snoring and apnea-related questions should be posed directly to the patient to elicit components (loud snoring, witnessed apneas, daytime sleepiness, hypertension, BMI, age, neck circumference, male sex); score to be tallied based on patient's answers during the interview.",
-    "importance": "important",
-    "abnormal": false,
-    "artifactIds": []
-   },
-   {
-    "id": "a13",
-    "kind": "test",
-    "name": "Ask about home pulse oximetry overnight spot-checks",
-    "result": "Prompt the patient about any home oximeter use and nocturnal symptoms; any desaturation history is self-reported and should be explored through direct questioning rather than treated as a validated recorded result.",
+    "result": "Patient endorses loud snoring, witnessed apneas (per wife), daytime sleepiness, and hypertension on direct questioning; BMI 29.7 (not >35), age 61 (not >50 threshold not met for this component per standard cutoff... ) - components should be tallied from the interview; no validated composite score has been calculated or recorded in the chart.",
     "importance": "important",
     "abnormal": false,
     "artifactIds": []
@@ -373,7 +364,7 @@
     "release": {
      "when": "start"
     },
-    "body": "Mr. Adeyemi is a 61-year-old man with hypertension and type 2 diabetes who presents after his smartwatch flagged an irregular rhythm notification. He reports approximately 2 months of intermittent palpitations described as 'fluttering,' lasting hours, associated with fatigue. No syncope. Referred for cardiology evaluation, confirmation of arrhythmia, and discussion of anticoagulation given his risk factors. Anticoagulation discussion requested; would appreciate counseling on options if appropriate."
+    "body": "Mr. Adeyemi is a 61-year-old man with hypertension and type 2 diabetes who presents after his smartwatch flagged an irregular rhythm notification. He reports approximately 2 months of intermittent palpitations described as 'fluttering,' lasting hours, associated with fatigue. No syncope. Referred for cardiology evaluation and discussion of anticoagulation given his risk factors, pending confirmatory ambulatory monitoring. Anticoagulation discussion requested; would appreciate counseling on options if appropriate."
    },
    {
     "id": "d7",
@@ -523,7 +514,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Hypertension; Type 2 diabetes mellitus; Paroxysmal atrial fibrillation (newly diagnosed, pending consult), CHA2DS2-VASc 2"
+    "value": "Hypertension; Type 2 diabetes mellitus; Paroxysmal atrial fibrillation, confirmed on 14-day patch monitor (9% burden), CHA2DS2-VASc 2, pending cardiology management plan"
    },
    {
     "label": "Medications",
@@ -878,8 +869,7 @@
     ],
     "actionIds": [
      "a7",
-     "a12",
-     "a13"
+     "a12"
     ]
    },
    {
@@ -917,11 +907,11 @@
    }
   ],
   "answerKey": {
-   "primaryProblem": "Paroxysmal atrial fibrillation (9% burden on 14-day monitor, rates to 148/min) with preserved ejection fraction, in a patient with hypertension and diabetes (CHA2DS2-VASc 2), with likely contributing untreated obstructive sleep apnea and alcohol-related triggering.",
+   "primaryProblem": "Paroxysmal atrial fibrillation (9% burden on 14-day monitor, rates to 148/min) with preserved ejection fraction, in a patient with hypertension and diabetes (CHA2DS2-VASc 2), with possible contributing undiagnosed obstructive sleep apnea and alcohol-related triggering.",
    "differential": [
     "Paroxysmal atrial fibrillation (confirmed)",
     "Alcohol-triggered atrial fibrillation ('holiday heart' pattern) contributing to episodes",
-    "Obstructive sleep apnea as a reversible contributor/trigger to AF",
+    "Obstructive sleep apnea as a possible reversible contributor/trigger to AF, warranting screening and sleep study referral",
     "Thyrotoxicosis-related atrial fibrillation (excluded by normal TSH/T4)",
     "Anxiety or stimulant-related palpitations (excluded given objective monitor-documented AF)"
    ],
@@ -930,13 +920,13 @@
     "Echocardiogram: EF 55%, mildly dilated LA, no valvular disease, no thrombus seen",
     "CHA2DS2-VASc score = 2 (hypertension, diabetes)",
     "TSH and renal/liver labs normal; A1c 7.2% (mildly above goal)",
-    "STOP-BANG score 5/8 and witnessed apneas/snoring with overnight desaturation to 88% suggest high probability of moderate-to-severe OSA",
+    "History of witnessed apneas/loud snoring per wife and reluctantly-disclosed daytime sleepiness raises suspicion for OSA, but no validated STOP-BANG score or objective oximetry data has been obtained in this case - formal sleep evaluation is needed",
     "Several worst palpitation episodes occurred the morning after weekend wine intake",
     "Home log shows intermittent irregular/elevated resting pulse and BP spikes despite reported perfect losartan adherence"
    ],
    "plan": [
-    "Discuss CHA2DS2-VASc score of 2 and recommend oral anticoagulation per guidelines; explore patient's specific fears about warfarin and offer a direct oral anticoagulant (e.g., apixaban or rivaroxaban) as an alternative with lower intracranial hemorrhage risk, pending renal function review (eGFR 82, dosing appropriate)",
-    "Refer for formal in-lab or home polysomnography given high STOP-BANG score and witnessed apneas; treating OSA may reduce AF burden",
+    "Discuss CHA2DS2-VASc score of 2 and recommend oral anticoagulation per guidelines; explore patient's specific fears about warfarin and offer a direct oral anticoagulant (e.g., apixaban or rivaroxaban) as an alternative with lower intracranial hemorrhage risk; renal function (eGFR 82, creatinine 1.0) does not require dose reduction, noting that apixaban dose reduction criteria are based on age ≥80, weight ≤60kg, and creatinine ≥1.5 mg/dL (none met) rather than eGFR alone, and rivaroxaban dosing is adjusted only at eGFR <50",
+    "Refer for formal in-lab or home polysomnography given reported snoring, witnessed apneas, and daytime sleepiness suggestive of OSA; treating OSA may reduce AF burden",
     "Counsel on reducing/eliminating weekend alcohol intake given temporal association with episodes",
     "Continue losartan for hypertension; coordinate with primary care on optimizing blood pressure control given variable home readings",
     "Discuss rate vs rhythm control strategy; given symptomatic episodes and patient interest, consider referral to electrophysiology for discussion of catheter ablation; AF burden and LA size do not currently suggest urgent need for left atrial appendage closure device, which is typically reserved for anticoagulation-ineligible patients",
@@ -952,7 +942,8 @@
    "educationPoints": [
     "CHA2DS2-VASc score of 2 in a male patient meets threshold for guideline-recommended anticoagulation regardless of AF burden percentage",
     "Direct oral anticoagulants have significantly lower rates of intracranial hemorrhage compared to warfarin, which is important when counseling patients with a family history of warfarin-associated bleeding",
-    "Obstructive sleep apnea is a major modifiable risk factor for atrial fibrillation recurrence and burden; screening (STOP-BANG) and treatment should be part of comprehensive AF management",
+    "DOAC dose-reduction criteria are drug-specific and based on age, weight, and creatinine (apixaban) or creatinine clearance (rivaroxaban) rather than eGFR alone; eGFR is used mainly to confirm adequate renal function and screen for contraindication",
+    "Obstructive sleep apnea is a major modifiable risk factor for atrial fibrillation recurrence and burden; screening (e.g., STOP-BANG) and treatment should be part of comprehensive AF management, though a formal diagnosis requires sleep study referral rather than interview alone",
     "Alcohol, even in a weekend-only 'binge' pattern, can precipitate atrial fibrillation episodes ('holiday heart') and should be addressed in lifestyle counseling",
     "Patient-reported medication adherence should be corroborated with objective home monitoring data when available, as perceived adherence does not always correlate with consistent physiologic control"
    ]
@@ -983,7 +974,8 @@
    "ethnicity": "Nigerian-American",
    "occupation": "Accountant",
    "language": "English",
-   "appearance": "A trim, neatly dressed man in his early sixties with short greying hair, wearing a collared shirt, seated at a home office desk with a laptop and stacks of tax documents visible in the background. He appears alert and articulate, with an attentive but slightly tense expression, occasionally glancing at notes he has prepared for the visit."
+   "appearance": "A trim, neatly dressed man in his early sixties with short greying hair, wearing a collared shirt, seated at a home office desk with a laptop and stacks of tax documents visible in the background. He appears alert and articulate, with an attentive but slightly tense expression, occasionally glancing at notes he has prepared for the visit.",
+   "portrait": "/portraits/cardiology-samuel-adeyemi-palpitations.jpg"
   },
   "persona": {
    "personality": "Analytical, detail-oriented, and somewhat anxious; takes a methodical approach to his health the same way he approaches his accounting work.",
