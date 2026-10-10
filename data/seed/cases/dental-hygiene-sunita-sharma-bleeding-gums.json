@@ -752,14 +752,14 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are seeing Sunita Sharma, a 52-year-old bank branch manager, for a tele-hygiene oral health risk assessment. She booked this visit because her gums bleed when she brushes and her husband has mentioned her breath. Review her medical history and medications, gather an oral health history, guide her through a camera-based oral exam and home-care demonstration, assess her risk for periodontal disease, caries, and oral cancer, and provide hygiene instruction and counseling. Identify any findings that need referral to her dentist.",
+   "studentBrief": "You are seeing Sunita Sharma, a 52-year-old bank branch manager, for a tele-hygiene oral health risk assessment. She booked this visit because her gums bleed when she brushes and her husband has mentioned her breath. Review her medical history and medications, gather an oral health history, guide her through a camera-based oral exam and home-care demonstration, assess her risk, and provide hygiene instruction and counseling.",
    "chiefComplaint": "Bleeding gums with brushing and spouse-noted bad breath",
    "openingLine": "Hi, thanks for fitting me in - my gums have been bleeding a lot when I brush, and my husband's mentioned my breath isn't great lately, so I wanted to get it checked out.",
    "tasks": [
-    "Take a focused oral health and medical/medication history relevant to periodontal and caries risk",
-    "Guide the patient through a camera-based visual exam of the gingiva, tongue, and oral mucosa, and a bleeding-on-brushing check",
-    "Assess home care technique (brushing, flossing, mouthwash) via demonstration and identify specific corrections needed",
-    "Screen for tobacco and areca nut/paan use as an oral cancer risk factor using direct, non-judgmental questioning",
+    "Take a focused oral health and medical/medication history relevant to the presenting concern",
+    "Guide the patient through a camera-based visual exam of the gingiva, tongue, and oral mucosa",
+    "Assess home care technique via demonstration and identify specific corrections needed",
+    "Screen for tobacco and substance use as part of a comprehensive oral health risk assessment",
     "Provide oral hygiene instruction and prevention counseling, and determine what findings should be referred to the dentist"
    ],
    "timeLimitMin": 20

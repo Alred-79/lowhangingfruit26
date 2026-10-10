@@ -855,15 +855,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the athletic training student covering today's follow-up visit for Destiny Williams, a 16-year-old varsity point guard who sustained a concussion 6 days ago during a game. She is requesting clearance to play in Friday's regional semifinal. Baseline balance and cognitive test data are available in her chart. Conduct a focused interview and remote assessment, review available testing, and determine next steps regarding return-to-learn and return-to-sport, including whether physician clearance is required.",
+   "studentBrief": "You are the athletic training student covering today's follow-up visit for Destiny Williams, a 16-year-old varsity point guard who sustained a concussion 6 days ago during a game. She is requesting clearance to play in Friday's regional semifinal. Baseline balance and cognitive test data are available in her chart.",
    "chiefComplaint": "6-day follow-up after concussion; athlete requesting clearance to play Friday's game",
    "openingLine": "Hey! So I'm here to get cleared, right? I feel like a hundred percent, I just need you to sign off before Friday's game.",
    "tasks": [
-    "Conduct an honest, non-leading symptom assessment that cross-checks athlete self-report against collateral/parent information",
-    "Administer and interpret serial balance and neurocognitive testing against documented baseline",
-    "Identify gaps in graduated return-to-learn and explain why academic cognitive rest must precede return-to-sport progression",
-    "Correctly determine that physician clearance is required before any contact/competition stage and communicate that clearance cannot be given today",
-    "Respond professionally and empathetically to pressure from the athlete (and reported coach pressure) while keeping the athlete's trust"
+    "Take a focused history of the presenting concern and current symptoms",
+    "Perform balance and neurocognitive testing",
+    "Review return-to-learn status and academic accommodations with the athlete",
+    "Discuss return-to-sport protocol and next steps",
+    "Respond to the athlete's questions and concerns while maintaining rapport"
    ],
    "timeLimitMin": 22
   },

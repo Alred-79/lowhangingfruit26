@@ -907,15 +907,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are seeing Samira Haddad, a 34-year-old architect, for an initial dietetics telehealth visit. She was diagnosed with celiac disease 3 weeks ago by her gastroenterologist and was referred to you for gluten-free diet education. She believes she has been strictly gluten-free since diagnosis but still has some symptoms. Review her chart, take a thorough diet history, assess for barriers, and provide patient-centered education.",
+   "studentBrief": "You are seeing Samira Haddad, a 34-year-old architect, for a dietetics telehealth visit. She was diagnosed with celiac disease 3 weeks ago by her gastroenterologist and was referred to you for nutrition education and support. She reports she has been following a gluten-free diet since diagnosis but continues to experience some mild gastrointestinal symptoms. Review her chart and conduct a comprehensive nutrition assessment.",
    "chiefComplaint": "Follow-up nutrition visit after new celiac disease diagnosis; patient reports ongoing mild GI symptoms despite believing she is fully gluten-free.",
    "openingLine": "My doctor sent me here because I was just diagnosed with celiac disease and I need help figuring out this gluten-free thing. I thought I had it handled but I'm still bloated sometimes.",
    "tasks": [
-    "Take a detailed diet history to identify hidden sources of gluten and cross-contact risk",
-    "Review relevant labs (ferritin, hemoglobin, vitamin D, tTG-IgA) and relate them to the nutrition diagnosis",
-    "Explore cultural and family-related barriers to adherence using patient-centered, non-judgmental communication",
-    "Provide practical, culturally appropriate education on safe swaps and label reading",
-    "Develop a follow-up and monitoring plan, including when to involve her physician for supplementation"
+    "Take a detailed diet history focusing on the presenting concern",
+    "Review relevant laboratory results and relate them to nutrition status",
+    "Explore any barriers to dietary management using patient-centered, non-judgmental communication",
+    "Provide practical, evidence-based nutrition education appropriate to the patient's needs",
+    "Develop a follow-up and monitoring plan"
    ],
    "timeLimitMin": 25
   },

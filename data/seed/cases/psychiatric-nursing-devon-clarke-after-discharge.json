@@ -722,11 +722,11 @@
    "chiefComplaint": "Restlessness and stiffness since starting antipsychotic medication after recent psychiatric hospitalization",
    "openingLine": "They told me I had to do this check-in call since I got out of the hospital. I guess I'm okay, just... I can't sit still, it's driving me crazy.",
    "tasks": [
-    "Perform a mental status exam and assess for residual psychotic symptoms",
+    "Perform a mental status exam and assess current symptoms",
     "Screen for suicidal/homicidal ideation and overall safety",
-    "Assess for extrapyramidal side effects (akathisia, rigidity) and differentiate from psychiatric relapse",
-    "Explore medication adherence, including gently addressing any discrepancy with pharmacy records",
-    "Provide psychoeducation on side effects and adherence, and identify when to escalate to the prescriber or increase visit frequency versus manage within nursing scope"
+    "Take a focused history of the presenting concern",
+    "Review the medication list with the patient",
+    "Provide education and agree a plan with appropriate safety-netting"
    ],
    "timeLimitMin": 25
   },

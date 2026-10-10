@@ -743,15 +743,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a genetic counseling student conducting a telehealth pre-test counseling session with Rebecca Levy, a 38-year-old woman referred by her gynecologist because of a strong maternal family history of breast and ovarian cancer and Ashkenazi Jewish ancestry. She has not had cancer herself and no one in her family has been genetically tested. She is requesting 'the BRCA test' and wants to move quickly. Your tasks are to gather a complete three-generation family history, assess hereditary cancer risk, and provide informed-consent-level pre-test counseling before any test is ordered.",
+   "studentBrief": "You are a genetic counseling student conducting a telehealth pre-test counseling session with Rebecca Levy, a 38-year-old woman referred by her gynecologist for consideration of genetic testing. She has a family history of breast and ovarian cancer and is of Ashkenazi Jewish ancestry. She has not had cancer herself and no one in her family has been genetically tested. She is requesting genetic testing and wants to move quickly. Your tasks are to gather a complete three-generation family history, assess hereditary cancer risk, and provide informed-consent-level pre-test counseling.",
    "chiefComplaint": "Request for BRCA genetic testing due to family history of breast and ovarian cancer",
    "openingLine": "Hi, thanks for seeing me - my gynecologist referred me here because of my family's cancer history. I'd really like to just get the BRCA test done, if that's possible.",
    "tasks": [
-    "Construct a complete three-generation pedigree, including ancestry and noting any unknown/non-contributory branches",
+    "Construct a complete three-generation pedigree, including ancestry and noting any unknown or non-contributory branches",
     "Assess whether the family history meets criteria for hereditary cancer genetic testing and explain the reasoning to the patient",
-    "Provide pre-test counseling on inheritance pattern, possible result categories (including VUS), and correct any misconceptions about what a positive result means for management",
-    "Counsel on GINA's protections and limitations, and on implications for relatives including any disclosed family tension around testing",
-    "Support the patient in choosing a testing strategy and obtain informed consent before placing any order"
+    "Provide pre-test counseling on inheritance pattern, possible result categories, and management implications",
+    "Counsel on genetic discrimination protections and limitations, and explore implications for relatives",
+    "Support the patient in choosing a testing strategy and obtain informed consent"
    ],
    "timeLimitMin": 25
   },

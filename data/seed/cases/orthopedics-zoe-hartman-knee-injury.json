@@ -748,11 +748,11 @@
    "chiefComplaint": "Follow-up visit to review MRI results and discuss treatment options after right knee twisting injury 3 weeks ago, with ongoing instability on stairs.",
    "openingLine": "Hi, thanks for seeing me — I'm here to find out what my MRI showed and figure out what we're doing about my knee. I've got a big tournament coming up.",
    "tasks": [
-    "Obtain a focused history of the injury mechanism, subsequent instability episodes, and current functional status",
-    "Perform a guided remote knee examination within telehealth limitations (inspection, active ROM, patient-assisted stability testing)",
-    "Explain the MRI findings in understandable terms, including the ACL tear, meniscus tear, bone bruising, and significance of closed growth plates",
-    "Discuss operative versus non-operative treatment options and clearly address whether bracing alone is appropriate for return to pivoting sport",
-    "Set a realistic return-to-sport timeline and address the conflict with the patient's 10-week showcase tournament goal with empathy, and arrange prehabilitation/physical therapy referral follow-up"
+    "Take a focused history of the injury mechanism, subsequent symptoms, and current functional status",
+    "Perform a guided remote knee examination within telehealth limitations",
+    "Review and explain the MRI findings to the patient and family",
+    "Discuss treatment options appropriate for the patient's presentation and goals",
+    "Agree a management plan, set expectations for recovery timeline, and arrange appropriate follow-up"
    ],
    "timeLimitMin": 20
   },

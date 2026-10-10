@@ -799,11 +799,11 @@
    "chiefComplaint": "Asthma follow-up visit after an emergency department visit for an exacerbation two weeks ago.",
    "openingLine": "I'm here for my asthma check-up thing after I went to the ER.",
    "tasks": [
-    "Take a focused history of asthma control (daytime, nighttime, exertional symptoms, rescue inhaler use) since the ED visit",
-    "Review inhaler/controller technique and adherence, using the camera to observe technique",
+    "Take a focused history of asthma symptoms since the emergency department visit",
+    "Review inhaler technique and adherence, using the camera to observe technique",
     "Establish confidential time with the adolescent and screen for substance use and psychosocial concerns",
-    "Identify environmental/trigger factors contributing to poor control (e.g., new pet, allergens)",
-    "Formulate and communicate an asthma action plan and follow-up plan appropriate to a pediatric resident's scope, including when escalation or referral is needed"
+    "Identify environmental and trigger factors",
+    "Formulate and communicate an asthma action plan and follow-up plan appropriate to a pediatric resident's scope"
    ],
    "timeLimitMin": 25
   },

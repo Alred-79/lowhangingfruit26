@@ -724,10 +724,10 @@
    "openingLine": "Hey, so my right eye has been really red and sore since yesterday morning, it's watering a lot and bright light is killing it, and my vision's kind of blurry too.",
    "tasks": [
     "Take a thorough history of the eye complaint including onset, pain, discharge, and vision changes",
-    "Elicit contact lens wear and hygiene history, including sensitive details the patient may initially minimize",
-    "Perform feasible remote exam elements: camera inspection, request a close-up photo, check visual acuity at home, and ask about photophobia",
-    "Identify red flag findings suggestive of microbial keratitis and determine this requires urgent in-person referral rather than telehealth management alone",
-    "Clearly communicate to the patient why he must stop lens wear, discontinue the borrowed eye drops, and seek same-day in-person care, addressing his concerns about work"
+    "Take a detailed contact lens wear and hygiene history",
+    "Perform feasible remote exam elements: camera inspection, request a close-up photo, check visual acuity at home, and assess light sensitivity",
+    "Assess the severity of the presentation and determine the appropriate level and urgency of care",
+    "Communicate your management plan to the patient, including advice on contact lens wear and next steps"
    ],
    "timeLimitMin": 20
   },

@@ -844,11 +844,11 @@
    "chiefComplaint": "Uncontrolled upper abdominal pain and uncertainty about pursuing further chemotherapy after disease progression",
    "openingLine": "My oncologist sent me to see you. I have this pain in my stomach that goes to my back, and frankly, I'm not sure what I want to do next about the chemotherapy.",
    "tasks": [
-    "Assess and address her pain, constipation, and overall symptom burden, including barriers to adequate opioid use",
-    "Explore her understanding of her illness and elicit her personal goals and values, including what she has and has not told her family",
-    "Respond honestly and compassionately to her direct questions about prognosis, using available records",
-    "Identify the lack of an advance directive and documented code status and discuss next steps for advance care planning",
-    "Assess caregiver strain and plan an approach to a family meeting given the apparent conflict between her wishes and her son's"
+    "Take a focused history of her pain and other symptoms, and review her current medication use",
+    "Explore her understanding of her illness and elicit her personal goals and values",
+    "Respond to her questions about prognosis using available information",
+    "Review advance care planning status and discuss next steps",
+    "Assess caregiver support and discuss options for family communication"
    ],
    "timeLimitMin": 30
   },

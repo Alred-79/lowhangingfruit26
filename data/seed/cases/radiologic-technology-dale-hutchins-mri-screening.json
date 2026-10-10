@@ -829,14 +829,14 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a radiologic technology student performing a telehealth pre-imaging safety screening call with Dale Hutchins, 58, who is scheduled for a lumbar spine MRI without/with gadolinium contrast in 3 days for leg pain and suspected spinal stenosis after prior back surgery. He has already submitted a paper screening form. Your job is to verify his identity and the order, conduct a thorough verbal MRI safety and contrast-risk screening beyond the paper form, inspect what you can by camera, and flag any concerns to the radiologist before the exam proceeds.",
+   "studentBrief": "You are a radiologic technology student performing a telehealth pre-imaging safety screening call with Dale Hutchins, 58, who is scheduled for a lumbar spine MRI without/with gadolinium contrast in 3 days. He has already submitted a paper screening form. Your job is to verify his identity and the order, conduct a thorough verbal MRI safety and contrast-risk screening beyond the paper form, inspect what you can by camera, and flag any concerns to the radiologist before the exam proceeds.",
    "chiefComplaint": "Pre-MRI safety screening for scheduled lumbar spine MRI with/without contrast, in a patient with leg pain and suspected spinal stenosis after prior fusion surgery.",
    "openingLine": "Hey there, I'm calling about my MRI I've got coming up for my back and this leg pain I've been having. I already filled out that form, so I think we're good to go.",
    "tasks": [
-    "Verify patient identity and confirm the imaging order matches the clinical indication.",
-    "Conduct a structured verbal MRI safety interview covering implants, devices, metal exposure, patches, and tattoos, beyond what the paper form indicated.",
-    "Screen for contrast-related risk factors including renal function, metformin use, and allergy history.",
-    "Screen for claustrophobia/anxiety history and prior scanner tolerance.",
+    "Verify patient identity and confirm the imaging order.",
+    "Conduct a structured verbal MRI safety interview covering implants, devices, metal exposure, patches, and tattoos.",
+    "Screen for contrast-related risk factors including renal function, medication use, and allergy history.",
+    "Screen for prior MRI experience and scanner tolerance.",
     "Document findings and escalate appropriate concerns to the radiologist before the scheduled exam."
    ],
    "timeLimitMin": 20

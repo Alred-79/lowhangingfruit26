@@ -847,15 +847,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a respiratory therapy student conducting a telehealth 6-week CPAP follow-up visit with Stefan Jovanovic, a 51-year-old man who started auto-CPAP therapy for severe obstructive sleep apnea (diagnostic AHI 38/hr, oxygen nadir 79%). The device download and today's vitals are already in the chart. Your job is to review his equipment data, assess how therapy is going, troubleshoot any barriers to use, and provide coaching. Do not assume his report of 'wearing it all night' is accurate without checking the record.",
+   "studentBrief": "You are a respiratory therapy student conducting a telehealth 6-week CPAP follow-up visit with Stefan Jovanovic, a 51-year-old man who started auto-CPAP therapy for severe obstructive sleep apnea (diagnostic AHI 38/hr, oxygen nadir 79%). The device download and today's vitals are already in the chart. Your job is to review his equipment data, assess how therapy is going, troubleshoot any barriers to use, and provide coaching.",
    "chiefComplaint": "6-week CPAP follow-up for severe obstructive sleep apnea",
    "openingLine": "Hi, thanks for having me on the call. I've had this CPAP machine for about six weeks now, so I guess you're checking in on how it's going?",
    "tasks": [
     "Review the CPAP download data and compare it with the patient's self-reported adherence",
     "Visually inspect the mask fit, humidifier chamber, and device settings on camera",
-    "Identify and troubleshoot barriers to adherence (mask leak, dryness, claustrophobia)",
-    "Screen sensitively for safety concerns related to daytime sleepiness, including at work",
-    "Provide education and a clear follow-up plan, escalating findings to the sleep medicine team as appropriate"
+    "Take a focused history of barriers to CPAP use",
+    "Screen for daytime sleepiness and its impact on daily activities",
+    "Provide education and agree a follow-up plan"
    ],
    "timeLimitMin": 20
   },

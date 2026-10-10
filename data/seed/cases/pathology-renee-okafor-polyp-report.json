@@ -716,15 +716,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a pathology resident holding a patient-requested telehealth consultation. Renee Okafor, 44, had her first colonoscopy after a positive stool screening test, during which a 14 mm polyp was removed. She found her pathology report on the patient portal, which reads 'tubular adenoma with focal high-grade dysplasia; stalk margin negative for dysplasia; no invasive carcinoma.' She believes this means she has cancer and requested to speak with pathology directly because her gastroenterology follow-up is three weeks away. Your task is to explain the specimen and diagnosis in plain language, clarify what is and is not known, and hand back management decisions to her gastroenterologist.",
+   "studentBrief": "You are a pathology resident holding a patient-requested telehealth consultation. Renee Okafor, 44, had her first colonoscopy after a positive stool screening test, during which a 14 mm polyp was removed. She found her pathology report on the patient portal and requested to speak with pathology directly because her gastroenterology follow-up is three weeks away. Your task is to explain the specimen and diagnosis in plain language, clarify what is and is not known, and hand back management decisions to her gastroenterologist.",
    "chiefComplaint": "Patient-requested explanation of colon polyp pathology report; fears the report means she has cancer",
    "openingLine": "Thank you for seeing me on such short notice. I got my pathology results on the portal and it says I have 'high-grade dysplasia,' and from what I've read online, I'm worried that means I have cancer. My gastroenterologist appointment isn't for three more weeks and I couldn't just sit with this.",
    "tasks": [
-    "Explain in plain language what tissue was examined and what the diagnosis terms mean (tubular adenoma, high-grade dysplasia, pedunculated, margin negative)",
-    "Clearly state what is known (no invasive cancer found, margin clear) and what remains outside pathology's determination (future surveillance interval, need for additional procedures)",
-    "Address the patient's specific fears about residual cancer and explain why no chemotherapy or additional surgery is being recommended",
-    "Discuss the relevance of her family history (brother with polyps) without overstepping into ordering genetic testing or making management recommendations",
-    "Appropriately hand back decisions about surveillance timing and any genetic counseling referral to her gastroenterologist"
+    "Explain in plain language what tissue was examined and what the pathology terms in the report mean",
+    "Clearly state what is known from the pathology examination and what remains outside pathology's determination (such as surveillance interval or need for additional procedures)",
+    "Address the patient's concerns and questions about the findings",
+    "Discuss any relevant family history without overstepping into ordering tests or making management recommendations",
+    "Appropriately hand back decisions about surveillance timing and any further referrals to her gastroenterologist"
    ],
    "timeLimitMin": 20
   },

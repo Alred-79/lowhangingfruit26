@@ -1061,15 +1061,15 @@
    "background": "Worked 41 years as a machinist at a tool-and-die plant in Dayton and still keeps a lathe in the garage. Widowed four years ago; his daughter lives ten minutes away, visits most days and fills his weekly pill organiser on Sundays. Follows the Cincinnati Reds on the radio and does the newspaper crossword every morning."
   },
   "scenario": {
-   "studentBrief": "You are a pharmacy student on clinical rotation conducting a telehealth comprehensive medication review (MTM visit) for Harold Jennings, an 81-year-old man referred by his primary care physician after two falls in the past month and new reports of evening confusion. His daughter manages a weekly pill organizer but he also keeps extra bottles at his armchair. Review his history, medication list, labs, and vitals; interview him directly to complete a best possible medication history; identify drug therapy problems; and prepare recommendations for the referring prescriber. He may not initially volunteer everything - build rapport to uncover the full picture.",
+   "studentBrief": "You are a pharmacy student on clinical rotation conducting a telehealth comprehensive medication review (MTM visit) for Harold Jennings, an 81-year-old man referred by his primary care physician after two falls in the past month and new reports of evening confusion. His daughter manages a weekly pill organizer but he also keeps extra bottles at his armchair. Review his history, medication list, labs, and vitals; interview him directly to complete a best possible medication history; and prepare recommendations for the referring prescriber.",
    "chiefComplaint": "Referral for medication review after two falls in the past month and new evening confusion, per daughter's report.",
    "openingLine": "Hi there, come on in - well, I guess that's not quite right for one of these video calls, is it? My daughter set this up because I've had a couple of falls and she says I get a little foggy some evenings.",
    "tasks": [
-    "Obtain a best possible medication history including OTC and herbal products not on the official list",
-    "Identify and reconcile the mismatch between patient's reported adherence and objective pharmacy fill/refill data",
-    "Assess for medication-related causes of falls and evening confusion using available vitals, labs, and anticholinergic/sedative burden screening",
-    "Formulate a drug therapy problem list and specific recommendations to communicate to the referring prescriber, respecting pharmacist scope of practice",
-    "Address the patient's adherence behaviors and fears about losing independence with empathy while still gathering needed safety information"
+    "Obtain a best possible medication history including OTC and herbal products",
+    "Review the medication list with the patient and reconcile any discrepancies between reported use and pharmacy records",
+    "Take a focused history of the falls and confusion episodes",
+    "Assess for potential drug therapy problems using available vitals and laboratory data",
+    "Formulate recommendations to communicate to the referring prescriber"
    ],
    "timeLimitMin": 25
   },

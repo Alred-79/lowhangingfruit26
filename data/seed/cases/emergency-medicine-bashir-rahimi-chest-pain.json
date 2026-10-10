@@ -792,15 +792,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are an emergency medicine resident conducting a virtual urgent care visit. Bashir Rahimi, a 41-year-old rideshare driver, has requested a telehealth visit for chest pain and shortness of breath that started this morning. Gather a focused history, use remote assessment tools available to you, and determine the appropriate disposition.",
+   "studentBrief": "You are an emergency medicine resident conducting a virtual urgent care visit. Bashir Rahimi, a 41-year-old rideshare driver, has requested a telehealth visit for sharp right-sided chest pain worse with deep breathing, and shortness of breath climbing stairs, since this morning. Gather a focused history, use remote assessment tools available to you, and determine the appropriate disposition.",
    "chiefComplaint": "Sharp right-sided chest pain worse with deep breathing, and shortness of breath climbing stairs, since this morning",
    "openingLine": "Hi doctor, thanks for seeing me. My chest has been hurting since this morning, kind of sharp, and I got winded just going up one flight of stairs at home, which isn't normal for me.",
    "tasks": [
-    "Elicit a complete history of present illness including associated symptoms the patient may be reluctant to share (leg swelling, hemoptysis)",
-    "Use remote-appropriate tools to assess vital signs and functional status (pulse oximeter, guided pulse/respiration counts, exertional observation, guided calf exam)",
-    "Risk-stratify for pulmonary embolism using an appropriate clinical decision tool",
-    "Communicate a clear, urgent disposition recommendation and address the patient's cost and work concerns without compromising on the medical urgency",
-    "Document a focused ED-style note including HPI, exam findings, medical decision-making, and disposition"
+    "Take a focused history of the presenting concern",
+    "Use remote-appropriate tools to assess vital signs and functional status",
+    "Apply an appropriate clinical decision tool to guide your assessment",
+    "Communicate a clear disposition recommendation and address the patient's concerns",
+    "Document a focused note including history, examination findings, clinical reasoning, and disposition"
    ],
    "timeLimitMin": 20
   },

@@ -798,11 +798,11 @@
    "chiefComplaint": "Fever and body aches for 4 days after returning from travel to Ghana",
    "openingLine": "I've had this fever for about four days now, really high, with drenching sweats, and my head and whole body ache. I just got back from Ghana about a week and a half ago.",
    "tasks": [
-    "Obtain a focused travel, exposure, and fever history, including malaria prophylaxis use",
-    "Assess for signs of severe or complicated malaria via remote exam techniques (skin, sclerae, abdomen, urine inspection)",
-    "Determine appropriate same-day diagnostic workup and articulate why this cannot be deferred",
-    "Address the patient's misconception about childhood immunity and his concerns about work and cost",
-    "Formulate and clearly communicate an urgent disposition plan including emergency department referral"
+    "Obtain a focused travel, exposure, and fever history",
+    "Assess for clinical findings via remote exam techniques (skin, sclerae, abdomen, urine inspection)",
+    "Determine appropriate same-day diagnostic workup and explain the urgency",
+    "Address the patient's questions and concerns about work and cost",
+    "Formulate and clearly communicate an urgent disposition plan"
    ],
    "timeLimitMin": 20
   },

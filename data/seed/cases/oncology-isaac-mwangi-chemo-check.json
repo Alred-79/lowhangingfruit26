@@ -1079,11 +1079,11 @@
    "chiefComplaint": "Pre-Cycle 5 toxicity check on FOLFOX for metastatic colon cancer; patient reports cold-sensitive tingling in fingers and increased loose stools.",
    "openingLine": "I'm here for my check before the next round of chemo. My hands get a bit cold and tingly sometimes, nothing I can't handle.",
    "tasks": [
-    "Elicit a thorough toxicity history across neuropathy, GI, and hematologic domains, including probing beyond the patient's initial minimization",
-    "Review today's labs, restaging CT, and CEA trend to synthesize current disease status and treatment tolerance",
-    "Identify the discrepancy between the patient's self-report and the caregiver-entered symptom diary, and explore the underlying reason with the patient directly",
-    "Formulate a dose modification plan for Cycle 5 appropriate to the grade of neuropathy and myelosuppression, specifying what requires attending co-sign",
-    "Acknowledge the patient's personal goal (granddaughter's graduation) and respond to his underlying anxiety about prognosis with empathy, without overstepping into definitive long-term prognosis-setting"
+    "Take a thorough toxicity history, exploring symptoms across all relevant domains",
+    "Review the recent laboratory results, imaging, and tumor markers with the patient",
+    "Reconcile any differences between the patient's account and documented information in the chart",
+    "Formulate a treatment plan for the upcoming cycle, specifying what requires attending co-sign",
+    "Address the patient's concerns and agree on next steps with appropriate safety-netting"
    ],
    "timeLimitMin": 25
   },

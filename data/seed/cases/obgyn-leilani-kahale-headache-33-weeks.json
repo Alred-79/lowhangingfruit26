@@ -930,11 +930,11 @@
    "chiefComplaint": "Two-day headache and new swelling of hands and feet, with elevated home blood pressure readings this morning",
    "openingLine": "Hi doctor, thanks for seeing me quick today - I've had this headache for two days that just won't quit, and my hands and feet are so swollen. My blood pressure machine at home said it was high this morning too.",
    "tasks": [
-    "Elicit a focused history of the headache, visual symptoms, right upper quadrant discomfort, swelling, and fetal movement",
-    "Review home BP trend and today's weight/edema findings, and obtain a repeat BP on camera",
-    "Recognize signs concerning for preeclampsia with severe features and explain why in-person evaluation is needed today",
-    "Order appropriate stat labs and fetal monitoring and arrange safe transport given her transportation barrier",
-    "Communicate clearly and compassionately, addressing her hope to simply rest at home"
+    "Elicit a focused history of the headache, visual symptoms, abdominal discomfort, swelling, and fetal movement",
+    "Review home blood pressure trend and today's weight and edema findings, and obtain a repeat blood pressure on camera",
+    "Determine the urgency of the clinical picture and explain your assessment and recommended next steps",
+    "Arrange appropriate investigations, monitoring, and logistics based on your clinical assessment",
+    "Communicate clearly and compassionately, exploring and addressing the patient's concerns"
    ],
    "timeLimitMin": 20
   },

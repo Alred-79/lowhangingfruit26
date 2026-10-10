@@ -959,15 +959,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a psychiatry resident conducting a telehealth intake evaluation for Eleanor Whitfield, a 72-year-old woman referred by her primary care physician for evaluation of depressive symptoms that began after her husband's death 4 months ago. Her PCP's referral notes a PHQ-9 of 19. Conduct a thorough psychiatric interview, mental status exam, and risk assessment, and formulate a diagnosis and treatment plan.",
+   "studentBrief": "You are a psychiatry resident conducting a telehealth intake evaluation for Eleanor Whitfield, a 72-year-old woman referred by her primary care physician for evaluation of low mood, loss of interest in previously enjoyed activities, poor sleep, and weight loss since her husband's death 4 months ago. Conduct a thorough psychiatric interview, mental status exam, and risk assessment, and formulate a diagnosis and treatment plan.",
    "chiefComplaint": "Low mood, loss of interest in previously enjoyed activities, poor sleep, and weight loss since her husband's death 4 months ago, referred by PCP for psychiatric evaluation.",
    "openingLine": "My doctor thought I should talk to someone because I haven't been myself since my husband passed. I feel a little silly being here, honestly.",
    "tasks": [
-    "Characterize the depressive syndrome and distinguish it from uncomplicated grief using history and collateral chart data.",
-    "Build enough rapport to directly and sensitively assess for suicidal ideation, intent, plan, and access to lethal means.",
-    "Screen for contributing factors including new alcohol use and medical/endocrine causes, reconciling patient report with chart data where they differ.",
-    "Perform a telehealth-appropriate mental status exam and brief cognitive screen.",
-    "Formulate a diagnosis and a safe, stepwise treatment plan including medication, psychotherapy referral, and an explicit safety plan, with appropriate follow-up timing."
+    "Take a focused psychiatric history of the presenting concern and explore the timeline and nature of symptoms since the loss",
+    "Conduct a risk assessment",
+    "Screen for contributing factors including substance use and review relevant medical history and chart data with the patient",
+    "Perform a telehealth-appropriate mental status exam and brief cognitive screen",
+    "Formulate a diagnosis and agree on a treatment plan with appropriate follow-up"
    ],
    "timeLimitMin": 30
   },

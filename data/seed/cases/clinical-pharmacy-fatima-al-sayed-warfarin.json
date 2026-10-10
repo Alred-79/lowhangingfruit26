@@ -845,15 +845,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the clinical pharmacist on an anticoagulation collaborative practice service conducting a telehealth visit with Fatima Al-Sayed, 56, who takes warfarin for a mechanical mitral valve. She contacted the clinic after her home INR monitor read high. Review her medication history, assess for bleeding, identify contributing causes, and determine next steps per clinic protocol.",
+   "studentBrief": "You are the clinical pharmacist on an anticoagulation collaborative practice service conducting a telehealth visit with Fatima Al-Sayed, 56, who takes warfarin for a mechanical mitral valve. She contacted the clinic after her home INR monitor showed an elevated reading. Review her medication history, assess for bleeding, and determine next steps per clinic protocol.",
    "chiefComplaint": "Elevated home INR reading (5.4) with minor gum bleeding and bruising",
    "openingLine": "My home machine said my INR is really high today, like over 5, and I'm scared.",
    "tasks": [
     "Obtain a best possible medication history including prescription, OTC, and herbal/supplement use",
     "Assess for signs and severity of bleeding via camera and self-report",
-    "Identify the likely contributing cause(s) of the supratherapeutic INR",
-    "Apply anticoagulation protocol to recommend a management plan (hold dose, vitamin K consideration, recheck timing)",
-    "Communicate the plan clearly, addressing the patient's fear about stroke risk if warfarin is held"
+    "Identify contributing factors to the elevated INR",
+    "Apply anticoagulation protocol to recommend a management plan",
+    "Communicate the plan clearly and address the patient's concerns"
    ],
    "timeLimitMin": 25
   },

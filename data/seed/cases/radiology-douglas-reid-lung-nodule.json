@@ -713,11 +713,11 @@
    "chiefComplaint": "Patient read 'nodule' in his CT chest report via the patient portal and is anxious about whether it means lung cancer.",
    "openingLine": "I read my own scan report online before anyone called me. It says 'nodule' in my lung. Just tell me straight - do I have cancer?",
    "tasks": [
-    "Explain the CT findings (healing rib fracture, 7mm nodule, pleural plaques, mild emphysema) in clear, accurate language",
-    "Apply and explain Fleischner Society follow-up guidance for this nodule given his risk factors",
-    "Distinguish the benign pleural plaques from the nodule finding and explain what each means",
-    "Identify that he is eligible for annual lung cancer screening and arrange appropriate referral back to primary care rather than ordering it yourself",
-    "Address his frustration about reading the report before being contacted, and his fear related to his brother's lung cancer death"
+    "Explain the CT findings in clear, accurate language",
+    "Apply and explain appropriate evidence-based follow-up guidance for the nodule",
+    "Distinguish the different findings on the CT and explain what each means",
+    "Identify whether the patient is eligible for lung cancer screening and arrange appropriate referral",
+    "Address his concerns about reading the report before being contacted"
    ],
    "timeLimitMin": 20
   },

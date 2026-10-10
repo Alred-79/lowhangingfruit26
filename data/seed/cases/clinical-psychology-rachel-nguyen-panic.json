@@ -834,15 +834,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a clinical psychology trainee conducting a telehealth diagnostic intake interview with Rachel Nguyen, a 33-year-old emergency department unit clerk referred by the ED after three visits in two months for episodic chest tightness, racing heart, and tingling, with fully negative cardiac and thyroid workups. Your task is to conduct a thorough diagnostic interview, screen for risk, and begin to build a shared understanding of her symptoms.",
+   "studentBrief": "You are a clinical psychology trainee conducting a telehealth diagnostic intake interview with Rachel Nguyen, a 33-year-old emergency department unit clerk referred by the ED after three visits in two months for episodic chest tightness, racing heart, and tingling. Your task is to conduct a thorough diagnostic interview, screen for risk, and begin to build a shared understanding of her symptoms.",
    "chiefComplaint": "Recurrent episodes of chest tightness, racing heart, and fear of dying, with three recent ED visits and negative cardiac workup",
    "openingLine": "I'm not really sure why they sent me to a psychologist. I keep having these episodes where I think I'm having a heart attack, and the ER keeps telling me it's nothing, but something is clearly wrong with me.",
    "tasks": [
-    "Conduct a diagnostic interview to characterize the episodes and screen for panic disorder using DSM-5 criteria and a standardized severity measure",
-    "Complete a risk assessment including suicidal ideation and any unauthorized medication or substance use",
-    "Explore the temporal link between symptom onset and the workplace incident, and screen for trauma-related symptoms",
-    "Develop and share a collaborative panic cycle formulation that addresses her belief in an undiagnosed cardiac problem",
-    "Introduce the rationale for CBT, including interoceptive exposure, in a way that engages her skepticism about psychotherapy"
+    "Conduct a diagnostic interview to characterize the episodes using DSM-5 criteria and a standardized severity measure",
+    "Complete a risk assessment including suicidal ideation and substance use",
+    "Take a focused history exploring the timeline and context of symptom onset",
+    "Develop and share a collaborative formulation with the patient",
+    "Introduce the rationale for psychological treatment options"
    ],
    "timeLimitMin": 25
   },

@@ -745,15 +745,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are an occupational therapy student conducting an initial home-based telehealth evaluation for Hiroshi Tanaka, a 70-year-old retired sushi chef who returned home one week ago after inpatient rehabilitation for a right-hemisphere stroke 5 weeks ago. He has left-sided weakness and was noted during inpatient rehab to have mild left spatial neglect. He and his wife have requested OT help because he wants to return to cooking, dressing, and bathing independently. Conduct an occupational profile interview, use camera-guided observation to assess his home environment and functional performance, and begin building a client-centered plan.",
+   "studentBrief": "You are an occupational therapy student conducting an initial home-based telehealth evaluation for Hiroshi Tanaka, a 70-year-old retired sushi chef who returned home one week ago after inpatient rehabilitation following a stroke. He has requested OT help because he wants to return to cooking, dressing, and bathing independently. Conduct an occupational profile interview, use camera-guided observation to assess his home environment and functional performance, and begin building a client-centered plan.",
    "chiefComplaint": "Difficulty resuming cooking, dressing, and bathing independently after stroke; wants OT help returning to these valued activities.",
    "openingLine": "They sent you to see how I'm doing at home now. I want to get back to cooking. That's really what I want.",
    "tasks": [
-    "Complete an occupational profile including COPM-style priorities (cooking, dressing, bathing) and relevant roles/identity.",
-    "Use camera-guided observation to screen upper limb motor/sensory function and functional task performance (grasp-release, dressing attempt).",
-    "Assess the home environment (kitchen, hallway, bathroom) for safety hazards relevant to stated goals.",
-    "Screen for cognitive-perceptual issues (attention/neglect) and reconcile any discrepancy between patient report and observed/documented findings.",
-    "Identify findings outside OT scope (unaddressed burn, caregiver strain) and plan appropriate referral or communication; draft an initial OT evaluation note with goals and plan."
+    "Complete an occupational profile including COPM-style priorities and relevant roles",
+    "Use camera-guided observation to screen upper limb function and functional task performance",
+    "Assess the home environment for safety hazards relevant to stated goals",
+    "Screen for cognitive-perceptual issues and compare findings with available documentation",
+    "Identify any findings requiring referral or communication with the healthcare team and draft an initial OT evaluation note with goals and plan"
    ],
    "timeLimitMin": 25
   },

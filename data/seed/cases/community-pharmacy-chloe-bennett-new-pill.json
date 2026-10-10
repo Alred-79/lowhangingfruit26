@@ -756,16 +756,16 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a pharmacy student on a community pharmacy rotation, supervised remotely by a pharmacist, conducting a telehealth video visit. Chloe Bennett, 22, is calling to pick up (via mail/curbside coordination) a new prescription for a combined oral contraceptive (ethinylestradiol 30 mcg/levonorgestrel 150 mcg) sent by an online telehealth prescriber. She also fills sumatriptan for migraines through a different, local prescriber. Conduct new-prescription counseling: confirm indication and understanding, screen for contraindications, interactions, and adherence barriers, and decide whether it is appropriate to dispense today.",
+   "studentBrief": "You are a pharmacy student on a community pharmacy rotation, supervised remotely by a pharmacist, conducting a telehealth video visit. Chloe Bennett, 22, is calling to pick up (via mail/curbside coordination) a new prescription for a combined oral contraceptive (ethinylestradiol 30 mcg/levonorgestrel 150 mcg) sent by an online telehealth prescriber. She also fills sumatriptan for migraines through your pharmacy. Conduct new-prescription counseling: confirm indication and understanding, screen for contraindications, interactions, and adherence barriers, and decide whether it is appropriate to dispense today.",
    "chiefComplaint": "Picking up new online-prescribed combined oral contraceptive; also asks whether it will help her acne.",
    "openingLine": "Hi, I'm just here to grab my new birth control pills - I ordered them online. Also, do these help with acne at all? I've been getting breakouts.",
    "tasks": [
     "Confirm what the patient understands about the new prescription and why it was prescribed",
-    "Take a focused headache history to screen for migraine with aura",
+    "Take a focused history of the presenting concern",
     "Reconcile all medications and supplements, including those not already in the pharmacy profile",
-    "Screen nonjudgmentally for nicotine/vaping use and other risk factors relevant to hormonal contraception",
-    "Determine whether a blood pressure measurement is required before dispensing, and address the gap",
-    "Make an appropriate, in-scope decision about dispensing versus contacting the prescriber, and document the encounter"
+    "Screen for relevant risk factors",
+    "Review baseline requirements for safe dispensing",
+    "Make an appropriate, in-scope decision about dispensing, and document the encounter"
    ],
    "timeLimitMin": 20
   },

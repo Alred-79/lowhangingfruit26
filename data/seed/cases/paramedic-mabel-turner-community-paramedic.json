@@ -876,15 +876,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a paramedic student conducting a community paramedicine video visit with Mabel Turner, 83, who was discharged 8 days ago after a heart failure admission. The program tablet is in her home. Your job is to perform a structured assessment, identify any signs of decompensation, and follow the treat-in-place protocol, including consulting the online supervising physician if indicated.",
+   "studentBrief": "You are a paramedic student conducting a community paramedicine video visit with Mabel Turner, 83, who was discharged 8 days ago after a heart failure admission. The program tablet is in her home. Your job is to perform a structured assessment and follow the treat-in-place protocol, including consulting the online supervising physician if indicated.",
    "chiefComplaint": "Increased breathlessness and leg swelling 8 days after heart failure hospitalization",
    "openingLine": "I'm just more winded than I was, and my ankles have gotten puffy again. I figured you ought to see for yourself.",
    "tasks": [
     "Conduct a structured history (SAMPLE/OPQRST) and camera-based physical assessment",
-    "Review home vitals, weight trend, and medication adherence records to identify signs of decompensation",
-    "Explore the medication adherence pattern and dietary contributors with sensitivity",
-    "Consult the online supervising physician under the treat-in-place protocol and determine transport versus treat-in-place",
-    "Deliver a clear, structured handover (IMIST-AMBO) and document the patient care report, addressing the patient's wish to avoid hospitalization respectfully"
+    "Review home vitals, weight trend, and medication adherence records",
+    "Explore medication use and recent dietary intake with the patient",
+    "Consult the online supervising physician under the treat-in-place protocol and determine the appropriate care pathway",
+    "Deliver a clear, structured handover (IMIST-AMBO) and document the patient care report"
    ],
    "timeLimitMin": 25
   },

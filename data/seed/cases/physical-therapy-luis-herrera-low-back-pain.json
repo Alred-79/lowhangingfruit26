@@ -667,15 +667,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the physical therapy student seeing Luis Herrera, a 44-year-old warehouse worker, for an initial telehealth evaluation of low back pain that started 3 weeks ago after a lifting injury at work. He was seen at urgent care, given an X-ray, and referred to PT. Conduct a focused history and remote movement-based examination, screen for red flags, and begin formulating a plan of care.",
+   "studentBrief": "You are the physical therapy student seeing Luis Herrera, a 44-year-old warehouse worker, for an initial telehealth evaluation of low back pain that started 3 weeks ago after a lifting injury at work. He was seen at urgent care, given an X-ray, and referred to PT. Conduct a focused history and remote movement-based examination and begin formulating a plan of care.",
    "chiefComplaint": "Low back pain for 3 weeks following a work lifting injury",
    "openingLine": "Hi, thanks for seeing me. My lower back has been killing me for about three weeks now, ever since I twisted wrong lifting a pallet at work.",
    "tasks": [
-    "Screen for red flags (cauda equina, fracture, infection, malignancy) through targeted history questions",
-    "Guide the patient through camera-based active movement testing (flexion, extension, side-bending) and a self-performed straight leg raise",
-    "Explore and address the patient's beliefs about his X-ray findings and fear of movement",
-    "Review the Oswestry Disability Index and occupational demands to understand functional impact",
-    "Establish an initial PT diagnosis, prognosis, and a graded home exercise and return-to-work plan"
+    "Take a focused history of the presenting concern",
+    "Guide the patient through camera-based active movement testing and a self-performed straight leg raise",
+    "Explore the patient's beliefs about his imaging findings and concerns about activity",
+    "Review functional limitations and occupational demands with the patient",
+    "Establish an initial PT diagnosis and agree a graded home exercise and return-to-work plan"
    ],
    "timeLimitMin": 25
   },

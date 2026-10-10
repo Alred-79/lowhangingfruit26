@@ -962,15 +962,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the hematology fellow conducting a telehealth follow-up with Trevor Blackwood, 38, seen 3 months ago for an unprovoked left femoropopliteal DVT and started on apixaban 5 mg twice daily. He is calling today specifically asking whether he can stop his blood thinner. Review his history, screen for bleeding and adherence issues, and discuss the plan for anticoagulation duration.",
+   "studentBrief": "You are the hematology fellow conducting a telehealth follow-up with Trevor Blackwood, 38, seen 3 months ago for a left leg DVT and started on apixaban 5 mg twice daily. He is calling today to discuss his anticoagulation treatment.",
    "chiefComplaint": "Follow-up for unprovoked left leg DVT, patient requesting to stop apixaban at 3 months",
    "openingLine": "Doc, it's been three months on this apixaban stuff. Can I just stop taking it now? I feel fine.",
    "tasks": [
-    "Clarify the unprovoked proximal nature of the DVT and relevant family history to assess recurrence risk",
-    "Screen for and explore bleeding symptoms (epistaxis, bruising, hematuria) with sensitive direct questioning",
-    "Explore medication adherence patterns beyond what pharmacy refill data suggests",
-    "Correctly interpret available labs (CBC, creatinine, D-dimer) and determine next steps for the new hematuria finding",
-    "Provide a clear, jargon-free recommendation about anticoagulation duration and next steps, including appropriate referral"
+    "Take a focused history of the presenting concern",
+    "Review the medication list with the patient",
+    "Perform a relevant focused examination",
+    "Interpret available investigation results",
+    "Agree a plan and safety-net"
    ],
    "timeLimitMin": 25
   },

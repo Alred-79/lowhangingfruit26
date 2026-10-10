@@ -934,11 +934,11 @@
    "chiefComplaint": "Three months of symmetric pain and swelling in the hands/wrists, now involving the balls of both feet, with prolonged morning stiffness",
    "openingLine": "Hi, thanks for seeing me. My hands and wrists have been hurting and swollen for about three months, and now the balls of my feet are starting to bother me too.",
    "tasks": [
-    "Characterize the joint pain pattern, duration of morning stiffness, and functional impact through history",
-    "Perform a guided remote joint examination (camera inspection, patient-performed squeeze test, fist closure) and interpret findings",
-    "Review and interpret serologic, inflammatory marker, imaging, and hepatitis B safety labs already in the chart",
-    "Elicit reproductive health plans and complementary/herbal medication use, and explain how these affect treatment options",
-    "Formulate an assessment and initial management plan within rheumatology scope, including appropriate referrals/coordination"
+    "Take a focused history of the presenting concern",
+    "Perform a guided remote joint examination",
+    "Review the laboratory results and imaging with the patient",
+    "Explore reproductive health plans and use of over-the-counter or complementary medications",
+    "Formulate an assessment and agree a management plan"
    ],
    "timeLimitMin": 25
   },

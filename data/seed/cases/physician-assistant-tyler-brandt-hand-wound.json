@@ -750,10 +750,10 @@
    "openingLine": "Hey, thanks for calling me back. I cut my finger on some barbed wire a few days ago and it's gotten pretty swollen and sore - was hoping you could just call in some antibiotics so I don't have to make the drive in. We're right in the middle of calving season.",
    "tasks": [
     "Obtain a focused history of the injury, wound care, and symptom progression",
-    "Perform a guided remote exam of the finger and hand to assess for signs of deep infection",
+    "Perform a guided remote exam of the finger and hand",
     "Review the patient's tetanus immunization status and determine if a booster is indicated",
-    "Recognize signs concerning for flexor tenosynovitis and explain why phone-in antibiotics alone are not appropriate",
-    "Communicate the need for urgent in-person evaluation and escalate to the supervising physician"
+    "Assess the severity of the infection and determine whether phone-in antibiotics are appropriate",
+    "Formulate a management plan and escalate to the supervising physician as needed"
    ],
    "timeLimitMin": 20
   },

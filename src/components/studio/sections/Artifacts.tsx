@@ -282,7 +282,7 @@ export function ArtifactsSection({ p, set }: SectionProps) {
             {p.artifacts.map((x) => (
               <li key={x.id}>
                 <button type="button" onClick={() => setSel(x.id)} className={cx("w-full rounded-md border px-2.5 py-2 text-left", x.id === d.id ? "border-brand-600 bg-brand-50" : "border-slate-200 hover:bg-slate-50")}>
-                  <span className="block truncate text-sm font-medium text-slate-900">{x.title || "Untitled document"}</span>
+                  <span className="block text-sm font-medium leading-snug text-slate-900">{x.title || "Untitled document"}</span>
                   <span className="mt-0.5 block text-[11px] text-slate-500">{typeLabel(x.type).split(" (")[0]}</span>
                   <span className={cx("mt-0.5 block text-[11px]", x.release.when === "start" ? "text-emerald-700" : "text-amber-700")}>{releaseLabel(p, x)}</span>
                 </button>

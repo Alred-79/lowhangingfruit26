@@ -901,10 +901,10 @@
    "chiefComplaint": "Referral from PCP for substance use assessment following abnormal liver enzyme results",
    "openingLine": "My doctor said my liver numbers were off and I had to come talk to someone about my drinking. I think it's a little overblown, honestly - I just have a glass or two of wine to unwind after work.",
    "tasks": [
-    "Elicit an accurate, non-judgmental history of alcohol use, including quantity, frequency, and pattern, beyond the initial minimized report",
-    "Screen for withdrawal risk and dependence indicators; determine that medically supervised withdrawal is needed rather than abrupt unsupervised cessation",
-    "Assess stage of change and use motivational interviewing techniques to explore ambivalence without confrontation",
-    "Address her confidentiality concerns clearly and accurately",
+    "Elicit an accurate, non-judgmental history of alcohol use, including quantity, frequency, and pattern",
+    "Screen for indicators of dependence and withdrawal risk",
+    "Assess stage of change and use motivational interviewing techniques to explore ambivalence",
+    "Address confidentiality concerns clearly and accurately",
     "Discuss treatment options including level of care and medication-assisted treatment, clarifying what requires referral to a physician"
    ],
    "timeLimitMin": 25

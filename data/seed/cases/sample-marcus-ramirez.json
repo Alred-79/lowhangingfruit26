@@ -590,14 +590,13 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a dietetics student conducting a telehealth nutrition assessment for Marcus Ramirez, a 59-year-old man with NYHA Class C heart failure and newly diagnosed (6 months ago) type 2 diabetes, referred for medical nutrition therapy. He reports early satiety and uncertainty about how diet relates to his conditions. Conduct a full nutrition assessment, identify a nutrition diagnosis using PES format, and provide patient-centered counseling using motivational interviewing.",
+   "studentBrief": "You are a dietetics student conducting a telehealth nutrition assessment for Marcus Ramirez, a 59-year-old man with heart failure and newly diagnosed type 2 diabetes, referred for medical nutrition therapy. He reports early satiety, fatigue, and uncertainty about how diet relates to his conditions. Conduct a full nutrition assessment, identify a nutrition diagnosis using PES format, and provide patient-centered counseling using motivational interviewing.",
    "chiefComplaint": "Early satiety, fatigue, and uncertainty about diet's role in managing newly diagnosed diabetes alongside heart failure",
    "openingLine": "Hi. They said I should talk to a dietitian. I get full real fast when I eat, and I'm tired a lot. Not sure food's really the issue though - that's what the pills are for, right?",
    "tasks": [
     "Obtain a thorough diet history including meal pattern, food preferences, fluid intake, and barriers",
-    "Review relevant anthropometric data, labs, and medication list to identify nutrition-related findings",
+    "Review relevant anthropometric data, labs, and medication list with the patient",
     "Explore the patient's beliefs about diet, diabetes, and heart failure using open-ended, motivational interviewing techniques",
-    "Identify and gently explore the discrepancy between reported medication adherence and refill records",
     "Formulate a PES statement and propose 2-3 simple, concrete, patient-centered next steps"
    ],
    "timeLimitMin": 30

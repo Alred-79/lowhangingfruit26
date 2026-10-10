@@ -819,15 +819,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are seeing Peggy O'Connell, a 74-year-old woman, for a telehealth physical therapy progress re-evaluation 6 weeks after a right total knee replacement. She was referred by orthopedic surgery for routine postoperative rehabilitation. Review the available chart, then conduct a focused interview and guided remote examination to assess her current status, screen for complications, and update her plan of care.",
+   "studentBrief": "You are seeing Peggy O'Connell, a 74-year-old woman, for a telehealth physical therapy progress re-evaluation 6 weeks after a right total knee replacement. She was referred by orthopedic surgery for routine postoperative rehabilitation. Review the available chart, then conduct a focused interview and guided remote examination to assess her current status and update her plan of care.",
    "chiefComplaint": "Persistent right knee stiffness and limited bending 6 weeks after total knee replacement, with concern about falling behind the expected recovery timeline.",
    "openingLine": "My new knee just won't bend the way they told me it should by now, and I'm getting worried about it.",
    "tasks": [
-    "Gather a focused history of her current function, pain, and home exercise adherence.",
-    "Screen for postoperative red flags (infection, DVT, wound complications) via guided remote examination.",
-    "Perform guided functional and range-of-motion measures appropriate for telehealth (goniometry via camera, Timed Up and Go, gait observation).",
-    "Identify adherence barriers, including fear-avoidance beliefs and medication timing, and reconcile her self-report with the exercise log.",
-    "Establish patient-centered functional goals and revise the home exercise program with a clear plan of care."
+    "Take a focused history of her current function, pain, and home exercise program",
+    "Screen for postoperative complications via guided remote examination",
+    "Perform guided functional and range-of-motion measures appropriate for telehealth",
+    "Explore barriers to progress and reconcile self-report with available documentation",
+    "Establish patient-centered goals and agree on an updated plan of care"
    ],
    "timeLimitMin": 25
   },

@@ -849,15 +849,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a urology resident conducting a telehealth results-discussion visit with Frank Moretti, a 62-year-old man referred by his family physician for a rising PSA (3.1 to 6.8 ng/mL over two years, repeat 6.5 ng/mL). His DRE was reported as a moderately enlarged, smooth prostate. He has moderate lower urinary tract symptoms. Review his history, labs, and family history; explain what the PSA result means and does not mean; discuss next steps including prostate MRI before any biopsy; and engage in shared decision-making.",
+   "studentBrief": "You are a urology resident conducting a telehealth results-discussion visit with Frank Moretti, a 62-year-old man referred by his family physician for a rising PSA. His DRE was reported as a moderately enlarged, smooth prostate. Review his history, labs, and family history; discuss the PSA findings; and engage in shared decision-making about next steps.",
    "chiefComplaint": "Rising PSA referred for urology evaluation",
    "openingLine": "Hey doc, nice to meet you. So my regular doctor sent me here because my PSA number keeps climbing and he said I oughta talk to a specialist about it.",
    "tasks": [
-    "Explain in plain language what PSA measures and what can cause it to rise, correcting the misconception that a high number automatically means cancer",
-    "Elicit relevant history including family history, urinary symptoms (use IPSS), and screen for erectile dysfunction",
-    "Identify and address the confounder of vigorous exercise before the first PSA draw, and review the normal urinalysis",
-    "Recommend prostate MRI before biopsy and explain its purpose in guiding further workup",
-    "Engage the patient in shared decision-making about next steps, including sensitively addressing his fear about erectile function and procedures, and set a realistic timeline given his upcoming travel"
+    "Explain in plain language what PSA measures and what can cause it to rise",
+    "Take a focused history including family history and urinary symptoms",
+    "Review the laboratory results with the patient",
+    "Discuss investigation options and their purpose in guiding further workup",
+    "Engage the patient in shared decision-making about next steps and agree a plan"
    ],
    "timeLimitMin": 25
   },

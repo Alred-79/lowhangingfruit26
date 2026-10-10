@@ -722,12 +722,12 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a community health worker conducting a telehealth outreach visit with Lupe Mendoza, 61, referred by her primary care clinic after missing three appointments. Her last HbA1c was 10.2%. Your role is to build trust, screen for social needs, support her in setting her own goals, connect her to resources, and relay any clinical concerns to her care team. You do not diagnose conditions or give medication instructions.",
+   "studentBrief": "You are a community health worker conducting a telehealth outreach visit with Lupe Mendoza, 61, referred by her primary care clinic after missing recent appointments. Your role is to build trust, screen for social needs, support her in setting her own goals, connect her to resources, and relay any clinical concerns to her care team. You do not diagnose conditions or give medication instructions.",
    "chiefComplaint": "Referred for missed appointments and poor diabetes control; patient reports feeling behind on managing her health.",
    "openingLine": "Hi, thank you for calling me back. I know I've missed a few appointments at the clinic, and they said my sugar numbers aren't good right now.",
    "tasks": [
     "Build rapport and conduct a social needs screen covering food, housing, transportation, and cost of care",
-    "Explore barriers behind the missed appointments and rising HbA1c with curiosity rather than judgment",
+    "Explore barriers behind the missed appointments with curiosity rather than judgment",
     "Identify any safety concerns (medication-related or symptom-related) that need to go back to the care team",
     "Collaborate with the patient to set one or two goals in her own words",
     "Identify and offer at least one concrete community resource matched to an identified barrier"

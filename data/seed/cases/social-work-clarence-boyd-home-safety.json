@@ -729,15 +729,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a social work student conducting a telehealth follow-up video visit for Clarence Boyd, a 79-year-old veteran who was discharged one week ago after a fall resulting in rib fractures. He declined rehab placement and lives alone. The inpatient team has asked social work to follow up given his solo living situation. You have no further details yet - begin the biopsychosocial assessment.",
+   "studentBrief": "You are a social work student conducting a telehealth follow-up video visit for Clarence Boyd, a 79-year-old veteran who was discharged one week ago after a fall resulting in rib fractures. He declined rehab placement and lives alone. The inpatient team has asked social work to follow up given his solo living situation.",
    "chiefComplaint": "Post-discharge psychosocial follow-up after fall with rib fractures in an older veteran living alone",
    "openingLine": "They said somebody would call to check on me after I fell and busted up my ribs. I'm managing. I didn't want to go to one of them facilities.",
    "tasks": [
-    "Build rapport and trust to assess the home situation beyond what the patient initially volunteers",
-    "Screen for depression and suicide risk, including means (firearm) access, and determine next safety steps",
-    "Assess for self-neglect (heat, food, medications, mobility) and signs of financial exploitation",
-    "Determine whether a mandated report to Adult Protective Services is required and explain this to the patient appropriately",
-    "Identify and initiate connections to veterans' benefits, food resources, and social supports; document findings as a biopsychosocial assessment"
+    "Build rapport and conduct a biopsychosocial assessment of the home situation",
+    "Screen for depression and suicide risk, including access to means",
+    "Assess for adequacy of food, heat, medications, and mobility support",
+    "Identify and discuss available veterans' benefits and community resources",
+    "Document findings and determine appropriate follow-up actions"
    ],
    "timeLimitMin": 25
   },

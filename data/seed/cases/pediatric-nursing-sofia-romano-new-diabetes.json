@@ -911,14 +911,14 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a pediatric nursing student conducting a telehealth follow-up visit three days after Sofia Romano, age 7, was discharged following diabetic ketoacidosis and a new diagnosis of type 1 diabetes. The history will be provided by her mother, Giulia Romano, who is on camera with Sofia nearby. Your goals are to assess how the home insulin regimen and glucose monitoring are actually going, re-teach key safety points using teach-back, develop a clear hypoglycemia plan, address the school and co-parent care gaps, and identify anything that needs to be escalated to the pediatric diabetes team rather than adjusted by you.",
+   "studentBrief": "You are a pediatric nursing student conducting a telehealth follow-up visit three days after Sofia Romano, age 7, was discharged following a recent hospitalization for new-onset type 1 diabetes. The history will be provided by her mother, Giulia Romano, who is on camera with Sofia nearby. Your goals are to assess how the home insulin regimen and glucose monitoring are going, re-teach key safety points using teach-back, develop a clear hypoglycemia plan, address school and co-parent care coordination, and identify anything that needs to be escalated to the pediatric diabetes team.",
    "chiefComplaint": "Caregiver follow-up for new-onset type 1 diabetes management after recent DKA hospitalization; glucose readings fluctuating with one hypoglycemic episode.",
    "openingLine": "Hi, thank you for calling. Honestly, it's been a rough few days since we got home from the hospital with Sofia's diabetes. I'm just trying to keep up with the shots and I feel like her numbers are all over the place.",
    "tasks": [
     "Assess current insulin administration technique, carbohydrate counting approach, and glucose monitoring pattern using teach-back.",
-    "Review the home glucose log and identify concerning patterns, including the hypoglycemic event, that require escalation to the diabetes team.",
-    "Reinforce a clear, immediate-treatment hypoglycemia action plan and review the glucagon kit together with the caregiver.",
-    "Identify and address gaps in school nurse training/DMMP status and co-parent (father's) diabetes education and supply access.",
+    "Review the home glucose log and identify any concerning patterns that require escalation to the diabetes team.",
+    "Reinforce a clear hypoglycemia action plan and review the glucagon kit with the caregiver.",
+    "Identify and address gaps in school nurse coordination and co-parent diabetes education and supply access.",
     "Assess caregiver coping, confidence, and support needs, and respond with supportive, non-judgmental teaching."
    ],
    "timeLimitMin": 25

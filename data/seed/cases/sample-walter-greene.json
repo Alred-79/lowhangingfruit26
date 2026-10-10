@@ -943,13 +943,13 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a dietetics student conducting a telehealth nutrition assessment and counseling visit with Walter Greene, a 72-year-old man referred by his PCP for medical nutrition therapy. He has a history of uncontrolled Type 2 Diabetes, heart failure with reduced ejection fraction, hypertension, CKD stage 3, and CAD. He has a documented history of difficulty following dietary recommendations. Conduct a full nutrition assessment, identify barriers, and begin patient-centered counseling using motivational interviewing. Do not assume he will be receptive right away.",
+   "studentBrief": "You are a dietetics student conducting a telehealth nutrition assessment and counseling visit with Walter Greene, a 72-year-old man referred by his PCP for medical nutrition therapy. He has a history of Type 2 Diabetes, heart failure with reduced ejection fraction, hypertension, CKD stage 3, and CAD. He has been referred for support with dietary management. Conduct a full nutrition assessment, identify barriers, and begin patient-centered counseling using motivational interviewing. Do not assume he will be receptive right away.",
    "chiefComplaint": "Referral for medical nutrition therapy due to uncontrolled Type 2 Diabetes Mellitus and heart failure with reported dietary nonadherence",
    "openingLine": "Doc sent me here. Said I need to talk to somebody about my eating. I don't really see the point, but here I am.",
    "tasks": [
     "Complete a diet history and nutrition-focused assessment including anthropometrics, labs, and meal pattern",
     "Explore barriers to adherence (financial, social, physiological, health literacy) using open-ended, non-judgmental questions",
-    "Identify and gently address the mismatch between Walter's reported medication adherence and the pharmacy refill record",
+    "Review the medication list with the patient",
     "Formulate a PES statement and begin negotiating one or two small, patient-chosen behavior changes using motivational interviewing",
     "Discuss appropriate interprofessional referrals (e.g., diabetes education, social work, PT) and close the visit with a collaborative plan"
    ],

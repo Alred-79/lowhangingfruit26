@@ -950,11 +950,11 @@
    "chiefComplaint": "4 months of loose, urgent stools with blood and mucus, abdominal cramping, and unintentional weight loss",
    "openingLine": "Hi, thank you for seeing me. My primary doctor sent me here because I've been having really loose, urgent bowel movements for the past four months, sometimes with blood, and I've lost some weight.",
    "tasks": [
-    "Take a focused history of the bowel symptoms including frequency, blood, nocturnal symptoms, and associated features",
-    "Screen for extraintestinal manifestations of IBD, including skin findings",
+    "Take a focused history of the bowel symptoms",
+    "Take a focused history of associated systemic symptoms",
     "Review and interpret available labs and stool studies in the chart",
-    "Reconcile the discrepancy between the prior primary care note and the patient's current presentation",
-    "Formulate an assessment and recommend appropriate next steps including colonoscopy, while addressing the patient's timeline concerns"
+    "Review the prior primary care documentation",
+    "Formulate an assessment and recommend appropriate next steps"
    ],
    "timeLimitMin": 25
   },

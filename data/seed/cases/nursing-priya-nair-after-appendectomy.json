@@ -423,14 +423,14 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the RN conducting a telehealth discharge follow-up call with Priya Nair, 28, who had an uncomplicated laparoscopic appendectomy yesterday. She was discharged the same day. Your goals are to perform a focused post-operative assessment, screen for complications, and provide discharge teaching on pain management, constipation, wound care, and activity restrictions. Review her medication list and ask about all medications/supplements she is taking, including OTC products.",
+   "studentBrief": "You are the RN conducting a telehealth discharge follow-up call with Priya Nair, 28, who had an uncomplicated laparoscopic appendectomy yesterday. She was discharged the same day. Your goals are to perform a focused post-operative assessment, screen for complications, and provide discharge teaching.",
    "chiefComplaint": "Follow-up after laparoscopic appendectomy yesterday; reports mild pain, bloating, and a new shoulder pain she is worried about.",
    "openingLine": "Hi, thanks for calling to check on me. I'm doing okay I think, just a little sore and bloated, and I have this weird pain in my shoulder that's kind of worrying me.",
    "tasks": [
     "Perform a focused post-operative nursing assessment (vitals, pain, wound, GI, mobility, red flags).",
-    "Ask about all medications and OTC products being taken; identify and address the acetaminophen dosing concern.",
-    "Provide teaching on constipation management and safe analgesic use.",
-    "Provide teaching on incision care and activity restrictions (showering, driving, lifting).",
+    "Review the medication list with the patient and ask about all medications and OTC products being taken.",
+    "Provide teaching on pain management and bowel function.",
+    "Provide teaching on incision care and activity restrictions.",
     "Determine whether any findings require SBAR escalation to the surgical provider."
    ],
    "timeLimitMin": 20

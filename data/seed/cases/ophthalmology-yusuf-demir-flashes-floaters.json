@@ -810,9 +810,9 @@
    "openingLine": "Hello doctor, thank you for seeing me. For a few days now I've been seeing a bunch of little specks floating in my right eye and some flashes of light at the side, and this morning I noticed like a dark curtain coming up from the bottom corner of my vision.",
    "tasks": [
     "Take a focused history of the floaters, flashes, and visual field shadow, including onset, laterality, and any pain or redness",
-    "Review the chart for key risk factors (refractive error, prior ocular surgery, diabetes status) and prior eye exam findings",
+    "Review the chart for key risk factors and prior eye exam findings",
     "Perform feasible remote visual function tests: monocular acuity, confrontation visual fields, and Amsler grid testing",
-    "Formulate an assessment of urgency and clearly communicate the need for same-day in-person dilated examination, addressing the patient's concerns about work and cost without delaying care",
+    "Formulate an assessment of urgency and clearly communicate the appropriate next steps, addressing the patient's concerns",
     "Document findings and plan in an ophthalmology SOAP note"
    ],
    "timeLimitMin": 20

@@ -1023,15 +1023,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the endocrinology fellow seeing Diego Morales, a 23-year-old with type 1 diabetes since age 9 on insulin pump/CGM therapy, for a telehealth follow-up. His HbA1c has risen from 7.6% to 9.4% over the past year. Review his CGM and pump data, take a focused history, and develop a management plan within your scope.",
+   "studentBrief": "You are the endocrinology fellow seeing Diego Morales, a 23-year-old with type 1 diabetes since age 9 on insulin pump/CGM therapy, for a telehealth follow-up. His HbA1c has risen from 7.6% to 9.4% over the past year. Review his device data, take a focused history, and develop a management plan within your scope.",
    "chiefComplaint": "Follow-up for worsening glycemic control (HbA1c rising to 9.4%) in a patient with longstanding type 1 diabetes on pump/CGM therapy.",
    "openingLine": "Hey, so my doctor said my A1c jumped up again and wanted me to check in before it gets worse.",
    "tasks": [
-    "Review the CGM ambulatory glucose profile and pump bolus history and reconcile them with the patient's self-report",
-    "Explore behavioral and psychosocial contributors to the glycemic pattern, including work-related insulin omission and alcohol use, with empathy",
-    "Screen for diabetes burnout and mood symptoms, including suicidal ideation",
-    "Identify and address overdue complication screening (retinal exam, nephropathy, lipids)",
-    "Formulate a concrete, collaborative management plan including pump/CGM setting adjustments and appropriate referrals"
+    "Review the CGM ambulatory glucose profile and pump bolus history with the patient",
+    "Take a focused history exploring factors that may be affecting diabetes management",
+    "Screen for diabetes distress and mood symptoms",
+    "Review complication screening status",
+    "Formulate a collaborative management plan and arrange appropriate follow-up"
    ],
    "timeLimitMin": 25
   },

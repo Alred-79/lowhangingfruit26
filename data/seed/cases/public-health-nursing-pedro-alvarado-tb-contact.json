@@ -760,12 +760,11 @@
    "chiefComplaint": "Scheduled follow-up visit for latent TB infection treatment adherence, 5 weeks after starting rifampin.",
    "openingLine": "Hi, yeah, I know you're calling about the TB pills they put me on.",
    "tasks": [
-    "Assess current adherence to the rifampin regimen and screen for side effects or symptoms of active TB disease",
-    "Explore the patient's actual medication-taking pattern using supportive, non-judgmental questioning, and reconcile this with the pharmacy record",
-    "Correct misunderstanding about latent versus active TB infection and the importance of completing treatment",
-    "Address confidentiality concerns about employer and immigration status accurately and within scope",
-    "Screen for alcohol use and other factors relevant to safely considering restarting treatment, and identify next steps including referral back to the prescribing clinician",
-    "Follow up on contact investigation status for untested household members and plan outreach"
+    "Take a focused history of adherence and any symptoms since starting treatment",
+    "Review the medication regimen with the patient",
+    "Explore any questions or concerns the patient has about his treatment or the contact investigation",
+    "Screen for factors relevant to treatment safety and completion",
+    "Agree a plan for next steps and follow-up"
    ],
    "timeLimitMin": 25
   },

@@ -878,15 +878,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the physiatry resident conducting a telehealth follow-up for Jamal Edwards, a 33-year-old man with T10 complete paraplegia from a motorcycle crash 8 months ago, currently on baclofen for spasticity. He is calling to report worsening leg spasms over the past 3 weeks. Conduct a focused history and remote exam, review relevant records, and develop a rehabilitation plan.",
+   "studentBrief": "You are the physiatry resident conducting a telehealth follow-up for Jamal Edwards, a 33-year-old man with T10 complete paraplegia from a motorcycle crash 8 months ago, currently on baclofen for spasticity. He is calling to report worsening leg spasms over the past 3 weeks.",
    "chiefComplaint": "Worsening lower extremity spasms over the past 3 weeks, interfering with transfers and sleep.",
    "openingLine": "My legs have been jumping around so much the last few weeks, it's throwing off my transfers and waking me up at night.",
    "tasks": [
-    "Characterize the spasticity and screen for common noxious triggers below the level of injury (bladder, bowel, skin, other)",
-    "Perform feasible remote exam maneuvers including camera-assisted skin inspection and guided spasticity assessment",
-    "Review the medical record for medication adherence, home monitoring logs, and recent therapy attendance, and identify any mismatches between patient report and documented data",
-    "Screen for mood symptoms and psychosocial barriers to rehabilitation participation",
-    "Formulate a rehabilitation plan addressing medical triggers, equipment needs, therapy re-engagement, and appropriate referrals for driving evaluation, vocational rehabilitation, and mental health support"
+    "Take a focused history of the presenting concern",
+    "Perform feasible remote examination maneuvers",
+    "Review the medical record and compare with patient report",
+    "Screen for mood symptoms and psychosocial factors",
+    "Formulate a rehabilitation plan and arrange appropriate follow-up"
    ],
    "timeLimitMin": 25
   },

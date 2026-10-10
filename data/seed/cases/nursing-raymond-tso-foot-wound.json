@@ -950,15 +950,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the home health/telehealth RN conducting a scheduled post-discharge follow-up call with Raymond Tso, 68, who was discharged 2 days ago after surgical debridement and IV antibiotics for a right great toe diabetic foot infection. He was started on new insulin glargine at discharge. Your task is to assess his wound, vital signs, glucose control, and medication adherence, identify any safety concerns, and determine whether this can wait for his scheduled follow-up in 9 days or needs urgent escalation.",
+   "studentBrief": "You are the home health/telehealth RN conducting a scheduled post-discharge follow-up call with Raymond Tso, 68, who was discharged 2 days ago after surgical debridement and IV antibiotics for a right great toe diabetic foot infection. He was started on new insulin glargine at discharge. Your task is to assess his wound, vital signs, glucose control, and medication adherence, and determine whether this can wait for his scheduled follow-up in 9 days or needs urgent escalation.",
    "chiefComplaint": "Post-discharge follow-up after diabetic foot infection with surgical debridement; patient reports foot 'looks about the same.'",
    "openingLine": "Hello, yes, this is Raymond. I guess you're calling about my foot. It looks about the same to me, nothing too different.",
    "tasks": [
     "Perform a focused remote assessment of the surgical wound, vital signs, and glucose control",
-    "Elicit medication adherence details, including insulin timing and technique, and compare against the discharge plan",
-    "Identify safety risks related to weight-bearing, neuropathy, and infection progression",
+    "Take a medication history and review adherence to the discharge plan",
+    "Assess safety risks related to weight-bearing and foot care",
     "Determine urgency and formulate an SBAR escalation to the provider if indicated",
-    "Provide patient-centered education on wound care, offloading, and insulin administration, while addressing the patient's logistical and emotional barriers to seeking further care"
+    "Provide patient-centered education on wound care and insulin administration"
    ],
    "timeLimitMin": 20
   },

@@ -897,15 +897,16 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a student nurse-midwife conducting a telehealth postpartum and lactation visit with Aaliyah Hassan, 27, who is 3 weeks postpartum after a spontaneous vaginal delivery of her first child. She called in with a new concern about breast pain. Review the chart before the visit; no findings beyond the stated reason for the call are provided in advance.",
+   "studentBrief": "You are a student nurse-midwife conducting a telehealth postpartum and lactation visit with Aaliyah Hassan, 27, who is 3 weeks postpartum after a spontaneous vaginal delivery of her first child. She has called in with left breast pain, redness, and fever since yesterday. She also reports pre-existing cracked nipples. Review the chart before the visit.",
    "chiefComplaint": "Left breast pain, redness, and fever since yesterday, with pre-existing cracked nipples",
    "openingLine": "Hi, thanks for seeing me. My left breast has gotten really sore and red since yesterday, and I had a fever last night. My nipples have been cracked too, so I wanted to check in.",
    "tasks": [
-    "Take a focused history of the breast symptoms and assess for mastitis versus other causes, including red-flag screening for abscess",
-    "Guide a remote camera-based exam of the breast, nipples, and latch/positioning technique",
-    "Screen for postpartum mood/anxiety symptoms using a validated tool and conduct a direct safety assessment",
-    "Respectfully explore perineal healing in the context of the patient's obstetric history, including prior female genital cutting",
-    "Formulate a plan within midwifery scope, including when to refer or escalate, and address the patient's and family's concerns about breastfeeding and supplementation"
+    "Take a focused history of the presenting breast concern",
+    "Guide a remote camera-based examination of the breast and nipples",
+    "Assess infant feeding and latch technique",
+    "Screen for postpartum mood and wellbeing",
+    "Assess overall postpartum recovery",
+    "Formulate a management plan and arrange appropriate follow-up"
    ],
    "timeLimitMin": 25
   },

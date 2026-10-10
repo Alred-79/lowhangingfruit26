@@ -960,10 +960,10 @@
    "openingLine": "Hi, thanks for seeing me. I've just been feeling really worn out lately, and I get short of breath going up my stairs, which isn't like me at all.",
    "tasks": [
     "Elicit a complete history of present illness including onset, progression, and associated symptoms",
-    "Sensitively screen for GI bleeding symptoms including stool changes, given NSAID use",
-    "Perform feasible remote physical exam maneuvers for anemia (pallor, orthostatic vitals)",
-    "Review and interpret CBC, iron studies, and renal function results from the chart",
-    "Formulate a differential diagnosis prioritizing iron-deficiency anemia from NSAID-related GI blood loss, with a plan to exclude colorectal malignancy and arrange appropriate referral"
+    "Take a focused medication history",
+    "Perform feasible remote physical exam maneuvers",
+    "Review and interpret the laboratory results from the chart",
+    "Formulate a differential diagnosis and initial management plan"
    ],
    "timeLimitMin": 25
   },

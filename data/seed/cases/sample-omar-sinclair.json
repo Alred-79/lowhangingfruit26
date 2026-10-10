@@ -810,15 +810,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are seeing Omar Sinclair, a 45-year-old aircraft mechanic, for a telehealth nutrition assessment following a PCP referral for medical nutrition therapy. His chart shows dyslipidemia, prediabetes, and hypertension, with recent labs showing elevated LDL and low HDL. He has been started on atorvastatin and lisinopril. Conduct a nutrition assessment, explore his diet and lifestyle, and use motivational interviewing to begin building a plan he can realistically follow.",
+   "studentBrief": "You are seeing Omar Sinclair, a 45-year-old aircraft mechanic, for a telehealth nutrition assessment following a PCP referral for medical nutrition therapy for dyslipidemia and related cardiometabolic risk. His chart shows dyslipidemia, prediabetes, and hypertension. Conduct a nutrition assessment and use motivational interviewing to begin building a plan he can realistically follow.",
    "chiefComplaint": "Referral for medical nutrition therapy for dyslipidemia and related cardiometabolic risk",
    "openingLine": "Hey, yeah, I'm Omar. My doctor said I need to talk to a dietitian because of my cholesterol numbers. Not really sure what you can tell me that I don't already know, but go ahead.",
    "tasks": [
     "Conduct a thorough nutrition-focused diet history and identify barriers to healthy eating",
     "Review relevant labs, vitals, and anthropometrics to complete the nutrition assessment",
-    "Explore medication adherence and side effect concerns as they relate to nutrition care, without overstepping into prescribing",
-    "Identify the mismatch between reported adherence/diet and objective record evidence, and address it with sensitivity",
-    "Formulate a PES statement and collaborate with Omar using motivational interviewing to set one or two realistic, patient-centered goals"
+    "Explore lifestyle factors that may impact nutrition care",
+    "Take a focused history of medication use and any concerns",
+    "Collaborate with Omar using motivational interviewing to set one or two realistic, patient-centered nutrition goals"
    ],
    "timeLimitMin": 30
   },

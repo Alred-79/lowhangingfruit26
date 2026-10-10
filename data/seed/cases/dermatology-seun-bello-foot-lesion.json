@@ -733,11 +733,11 @@
    "chiefComplaint": "Dark, enlarging pigmented lesion on the sole of the left foot, present about one year",
    "openingLine": "Hi, thanks for seeing me - I've got this dark spot on the bottom of my left foot that's been there about a year, and it seems like it's gotten bigger, so I wanted to get it checked out.",
    "tasks": [
-    "Obtain a thorough history of the foot lesion including timeline, change, and prior evaluations",
-    "Guide the patient through a camera-based inspection of the lesion and relevant regional and total-body skin exam",
-    "Review the chart for prior documentation of this lesion and identify any discrepancies with the patient's account",
-    "Formulate and clearly communicate an appropriate triage/referral plan for the suspicious lesion",
-    "Address the patient's secondary concern about neck razor bumps with brief, appropriate guidance"
+    "Take a focused history of the foot lesion including timeline, changes, and any prior evaluations",
+    "Guide the patient through a camera-based examination of the lesion and perform a relevant skin examination",
+    "Review the medical record and reconcile any documentation with the patient's history",
+    "Formulate and communicate an appropriate management plan",
+    "Address the patient's secondary concern about the neck bumps"
    ],
    "timeLimitMin": 22
   },

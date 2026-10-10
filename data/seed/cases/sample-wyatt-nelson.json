@@ -846,15 +846,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a dietetics student conducting an initial telehealth nutrition assessment for Wyatt Nelson, an 18-year-old male referred by his primary care physician for uncontrolled Type 2 Diabetes Mellitus, obesity, and dyslipidemia. He has a history of T2DM since age 15. Review his available chart data before the visit. Your goals are to complete a nutrition assessment, identify a nutrition diagnosis, and begin patient-centered counseling using motivational interviewing. Be aware he may be shy and sensitive about weight and bowel habits.",
+   "studentBrief": "You are a dietetics student conducting an initial telehealth nutrition assessment for Wyatt Nelson, an 18-year-old male referred by his primary care physician for uncontrolled Type 2 Diabetes Mellitus, obesity, and dyslipidemia. He has a history of T2DM since age 15. Review his available chart data before the visit. Your goals are to complete a nutrition assessment, identify a nutrition diagnosis, and begin patient-centered counseling using motivational interviewing.",
    "chiefComplaint": "Nutrition counseling referral for uncontrolled Type 2 Diabetes Mellitus, obesity, and dyslipidemia",
    "openingLine": "Hey... yeah, my doctor said I need to talk to you about my blood sugar and stuff. It's been kind of high.",
    "tasks": [
     "Complete a thorough diet history including meal pattern, food preferences, beverage intake, and barriers to healthy eating",
     "Assess anthropometrics and relevant labs to inform the nutrition diagnosis",
-    "Explore medication adherence and reconcile any discrepancies with chart data in a nonjudgmental way",
-    "Sensitively assess constipation and bowel habits as they relate to nutrition",
-    "Use motivational interviewing techniques to explore Wyatt's ambivalence and identify at least one patient-centered, achievable nutrition goal tied to his soccer performance motivation",
+    "Explore medication adherence in a nonjudgmental way",
+    "Assess bowel habits as they relate to nutrition",
+    "Use motivational interviewing techniques to explore the patient's readiness for change and identify at least one patient-centered, achievable nutrition goal",
     "Formulate a PES statement and brief ADIME note summarizing the encounter"
    ],
    "timeLimitMin": 30

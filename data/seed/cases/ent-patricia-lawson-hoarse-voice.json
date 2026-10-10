@@ -874,11 +874,11 @@
    "chiefComplaint": "Persistent hoarse voice for 8 weeks, not improved with antibiotics and acid reflux medication",
    "openingLine": "Hi there, thanks for seeing me. My voice has just been so scratchy and rough for about two months now, and nothing they've given me has helped one bit.",
    "tasks": [
-    "Elicit a complete history of the hoarseness including red-flag symptoms (ear pain, swallowing difficulty, weight loss, neck mass)",
-    "Obtain an honest tobacco and alcohol history",
-    "Perform feasible camera-based exam of the oropharynx and neck, including guided neck self-palpation",
-    "Determine and communicate the urgent next steps (laryngoscopy, imaging) given the red flags present",
-    "Address the patient's fear and emotional state with empathy while conveying appropriate urgency"
+    "Take a focused history of the presenting concern",
+    "Obtain a tobacco and alcohol history",
+    "Perform a feasible camera-based examination of the oropharynx and neck",
+    "Determine and communicate the next steps in management",
+    "Address the patient's concerns with empathy"
    ],
    "timeLimitMin": 22
   },

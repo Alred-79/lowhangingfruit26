@@ -929,10 +929,10 @@
    "chiefComplaint": "Pre-anesthesia assessment prior to scheduled outpatient right knee arthroscopy with meniscal repair.",
    "openingLine": "Hi! I'm just here for that call before my knee surgery next week, right? I figured this would be pretty quick.",
    "tasks": [
-    "Conduct a structured pre-anesthesia history including prior anesthesia/sedation experiences and family anesthesia history",
-    "Perform a remote airway exam and OSA risk screening (STOP-BANG) using camera-based maneuvers and patient report",
-    "Reconcile medications and supplements, including semaglutide timing and bleeding-risk herbal supplements, and give fasting instructions",
-    "Recognize the family history suggestive of malignant hyperthermia susceptibility and determine the appropriate escalation within CRNA scope",
+    "Conduct a structured pre-anesthesia history including prior anesthesia and sedation experiences and family history",
+    "Perform a remote airway examination and OSA risk screening (STOP-BANG) using camera-based maneuvers and patient report",
+    "Reconcile medications and supplements with the patient and provide fasting instructions",
+    "Assess anesthesia-related risk factors and determine appropriate escalation or consultation",
     "Risk-stratify for postoperative nausea and vomiting and propose a prophylaxis approach"
    ],
    "timeLimitMin": 25

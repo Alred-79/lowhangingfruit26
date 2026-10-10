@@ -813,14 +813,14 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a sonography student taking a pre-scan telehealth call with Tamika Lewis, 29, who is scheduled tomorrow for an early pregnancy ultrasound ordered by her midwife for light spotting at approximately 8 weeks by uncertain dates. Your job is to take a focused pre-scan history, confirm the clinical indication, give preparation instructions, explain the transvaginal scan and obtain informed consent (including chaperone and partner-attendance questions), and set honest expectations about who will give her results. You must also recognize any symptoms that would need urgent in-person evaluation before tomorrow's appointment.",
+   "studentBrief": "You are a sonography student taking a pre-scan telehealth call with Tamika Lewis, 29, who is scheduled tomorrow for an early pregnancy ultrasound ordered by her midwife for light spotting at approximately 8 weeks by uncertain dates. Your job is to take a focused pre-scan history, confirm the clinical indication, give preparation instructions, explain the transvaginal scan and obtain informed consent (including chaperone and partner-attendance questions), and set honest expectations about who will give her results.",
    "chiefComplaint": "Pre-scan call before scheduled early pregnancy ultrasound for light spotting at approximately 8 weeks by uncertain dates.",
    "openingLine": "Hi, I'm calling about getting ready for my ultrasound tomorrow. My midwife ordered it because I've been spotting a little.",
    "tasks": [
-    "Take a focused history covering bleeding, pain pattern and laterality, and ectopic warning signs",
+    "Take a focused history covering bleeding, pain, and relevant symptoms",
     "Advise the patient on any symptoms that require same-day in-person evaluation before the scheduled scan",
     "Explain bladder preparation and fasting requirements for the ultrasound",
-    "Explain the transvaginal ultrasound procedure, address her safety concerns, and obtain informed consent including chaperone and partner-attendance policy",
+    "Explain the transvaginal ultrasound procedure and obtain informed consent including chaperone and partner-attendance policy",
     "Set honest, compassionate expectations about who will communicate the ultrasound results"
    ],
    "timeLimitMin": 20

@@ -756,15 +756,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are an audiology student conducting a telehealth follow-up visit with Dorothy Greenwood, a 68-year-old woman who had a diagnostic audiogram one week ago at her husband's urging. Your task is to review her audiologic test results with her, take a focused history regarding tinnitus and balance symptoms, assess the functional/psychosocial impact of her hearing loss, and determine appropriate next steps within your scope of practice as an audiology student.",
+   "studentBrief": "You are an audiology student conducting a telehealth follow-up visit with Dorothy Greenwood, a 68-year-old woman who had a diagnostic audiogram one week ago at her husband's urging. Your task is to review her audiologic test results with her, take a focused history, assess the functional and psychosocial impact of her hearing loss, and determine appropriate next steps within your scope of practice as an audiology student.",
    "chiefComplaint": "Follow-up visit to review audiogram results and discuss difficulty understanding conversation, particularly in groups.",
    "openingLine": "My husband made me come get this hearing thing checked out. I guess you're going to tell me what the test showed - though I'll warn you, I still think most people just mumble.",
    "tasks": [
     "Review and explain the audiogram and word recognition results in plain language appropriate to her health literacy",
-    "Take a focused history of her tinnitus, balance symptoms, and functional impact of hearing loss, including sensitive exploration of social withdrawal and attitudes toward hearing aids",
-    "Recognize the audiometric red-flag pattern (asymmetry, poor word recognition) and determine that medical/ENT referral is indicated before finalizing an amplification plan",
-    "Explore the mismatch between her self-reported difficulty (mainly in noise/groups) and her objective test results (reduced left-ear word recognition even in quiet)",
-    "Counsel her on next steps, including the referral recommendation and realistic discussion of hearing aid options, while respecting her stated goal of not being pressured"
+    "Take a focused history of the presenting concern, including functional impact of hearing loss and attitudes toward management options",
+    "Assess for any additional relevant symptoms",
+    "Determine appropriate next steps within your scope of practice",
+    "Counsel the patient on your recommendations and agree on a plan"
    ],
    "timeLimitMin": 25
   },

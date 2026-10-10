@@ -914,15 +914,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a pulmonary and critical care fellow conducting a telehealth follow-up visit with Barbara Novak, a 66-year-old woman with severe COPD, who is calling in to review recent spirometry and lab results after two exacerbations in the past 8 months. Review her chart before the visit.",
+   "studentBrief": "You are a pulmonary and critical care fellow conducting a telehealth follow-up visit with Barbara Novak, a 66-year-old woman with COPD, who is calling in to review recent spirometry and lab results after recurrent exacerbations. Review her chart before the visit.",
    "chiefComplaint": "COPD follow-up to review spirometry and lab results after recurrent exacerbations",
    "openingLine": "Hi doctor, I'm here to go over my breathing test results, like we planned.",
    "tasks": [
-    "Take a focused history of her exacerbation pattern, inhaler use, and functional limitation (mMRC)",
-    "Observe and assess her inhaler technique on camera for both tiotropium and albuterol",
-    "Review and interpret her spirometry, eosinophil count, cotinine result, chest X-ray, and home oximetry log in the context of her history",
-    "Explore smoking status sensitively, noting any discrepancy between her report and the record",
-    "Formulate and discuss a COPD management plan addressing therapy escalation, vaccination, pulmonary rehabilitation, and oxygen assessment, incorporating her goals and concerns"
+    "Take a focused history of her exacerbation pattern, inhaler use, and functional limitation",
+    "Observe and assess her inhaler technique on camera",
+    "Review and interpret her spirometry, laboratory results, chest X-ray, and home oximetry log",
+    "Explore smoking status and cessation support",
+    "Formulate and discuss a COPD management plan, incorporating her goals and concerns"
    ],
    "timeLimitMin": 25
   },

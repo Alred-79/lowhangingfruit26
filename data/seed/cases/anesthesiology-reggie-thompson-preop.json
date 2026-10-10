@@ -1098,15 +1098,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the anesthesiology resident conducting a telehealth pre-anesthesia evaluation for Reggie Thompson, a 54-year-old man scheduled for laparoscopic sleeve gastrectomy in two weeks. Review his history, airway and cardiopulmonary risk, home medications, CPAP use, and fasting plan, and be ready to explain the anesthetic plan and address his questions.",
+   "studentBrief": "You are the anesthesiology resident conducting a telehealth pre-anesthesia evaluation for Reggie Thompson, a 54-year-old man scheduled for laparoscopic sleeve gastrectomy in two weeks. Review his history, medications, and perioperative risk factors, and be ready to explain the anesthetic plan and address his questions.",
    "chiefComplaint": "Pre-operative evaluation prior to scheduled laparoscopic sleeve gastrectomy",
    "openingLine": "Hey doc, I'm just here to get checked out before my weight loss surgery. I'm ready to get this show on the road.",
    "tasks": [
-    "Elicit and characterize airway risk, including the prior anesthetic record and a guided camera airway exam",
-    "Assess cardiopulmonary risk and functional capacity in the context of his ECG, blood pressure trend, and comorbidities",
-    "Evaluate obstructive sleep apnea severity and CPAP adherence, reconciling patient report with objective device data",
-    "Give clear, correct perioperative instructions for his GLP-1 agonist, ACE inhibitor, and metformin, plus fasting guidance",
-    "Explain the anesthetic plan and associated risks in terms he can understand, and identify any issues that require escalation to the surgical or sleep medicine team before proceeding"
+    "Take a focused history of airway, cardiopulmonary status, and functional capacity",
+    "Review the medication list with the patient and confirm current use",
+    "Assess obstructive sleep apnea history and CPAP use",
+    "Provide perioperative medication and fasting instructions",
+    "Explain the anesthetic plan and associated risks, and agree on next steps"
    ],
    "timeLimitMin": 25
   },

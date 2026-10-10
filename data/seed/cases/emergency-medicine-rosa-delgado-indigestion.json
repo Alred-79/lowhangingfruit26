@@ -380,12 +380,12 @@
    "chiefComplaint": "Upper abdominal pressure, nausea, and jaw ache for 2 hours, thought to be indigestion",
    "openingLine": "Hi, sorry to bother you, I think I just have some bad indigestion from dinner last night. My stomach's been hurting and I feel kind of sick. Can you tell me what I can take for it?",
    "tasks": [
-    "Elicit a focused history of the pain, associated symptoms, and cardiac risk factors",
-    "Identify red flags for acute coronary syndrome despite the patient's framing of the complaint as indigestion",
-    "Correctly risk-stratify and arrive at the disposition of calling emergency medical services now",
-    "Direct the patient to chew aspirin 325 mg while staying on the line, and avoid letting her drive herself",
-    "Address her concerns about missing work and cost with clear, honest reassurance without delaying escalation",
-    "Give clear return/escalation instructions and confirm EMS activation before ending the call"
+    "Take a focused history of the presenting concern and associated symptoms",
+    "Elicit relevant past medical history and risk factors",
+    "Perform a remote assessment and determine the appropriate disposition",
+    "Advise the patient on immediate management while remaining on the line",
+    "Address the patient's concerns with clear communication",
+    "Give clear instructions and confirm the plan before ending the call"
    ],
    "timeLimitMin": 20
   },

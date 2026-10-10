@@ -960,15 +960,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are seeing Mai Tran, a 46-year-old woman, for a telehealth preventive care visit. She booked this visit at her daughter's urging. Review the chart before the call; no prior preventive screening history is detailed yet. Conduct a focused history, address her presenting concerns, and ensure age-appropriate preventive care is addressed.",
+   "studentBrief": "You are seeing Mai Tran, a 46-year-old woman, for a telehealth preventive care visit. She booked this visit at her daughter's urging. Review the chart before the call. Conduct a focused history, address her presenting concerns, and ensure age-appropriate preventive care is addressed.",
    "chiefComplaint": "Preventive health check-up; patient also reports irregular periods, hot flushes, and poor sleep for 8 months",
    "openingLine": "Hi doctor, thank you for seeing me. I feel fine really, my daughter just worries too much, but I guess I should mention my periods have been strange lately and I'm not sleeping well.",
    "tasks": [
-    "Characterize the irregular periods, hot flushes, and sleep disturbance and discuss likely perimenopause with appropriate reassurance and targeted testing",
-    "Elicit family history (including colon cancer) and personal screening history for cervical, colorectal, and breast cancer, and address any gaps",
-    "Screen for hepatitis B risk based on country of birth and arrange appropriate testing",
-    "Assess the reported hand skin changes in the context of her occupational exposures and provide guidance within scope",
-    "Acknowledge her time/income constraints and negotiate a realistic, prioritized follow-up and referral plan"
+    "Take a focused history of the irregular periods, hot flushes, and sleep disturbance",
+    "Elicit family history and personal screening history for age-appropriate preventive care",
+    "Screen for relevant health risks based on the patient's background and arrange appropriate testing",
+    "Take a focused history of the reported hand skin changes in the context of her work",
+    "Discuss findings, agree a prioritized management plan, and arrange follow-up"
    ],
    "timeLimitMin": 20
   },

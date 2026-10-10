@@ -447,13 +447,13 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the dietetics student conducting a telehealth nutrition assessment for Vladko Bareche, a 31-year-old TV producer recently referred for poorly controlled Type 2 Diabetes and unintentional weight loss. He was lost to primary care follow-up for 8 months. Review his available records, conduct a nutrition-focused history (diet pattern, medication adherence, barriers, substance use as relevant to nutrition status), and begin motivational-interviewing-based counseling. He may be guarded about personal topics.",
+   "studentBrief": "You are the dietetics student conducting a telehealth nutrition assessment for Vladko Bareche, a 31-year-old TV producer recently referred for poorly controlled Type 2 Diabetes and unintentional weight loss. He was lost to primary care follow-up for 8 months. Review his available records, conduct a nutrition-focused history, and begin motivational-interviewing-based counseling. He may be guarded about personal topics.",
    "chiefComplaint": "Poorly controlled Type 2 Diabetes with recent unintentional 30-lb weight loss, referred for nutrition assessment",
    "openingLine": "Hi... thanks for fitting me in. I guess my doctor's office wants me to talk to a nutritionist because my sugar numbers aren't great and I've lost some weight. I've been really busy with work though, so I don't have much time.",
    "tasks": [
     "Conduct a thorough nutrition-focused history including usual intake, meal pattern, and cultural food preferences",
-    "Identify barriers to glycemic control including medication adherence, substance use, and psychosocial stressors as they relate to nutrition status",
-    "Reconcile the patient's self-reported medication adherence with the pharmacy refill record and address the discrepancy sensitively",
+    "Explore barriers to glycemic control and nutrition status including medication use, lifestyle factors, and psychosocial stressors",
+    "Review the medication list and adherence pattern with the patient",
     "Formulate a nutrition diagnosis (PES statement) using the Nutrition Care Process",
     "Use motivational interviewing techniques to explore readiness to change and negotiate an initial, culturally appropriate nutrition goal"
    ],

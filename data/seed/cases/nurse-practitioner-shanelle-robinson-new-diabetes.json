@@ -901,15 +901,16 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the nurse practitioner seeing Shanelle Robinson, a 38-year-old call-center supervisor, for a telehealth visit to review labs drawn after she reported thirst, fatigue, and recurrent yeast infections. Review the chart before the visit. Your tasks: discuss the diagnosis suggested by her results, decide on an appropriate medication plan within your scope, help her set realistic self-management goals given her work schedule and family demands, and identify any preventive care or screening gaps.",
+   "studentBrief": "You are the nurse practitioner seeing Shanelle Robinson, a 38-year-old call-center supervisor, for a telehealth visit to review lab results drawn after she reported thirst, fatigue, and recurrent yeast infections. Review the chart before the visit.",
    "chiefComplaint": "Follow-up visit to review lab results after work-up for thirst, fatigue, and recurrent yeast infections.",
    "openingLine": "Hi, thanks for seeing me. I'm here to find out what my blood tests showed. The doctor said they'd call me but I never heard back, so I just went ahead and made this appointment myself.",
    "tasks": [
-    "Explain the lab results and new diagnosis in clear, non-judgmental language",
-    "Initiate metformin with appropriate dosing and counseling, addressing her fear of injections and cost concerns",
-    "Negotiate realistic self-management goals that fit her rotating shift schedule and caregiving responsibilities",
-    "Identify and address gaps in preventive care: eye exam, foot exam, immunizations, and kidney/lipid monitoring",
-    "Respond to her emotional distress and the conflicting health information she has encountered online"
+    "Take a focused history of the presenting symptoms and review relevant medical history",
+    "Review the lab results with the patient",
+    "Discuss medication options and address any concerns",
+    "Negotiate self-management goals that fit the patient's lifestyle and responsibilities",
+    "Review preventive care and screening recommendations",
+    "Respond to the patient's questions and concerns, and agree on a follow-up plan"
    ],
    "timeLimitMin": 25
   },

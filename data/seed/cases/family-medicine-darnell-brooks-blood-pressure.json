@@ -1027,10 +1027,10 @@
    "openingLine": "Hi doc, thanks for seeing me - I'm here to go over my blood pressure numbers from home, they've been kind of high.",
    "tasks": [
     "Review the home blood pressure log and confirm technique on camera.",
-    "Explore medication-taking patterns and identify any barriers to adherence.",
-    "Screen for secondary/contributing causes of poor BP control (OTC medications, diet, sleep).",
-    "Assess for obstructive sleep apnea risk and address the safety-sensitive occupational concern appropriately.",
-    "Formulate a follow-up plan including labs already on file, referrals, and medication adjustments within scope."
+    "Take a focused history of medication use and any challenges with the current regimen.",
+    "Take a focused history exploring factors that may affect blood pressure control.",
+    "Perform a relevant risk assessment and address any occupational health concerns appropriately.",
+    "Formulate a follow-up plan including any investigations, referrals, and medication adjustments within scope."
    ],
    "timeLimitMin": 20
   },

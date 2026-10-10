@@ -1042,11 +1042,11 @@
    "chiefComplaint": "Six-week follow-up after anterior STEMI and LAD drug-eluting stent placement",
    "openingLine": "Hey doc, good to see you! I'm here for my follow-up after the heart attack thing. I'm doing okay, just checking in like they told me to.",
    "tasks": [
-    "Obtain a focused interval history including symptoms, functional status, and medication adherence",
-    "Identify the discrepancy between reported and actual ticagrelor use by reviewing pharmacy/refill data and exploring the reason with the patient",
-    "Screen for post-MI mood symptoms, fear of exertion/intimacy, and suicidal ideation",
-    "Review echocardiogram, catheterization report, and lipid panel to guide secondary prevention recommendations",
-    "Formulate and communicate a plan addressing DAPT, lipid management, cardiac rehab engagement, smoking, and mental health referral"
+    "Take a focused interval history including symptoms, functional status, and medication adherence",
+    "Review pharmacy records and reconcile the medication list with the patient",
+    "Screen for mood symptoms and assess psychosocial adjustment",
+    "Review investigation results to guide secondary prevention recommendations",
+    "Formulate and communicate a management plan and arrange appropriate follow-up"
    ],
    "timeLimitMin": 25
   },

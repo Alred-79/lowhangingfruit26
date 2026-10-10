@@ -831,16 +831,16 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are an oncology nursing student making a scheduled telehealth between-cycle symptom check call to Deborah Kim, a 52-year-old woman who is 9 days post cycle 2 of doxorubicin/cyclophosphamide (AC) for breast cancer. She has an implanted port. Review her chart before the call. Your job is to assess for chemotherapy toxicities and any signs of infection or neutropenic fever, and escalate appropriately if needed.",
+   "studentBrief": "You are an oncology nursing student making a scheduled telehealth between-cycle symptom check call to Deborah Kim, a 52-year-old woman who is 9 days post cycle 2 of doxorubicin/cyclophosphamide (AC) for breast cancer. She has an implanted port. Review her chart before the call. Your job is to assess for chemotherapy toxicities and escalate appropriately if needed.",
    "chiefComplaint": "Fatigue and mouth sores 9 days after second chemotherapy cycle",
    "openingLine": "Hi, thanks for calling. I'm okay, really — I'm just a little tired and I've got some sores in my mouth that are bothering me when I eat.",
    "tasks": [
-    "Conduct a systematic symptom check for common AC chemotherapy toxicities (fatigue, mucositis, GI symptoms, infection risk)",
-    "Directly and specifically ask about fever, chills, and temperature history over the past 24 hours",
+    "Conduct a systematic symptom check for common AC chemotherapy toxicities",
+    "Take a focused history of fever, chills, and recent temperature measurements",
     "Perform a camera-based inspection of the port site and oral mucosa and obtain current vital signs",
-    "Recognize signs consistent with febrile neutropenia given the prior severe nadir ANC and current findings, and escalate for urgent in-person evaluation rather than reassuring or deferring",
-    "Address the patient's reluctance, minimization, and practical/financial barriers with empathy while ensuring urgent action occurs",
-    "Document findings using SBAR format for handoff to the on-call oncologist"
+    "Assess findings in the context of the patient's chemotherapy timeline and prior laboratory results",
+    "Discuss any concerns with the patient and agree on next steps",
+    "Document findings using SBAR format for handoff to the oncology team"
    ],
    "timeLimitMin": 25
   },

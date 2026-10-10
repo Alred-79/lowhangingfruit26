@@ -764,15 +764,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a neurology resident conducting a telehealth new-consult video visit with Amara Diallo, a 27-year-old graduate student referred after a first witnessed generalized tonic-clonic seizure two weeks ago. ED workup (CT, labs) was normal; outpatient EEG and MRI have since been completed. Your task is to take a focused history, perform a camera-guided neurological screening exam, review available results, localize the process, and develop a diagnosis and management plan.",
+   "studentBrief": "You are a neurology resident conducting a telehealth new-consult video visit with Amara Diallo, a 27-year-old graduate student referred after a first witnessed generalized tonic-clonic seizure two weeks ago. ED workup (CT, labs) was normal; outpatient EEG and MRI have since been completed. Your task is to take a focused history, perform a camera-guided neurological screening exam, review available results, and develop a diagnosis and management plan.",
    "chiefComplaint": "First witnessed generalized tonic-clonic seizure two weeks ago, referred for neurology follow-up after ED workup.",
    "openingLine": "Hi, thanks for seeing me. I had some kind of seizure two weeks ago and I'm here to figure out what happened and what I'm supposed to do now.",
    "tasks": [
-    "Elicit a complete seizure history including precipitants, post-ictal course, and any subtle prior seizure-like events.",
-    "Perform a camera-guided neurological screening exam including observation of the described morning jerking movements.",
-    "Review and interpret the EEG and MRI reports in the context of the history to localize the seizure type as generalized rather than focal.",
-    "Formulate a working diagnosis, discuss antiseizure medication choice appropriate for a woman of reproductive potential, and counsel on driving safety and seizure precautions.",
-    "Address the patient's concerns about family stigma and future pregnancy with sensitivity."
+    "Take a focused history of the presenting concern including precipitants and post-ictal course",
+    "Perform a camera-guided neurological screening exam",
+    "Review and interpret the EEG and MRI reports",
+    "Discuss antiseizure medication options appropriate for a woman of reproductive potential and counsel on driving safety and seizure precautions",
+    "Address the patient's concerns with sensitivity"
    ],
    "timeLimitMin": 25
   },

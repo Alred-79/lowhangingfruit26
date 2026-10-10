@@ -785,15 +785,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a general surgery resident conducting a telehealth pre-operative consultation with Viktor Petrov, a 59-year-old truck driver referred for a right inguinal hernia. He has a confirmed ultrasound showing a reducible indirect hernia. Your job is to confirm the surgical indication, assess his operative risk, discuss repair options and risks, and address his questions about timing. He may understate how bothersome his symptoms are.",
+   "studentBrief": "You are a general surgery resident conducting a telehealth pre-operative consultation with Viktor Petrov, a 59-year-old truck driver referred for evaluation of an enlarging, aching right groin bulge. He is requesting elective repair during his upcoming 3-week work layoff. Your job is to assess his symptoms, confirm the surgical indication, assess his operative risk, discuss repair options and risks, and address his questions about timing.",
    "chiefComplaint": "Enlarging, aching right groin bulge for about a year, patient requesting elective repair during his upcoming 3-week work layoff",
    "openingLine": "I've got this lump in my right groin that's been there about a year. It's bigger now. I want it fixed during my three weeks off next month.",
    "tasks": [
-    "Confirm the hernia is a clear surgical indication by history and reconcile this with the ultrasound findings",
-    "Assess perioperative risk factors including smoking, BMI, aspirin use, hypertension, and urinary symptoms",
-    "Explain open versus laparoscopic mesh repair options and address the patient's concerns about mesh safety in plain, accurate terms",
+    "Take a focused history of the presenting concern and review any available imaging",
+    "Assess perioperative risk factors including relevant medical history, medications, and social history",
+    "Explain surgical repair options and address the patient's questions and concerns",
     "Counsel on realistic timelines for return to driving and lifting given his occupation",
-    "Teach incarceration/strangulation warning signs for the preoperative waiting period and give guidance on his aspirin and smoking given the planned surgery"
+    "Teach warning signs to watch for in the preoperative period and discuss perioperative medication management"
    ],
    "timeLimitMin": 20
   },

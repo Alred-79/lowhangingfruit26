@@ -1001,11 +1001,11 @@
    "chiefComplaint": "Intermittent chest fluttering and fatigue for 2 months, with smartwatch-detected irregular rhythm",
    "openingLine": "My smartwatch kept telling me my heart rhythm looked irregular, and I've been having these spells where my chest flutters and I feel wiped out afterward.",
    "tasks": [
-    "Elicit the history of palpitation episodes and relevant cardiovascular risk factors",
-    "Review the patch monitor and echocardiogram findings with the patient and explain the diagnosis in clear terms",
-    "Calculate CHA2DS2-VASc score and discuss anticoagulation options, addressing the patient's specific fears about warfarin",
-    "Screen for reversible contributors including obstructive sleep apnea and alcohol use, and identify the mismatch between reported adherence and home monitoring trends",
-    "Outline a management plan including referral considerations (sleep study, possible electrophysiology referral) within cardiology scope"
+    "Take a focused history of the presenting concern and relevant cardiovascular risk factors",
+    "Review the available investigations with the patient and discuss the findings",
+    "Assess stroke risk and discuss management options",
+    "Screen for potential contributing factors and review the home monitoring data with the patient",
+    "Agree a management plan including any referrals and safety-net"
    ],
    "timeLimitMin": 25
   },

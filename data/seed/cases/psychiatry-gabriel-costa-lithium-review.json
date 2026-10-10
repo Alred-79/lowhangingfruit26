@@ -900,16 +900,16 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the psychiatry resident conducting a telehealth medication management follow-up for Gabriel Costa, a 29-year-old sous-chef with bipolar I disorder stable on lithium carbonate 900 mg nightly for 14 months. He is calling in for a routine follow-up but has mentioned worsening tremor, thirst, urination, and loose stools over the phone when scheduling. Review the chart, conduct the interview and mental status/risk assessment, and determine next steps.",
+   "studentBrief": "You are the psychiatry resident conducting a telehealth medication management follow-up for Gabriel Costa, a 29-year-old sous-chef with bipolar I disorder stable on lithium carbonate 900 mg nightly for 14 months. He is calling in with concerns about worsening tremor, thirst, urination, and loose stools over the past 2 weeks. Review the chart, conduct the interview and mental status/risk assessment, and determine next steps.",
    "chiefComplaint": "Worsening hand tremor, excessive thirst and urination, and loose stools for 2 weeks in a patient on long-term lithium.",
    "openingLine": "Hey doc, thanks for fitting me in. My hands have been shaking a lot more lately, I'm super thirsty all the time, going to the bathroom constantly, and my stomach's been loose too. It's starting to mess with my work.",
    "tasks": [
-    "Elicit a complete history of the tremor, thirst, polyuria, and GI symptoms and their timeline",
-    "Identify the recently started ibuprofen and contextual factors (hot kitchen, double shifts) as potential contributors to lithium toxicity",
-    "Conduct a full mental status exam and suicide/homicide risk assessment to confirm current euthymia and safety",
-    "Review today's labs and prior trends to recognize acute lithium toxicity and acute kidney injury, and interpret the elevated TSH",
-    "Gently and directly explore the patient's feelings about his medication to uncover any ambivalence or thoughts of self-discontinuation",
-    "Formulate a safe, in-scope plan including urgent medical coordination, stopping the NSAID, and close psychiatric follow-up"
+    "Take a focused history of the tremor, thirst, urination, and gastrointestinal symptoms",
+    "Review the medication list and recent changes with the patient",
+    "Conduct a mental status examination and assess risk",
+    "Review the laboratory results with the patient",
+    "Explore the patient's experience with and feelings about his current medication regimen",
+    "Formulate and agree a management plan with appropriate follow-up"
    ],
    "timeLimitMin": 25
   },

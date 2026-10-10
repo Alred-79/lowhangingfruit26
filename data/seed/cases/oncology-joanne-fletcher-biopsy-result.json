@@ -871,15 +871,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the medical oncology fellow on a telehealth video visit with Joanne Fletcher, a 49-year-old elementary school teacher, who is calling to receive the results of a core needle biopsy and axillary node biopsy performed after an abnormal screening mammogram. She is alone on the call and expecting routine reassurance. Review the available records before and during the visit, deliver the results, answer her questions honestly including about prognosis, and establish next steps in staging and treatment planning.",
+   "studentBrief": "You are the medical oncology fellow on a telehealth video visit with Joanne Fletcher, a 49-year-old elementary school teacher, who is calling to receive the results of a core needle biopsy and axillary node biopsy performed after an abnormal screening mammogram. She is alone on the call. Review the available records before and during the visit.",
    "chiefComplaint": "Here to receive biopsy results after an abnormal screening mammogram showing a left breast mass.",
    "openingLine": "Hi, thanks for getting me in - I'm here to find out what that biopsy showed. I'm hoping you're going to tell me it's just a cyst.",
    "tasks": [
-    "Disclose the biopsy and lymph node results clearly and empathetically, confirming diagnosis of invasive ductal carcinoma with axillary nodal involvement",
-    "Explain clinical staging and receptor status (ER/PR/HER2/Ki-67) in plain language and its relevance to treatment planning",
-    "Respond to her direct question about mortality risk and address her distress about her children without false reassurance or premature statistics",
-    "Screen for red-flag symptoms of metastatic disease and determine whether further staging imaging is indicated at this time",
-    "Identify the family history indication for genetic counseling referral and place appropriate referrals (genetic counseling, breast surgical oncology) and order breast MRI",
+    "Disclose the biopsy results clearly and empathetically",
+    "Explain the pathology findings in plain language and discuss their relevance to treatment planning",
+    "Respond to her questions and concerns",
+    "Take a focused history to assess for any new symptoms",
+    "Discuss next steps in staging and treatment planning, including appropriate referrals and investigations",
     "Assess psychosocial distress and social support, and connect her with appropriate supportive resources"
    ],
    "timeLimitMin": 25

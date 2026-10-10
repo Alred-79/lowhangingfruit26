@@ -773,15 +773,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are the dental provider on a teledentistry video visit. Jerome Baker, 48, contacted the clinic about a bad lower-right toothache over the past several days, now with new swelling under his jaw overnight. Review his history, inspect what you can by camera, review any available imaging, and determine the appropriate next step for his care.",
+   "studentBrief": "You are the dental provider on a teledentistry video visit. Jerome Baker, 48, contacted the clinic about a bad lower-right toothache over the past several days, now with new swelling under his jaw overnight. Review his history, inspect what you can by camera, and determine the appropriate next step for his care.",
    "chiefComplaint": "Five-day history of right lower back tooth pain, now with overnight jaw and submandibular swelling, limited mouth opening, and muffled voice.",
    "openingLine": "My bottom back tooth on the right has been killing me for like five days, and now my jaw and under my neck swelled up overnight.",
    "tasks": [
-    "Take a focused history of the dental pain, swelling, and associated symptoms including airway-related red flags.",
-    "Review the patient's medical history, current medications, and relevant prior dental imaging.",
-    "Perform feasible remote examination maneuvers (camera inspection, guided self-palpation, mouth opening assessment).",
-    "Determine and clearly communicate the appropriate urgent disposition, addressing the patient's concerns about cost and work.",
-    "Document findings and plan in a dental SOAP note."
+    "Take a focused history of the presenting concern",
+    "Review the patient's medical history, current medications, and any available prior dental records",
+    "Perform a remote examination using camera inspection and guided patient maneuvers",
+    "Determine and communicate the appropriate next steps for care",
+    "Document findings and plan in a dental SOAP note"
    ],
    "timeLimitMin": 20
   },

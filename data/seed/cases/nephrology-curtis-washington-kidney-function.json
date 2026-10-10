@@ -1081,15 +1081,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a nephrology fellow conducting a telehealth follow-up visit with Curtis Washington, a 58-year-old man with CKD from diabetes and hypertension, whose kidney function has been declining. Review his labs, blood pressure trends, and medications, and address next steps in his care.",
+   "studentBrief": "You are a nephrology fellow conducting a telehealth follow-up visit with Curtis Washington, a 58-year-old man with CKD from diabetes and hypertension. Review his recent labs, blood pressure trends, and medications, and address next steps in his care.",
    "chiefComplaint": "CKD follow-up after labs show worsening kidney function",
    "openingLine": "Hey doc, thanks for fitting me in between clients. My regular doctor's office said my kidney numbers came back worse and that you'd want to talk to me about what's next.",
    "tasks": [
-    "Review and interpret the trend in eGFR and urine albumin-creatinine ratio over the past 18 months",
+    "Review and interpret the trend in eGFR and urine albumin-creatinine ratio",
     "Reconcile the medication list with what the patient is actually taking, including any over-the-counter drugs or supplements",
-    "Identify and address modifiable contributors to CKD progression (blood pressure control, glycemic control, nephrotoxin exposure)",
-    "Explore the patient's beliefs and fears about dialysis with respect, and begin non-coercive education about the full range of kidney replacement therapy options including transplant and home dialysis",
-    "Develop and clearly communicate a follow-up plan including appropriate referrals within nephrology's scope"
+    "Identify and address modifiable contributors to CKD progression",
+    "Explore the patient's understanding and concerns about kidney disease progression",
+    "Develop and clearly communicate a follow-up plan including appropriate referrals"
    ],
    "timeLimitMin": 25
   },

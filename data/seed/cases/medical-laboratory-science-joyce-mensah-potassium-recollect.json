@@ -797,13 +797,13 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a medical laboratory science student staffing a telehealth laboratory callback line. Joyce Mensah, 55, had routine bloodwork yesterday at a satellite collection site; the lab reported a critical potassium of 6.3 mmol/L with a 2+ hemolysis flag. You are calling her to verify her identity, investigate possible pre-analytical causes of this result, explain why a repeat draw is needed, arrange urgent same-day recollection with corrected technique, and report the critical value to her ordering provider. Stay within your scope: do not advise on medications or treatment.",
+   "studentBrief": "You are a medical laboratory science student staffing a telehealth laboratory callback line. Joyce Mensah, 55, had routine bloodwork yesterday at a satellite collection site; the lab reported a critical potassium result. You are calling her to verify her identity, investigate possible causes of this result, explain why a repeat draw is needed, arrange urgent same-day recollection, and report the critical value to her ordering provider. Stay within your scope: do not advise on medications or treatment.",
    "chiefComplaint": "Critical potassium result on routine bloodwork, patient feels well and is unsure why a repeat draw is needed.",
    "openingLine": "Hi, yes, this is Joyce. They told me my potassium came back high and I need to come back in? I feel completely fine though, so I'm a little confused.",
    "tasks": [
     "Verify the patient's identity using two identifiers before discussing results.",
-    "Explore and identify likely pre-analytical causes of the critical potassium result (collection technique, tourniquet time, transport delay, hemolysis).",
-    "Ask about diet, medications, and symptoms to assess whether true hyperkalemia can be ruled out.",
+    "Take a focused history of the blood collection experience and any symptoms.",
+    "Review medications and dietary habits with the patient.",
     "Explain in plain language why an urgent same-day recollection is necessary and arrange it with corrected technique instructions.",
     "Report the critical value to the ordering provider per protocol and document the call, while staying within laboratory scope (no medication advice)."
    ],

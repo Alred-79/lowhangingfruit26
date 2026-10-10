@@ -869,11 +869,11 @@
    "chiefComplaint": "Scheduled post-ICU follow-up visit for recovery after septic shock and prolonged ICU stay",
    "openingLine": "Hi there, thanks for calling. I'm doing fine, just a little lazy still since I got home. My wife Carol's here with me too.",
    "tasks": [
-    "Screen systematically for physical, cognitive, and psychological domains of post-intensive care syndrome",
-    "Perform feasible remote exam maneuvers (sit-to-stand screen, camera inspection of heel wound and neck line site, swallow screen) and interpret results in context of trend data",
-    "Identify the mismatch between reported medication-taking and actual pill administration technique, and respond within nursing scope",
-    "Assess caregiver strain and safety concerns, and provide support/education",
-    "Synthesize findings into an SBAR escalation to the primary care/rehab team, including specific referrals needed"
+    "Take a systematic history covering physical, cognitive, and psychological recovery since discharge",
+    "Perform feasible remote examination and review available monitoring data",
+    "Review the medication list and administration technique with the patient and caregiver",
+    "Assess caregiver wellbeing and home safety",
+    "Summarize your findings and formulate a plan including any referrals or escalation needed"
    ],
    "timeLimitMin": 25
   },

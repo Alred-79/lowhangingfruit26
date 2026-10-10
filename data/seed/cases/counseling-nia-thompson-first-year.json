@@ -719,10 +719,10 @@
    "chiefComplaint": "Difficulty concentrating and declining academic performance following the death of her grandmother seven weeks ago; referred by academic adviser after being placed on academic probation.",
    "openingLine": "Hi, I'm Nia. My adviser said I should talk to someone because my grades slipped and I got put on probation. I guess I've just been having a hard time focusing lately.",
    "tasks": [
-    "Build rapport and conduct a culturally responsive intake exploring the recent loss, academic stress, and support system",
+    "Build rapport and conduct a culturally responsive intake exploring presenting concerns, academic stress, and support system",
     "Administer and interpret the PHQ-9 and GAD-7, and complete a suicide risk screen",
-    "Explore the patient's ambivalence about counseling and confidentiality concerns without being confrontational",
-    "Reconcile the timeline discrepancy between the adviser's referral note and the patient's own account of the bereavement",
+    "Explore the patient's understanding of counseling and address any questions or concerns about the process",
+    "Review available documentation and clarify any questions about the referral",
     "Draft the Assessment and Plan sections of a DAP note reflecting an appropriate within-scope plan"
    ],
    "timeLimitMin": 25

@@ -734,15 +734,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are seeing Arjun Mehta, a 20-year-old college student, via telehealth video visit for 6 days of sore throat, fever, and fatigue. He was seen at student health yesterday where a rapid strep test was negative. Take a focused history, perform feasible remote examination maneuvers, order appropriate testing, and develop a diagnosis and management plan.",
+   "studentBrief": "You are seeing Arjun Mehta, a 20-year-old college student, via telehealth video visit for 6 days of sore throat, fever, and fatigue. He was seen at student health yesterday where a rapid strep test was negative. Take a focused history, perform feasible remote examination maneuvers, order appropriate testing, and develop a management plan.",
    "chiefComplaint": "Sore throat, fever, swollen neck glands, and fatigue for 6 days",
    "openingLine": "Hi, thanks for seeing me. I've had this awful sore throat and fever for about six days now, and I'm just exhausted all the time. My neck glands feel swollen too.",
    "tasks": [
     "Obtain a focused history of present illness including exposure history and associated symptoms",
     "Guide the patient through feasible remote examination maneuvers (throat inspection, lymph node and abdominal self-palpation)",
-    "Order and interpret appropriate confirmatory laboratory testing",
-    "Formulate a diagnosis and differential, and counsel the patient on management including activity restriction and antibiotic avoidance",
-    "Address the patient's specific concerns about antibiotics and returning to rugby"
+    "Order and interpret appropriate laboratory testing",
+    "Formulate a working diagnosis and differential, and counsel the patient on management",
+    "Address the patient's concerns and agree on a plan with safety-netting"
    ],
    "timeLimitMin": 20
   },

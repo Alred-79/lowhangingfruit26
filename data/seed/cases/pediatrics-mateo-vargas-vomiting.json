@@ -837,11 +837,11 @@
    "chiefComplaint": "2 days of vomiting (improving) and watery diarrhea with low-grade fever in a 14-month-old",
    "openingLine": "Hi, thanks for seeing us - Mateo's been throwing up for a couple of days and now he's got really watery diarrhea, like six times a day. I'm worried he might be getting dehydrated.",
    "tasks": [
-    "Take a focused history of the vomiting/diarrhea illness including exposures, fluid intake, and urine output",
-    "Guide the mother through remote hydration assessment maneuvers (skin pinch, mucous membranes, tears, capillary refill) and interpret the home weight change",
-    "Sensitively ask about all medications and fluids given at home, including over-the-counter products",
-    "Review the growth chart, recent vitals, and immunization status in the record",
-    "Formulate a diagnosis, create a rehydration/feeding plan, correct any unsafe home practices, and give clear return precautions"
+    "Take a focused history of the presenting illness including exposures, fluid intake, and urine output",
+    "Guide the mother through remote assessment maneuvers (skin pinch, mucous membranes, tears, capillary refill)",
+    "Take a complete history of all medications and fluids given at home",
+    "Review the growth chart, recent vitals, and immunization record",
+    "Formulate a diagnosis, create a management plan, provide education, and give clear return precautions"
    ],
    "timeLimitMin": 20
   },

@@ -727,11 +727,11 @@
    "chiefComplaint": "Referral for swallowing and communication evaluation after recent chest infection; patient reports no swallowing problems himself.",
    "openingLine": "My wife wanted us to come in today. I don't think there's anything wrong with my swallowing, honestly, but I suppose we're here now.",
    "tasks": [
-    "Obtain a case history from the patient and caregiver, respectfully managing differing perspectives on swallowing difficulty",
+    "Obtain a case history from the patient and caregiver, respectfully managing differing perspectives",
     "Conduct feasible remote swallowing screening including observed trial swallows of different consistencies",
     "Screen voice and motor speech function using perceptual voice tasks and oral mechanism exam via camera",
-    "Identify aspiration risk indicators and red flags (weight loss, recent pneumonia, wet voice, delayed cough) warranting referral for instrumental swallow study",
-    "Discuss interim compensatory strategies and introduce the recommendation for LSVT LOUD voice treatment, respecting the patient's autonomy and goals"
+    "Identify any concerns warranting referral for further assessment",
+    "Discuss findings and recommendations, respecting the patient's autonomy and goals"
    ],
    "timeLimitMin": 25
   },

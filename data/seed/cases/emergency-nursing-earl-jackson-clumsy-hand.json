@@ -748,11 +748,11 @@
    "chiefComplaint": "Right hand clumsiness and dropped cup, with reported slurred speech and facial asymmetry, onset ~40 minutes ago",
    "openingLine": "Hi, this is Earl Jackson calling. My right hand just quit working right and I dropped my coffee cup about forty minutes ago. I figure I just slept on it wrong, but my wife's fussing at me to call. Can I just wait and see my regular doctor Monday?",
    "tasks": [
-    "Perform a rapid remote FAST stroke screen (face, arm, speech, time) via video",
-    "Establish and document the time last known well",
-    "Assign the correct triage acuity level and determine whether EMS activation is indicated",
-    "Reconcile the patient's medication adherence history, including the anticoagulant lapse, with the record",
-    "Give clear, protocol-based safety instructions (NPO status, no aspirin, remain on the line) and address the patient's and family's concerns about cost and urgency"
+    "Perform a rapid remote stroke screen via video",
+    "Establish and document the time of symptom onset",
+    "Assign a triage acuity level and determine the appropriate care pathway",
+    "Review the patient's current medications and adherence",
+    "Provide clear instructions and address the patient's and family's questions"
    ],
    "timeLimitMin": 20
   },

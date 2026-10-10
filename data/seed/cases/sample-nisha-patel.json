@@ -935,15 +935,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a dietetics student conducting a telehealth nutrition assessment for Nisha Patel, a 29-year-old woman recently hospitalized for her first presentation of uncontrolled type 2 diabetes. She has been referred by the hospital discharge team for outpatient medical nutrition therapy. Review her chart before the visit; your goals are to complete a nutrition assessment, identify a nutrition diagnosis, and begin patient-centered counseling.",
+   "studentBrief": "You are a dietetics student conducting a telehealth nutrition assessment for Nisha Patel, a 29-year-old woman recently hospitalized for uncontrolled type 2 diabetes. She has been referred by the hospital discharge team for outpatient medical nutrition therapy. Review her chart before the visit.",
    "chiefComplaint": "Referral for nutrition assessment and counseling after first hospitalization for uncontrolled type 2 diabetes",
    "openingLine": "Hi... thanks for seeing me. I've been diagnosed with type 2 diabetes and I was just in the hospital for the first time ever, so I'm honestly still trying to wrap my head around all of this.",
    "tasks": [
-    "Complete a nutrition-focused history including meal pattern, carbohydrate sources, beverages, and behavioral/cultural barriers",
-    "Review relevant labs, anthropometrics, and medication list and reconcile with patient-reported adherence",
+    "Complete a nutrition-focused history including meal pattern, carbohydrate sources, beverages, and any barriers to healthy eating",
+    "Review relevant labs, anthropometrics, and medication list with the patient",
     "Formulate a PES statement based on assessment findings",
-    "Use motivational interviewing to explore the patient's readiness to change and address her beliefs about diet and willpower",
-    "Collaboratively set at least one small, feasible nutrition-related goal and provide culturally respectful education"
+    "Use motivational interviewing to explore the patient's readiness to change",
+    "Collaboratively set at least one small, feasible nutrition-related goal and provide education"
    ],
    "timeLimitMin": 30
   },

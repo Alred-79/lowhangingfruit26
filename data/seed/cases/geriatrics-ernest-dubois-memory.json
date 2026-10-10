@@ -967,14 +967,14 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a geriatric medicine fellow conducting a telehealth comprehensive geriatric assessment. Ernest Dubois, 84, was referred by his family physician after a low score on cognitive screening (MoCA 19/30) and reports from his daughter of 18 months of worsening memory, missed bills, and a recent episode of getting lost while driving. His daughter Annette will join the call. Your task is to conduct a 4Ms-based comprehensive geriatric assessment, incorporating collateral history, medication review, falls assessment, and the patient's own goals, while navigating his resistance to acknowledging any problem.",
+   "studentBrief": "You are a geriatric medicine fellow conducting a telehealth comprehensive geriatric assessment. Ernest Dubois, 84, was referred by his family physician for memory concerns reported by family over the past 18 months. His daughter Annette will join the call. Your task is to conduct a 4Ms-based comprehensive geriatric assessment, incorporating collateral history, medication review, falls assessment, and the patient's own goals.",
    "chiefComplaint": "Family-reported memory concerns over 18 months with recent lost-driving episode; patient denies any problem.",
    "openingLine": "Well, I don't rightly know why we're here, Doc. My memory's fine for my age, but my daughter here insisted we come talk to y'all. Everybody forgets things now and then, ain't that right?",
    "tasks": [
     "Elicit collateral history from the daughter regarding cognitive, functional, and safety concerns, while respecting the patient's presence and dignity",
     "Perform a remote medication safety review, including camera observation of the pill organizer",
     "Conduct a falls assessment including orthostatic vitals and a functional mobility test",
-    "Explore the patient's own goals and values ('What Matters') and sensitively address driving safety and advance care planning",
+    "Explore the patient's own goals and values ('What Matters') and address advance care planning",
     "Synthesize findings into a 4Ms-based geriatric assessment and plan appropriate for this role's scope, including appropriate referrals"
    ],
    "timeLimitMin": 30

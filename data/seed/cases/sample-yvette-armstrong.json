@@ -1001,15 +1001,15 @@
    ]
   },
   "scenario": {
-   "studentBrief": "You are a dietetics student conducting a telehealth nutrition assessment visit with Yvette Armstrong, a 64-year-old woman recently diagnosed with Stage II hypertension and referred for uncontrolled type 2 diabetes (diagnosed 2 years ago) and obesity. She was referred by her primary care provider for comprehensive nutrition assessment and counseling. Review the chart, conduct a nutrition-focused history and assessment, and provide patient-centered education and goal-setting using motivational interviewing. Do not assume findings before the visit - gather them through your assessment.",
+   "studentBrief": "You are a dietetics student conducting a telehealth nutrition assessment visit with Yvette Armstrong, a 64-year-old woman referred for nutrition counseling due to new Stage II hypertension and poorly controlled type 2 diabetes. She was referred by her primary care provider for comprehensive nutrition assessment and counseling. Review the chart, conduct a nutrition-focused history and assessment, and provide patient-centered education and goal-setting using motivational interviewing.",
    "chiefComplaint": "Referral for nutrition counseling due to new Stage II hypertension and poorly controlled type 2 diabetes",
    "openingLine": "Hi, thanks for seeing me - my doctor said I really need to talk to someone about my eating because my blood pressure and my sugar are both pretty high right now.",
    "tasks": [
     "Conduct a nutrition-focused history including 24-hour diet recall, meal pattern, and psychosocial/cultural context",
-    "Review relevant anthropometrics, vitals, and laboratory data and relate them to nutrition status",
-    "Identify and sensitively explore the discrepancy between reported medication adherence and refill records",
-    "Formulate a nutrition diagnosis (PES statement) based on findings",
-    "Use motivational interviewing to explore readiness to change and deliver culturally respectful, literacy-appropriate education and a collaborative action plan",
+    "Review relevant anthropometrics, vitals, and laboratory data with the patient",
+    "Review the medication list with the patient",
+    "Assess readiness to change and identify nutrition-related concerns",
+    "Use motivational interviewing to deliver culturally respectful, literacy-appropriate education and develop a collaborative action plan",
     "Document the encounter using the ADIME format"
    ],
    "timeLimitMin": 30

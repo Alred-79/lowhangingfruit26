@@ -1038,11 +1038,11 @@
    "chiefComplaint": "Weakness and lightheadedness on standing since hospital discharge for pneumonia and acute kidney injury",
    "openingLine": "Hi doctor, thanks for seeing me. I'm here for my follow-up after the hospital. I've just been feeling weak and a little dizzy when I stand up, but otherwise I think I'm doing okay.",
    "tasks": [
-    "Elicit a complete history of her current symptoms (weakness, dizziness) and recent hospitalization course",
-    "Perform a thorough medication reconciliation, uncovering any discrepancies between discharge instructions and what she is actually taking",
-    "Review and interpret her repeat labs and vital sign trends to assess for recurrent AKI, hyperkalemia, and volume status",
-    "Formulate an appropriate, in-scope assessment and plan, including whether urgent in-person/ED evaluation is needed",
-    "Communicate findings and next steps clearly and respectfully, addressing her concerns about independence without being paternalistic"
+    "Take a focused history of the presenting concern",
+    "Perform a medication reconciliation",
+    "Review available laboratory results and vital signs",
+    "Formulate an assessment and plan, including disposition",
+    "Communicate findings and next steps with the patient"
    ],
    "timeLimitMin": 20
   },
