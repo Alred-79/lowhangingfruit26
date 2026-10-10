@@ -13,10 +13,16 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
   const b = await req.json().catch(() => ({}));
   if (b.paused && row.status === "active") {
     const note = String(b.note || "").slice(0, 1000);
-    run("UPDATE encounters SET status = 'paused', pause_note = ? WHERE id = ?", note, id);
+    run("UPDATE encounters SET status = 'paused', pause_note = ?, paused_at = datetime('now') WHERE id = ?", note, id);
     addMessage(id, state.turn, "instructor", note ? `Paused by ${r.user.name}: ${note}` : `Paused by ${r.user.name}.`, { kind: "pause" });
   } else if (!b.paused && row.status === "paused") {
-    run("UPDATE encounters SET status = 'active', pause_note = NULL WHERE id = ?", id);
+    // Time spent paused does not count against the student: move the start forward by the pause length.
+    run(
+      `UPDATE encounters SET status = 'active', pause_note = NULL,
+         started_at = datetime(started_at, '+' || (strftime('%s','now') - strftime('%s', COALESCE(paused_at, datetime('now')))) || ' seconds'),
+         paused_at = NULL WHERE id = ?`,
+      id,
+    );
     addMessage(id, state.turn, "instructor", "Visit resumed.", { kind: "resume" });
   }
   return Response.json({ ok: true });

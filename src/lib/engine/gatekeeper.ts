@@ -201,16 +201,21 @@ export const caseFacts = (c: CaseProfile, knobs: Knobs) => c.facts.filter((f) =>
 
 const AUDIT_SCHEMA = {
   type: "object",
-  required: ["unsupported", "not_conveyed"],
+  required: ["unsupported", "not_conveyed", "also_conveyed"],
   properties: {
     unsupported: {
       type: "array",
-      description: "Clinical details the patient asserted as true that are not supported by the approved list. Empty if none.",
-      items: { type: "string", description: "The unsupported claim, in a few words, quoting the patient where possible" },
+      description: "Concrete clinical details the patient asserted as true that appear nowhere in the case facts, or that contradict one. Empty if none.",
+      items: { type: "string", description: "The claim in a few words, quoting the patient" },
     },
     not_conveyed: {
       type: "array",
-      description: "ids from the NEW THIS TURN list whose content the reply did not actually communicate. Empty if all were conveyed.",
+      description: "ids from NEW THIS TURN whose substance the reply did not communicate. Empty if all were conveyed.",
+      items: { type: "string" },
+    },
+    also_conveyed: {
+      type: "array",
+      description: "ids from NOT YET SHARED whose substance the reply clearly stated anyway. Empty if none.",
       items: { type: "string" },
     },
   },
@@ -218,38 +223,51 @@ const AUDIT_SCHEMA = {
 
 export interface Audit {
   unsupported: string[];
-  /** ids of facts that were released this turn but that the patient did not actually say. */
+  /** ids released this turn that the patient did not actually say. */
   notConveyed: string[];
+  /** ids of still-locked facts the patient stated anyway (they are true, so they are filed). */
+  alsoConveyed: string[];
 }
 
 /**
- * Checks a finished patient reply against the facts the patient was allowed to use:
- * (1) anything clinical asserted beyond the approved facts is reported so it can be flagged;
- * (2) any fact released this turn that the patient did not actually say is reported so the
- *     ledger only records what was really disclosed.
+ * Reconciles a finished patient reply with the case so the disclosure ledger records what was
+ * actually said:
+ *  - a released fact the patient skipped goes back to locked;
+ *  - a true case fact the patient stated early is filed;
+ *  - a concrete clinical claim that is in no case fact, or contradicts one, is reported so it can
+ *    be flagged to the student as outside the record.
  */
-export async function auditReply(reply: string, known: Fact[], reveal: Fact[], background: string, openingLine: string, memory = ""): Promise<Audit> {
+export async function auditReply(args: { reply: string; known: Fact[]; reveal: Fact[]; locked: Fact[]; background: string; openingLine: string; context?: string }): Promise<Audit> {
+  const { reply, known, reveal, locked } = args;
+  const line = (f: Fact) => `${f.id}: ${f.chart} (patient wording: ${f.says})`;
   try {
-    const res = await chatJSON<{ unsupported: string[]; not_conveyed: string[] }>({
+    const res = await chatJSON<{ unsupported: string[]; not_conveyed: string[]; also_conveyed: string[] }>({
       model: MODELS.fast,
       temperature: 0,
-      maxTokens: 400,
+      maxTokens: 500,
       schema: AUDIT_SCHEMA,
-      system:
-        "You audit a simulated patient's reply for a medical education simulator. You are given the only clinical facts the patient was approved to state, plus their non-medical background.\n1. unsupported: list clinical details the reply ASSERTS AS TRUE that are not supported by that material: new symptoms, diagnoses, medications or doses, test results, numbers, dates of medical events, or family members' health. Do not list denials, 'I don't know', vague non-answers, feelings and opinions, everyday non-medical life details, reasonable rewording of an approved fact, or the patient repeating back what a clinician told them. Be strict about real additions and silent about everything else.\n2. not_conveyed: for each fact under NEW THIS TURN, decide whether the reply communicated its substance (paraphrase counts). List the ids that were not communicated at all.",
+      system: `You reconcile a simulated patient's reply with the case file of a medical education simulator. The case facts are the whole clinical truth about this patient.
+
+unsupported: concrete clinical details the reply asserts as true that are in NO case fact (any of the three lists) or that CONTRADICT one: a different drug, dose, amount, frequency, duration, symptom, diagnosis, test result or family history. Quote the patient. Do NOT list: denials or "I don't know"; vague or non-committal answers; feelings, opinions and worries; everyday non-medical life details; minimising without specifics ("a drink now and then"); rewording of a case fact; or the patient repeating what a clinician told them. If unsure, leave it out.
+
+not_conveyed: for each fact under NEW THIS TURN, did the reply communicate its substance (paraphrase and partial detail count)? List the ids that were not communicated at all.
+
+also_conveyed: ids under NOT YET SHARED whose substance the reply stated with its specifics (the actual amount, frequency, name or event). A played-down or vague version does not count: "I have a beer here and there" does not convey "drinks 4-5 beers most evenings". When in doubt, leave it out.`,
       messages: [
         {
           role: "user",
-          text: `ALREADY SHARED EARLIER:\n${known.map((f) => `- ${f.chart} (patient wording: ${f.says})`).join("\n") || "(none)"}\n- Reason for visit, in the patient's words: ${openingLine}\n\nNEW THIS TURN:\n${reveal.map((f) => `${f.id}: ${f.chart} (patient wording: ${f.says})`).join("\n") || "(none)"}\n\nNON-MEDICAL BACKGROUND:\n${background}${memory ? `\n\nWHAT THE PATIENT REMEMBERS FROM EARLIER VISITS (repeating what a clinician said or advised then is allowed, and so is anything the student has just said in this conversation):\n${memory}` : ""}\n\nPATIENT REPLY TO AUDIT:\n${reply}`,
+          text: `ALREADY SHARED:\n${known.map(line).join("\n") || "(none)"}\nReason for visit, patient's words: ${args.openingLine}\n\nNEW THIS TURN:\n${reveal.map(line).join("\n") || "(none)"}\n\nNOT YET SHARED:\n${locked.map(line).join("\n") || "(none)"}\n\nNON-MEDICAL BACKGROUND:\n${args.background}${args.context ? `\n\nALLOWED CONTEXT (what earlier clinicians said, and what the student just said):\n${args.context}` : ""}\n\nPATIENT REPLY:\n${reply}`,
         },
       ],
     });
-    const ids = new Set(reveal.map((f) => f.id));
+    const newIds = new Set(reveal.map((f) => f.id));
+    const lockedIds = new Set(locked.map((f) => f.id));
     return {
-      unsupported: (res.unsupported || []).filter((x) => typeof x === "string" && x.trim()).slice(0, 4),
-      notConveyed: (res.not_conveyed || []).filter((id) => ids.has(id)),
+      unsupported: (res.unsupported || []).filter((x) => typeof x === "string" && x.trim()).slice(0, 3),
+      notConveyed: (res.not_conveyed || []).filter((id) => newIds.has(id)),
+      alsoConveyed: (res.also_conveyed || []).filter((id) => lockedIds.has(id)),
     };
   } catch {
-    return { unsupported: [], notConveyed: [] };
+    return { unsupported: [], notConveyed: [], alsoConveyed: [] };
   }
 }

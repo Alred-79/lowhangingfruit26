@@ -223,6 +223,15 @@ CREATE TABLE IF NOT EXISTS patient_relationships (
   PRIMARY KEY (user_id, case_id)
 );
 
+-- Personal access keys for the episode search API and MCP endpoint.
+CREATE TABLE IF NOT EXISTS api_keys (
+  key TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  label TEXT NOT NULL DEFAULT '',
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  last_used_at TEXT
+);
+
 CREATE TABLE IF NOT EXISTS uploads (
   id TEXT PRIMARY KEY,
   owner_id TEXT,
@@ -261,6 +270,7 @@ export function db(): Database.Database {
       d.prepare("INSERT INTO applied_fixes (name) VALUES (?)").run(name);
     };
     // The provided sample patients were expanded by the case generator; no clinician has reviewed the expansion.
+    once("encounters-paused-at", "ALTER TABLE encounters ADD COLUMN paused_at TEXT");
     once("samples-not-reviewed", "UPDATE cases SET reviewed = 0 WHERE origin = 'sample'");
     g.__db = d;
   }

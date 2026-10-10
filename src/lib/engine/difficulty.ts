@@ -11,7 +11,7 @@ export function knobsForLevel(level: number, caseTimeLimitMin = 20): Knobs {
   const t = {
     1: { rapportStart: 62, reluctantAt: 55, hiddenAt: 70, factsPerTurn: 4, volunteers: true, vagueness: 0, emotion: 0, distractors: false, hints: true, time: null as number | null },
     2: { rapportStart: 55, reluctantAt: 60, hiddenAt: 74, factsPerTurn: 3, volunteers: true, vagueness: 1, emotion: 1, distractors: false, hints: true, time: null as number | null },
-    3: { rapportStart: 48, reluctantAt: 64, hiddenAt: 78, factsPerTurn: 3, volunteers: false, vagueness: 1, emotion: 1, distractors: true, hints: true, time: caseTimeLimitMin + 5 },
+    3: { rapportStart: 48, reluctantAt: 64, hiddenAt: 78, factsPerTurn: 3, volunteers: false, vagueness: 1, emotion: 1, distractors: true, hints: true, time: caseTimeLimitMin },
     4: { rapportStart: 42, reluctantAt: 68, hiddenAt: 82, factsPerTurn: 2, volunteers: false, vagueness: 2, emotion: 2, distractors: true, hints: false, time: caseTimeLimitMin },
     5: { rapportStart: 36, reluctantAt: 72, hiddenAt: 86, factsPerTurn: 2, volunteers: false, vagueness: 3, emotion: 3, distractors: true, hints: false, time: Math.max(8, caseTimeLimitMin - 5) },
   }[L]!;

@@ -26,7 +26,10 @@ export default function GuidePanel({ caseId, profileNow, onAccept, onClose }: { 
   const [busy, setBusy] = useState(false);
   const [secs, setSecs] = useState(0);
   const end = useRef<HTMLDivElement>(null);
-  useEffect(() => end.current?.scrollIntoView({ behavior: "smooth", block: "end" }), [msgs, busy]);
+  useEffect(() => {
+    // Braces matter: scrollIntoView can return a promise, which React would treat as a cleanup function.
+    end.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [msgs, busy]);
   useEffect(() => {
     if (!busy) return;
     const t0 = Date.now();

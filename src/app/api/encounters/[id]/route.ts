@@ -26,6 +26,7 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
     timeLimitMin: cfg.knobs.timeLimitMin,
     startedAt: row.started_at,
     pauseNote: row.pause_note,
+    pausedAt: (row as unknown as { paused_at?: string | null }).paused_at || null,
     role: { name: role.name, roleTitle: role.roleTitle, noteFormat: role.noteFormat, wrapUp: role.wrapUp },
     journeyRunId: row.journey_run_id,
     priorContext: cfg.journey?.priorContext || null,

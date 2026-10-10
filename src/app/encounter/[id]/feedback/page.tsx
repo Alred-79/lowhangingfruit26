@@ -2,12 +2,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import AppShell from "@/components/AppShell";
 import FacultyReview from "@/components/courses/FacultyReview";
+import When from "@/components/courses/When";
 import { Badge, Card, CardHeader, LinkButton } from "@/components/ui";
 import { FinishScoring, RetryButtons } from "@/components/visit/FeedbackActions";
 import { isFaculty, requireUser } from "@/lib/auth";
 import { get, parse } from "@/lib/db";
 import { LEVEL_NAMES } from "@/lib/engine/difficulty";
 import { loadEncounter, messagesOf } from "@/lib/engine/encounter";
+import { canSeeEpisode } from "@/lib/episodes";
 import { TrendChart } from "@/components/chart/ArtifactView";
 import { attemptHistory } from "@/lib/engine/feedback";
 import { timeline, timelineChart } from "@/lib/engine/timeline";
@@ -48,7 +50,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
   const enc = loadEncounter(id);
   if (!enc) notFound();
   const faculty = isFaculty(user);
-  if (enc.row.user_id !== user.id && !faculty) notFound();
+  if (enc.row.user_id !== user.id && !faculty && !canSeeEpisode(user, id)) notFound();
   const { row, c, cfg, state } = enc;
   const own = row.user_id === user.id;
   const role = profession(cfg.professionId);
@@ -85,7 +87,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
           {!own && student ? ` · ${student.name}` : ""}
         </h1>
         <p className="mt-0.5 text-sm text-slate-600">
-          {role.name} · {state.turn} turns · {row.ended_at ? new Date(row.ended_at.replace(" ", "T") + "Z").toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" }) : ""}
+          {role.name} · {state.turn} turns · <When at={row.ended_at} />
         </p>
       </div>
       <LinkButton href={faculty && !own ? "/faculty/courses" : "/student"} variant="secondary">
@@ -127,7 +129,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
 
       {f.needsReview && (
         <div className="mb-4 rounded-lg border border-rose-300 bg-rose-50 px-4 py-3 text-sm text-rose-900">
-          <span className="font-semibold">Flagged for instructor review.</span> {f.reviewReasons.join("; ")}. The rubric asks for a review whenever safety or clinical reasoning scores 1, whatever the total.
+          <span className="font-semibold">Flagged for instructor review:</span> {f.reviewReasons.join("; ")}. An instructor should look at this visit whatever the total score.
         </div>
       )}
       {review.faculty_note && (
@@ -183,7 +185,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
         </Card>
       </div>
 
-      {own && (
+      {own && assignment?.type !== "exam" && (
         <Card className="mt-4">
           <CardHeader title="For your next attempt" subtitle="Start over to practise the same visit again (optionally with the patient in a different mood), or book a follow-up where the patient remembers you and this conversation." />
           <div className="p-4">
@@ -483,7 +485,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
                   <div className="text-sm">
                     <span className="font-medium text-slate-700">{c.patient.name.split(" ")[0]}:</span> <span className="text-slate-800">{m.text}</span>
                     <div className="mt-0.5 flex flex-wrap items-center gap-1 text-[11px]">
-                      {x.questionType && <span className="rounded bg-slate-100 px-1 text-slate-600">{x.questionType} question</span>}
+                      {x.questionType && !["other", "greeting"].includes(x.questionType) && <span className="rounded bg-slate-100 px-1 text-slate-600">{({ open: "open question", focused: "focused question", closed: "closed question", leading: "leading question", multiple: "stacked questions", statement: "statement" } as Record<string, string>)[x.questionType] || x.questionType}</span>}
                       {!!x.rapportDelta && <span className={`rounded px-1 ${x.rapportDelta > 0 ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-700"}`}>comfort {x.rapportDelta > 0 ? "+" : ""}{x.rapportDelta}</span>}
                       {(x.revealed || []).map((fid) => <span key={fid} className="rounded bg-brand-50 px-1 text-brand-700">unlocked: {factText(fid)?.topic}</span>)}
                       {(x.deflected || []).map((fid) => <span key={fid} className="rounded bg-amber-50 px-1 text-amber-800">deflected: {factText(fid)?.topic}</span>)}

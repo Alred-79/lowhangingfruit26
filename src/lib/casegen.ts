@@ -167,6 +167,9 @@ Quality bar:
 - Work out every score, grade and stage you state (BMI, percent weight change, CKD stage, CHA2DS2-VASc, AUDIT-C, CTCAE and the like) and check it against the numbers in the case.
 - Lab tables use the columns Test, Result, Units, Reference range, and every row has all four cells.
 - A mismatch's artifactId must be a document id (d...), never an action id.
+- 'chart' records what the patient reports, in clinician wording, and never the hidden truth: if the patient under-reports, the fact reads "Reports taking sumatriptan 10-12 days a month" and the real figure lives only in a document, which is what makes it a mismatch. No commentary in chart wording or results ("far exceeding the recommended limit", "not indicated"): state the finding and stop.
+- The title, summary and answer key are for faculty. The student brief and tasks are shown to the learner before the visit, so they must not name the diagnosis, the hidden problem or any finding: write tasks as "Take a focused history of the presenting concern", never "Identify medication overuse headache".
+- Anything in the persona's background, concerns or opening line that is clinically relevant must also exist as a fact.
 - Include pertinent negatives as facts so the patient can answer common screening questions.
 - Keep lab values physiologically plausible with correct units and reference ranges.
 - Do not include real people or identifiable data. This is synthetic educational content.`;

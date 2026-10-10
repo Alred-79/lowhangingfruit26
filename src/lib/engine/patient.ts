@@ -75,7 +75,7 @@ ${known.length ? lines(known) : "- Nothing yet."}
 NEW THINGS YOU SHARE IN THIS REPLY
 ${reveal.length ? lines(reveal) + "\nSay each of these in this reply, in your own words, woven into a natural answer (not a list)." : "- Nothing new. Answer only from what you have already said or from your non-medical life."}
 
-${deflect.length ? `TOPICS YOU ARE NOT READY TO DISCUSS YET\n${deflect.map((f) => `- ${f.topic}`).join("\n")}\nYou are uncomfortable with this. Deflect: change the subject, give a vague non-answer, or ask why they need to know. Let a little discomfort show so an attentive student notices. Do not reveal anything about it.` : ""}
+${deflect.length ? `THINGS YOU ARE NOT READY TO ADMIT YET\n${deflect.map((f) => `- ${f.topic}. The truth, which you are keeping to yourself for now: ${f.says}`).join("\n")}\nThe student has asked about this before earning your trust. Do not admit it in this reply. Dodge, play it down in general terms without any specifics, change the subject, or ask why they need to know, and let a little discomfort show so an attentive student notices. Never state an amount, frequency, name or detail that differs from the truth above: say less, never something false.` : ""}
 
 ${later.length ? `THINGS YOU HAVE NOT BEEN ASKED CLEARLY ENOUGH ABOUT YET\n${later.join("; ")}\nYou have more to say on these, but not in this reply. If the student brushes against one of them, stay non-committal ("a bit, I guess", "what do you mean exactly?") so they have to ask properly. Do not say no to these and do not give details.` : ""}
 

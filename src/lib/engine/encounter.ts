@@ -160,8 +160,9 @@ export function createEncounter(input: CreateInput): string {
   const base = parse<CaseProfile>(row.profile, {} as CaseProfile);
   const c = withVariant(base, input.variantId);
   if (input.teamScope) addTeamNotes(c, input.teamScope, input.caseId);
+  // Attempts are numbered by distinct finished visits; a rewound branch keeps its parent's number.
   const prior = get<{ n: number }>(
-    "SELECT COUNT(*) AS n FROM encounters WHERE user_id = ? AND case_id = ? AND status IN ('submitted','scored') AND parent_id IS NULL",
+    "SELECT COUNT(DISTINCT attempt) AS n FROM encounters WHERE user_id = ? AND case_id = ? AND status IN ('submitted','scored')",
     input.userId,
     input.caseId,
   )!.n;
@@ -271,7 +272,7 @@ export function chartView(c: CaseProfile, cfg: EncounterConfig, state: Encounter
     log,
     // Exams hide the comfort meter; practice shows it so students can see cause and effect.
     rapport: cfg.mode === "exam" ? null : state.rapport,
-    emotion: state.emotion,
+    emotion: state.emotion.length > 28 ? "" : state.emotion,
     turn: state.turn,
   };
 }
@@ -355,13 +356,30 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
   reply = reply.replace(/\*[^*\n]{1,80}\*/g, (m) => (d.deflect.length && cues++ === 0 ? m : ""));
   reply = reply.replace(/[ \t]+\n/g, "\n").replace(/\n{2,}/g, "\n").replace(/ {2,}/g, " ").trim() || "...";
   // Grounding audit: anything clinical the patient said beyond the approved facts is flagged, never filed.
-  const audit = await auditReply(reply, known, d.reveal, c.persona.background, c.scenario.openingLine, [cfg.memory, cfg.journey?.patientMemory, `Student just said: ${text}`].filter(Boolean).join("\n"));
+  const stillLocked = locked.filter((f) => !d.reveal.includes(f));
+  const audit = await auditReply({
+    reply,
+    known,
+    reveal: d.reveal,
+    locked: stillLocked,
+    background: `${c.persona.background}\nConcerns: ${c.persona.concerns.join("; ")}`,
+    openingLine: c.scenario.openingLine,
+    context: [cfg.memory, cfg.journey?.patientMemory, `Student just said: ${text}`].filter(Boolean).join("\n"),
+  });
   const unsupported = audit.unsupported;
-  // The ledger records only what the patient actually said; anything skipped stays locked.
+  // The ledger records what the patient actually said: skipped facts stay locked, and a true
+  // fact the patient stated early is filed rather than later counted as missed.
   if (audit.notConveyed.length) {
     for (const fid of audit.notConveyed) delete state.disclosed[fid];
     d.reveal = d.reveal.filter((f) => !audit.notConveyed.includes(f.id));
   }
+  for (const fid of audit.alsoConveyed) {
+    const f = stillLocked.find((x) => x.id === fid);
+    if (!f) continue;
+    state.disclosed[fid] = { turn: state.turn, how: "volunteered" };
+    d.reveal.push(f);
+  }
+  releaseArtifacts(c, state);
   const inserted = addMessage(encId, state.turn, "patient", reply, {
     unsupported,
     revealed: d.reveal.map((f) => f.id),
@@ -372,7 +390,7 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
     rapportDelta: d.rapportDelta,
     state, // snapshot: lets a student rewind to this point
   });
-  const notice = unsupported.length ? `Not in the approved case record: ${unsupported.map((u) => `"${u}"`).join("; ")}. Treat this as unverified. It is not filed in the chart and does not count for or against you.` : null;
+  const notice = unsupported.length ? `Outside the case record: ${unsupported.map((u) => `"${u}"`).join("; ")}. The simulated patient went beyond the approved case here. Treat it as unverified; it is not filed in the chart and is not scored.` : null;
   if (notice) addMessage(encId, state.turn, "system", notice, { kind: "unsupported" });
   save(encId, state);
   yield {
@@ -449,9 +467,13 @@ export function rewind(encId: string, toTurn: number): string {
   const lastPatient = [...msgs].reverse().find((m) => m.speaker === "patient");
   const snap = lastPatient ? parse<{ state?: EncounterState }>(lastPatient.meta, {}).state : null;
   const state = snap || freshState(enc.c, enc.cfg.knobs);
+  // Orders are placed between turns, after the snapshot was taken: carry over those made by this point.
+  for (const [aid, a] of Object.entries(enc.state.actions)) if (a.turn <= toTurn && !state.actions[aid]) state.actions[aid] = a;
+  for (const [did, t] of Object.entries(enc.state.artifacts)) if (t <= toTurn && state.artifacts[did] === undefined) state.artifacts[did] = t;
+  state.unmatchedOrders = enc.state.unmatchedOrders.filter((u) => u.turn <= toTurn);
   const id = newId("e_");
   run(
-    "INSERT INTO encounters (id, user_id, case_id, assignment_id, journey_run_id, parent_id, attempt, config, state, case_snapshot) VALUES (?,?,?,?,?,?,?,?,?,?)",
+    "INSERT INTO encounters (id, user_id, case_id, assignment_id, journey_run_id, parent_id, attempt, config, state, case_snapshot, started_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
     id,
     enc.row.user_id,
     enc.row.case_id,
@@ -462,6 +484,7 @@ export function rewind(encId: string, toTurn: number): string {
     enc.row.config,
     JSON.stringify(state),
     enc.row.case_snapshot,
+    enc.row.started_at,
   );
   for (const m of msgs) run("INSERT INTO messages (encounter_id, turn, speaker, text, meta) VALUES (?,?,?,?,?)", id, m.turn, m.speaker, m.text, m.meta);
   return id;

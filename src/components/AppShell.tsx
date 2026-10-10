@@ -11,12 +11,14 @@ const FACULTY_NAV = [
   { href: "/faculty/journeys", label: "Care Journeys" },
   { href: "/faculty/courses", label: "Courses" },
   { href: "/faculty/live", label: "Live Visits" },
+  { href: "/episodes", label: "Episodes" },
 ];
 const STUDENT_NAV = [
   { href: "/student", label: "Home" },
   { href: "/student/practice", label: "Practice" },
   { href: "/student/journeys", label: "Care Journeys" },
   { href: "/student/progress", label: "Progress" },
+  { href: "/episodes", label: "My visits" },
 ];
 
 export function Logo() {

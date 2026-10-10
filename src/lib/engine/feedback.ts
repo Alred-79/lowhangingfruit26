@@ -42,6 +42,7 @@ function schema(rubric: Rubric) {
       },
       objectives: {
         type: "array",
+        description: "Judge each objective on what the student actually did. The comment must agree with the met value.",
         items: { type: "object", required: ["id", "met", "comment"], properties: { id: str, met: { type: "string", enum: ["met", "partial", "not_met"] }, comment: str } },
       },
       interview: {
@@ -59,7 +60,7 @@ function schema(rubric: Rubric) {
       },
       mismatches: {
         type: "array",
-        description: "One entry per listed patient-versus-chart mismatch: did the student notice and explore it?",
+        description: "One entry per listed patient-versus-chart mismatch. noticed is true only if the student explicitly raised the discrepancy with the patient or in the write-up; seeing the document is not enough. The comment must agree with the noticed value.",
         items: { type: "object", required: ["id", "noticed", "comment"], properties: { id: str, noticed: { type: "boolean" }, comment: str } },
       },
       wrapUpReview: { type: "string", description: "Assessment of the student's written wrap-up against the answer key" },
@@ -181,13 +182,25 @@ ${role.wrapUp.map((f) => `${f.label}:\n${wrap[f.id] || "(left blank)"}`).join("\
     mismatches?: { id: string; noticed: boolean; comment: string }[];
   } & Pick<Feedback, "interview" | "strengths" | "improvements" | "safetyConcerns" | "accuracyIssues" | "wrapUpReview" | "nextAttempt" | "summary">;
 
-  const raw = await chatJSON<Raw>({
-    model: MODELS.smart,
-    system: SYSTEM,
-    schema: schema(rubric),
-    maxTokens: 8000,
-    messages: [{ role: "user", text: prompt }],
-  });
+  let raw!: Raw;
+  // A reply without usable domain scores is a failed scoring, not a zero: retry, then fail loudly.
+  for (let attempt = 0; attempt < 3; attempt++) {
+    raw = await chatJSON<Raw>({
+      model: MODELS.smart,
+      system: SYSTEM,
+      schema: schema(rubric),
+      maxTokens: 8000,
+      messages: [{ role: "user", text: prompt }],
+    });
+    if (typeof raw.domains === "string") {
+      try {
+        raw.domains = JSON.parse(raw.domains);
+      } catch {}
+    }
+    const usable = Array.isArray(raw.domains) && raw.domains.filter((d) => d && typeof d.score === "number").length >= 2;
+    if (usable) break;
+    if (attempt === 2) throw new Error("The examiner did not return rubric scores. Your visit is saved; select Score this visit to try again.");
+  }
 
   const spoken = msgs.filter((m) => m.speaker === "student" || m.speaker === "patient" || m.speaker === "system");
   const defs = rubric.type === "domain4" ? rubric.domains!.map((d) => ({ key: d.key, name: d.name, max: 4, review: !!d.reviewIfOne })) : rubric.items!.map((i) => ({ key: i.key, name: i.text, max: i.points, review: false }));
@@ -221,7 +234,11 @@ ${role.wrapUp.map((f) => `${f.label}:\n${wrap[f.id] || "(left blank)"}`).join("\
     objectives: objectiveStatus.map((o) => {
       const r = raw.objectives?.find((x) => x.id === o.id);
       // Objectives linked to facts/actions are decided by the ledger; the model only comments.
-      const met = o.refs ? (o.hit === o.refs ? "met" : o.hit > 0 ? "partial" : "not_met") : r?.met || "not_met";
+      const order = { not_met: 0, partial: 1, met: 2 } as const;
+      const ledger = o.refs ? (o.hit === o.refs ? "met" : o.hit > 0 ? "partial" : "not_met") : null;
+      // The ledger shows the information came out; the examiner judges whether the skill was shown.
+      // An objective counts as met only when both agree, so the label never contradicts the comment.
+      const met = ledger && r?.met ? (order[ledger] <= order[r.met] ? ledger : r.met) : ledger || r?.met || "not_met";
       return { id: o.id, text: o.text, met, comment: r?.comment || "" };
     }),
     interview: raw.interview || { structure: "", sequencing: "", questionMix: "" },
@@ -300,10 +317,15 @@ export interface AttemptSummary {
 
 /** Every scored attempt a student has made at a case, oldest first, for the progress view. */
 export function attemptHistory(userId: string, caseId: string): AttemptSummary[] {
-  return all<{ id: string; attempt: number; ended_at: string; feedback: string; config: string; score: number }>(
-    "SELECT id, attempt, ended_at, feedback, config, score FROM encounters WHERE user_id = ? AND case_id = ? AND status = 'scored' AND parent_id IS NULL ORDER BY started_at",
+  const rows = all<{ id: string; attempt: number; ended_at: string; feedback: string; config: string; score: number }>(
+    "SELECT id, attempt, ended_at, feedback, config, score FROM encounters WHERE user_id = ? AND case_id = ? AND status = 'scored' ORDER BY ended_at",
     userId,
     caseId,
+  );
+  // A rewound branch shares its attempt number with the visit it came from; keep the latest scored one.
+  const latest = new Map<number, (typeof rows)[number]>();
+  for (const r of rows) latest.set(r.attempt, r);
+  return [...latest.values()].sort((a, b) => a.attempt - b.attempt
   ).map((r) => {
     const f = parse<Feedback>(r.feedback, {} as Feedback);
     const cfg = parse<EncounterConfig>(r.config, {} as EncounterConfig);

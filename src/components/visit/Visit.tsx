@@ -26,6 +26,7 @@ interface VisitData {
   timeLimitMin: number | null;
   startedAt: string;
   pauseNote: string | null;
+  pausedAt: string | null;
   role: { name: string; roleTitle: string; noteFormat: string; wrapUp: { id: string; label: string; placeholder?: string }[] };
   journeyRunId: string | null;
   priorContext: string | null;
@@ -139,7 +140,10 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
 
   const paused = data?.status === "paused";
   const ended = data?.status === "submitted" || data?.status === "scored";
-  const elapsed = data ? Math.floor((now - new Date(data.startedAt.replace(" ", "T") + "Z").getTime()) / 1000) : 0;
+  const utc = (t: string) => new Date(t.replace(" ", "T") + "Z").getTime();
+  // The clock does not run in the waiting room or while an instructor has the visit paused.
+  const clockNow = data?.pausedAt ? utc(data.pausedAt) : now;
+  const elapsed = data && joined ? Math.max(0, Math.floor((clockNow - utc(data.startedAt)) / 1000)) : 0;
   const remaining = data?.timeLimitMin ? data.timeLimitMin * 60 - elapsed : null;
 
   // When the clock runs out, open the write-up; the student can still go back for a closing sentence.
@@ -459,7 +463,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
               <span className="absolute bottom-0.5 left-1 text-[10px] text-white/80">You</span>
             </div>
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent px-4 pb-3 pt-10">
-              {captionsOn && caption && <p className="mb-2 max-h-24 overflow-hidden text-[15px] leading-snug text-white">{stripCues(caption) || "…"}</p>}
+              {captionsOn && caption && <p className="mb-2 text-[15px] leading-snug text-white">{(() => { const t = stripCues(caption); return t.length > 190 ? "… " + t.slice(t.length - 190).replace(/^\S*\s/, "") : t || "…"; })()}</p>}
               {micOn && !patientTalking && !busy && <p className="mb-2 text-sm italic text-emerald-200">{interim ? `You: ${interim}` : "Listening… speak to the patient"}</p>}
               <div className="flex items-center justify-between">
                 <div className="text-sm font-medium text-white">
@@ -493,7 +497,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
                 m.speaker === "student" ? (
                   <div key={m.id} className="group flex justify-end gap-2">
                     {data.canRewind && m.id > 0 && !busy && (
-                      <button onClick={() => rewindTo(m.turn - 1)} className="invisible self-center text-[11px] text-slate-400 hover:text-brand-600 group-hover:visible">
+                      <button onClick={() => rewindTo(m.turn - 1)} className="self-center whitespace-nowrap text-[11px] text-slate-400 underline decoration-dotted hover:text-brand-600">
                         Try this again
                       </button>
                     )}
@@ -548,7 +552,8 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
       {/* Waiting room */}
       {!joined && (
         <div className="fixed inset-0 z-20 grid place-items-center bg-slate-900/70 p-4">
-          <div className="max-h-full w-full max-w-xl overflow-y-auto rounded-xl bg-white p-6 shadow-xl">
+          <div className="flex max-h-full w-full max-w-xl flex-col overflow-hidden rounded-xl bg-white shadow-xl">
+           <div className="min-h-0 flex-1 overflow-y-auto p-6 pb-2">
             <div className="text-xs font-medium uppercase tracking-wide text-brand-600">Waiting room · {MODE_LABEL[data.mode] || data.mode}</div>
             <h1 className="mt-1 text-xl font-semibold text-slate-900">
               {p.name}, {p.age}
@@ -574,9 +579,11 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
             <p className={`mt-3 text-[13px] ${data.recorded ? "text-violet-800" : "text-slate-600"}`}>
               {data.recorded ? "Recorded: your instructor can see this visit, its transcript and its score." : "Private practice: only you see this visit and its feedback. It still updates your own progress."}
             </p>
-            <div className="mt-5 flex flex-wrap items-center gap-3">
+           </div>
+            <div className="flex flex-wrap items-center gap-3 border-t border-slate-200 px-6 py-4">
               <button
                 onClick={() => {
+                  fetch(`/api/encounters/${id}/start`, { method: "POST" }).then(load).catch(() => {});
                   setJoined(true);
                   // Unlock audio playback inside the click.
                   audioRef.current?.play().catch(() => {});
@@ -604,7 +611,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
           <div className="w-full max-w-md rounded-xl bg-white p-6 text-center shadow-xl">
             <div className="text-xs font-semibold uppercase tracking-wide text-violet-700">Paused by your instructor</div>
             <p className="mt-3 whitespace-pre-wrap text-slate-800">{data.pauseNote || "Take a moment. Your instructor will resume the visit shortly."}</p>
-            <p className="mt-4 text-xs text-slate-500">The clock keeps your place. The visit continues when they resume it.</p>
+            <p className="mt-4 text-xs text-slate-500">The clock is stopped. The visit continues when they resume it.</p>
           </div>
         </div>
       )}
