@@ -1,4 +1,5 @@
 import { get } from "../db";
+import { studentJourneyLabel } from "../courses/label";
 import { messagesOf } from "../engine/encounter";
 import { clinician, entriesOf, handoffsOf, linksOf, loadRun, messagesOfRun, RECORD_STAGE, resolveProfession, stageRuns, studentNameOf } from "./store";
 import type { Chain, ChainStep, Handoff, PillarRow, RunView, StageView, StateEntry, StateLink, Synthesis } from "./types";
@@ -165,12 +166,16 @@ export function buildView(runId: string, viewerId: string, busy: boolean): RunVi
   else next = { kind: "huddle", label: "Join the team huddle." };
 
   const stageName = (id: string) => run.stages.find((s) => s.id === id)?.roleTitle || "Existing record";
+  // Journey and case titles are written for faculty and name the diagnoses. A student viewer gets the patient and roles instead.
+  const viewer = get<{ role: string }>("SELECT role FROM users WHERE id = ?", viewerId);
+  const facultyViewer = viewer?.role === "faculty" || viewer?.role === "admin";
+  const neutral = studentJourneyLabel(run.c.patient?.name, run.stages.map((s) => s.roleTitle));
   return {
     id: runId,
     status: run.row.status,
-    journey: { id: run.journey.id, title: run.journey.title, summary: run.spec.summary },
+    journey: facultyViewer ? { id: run.journey.id, title: run.journey.title, summary: run.spec.summary } : { id: run.journey.id, title: neutral.title, summary: neutral.roles },
     patient: { name: run.c.patient?.name || "", age: run.c.patient?.age || 0, sex: run.c.patient?.sex || "", summary: run.c.scenario?.chiefComplaint || "" },
-    caseTitle: run.c.title || "",
+    caseTitle: facultyViewer ? run.c.title || "" : "",
     studentStageId: run.row.student_stage_id,
     studentName: student,
     viewerIsOwner: viewerId === run.row.user_id,

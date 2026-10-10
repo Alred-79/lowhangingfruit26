@@ -217,7 +217,7 @@ export default function NewCaseWizard({ groups, defaultRole }: { groups: { group
       ...(doc ? [{ label: "Source document attached", detail: `${doc.filename}, ${doc.chars.toLocaleString()} characters`, state: "done" as const }] : []),
       {
         label: "Writing the patient",
-        detail: "One model call writes the persona, 25 to 40 facts with disclosure tiers, the exams and orders with their results, the chart documents, the objectives and the answer key together, so they agree with each other. This usually takes 2 to 3 minutes and there is no partial result to show until it finishes.",
+        detail: "The guide writes the persona, the facts with their disclosure tiers, the exams and orders with their results, the chart documents, the objectives and the answer key together, so they agree with each other. This usually takes one to two minutes and can take longer. There is no partial result to show until it finishes.",
         state: saved ? "done" : stage === "failed" ? "failed" : "active",
       },
       { label: "Checking ids and links, then saving as a draft", state: saved ? "done" : "todo", detail: saved ? `${saved.counts.facts} facts, ${saved.counts.actions} exams and orders, ${saved.counts.artifacts} documents, ${saved.counts.objectives} objectives` : undefined },
@@ -252,6 +252,18 @@ export default function NewCaseWizard({ groups, defaultRole }: { groups: { group
               </li>
             ))}
           </ol>
+          {stage === "writing" && !saved && (
+            <p role="status" aria-live="polite" className={cx("mt-4 flex items-start gap-2 rounded-md border px-3 py-2 text-sm", elapsed >= 120 ? "border-amber-200 bg-amber-50 text-amber-900" : "border-slate-200 bg-slate-50 text-slate-700")}>
+              <span className={cx("mt-1.5 h-2 w-2 shrink-0 animate-pulse rounded-full", elapsed >= 120 ? "bg-amber-500" : "bg-brand-600")} />
+              <span>
+                {elapsed < 60 && "Writing. Most patients are ready in one to two minutes."}
+                {elapsed >= 60 && elapsed < 120 && "Still writing. This is within the usual one to two minutes."}
+                {elapsed >= 120 && elapsed < 180 && `Still working at ${fmt(elapsed)}. This patient is taking longer than usual, which happens with detailed descriptions and cases that need several chart documents. Nothing has gone wrong; the whole case is written before any of it is shown.`}
+                {elapsed >= 180 && elapsed < 300 && `Still working at ${fmt(elapsed)}. The longest drafts are the ones with many facts, lab tables and documents that all have to agree with each other. You can keep this page open or leave it: the draft is saved to your library when it is done.`}
+                {elapsed >= 300 && `Still working at ${fmt(elapsed)}, which is much longer than usual. If the draft cannot be written, this page will say so and offer to try again. You can also check your library for the finished draft.`}
+              </span>
+            </p>
+          )}
           {stage === "failed" && (
             <div className="mt-4 space-y-3">
               <Notice tone="red">{error}</Notice>
@@ -298,7 +310,7 @@ export default function NewCaseWizard({ groups, defaultRole }: { groups: { group
             <Button variant="ghost" onClick={() => setStage("input")}>
               Back
             </Button>
-            <span className="text-xs text-slate-500">Drafting takes about 2 to 3 minutes.</span>
+            <span className="text-xs text-slate-500">Drafting usually takes one to two minutes and can take longer.</span>
           </div>
         </Panel>
       </div>
@@ -381,7 +393,7 @@ export default function NewCaseWizard({ groups, defaultRole }: { groups: { group
               <Button disabled={!canContinue || stage === "asking" || uploading} onClick={next}>
                 {stage === "asking" ? "Reading your description..." : "Continue"}
               </Button>
-              <span className="text-xs text-slate-500">Next: the guide may ask up to three short questions, then drafts the case (2 to 3 minutes).</span>
+              <span className="text-xs text-slate-500">Next: the guide may ask up to three short questions, then drafts the case (usually one to two minutes).</span>
             </div>
           </div>
         </Panel>
@@ -406,7 +418,7 @@ export default function NewCaseWizard({ groups, defaultRole }: { groups: { group
               <Button disabled={!canContinue || uploading} onClick={next}>
                 Draft the patient
               </Button>
-              <span className="text-xs text-slate-500">Drafting takes about 2 to 3 minutes. You review everything before it can be published.</span>
+              <span className="text-xs text-slate-500">Drafting usually takes one to two minutes and can take longer. You review everything before it can be published.</span>
             </div>
           </div>
         </Panel>

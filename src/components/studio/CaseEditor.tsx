@@ -78,7 +78,17 @@ export default function CaseEditor({
   const [busy, setBusy] = useState<string | null>(null);
   const [flash, setFlash] = useState<{ tone: "green" | "red" | "amber"; text: string } | null>(null);
   const [menu, setMenu] = useState(false);
-  const [undo, setUndo] = useState<{ profile: CaseProfile; cons: ConsistencyResult | null; label: string }[]>([]);
+  const [undo, setUndo] = useState<{ profile: CaseProfile; cons: ConsistencyResult | null; label: string; covered: boolean }[]>([]);
+  /**
+   * True while the consistency check still covers the patient: nothing has changed since it ran except
+   * the check's own suggested fixes. Applying one of those must not make the check read as out of date.
+   */
+  const [covered, setCoveredState] = useState(!!initialConsistency && initialConsistency.profileHash === initialHash);
+  const coveredRef = useRef(covered);
+  const setCovered = useCallback((v: boolean) => {
+    coveredRef.current = v;
+    setCoveredState(v);
+  }, []);
   /** Edit counter right after the most recent accepted change (or undo), to tell whether hand edits followed it. */
   const undoMark = useRef(0);
   const [showIntro, setShowIntro] = useState(created);
@@ -104,11 +114,17 @@ export default function CaseEditor({
     if (savedVersion.current === version.current) return true;
     const v = version.current;
     const sendCons = consDirty.current;
+    const covers = sendCons && coveredRef.current && !!consRef.current;
     setSaveState("saving");
     const run = (async () => {
       try {
-        const r = await api<{ hash: string; updatedAt: string }>(`/api/cases/${id}`, { method: "PUT", json: { profile: profileRef.current, ...(sendCons ? { consistency: consRef.current } : {}) } });
+        const r = await api<{ hash: string; updatedAt: string }>(`/api/cases/${id}`, { method: "PUT", json: { profile: profileRef.current, ...(sendCons ? { consistency: consRef.current, consistencyCovers: covers } : {}) } });
         savedVersion.current = v;
+        // The server stamped the stored check with the new hash; mirror that here without marking anything dirty.
+        if (covers && consRef.current && consRef.current.profileHash !== r.hash) {
+          consRef.current = { ...consRef.current, profileHash: r.hash };
+          setConsState(consRef.current);
+        }
         if (sendCons && version.current === v) consDirty.current = false;
         setSavedHash(r.hash);
         setSaveError("");
@@ -145,9 +161,11 @@ export default function CaseEditor({
       if (next === profileRef.current) return;
       profileRef.current = next;
       setProfileState(next);
+      // Any edit puts the patient ahead of the last check. applyFix and undo restore the flag afterwards.
+      setCovered(false);
       touch();
     },
-    [touch],
+    [touch, setCovered],
   );
   const setCons = useCallback(
     (next: ConsistencyResult | null) => {
@@ -164,9 +182,10 @@ export default function CaseEditor({
     window.scrollTo({ top: 0 });
   }, []);
 
-  // The guide is a column on wide screens and starts open there; on narrower screens it is a drawer and starts closed.
+  // The guide is a column on very wide screens and starts open there. Up to 1535px (which includes a 1280x720
+  // projector laptop) there is no room for it beside the facts table, so it is a drawer and starts closed.
   useEffect(() => {
-    const wide = window.matchMedia("(min-width: 1280px)");
+    const wide = window.matchMedia("(min-width: 1536px)");
     const t = requestAnimationFrame(() => wide.matches && setGuideOpen(true));
     return () => cancelAnimationFrame(t);
   }, []);
@@ -193,13 +212,13 @@ export default function CaseEditor({
     return () => clearTimeout(t);
   }, [flash]);
 
-  const stale = !!cons && (cons.profileHash !== savedHash || saveState !== "saved");
+  const stale = !!cons && !covered && (cons.profileHash !== savedHash || saveState !== "saved");
   const highOpen = openHigh(cons).length;
   const issuesOpen = (cons?.issues || []).filter((i) => i.status === "open").length;
 
   function pushUndo(label: string) {
     // Capture now: the updater below runs later, after the refs have moved on.
-    const snapshot = { profile: profileRef.current, cons: consRef.current, label };
+    const snapshot = { profile: profileRef.current, cons: consRef.current, label, covered: coveredRef.current };
     setUndo((u) => [...u.slice(-9), snapshot]);
   }
   function undoLast() {
@@ -211,6 +230,8 @@ export default function CaseEditor({
     consDirty.current = true;
     setConsState(last.cons);
     set(() => last.profile);
+    // Back to a state the check covered (for example undoing one of its own fixes): it is current again.
+    setCovered(last.covered);
     undoMark.current = version.current;
     setFlash({ tone: "green", text: `Undone: ${last.label}` });
   }
@@ -230,7 +251,10 @@ export default function CaseEditor({
     const r = applyPatch(profileRef.current, issue.fix.ops);
     if (!r.applied) return "This fix no longer fits the patient as it is now. Edit the section by hand, or run the check again.";
     pushUndo(`fix for "${issue.title}"`);
+    const wasCovered = coveredRef.current;
     set(() => r.profile);
+    // A fix the check itself proposed does not make the check out of date; the finding is marked resolved instead.
+    setCovered(wasCovered);
     if (consRef.current) setCons({ ...consRef.current, issues: consRef.current.issues.map((i) => (i.id === issue.id ? { ...i, status: "fixed" } : i)) });
     undoMark.current = version.current;
     return r.errors.length ? `${r.applied} of ${issue.fix.ops.length} edits were applied; the rest no longer fit. Review ${issue.where}.` : null;
@@ -242,9 +266,12 @@ export default function CaseEditor({
     setCheck({ running: true, seconds: 0, error: null });
     try {
       if (!(await save())) throw new Error("The patient could not be saved, so it was not checked. " + saveError);
+      const checkedVersion = version.current;
       const r = await api<{ consistency: ConsistencyResult }>(`/api/cases/${id}/check`, { json: {} });
       consRef.current = r.consistency;
       setConsState(r.consistency);
+      // Edits made while the check was running are not covered by it.
+      setCovered(version.current === checkedVersion);
       setCheck({ running: false, seconds: 0, error: null });
     } catch (e) {
       setCheck({ running: false, seconds: 0, error: (e as Error).message });
@@ -331,8 +358,9 @@ export default function CaseEditor({
   const roleTitle = roles.find((r) => r.id === profile.professions[0])?.roleTitle || "clinician";
   const navBtn = (sid: SectionId, label: string, right?: React.ReactNode) => (
     <button key={sid} type="button" onClick={() => go(sid)} aria-current={section === sid ? "page" : undefined} className={cx("flex w-full items-center justify-between gap-2 rounded-md px-2.5 py-1.5 text-left text-sm", section === sid ? "bg-brand-600 font-medium text-white" : "text-slate-700 hover:bg-slate-100")}>
-      <span className="truncate">{label}</span>
-      {right !== undefined && <span className={cx("shrink-0 text-xs", section === sid ? "text-brand-100" : "text-slate-400")}>{right}</span>}
+      {/* Labels wrap rather than truncate: "Consistency check" beside "out of date" must stay readable. */}
+      <span className="min-w-0 leading-snug">{label}</span>
+      {right !== undefined && <span className={cx("shrink-0 whitespace-nowrap text-xs", section === sid ? "text-brand-100" : "text-slate-400")}>{right}</span>}
     </button>
   );
 
@@ -363,11 +391,12 @@ export default function CaseEditor({
                 </button>
               )}
             </div>
-            <h1 className="truncate text-base font-semibold text-slate-900">
-              {profile.title || "Untitled patient"}
-              <span className="ml-2 text-sm font-normal text-slate-500">
-                {profile.patient.name}, {profile.patient.age}
+            {/* The patient's name comes first and never truncates; the faculty title follows and may take a second line. */}
+            <h1 className="line-clamp-2 text-base leading-snug text-slate-900" title={profile.title || undefined}>
+              <span className="whitespace-nowrap font-semibold">
+                {profile.patient.name || "Unnamed patient"}, {profile.patient.age}
               </span>
+              <span className="ml-2 text-sm font-normal text-slate-600">{profile.title || "Untitled patient"}</span>
             </h1>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
@@ -436,9 +465,9 @@ export default function CaseEditor({
         </Notice>
       )}
 
-      <div className={cx("grid items-start gap-4", guideOpen ? "lg:grid-cols-[13rem_minmax(0,1fr)] xl:grid-cols-[13rem_minmax(0,1fr)_22rem]" : "lg:grid-cols-[13rem_minmax(0,1fr)]")}>
+      <div className={cx("grid items-start gap-4", guideOpen ? "lg:grid-cols-[15rem_minmax(0,1fr)] 2xl:grid-cols-[15rem_minmax(0,1fr)_22rem]" : "lg:grid-cols-[15rem_minmax(0,1fr)]")}>
         {/* Section navigation */}
-        <nav aria-label="Sections" className="rounded-lg border border-slate-200 bg-white p-2 shadow-sm lg:sticky lg:top-[4.75rem]">
+        <nav aria-label="Sections" className="rounded-lg border border-slate-200 bg-white p-2 shadow-sm lg:sticky lg:top-[5.75rem] lg:max-h-[calc(100vh-6.5rem)] lg:overflow-y-auto">
           <p className="px-2.5 pb-1 pt-1 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Patient profile</p>
           {SECTIONS.map((s) => navBtn(s.id, s.label, counts[s.id]))}
           <p className="mt-2 border-t border-slate-100 px-2.5 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Before publishing</p>
@@ -469,9 +498,9 @@ export default function CaseEditor({
           {section === "preview" && <StudentPreview p={profile} roleTitle={roleTitle} />}
         </div>
 
-        {/* Guide: a column on very wide screens, a drawer otherwise */}
+        {/* Guide: a column from 1536px up, a drawer otherwise */}
         {guideOpen && (
-          <div className="fixed inset-y-0 right-0 z-40 w-[25rem] max-w-[92vw] p-2 xl:sticky xl:inset-auto xl:top-[4.75rem] xl:z-auto xl:h-[calc(100vh-5.75rem)] xl:w-auto xl:max-w-none xl:p-0">
+          <div className="fixed inset-y-0 right-0 z-40 w-[25rem] max-w-[92vw] p-2 2xl:sticky 2xl:inset-auto 2xl:top-[5.75rem] 2xl:z-auto 2xl:h-[calc(100vh-6.75rem)] 2xl:w-auto 2xl:max-w-none 2xl:p-0">
             <GuidePanel caseId={id} profileNow={profileNow} onAccept={acceptOps} onClose={() => setGuideOpen(false)} />
           </div>
         )}

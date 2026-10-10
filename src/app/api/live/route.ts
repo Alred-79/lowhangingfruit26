@@ -1,8 +1,9 @@
 import { apiUser } from "@/lib/auth";
+import { RECORDED_VISIT } from "@/lib/courses";
 import { all, parse } from "@/lib/db";
 import type { EncounterConfig, EncounterState } from "@/lib/types";
 
-/** Faculty: visits in progress that have live assist turned on, with at-risk signals. */
+/** Faculty: assignment or journey visits in progress that have live assist turned on, with at-risk signals. Never private practice. */
 export async function GET() {
   const user = await apiUser("faculty");
   if (user instanceof Response) return user;
@@ -10,7 +11,7 @@ export async function GET() {
     `SELECT e.id, e.status, e.config, e.state, e.started_at, u.name AS student, c.title, a.title AS assignment,
             (SELECT MAX(created_at) FROM messages m WHERE m.encounter_id = e.id) AS last_at
      FROM encounters e JOIN users u ON u.id = e.user_id JOIN cases c ON c.id = e.case_id LEFT JOIN assignments a ON a.id = e.assignment_id
-     WHERE e.status IN ('active','paused') AND e.started_at > datetime('now','-3 hours') ORDER BY e.started_at DESC`,
+     WHERE e.status IN ('active','paused') AND e.started_at > datetime('now','-3 hours') AND ${RECORDED_VISIT} ORDER BY e.started_at DESC`,
   );
   const visits = rows
     .map((r) => ({ r, cfg: parse<EncounterConfig>(r.config, {} as EncounterConfig), st: parse<EncounterState>(r.state, {} as EncounterState) }))

@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { SignJWT, jwtVerify } from "jose";
 import bcrypt from "bcryptjs";
@@ -68,10 +68,25 @@ export async function getUser(): Promise<User | null> {
   }
 }
 
-/** For pages: redirects to /login (or home when the role does not match). */
+/**
+ * A path on this site that is safe to send someone to after sign-in, or null.
+ * Rejects absolute URLs, protocol-relative URLs ("//host"), backslashes and control characters.
+ */
+export function safeNextPath(next: unknown): string | null {
+  const p = typeof next === "string" ? next : "";
+  if (!p.startsWith("/") || p.startsWith("//") || p.length > 500 || /[\\\u0000-\u001f]/.test(p)) return null;
+  if (/^\/(login|register)(\/|\?|$)/.test(p) || p.startsWith("/api/")) return null;
+  return p;
+}
+
+/** For pages: redirects to /login, remembering the page that was asked for (or home when the role does not match). */
 export async function requireUser(role?: "faculty" | "student"): Promise<User> {
   const u = await getUser();
-  if (!u) redirect("/login");
+  if (!u) {
+    // Set by src/proxy.ts. "/" needs no return trip: it already redirects by role.
+    const from = safeNextPath((await headers()).get("x-rounds-path"));
+    redirect(from && from !== "/" ? `/login?next=${encodeURIComponent(from)}` : "/login");
+  }
   if (role === "faculty" && u.role === "student") redirect("/student");
   return u;
 }

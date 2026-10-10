@@ -7,7 +7,7 @@ import { Badge, Card, CardHeader, Empty, LinkButton, PageHeader } from "@/compon
 import { skillProfile } from "@/lib/adaptive";
 import { requireUser } from "@/lib/auth";
 import { all } from "@/lib/db";
-import { feedbackUrl, heldAssignmentIds, toDate } from "@/lib/courses";
+import { feedbackUrl, heldAssignmentIds, studentCaseLabels, toDate } from "@/lib/courses";
 import { LEVEL_NAMES, LEVEL_RATING } from "@/lib/engine/difficulty";
 import { attemptHistory } from "@/lib/engine/feedback";
 import { profession, professions } from "@/lib/professions";
@@ -48,17 +48,19 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
   const ticks = [1, 2, 3, 4, 5].map((level) => ({ level, rating: LEVEL_RATING[level] }));
 
   // ----- Rating history from the event log -----
-  const events = all<{ encounter_id: string; domain: string; level: number; outcome: number; before: number; after: number; created_at: string; title: string | null }>(
-    `SELECT s.encounter_id, s.domain, s.level, s.outcome, s.before, s.after, s.created_at, c.title
-     FROM skill_events s LEFT JOIN encounters e ON e.id = s.encounter_id LEFT JOIN cases c ON c.id = e.case_id
+  const events = all<{ encounter_id: string; domain: string; level: number; outcome: number; before: number; after: number; created_at: string; case_id: string | null }>(
+    `SELECT s.encounter_id, s.domain, s.level, s.outcome, s.before, s.after, s.created_at, e.case_id
+     FROM skill_events s LEFT JOIN encounters e ON e.id = s.encounter_id
      WHERE s.user_id = ? AND s.profession_id = ? ORDER BY s.id`,
     user.id,
     professionId,
   );
+  // Students never see the faculty case title; it usually names the diagnosis.
+  const labels = studentCaseLabels([...events.map((e) => e.case_id || ""), ...all<{ case_id: string }>("SELECT DISTINCT case_id FROM encounters WHERE user_id = ?", user.id).map((r) => r.case_id)]);
   const visits: { id: string; level: number; date: string; title: string; after: Map<string, number> }[] = [];
   for (const ev of events) {
     let v = visits[visits.length - 1];
-    if (!v || v.id !== ev.encounter_id) visits.push((v = { id: ev.encounter_id, level: ev.level, date: ev.created_at, title: ev.title || "Visit", after: new Map() }));
+    if (!v || v.id !== ev.encounter_id) visits.push((v = { id: ev.encounter_id, level: ev.level, date: ev.created_at, title: labels.get(ev.case_id || "") || "Visit", after: new Map() }));
     v.after.set(ev.domain, ev.after);
   }
   const day = (s: string) => toDate(s).toLocaleDateString("en-US", { month: "short", day: "numeric" });
@@ -81,8 +83,8 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
 
   // ----- Attempts per patient -----
   const held = heldAssignmentIds();
-  const mine = all<{ id: string; case_id: string; assignment_id: string | null; faculty_score: number | null; title: string }>(
-    "SELECT e.id, e.case_id, e.assignment_id, e.faculty_score, c.title FROM encounters e JOIN cases c ON c.id = e.case_id WHERE e.user_id = ? AND e.status = 'scored' AND e.parent_id IS NULL ORDER BY e.started_at DESC",
+  const mine = all<{ id: string; case_id: string; assignment_id: string | null; faculty_score: number | null }>(
+    "SELECT e.id, e.case_id, e.assignment_id, e.faculty_score FROM encounters e WHERE e.user_id = ? AND e.status = 'scored' AND e.parent_id IS NULL ORDER BY e.started_at DESC",
     user.id,
   );
   const meta = new Map(mine.map((m) => [m.id, m]));
@@ -93,7 +95,7 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
       const attempts = attemptHistory(user.id, caseId)
         .filter((a) => !held.has(meta.get(a.id)?.assignment_id || ""))
         .map((a) => ({ ...a, percent: meta.get(a.id)?.faculty_score ?? a.percent }));
-      return { caseId, title: mine.find((m) => m.case_id === caseId)!.title, attempts };
+      return { caseId, title: labels.get(caseId) || "Patient", attempts };
     })
     .filter((c) => c.attempts.length);
   const heldCount = mine.filter((m) => m.assignment_id && held.has(m.assignment_id)).length;

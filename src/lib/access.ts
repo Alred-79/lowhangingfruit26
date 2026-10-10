@@ -9,7 +9,9 @@ export async function encounterFor(id: string, opts: { faculty?: "also" | "only"
   const enc = loadEncounter(id);
   if (!enc) return Response.json({ error: "Visit not found" }, { status: 404 });
   const owner = enc.row.user_id === user.id;
-  const fac = isFaculty(user);
+  // Faculty reach other people's visits only when the visit is recorded (assignment or care journey).
+  // Self-started practice is labelled private to the student and stays that way.
+  const fac = isFaculty(user) && (owner || !!enc.row.assignment_id || !!enc.row.journey_run_id);
   if (opts.faculty === "only" ? !fac : !(owner || (opts.faculty === "also" && fac))) return Response.json({ error: "Not allowed" }, { status: 403 });
   return { user, enc };
 }

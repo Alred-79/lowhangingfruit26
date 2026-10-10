@@ -1,22 +1,38 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useState } from "react";
+import { startTransition, useActionState, useState } from "react";
 import { Button, Input, Label, Select } from "@/components/ui";
 import { login, register } from "./actions";
 
 type Group = { group: string; items: { id: string; name: string }[] };
 
-export default function AuthForm({ mode, groups }: { mode: "login" | "register"; groups?: Group[] }) {
+export default function AuthForm({ mode, groups, next }: { mode: "login" | "register"; groups?: Group[]; next?: string }) {
   const [error, action, pending] = useActionState(mode === "login" ? login : register, null);
   const [role, setRole] = useState("student");
+  // Submitted by hand rather than through the form's action: React resets a form after its action
+  // returns, which wiped the name and email (and put the role and program back to their defaults)
+  // whenever the server sent back an error such as a duplicate email.
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [profession, setProfession] = useState("medicine");
+  const q = next ? `?next=${encodeURIComponent(next)}` : "";
   return (
-    <form action={action} className="space-y-4">
+    <form
+      action={action}
+      onSubmit={(e) => {
+        e.preventDefault();
+        const data = new FormData(e.currentTarget);
+        startTransition(() => action(data));
+      }}
+      className="space-y-4"
+    >
+      {next && <input type="hidden" name="next" value={next} />}
       {mode === "register" && (
         <>
           <div>
             <Label htmlFor="name">Full name</Label>
-            <Input id="name" name="name" required autoComplete="name" />
+            <Input id="name" name="name" required autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} />
           </div>
           <div>
             <Label>I am a</Label>
@@ -28,10 +44,11 @@ export default function AuthForm({ mode, groups }: { mode: "login" | "register";
                 </label>
               ))}
             </div>
+            <p className="mt-1.5 text-right text-xs text-slate-500">Faculty accounts can see every patient&apos;s answer key.</p>
           </div>
           <div>
             <Label htmlFor="profession">{role === "student" ? "Your program" : "Your discipline"}</Label>
-            <Select id="profession" name="profession" defaultValue="medicine">
+            <Select id="profession" name="profession" value={profession} onChange={(e) => setProfession(e.target.value)}>
               {groups?.map((g) => (
                 <optgroup key={g.group} label={g.group}>
                   {g.items.map((p) => (
@@ -47,7 +64,7 @@ export default function AuthForm({ mode, groups }: { mode: "login" | "register";
       )}
       <div>
         <Label htmlFor="email">Email</Label>
-        <Input id="email" name="email" type="email" required autoComplete="email" />
+        <Input id="email" name="email" type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
       <div>
         <Label htmlFor="password">Password</Label>
@@ -60,11 +77,11 @@ export default function AuthForm({ mode, groups }: { mode: "login" | "register";
       <p className="text-center text-sm text-slate-600">
         {mode === "login" ? (
           <>
-            New here? <Link href="/register" className="font-medium text-brand-600 hover:underline">Create an account</Link>
+            New here? <Link href={`/register${q}`} className="font-medium text-brand-600 hover:underline">Create an account</Link>
           </>
         ) : (
           <>
-            Already have an account? <Link href="/login" className="font-medium text-brand-600 hover:underline">Sign in</Link>
+            Already have an account? <Link href={`/login${q}`} className="font-medium text-brand-600 hover:underline">Sign in</Link>
           </>
         )}
       </p>

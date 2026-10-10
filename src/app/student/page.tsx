@@ -7,7 +7,7 @@ import { Badge, Card, CardHeader, LinkButton, PageHeader } from "@/components/ui
 import { recommend } from "@/lib/adaptive";
 import { requireUser } from "@/lib/auth";
 import { all, parse } from "@/lib/db";
-import { describeSettings, feedbackUrl, heldAssignmentIds, publishedCaseCards, studentAssignments, toDate, TYPE_LABEL, visitUrl } from "@/lib/courses";
+import { describeSettings, feedbackUrl, heldAssignmentIds, publishedCaseCards, studentAssignments, studentCaseLabels, toDate, TYPE_LABEL, visitUrl } from "@/lib/courses";
 import { LEVEL_NAMES } from "@/lib/engine/difficulty";
 import { profession } from "@/lib/professions";
 import type { EncounterConfig, EncounterState } from "@/lib/types";
@@ -24,18 +24,20 @@ export default async function StudentHome() {
   const held = heldAssignmentIds();
   const now = Date.now();
 
-  const active = all<{ id: string; title: string; config: string; state: string; status: string; started_at: string; assignment: string | null; journey_run_id: string | null }>(
-    `SELECT e.id, c.title, e.config, e.state, e.status, e.started_at, a.title AS assignment, e.journey_run_id
+  const active = all<{ id: string; case_id: string; config: string; state: string; status: string; started_at: string; assignment: string | null; journey_run_id: string | null }>(
+    `SELECT e.id, e.case_id, e.config, e.state, e.status, e.started_at, a.title AS assignment, e.journey_run_id
      FROM encounters e JOIN cases c ON c.id = e.case_id LEFT JOIN assignments a ON a.id = e.assignment_id
      WHERE e.user_id = ? AND e.status IN ('active','paused') AND e.started_at > datetime('now','-14 days') ORDER BY e.started_at DESC LIMIT 6`,
     user.id,
   );
-  const recent = all<{ id: string; title: string; config: string; score: number | null; faculty_score: number | null; ended_at: string | null; attempt: number; assignment_id: string | null; assignment: string | null; faculty_note: string | null }>(
-    `SELECT e.id, c.title, e.config, e.score, e.faculty_score, e.ended_at, e.attempt, e.assignment_id, a.title AS assignment, e.faculty_note
+  const recent = all<{ id: string; case_id: string; config: string; score: number | null; faculty_score: number | null; ended_at: string | null; attempt: number; assignment_id: string | null; assignment: string | null; faculty_note: string | null }>(
+    `SELECT e.id, e.case_id, e.config, e.score, e.faculty_score, e.ended_at, e.attempt, e.assignment_id, a.title AS assignment, e.faculty_note
      FROM encounters e JOIN cases c ON c.id = e.case_id LEFT JOIN assignments a ON a.id = e.assignment_id
      WHERE e.user_id = ? AND e.status = 'scored' ORDER BY e.ended_at DESC LIMIT 6`,
     user.id,
   );
+  // Case titles are faculty-facing and name the diagnosis; students get a neutral label.
+  const labels = studentCaseLabels([...active, ...recent].map((e) => e.case_id));
   const open = assignments.filter((x) => x.status !== "submitted");
   const doneAssignments = assignments.filter((x) => x.status === "submitted");
 
@@ -59,11 +61,7 @@ export default async function StudentHome() {
                 {recCard ? (
                   <p className="mt-2 text-sm text-slate-600">
                     <span className="text-slate-500">Patient picked: </span>
-                    <span className="font-medium text-slate-900">
-                      {recCard.patientFirstName}
-                      {recCard.age !== null && `, ${recCard.age}`}
-                    </span>{" "}
-                    · {recCard.title}
+                    <span className="font-medium text-slate-900">{recCard.label}</span>
                     {recCard.aiDraft && (
                       <Badge tone="amber" className="ml-1.5">
                         AI draft, not faculty-reviewed
@@ -144,11 +142,7 @@ export default async function StudentHome() {
                               <li key={c.card.id} className="flex flex-wrap items-center justify-between gap-3 rounded-md border border-slate-200 px-3 py-2">
                                 <div className="min-w-0 flex-1">
                                   <div className="text-sm text-slate-900">
-                                    <span className="font-medium">
-                                      {c.card.patientFirstName}
-                                      {c.card.age !== null && `, ${c.card.age}`}
-                                    </span>
-                                    <span className="text-slate-500"> · {c.card.title}</span>
+                                    <span className="font-medium">{c.card.label}</span>
                                   </div>
                                   <div className="mt-0.5 text-xs text-slate-500">
                                     {max ? `${c.attemptsUsed} of ${max} attempt${max === 1 ? "" : "s"} used` : `${c.attemptsUsed} attempt${c.attemptsUsed === 1 ? "" : "s"} so far`}
@@ -203,7 +197,7 @@ export default async function StudentHome() {
                   return (
                     <li key={e.id} className="flex items-center justify-between gap-3 px-4 py-2.5">
                       <div className="min-w-0">
-                        <div className="truncate text-sm font-medium text-slate-900">{e.title}</div>
+                        <div className="truncate text-sm font-medium text-slate-900">{labels.get(e.case_id) || "Visit"}</div>
                         <div className="text-xs text-slate-500">
                           {e.assignment || MODE_LABEL[cfg.mode || "practice"]} · turn {st.turn ?? 0} · started <When at={e.started_at} />
                           {e.status === "paused" && " · paused by your instructor"}
@@ -231,7 +225,7 @@ export default async function StudentHome() {
                   const body = (
                     <>
                       <div className="min-w-0">
-                        <div className="truncate text-sm font-medium text-slate-900">{e.title}</div>
+                        <div className="truncate text-sm font-medium text-slate-900">{labels.get(e.case_id) || "Visit"}</div>
                         <div className="text-xs text-slate-500">
                           {e.assignment || MODE_LABEL[cfg.mode || "practice"]} · attempt {e.attempt} · level {cfg.knobs?.level ?? "?"} · <When at={e.ended_at} />
                           {!hidden && e.faculty_note && " · instructor note"}

@@ -4,7 +4,7 @@ import When from "@/components/courses/When";
 import { Badge, Card, CardHeader, Empty, LinkButton, PageHeader } from "@/components/ui";
 import { requireUser } from "@/lib/auth";
 import { all, get } from "@/lib/db";
-import { assignmentOverviews, coursesOf, feedbackUrl, liveVisitCount, reviewQueue, toDate, TYPE_LABEL } from "@/lib/courses";
+import { assignmentOverviews, coursesOf, feedbackUrl, liveVisitCount, RECORDED_VISIT, reviewQueue, toDate, TYPE_LABEL } from "@/lib/courses";
 
 function Stat({ label, value, note, href }: { label: string; value: number; note: string; href: string }) {
   return (
@@ -45,9 +45,10 @@ export default async function FacultyHome() {
   const queueTotal = reviewQueue(user, 200).length;
   const live = liveVisitCount();
   const published = get<{ n: number }>("SELECT COUNT(*) AS n FROM cases WHERE status = 'published'")!.n;
+  // Assignment and care-journey visits only: self-started practice is private to the student.
   const recent = all<{ id: string; student: string; title: string; score: number | null; faculty_score: number | null; ended_at: string | null }>(
     `SELECT e.id, u.name AS student, c.title, e.score, e.faculty_score, e.ended_at FROM encounters e JOIN users u ON u.id = e.user_id JOIN cases c ON c.id = e.case_id
-     WHERE e.status = 'scored' AND u.role = 'student' ORDER BY e.ended_at DESC LIMIT 6`,
+     WHERE e.status = 'scored' AND u.role = 'student' AND ${RECORDED_VISIT} ORDER BY e.ended_at DESC LIMIT 6`,
   );
 
   return (
@@ -177,7 +178,7 @@ export default async function FacultyHome() {
         <Card>
           <CardHeader title="Recently scored visits" subtitle="Across all students, newest first." />
           {recent.length === 0 ? (
-            <p className="px-4 py-6 text-sm text-slate-500">No student has finished a visit yet.</p>
+            <p className="px-4 py-6 text-sm text-slate-500">No assignment or care journey visit has been scored yet. Students&apos; private practice visits are not listed here.</p>
           ) : (
             <ul className="divide-y divide-slate-100">
               {recent.map((r) => (

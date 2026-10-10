@@ -1,4 +1,5 @@
 import { apiUser } from "@/lib/auth";
+import { decodeEntities } from "@/lib/courses/save";
 import { courseFor, normalizeSettings, publishedCaseBriefs, publishedJourneys } from "@/lib/courses";
 import { LEVEL_NAMES } from "@/lib/engine/difficulty";
 import { bad, longJson } from "@/lib/http";
@@ -117,19 +118,19 @@ ${journeys.map((j) => `id: ${j.id} | title: ${j.title} | patient: ${cases.find((
     });
     return {
       proposal: {
-        title: String(raw.title || "").slice(0, 160),
-        instructions: String(raw.instructions || ""),
+        title: decodeEntities(String(raw.title || "")).trim().slice(0, 160),
+        instructions: decodeEntities(String(raw.instructions || "")),
         type,
         journeyId: journey?.id || null,
         caseIds: journey ? [] : chosen.map((c) => c.id),
         settings,
       },
       reasons: {
-        type: raw.typeReason || "",
-        level: raw.levelReason || "",
-        settings: raw.settingsReason || "",
-        cases: Object.fromEntries(chosen.map((c) => [c.id, c.reason])),
-        gaps: raw.gaps || "",
+        type: decodeEntities(raw.typeReason || ""),
+        level: decodeEntities(raw.levelReason || ""),
+        settings: decodeEntities(raw.settingsReason || ""),
+        cases: Object.fromEntries(chosen.map((c) => [c.id, decodeEntities(String(c.reason || ""))])),
+        gaps: decodeEntities(raw.gaps || ""),
       },
     };
   });

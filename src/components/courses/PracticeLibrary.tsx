@@ -8,7 +8,8 @@ import StartVisit from "./StartVisit";
 
 export interface PracticeCase {
   id: string;
-  title: string;
+  /** Student-safe label; the faculty title never reaches this component. */
+  label: string;
   specialty: string;
   professions: string[];
   difficulty: number;
@@ -37,15 +38,11 @@ function CaseCard({ c, professionNames }: { c: PracticeCase; professionNames: Re
           </Badge>
         )}
       </div>
-      <h3 className="mt-2 text-sm font-semibold leading-snug text-slate-900">{c.title}</h3>
+      <h3 className="mt-2 text-sm font-semibold leading-snug text-slate-900">
+        {c.patientFirstName}
+        {c.age !== null && `, ${c.age}`}
+      </h3>
       <dl className="mt-2 space-y-0.5 text-xs text-slate-600">
-        <div>
-          <dt className="inline text-slate-500">Patient: </dt>
-          <dd className="inline">
-            {c.patientFirstName}
-            {c.age !== null && `, ${c.age}`}
-          </dd>
-        </div>
         {c.encounterType && (
           <div>
             <dt className="inline text-slate-500">Visit: </dt>

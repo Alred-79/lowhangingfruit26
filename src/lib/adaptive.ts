@@ -1,5 +1,6 @@
 import { all, get, parse, run } from "./db";
 import { LEVEL_RATING } from "./engine/difficulty";
+import { studentCaseLabelFromJson } from "./courses/label";
 import type { CaseProfile, DomainScore, Knobs } from "./types";
 
 /**
@@ -116,7 +117,8 @@ function focusKnobs(weakest: string | null): { knobs: Partial<Knobs>; why: strin
 
 export interface Recommendation {
   caseId: string | null;
-  title: string | null;
+  /** Student-safe label (patient, visit type, specialty). Never the faculty case title. */
+  label: string | null;
   level: number;
   knobs: Partial<Knobs>;
   reason: string;
@@ -146,7 +148,7 @@ export function recommend(userId: string, professionId: string): Recommendation 
     profile.sessions === 0
       ? `No history yet, so this starts at level 2 and adjusts after each visit.`
       : `Your rating is ${Math.round(profile.overall)} after ${profile.sessions} visit${profile.sessions === 1 ? "" : "s"}. Level ${profile.level} gives an expected score of about ${pct}%, the range where practice is most productive. Weakest area: ${(profile.weakest || "").replace(/_/g, " ")}, so you get ${focus.why}.`;
-  return { caseId: pick?.id || null, title: pick?.title || null, level: profile.level, knobs: focus.knobs, reason, profile };
+  return { caseId: pick?.id || null, label: pick ? studentCaseLabelFromJson(pick.profile) : null, level: profile.level, knobs: focus.knobs, reason, profile };
 }
 
 export const caseTitle = (profileJson: string) => parse<CaseProfile>(profileJson, {} as CaseProfile).title;

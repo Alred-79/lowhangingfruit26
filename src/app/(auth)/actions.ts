@@ -1,13 +1,14 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { createUser, endSession, startSession, verifyLogin } from "@/lib/auth";
+import { createUser, endSession, safeNextPath, startSession, verifyLogin } from "@/lib/auth";
 
 export async function login(_prev: string | null, form: FormData): Promise<string | null> {
   const user = await verifyLogin(String(form.get("email") || ""), String(form.get("password") || ""));
   if (!user) return "That email and password don't match an account.";
   await startSession(user.id);
-  redirect(user.role === "student" ? "/student" : "/faculty");
+  // Back to the page they were sent to /login from, if it is a path on this site.
+  redirect(safeNextPath(form.get("next")) || (user.role === "student" ? "/student" : "/faculty"));
 }
 
 export async function register(_prev: string | null, form: FormData): Promise<string | null> {
@@ -23,7 +24,7 @@ export async function register(_prev: string | null, form: FormData): Promise<st
   } catch (e) {
     return (e as Error).message;
   }
-  redirect(role === "student" ? "/student" : "/faculty");
+  redirect(safeNextPath(form.get("next")) || (role === "student" ? "/student" : "/faculty"));
 }
 
 export async function logout() {

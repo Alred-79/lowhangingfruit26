@@ -3,6 +3,7 @@ import AppShell from "@/components/AppShell";
 import JoinButtons from "@/components/journey/JoinButtons";
 import { Card, LinkButton, PageHeader } from "@/components/ui";
 import { isFaculty, requireUser } from "@/lib/auth";
+import { studentJourneyLabel } from "@/lib/courses/label";
 import { get, parse } from "@/lib/db";
 import { clinician, loadJourney, resolveProfession } from "@/lib/journey/store";
 import type { CaseProfile } from "@/lib/types";
@@ -20,9 +21,12 @@ export default async function JourneyIntro({ params, searchParams }: { params: P
     return { id: s.id, order: s.order, roleTitle: s.roleTitle, clinicianName: cl.name, clinicianRole: cl.role, focus: s.focus, simTime: s.simTime, visitLabel: s.visitLabel, suggested: !!user.profession_id && resolveProfession(s).id === user.profession_id && (s.professionId === user.profession_id || !j.stages.some((o) => o.professionId === user.profession_id)) };
   });
   const firstSuggested = stages.findIndex((s) => s.suggested);
+  // The journey title and summary are written for faculty and name the diagnoses; students get the patient and the roles.
+  const neutral = studentJourneyLabel(c.patient?.name, stages.map((s) => s.roleTitle));
+  const heading = isFaculty(user) ? { title: j.row.title, subtitle: j.spec.summary } : { title: neutral.title, subtitle: `Seen in turn by: ${neutral.roles}. Join as any one of them; the AI plays the rest.` };
   return (
     <AppShell user={user}>
-      <PageHeader title={j.row.title} subtitle={j.spec.summary} action={<LinkButton href="/student/journeys" variant="secondary" size="sm">All care journeys</LinkButton>} />
+      <PageHeader title={heading.title} subtitle={heading.subtitle} action={<LinkButton href="/student/journeys" variant="secondary" size="sm">All care journeys</LinkButton>} />
       <div className="grid gap-5 lg:grid-cols-[1fr_20rem]">
         <div>
           <h2 className="mb-2 text-sm font-semibold text-slate-900">Choose the professional you will be</h2>

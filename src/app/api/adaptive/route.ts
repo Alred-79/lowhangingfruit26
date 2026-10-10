@@ -11,5 +11,5 @@ export async function GET(req: Request) {
   const professionId = asked && professions().some((p) => p.id === asked) ? asked : user.profession_id;
   if (!professionId) return bad("Choose a profession first");
   const r = recommend(user.id, professionId);
-  return Response.json({ professionId, caseId: r.caseId, title: r.title, level: r.level, knobs: r.knobs, reason: r.reason, sessions: r.profile.sessions, overall: Math.round(r.profile.overall), weakest: r.profile.weakest });
+  return Response.json({ professionId, caseId: r.caseId, label: r.label, level: r.level, knobs: r.knobs, reason: r.reason, sessions: r.profile.sessions, overall: Math.round(r.profile.overall), weakest: r.profile.weakest });
 }

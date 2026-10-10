@@ -4,7 +4,7 @@ import { chatJSON, MODELS, type Turn } from "@/lib/llm";
 import { profession } from "@/lib/professions";
 import type { CaseProfile, Persona, Variant } from "@/lib/types";
 import type { Issue, Severity } from "./checks";
-import { PATCH_DOC, PATCH_OPS_SCHEMA, validOps, type PatchOp } from "./patch";
+import { PATCH_DOC, PATCH_OPS_SCHEMA, validOps, wordingWarnings, type PatchOp } from "./patch";
 import { nextId, sectionForPath, SECTIONS } from "./profile";
 
 /** The case as the model sees it: no portraits or file URLs, knowledge sources shortened. */
@@ -113,6 +113,8 @@ Report only real problems you can point to in the data; quote the conflicting va
 
 A difference in wording or formatting between two places that state the same value is not an issue.
 
+Every fact states the same information twice: "says" (the patient's words) and "chart" (what is written to the record). When a patch changes a clinical value in a fact (a number, range, dose, frequency, date or duration), it MUST set both facts.<id>.says and facts.<id>.chart in the same patch so the two wordings state the same value. Never change the value in one wording and leave the other as it was: "says" becoming "89 up to 93" while "chart" still reads "89-91%" is a new contradiction. The same holds for any other place that repeats the value.
+
 For each issue give a fix as a patch when editing specific fields resolves it. Most contradictions can be fixed this way, so most issues should carry a patch. Choose the reading that agrees with the answer key and the majority of the case, and patch every field needed. When the right answer is a faculty judgment call, leave ops empty and say in fixSummary what they need to decide.
 
 ${PATCH_DOC}`,
@@ -171,6 +173,9 @@ ${PATCH_DOC}`,
       fix: ops.length ? { summary: String(it.fixSummary || "Apply the proposed correction"), ops } : undefined,
       status: "open",
     });
+    // The prompt requires both wordings of a fact to be patched together; log when the model did not. The editor shows the warning.
+    const lopsided = wordingWarnings(p, ops);
+    if (lopsided.length) console.warn("[studio] clinical review proposed a one-sided fact wording change", { issue: it.title, warnings: lopsided });
     // A decision the model left to faculty still needs to be visible.
     if (!ops.length && it.fixSummary) issues[issues.length - 1].why += ` Suggested: ${it.fixSummary}`;
   }

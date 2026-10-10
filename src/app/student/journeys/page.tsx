@@ -1,6 +1,7 @@
 import AppShell from "@/components/AppShell";
 import { Badge, Card, Empty, LinkButton, PageHeader } from "@/components/ui";
-import { requireUser } from "@/lib/auth";
+import { isFaculty, requireUser } from "@/lib/auth";
+import { studentJourneyLabel } from "@/lib/courses/label";
 import { all, parse } from "@/lib/db";
 import type { JourneySpec } from "@/lib/journey/types";
 import type { CaseProfile } from "@/lib/types";
@@ -18,10 +19,13 @@ export default async function StudentJourneys() {
           const spec = parse<JourneySpec>(j.spec, { summary: "", stages: [] });
           const c = parse<CaseProfile>(j.profile, {} as CaseProfile);
           const mine = runs.filter((r) => r.journey_id === j.id);
+          // The journey title and summary are written for faculty and name the diagnoses.
+          const faculty = isFaculty(user);
+          const neutral = studentJourneyLabel(c.patient?.name, spec.stages.map((s) => s.roleTitle));
           return (
             <Card key={j.id} className="flex flex-col p-4">
-              <h2 className="text-base font-semibold text-slate-900">{j.title}</h2>
-              <p className="mt-1 text-sm text-slate-600">{spec.summary}</p>
+              <h2 className="text-base font-semibold text-slate-900">{faculty ? j.title : neutral.title}</h2>
+              <p className="mt-1 text-sm text-slate-600">{faculty ? spec.summary : `Seen in turn by ${spec.stages.length} professionals. Join as any one of them; the AI plays the rest.`}</p>
               <ol className="mt-3 flex flex-wrap items-center gap-1.5 text-xs text-slate-700">
                 {[...spec.stages].sort((a, b) => a.order - b.order).map((s, i) => (
                   <li key={s.id} className="flex items-center gap-1.5">

@@ -284,3 +284,43 @@ export function describeOp(profile: CaseProfile, op: PatchOp): OpView {
   if (op.op === "remove") return { verb: "Remove", where, before: formatValue(node) };
   return { verb: "Change", where, before: formatValue(node), after: formatValue(op.value) };
 }
+
+// ---------- Fact wording: a changed value must change in both wordings ----------
+
+const NUMBER_WORDS = "zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|half|quarter|once|twice|couple|dozen";
+/** The numbers a wording states, as digits or as words, sorted. "89 up to 93" -> ["89", "93"]. */
+export function valuesIn(text: unknown): string[] {
+  return (String(text ?? "").toLowerCase().match(new RegExp(`\\d+(?:\\.\\d+)?|\\b(?:${NUMBER_WORDS})\\b`, "g")) || []).sort();
+}
+
+/**
+ * A fact has two wordings of the same information: what the patient says and what is written to the chart.
+ * Warns when a patch changes a number in one of them and does not touch the other, which leaves the two
+ * wordings of one fact disagreeing (patient "89 up to 93", chart "89-91%"). Pure; used by the server to
+ * flag a proposed fix and by the editor to show the warning beside it.
+ */
+export function wordingWarnings(p: CaseProfile, ops: PatchOp[]): string[] {
+  const touched = new Map<string, { says?: unknown; chart?: unknown }>();
+  for (const op of ops) {
+    const seg = splitPath(op.path);
+    if (op.op !== "set" || seg.length !== 3 || seg[0] !== "facts" || (seg[2] !== "says" && seg[2] !== "chart")) continue;
+    touched.set(seg[1], { ...touched.get(seg[1]), [seg[2]]: op.value });
+  }
+  const out: string[] = [];
+  for (const [id, next] of touched) {
+    const f = p.facts.find((x) => x.id === id);
+    if (!f) continue;
+    const name = `fact ${f.id}${f.topic ? ` (${f.topic})` : ""}`;
+    for (const [field, other, label, otherLabel] of [
+      ["says", "chart", "patient wording", "chart wording"],
+      ["chart", "says", "chart wording", "patient wording"],
+    ] as const) {
+      if (next[field] === undefined || next[other] !== undefined) continue;
+      const before = valuesIn(f[field]);
+      const after = valuesIn(next[field]);
+      if (before.join("|") === after.join("|")) continue;
+      out.push(`This fix changes a value in the ${label} of ${name} to "${String(next[field])}" but leaves the ${otherLabel} as "${f[other]}". Both wordings describe the same finding, so check they still agree and edit the ${otherLabel} if they do not.`);
+    }
+  }
+  return out;
+}

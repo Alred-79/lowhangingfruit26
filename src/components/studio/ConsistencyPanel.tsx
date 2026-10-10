@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Badge, Button, cx } from "@/components/ui";
 import type { CaseProfile } from "@/lib/types";
 import type { ConsistencyResult, Issue } from "@/lib/studio/checks";
-import { describeOp } from "@/lib/studio/patch";
+import { describeOp, wordingWarnings } from "@/lib/studio/patch";
 import { SECTIONS, type SectionId } from "@/lib/studio/profile";
 import { Notice, Panel } from "./fields";
 import PatchDiff from "./PatchDiff";
@@ -16,6 +16,8 @@ function IssueCard({ issue, p, onApply, onStatus, go }: { issue: Issue; p: CaseP
   const [show, setShow] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const closed = issue.status !== "open";
+  // A fix that changes a value in one wording of a fact and not the other would leave the fact disagreeing with itself.
+  const warnings = issue.fix && !closed ? wordingWarnings(p, issue.fix.ops) : [];
   return (
     <li className={cx("rounded-md border p-3", closed ? "border-slate-200 bg-slate-50 opacity-75" : issue.severity === "high" ? "border-rose-200 bg-white" : "border-slate-200 bg-white")}>
       <div className="flex flex-wrap items-center gap-1.5">
@@ -41,6 +43,12 @@ function IssueCard({ issue, p, onApply, onStatus, go }: { issue: Issue; p: CaseP
               <PatchDiff views={issue.fix.ops.map((op) => describeOp(p, op))} />
             </div>
           )}
+          {warnings.map((w) => (
+            <Notice key={w} tone="amber" className="mt-2">
+              <span className="font-semibold">Check before applying: </span>
+              {w}
+            </Notice>
+          ))}
         </div>
       )}
       {error && (

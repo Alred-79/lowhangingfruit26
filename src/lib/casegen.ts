@@ -184,7 +184,8 @@ export interface GenerateInput {
   portrait?: string;
 }
 
-export async function generateCase(input: GenerateInput): Promise<CaseProfile> {
+/** Single-call generation. Kept as the fallback path for the staged generator below. */
+async function generateSingle(input: GenerateInput): Promise<CaseProfile> {
   const p = profession(input.professionId);
   type Raw = Omit<CaseProfile, "version" | "professions" | "knowledge" | "rubricId">;
   let raw!: Raw;
@@ -233,6 +234,172 @@ export async function generateCase(input: GenerateInput): Promise<CaseProfile> {
 }
 
 /** Repairs ids and dangling references so the engine can trust the profile. */
+// ---------- Staged generation ----------
+// One large call takes about two minutes and sometimes drops a section. Instead: a short first call
+// fixes the clinical story and every number in it; the long lists (facts, and exams + documents) are
+// then written in parallel from that story; a final short call links objectives and mismatches to
+// the ids that now exist. About half the wall-clock time, and each call is small enough to be reliable.
+
+const P = CASE_SCHEMA.properties;
+const OUTLINE_SCHEMA = {
+  type: "object",
+  required: ["title", "specialty", "setting", "encounterType", "difficulty", "patient", "voice", "chiefComplaint", "clinicalStory"],
+  properties: {
+    title: P.title,
+    specialty: P.specialty,
+    setting: P.setting,
+    encounterType: P.encounterType,
+    difficulty: P.difficulty,
+    patient: P.patient,
+    voice: { type: "string", description: "Two sentences: this person's personality and how they talk (vocabulary, health literacy, mood today)." },
+    chiefComplaint: { type: "string", description: "The reason for the visit as booked, without the diagnosis." },
+    clinicalStory: {
+      type: "string",
+      description:
+        "The ground truth of the case in 300-450 words, for the other case writers (never shown to learners). Fix every specific that must agree across the case: timeline with durations; every medication with dose and frequency and how it is really taken; vitals; each lab or test value with units; examination findings; relevant negatives; the sensitive things the patient is slow to admit; the one or two patient-versus-chart mismatches (what the patient claims, and what a named record shows instead); one to three red herrings; what the learner in this role should do about it.",
+    },
+  },
+};
+const PEOPLE_SCHEMA = { type: "object", required: ["summary", "persona", "scenario", "answerKey"], properties: { summary: P.summary, persona: P.persona, scenario: P.scenario, answerKey: P.answerKey } };
+const HALF_SCHEMA = { type: "object", required: ["facts"], properties: { facts: P.facts } };
+const RECORD_SCHEMA = { type: "object", required: ["chartAtStart", "actions", "artifacts"], properties: { chartAtStart: P.chartAtStart, actions: P.actions, artifacts: P.artifacts } };
+const LINK_SCHEMA = { type: "object", required: ["objectives", "mismatches"], properties: { objectives: P.objectives, mismatches: P.mismatches } };
+
+interface Outline {
+  title: string;
+  specialty: string;
+  setting: string;
+  encounterType: string;
+  difficulty: number;
+  patient: CaseProfile["patient"];
+  voice: string;
+  chiefComplaint: string;
+  clinicalStory: string;
+}
+
+async function stage<T>(label: string, schema: object, text: string, maxTokens: number, ok: (r: T) => boolean): Promise<T> {
+  for (let attempt = 0; ; attempt++) {
+    const r = await chatJSON<T>({ model: MODELS.smart, system: SYSTEM, schema: schema as Record<string, unknown>, maxTokens, messages: [{ role: "user", text }] });
+    if (ok(r)) return r;
+    console.error(`[casegen] ${label} attempt ${attempt + 1} unusable:`, Object.entries(r as Record<string, unknown>).map(([k, v]) => `${k}=${Array.isArray(v) ? `array(${v.length})` : typeof v === "string" ? `string(${v.length})` : typeof v}`).join(", "));
+    if (attempt === 1) throw new Error(`Drafting the ${label} failed twice.`);
+  }
+}
+
+async function generateStaged(input: GenerateInput): Promise<CaseProfile> {
+  const p = profession(input.professionId);
+  const brief = `LEARNER ROLE: ${p.name} (${p.roleTitle})
+ROLE SCOPE: ${p.scope}
+TYPICAL ENCOUNTERS: ${p.encounterTypes.join(", ")}
+ACTION KINDS THIS ROLE USES: ${p.actionKinds.join(", ")}
+DOCUMENTATION FORMAT: ${p.noteFormat}
+${input.level ? `TARGET INTRINSIC DIFFICULTY: ${input.level} of 5\n` : ""}${input.guidance ? `FACULTY GUIDANCE:\n${input.guidance}\n` : ""}
+CASE DESCRIPTION FROM FACULTY (treat every detail given here as fixed; fill in only what is missing):
+${input.description}`;
+
+  const t0 = Date.now();
+  const o = await stage<Outline>(
+    "case outline",
+    OUTLINE_SCHEMA,
+    `Plan a telehealth simulation case: the faculty-facing title, who the patient is, and the clinical story that fixes every specific. Other writers will fill in the lists from your story, so be exact and complete in it.\n\n${brief}`,
+    3000,
+    (r) => !!(r.title && r.patient?.name && (r.clinicalStory || "").length > 300),
+  );
+
+  const shared = `${brief}
+
+THE CASE SO FAR (already decided; stay consistent with it and do not change any name, value or date)
+Title (faculty only): ${o.title}
+Setting: ${o.setting}. Encounter type: ${o.encounterType}. Reason for visit: ${o.chiefComplaint}
+Patient: ${JSON.stringify(o.patient)}
+How the patient talks: ${o.voice}
+
+CLINICAL STORY (ground truth; use these exact values, and where you need a value it does not give, choose an unremarkable normal one)
+${o.clinicalStory}`;
+
+  // The long lists are written in parallel. The fact list is the longest, so it is split into two
+  // halves with disjoint categories.
+  const t1 = Date.now();
+  const [who, f1, f2, r] = await Promise.all([
+    stage<Pick<CaseProfile, "summary" | "persona" | "scenario" | "answerKey">>(
+      "persona and scenario",
+      PEOPLE_SCHEMA,
+      `Write the faculty summary, the patient's persona, the scenario the learner sees (brief, opening line, tasks, time limit) and the answer key for this case.\n\n${shared}`,
+      4000,
+      (x) => !!(x.persona?.personality && x.persona?.background && x.scenario?.studentBrief && x.scenario?.openingLine && x.answerKey?.primaryProblem),
+    ),
+    stage<Pick<CaseProfile, "facts">>(
+      "medical history",
+      HALF_SCHEMA,
+      `Write the MEDICAL half of the patient facts for this case: only categories chief_complaint, hpi, ros, pmh, psh, medications, allergies (18-22 facts, including pertinent negatives; the presenting concern itself is tier initial). Use ids h1, h2, ... Another writer is covering family, social, substance, sexual, nutrition, function, psychosocial, goals and adherence, so leave those out.\n\n${shared}`,
+      7000,
+      (x) => asArray(x.facts).length >= 8,
+    ),
+    stage<Pick<CaseProfile, "facts">>(
+      "personal history",
+      HALF_SCHEMA,
+      `Write the PERSONAL half of the patient facts for this case: only categories family, social, substance, sexual, nutrition, function, psychosocial, goals, adherence, other (14-18 facts). Use ids s1, s2, ... Another writer is covering the presenting complaint, review of systems, past history, medications and allergies, so leave those out. Do not restate symptoms of the presenting problem (including mood or safety symptoms when those are the presenting problem); they belong to the other writer. The sensitive personal items the patient is slow to admit mostly live here: give them tier reluctant or hidden.\n\n${shared}`,
+      6000,
+      (x) => asArray(x.facts).length >= 6,
+    ),
+    stage<Pick<CaseProfile, "chartAtStart" | "actions" | "artifacts">>(
+      "exams and documents",
+      RECORD_SCHEMA,
+      `Write the chart-at-start items, the exams, tests and record reviews the learner can request (with their fixed results), and the chart documents for this case. A document appears either at the start or when an action is done: use release.when "start" or "action" with ref set to that action's id. Do not use "fact" here.\n\n${shared}`,
+      10000,
+      (x) => asArray(x.actions).length >= 4 && asArray(x.artifacts).length >= 1,
+    ),
+  ]);
+  const t2 = Date.now();
+
+  const facts = [...asArray<Fact>(f1.facts), ...asArray<Fact>(f2.facts)];
+  const actions = asArray<ClinicalAction>(r.actions);
+  const artifacts = asArray<Artifact>(r.artifacts);
+  const link = await stage<Pick<CaseProfile, "objectives"> & { mismatches: CaseProfile["mismatches"] }>(
+    "objectives",
+    LINK_SCHEMA,
+    `Write the learning objectives and the patient-versus-chart mismatches for this case, linking them to the ids below. Use only ids that appear in these lists.\n\n${brief}\n\nAnswer key: ${JSON.stringify(who.answerKey)}\nTasks given to the learner: ${asArray<string>(who.scenario.tasks).join("; ")}\n\nFACTS (id | tier | chart wording)\n${facts.map((x) => `${x.id} | ${x.tier} | ${x.chart}`).join("\n")}\n\nACTIONS (id | name | result)\n${actions.map((x) => `${x.id} | ${x.name} | ${(x.result || "").slice(0, 160)}`).join("\n")}\n\nDOCUMENTS (id | title)\n${artifacts.map((x) => `${x.id} | ${x.title}`).join("\n")}\n\nCLINICAL STORY\n${o.clinicalStory}`,
+    3500,
+    (x) => asArray(x.objectives).length >= 2,
+  );
+  console.log(`[casegen] outline ${Math.round((t1 - t0) / 1000)}s, lists ${Math.round((t2 - t1) / 1000)}s, linking ${Math.round((Date.now() - t2) / 1000)}s`);
+
+  const profile: CaseProfile = {
+    version: 1,
+    title: o.title,
+    summary: who.summary,
+    specialty: o.specialty,
+    setting: o.setting,
+    encounterType: o.encounterType,
+    difficulty: o.difficulty,
+    patient: o.patient,
+    persona: who.persona,
+    scenario: { ...who.scenario, chiefComplaint: who.scenario.chiefComplaint || o.chiefComplaint },
+    chartAtStart: r.chartAtStart,
+    facts,
+    actions,
+    artifacts,
+    objectives: link.objectives,
+    mismatches: link.mismatches,
+    answerKey: who.answerKey,
+    professions: [p.id],
+    knowledge: [],
+    rubricId: "default",
+  };
+  if (input.portrait) profile.patient.portrait = input.portrait;
+  return normalizeCase(profile);
+}
+
+export async function generateCase(input: GenerateInput): Promise<CaseProfile> {
+  if (process.env.CASEGEN_SINGLE === "1") return generateSingle(input);
+  try {
+    return await generateStaged(input);
+  } catch (e) {
+    console.error("[casegen] staged generation failed, falling back to a single call:", (e as Error).message);
+    return generateSingle(input);
+  }
+}
+
 /** Models occasionally return an array as a JSON string; accept both. */
 function asArray<T>(v: unknown): T[] {
   if (Array.isArray(v)) return v as T[];

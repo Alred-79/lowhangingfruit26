@@ -3,8 +3,11 @@ import { all, get, parse } from "@/lib/db";
 import { isFaculty } from "@/lib/auth";
 import type { CaseProfile, EncounterConfig, Feedback, Importance, User } from "@/lib/types";
 import { normalizeSettings, type AssignmentSettings, type AssignmentType } from "./settings";
+import { decodeEntities } from "./save";
+import { studentCaseLabel, studentCaseLabelFromJson, studentJourneyLabel } from "./label";
 
 export * from "./settings";
+export * from "./label";
 
 export interface CourseRow {
   id: string;
@@ -43,6 +46,9 @@ export function newJoinCode(): string {
 
 export const toAssignment = (r: AssignmentRow): Assignment => {
   const { case_ids, settings, ...rest } = r;
+  // Rows saved before entities were decoded on save may still hold "&amp;amp;".
+  rest.title = decodeEntities(rest.title || "");
+  rest.instructions = decodeEntities(rest.instructions || "");
   return { ...rest, caseIds: parse<string[]>(case_ids, []), settings: normalizeSettings(r.type, parse<Record<string, unknown>>(settings, {})) };
 };
 
@@ -66,7 +72,8 @@ export const coursesOf = (user: User) =>
 /** What a student may know about a patient before the visit. Never includes findings. */
 export interface CaseCard {
   id: string;
-  title: string;
+  /** Neutral label from `studentCaseLabel`. The faculty title is deliberately not on this type. */
+  label: string;
   specialty: string;
   professions: string[];
   difficulty: number;
@@ -78,6 +85,7 @@ export interface CaseCard {
 }
 /** Faculty-side description used by the assignment builder and its guide. */
 export interface CaseBrief extends CaseCard {
+  title: string;
   summary: string;
   objectives: string[];
   timeLimitMin: number;
@@ -98,6 +106,7 @@ function brief(r: CaseRow): CaseBrief {
   return {
     id: r.id,
     title: r.title,
+    label: studentCaseLabel({ patient: p.patient, encounterType: p.encounterType, specialty: r.specialty || p.specialty }),
     specialty: r.specialty || p.specialty || "",
     professions: parse<string[]>(r.professions, []),
     difficulty: r.difficulty,
@@ -115,7 +124,7 @@ export const publishedCaseBriefs = (): CaseBrief[] =>
 
 export const toCard = (b: CaseBrief): CaseCard => ({
   id: b.id,
-  title: b.title,
+  label: b.label,
   specialty: b.specialty,
   professions: b.professions,
   difficulty: b.difficulty,
@@ -125,6 +134,22 @@ export const toCard = (b: CaseBrief): CaseCard => ({
   aiDraft: b.aiDraft,
 });
 export const publishedCaseCards = (): CaseCard[] => publishedCaseBriefs().map(toCard);
+
+/** Student-safe labels for a set of cases, keyed by case id. */
+export function studentCaseLabels(caseIds: string[]): Map<string, string> {
+  const ids = [...new Set(caseIds.filter(Boolean))];
+  if (!ids.length) return new Map();
+  return new Map(all<{ id: string; profile: string }>(`SELECT id, profile FROM cases WHERE id IN (${ids.map(() => "?").join(",")})`, ...ids).map((r) => [r.id, studentCaseLabelFromJson(r.profile)]));
+}
+
+/** What a student sees for a care journey: the patient and the roles involved, never the faculty title or summary. */
+export function studentJourneyCard(journeyId: string): { title: string; roles: string } | null {
+  const j = get<{ spec: string; profile: string | null }>("SELECT j.spec, c.profile FROM journeys j LEFT JOIN cases c ON c.id = j.case_id WHERE j.id = ?", journeyId);
+  if (!j) return null;
+  const stages = parse<{ stages?: { order: number; roleTitle: string }[] }>(j.spec, {}).stages || [];
+  const name = parse<Partial<CaseProfile>>(j.profile, {}).patient?.name;
+  return studentJourneyLabel(name, [...stages].sort((a, b) => a.order - b.order).map((s) => s.roleTitle));
+}
 
 export const publishedJourneys = () => all<{ id: string; title: string; case_id: string }>("SELECT id, title, case_id FROM journeys WHERE status = 'published' ORDER BY title");
 
@@ -314,15 +339,23 @@ export function gradebook(a: Assignment): Gradebook {
   };
 }
 
-/** Scored visits flagged for a human look that no faculty member has annotated yet. */
+/**
+ * SQL condition (encounters aliased `e`) for visits an instructor may be shown: those started from an
+ * assignment or a care journey, which the student sees labelled "Recorded". Self-started practice is
+ * labelled "Private practice: only you see this visit and its feedback" and must never be listed for faculty.
+ */
+export const RECORDED_VISIT = "(e.assignment_id IS NOT NULL OR e.journey_run_id IS NOT NULL)";
+
+/** Scored visits flagged for a human look that no faculty member has annotated yet. Recorded visits only. */
 export function reviewQueue(user: User, limit = 20) {
+  // Assignment visits go to the course's instructor; journey visits outside an assignment have no course, so any faculty member may review them.
   const mine = user.role === "admin" ? "" : "AND (co.faculty_id = ? OR e.assignment_id IS NULL)";
   const rows = all<{ id: string; student: string; title: string; score: number | null; feedback: string; ended_at: string | null; assignment: string | null; assignment_id: string | null; course_id: string | null }>(
     `SELECT e.id, u.name AS student, c.title, e.score, e.feedback, e.ended_at, a.title AS assignment, a.id AS assignment_id, a.course_id
      FROM encounters e JOIN users u ON u.id = e.user_id JOIN cases c ON c.id = e.case_id
      LEFT JOIN assignments a ON a.id = e.assignment_id LEFT JOIN courses co ON co.id = a.course_id
      WHERE e.status = 'scored' AND e.faculty_note IS NULL AND e.faculty_score IS NULL AND u.role = 'student'
-       AND e.feedback LIKE '%"needsReview":true%' ${mine}
+       AND ${RECORDED_VISIT} AND e.feedback LIKE '%"needsReview":true%' ${mine}
      ORDER BY e.ended_at DESC LIMIT 200`,
     ...(mine ? [user.id] : []),
   );
@@ -388,7 +421,8 @@ export function studentAssignments(userId: string): StudentAssignment[] {
       });
     const anyDone = a.journey_id ? encs.some((e) => e.status === "scored" || e.status === "submitted") : cases.length > 0 && cases.every((c) => c.scoredCount > 0);
     const status = anyDone ? "submitted" : encs.length ? "in_progress" : "not_started";
-    const journeyTitle = a.journey_id ? get<{ title: string }>("SELECT title FROM journeys WHERE id = ?", a.journey_id)?.title || "Care journey" : null;
+    const jc = a.journey_id ? studentJourneyCard(a.journey_id) : null;
+    const journeyTitle = a.journey_id ? (jc ? `${jc.title} (${jc.roles})` : "Care journey") : null;
     return { a, course: r.course, journeyTitle, cases, status, feedbackVisible };
   });
 }
@@ -422,5 +456,5 @@ export function assignmentOverviews(user: User, courseId?: string): AssignmentOv
 
 /** Visits in progress that an instructor can watch (live assist on), started in the last three hours. */
 export function liveVisitCount(): number {
-  return all<{ config: string }>("SELECT config FROM encounters WHERE status IN ('active','paused') AND started_at > datetime('now','-3 hours')").filter((r) => parse<Partial<EncounterConfig>>(r.config, {}).liveAssist).length;
+  return all<{ config: string }>(`SELECT e.config FROM encounters e WHERE e.status IN ('active','paused') AND e.started_at > datetime('now','-3 hours') AND ${RECORDED_VISIT}`).filter((r) => parse<Partial<EncounterConfig>>(r.config, {}).liveAssist).length;
 }

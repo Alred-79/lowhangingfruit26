@@ -167,13 +167,13 @@ export function FactsSection({ p, set }: SectionProps) {
           </Select>
         </div>
         <div className="-mx-4 overflow-x-auto">
-          <table id="facts-table" className="w-full min-w-[820px] table-fixed border-collapse text-left">
+          <table id="facts-table" className="w-full min-w-[760px] table-fixed border-collapse text-left">
             <colgroup>
-              <col className="w-[190px]" />
+              <col className="w-[180px]" />
               <col />
               <col />
               <col className="w-[128px]" />
-              <col className="w-[64px]" />
+              <col className="w-[56px]" />
             </colgroup>
             <thead>
               <tr className="border-y border-slate-200 bg-slate-50 text-xs text-slate-500">
