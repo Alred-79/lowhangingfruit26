@@ -2,10 +2,10 @@ export function BrandMark({ className = "h-8 w-8", inverse = false }: { classNam
   const cutout = inverse ? "#172554" : "white";
   return (
     <svg viewBox="0 0 32 32" className={className} fill="none" aria-hidden="true">
-      <path d="M22.7 6.7A11.8 11.8 0 1 0 27.7 11.2" stroke="currentColor" strokeWidth="3.9" strokeLinecap="round" />
-      <path d="M20.5 5.4c2.6-.9 5.4-.5 7.6.9 1.4.9 2.6 2.2 3.5 3.7.5.9-.2 2-1.2 2l-5.4-.3-2.6 4.5c-.6 1-2.1.8-2.4-.3l-.8-3.7-2.7-1.8 2.4-2.8 1.6-2.2Z" fill="currentColor" />
-      <circle cx="26.6" cy="7.8" r=".85" fill={cutout} />
-      <path d="m31.35 10.15-3.05 1 2.8 1.05Z" fill={cutout} />
+      <circle cx="15.5" cy="16" r="11.4" stroke="currentColor" strokeWidth="4" />
+      <path d="M18.5 4.6h12v6.1l-4-.45 3.25 3.35-2.5 1.9-4.2-5.3-1.65 5.2h-2.8Z" fill="currentColor" />
+      <path d="m30.6 10.15-4 .05 3.1 3.1Z" fill={cutout} />
+      <circle cx="26.4" cy="7.35" r=".85" fill={cutout} />
     </svg>
   );
 }
