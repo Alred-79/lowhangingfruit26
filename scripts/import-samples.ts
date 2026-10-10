@@ -28,10 +28,10 @@ async function one(r: Record<string, any>) {
     professionId: "dietetics",
     description: JSON.stringify(r),
     guidance:
-      "This is a faculty-provided sample profile. Keep every detail exactly as given (name, age, diagnoses, labs, medications, personality). Map information_disclosure tiers directly onto fact tiers, and learning_opportunities onto objectives. Frame it as a telehealth nutrition counselling visit.",
+      "This is a faculty-provided sample profile. Keep every detail exactly as given (name, age, diagnoses, labs, medications, personality). Map information_disclosure tiers directly onto fact tiers, and learning_opportunities onto objectives. Frame it as a telehealth nutrition counselling visit. Build the mismatch from details already in the profile (for example reported adherence versus a lab or refill record).",
     portrait: portraitFor(name),
   });
-  fs.writeFileSync(file, JSON.stringify({ origin: "sample", reviewed: true, profile: c }, null, 1));
+  fs.writeFileSync(file, JSON.stringify({ origin: "sample", reviewed: false, profile: c }, null, 1));
   console.log("ok", name, c.facts.length, "facts", c.actions.length, "actions", c.artifacts.length, "docs", Math.round((Date.now() - t) / 1000) + "s");
 }
 

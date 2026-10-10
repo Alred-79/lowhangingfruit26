@@ -1,5 +1,6 @@
 import { chatJSON, MODELS } from "./llm";
 import { profession } from "./professions";
+import { FACT_CATEGORIES } from "./types";
 import type { CaseProfile, Fact, ClinicalAction, Artifact } from "./types";
 
 const str = { type: "string" };
@@ -161,6 +162,11 @@ Quality bar:
 - 'topic' labels must never reveal the answer.
 - Scope everything to what the learner's profession actually does in a telehealth visit. Actions must be ones that role would perform or request remotely.
 - Build in one or two patient-versus-chart mismatches: the patient sincerely says one thing while a chart document shows another. Spotting and gently exploring this is part of the exercise.
+- Actions are things the learner does or reviews: an examination, a measurement, a named screening instrument, a record or result review. Never write an action that is only an interview question ("Ask about...", "Explore...").
+- Nothing that exists before the visit may give the game away: chartAtStart, artifacts released at start, and action results must not reveal a reluctant or hidden fact or state the diagnosis the learner is meant to reach. Those come out only through the patient in conversation (a record may contain the objective evidence for a mismatch).
+- Work out every score, grade and stage you state (BMI, percent weight change, CKD stage, CHA2DS2-VASc, AUDIT-C, CTCAE and the like) and check it against the numbers in the case.
+- Lab tables use the columns Test, Result, Units, Reference range, and every row has all four cells.
+- A mismatch's artifactId must be a document id (d...), never an action id.
 - Include pertinent negatives as facts so the patient can answer common screening questions.
 - Keep lab values physiologically plausible with correct units and reference ranges.
 - Do not include real people or identifiable data. This is synthetic educational content.`;
@@ -180,7 +186,7 @@ export async function generateCase(input: GenerateInput): Promise<CaseProfile> {
   type Raw = Omit<CaseProfile, "version" | "professions" | "knowledge" | "rubricId">;
   let raw!: Raw;
   // The model occasionally omits required sections; one retry is cheaper than a broken case.
-  for (let attempt = 0; attempt < 2; attempt++) {
+  for (let attempt = 0; attempt < 3; attempt++) {
     raw = await chatJSON<Raw>({
       model: MODELS.smart,
       system: SYSTEM,
@@ -204,8 +210,13 @@ export async function generateCase(input: GenerateInput): Promise<CaseProfile> {
       ],
     });
     const missing = (CASE_SCHEMA.required as readonly string[]).filter((k) => (raw as unknown as Record<string, unknown>)[k] === undefined || (raw as unknown as Record<string, unknown>)[k] === "");
+    // An empty or stringified-and-unparseable list is as bad as a missing one.
+    const r = raw as unknown as Record<string, unknown>;
+    for (const [k, min] of [["facts", 15], ["actions", 4], ["artifacts", 1], ["objectives", 2]] as const) {
+      if (asArray(r[k]).length < min && !missing.includes(k)) missing.push(k);
+    }
     if (!missing.length) break;
-    if (attempt === 1) throw new Error(`The draft came back incomplete (missing ${missing.join(", ")}). Please try again.`);
+    if (attempt === 2) throw new Error(`The draft came back incomplete (missing ${missing.join(", ")}). Please try again.`);
   }
   const profile: CaseProfile = {
     version: 1,
@@ -286,6 +297,23 @@ export function normalizeCase(c: CaseProfile): CaseProfile {
   c.rubricId = c.rubricId || "default";
   c.professions = c.professions?.length ? c.professions : ["medicine"];
   c.variants = c.variants || [];
-  c.mismatches = asArray(c.mismatches);
+  c.mismatches = asArray<NonNullable<CaseProfile["mismatches"]>[number]>(c.mismatches).map((m) => ({
+    ...m,
+    artifactId: m.artifactId && artifactIds.has(m.artifactId) ? m.artifactId : undefined,
+    factId: m.factId && factIds.has(m.factId) ? m.factId : undefined,
+  }));
+  const CATEGORIES = new Set(Object.keys(FACT_CATEGORIES));
+  for (const f of c.facts) if (!CATEGORIES.has(f.category)) f.category = "other";
+  // Ragged table rows break the chart layout: pad or trim every row to the header width.
+  for (const d of c.artifacts) {
+    if (!d.table) continue;
+    d.table.columns = asArray<string>(d.table.columns);
+    d.table.rows = asArray<{ cells: string[]; flag?: "H" | "L" | "A" | "" }>(d.table.rows).map((r) => {
+      const cells = asArray<string>(r.cells).slice(0, d.table!.columns.length);
+      while (cells.length < d.table!.columns.length) cells.push("");
+      return { ...r, cells };
+    });
+  }
+  if (!c.persona?.personality || !c.persona?.background) throw new Error("Generation returned no persona; please try again.");
   return c;
 }

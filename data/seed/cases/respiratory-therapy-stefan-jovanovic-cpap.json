@@ -823,7 +823,8 @@
    "ethnicity": "Serbian-American",
    "occupation": "Forklift operator at a warehouse distribution center",
    "language": "English (native, occasional Serbian phrases with family)",
-   "appearance": "A heavyset man with a graying beard and short dark hair, wearing a plain gray t-shirt, seated at a kitchen table with a coffee mug nearby; the CPAP machine and mask are visible on the table beside him. His affect is good-natured but slightly sheepish, and he glances away briefly when the machine comes up."
+   "appearance": "A heavyset man with a graying beard and short dark hair, wearing a plain gray t-shirt, seated at a kitchen table with a coffee mug nearby; the CPAP machine and mask are visible on the table beside him. His affect is good-natured but slightly sheepish, and he glances away briefly when the machine comes up.",
+   "portrait": "/portraits/respiratory-therapy-stefan-jovanovic-cpap.jpg"
   },
   "persona": {
    "personality": "Good-natured, hardworking, a bit embarrassed about struggling with the CPAP machine, values being seen as capable and reliable",

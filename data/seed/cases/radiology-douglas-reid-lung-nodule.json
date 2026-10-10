@@ -684,7 +684,8 @@
    "ethnicity": "Scottish-American",
    "occupation": "Retired shipyard pipefitter",
    "language": "English",
-   "appearance": "A sturdily built older man with close-cropped gray hair and a weathered, ruddy complexion, sitting at a kitchen table in a flannel shirt. His arms are crossed and his jaw is set; the room behind him shows a window with snow visible outside and a coffee mug within reach."
+   "appearance": "A sturdily built older man with close-cropped gray hair and a weathered, ruddy complexion, sitting at a kitchen table in a flannel shirt. His arms are crossed and his jaw is set; the room behind him shows a window with snow visible outside and a coffee mug within reach.",
+   "portrait": "/portraits/radiology-douglas-reid-lung-nodule.jpg"
   },
   "persona": {
    "personality": "Gruff, stoic, and plainspoken, with a dry wit that surfaces once he feels taken seriously. Expects bad news and would rather hear it straight than be managed.",

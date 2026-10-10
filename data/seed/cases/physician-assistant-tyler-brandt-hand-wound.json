@@ -723,7 +723,8 @@
    "ethnicity": "White",
    "occupation": "Ranch hand",
    "language": "English",
-   "appearance": "A lean, sun-weathered young man in a faded flannel shirt, sitting at what looks like a kitchen table with a barn visible through a window behind him. He holds his right hand carefully in his lap, occasionally glancing down at his finger, with a stoic, slightly impatient expression."
+   "appearance": "A lean, sun-weathered young man in a faded flannel shirt, sitting at what looks like a kitchen table with a barn visible through a window behind him. He holds his right hand carefully in his lap, occasionally glancing down at his finger, with a stoic, slightly impatient expression.",
+   "portrait": "/portraits/physician-assistant-tyler-brandt-hand-wound.jpg"
   },
   "persona": {
    "personality": "Tough, no-nonsense, used to pushing through physical discomfort; proud of his work ethic",

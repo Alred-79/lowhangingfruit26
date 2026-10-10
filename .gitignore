@@ -48,3 +48,5 @@ next-env.d.ts
 /_challenge/*.zip
 
 /.secrets/
+
+/data/seed/cases/.review/

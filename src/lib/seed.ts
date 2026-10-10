@@ -13,7 +13,21 @@ export function seed() {
   if (fs.existsSync(dir)) {
     for (const file of fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort()) {
       const id = "seed_" + file.replace(/\.json$/, "");
-      if (get("SELECT 1 FROM cases WHERE id = ?", id)) continue;
+      const existing = get<{ profile: string; created_at: string; updated_at: string; owner_id: string | null }>("SELECT profile, created_at, updated_at, owner_id FROM cases WHERE id = ?", id);
+      if (existing) {
+        // Pick up a revised seed file, but never overwrite a case someone has edited in the Studio.
+        if (existing.owner_id || existing.created_at !== existing.updated_at) continue;
+        try {
+          const { reviewed, profile } = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8")) as { reviewed: boolean; profile: CaseProfile };
+          const next = JSON.stringify(profile);
+          if (profile?.title && profile.facts?.length && next !== existing.profile) {
+            run("UPDATE cases SET profile = ?, title = ?, specialty = ?, professions = ?, difficulty = ?, reviewed = ? WHERE id = ?", next, profile.title, profile.specialty || "", JSON.stringify(profile.professions || []), profile.difficulty || 3, reviewed ? 1 : 0, id);
+          }
+        } catch (e) {
+          console.error(`[seed] could not refresh ${file}: ${(e as Error).message}`);
+        }
+        continue;
+      }
       // A bad or half-written seed file must never stop the server from starting.
       try {
         const { origin, reviewed, profile } = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8")) as { origin: string; reviewed: boolean; profile: CaseProfile };

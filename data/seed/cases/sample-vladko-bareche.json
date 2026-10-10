@@ -7,147 +7,129 @@
    {
     "id": "a1",
     "kind": "vitals",
-    "name": "Review current vital signs",
-    "result": "BP 135/88 mmHg, HR 110 bpm, Temp 98.6\u00b0F, RR 16/min (from recent clinic visit)",
+    "name": "Review home BP/HR log and current vitals",
+    "result": "BP 135/88 mmHg, HR 110 bpm, Temp 98.6°F, RR 16/min. No home BP log available; patient does not own a cuff.",
     "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a2",
-    "kind": "assessment",
-    "name": "Obtain height, weight, and calculate BMI",
-    "result": "Height 5'9\" (175 cm), Weight 148 lbs (67 kg), BMI 22.0 kg/m\u00b2 \u2014 down from 178 lbs 6 months ago (-30 lbs, ~17% body weight loss)",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a3",
-    "kind": "assessment",
-    "name": "Measure/confirm waist circumference (patient self-measures on camera)",
-    "result": "Waist circumference 32 inches",
-    "importance": "minor",
-    "artifactIds": []
-   },
-   {
-    "id": "a4",
-    "kind": "lab",
-    "name": "Review HbA1c",
-    "result": "HbA1c 9.1% (goal <7%) \u2014 High",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a5",
-    "kind": "lab",
-    "name": "Review fasting glucose",
-    "result": "Fasting glucose 230 mg/dL \u2014 High",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a6",
-    "kind": "lab",
-    "name": "Review lipid panel",
-    "result": "Total cholesterol within normal limits; HDL elevated at 68 mg/dL; LDL 90 mg/dL; Triglycerides 140 mg/dL",
-    "importance": "minor",
-    "artifactIds": []
-   },
-   {
-    "id": "a7",
-    "kind": "lab",
-    "name": "Review liver function tests",
-    "result": "ALT 112 U/L (High, ref 7-56), AST 78 U/L (High, ref 10-40), GGT 95 U/L (High) \u2014 pattern suggestive of alcohol-related hepatocellular stress",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a8",
-    "kind": "lab",
-    "name": "Review renal function (BUN/Creatinine/eGFR)",
-    "result": "BUN 14 mg/dL, Creatinine 0.9 mg/dL, eGFR >90 mL/min/1.73m\u00b2 \u2014 normal",
-    "importance": "minor",
-    "artifactIds": []
-   },
-   {
-    "id": "a9",
-    "kind": "record",
-    "name": "Review current medication list",
-    "result": "Metformin 500mg PO BID with meals (poor adherence, GI side effects); Amlodipine 5mg PO daily (fair adherence, morning dizziness); multivitamin and acupressure wristbands used irregularly",
-    "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a10",
-    "kind": "record",
-    "name": "Review allergy list",
-    "result": "Penicillin \u2014 rash",
-    "importance": "minor",
-    "artifactIds": []
-   },
-   {
-    "id": "a11",
-    "kind": "assessment",
-    "name": "Conduct 24-hour dietary recall",
-    "result": "Patient reports: late breakfast (chai + white bread or paratha), skipped/rushed lunch, large late dinner (rice, dal, vegetable curry, occasional fried snacks or sweets), frequent soda or sweetened lassi; largely vegetarian, no red meat, heavy use of refined carbohydrates and added sugar; irregular timing driven by work schedule",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a12",
-    "kind": "assessment",
-    "name": "Assess readiness to change (stage-of-change screening)",
-    "result": "Patient endorses ambivalence; acknowledges diabetes is a problem but minimizes urgency ('I'm not like my uncle'); motivated primarily by fear of losing independence and career impact rather than health itself",
-    "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a13",
-    "kind": "assessment",
-    "name": "Screen for food access and budget barriers",
-    "result": "Reports limited grocery budget on marketplace-plan income, unfamiliar with US food labeling, relies on convenience/takeout due to long work hours; has some access to Indian grocery stores in neighborhood",
-    "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a14",
-    "kind": "assessment",
-    "name": "Screen for alcohol use (AUDIT-C style questions)",
-    "result": "Reports drinking 2-8 drinks per occasion, 2-6 nights per week, mostly beer and whiskey; drinking has increased since job stress began; consistent with chronic heavy alcohol use",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a15",
-    "kind": "assessment",
-    "name": "Screen for other substance use",
-    "result": "Reports smoking about half a pack of cigarettes/day; occasional cocaine use at industry social events, roughly 1-2 times/month",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a16",
-    "kind": "assessment",
-    "name": "Screen for psychosocial support and stress",
-    "result": "Lives alone in Brooklyn, no family in US, limited local social network; reports high work stress and some isolation; denies current suicidal ideation when asked directly",
-    "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a17",
-    "kind": "record",
-    "name": "Review problem list / diagnoses on chart",
-    "result": "Type 2 Diabetes Mellitus, poorly controlled; Hypertension; Unspecified STI history; Chronic Alcohol Use Disorder (per chart)",
-    "importance": "important",
+    "abnormal": true,
     "artifactIds": [
      "d6"
     ]
    },
    {
-    "id": "a18",
+    "id": "a2",
     "kind": "assessment",
-    "name": "Visual skin inspection via camera (lower extremities, hands)",
-    "result": "Patient reports dry, flaky skin on lower legs; nail changes and small sores noted on fingers consistent with substance use pattern per chart documentation",
+    "name": "Anthropometric measurement (height/weight self-report via camera, scale at home)",
+    "result": "Height 5'9\" (175 cm), Weight 148 lb (67 kg), BMI 22.0 kg/m^2. Weight down 30 lb over past 6 months (from ~178 lb). Waist circumference 32 in.",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a3",
+    "kind": "lab",
+    "name": "Review HbA1c",
+    "result": "HbA1c 9.1% (goal <7%) - High",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a4",
+    "kind": "lab",
+    "name": "Review fasting glucose",
+    "result": "Fasting glucose 230 mg/dL (ref 70-99) - High",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a5",
+    "kind": "lab",
+    "name": "Review lipid panel",
+    "result": "Total cholesterol 210 mg/dL (H), LDL 130 mg/dL (H), HDL 68 mg/dL, Triglycerides 110 mg/dL - HDL high, otherwise mixed",
+    "importance": "minor",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a6",
+    "kind": "lab",
+    "name": "Review liver function tests",
+    "result": "ALT 112 U/L (ref 7-56) - High; AST 98 U/L (ref 10-40) - High; GGT elevated at 140 U/L (ref 8-61) - High",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a7",
+    "kind": "record",
+    "name": "Review medication list and refill/adherence history",
+    "result": "Metformin 500mg BID with meals - pharmacy refill history shows last fill 68 days ago for a 30-day supply (significant gaps). Amlodipine 5mg daily - refill history more consistent but one gap of 10 days noted 2 months ago.",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a8",
+    "kind": "record",
+    "name": "Review problem list and diagnosis history",
+    "result": "Type 2 Diabetes Mellitus (dx ~3 yrs ago), Hypertension (dx ~4 yrs ago), unspecified STI history noted, chronic alcohol use flagged by PCP at last visit 8 months ago.",
     "importance": "important",
+    "abnormal": false,
+    "artifactIds": []
+   },
+   {
+    "id": "a9",
+    "kind": "assessment",
+    "name": "24-hour dietary recall / usual intake assessment",
+    "result": "Patient reports: skips breakfast most days; large late dinner (9-10pm) of rice, dal, vegetable curry, naan or roti; frequent chai with 2-3 tsp sugar; sweets (gulab jamun, jalebi) 3-4x/week; soda or mango lassi most afternoons; vegetarian, no meat/fish/eggs; snacks on namkeen (fried lentil/chickpea snacks) when stressed at work.",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a10",
+    "kind": "assessment",
+    "name": "Readiness-to-change / stage of change assessment",
+    "result": "Patient rates importance of changing diet as 4/10 and confidence as 3/10; describes himself as 'not ready to give up what little pleasure I have.' Consistent with ambivalence/contemplation stage.",
+    "importance": "important",
+    "abnormal": false,
+    "artifactIds": []
+   },
+   {
+    "id": "a11",
+    "kind": "assessment",
+    "name": "Alcohol use screening (AUDIT-C)",
+    "result": "Frequency 2-6 nights/week; typically 2-8 drinks/occasion; reports no inability to stop once started but has had mornings he couldn't recall details. AUDIT-C score estimated 8/12 - high risk, consistent with chronic heavy use.",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a12",
+    "kind": "record",
+    "name": "Review growth/weight trend flowsheet",
+    "result": "Weight trend over past 6 months shows steady decline from 178 lb to 148 lb despite patient reporting 'eating the same as always.'",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a13",
+    "kind": "assessment",
+    "name": "Food security / grocery access screen",
+    "result": "Patient reports food budget is tight on marketplace-plan income after rent; relies on convenience foods and takeout 3-4x/week due to long work hours; limited access to familiar fresh produce in his neighborhood.",
+    "importance": "important",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a14",
+    "kind": "assessment",
+    "name": "Physical activity assessment",
+    "result": "Patient reports minimal structured activity; mostly sedentary at editing desk 10-12 hrs/day; occasional walking to set.",
+    "importance": "minor",
+    "abnormal": false,
     "artifactIds": []
    }
   ],
@@ -156,8 +138,8 @@
     "id": "d1",
     "type": "lab_report",
     "title": "Comprehensive Metabolic & Diabetes Panel",
-    "date": "3 days ago",
-    "author": "Brooklyn Community Health Lab",
+    "author": "Quest Diagnostics",
+    "date": "3 days prior to visit",
     "release": {
      "when": "start"
     },
@@ -165,103 +147,97 @@
      "columns": [
       "Test",
       "Result",
-      "Reference Range",
-      "Flag"
+      "Units",
+      "Reference range"
      ],
      "rows": [
       {
        "cells": [
         "HbA1c",
-        "9.1 %",
-        "<5.7% normal; <7% goal for DM"
+        "9.1",
+        "%",
+        "<5.7 (normal), <7 (diabetic goal)"
        ],
        "flag": "H"
       },
       {
        "cells": [
         "Fasting Glucose",
-        "230 mg/dL",
-        "70-99 mg/dL"
+        "230",
+        "mg/dL",
+        "70-99"
        ],
        "flag": "H"
       },
       {
        "cells": [
         "Total Cholesterol",
-        "172 mg/dL",
-        "<200 mg/dL"
-       ],
-       "flag": ""
-      },
-      {
-       "cells": [
-        "HDL",
-        "68 mg/dL",
-        "40-60 mg/dL"
+        "210",
+        "mg/dL",
+        "<200"
        ],
        "flag": "H"
       },
       {
        "cells": [
         "LDL",
-        "90 mg/dL",
-        "<100 mg/dL"
+        "130",
+        "mg/dL",
+        "<100"
        ],
-       "flag": ""
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "HDL",
+        "68",
+        "mg/dL",
+        "40-60 (M)"
+       ],
+       "flag": "H"
       },
       {
        "cells": [
         "Triglycerides",
-        "140 mg/dL",
-        "<150 mg/dL"
+        "110",
+        "mg/dL",
+        "<150"
        ],
        "flag": ""
       },
       {
        "cells": [
         "ALT",
-        "112 U/L",
-        "7-56 U/L"
+        "112",
+        "U/L",
+        "7-56"
        ],
        "flag": "H"
       },
       {
        "cells": [
         "AST",
-        "78 U/L",
-        "10-40 U/L"
+        "98",
+        "U/L",
+        "10-40"
        ],
        "flag": "H"
       },
       {
        "cells": [
         "GGT",
-        "95 U/L",
-        "8-61 U/L"
+        "140",
+        "U/L",
+        "8-61"
        ],
        "flag": "H"
       },
       {
        "cells": [
-        "BUN",
-        "14 mg/dL",
-        "7-20 mg/dL"
-       ],
-       "flag": ""
-      },
-      {
-       "cells": [
         "Creatinine",
-        "0.9 mg/dL",
-        "0.6-1.2 mg/dL"
-       ],
-       "flag": ""
-      },
-      {
-       "cells": [
-        "eGFR",
-        ">90 mL/min/1.73m\u00b2",
-        ">60 mL/min/1.73m\u00b2"
+        "0.9",
+        "mg/dL",
+        "0.7-1.3"
        ],
        "flag": ""
       }
@@ -271,9 +247,9 @@
    {
     "id": "d2",
     "type": "medication_list",
-    "title": "Current Medications",
-    "date": "Today",
-    "author": "Primary Care Clinic",
+    "title": "Active Medication List with Refill History",
+    "author": "Pharmacy/EHR",
+    "date": "Current",
     "release": {
      "when": "start"
     },
@@ -282,8 +258,9 @@
       "Medication",
       "Dose",
       "Frequency",
-      "Purpose",
-      "Adherence Note"
+      "Last Fill Date",
+      "Days Supply",
+      "Refill Gap Notes"
      ],
      "rows": [
       {
@@ -291,27 +268,33 @@
         "Metformin",
         "500 mg",
         "Twice daily with meals",
-        "Type 2 Diabetes",
-        "Poor - sporadic use, reports nausea/cramping"
-       ]
+        "68 days ago",
+        "30 days",
+        "Significant gap - suggests doses frequently missed over ~3 month period"
+       ],
+       "flag": "H"
       },
       {
        "cells": [
         "Amlodipine",
         "5 mg",
         "Once daily",
-        "Hypertension",
-        "Fair - misses some AM doses, reports morning dizziness"
-       ]
+        "12 days ago",
+        "30 days",
+        "One prior 10-day gap noted ~2 months ago"
+       ],
+       "flag": ""
       },
       {
        "cells": [
-        "Multivitamin (OTC)",
+        "Multivitamin",
         "1 tablet",
-        "Irregular",
-        "General",
-        "Taken inconsistently"
-       ]
+        "OTC, irregular use",
+        "N/A",
+        "N/A",
+        "Patient-reported irregular use"
+       ],
+       "flag": ""
       }
      ]
     }
@@ -319,16 +302,16 @@
    {
     "id": "d3",
     "type": "flowsheet",
-    "title": "Weight Trend - Past 6 Months",
-    "date": "Today",
-    "author": "Clinic records",
+    "title": "Weight & Vitals Flowsheet",
+    "author": "Clinic nursing staff",
+    "date": "Last 6 months",
     "release": {
      "when": "start"
     },
     "chart": {
      "kind": "line",
      "xLabel": "Month",
-     "yLabel": "Weight (lbs)",
+     "yLabel": "Weight (lb)",
      "series": [
       {
        "name": "Weight",
@@ -351,7 +334,7 @@
         },
         {
          "x": "2 mo ago",
-         "y": 155
+         "y": 154
         },
         {
          "x": "1 mo ago",
@@ -368,100 +351,51 @@
    },
    {
     "id": "d4",
-    "type": "flowsheet",
-    "title": "Vital Signs - Today's Visit",
-    "date": "Today",
-    "author": "Telehealth intake",
+    "type": "note",
+    "title": "PCP Visit Note - 8 Months Ago",
+    "author": "Dr. R. Okafor, Internal Medicine",
+    "date": "8 months ago",
     "release": {
      "when": "start"
     },
-    "table": {
-     "columns": [
-      "Parameter",
-      "Value"
-     ],
-     "rows": [
-      {
-       "cells": [
-        "Blood Pressure",
-        "135/88 mmHg"
-       ]
-      },
-      {
-       "cells": [
-        "Heart Rate",
-        "110 bpm"
-       ]
-      },
-      {
-       "cells": [
-        "Temperature",
-        "98.6 \u00b0F"
-       ]
-      },
-      {
-       "cells": [
-        "Respiratory Rate",
-        "16/min"
-       ]
-      },
-      {
-       "cells": [
-        "Weight",
-        "148 lbs (67 kg)"
-       ]
-      },
-      {
-       "cells": [
-        "Height",
-        "5'9\" (175 cm)"
-       ]
-      },
-      {
-       "cells": [
-        "BMI",
-        "22.0 kg/m\u00b2"
-       ]
-      }
-     ]
-    }
+    "body": "31 yo M, recent immigrant from Mumbai, presents for routine follow-up of T2DM and HTN. Patient endorses occasional alcohol use 'at social events.' Advised to limit alcohol intake and continue current medication regimen. Discussed importance of regular follow-up given limited local support network reported by patient. Plan: continue metformin and amlodipine, recheck labs in 6 months, counsel on diet. Patient was lost to follow-up until recent urgent visit prompted by weight loss and fatigue."
    },
    {
     "id": "d5",
-    "type": "note",
-    "title": "Primary Care Visit Note (3 weeks ago)",
-    "date": "3 weeks ago",
-    "author": "Dr. A. Nguyen, Internal Medicine",
+    "type": "form",
+    "title": "Nutrition Intake Questionnaire (patient-completed prior to visit)",
+    "author": "Self-reported, patient portal",
+    "date": "2 days prior to visit",
     "release": {
      "when": "start"
     },
-    "body": "31 yo M, recent immigrant from Mumbai, presents with 6-month history of 30 lb unintentional weight loss, polyuria, polydipsia, fatigue. Diagnosed T2DM ~3 years ago in India, HTN ~4 years ago; reports inconsistent follow-up since immigrating 8 months ago due to insurance transition. Labs significant for HbA1c 9.1%, fasting glucose 230, elevated LFTs. Discussed findings; patient reluctant to elaborate on alcohol use when asked directly in person, deflected to work stress. STI screening performed given reported inconsistent barrier protection; results pending at time of note. Referred to RD for nutrition counseling and diabetes education. Will follow up medication adherence and consider further substance use evaluation."
+    "body": "Diet type: Vegetarian (no meat, fish, eggs). Typical meals: rice, dal, vegetable curry, roti/naan, chai. Eats out or orders in 3-4x/week. Reports 'I eat healthy, it's just Indian food is naturally good for you.' Denies any food allergies. Does not use nutrition labels regularly. No current contact with a dietitian prior to this visit."
    },
    {
     "id": "d6",
-    "type": "note",
-    "title": "STI Screening Result",
-    "date": "10 days ago",
-    "author": "Brooklyn Community Health Lab",
+    "type": "ecg",
+    "title": "12-Lead ECG",
+    "author": "Telehealth cardiac monitoring device",
+    "date": "Today",
     "release": {
      "when": "action",
-     "ref": "a17"
+     "ref": "a1"
     },
-    "body": "Patient tested positive for an unspecified sexually transmitted infection on screening performed at last PCP visit; treatment/counseling initiated by PCP. Flagged on problem list for ongoing monitoring and risk-reduction counseling. Not primary focus of nutrition visit but relevant to overall risk profile and interprofessional coordination."
+    "body": "Sinus tachycardia at 110 bpm. No ST-T wave abnormalities. QTc within normal limits (420ms). Correlate clinically; may reflect stimulant use, dehydration, anxiety, or alcohol withdrawal physiology."
    }
   ],
   "chartAtStart": [
    {
     "label": "Reason for visit",
-    "value": "Nutrition assessment and counseling for poorly controlled Type 2 Diabetes, referred by PCP"
+    "value": "Outpatient nutrition assessment and counseling - referral for poorly controlled Type 2 Diabetes and recent unintentional weight loss"
    },
    {
     "label": "Problem list",
-    "value": "Type 2 Diabetes Mellitus (poorly controlled); Hypertension; Chronic Alcohol Use Disorder; Unspecified STI (treated)"
+    "value": "Type 2 Diabetes Mellitus (dx 3 yrs ago); Hypertension (dx 4 yrs ago); Unspecified STI history; Chronic alcohol use (flagged by PCP)"
    },
    {
     "label": "Medications",
-    "value": "Metformin 500mg PO BID; Amlodipine 5mg PO daily; Multivitamin OTC (irregular)"
+    "value": "Metformin 500mg PO BID with meals; Amlodipine 5mg PO daily; Multivitamin OTC (irregular)"
    },
    {
     "label": "Allergies",
@@ -469,512 +403,18 @@
    },
    {
     "label": "Last vitals",
-    "value": "BP 135/88, HR 110, Temp 98.6F, RR 16, Weight 148 lb, BMI 22.0"
+    "value": "BP 135/88 mmHg, HR 110 bpm, Temp 98.6°F, RR 16/min (today)"
    },
    {
     "label": "Care team",
-    "value": "PCP: Dr. A. Nguyen (Internal Medicine); Referral to Registered Dietitian for diabetes nutrition education"
+    "value": "PCP: Dr. R. Okafor, Internal Medicine (no recent visit in 8 months prior to this referral); Dietitian: newly assigned for this visit"
    },
    {
-    "label": "Code status",
-    "value": "Full code"
+    "label": "Immunizations",
+    "value": "Up to date per self-report; no record of recent immunizations in US system"
    }
   ],
   "difficulty": 4,
-  "encounterType": "nutrition assessment / counseling (initial telehealth visit)",
-  "facts": [
-   {
-    "id": "f1",
-    "category": "chief_complaint",
-    "topic": "reason for referral",
-    "chart": "Patient referred by PCP for nutrition counseling re: poorly controlled T2DM",
-    "says": "My doctor said I need to see a dietitian because my sugar numbers are bad.",
-    "tier": "initial",
-    "importance": "critical"
-   },
-   {
-    "id": "f2",
-    "category": "hpi",
-    "topic": "fatigue and energy",
-    "chart": "Reports persistent fatigue and low energy over several months",
-    "says": "I'm just tired all the time, even when I sleep okay.",
-    "tier": "initial",
-    "importance": "important"
-   },
-   {
-    "id": "f3",
-    "category": "hpi",
-    "topic": "blood sugar readings",
-    "chart": "Aware his blood sugar has been running high per recent labs",
-    "says": "They told me my blood sugar is really high right now, like 230.",
-    "tier": "initial",
-    "importance": "critical"
-   },
-   {
-    "id": "f4",
-    "category": "hpi",
-    "topic": "weight change",
-    "chart": "Reports unintentional weight loss of ~30 lbs over 6 months",
-    "says": "I've lost like 30 pounds without trying. My clothes don't fit anymore.",
-    "tier": "initial",
-    "importance": "critical"
-   },
-   {
-    "id": "f5",
-    "category": "hpi",
-    "topic": "urination frequency",
-    "chart": "Reports urinary frequency 10-15 times/day",
-    "says": "I'm running to the bathroom like 10, 15 times a day, it's exhausting.",
-    "tier": "initial",
-    "importance": "important"
-   },
-   {
-    "id": "f6",
-    "category": "hpi",
-    "topic": "thirst and vision",
-    "chart": "Reports excessive thirst and occasional blurry vision",
-    "says": "I'm drinking water constantly and sometimes my vision gets blurry, especially at night.",
-    "tier": "initial",
-    "importance": "important"
-   },
-   {
-    "id": "f7",
-    "category": "hpi",
-    "topic": "dietary pattern description",
-    "chart": "Describes himself as mostly vegetarian, eating 'Indian food'",
-    "says": "I'm vegetarian, mostly. I eat a lot of Indian food, rice, dal, that kind of thing.",
-    "tier": "initial",
-    "importance": "critical"
-   },
-   {
-    "id": "f8",
-    "category": "social",
-    "topic": "alcohol at events",
-    "chart": "Vaguely references drinking at social/industry events",
-    "says": "I mean, I drink sometimes, like at work parties and stuff. Everyone does.",
-    "tier": "initial",
-    "importance": "important"
-   },
-   {
-    "id": "f9",
-    "category": "substance",
-    "topic": "smoking habits",
-    "chart": "Reports smoking approximately half pack/day",
-    "says": "Yeah I smoke, maybe half a pack a day, helps with the stress on set.",
-    "tier": "initial",
-    "importance": "important"
-   },
-   {
-    "id": "f10",
-    "category": "substance",
-    "topic": "other substance use",
-    "chart": "Reports occasional cocaine use at industry events",
-    "says": "Sometimes at parties, you know, there's... stuff going around. I'll do a little. It's not a big deal.",
-    "tier": "initial",
-    "importance": "important"
-   },
-   {
-    "id": "f11",
-    "category": "sexual",
-    "topic": "protection practices",
-    "chart": "Reports inconsistent condom use",
-    "says": "I don't always... I mean, not every time, but it's usually fine.",
-    "tier": "initial",
-    "importance": "important"
-   },
-   {
-    "id": "f12",
-    "category": "social",
-    "topic": "local support",
-    "chart": "No immediate family or close support network in the US",
-    "says": "I don't really have family here. It's just me in Brooklyn.",
-    "tier": "initial",
-    "importance": "important"
-   },
-   {
-    "id": "f13",
-    "category": "medications",
-    "topic": "metformin side effects",
-    "chart": "Reports nausea and abdominal cramping with Metformin, contributing to poor adherence",
-    "says": "That metformin pill makes my stomach hurt, so honestly I skip it a lot.",
-    "tier": "discoverable",
-    "importance": "critical"
-   },
-   {
-    "id": "f14",
-    "category": "medications",
-    "topic": "amlodipine adherence",
-    "chart": "Reports fair adherence to Amlodipine, occasional morning dizziness",
-    "says": "The blood pressure pill, I take that one more, but sometimes it makes me dizzy in the morning.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f15",
-    "category": "adherence",
-    "topic": "missed doses pattern",
-    "chart": "Medication adherence disrupted by chaotic, unpredictable work schedule",
-    "says": "My schedule is crazy, 14-hour days sometimes. I forget pills, forget to eat even.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f16",
-    "category": "nutrition",
-    "topic": "meal timing",
-    "chart": "Irregular meal times; often skips lunch, eats large dinner late at night",
-    "says": "I don't really have lunch most days. By the time I eat it's like 9, 10 pm, and I'm starving so I eat a lot.",
-    "tier": "discoverable",
-    "importance": "critical"
-   },
-   {
-    "id": "f17",
-    "category": "nutrition",
-    "topic": "sweets and sugary drinks",
-    "chart": "Reports frequent intake of sweets, sweetened lassi, and soda",
-    "says": "I do like sweets, chai with sugar, sometimes a soda when I'm dragging at work.",
-    "tier": "discoverable",
-    "importance": "critical"
-   },
-   {
-    "id": "f18",
-    "category": "nutrition",
-    "topic": "carbohydrate portions",
-    "chart": "Reports large portions of white rice and bread/paratha, minimal portion awareness",
-    "says": "Rice is like, the whole plate basically. And I love paratha, my mom used to make it fresh.",
-    "tier": "discoverable",
-    "importance": "critical"
-   },
-   {
-    "id": "f19",
-    "category": "nutrition",
-    "topic": "protein sources",
-    "chart": "Vegetarian diet relies mainly on lentils, dairy, paneer; avoids red meat entirely, occasional eggs",
-    "says": "I eat dal, paneer, sometimes eggs, but no meat, never had it really.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f20",
-    "category": "substance",
-    "topic": "alcohol quantity detail",
-    "chart": "Reports drinking 2-8 standard drinks per occasion, 2-6 nights per week, primarily beer and whiskey",
-    "says": "Okay, honestly... some nights it's just a couple beers, but other nights, especially after a hard shoot, it can be a lot more. Maybe 6, 7 drinks. Whiskey mostly then.",
-    "tier": "discoverable",
-    "importance": "critical"
-   },
-   {
-    "id": "f21",
-    "category": "substance",
-    "topic": "alcohol escalation",
-    "chart": "Reports alcohol use has increased since job stress and immigration began",
-    "says": "It's gotten worse since I moved here honestly. The job is intense and I don't know, drinking helps me unwind.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f22",
-    "category": "nutrition",
-    "topic": "grocery budget",
-    "chart": "Reports limited grocery budget, relies on convenience foods and takeout",
-    "says": "Groceries here are so expensive compared to home. I end up just getting takeout a lot, it's actually sometimes cheaper.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f23",
-    "category": "nutrition",
-    "topic": "food label literacy",
-    "chart": "Reports unfamiliarity with US nutrition labels and packaged food information",
-    "says": "I don't really understand these labels here, grams, percent, it's confusing. In India we didn't really check that stuff.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f24",
-    "category": "psychosocial",
-    "topic": "work stress impact",
-    "chart": "Describes high-stress, unpredictable work schedule as TV producer impacting all self-care",
-    "says": "This job is my life right now. 14-hour days, no set schedule. Everything else gets pushed aside.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f25",
-    "category": "psychosocial",
-    "topic": "beliefs about diabetes",
-    "chart": "Believes diabetes mainly affects older or 'unhealthy' people, minimizes own risk",
-    "says": "I always thought diabetes was like, an old person thing. My uncle has it and he's like 70 and overweight. I'm 31.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f26",
-    "category": "goals",
-    "topic": "future plans",
-    "chart": "Expresses goal to travel to India in the future and maintain demanding career",
-    "says": "I want to go back and visit India when things calm down. And I can't lose this job, it's everything I worked for.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f27",
-    "category": "psychosocial",
-    "topic": "fear of dependency",
-    "chart": "Expresses fear of losing independence or becoming a burden on family",
-    "says": "I don't want to end up needing people to take care of me. That's my biggest fear honestly.",
-    "tier": "reluctant",
-    "importance": "important"
-   },
-   {
-    "id": "f28",
-    "category": "psychosocial",
-    "topic": "readiness to change",
-    "chart": "Ambivalent about change; motivated more by fear of consequences than health itself",
-    "says": "I know I should probably change stuff but... I don't know, it feels like a lot right now.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f29",
-    "category": "social",
-    "topic": "isolation detail",
-    "chart": "Reluctantly acknowledges feeling isolated and lonely since immigrating",
-    "says": "It's lonely sometimes. I don't really have anyone to call when things get hard here.",
-    "tier": "reluctant",
-    "importance": "important"
-   },
-   {
-    "id": "f30",
-    "category": "substance",
-    "topic": "cocaine frequency detail",
-    "chart": "Reports cocaine use approximately 1-2 times per month, tied to industry social events",
-    "says": "It's maybe once or twice a month, only at certain parties. I don't do it alone or anything.",
-    "tier": "reluctant",
-    "importance": "important"
-   },
-   {
-    "id": "f31",
-    "category": "sexual",
-    "topic": "condom use frequency",
-    "chart": "Reports using condoms inconsistently, roughly 1-2 times per month when sexually active",
-    "says": "I'm not seeing anyone serious. When I do hook up, I don't always have one on me, so... yeah, not every time.",
-    "tier": "hidden",
-    "importance": "important"
-   },
-   {
-    "id": "f32",
-    "category": "psychosocial",
-    "topic": "support network depth",
-    "chart": "Reveals he has no one he trusts locally to confide in about health or personal struggles, feels ashamed",
-    "says": "Honestly? There's no one here I'd tell this stuff to. I don't want people back home worrying either. I just... deal with it alone.",
-    "tier": "hidden",
-    "importance": "important"
-   },
-   {
-    "id": "f33",
-    "category": "family",
-    "topic": "family history",
-    "chart": "Family history of T2DM (uncle) and possibly other relatives in India, unconfirmed",
-    "says": "My uncle has diabetes bad. Not sure about anyone else, my parents seem okay last I checked.",
-    "tier": "discoverable",
-    "importance": "minor"
-   },
-   {
-    "id": "f34",
-    "category": "ros",
-    "topic": "skin changes",
-    "chart": "Reports dry, flaky skin on lower legs",
-    "says": "My legs get really dry and flaky lately, like ashy.",
-    "tier": "initial",
-    "importance": "minor",
-    "distractor": true
-   },
-   {
-    "id": "f35",
-    "category": "nutrition",
-    "topic": "caffeine intake",
-    "chart": "Drinks 3-4 cups of chai daily, usually with added sugar",
-    "says": "I probably have like 3 or 4 chai a day, with sugar in it, keeps me going.",
-    "tier": "initial",
-    "importance": "important"
-   },
-   {
-    "id": "f36",
-    "category": "other",
-    "topic": "insurance limitations",
-    "chart": "Reports marketplace insurance plan with limited coverage since recent immigration",
-    "says": "My insurance is this marketplace thing, it doesn't cover a lot, I think that's why follow-ups have been spotty.",
-    "tier": "discoverable",
-    "importance": "minor",
-    "distractor": true
-   },
-   {
-    "id": "f37",
-    "category": "function",
-    "topic": "exercise habits",
-    "chart": "Reports minimal structured physical activity due to work hours",
-    "says": "Exercise? I wish. Between work and everything there's just no time.",
-    "tier": "discoverable",
-    "importance": "minor"
-   }
-  ],
-  "objectives": [
-   {
-    "id": "o1",
-    "text": "Apply the Nutrition Care Process to conduct a complete remote nutrition assessment, including diet history, anthropometrics, labs, medication effects, and psychosocial/substance use context.",
-    "factIds": [
-     "f7",
-     "f16",
-     "f17",
-     "f18",
-     "f19",
-     "f20",
-     "f22",
-     "f33",
-     "f35"
-    ],
-    "actionIds": [
-     "a2",
-     "a4",
-     "a5",
-     "a7",
-     "a9",
-     "a11"
-    ]
-   },
-   {
-    "id": "o2",
-    "text": "Synthesize assessment data into an accurate PES (Problem, Etiology, Signs/Symptoms) statement reflecting poorly controlled T2DM related to excess carbohydrate/sugar intake, irregular meal timing, and heavy alcohol use.",
-    "factIds": [
-     "f16",
-     "f17",
-     "f18",
-     "f20",
-     "f4"
-    ],
-    "actionIds": [
-     "a4",
-     "a5",
-     "a11",
-     "a14"
-    ]
-   },
-   {
-    "id": "o3",
-    "text": "Develop evidence-based, culturally appropriate nutrition interventions (e.g., carbohydrate counting with Indian vegetarian staples, meal timing strategies, label literacy, budget-conscious grocery guidance) that respect the patient's vegetarian and cultural food preferences.",
-    "factIds": [
-     "f7",
-     "f19",
-     "f22",
-     "f23",
-     "f26"
-    ],
-    "actionIds": [
-     "a11",
-     "a13"
-    ]
-   },
-   {
-    "id": "o4",
-    "text": "Integrate medication management considerations into nutrition counseling, recognizing Metformin GI side effects and timing with meals as a barrier to adherence, and coordinating with the care team.",
-    "factIds": [
-     "f13",
-     "f14",
-     "f15"
-    ],
-    "actionIds": [
-     "a9"
-    ]
-   },
-   {
-    "id": "o5",
-    "text": "Apply motivational interviewing techniques to explore ambivalence, elicit the patient's own motivations (career, travel, independence), and avoid confrontation around sensitive substance use and sexual health topics.",
-    "factIds": [
-     "f21",
-     "f25",
-     "f26",
-     "f27",
-     "f28",
-     "f30"
-    ],
-    "actionIds": [
-     "a12",
-     "a14",
-     "a15"
-    ]
-   },
-   {
-    "id": "o6",
-    "text": "Identify red-flag findings (significant unintentional weight loss, heavy alcohol use with elevated LFTs, cocaine use, inconsistent condom use, social isolation) that warrant interprofessional referral beyond the scope of nutrition counseling alone.",
-    "factIds": [
-     "f20",
-     "f30",
-     "f31",
-     "f32",
-     "f29"
-    ],
-    "actionIds": [
-     "a7",
-     "a14",
-     "a15",
-     "a16"
-    ]
-   }
-  ],
-  "answerKey": {
-   "primaryProblem": "Unintended weight loss and hyperglycemia in the setting of poorly controlled Type 2 Diabetes Mellitus, with nutrition-related contributors including excessive simple carbohydrate/added sugar intake, irregular meal timing, and heavy alcohol use",
-   "differential": [
-    "Nutrition diagnosis: Excessive carbohydrate intake related to irregular meal patterns and high intake of refined carbohydrates/sweets as evidenced by HbA1c 9.1%, fasting glucose 230 mg/dL, and diet history of large late-night rice/bread portions, sweetened chai, and sugary beverages",
-    "Nutrition diagnosis: Inadequate energy intake possibly contributing to unintentional 30 lb (17%) weight loss, though hyperglycemia-driven catabolism and heavy alcohol/substance use are more likely primary drivers than simple caloric restriction",
-    "Medical differential (for referring team): new/progressing diabetic complications (consider further workup) vs. catabolic effect of chronic heavy alcohol use vs. undiagnosed thyroid or GI pathology contributing to weight loss - outside RD scope but should be flagged",
-    "Alcohol-related hepatocellular injury (elevated ALT/AST/GGT) as a contributing/complicating factor to overall metabolic control and nutrition status"
-   ],
-   "keyFindings": [
-    "HbA1c 9.1% and fasting glucose 230 mg/dL indicate poorly controlled T2DM",
-    "Unintentional weight loss of 30 lbs (~17% body weight) over 6 months despite normal BMI of 22.0 - concerning for underlying metabolic decompensation",
-    "Elevated ALT, AST, GGT consistent with alcohol-related liver stress",
-    "Diet history reveals irregular meal timing, skipped lunches, large late dinners, high intake of refined carbohydrates (rice, paratha) and added sugars (chai, sweets, occasional soda)",
-    "Vegetarian dietary pattern avoiding red meat, relying on dal, paneer, occasional eggs for protein",
-    "Poor Metformin adherence due to GI side effects; fair Amlodipine adherence with morning dizziness",
-    "Heavy alcohol use: 2-8 drinks per occasion, 2-6 nights/week, escalating with job stress",
-    "Smoking ~1/2 pack/day; cocaine use ~1-2 times/month at social events",
-    "Inconsistent condom use (~1-2 times/month) with associated STI history on problem list",
-    "Limited local social support; lives alone with no family in US; reports loneliness and ambivalence about change"
-   ],
-   "plan": [
-    "Document findings using ADIME format: Assessment (anthropometrics, labs, diet history, meds, psychosocial), Diagnosis (PES statement), Intervention (education + goal setting), Monitoring/Evaluation plan",
-    "Nutrition diagnosis/PES: 'Excessive carbohydrate and added sugar intake related to irregular meal timing and limited nutrition knowledge as evidenced by HbA1c 9.1%, fasting glucose 230 mg/dL, and diet history of large late-night refined-carbohydrate meals and frequent sugary beverages.'",
-    "Provide culturally tailored carbohydrate counting/plate method education using familiar vegetarian Indian foods (portion guidance for rice/roti, emphasis on dal/paneer/vegetables, swap white rice for smaller portions or alternatives)",
-    "Address meal timing: encourage structured meals/snacks to reduce long fasting gaps and large late-night intake; discuss practical strategies given demanding work schedule",
-    "Counsel on reducing added sugar (chai, sweets, soda) with specific, achievable swaps (e.g., less sugar in chai, water/unsweetened options)",
-    "Coordinate with PCP regarding Metformin GI side effects (consider extended-release formulation or dose timing adjustment) to improve adherence",
-    "Use motivational interviewing to explore ambivalence; link nutrition/behavior change to his stated motivations (career stamina, future travel to India, maintaining independence) rather than confronting directly",
-    "Screen and refer: discuss alcohol use pattern and elevated LFTs; refer for substance use evaluation/counseling (alcohol and cocaine); reinforce importance of interprofessional team (PCP, behavioral health, possible social work for support/isolation)",
-    "Address sexual health risk reduction briefly and refer back to PCP/sexual health resources given reported inconsistent condom use and STI history",
-    "Discuss social isolation and limited support network; provide information on local community resources (South Asian community groups, diabetes support programs, low-cost food resources/food pantries appropriate to dietary pattern)",
-    "Set a collaborative, patient-driven SMART goal for next visit (e.g., one specific small change he chooses, such as reducing chai sugar or adding a consistent lunch) rather than imposing a full dietary overhaul",
-    "Schedule follow-up telehealth visit in 2-4 weeks to reassess adherence, labs trend, and readiness to change"
-   ],
-   "redFlags": [
-    "30 lb (17%) unintentional weight loss in 6 months despite normal BMI - warrants medical workup beyond nutrition alone",
-    "Markedly elevated ALT/AST/GGT suggestive of alcohol-related liver injury - needs medical follow-up and possible hepatology/substance use referral",
-    "Heavy, escalating alcohol use (up to 6-8 drinks/occasion, several nights/week) with possible withdrawal risk - refer for substance use disorder evaluation, do not advise abrupt cessation without medical supervision",
-    "Cocaine use - safety and cardiovascular risk given tachycardia (HR 110) and hypertension; flag for medical/behavioral health follow-up",
-    "Inconsistent condom use with history of STI - sexual health risk-reduction counseling and referral back to PCP",
-    "Reported social isolation/loneliness in a patient who is ambivalent about change - monitor for mood symptoms, assess for depression/suicidality via appropriate referral",
-    "Tachycardia (HR 110) at rest - exceeds expected and should be communicated to medical team, could relate to stimulant use, dehydration from hyperglycemia, or alcohol withdrawal"
-   ],
-   "educationPoints": [
-    "Explain the relationship between carbohydrate quantity/quality, meal timing, and blood glucose control in accessible, non-judgmental language",
-    "Clarify that vegetarian/Indian cuisine can absolutely fit a diabetes-friendly pattern with portion and preparation adjustments - no need to abandon cultural food identity",
-    "Teach basic food label literacy (serving size, total carbohydrate, added sugar) relevant to US packaged foods he now encounters",
-    "Explain why taking Metformin with food and possible formulation changes may reduce GI side effects, reinforcing coordination with his prescriber rather than independently stopping the medication",
-    "Normalize and destigmatize alcohol/substance use disclosure to support honest ongoing conversation; explain the connection between alcohol intake and both liver enzyme elevation and blood sugar control",
-    "Validate his autonomy and fears about dependency while gently connecting nutrition changes to his own stated goals (career stamina, travel, independence) using motivational interviewing rather than directive advice",
-    "Provide information about accessible community and interprofessional resources (behavioral health, social work, South Asian community support, diabetes self-management programs) without pressuring immediate action"
-   ]
-  },
   "patient": {
    "name": "Vladko Bareche",
    "age": 31,
@@ -983,47 +423,529 @@
    "ethnicity": "Asian Indian",
    "occupation": "TV Producer",
    "language": "English, Hindi",
-   "appearance": "Sitting in what appears to be a small, dimly lit apartment living room, laptop propped on a stack of books. Wearing a wrinkled button-down, visible fatigue under his eyes, speaks in short sentences and often glances off-camera as if distracted by phone notifications. Posture is slightly hunched, arms often crossed.",
+   "appearance": "Video call from a dimly lit apartment, editing monitors visible in background. Appears thin, tired, with visible dry skin on forearms. Sits stiffly, speaks briefly, avoids prolonged eye contact with the camera, occasionally glances at his phone.",
    "portrait": "/portraits/vadko-bareche.jpg"
   },
   "persona": {
-   "personality": "Quiet, introverted, hardworking, highly creative, guarded about personal life, values dignity and self-reliance",
-   "communicationStyle": "Brief and reserved; deflects personal or sensitive questions by redirecting to work stress; opens up gradually with patience and non-judgmental approach; uses understatement ('it's not a big deal') to minimize concerning behaviors",
+   "personality": "Quiet, introverted, hardworking, highly creative, private",
+   "communicationStyle": "Brief and reserved; deflects personal questions by redirecting to work stress; opens up slightly if the clinician connects advice to his career goals or shows genuine curiosity about his culture",
    "healthLiteracy": "moderate",
-   "emotionalState": "Fatigued, mildly anxious beneath a controlled exterior, somewhat defensive when diabetes severity is raised, softens when goals (career, travel, independence) are discussed",
-   "background": "Grew up in Mumbai in a large extended family where communal meals were central to daily life. Studied film in college, has worked his way up in television production over the past decade, moved to Brooklyn 8 months ago for a producer role on a creative project he's passionate about. Lives alone in a small apartment, works long and unpredictable hours, has not built much of a social circle outside of work colleagues and industry events. Misses home-cooked food and family gatherings from India.",
+   "emotionalState": "Guarded, fatigued, mildly anxious about being told to change everything at once; defensive when diet or substance use is questioned directly",
+   "background": "Grew up in a close-knit family in Mumbai with communal vegetarian meals. Studied film in college, moved to Brooklyn 8 months ago for a producer role at a streaming company. Works 60+ hour weeks, lives alone in a small apartment, has not built a social network outside of work colleagues.",
    "speechExamples": [
-    "It's fine, I just need to manage my time better, that's all.",
-    "I don't really have time to think about all this food stuff, honestly.",
-    "My uncle has diabetes, he's like 70 and out of shape. I'm not like that.",
-    "I don't want to make a big deal out of this.",
-    "Can we talk about something I can actually do? I don't want a lecture."
+    "I mean... it's just stress-eating, nothing serious.",
+    "In India we always say food is medicine, so I don't think my diet is the problem.",
+    "I don't really have time to see doctors, I have deadlines.",
+    "My uncle had diabetes and he was way older and out of shape - I'm not like that.",
+    "Can we talk about something that'll actually help me get through my shoot days?"
    ],
    "concerns": [
-    "Will stop caring about this new 'diabetes' problem if it feels overwhelming",
-    "Worried dietary changes will make him feel deprived or depressed",
-    "Concerned about how health issues might affect his demanding career",
-    "Fears losing independence or becoming a burden on family back in India"
+    "Will stop caring about this 'diabetes' problem once work gets busier",
+    "Worried changing his diet will make him miserable or depressed",
+    "Concerned treatment will interfere with his ability to work long hours",
+    "Doesn't want to be seen as weak or unable to manage his own life"
    ]
   },
   "scenario": {
-   "studentBrief": "You are a dietetics student conducting an initial telehealth nutrition assessment for Vladko Bareche, a 31-year-old TV producer recently relocated from Mumbai to Brooklyn, referred by his PCP for poorly controlled Type 2 Diabetes (HbA1c 9.1%). Review the chart before the call. Conduct a nutrition-focused history and assessment, build rapport using motivational interviewing, and begin developing a nutrition diagnosis and culturally appropriate plan. Be alert to barriers beyond diet alone.",
-   "chiefComplaint": "Referred for nutrition counseling due to poorly controlled Type 2 Diabetes (HbA1c 9.1%) with recent unintentional weight loss",
-   "openingLine": "Hi... yeah, my doctor said I should talk to a dietitian because my blood sugar numbers aren't good. I'm pretty busy, so, however this works.",
+   "studentBrief": "You are the dietetics student conducting a telehealth nutrition assessment for Vladko Bareche, a 31-year-old TV producer recently referred for poorly controlled Type 2 Diabetes and unintentional weight loss. He was lost to primary care follow-up for 8 months. Review his available records, conduct a nutrition-focused history (diet pattern, medication adherence, barriers, substance use as relevant to nutrition status), and begin motivational-interviewing-based counseling. He may be guarded about personal topics.",
+   "chiefComplaint": "Poorly controlled Type 2 Diabetes with recent unintentional 30-lb weight loss, referred for nutrition assessment",
+   "openingLine": "Hi... thanks for fitting me in. I guess my doctor's office wants me to talk to a nutritionist because my sugar numbers aren't great and I've lost some weight. I've been really busy with work though, so I don't have much time.",
    "tasks": [
-    "Conduct a thorough remote nutrition assessment including 24-hour diet recall, anthropometrics, and relevant labs",
-    "Explore medication adherence and side effects as they relate to nutrition and glycemic control",
-    "Use motivational interviewing to assess readiness to change and explore barriers (work stress, substance use, cultural food patterns, limited support)",
-    "Formulate an accurate PES statement reflecting the nutrition diagnosis",
-    "Deliver culturally sensitive, patient-centered education and negotiate one realistic, collaborative goal for follow-up",
-    "Recognize red-flag findings warranting interprofessional referral and document the encounter in ADIME format"
+    "Conduct a thorough nutrition-focused history including usual intake, meal pattern, and cultural food preferences",
+    "Identify barriers to glycemic control including medication adherence, substance use, and psychosocial stressors as they relate to nutrition status",
+    "Reconcile the patient's self-reported medication adherence with the pharmacy refill record and address the discrepancy sensitively",
+    "Formulate a nutrition diagnosis (PES statement) using the Nutrition Care Process",
+    "Use motivational interviewing techniques to explore readiness to change and negotiate an initial, culturally appropriate nutrition goal"
    ],
    "timeLimitMin": 30
   },
-  "setting": "Telehealth video visit; patient at home in his Brooklyn apartment, dietetics student calling from clinic office",
+  "facts": [
+   {
+    "id": "f1",
+    "category": "chief_complaint",
+    "topic": "referral reason",
+    "chart": "Referred for poorly controlled T2DM with HbA1c 9.1% and unintentional 30-lb weight loss over 6 months",
+    "says": "My doctor said my sugar levels are too high and I've lost weight without trying, so they wanted me to see a nutritionist.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f2",
+    "category": "hpi",
+    "topic": "energy and urination",
+    "chart": "Reports persistent fatigue, polyuria (10-15x/day), polydipsia, occasional blurry vision",
+    "says": "I'm tired all the time, and I'm literally running to the bathroom like fifteen times a day. I'm thirsty constantly too.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f3",
+    "category": "hpi",
+    "topic": "weight loss",
+    "chart": "Unintentional 30 lb weight loss over past 6 months, from 178 lb to 148 lb, despite reporting unchanged eating habits",
+    "says": "I don't know why I'm losing weight, I'm eating the same as always, maybe even more because of stress.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f4",
+    "category": "nutrition",
+    "topic": "diet type",
+    "chart": "Follows traditional vegetarian diet; avoids meat, fish, eggs entirely for cultural/family reasons",
+    "says": "I'm vegetarian, always have been - no meat, no fish, no eggs. That's just how we eat.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f5",
+    "category": "nutrition",
+    "topic": "typical meals",
+    "chart": "Reports mostly skipping breakfast, large late dinner (9-10pm) of rice, dal, vegetable curry, roti/naan",
+    "says": "Honestly I skip breakfast most days, too rushed. Dinner's usually late, like 9 or 10, big plate of rice and dal and curry.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f6",
+    "category": "nutrition",
+    "topic": "sweets and sugary drinks",
+    "chart": "Consumes sweets (gulab jamun, jalebi) 3-4x/week; sweetened chai daily with 2-3 tsp sugar; soda or mango lassi most afternoons",
+    "says": "I do have a sweet tooth, I'll admit - chai every day, sweets a few times a week, maybe a soda or lassi in the afternoon to keep going.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f7",
+    "category": "nutrition",
+    "topic": "stress eating",
+    "chart": "Snacks on fried lentil/chickpea namkeen when stressed at work",
+    "says": "When deadlines get crazy I just grab a bag of namkeen at my desk, it's hard to stop.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f8",
+    "category": "nutrition",
+    "topic": "meal timing and work",
+    "chart": "Irregular meal times, frequently skips or delays meals due to 60+ hour work weeks",
+    "says": "My schedule's a mess - sometimes I don't eat until I get home at night, work just takes over.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f9",
+    "category": "nutrition",
+    "topic": "takeout frequency",
+    "chart": "Orders takeout or eats out 3-4 times per week due to long hours",
+    "says": "I order in a lot, three or four times a week probably, I just don't have energy to cook after a shoot.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f10",
+    "category": "nutrition",
+    "topic": "grocery budget",
+    "chart": "Reports tight food budget on marketplace insurance plan income after rent; relies on convenience foods",
+    "says": "Rent here is brutal, so I'm not exactly splurging on fancy groceries. Whatever's quick and cheap.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f11",
+    "category": "other",
+    "topic": "diabetes risk perception",
+    "chart": "Believes diabetes affects older or 'unhealthy' people; compares self favorably to uncle with diabetes",
+    "says": "My uncle had diabetes and he was old and out of shape. I'm not like that, I'm young and I work out sometimes.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f12",
+    "category": "other",
+    "topic": "food as medicine",
+    "chart": "Believes traditional Indian diet is inherently healthy and doubts diet is contributing to his condition",
+    "says": "In India we say food is medicine. I don't really think my diet is the problem here.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f13",
+    "category": "medications",
+    "topic": "metformin adherence",
+    "chart": "Reports taking metformin sporadically; often forgets doses due to chaotic schedule",
+    "says": "I try to take my metformin but honestly I forget a lot, my days are just unpredictable.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f14",
+    "category": "medications",
+    "topic": "metformin side effects",
+    "chart": "Reports nausea and abdominal cramping with metformin use",
+    "says": "That metformin pill makes my stomach hurt, gives me nausea, so sometimes I just skip it on purpose.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f15",
+    "category": "medications",
+    "topic": "amlodipine adherence",
+    "chart": "Reports taking amlodipine daily but frequently misses morning doses; feels dizzy",
+    "says": "I take my blood pressure pill pretty much every day, maybe miss the morning one sometimes. It makes me a little dizzy.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f16",
+    "category": "medications",
+    "topic": "metformin dosing claim",
+    "chart": "States he takes metformin consistently 'most days' with meals",
+    "says": "I'd say I take it most days, maybe miss one here and there, nothing major.",
+    "tier": "initial",
+    "importance": "critical",
+    "distractor": false
+   },
+   {
+    "id": "f17",
+    "category": "substance",
+    "topic": "smoking habits",
+    "chart": "Smokes approximately 10 cigarettes/day for the past 5 years",
+    "says": "Yeah, I smoke, about half a pack a day. Helps with the stress on set.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f18",
+    "category": "substance",
+    "topic": "alcohol at social events",
+    "chart": "Reports drinking 'at social events' when asked generally",
+    "says": "I'll have a few drinks sometimes at work events, nothing crazy.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f19",
+    "category": "substance",
+    "topic": "detailed alcohol quantity",
+    "chart": "Detailed history reveals 2-8 drinks per occasion, 2-6 nights per week, often drinking alone after work",
+    "says": "Okay... if I'm being honest, it's more like most nights after work, maybe 2 to 8 drinks depending on how bad the day was.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f20",
+    "category": "substance",
+    "topic": "cocaine use",
+    "chart": "Reports occasional cocaine use at industry social events, roughly monthly",
+    "says": "Sometimes at industry parties people do coke, I've joined in a few times, maybe once a month.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f21",
+    "category": "sexual",
+    "topic": "condom use pattern",
+    "chart": "Reports inconsistent condom use, approximately 1-2 times per month unprotected",
+    "says": "I'm not always careful... maybe once or twice a month I don't use protection.",
+    "tier": "hidden",
+    "importance": "critical"
+   },
+   {
+    "id": "f22",
+    "category": "psychosocial",
+    "topic": "local support network",
+    "chart": "Lives alone in Brooklyn with no family nearby; limited friendships outside work colleagues",
+    "says": "It's just me here. No family close by, and honestly I haven't really made friends outside of work.",
+    "tier": "reluctant",
+    "importance": "critical"
+   },
+   {
+    "id": "f23",
+    "category": "psychosocial",
+    "topic": "immigration stress",
+    "chart": "Reports significant stress adjusting to US work culture and healthcare system since migrating 8 months ago",
+    "says": "Moving here was supposed to be my big opportunity but it's been a lot harder than I expected, figuring out everything on my own.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f24",
+    "category": "goals",
+    "topic": "career priorities",
+    "chart": "Primary motivation is maintaining demanding TV producer job; fears health issues will threaten career",
+    "says": "My job is everything to me right now. If my health gets in the way of that, I don't know what I'd do.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f25",
+    "category": "goals",
+    "topic": "future travel plans",
+    "chart": "Hopes to travel back to India to visit family once work stabilizes",
+    "says": "I want to go back and visit my family in Mumbai eventually, once things calm down at work.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f26",
+    "category": "psychosocial",
+    "topic": "fear of dependency",
+    "chart": "Expresses fear of becoming dependent on others or being seen as a burden to family",
+    "says": "I don't want to end up needing help from my family back home. I'd feel like such a failure.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f27",
+    "category": "psychosocial",
+    "topic": "readiness to change diet",
+    "chart": "Rates importance of dietary change as low-moderate (4/10) and confidence as low (3/10); ambivalent about change",
+    "says": "I know I probably should change some things, but honestly I don't feel ready, and I'm not sure I even can with my schedule.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f28",
+    "category": "psychosocial",
+    "topic": "fear about diet changes",
+    "chart": "Worries that major dietary restriction will worsen mood or feel like losing a source of comfort",
+    "says": "If you take away the food I like, I'm worried I'll just feel worse, like depressed almost.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f29",
+    "category": "function",
+    "topic": "physical activity",
+    "chart": "Minimal structured exercise; sedentary desk work 10-12 hrs/day; occasional walking on set",
+    "says": "I don't really exercise, I'm sitting at an editing desk most of the day, maybe I walk around on set sometimes.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f30",
+    "category": "ros",
+    "topic": "skin changes",
+    "chart": "Reports dry, flaky skin on lower legs for past few months",
+    "says": "My legs have been really dry and flaky lately, I thought it was just the weather here.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f31",
+    "category": "ros",
+    "topic": "vision changes",
+    "chart": "Occasional blurry vision, worse when blood sugar feels 'off'",
+    "says": "Sometimes my vision gets blurry, especially when I feel really off, like after a bad sugar day.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f32",
+    "category": "family",
+    "topic": "family diabetes history",
+    "chart": "Uncle with history of type 2 diabetes; no other known family history disclosed",
+    "says": "My uncle had it, that's the only one in the family I know of.",
+    "tier": "initial",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f33",
+    "category": "allergies",
+    "topic": "medication allergy",
+    "chart": "Penicillin allergy - rash reaction",
+    "says": "I'm allergic to penicillin, I get a rash.",
+    "tier": "initial",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f34",
+    "category": "social",
+    "topic": "insurance limitations",
+    "chart": "Has marketplace insurance plan with limited coverage due to recent immigration status",
+    "says": "My insurance is this marketplace plan, it doesn't cover a ton, which makes doctor visits expensive.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f35",
+    "category": "nutrition",
+    "topic": "supplement use",
+    "chart": "Takes multivitamin irregularly; uses acupressure wristbands, no other supplements",
+    "says": "I take a multivitamin when I remember, and I wear these acupressure bands a friend recommended, not sure if they do anything.",
+    "tier": "discoverable",
+    "importance": "minor"
+   }
+  ],
+  "mismatches": [
+   {
+    "id": "m1",
+    "factId": "f16",
+    "artifactId": "d2",
+    "patientClaim": "Vladko states he takes metformin 'most days' with only occasional missed doses, nothing major",
+    "recordEvidence": "Pharmacy refill history shows the last 30-day supply of metformin was filled 68 days ago, meaning a gap of over a month with no medication on hand, consistent with far more frequent missed doses than he reports",
+    "teachingPoint": "Self-reported adherence often overestimates actual medication-taking behavior; refill/pharmacy records provide objective corroboration and should be reviewed before accepting verbal adherence reports, especially when nutrition-drug interactions (like metformin GI side effects) may be driving nonadherence."
+   },
+   {
+    "id": "m2",
+    "factId": "f3",
+    "artifactId": "d3",
+    "patientClaim": "Vladko reports he has been 'eating the same as always' and does not understand why he is losing weight",
+    "recordEvidence": "Weight flowsheet shows a steady, progressive decline from 178 lb to 148 lb over 6 months (30 lb loss), a pattern inconsistent with unchanged intake and more consistent with uncontrolled hyperglycemia (osmotic diuresis/catabolism) and/or reduced effective intake from alcohol substitution and appetite suppression from cocaine use",
+    "teachingPoint": "Unintentional weight loss in poorly controlled diabetes may reflect calorie loss through glycosuria and catabolism rather than true intake patterns; a discrepancy between reported intake and objective weight trends should prompt deeper exploration of hyperglycemia severity and substance use effects on appetite and intake."
+   }
+  ],
+  "objectives": [
+   {
+    "id": "o1",
+    "text": "Apply the Nutrition Care Process to complete a comprehensive nutrition assessment, including diet history, anthropometrics, labs, and medication-related barriers.",
+    "factIds": [
+     "f4",
+     "f5",
+     "f6",
+     "f7",
+     "f8",
+     "f9",
+     "f10",
+     "f13",
+     "f14"
+    ],
+    "actionIds": [
+     "a2",
+     "a3",
+     "a4",
+     "a9",
+     "a7"
+    ]
+   },
+   {
+    "id": "o2",
+    "text": "Formulate an accurate PES (Problem, Etiology, Signs/Symptoms) nutrition diagnosis statement reflecting glycemic control, intake pattern, and psychosocial/substance barriers.",
+    "factIds": [
+     "f6",
+     "f13",
+     "f14",
+     "f19",
+     "f27"
+    ],
+    "actionIds": [
+     "a9",
+     "a10",
+     "a11"
+    ]
+   },
+   {
+    "id": "o3",
+    "text": "Identify the discrepancy between patient-reported medication adherence and pharmacy refill records, and address it sensitively without damaging rapport.",
+    "factIds": [
+     "f13",
+     "f16"
+    ],
+    "actionIds": [
+     "a7"
+    ]
+   },
+   {
+    "id": "o4",
+    "text": "Use motivational interviewing techniques to explore ambivalence, elicit the patient's own motivations (career, travel, independence), and negotiate a culturally appropriate, patient-centered initial goal.",
+    "factIds": [
+     "f11",
+     "f12",
+     "f24",
+     "f25",
+     "f26",
+     "f27",
+     "f28"
+    ],
+    "actionIds": [
+     "a10"
+    ]
+   },
+   {
+    "id": "o5",
+    "text": "Recognize substance use (alcohol, cocaine, smoking) and psychosocial barriers (isolation, immigration stress) as factors affecting nutrition status and glycemic control, and identify appropriate interprofessional/community referral needs.",
+    "factIds": [
+     "f17",
+     "f18",
+     "f19",
+     "f20",
+     "f22",
+     "f23"
+    ],
+    "actionIds": [
+     "a6",
+     "a11"
+    ]
+   },
+   {
+    "id": "o6",
+    "text": "Interpret relevant labs (HbA1c, fasting glucose, lipids, liver enzymes) and anthropometric trends in the context of nutrition diagnosis and counseling priorities.",
+    "factIds": [
+     "f1",
+     "f2",
+     "f3"
+    ],
+    "actionIds": [
+     "a3",
+     "a4",
+     "a5",
+     "a6",
+     "a12"
+    ]
+   }
+  ],
+  "answerKey": {
+   "primaryProblem": "Uncontrolled Type 2 Diabetes Mellitus (HbA1c 9.1%) with unintentional weight loss, in the context of inconsistent medication adherence, high-sugar/high-refined-carbohydrate intake pattern, and heavy alcohol use with likely substance-use-related appetite/intake disruption",
+   "differential": [
+    "Nutrition diagnosis: Excessive carbohydrate/sugar intake related to limited nutrition knowledge and cultural dietary pattern, as evidenced by frequent sweets, sweetened chai, and sugary beverages and HbA1c 9.1%",
+    "Nutrition diagnosis: Inadequate medication-nutrition adherence related to GI side effects of metformin and chaotic work schedule, as evidenced by refill gaps and patient report of skipping doses due to nausea",
+    "Nutrition diagnosis: Unintended weight loss related to uncontrolled hyperglycemia and heavy alcohol intake, as evidenced by 30-lb weight loss over 6 months despite reported stable intake",
+    "Differential medical consideration: possible alcohol-related hepatic dysfunction contributing to metabolic derangement (elevated ALT/AST/GGT)",
+    "Differential consideration: new-onset vs long-standing poorly controlled T2DM exacerbated by acute psychosocial/substance stressors since immigration"
+   ],
+   "keyFindings": [
+    "HbA1c 9.1%, fasting glucose 230 mg/dL - severe hyperglycemia",
+    "30 lb unintentional weight loss over 6 months (178 to 148 lb), BMI now 22.0",
+    "Elevated ALT 112, AST 98, GGT 140 - concerning for alcohol-related liver involvement",
+    "Pharmacy refill records show major gap in metformin refills (68 days since last 30-day fill) despite patient reporting near-daily use",
+    "Detailed alcohol history: 2-8 drinks, 2-6 nights/week, often alone after work",
+    "Diet pattern: skipped breakfast, late large dinners, daily sweetened chai, sweets 3-4x/week, soda/lassi most afternoons, frequent takeout",
+    "Low readiness to change (importance 4/10, confidence 3/10)",
+    "Lives alone with minimal local support network, 8 months post-immigration"
+   ],
+   "plan": [
+    "Document findings using ADIME format with PES statement(s) addressing excessive sugar/carbohydrate intake, medication-nutrition adherence barriers, and unintended weight loss",
+    "Collaborate with PCP/prescriber regarding metformin GI side effects possibly contributing to nonadherence; consider discussing extended-release formulation or dose titration with medical team",
+    "Provide culturally tailored nutrition education on carbohydrate quantity/quality within a vegetarian Indian dietary pattern (e.g., portion guidance for rice/roti, lower-sugar chai alternatives, swaps for sweets)",
+    "Use motivational interviewing to negotiate one small, patient-chosen initial behavior change goal (e.g., reducing sweetened chai sugar or spacing meals) rather than prescribing a full diet overhaul",
+    "Screen and refer for alcohol use disorder support (e.g., brief intervention, referral to counseling or community-based South Asian support resources) given AUDIT-C in high-risk range and elevated liver enzymes",
+    "Screen and refer for mental health/immigrant support resources given social isolation and acculturation stress",
+    "Refer back to PCP for medical follow-up on STI history, sexual health counseling, and substance use (cocaine) given disclosure, as this is outside dietetics scope but requires interprofessional coordination",
+    "Arrange follow-up nutrition visit within 2-4 weeks to reassess intake changes, readiness to change, and adherence after initial goal-setting"
+   ],
+   "redFlags": [
+    "Severe hyperglycemia (fasting glucose 230, HbA1c 9.1%) with symptoms of polyuria/polydipsia - risk for progression to hyperglycemic crisis if unaddressed",
+    "Significant unintentional weight loss (30 lb/6 months) requiring medical correlation, not solely a nutrition-counseling issue",
+    "Elevated liver enzymes suggestive of alcohol-related hepatic injury - needs medical follow-up and possible lab monitoring",
+    "High-risk alcohol use pattern (AUDIT-C ~8) and cocaine use - safety and interprofessional referral needed",
+    "Inconsistent condom use disclosed - sexual health follow-up needed with medical team (outside dietetics scope but should be flagged for referral)",
+    "Social isolation and immigration-related stress with no local support system - risk factor for disengagement from care"
+   ],
+   "educationPoints": [
+    "Pharmacy/refill records can reveal medication adherence patterns that differ from self-report; approach discrepancies with curiosity and nonjudgment rather than confrontation",
+    "Unintentional weight loss in the setting of uncontrolled diabetes may reflect osmotic/catabolic calorie loss rather than reduced intake, and may be compounded by appetite effects of alcohol or stimulant use",
+    "Cultural dietary patterns (vegetarian, Indian cuisine) are not inherently the problem; the goal is identifying specific modifiable components (added sugars, refined carbohydrate portions, meal timing) within the patient's preferred cuisine",
+    "Motivational interviewing should elicit the patient's own motivations (career performance, future travel, independence) to build an internally driven, achievable first goal rather than imposing a comprehensive diet overhaul on a patient in the contemplation stage",
+    "Nutrition counseling for a patient with concurrent substance use and psychosocial stressors requires recognizing the limits of dietetics scope and facilitating interprofessional referral (medical, behavioral health, substance use services) rather than attempting to manage all issues directly"
+   ]
+  },
+  "title": "Uncontrolled Type 2 Diabetes with Unintentional Weight Loss in a Recently Immigrated TV Producer",
+  "summary": "A 31-year-old recently immigrated Indian TV producer presents for telehealth nutrition assessment with poorly controlled T2DM (HbA1c 9.1%), unintentional 30-lb weight loss, and a guarded presentation masking heavy alcohol use, occasional cocaine use, and inconsistent medication adherence. The case teaches application of the Nutrition Care Process, PES statement formulation, motivational interviewing with an ambivalent patient, and reconciling self-reported adherence against objective pharmacy and weight-trend records.",
   "specialty": "Dietetics / Clinical Nutrition",
-  "summary": "A 31-year-old recently immigrated TV producer with poorly controlled Type 2 Diabetes (HbA1c 9.1%), unintentional 30-lb weight loss, and significant unaddressed substance use (heavy alcohol, smoking, occasional cocaine) and sexual health risk presents for an initial telehealth nutrition assessment. The case teaches students to conduct a full Nutrition Care Process assessment, apply motivational interviewing with a guarded, ambivalent patient, formulate an accurate PES statement, deliver culturally appropriate vegetarian/Indian-cuisine-based education, and recognize red flags requiring interprofessional referral beyond nutrition's scope.",
-  "title": "Poorly Controlled Type 2 Diabetes with Unintentional Weight Loss in a Recently Immigrated Vegetarian TV Producer",
+  "setting": "Telehealth video visit, patient at home in his Brooklyn apartment during a break from editing work",
+  "encounterType": "Nutrition assessment and counseling (initial visit, referred for poorly controlled diabetes)",
   "professions": [
    "dietetics"
   ],
