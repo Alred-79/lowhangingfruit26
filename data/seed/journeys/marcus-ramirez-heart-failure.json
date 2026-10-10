@@ -8,7 +8,7 @@
       {
         "id": "s1",
         "order": 1,
-        "professionId": "emergency_medicine",
+        "professionId": "emergency-medicine",
         "roleTitle": "Emergency medicine attending",
         "clinicianId": "brian_lee",
         "focus": "First contact for the team. Find out how he is right now and what is troubling him most, review his vital signs, check for anything that needs urgent attention, and identify what cardiology, pharmacy and nutrition each need to look at.",
@@ -28,7 +28,7 @@
       {
         "id": "s3",
         "order": 3,
-        "professionId": "pharmacy",
+        "professionId": "clinical-pharmacy",
         "roleTitle": "Clinical pharmacist",
         "clinicianId": "nasir_mahmoud",
         "focus": "Medication reconciliation and adherence. Find out what he actually takes and when, side effects and fears, supplements and herbal products, and anything on the medication list that looks duplicated or unsafe. Flag concerns for the prescribers.",

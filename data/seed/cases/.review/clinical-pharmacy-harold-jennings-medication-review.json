@@ -1,0 +1,40 @@
+{
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "accuracy",
+   "where": "action a4 result and answerKey keyFindings/plan (apixaban dose-reduction criteria)",
+   "problem": "Apixaban dose-reduction criteria require ≥2 of: age ≥80, weight ≤60kg, creatinine ≥1.5 mg/dL. Patient has age 81 (≥80, met), weight 58kg (≤60kg, met), and creatinine 1.6 mg/dL which IS ≥1.5 mg/dL (met) - all three criteria are met, not two. The case text waffles ('creatinine <1.5 mg/dL threshold not met at 1.6... requires prescriber confirmation') which is internally contradictory: 1.6 is NOT less than 1.5, so the creatinine criterion IS met. This means all 3 criteria are met and apixaban should clearly be reduced to 2.5mg BID, not an ambiguous call requiring 'arithmetic confirmation.' Fix: state plainly that all three criteria are met and the current 5mg BID dose is a clear overdose error warranting urgent prescriber communication, not a hedge about dose-reduction criteria arithmetic."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "action a13 result (gabapentin renal dosing)",
+   "problem": "At CrCl ~29 mL/min (CrCl 15-29 range per common renal dosing tables), many references suggest reducing gabapentin to roughly 200-700mg/day in 2-3 divided doses, varying by neuropathic pain indication. Calling 900mg/day 'supratherapeutic' is reasonable but the result's phrasing of 'guideline-suggested range roughly 300mg once or twice daily' is only an approximation and may not reflect exact standard renal dosing charts (which often cite CrCl 15-29 as 300mg every other day to once daily for seizure dosing, with higher allowances for pain). This is a soft inaccuracy; recommend clarifying with a specific reference range rather than an approximate one, but not a severe error."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a2 result and artifact d8 (pharmacy fill history) vs fact f5",
+   "problem": "The fill-history result for tamsulosin explicitly states 'suggesting higher-than-prescribed consumption rate,' which directly reveals the double-dosing/mix-up mechanism before the learner interviews the patient and before fact f5 (discoverable) is elicited. This is acceptable as an objective record review (not a leak of the hidden mechanism, just the pattern) but the mismatch m1 and answerKey rely on this same finding, so it should remain purely descriptive (fill interval only) without the interpretive phrase 'instead of every 30 days... suggesting...' - that interpretive conclusion is fine for a record review action result, so this is low risk; downgrade concern unless learner is meant to generate interpretation themselves (educational intent may be fine, as it's an action result not chart-at-start leakage)."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a1 result vs facts f6 and f7 (OTC diphenhydramine and ginkgo)",
+   "problem": "a1's result already states 'OTC diphenhydramine PM product and ginkgo supplement are not listed in EHR,' which effectively tells the learner these specific products exist before the patient volunteers them via facts f6/f7, which are tier 'discoverable.' This is leakage of hidden-tier information through a record review action - the medication reconciliation action should only show what's actively prescribed/listed, not foreshadow the existence of unlisted products with their specific identities (diphenhydramine, ginkgo). Fix: have a1 state only 'No other medications reported by patient at this time; OTC/herbal product use not yet assessed' rather than naming the specific unlisted products."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "action a9 BMI calculation",
+   "problem": "BMI calculation: 58kg / (1.70m)^2 = 58/2.89 = 20.07 kg/m^2, which rounds to 20.1 kg/m^2 - this is correct, no issue found upon verification (noting for completeness, not an actual error)."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "action a8 CHA2DS2-VASc calculation",
+   "problem": "CHA2DS2-VASc for an 81-year-old male with HTN and DM, no vascular disease, no prior stroke/TIA, no CHF: age≥75=2, HTN=1, DM=1, sex=0(male) = total 4, not 5. The result lists 'female sex N/A' oddly instead of simply 0 points for male sex, and sums to 5 only if an extra point is miscounted. Correct total CHA2DS2-VASc = 4, not 5."
+  }
+ ]
+}

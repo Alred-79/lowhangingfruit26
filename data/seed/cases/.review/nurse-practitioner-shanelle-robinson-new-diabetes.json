@@ -1,0 +1,41 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a9 result",
+   "problem": "Action a9 is described as a brief verbal screen but its result hands over f25 (reluctant fact about needle fear origin tied to mother) and f28 (cost concern) content essentially unprompted ('motivated to make changes... fear of complications') - actually checking: a9 result only says 'moderate distress related to fear of complications and difficulty fitting self-care into shift work; motivated to make changes' which is f9/f12-adjacent, not clearly f25. This is borderline but the action name 'Diabetes distress / self-management readiness discussion tool (brief verbal screen)' is not a validated instrument and functions as an interview question in disguise, bypassing rapport-building needed for reluctant fact f25 which is listed as a factId for objective o6 but not actually surfaced by any action - acceptable. However a8 PHQ-9 is a legitimate instrument; no leak there. Flagging a9 as borderline-noncompliant with 'named screening instrument' requirement since no validated tool is specified."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a5 result",
+   "problem": "Action a5 result calls urine ACR 22 mg/g 'borderline-elevated' and 'A2 category,' but by standard KDIGO definitions A2 (moderately increased) is 30-300 mg/g; 22 mg/g is A1 (normal to mildly increased, <30). Labeling 22 as 'A2 category' is incorrect; it should be classified as A1."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "d1 table vs a2/a3 action text",
+   "problem": "The lab artifact d1 lists HbA1c reference range as '4.0-5.6 (normal); ≥6.5 diabetes' while action a2 states reference range as '<5.7% normal, 5.7-6.4% prediabetes, ≥6.5% diabetes' (standard ADA ranges). The artifact's normal cutoff (5.6) and the action's (5.7) are inconsistent with each other for the same lab value."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "answerKey.plan immunization item",
+   "problem": "Hepatitis B vaccination is recommended by ACIP for adults with diabetes aged 19-59 (not 'under age 60' loosely stated elsewhere, but the plan text says 'recommended for adults with diabetes under age 60' which is correct per ACIP 19-59; this is fine) - no issue, retracting."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "answerKey.plan metformin titration",
+   "problem": "Plan states titrate 'by 500 mg weekly as tolerated to a target of 1000 mg twice daily' - this is an aggressive titration schedule; standard practice titrates by 500mg increments every 1-2 weeks, often slower (every 1-2 weeks, not strictly weekly) to minimize GI side effects, and typical target is often 1000mg BID or 2000mg/day max, which is consistent, but weekly titration is faster than many guidelines recommend (some suggest biweekly). This is a minor dosing-pace concern rather than an error, downgrading relevance."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "chartAtStart 'Immunizations' vs d4 Hepatitis B row",
+   "problem": "chartAtStart immunizations summary does not mention Hepatitis B series status at all, while d4 artifact explicitly flags Hepatitis B as not completed and recommends completing - minor omission in the summary chart but not a contradiction, low severity."
+  }
+ ]
+}

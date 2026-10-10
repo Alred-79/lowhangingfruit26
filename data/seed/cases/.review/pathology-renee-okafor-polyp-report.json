@@ -1,0 +1,29 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "a3 result / a7 result",
+   "problem": "Action a3 ('Confirm complete submission of specimen') and a7 ('Check polyp size/morphology measurement documentation') are purely interview/record-check style actions whose results simply restate information already given in full in d2 (a2's artifact). They don't add new findings and risk being redundant leakage pathways rather than independent findings, but this is low-impact since the underlying facts are not reluctant/hidden. More concerning: a3 has no artifactId, meaning its 'gross exam notes' content is not grounded in any released artifact, which is a mismatch between claimed record evidence and actual artifact support."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a5 result",
+   "problem": "The action result states MMR/IHC stains were not ordered because 'this adenoma does not meet criteria for universal screening (that applies to colorectal carcinoma, not adenomas)' - this is accurate, but the action has no artifactId despite being a 'lab' kind action reviewing a status; minor inconsistency with other lab actions that do cite artifacts (a2, a8)."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a6 result",
+   "problem": "Action a6 result states 'this is her first colonoscopy and first polyp removed' with no artifactId, while chartAtStart and d3 already establish this; redundant but not harmful. Low severity, no fix needed beyond noting."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "answerKey.plan[2]",
+   "problem": "The plan states a specific interval ('typically 3 years for an adenoma with high-grade dysplasia, per standard society guidelines') - current USMSTF/ACG guidance (2020) for adenoma with high-grade dysplasia (and no other high-risk features) is a 3-year interval, which is correct, but the pathology learner answer key is making a surveillance-interval recommendation that the case explicitly says belongs to gastroenterology (per o3 and task list). This creates an internal inconsistency: the role is supposed to defer this decision, yet the answer key states the specific guideline-based interval as if it were part of the pathology consult's content to deliver, which could blur scope boundaries for faculty reviewing fidelity to the stated role limits."
+  }
+ ]
+}

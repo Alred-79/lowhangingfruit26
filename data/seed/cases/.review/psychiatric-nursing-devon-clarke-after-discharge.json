@@ -1,0 +1,40 @@
+{
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a1 (Mental Status Examination) result",
+   "problem": "The MSE result states 'endorses residual auditory experiences (see below)' and references hallucinations content, but auditory hallucinations (f8/f9) are tier 'discoverable' facts that should only surface when specifically asked about, not be bundled into a general MSE action result. This hands the hidden/discoverable finding to the learner without requiring the targeted question, bypassing the interview-based elicitation the case design intends."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a7 (Pharmacy fill history review) result",
+   "problem": "The action result text states 'no refill requests since' and explicitly frames the quantity as consistent with only 7 days supply, which essentially pre-interprets and reveals the non-adherence mismatch (f6/f7) that is supposed to be reluctant/hidden and elicited via rapport-building interview. The pharmacy record (an actual record review) is appropriate to reveal the fill data, but the action result should present raw data only (as the artifact does) without narrating the interpretive conclusion that spoils discovery of patient's hidden non-adherence confession (f6)."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "chartAtStart 'Problem list'",
+   "problem": "The chartAtStart problem list includes 'rule out medication side effects,' which telegraphs the diagnosis (akathisia/EPS) before the learner conducts any assessment, undermining the differential-building objective (o1)."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "action a7 vs d3 vs f7",
+   "problem": "Action a7 result says 'disp #7, 1 refill authorized' and 'no subsequent fills recorded,' while d3 artifact table says 'Refills Remaining: 1' and 'Refill Requests Since: 0' — these are consistent, but f7 patient statement says 'I only got the one bottle... I haven't been back to the pharmacy,' which is consistent too. However, this creates redundant leakage: the mismatch m1 is meant to be discovered by the learner comparing patient's claim (f5) to pharmacy data, but the a7 action result alone already states the discrepancy's conclusion before the learner even asks the patient, making the mismatch moot by the time it's reached."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "action a9 PHQ-9 result",
+   "problem": "PHQ-9 score of 6 is stated as 'mild range,' which is correct (5-9 = mild), but the result also says patient 'endorses sleep item (sleeping too much)' - this is fine, but should also clarify this does not need to double-count with f4 unless both are meant to co-exist; no major error, just a minor consistency note, not a true error."
+  },
+  {
+   "severity": "low",
+   "kind": "other",
+   "where": "action a10 (Urine toxicology screen)",
+   "problem": "This action is labeled as a 'test' ordered this visit, but the result explains none was performed and none is on file, deferring to in-person follow-up. Ordering a urine tox screen is typically outside independent RN/PMHN student scope in a telehealth visit without point-of-care capability; the action should be reframed as 'reviewing/requesting' rather than 'ordering,' or removed since it cannot be completed and adds little educational value given the result is essentially 'not available.'"
+  }
+ ]
+}

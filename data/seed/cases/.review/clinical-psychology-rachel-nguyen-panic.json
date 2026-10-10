@@ -1,0 +1,28 @@
+{
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a6 result / artifact d5",
+   "problem": "Action a6 (review medication list) result text states 'Lorazepam 0.5mg tablets - not prescribed to patient (prescribed to partner)' - this directly hands the learner the reluctant fact f10 (unauthorized borrowed lorazepam use) via a passive record review, bypassing the need to ask. The medication reconciliation artifact d5 itself correctly shows no lorazepam at all, but the action result text contradicts the artifact and leaks the hidden fact. Fix: action a6 result should only report what d5 shows (no benzodiazepine on the list, only OTC omeprazole), with no mention of lorazepam/partner."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "action a5 result vs artifact d4/d6",
+   "problem": "Action a5 result states vitals 'HR 110-130' across three ED visits, but artifact d4/d6 shows HR values of 128, 118, 122 - visit 2's 118 is below the stated range floor of 110 is fine, but the stated range '110-130' doesn't match actual range 118-128; minor numeric inconsistency a careful reader would flag."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "objective o5 / action a8",
+   "problem": "Objective o5 lists factIds f21, f24, f31 (family cultural attitudes, partner's limited awareness, cultural stigma - several reluctant/hidden tier facts) as elicited via action a8 (Mental Status Exam), but MSE is an observational action, not an interview action capable of eliciting these reluctant disclosed facts; this mismatches action kind to the facts it's supposed to reveal and risks implying these facts are observable rather than elicited via sensitive questioning."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a9 vs f12",
+   "problem": "Action a9 result and fact f12 both describe ~5 cups/500mg caffeine daily, consistent, but a9 is tagged kind 'test' though it is essentially a self-report inventory akin to an interview tool; minor scope-labeling inconsistency with other similarly self-report actions (e.g., AUDIT-C a7 also 'test') - not a major issue but worth noting for consistency of action-kind taxonomy."
+  }
+ ]
+}

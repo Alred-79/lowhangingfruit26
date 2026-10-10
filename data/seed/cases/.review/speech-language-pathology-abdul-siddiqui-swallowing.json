@@ -1,0 +1,47 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart 'Reason for visit' and d1/d6 released at start",
+   "problem": "chartAtStart explicitly states the visit is for 'swallowing and communication evaluation, referred after recent chest infection' and d1 (released at start) states pneumonia was 'likely aspiration-related given underlying Parkinson disease and reported difficulty with liquids per spouse,' and d6 (chest X-ray, also released at action a1 but a1 is listed with artifactIds d6 meaning it's available from start of that action) explicitly says 'clinical correlation with aspiration risk recommended.' This hands the learner the entire diagnosis (aspiration risk) before any interview occurs, bypassing the clinical reasoning the case is meant to test. Fix: redact the explicit aspiration linkage in d1 to something neutral like 'community-acquired pneumonia, right lower lobe, resolved,' and remove 'aspiration risk' language from d6, letting the learner infer aspiration risk from trial swallows and history rather than reading it directly in the chart."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "a1 result text",
+   "problem": "The action result for reviewing the hospitalization record restates 'likely aspiration-related' verbatim, again leaking the clinical conclusion the student is supposed to reach through assessment. Fix: state only the objective facts (diagnosis treated, antibiotics given, resolution) without the aspiration causal attribution."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "d2/d3 weight data vs a2 result",
+   "problem": "d2 and d3 show three data points (68.0 kg 3 months ago, 66.2 kg 6 weeks ago, 64.0 kg today), but a2's result only references two points (68 kg three months ago, 64 kg today) and computes 5.9% loss based on only the endpoints, ignoring the intermediate value. This is not inherently wrong arithmetically (4/68=5.88%≈5.9%, correct), but the artifact-review action result should accurately reflect that three data points exist rather than appearing to omit the middle one, since the artifact d2/d3 are not even linked as artifactIds for a2 despite directly matching its described review of the chart's weight data."
+  },
+  {
+   "severity": "medium",
+   "kind": "mismatch",
+   "where": "a2 artifactIds field",
+   "problem": "Action a2 reviews 'weight trend in chart' and its result exactly matches the data in artifacts d2 (Weight Flowsheet) and d3 (Weight Trend Chart), yet artifactIds for a2 is empty ([]). This should reference d2 and/or d3 so the result is traceable to a specific artifact."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "a6 result text",
+   "problem": "The result states 'Recommend formant assessment at instrumental study' — this is an action result handing the learner a specific next-step recommendation (effectively giving away part of the answer-key plan) rather than simply reporting that cervical auscultation could not be performed. Fix: remove the recommendation language from the action result; such recommendations belong in the learner's own clinical reasoning/plan, not as feedback from a failed action."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "d1 and f30/m2 timeline",
+   "problem": "d1 (5 weeks ago) says 'Advised follow-up with speech-language pathology for swallow evaluation; family reports this is first time scheduling due to patient's reluctance,' which already announces the reluctance/delay captured in reluctant fact f30 ('I didn't see the urgency, so we put it off'). This chart note, released at start, leaks the reluctant psychosocial fact f30 before the interview reveals it. Fix: remove the 'family reports...reluctance' clause from d1, leaving only the referral recommendation."
+  },
+  {
+   "severity": "low",
+   "kind": "leakage",
+   "where": "d5 Neurology note phrase 'Speech noted to be soft but not formally assessed'",
+   "problem": "This is acceptable as a discoverable record finding supporting hypophonia, but combined with chartAtStart and d1's leaks, it compounds early disclosure of the voice/communication diagnosis dimension before any direct patient interaction, reducing the diagnostic challenge intended by objectives o4/o5. Consider moving this detail to be revealed only upon a specific record-review action rather than passively available at start (currently d5 release is 'start')."
+  }
+ ]
+}

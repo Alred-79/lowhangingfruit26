@@ -1,0 +1,46 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart / f1 / f4 / studentBrief vs d6 release",
+   "problem": "The parent-report symptom scale (d6, fact f23 content) reveals discrepant symptoms, but it is released only via action a3. However chartAtStart and f1 already frame the visit as a 'return-to-play assessment' with athlete claiming full recovery, which is fine; the real leak is that a2 and a3 (administering self-report and reviewing parent report) are both labeled as 'test'/'record' review of instruments that already contain the key teaching contrast baked into the artifact text verbatim before the learner does any interview questioning (e.g., d6 lists irritability, drowsiness explicitly matching f8, f7 reluctant/discoverable facts). This means the hidden/reluctant facts f6, f7, f8 (light sensitivity, sleep change, irritability) are fully disclosed via a record artifact (d6) without requiring the learner to elicit them through rapport-based questioning, bypassing the reluctant-tier interview requirement for f6-f8, which are tagged reluctant/discoverable but are fully given away by simply running the parent PCSS action.",
+   "fixSuggestion": "Either reduce d6 to a smaller discrepancy that doesn't fully enumerate every reluctant symptom, or keep d6 as a legitimate collateral screening instrument result (which is appropriate for this tier since parent report is a valid record action) but downgrade f6/f7/f8 to discoverable rather than reluctant, since the record already discloses them without needing a sensitive direct question."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "fact f12 topic label 'prior head injury history' and action a9 result",
+   "problem": "a9's result text explicitly states 'No prior concussion documented... Chart notes first known concussion' which is accurate record review, but the fact topic itself labeled 'prior head injury history' alongside objective o5 and the hidden tier makes clear to a careful reader scanning fact topics that there IS a hidden prior concussion fact, telegraphing the exact hidden teaching point before the learner elicits it. This is a structural/topic-label leak rather than a chart leak, but combined with o5 explicitly naming the fact ('Elicit prior concussion history (hidden fact)') in a document the learner should not see pre-encounter, it's acceptable only if objectives are faculty-facing (common in these cases) — flagging only if learner-facing.",
+   "fixSuggestion": "Confirm objectives/factIds are faculty-only; if learner-facing, remove explicit 'hidden fact' labeling from objective o5 text."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a4 result vs d3 table",
+   "problem": "a4's result states BESS total errors today = 11, matching d3's row (6, 9, 11) for baseline/day3/today. This is consistent. However a4 has no artifactIds listed despite reporting a specific numeric result that duplicates d3's 'today' column; since d3 is only released by a1, the BESS 'today' value appears twice (once via a4 free-text result, once via d3 table) without an artifact tied to a4, which is a minor sourcing inconsistency rather than a real contradiction.",
+   "fixSuggestion": "Add d3 (or a new artifact) to a4's artifactIds, or note that a4 result is the source for d3's 'today' column to avoid ambiguity about which action generates the recorded flowsheet value."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a8 VOMS convergence result",
+   "problem": "Near point of convergence (NPC) >5-6 cm is generally considered abnormal in adolescents; 8 cm is correctly flagged abnormal here, so this is fine, but the result for VOR vertical ('mild provocation') and VMS ('moderate provocation +2 headache, +1 dizziness') uses a mixed scoring convention (some items use +N symptom change, others use descriptive-only severity) inconsistently within the same action result, which could confuse readers about the actual VOMS scoring rubric (standard VOMS reports change scores 0-10 per item, not categorical 'mild/moderate').",
+   "fixSuggestion": "Standardize VOMS reporting to the actual 0-10 symptom change scale for each of the 6 components for clarity and accuracy."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "chartAtStart 'Last vitals' vs a6 action result",
+   "problem": "chartAtStart lists last vitals as day-3 (HR 68, BP 110/70, Temp 98.2F), and a6 provides today's vitals (HR 72, BP 108/68, SpO2 99%, Temp 98.4F) — these are consistent as separate timepoints, no real conflict, but SpO2 was not previously tracked at day 3, so there's no baseline SpO2 for comparison; this is a trivial completeness gap, not an error."
+  },
+  {
+   "severity": "low",
+   "kind": "scope",
+   "where": "a11 'Review physician clearance status in chart'",
+   "problem": "This is appropriately a record-review action within AT scope, but the phrasing of the result ('Return-to-play protocol requires physician sign-off before beginning Stage 6') slightly misstates district policy as stated in d8, which says physician clearance is required before Stage 5 (full-contact practice) AND Stage 6 (competition), not just Stage 6.",
+   "fixSuggestion": "Update a11 result to say 'before beginning Stage 5 (full-contact practice) or Stage 6 (competition)' to match d8 exactly."
+  }
+ ]
+}

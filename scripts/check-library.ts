@@ -312,7 +312,7 @@ async function reviewAll() {
             r.issues = Array.isArray(r.issues) ? r.issues : [];
             fs.writeFileSync(path.join(reviewDir, f), JSON.stringify(r, null, 1));
             const by = (s: string) => r.issues.filter((i) => i.severity === s).length;
-            console.log(`${r.verdict.padEnd(12)} ${f}  high ${by("high")}, medium ${by("medium")}, low ${by("low")}  ${Math.round((Date.now() - t) / 1000)}s`);
+            console.log(`${String(r.verdict || "?").padEnd(12)} ${f}  high ${by("high")}, medium ${by("medium")}, low ${by("low")}  ${Math.round((Date.now() - t) / 1000)}s`);
             break;
           } catch (e) {
             const msg = `${(e as Error).name}: ${(e as Error).message}`;

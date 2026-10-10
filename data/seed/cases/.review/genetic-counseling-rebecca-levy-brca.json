@@ -1,0 +1,35 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a11 result",
+   "problem": "Action a11 is named 'Discuss cascade testing implications for relatives' but its result includes 'Discussed strategies for sharing information with family given sister's stated reluctance' - this hands over f15 (sister's reluctance, tier: reluctant) and f30 (patient's guilt/conflict, tier: reluctant) without the learner ever having asked a direct, sensitive question to elicit it. The result should only reflect what the counselor explains about cascade testing in general; the sister's specific wish not to know should only surface if the learner asks about it directly (e.g., 'how do you think your siblings would feel about testing' or similar) per the reluctant tier rules."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a8 result",
+   "problem": "Action a8 'Assess patient understanding of inheritance pattern' is phrased as an assessment but its result reports the patient's understanding 'after counseling' as if the counseling already occurred - this bypasses the actual counseling interaction. Similarly a9 reports the patient's understanding as already achieved. These should represent a check of the patient's baseline understanding (pre-counseling), not a conclusion that counseling was already successfully delivered, since f17 and f31 establish the patient initially does NOT understand VUS or the result categories."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a11 result",
+   "problem": "The result states daughters' testing is deferred 'per professional guidelines for adult-onset conditions' - this is appropriate content for the counselor to state, but combined with the sister's reluctance leak above, the entire result for a11 collapses several distinct interview-dependent facts (f15, f16, f30) into a single record action, denying the learner the chance to actually elicit this reluctant information through rapport-building and direct questioning."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "d4 vs f28 vs mismatch m2",
+   "problem": "d4 flowsheet shows only one mammogram (13 months ago) with no earlier entries, and action a7 result states 'Last mammogram at age 37: normal... Clinical breast exams by PCP annually, last normal' implying a longer screening history consistent with f28 (annual mammograms since age 35). The mismatch m2 is intentional and documented, but the a7 action result itself doesn't flag the discrepancy with f28, so the mismatch is only discoverable via the artifact d4, which is correct; however the action a7 text already asserts 'clinical breast exams... annually' as fact, slightly undercutting the intended mismatch about mammogram frequency - this is a minor internal tension but likely acceptable by design."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a2 result vs d5 chart",
+   "problem": "Action a2 result lists maternal grandfather's prostate cancer as diagnosed 'age 60s' with status 'unknown' for living/death, while d5 chart gives a specific age of 62 at diagnosis. This is not strictly contradictory but is a minor inconsistency in precision between the two artifacts describing the same fact."
+  }
+ ]
+}

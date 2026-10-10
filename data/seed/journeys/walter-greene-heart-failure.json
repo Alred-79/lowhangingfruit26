@@ -8,7 +8,7 @@
       {
         "id": "s1",
         "order": 1,
-        "professionId": "emergency_medicine",
+        "professionId": "emergency-medicine",
         "roleTitle": "Emergency medicine attending",
         "clinicianId": "brian_lee",
         "focus": "First contact for the team. Find out how he is right now and what is troubling him most, review his vital signs, check for anything that needs urgent attention, and identify what hospital medicine and nutrition need to pick up.",
@@ -18,7 +18,7 @@
       {
         "id": "s2",
         "order": 2,
-        "professionId": "hospital_medicine",
+        "professionId": "internal-medicine",
         "roleTitle": "Hospitalist (internal medicine)",
         "clinicianId": "priya_narang",
         "focus": "Medical review across his diabetes, heart failure and kidney disease: current symptoms, the medicines he actually takes including over-the-counter ones, what he understands about his conditions, and what worries him. Coordinate what the team does next.",

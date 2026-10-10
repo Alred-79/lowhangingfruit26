@@ -35,7 +35,7 @@ function Arrow() {
   );
 }
 
-function ChainFlow({ chain, onOpen }: { chain: Chain; onOpen: (id: string) => void }) {
+function ChainFlow({ chain, onOpen, stages }: { chain: Chain; onOpen: (id: string) => void; stages: number }) {
   return (
     <div className="rounded-lg border border-slate-200 bg-white p-3">
       <div className="mb-2 flex flex-wrap items-center gap-2 text-xs text-slate-500">
@@ -49,7 +49,7 @@ function ChainFlow({ chain, onOpen }: { chain: Chain; onOpen: (id: string) => vo
             <>
               <div className={cx("text-[11px] font-semibold uppercase tracking-wide", st.tag)}>{s.label}</div>
               <div className="mt-0.5 line-clamp-4 text-[13px] leading-snug text-slate-800">{s.kind === "asked" ? `“${s.detail}”` : s.detail}</div>
-              <div className="mt-1 text-[11px] text-slate-500">{s.who}{s.stageOrder > 0 && s.stageOrder < 90 ? ` · encounter ${s.stageOrder}` : ""}</div>
+              <div className="mt-1 text-[11px] text-slate-500">{s.who}{s.stageOrder > 0 && s.stageOrder <= stages ? ` · encounter ${s.stageOrder}` : ""}</div>
             </>
           );
           return (
@@ -374,7 +374,7 @@ export default function FinalView({ view, onOpen, refresh }: { view: RunView; on
                 <span key={k} className="inline-flex items-center gap-1.5"><span className={cx("h-3 border-l-4", STEP_STYLE[k].bar)} />{l}</span>
               ))}
             </div>
-            {view.chains.map((c) => <ChainFlow key={c.id} chain={c} onOpen={onOpen} />)}
+            {view.chains.map((c) => <ChainFlow key={c.id} chain={c} onOpen={onOpen} stages={view.stages.length} />)}
           </div>
         ) : (
           <p className="text-sm text-slate-500">No later encounter has drawn on an earlier entry yet. Chains appear as soon as a professional asks about something a colleague recorded.</p>
