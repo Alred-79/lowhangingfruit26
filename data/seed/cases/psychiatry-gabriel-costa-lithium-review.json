@@ -72,7 +72,7 @@
     "id": "a9",
     "kind": "lab",
     "name": "Review renal function panel",
-    "result": "Creatinine 1.3 mg/dL (H, baseline 0.9 mg/dL three months ago); eGFR 68 mL/min/1.73m² (L); BUN 22 mg/dL (H).",
+    "result": "Creatinine 1.3 mg/dL (H, baseline 0.9 mg/dL three months ago); eGFR 68 mL/min/1.73m² (L); BUN 22 mg/dL (H). Creatinine ratio (1.3/0.9 = 1.44) meets KDIGO AKI Stage 1 by magnitude, but no interim creatinine was drawn during the 2-week symptom course, so true onset timing (acute vs. subacute-on-chronic) cannot be strictly confirmed; best characterized as acute-on-indeterminate kidney injury pending urgent medical work-up.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -783,14 +783,12 @@
    },
    {
     "id": "o4",
-    "text": "Elicit, with nonjudgmental direct questioning, the patient's hidden ambivalence about lithium and covert consideration of self-discontinuation, and address it therapeutically.",
+    "text": "Through nonjudgmental, direct interview questioning and rapport-building (not surfaced by a generic MSE), elicit the patient's hidden ambivalence about lithium and covert consideration of self-discontinuation, and address it therapeutically.",
     "factIds": [
      "f27",
      "f28"
     ],
-    "actionIds": [
-     "a1"
-    ]
+    "actionIds": []
    },
    {
     "id": "o5",
@@ -822,19 +820,19 @@
    }
   ],
   "answerKey": {
-   "primaryProblem": "Acute lithium toxicity (serum lithium 1.4 mmol/L, up from 0.8 three months ago) with acute kidney injury, precipitated by NSAID (ibuprofen) use combined with volume depletion from heat exposure and GI losses, in a patient with bipolar I disorder currently euthymic on long-term lithium maintenance.",
+   "primaryProblem": "Acute lithium toxicity (serum lithium 1.4 mmol/L, up from 0.8 three months ago) with acute-on-indeterminate kidney injury (creatinine 1.3 mg/dL vs. baseline 0.9 mg/dL three months ago, meeting KDIGO AKI Stage 1 by magnitude though no interim labs confirm strict acute onset), precipitated by NSAID (ibuprofen) use combined with volume depletion from heat exposure and GI losses, in a patient with bipolar I disorder currently euthymic on long-term lithium maintenance.",
    "differential": [
     "Acute lithium toxicity due to NSAID interaction and dehydration (most likely)",
     "Lithium-induced nephrogenic diabetes insipidus (chronic, contributing to polyuria/polydipsia independent of acute toxicity)",
     "Subclinical hypothyroidism, possibly lithium-induced, contributing to fatigue but not the acute presentation",
-    "Acute kidney injury from another cause (e.g., prerenal azotemia from volume depletion) amplifying lithium retention",
+    "Acute-on-indeterminate kidney injury from another cause (e.g., prerenal azotemia from volume depletion) amplifying lithium retention, with timing not strictly confirmable as acute given lack of interim creatinine over the 2-week course",
     "Early breakthrough mania or mixed episode (unlikely given MSE and screens, but must be ruled out given tremor and GI symptoms)",
     "Thyrotoxicosis (unlikely; TSH is elevated, not suppressed)",
     "Nonadherence leading to erratic lithium dosing (ruled out by refill history)"
    ],
    "keyFindings": [
     "Lithium level 1.4 mmol/L today, up from 0.8 mmol/L three months ago, now above therapeutic range (0.6-1.2)",
-    "Creatinine 1.3 mg/dL (up from baseline 0.9), eGFR 68 (L), BUN 22 (H) consistent with acute kidney injury",
+    "Creatinine 1.3 mg/dL (up from baseline 0.9), eGFR 68 (L), BUN 22 (H) — meets KDIGO AKI Stage 1 by creatinine ratio, but no interim creatinine was obtained during the 2-week symptom course, so acute vs. subacute-on-chronic kidney injury cannot be strictly confirmed",
     "New-onset worsened postural/action tremor on camera exam, beyond baseline mild tremor",
     "2-week history of polydipsia, polyuria, and loose stools consistent with lithium GI/renal toxicity and nephrogenic diabetes insipidus",
     "Ibuprofen 600 mg TID started 3 weeks ago (NSAID reduces renal lithium clearance), overlapping precisely with symptom onset",
@@ -842,22 +840,22 @@
     "TSH 5.8 mIU/L (H), subclinical hypothyroidism, a known long-term lithium effect requiring primary care follow-up",
     "Pharmacy refill history confirms adherence, ruling out erratic dosing as the cause",
     "Current mood euthymic; MSE and mania/depression screens negative; C-SSRS negative",
-    "Hidden ambivalence: patient privately misses hypomanic energy and has been considering stopping lithium independently, not yet acted upon"
+    "Hidden ambivalence: patient privately misses hypomanic energy and has been considering stopping lithium independently, not yet acted upon — only elicitable through direct, nonjudgmental interview questioning, not through the MSE itself"
    ],
    "plan": [
-    "Advise patient to hold tonight's lithium dose and seek urgent same-day medical evaluation (primary care or emergency department) given AKI and lithium level 1.4 mmol/L — this requires physical exam, IV fluids, and lab monitoring beyond psychiatry's remote scope",
+    "Advise patient to hold tonight's lithium dose and seek urgent same-day medical evaluation (primary care or emergency department) given acute-on-indeterminate kidney injury and lithium level 1.4 mmol/L — this requires physical exam, IV fluids, and lab monitoring beyond psychiatry's remote scope",
     "Instruct patient to stop ibuprofen immediately; coordinate with urgent care/primary care for alternative non-NSAID pain management for back strain",
-    "Recommend repeat lithium level and renal panel in 24-48 hours after rehydration, coordinated with primary care, before resuming or adjusting lithium dose",
+    "Recommend repeat lithium level and renal panel in 24-48 hours after rehydration, coordinated with primary care, before resuming or adjusting lithium dose, which will also help clarify the trajectory of the kidney injury",
     "Counsel on maintaining adequate hydration and avoiding future NSAID use without checking with the prescribing psychiatrist",
     "Refer to primary care for evaluation and management of elevated TSH (consider repeat TSH with free T4 off acute illness, discuss levothyroxine if persistent)",
-    "Explore and validate the patient's ambivalence about lithium and sense of flatness/missing hypomanic energy; psychoeducate on relapse risk of stopping lithium abruptly and the difference between toxicity (temporary, treatable) and the medication itself being wrong for him",
+    "Explore and validate the patient's ambivalence about lithium and sense of flatness/missing hypomanic energy, using direct nonjudgmental questioning during the interview rather than relying on the MSE alone; psychoeducate on relapse risk of stopping lithium abruptly and the difference between toxicity (temporary, treatable) and the medication itself being wrong for him",
     "Schedule close psychiatric follow-up (within 1 week) after acute toxicity resolves to reassess lithium dosing, consider adjunctive strategies for residual flatness, and discuss long-term lithium monitoring plan (levels, renal, thyroid every 3-6 months)",
     "Document clear safety plan: no current SI/HI, but monitor given ambivalence about treatment and risk of mood destabilization if lithium is self-discontinued",
-    "Do not independently manage the acute toxicity/AKI as psychiatry; ensure a medical clinician is involved urgently"
+    "Do not independently manage the acute toxicity/kidney injury as psychiatry; ensure a medical clinician is involved urgently"
    ],
    "redFlags": [
     "Lithium level significantly above therapeutic range with new tremor and GI/renal symptoms indicating possible evolving toxicity, which can progress to confusion, ataxia, seizures, or arrhythmia if untreated",
-    "Acute kidney injury (rising creatinine, falling eGFR) requiring urgent medical, not purely psychiatric, management",
+    "Acute-on-indeterminate kidney injury (rising creatinine, falling eGFR) requiring urgent medical, not purely psychiatric, management",
     "Patient's covert consideration of self-discontinuing lithium, which carries high relapse risk for mania given prior psychotic manic episode",
     "Need to distinguish toxicity tremor/GI symptoms from any emerging mood episode before attributing symptoms solely to toxicity"
    ],
@@ -865,9 +863,10 @@
     "NSAIDs (including OTC ibuprofen) significantly reduce renal clearance of lithium and are a common, under-recognized cause of lithium toxicity; cross-prescriber communication and pharmacy interaction screening are essential",
     "Lithium toxicity can present subtly with worsening tremor, GI symptoms, and polyuria/polydipsia before progressing to neurologic signs like confusion or ataxia",
     "Routine lithium monitoring (levels, renal function, thyroid function every 3-6 months) is essential even when patients feel clinically stable, since toxicity can develop insidiously",
-    "Patients on long-term mood stabilizers may privately grieve the loss of hypomanic energy; nonjudgmental, direct inquiry can uncover covert nonadherence risk before it happens",
+    "Patients on long-term mood stabilizers may privately grieve the loss of hypomanic energy; nonjudgmental, direct inquiry (not the MSE itself) can uncover covert nonadherence risk before it happens",
     "Volume depletion from occupational heat exposure, poor fluid replacement physiology, and diarrhea can precipitate lithium toxicity even without any change in dose or adherence",
-    "Subclinical hypothyroidism is a known long-term adverse effect of lithium and requires ongoing primary care collaboration, not psychiatric management alone"
+    "Subclinical hypothyroidism is a known long-term adverse effect of lithium and requires ongoing primary care collaboration, not psychiatric management alone",
+    "Strict KDIGO AKI criteria require a creatinine rise within a defined 48-hour to 7-day window; a creatinine increase documented only before and after a longer symptomatic interval (as here, over 2 weeks) meets the magnitude criterion but cannot be labeled definitively 'acute' without interim data — a useful nuance for trainees applying diagnostic criteria to real-world lab spacing"
    ]
   },
   "patient": {

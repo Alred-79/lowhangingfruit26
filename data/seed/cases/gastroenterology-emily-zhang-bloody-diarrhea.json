@@ -125,7 +125,7 @@
     "id": "a13",
     "kind": "assessment",
     "name": "Review home stool diary/log for frequency and blood",
-    "result": "Patient-logged diary shows 5-7 bowel movements/day over the past 3 weeks, blood noted in 6 of 7 days logged, 2 nighttime episodes documented",
+    "result": "Patient-logged diary shows 5-7 bowel movements/day over the past 3 weeks; diary tracks frequency only and does not log blood or nighttime episodes",
     "importance": "important",
     "artifactIds": [
      "d3"
@@ -145,7 +145,7 @@
     "id": "a15",
     "kind": "assessment",
     "name": "Calculate partial Mayo score from reported symptoms",
-    "result": "Partial Mayo score approximately 7 (stool frequency subscore 2, rectal bleeding subscore 2, physician global assessment 3) consistent with moderately active disease",
+    "result": "Partial Mayo score approximately 6 (stool frequency subscore 2, rectal bleeding subscore 2, physician global assessment 2) consistent with moderately active disease",
     "importance": "important",
     "artifactIds": []
    },
@@ -421,7 +421,7 @@
     "release": {
      "when": "start"
     },
-    "body": "26yo F presents with 3 month history of loose stools, 4-5x/day, intermittent cramping. Reports high stress due to upcoming bar exam. No fever, no weight loss elicited at this visit. Abdominal exam benign. Impression: likely stress-related irritable bowel syndrome given timing with exam preparation. Discussed dietary fiber, stress management techniques. Recommended psyllium fiber supplement and follow-up if symptoms worsen. No labs or stool studies ordered at this visit."
+    "body": "26yo F presents with 3 month history of loose stools, 4-5x/day, intermittent cramping. Reports high stress due to upcoming bar exam. No fever reported; weight loss not asked about or reported at this visit. Abdominal exam benign. Impression: likely stress-related irritable bowel syndrome given timing with exam preparation. Discussed dietary fiber, stress management techniques. Recommended psyllium fiber supplement and follow-up if symptoms worsen. No labs or stool studies ordered at this visit."
    },
    {
     "id": "d5",
@@ -502,11 +502,11 @@
   "chartAtStart": [
    {
     "label": "Reason for visit",
-    "value": "New GI consultation: 4 months of loose stools with blood, abdominal cramping"
+    "value": "New GI consultation: referred by primary care for chronic diarrhea"
    },
    {
     "label": "Problem list",
-    "value": "Loose stools with blood (4 months), unintentional weight loss, iron deficiency anemia"
+    "value": "Referred for evaluation of chronic diarrhea"
    },
    {
     "label": "Medications",
@@ -978,7 +978,7 @@
     "Markedly elevated fecal calprotectin (890 mcg/g) with negative infectious stool workup",
     "Erythema nodosum on shins, an extraintestinal manifestation not initially connected by the patient",
     "Hypoalbuminemia reflecting disease severity/nutritional impact",
-    "Partial Mayo score ~7 indicating moderately active disease"
+    "Partial Mayo score ~6 indicating moderately active disease"
    ],
    "plan": [
     "Order colonoscopy with ileal intubation and segmental biopsies to confirm diagnosis, assess extent, and rule out infectious/other etiologies",

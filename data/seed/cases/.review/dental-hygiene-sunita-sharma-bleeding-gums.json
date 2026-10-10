@@ -31,5 +31,14 @@
    "where": "a9 vs f11",
    "problem": "Action a9 result states the patient uses a 'firm/medium bristle brush,' while fact f11 states she 'believes harder brushing cleans better' with a 'firm-bristle brush' - these are consistent in substance but a9 hedges with 'firm/medium' which slightly waters down the clarity of the finding compared to the fact; align wording to 'firm-bristle brush' only for consistency."
   }
+ ],
+ "revised": [
+  "a11: renamed to 'Tobacco use screening' and result now only reflects negative cigarette/smokeless tobacco screening (f15); removed automatic disclosure of reluctant fact f14 (paan/areca use), which must now be elicited through direct, rapport-based conversation per its 'reluctant' tier.",
+  "a10: converted from an interview-style action to a pure camera-based flossing technique demonstration; result now describes only observed technique (inconsistent motion, missed sites), removing the self-reported frequency correction (f13) that previously bypassed the tiering/mismatch design.",
+  "a7: removed the bundled sweetened-chai sipping detail (f9) from the dry-mouth screening result so that this separate discoverable fact must be elicited on its own rather than being auto-revealed with the dry-mouth screen.",
+  "a13 and d3: reconciled HbA1c framing so both now present the same information consistently - diagnostic cutoffs (<5.7 normal, 5.7-6.4 prediabetes, ≥6.5 diabetes) together with the treatment goal (<7.0 for most diabetics) - clarifying that 8.2% is both diagnostic of diabetes and above the treatment goal.",
+  "m1: updated recordEvidence to also reference the now-observation-only a10 demonstration result (technique inconsistency) as supporting evidence, since the flossing frequency admission no longer appears verbatim in an action result and must emerge via conversation.",
+  "m2: updated recordEvidence to clarify that the negative tobacco screening (a11) does not capture paan/areca use, so this risk factor can only be surfaced through separate direct, sensitive questioning in conversation, preserving the mismatch's teaching function without leaking f14 via an action.",
+  "o1 and o2: no factId/actionId changes needed beyond the above corrections (f13 and f14 still linked only via conversation-gated discovery, not leaked actions)."
  ]
 }

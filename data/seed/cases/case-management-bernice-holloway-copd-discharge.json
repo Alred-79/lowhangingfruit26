@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "assessment",
     "name": "Review discharge summary and planned services",
-    "result": "Discharge summary (4 days ago) for AECOPD, 3rd admission this year. Plan: fluticasone/umeclidinium/vilanterol (Trelegy Ellipta) 1 inh daily, prednisone 40mg taper over 10 days, home O2 2L/min NC, home health nursing eval within 48h of discharge, pulmonology follow-up in 7 days, portable O2 tanks for ambulation/appointments ordered via DME.",
+    "result": "Discharge summary (4 days ago) for AECOPD, 3rd admission this year. Plan: fluticasone/umeclidinium/vilanterol (Trelegy Ellipta) 1 inh daily, prednisone taper (40mg days 1-3, 30mg days 4-6, 20mg days 7-9, 10mg day 10, then stop), home O2 2L/min NC, home health nursing eval within 48h of discharge, pulmonology follow-up in 7 days, portable O2 tanks for ambulation/appointments ordered via DME.",
     "importance": "critical",
     "artifactIds": [
      "d3"
@@ -251,9 +251,9 @@
       {
        "cells": [
         "Prednisone",
-        "40mg, taper 10mg q3 days",
+        "Days 1-3: 40mg; Days 4-6: 30mg; Days 7-9: 20mg; Day 10: 10mg, then stop",
         "Oral",
-        "Daily (tapering)",
+        "Daily (tapering), see dose by day range",
         "Continued from hospital"
        ]
       },
@@ -322,7 +322,7 @@
     "id": "d4",
     "type": "chart",
     "title": "Home Pulse Oximetry Readings Since Discharge",
-    "date": "Days 1-4 post-discharge",
+    "date": "Days 0-4 post-discharge",
     "release": {
      "when": "action",
      "ref": "a3"
@@ -337,6 +337,10 @@
       {
        "name": "SpO2 on 2L O2",
        "points": [
+        {
+         "x": "Day 0 (discharge)",
+         "y": 93
+        },
         {
          "x": "Day 1",
          "y": 92

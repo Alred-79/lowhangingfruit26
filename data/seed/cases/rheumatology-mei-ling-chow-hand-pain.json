@@ -142,8 +142,8 @@
    {
     "id": "a15",
     "kind": "assessment",
-    "name": "Calculate DAS28 / joint count assessment",
-    "result": "Tender joint count 10 (bilateral MCPs, wrists, MTPs), swollen joint count 8, consistent with moderate-to-high disease activity.",
+    "name": "Tender/swollen joint count (28-joint assessment)",
+    "result": "Tender joint count 10 and swollen joint count 8 across bilateral MCPs, wrists, and MTPs. Combined with CRP 22 mg/L (once reviewed) and patient global assessment, this joint count pattern is consistent with moderate-to-high disease activity; a formal DAS28-CRP score can be calculated once CRP and patient global assessment (0-10) are incorporated.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -167,7 +167,8 @@
     "author": "Quest Diagnostics - Seattle",
     "date": "1 week ago",
     "release": {
-     "when": "start"
+     "when": "action",
+     "ref": "a7"
     },
     "table": {
      "columns": [
@@ -405,7 +406,7 @@
     "release": {
      "when": "start"
     },
-    "body": "41yo woman with 3 months progressive symmetric hand/wrist pain and swelling, now involving forefeet, morning stiffness >1 hour, partial response to OTC NSAID. Family history of RF-positive RA in mother with hand deformities. Referred to rheumatology for evaluation of inflammatory arthritis. Baseline labs and hand/wrist films obtained prior to referral, see attached."
+    "body": "41yo woman with 3 months progressive symmetric hand/wrist pain and swelling, now involving forefeet, morning stiffness >1 hour, partial response to OTC NSAID. On exam: symmetric soft-tissue swelling of MCP joints and wrists bilaterally, with tenderness on compression; mild forefoot swelling. No rash or nail changes noted. Referred to rheumatology for further evaluation. Baseline labs and hand/wrist films ordered prior to referral; results pending at time of this note."
    }
   ],
   "chartAtStart": [
@@ -797,15 +798,13 @@
    },
    {
     "id": "o4",
-    "text": "Elicit reproductive health history (pregnancy intention) and herbal/complementary medication use, and recognize how these change treatment planning (avoiding methotrexate; need to clarify unidentified herbal supplement).",
+    "text": "Elicit reproductive health history (pregnancy intention) and herbal/complementary medication use through direct interview (not the written medication list, which does not capture undisclosed supplement use), and recognize how these change treatment planning (avoiding methotrexate; need to clarify unidentified herbal supplement).",
     "factIds": [
      "f20",
      "f21",
      "f34"
     ],
-    "actionIds": [
-     "a14"
-    ]
+    "actionIds": []
    },
    {
     "id": "o5",

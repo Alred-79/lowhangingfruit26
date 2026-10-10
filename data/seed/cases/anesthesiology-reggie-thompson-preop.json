@@ -91,7 +91,7 @@
     "id": "a7",
     "kind": "assessment",
     "name": "Assess functional capacity (METs) by history",
-    "result": "Patient reports able to walk short distances and do light household tasks without symptoms, but climbing one flight of stairs causes breathlessness and he must pause; cannot jog or climb two flights without stopping. Estimated functional capacity <4 METs.",
+    "result": "Patient reports able to walk short distances and do light household tasks without symptoms, but becomes breathless climbing even one flight of stairs and must pause partway; unable to climb two flights of stairs without stopping, and cannot jog. Inability to climb two flights of stairs without stopping is a classic marker for functional capacity <4 METs.",
     "importance": "critical",
     "aliases": [
      "exercise tolerance",
@@ -423,8 +423,7 @@
     "author": "Primary Care Clinic EHR",
     "date": "Updated 1 month ago",
     "release": {
-     "when": "action",
-     "ref": "a4"
+     "when": "start"
     },
     "table": {
      "columns": [
@@ -620,10 +619,9 @@
     "author": "Dr. L. Fernandez, Bariatric Surgery",
     "date": "3 weeks ago",
     "release": {
-     "when": "action",
-     "ref": "a13"
+     "when": "start"
     },
-    "body": "54-year-old male with BMI 44 kg/m2, hypertension, type 2 diabetes, severe OSA on CPAP (per patient report), GERD, cleared from nutrition and psychology for laparoscopic sleeve gastrectomy. Scheduled for surgery in 2 weeks. Referred to anesthesia for pre-operative evaluation given multiple comorbidities and reported history of difficult intubation. Plan: general anesthesia, standard bariatric perioperative pathway, 23-hour observation anticipated."
+    "body": "54-year-old male with BMI 44 kg/m2, hypertension, type 2 diabetes, severe OSA on CPAP (per patient report; adherence not recently verified), GERD, cleared from nutrition and psychology for laparoscopic sleeve gastrectomy. Scheduled for surgery in 2 weeks. Referred to anesthesia for pre-operative evaluation given multiple comorbidities and reported history of difficult intubation. Plan: general anesthesia, standard bariatric perioperative pathway, 23-hour observation anticipated."
    }
   ],
   "chartAtStart": [
@@ -633,7 +631,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Obesity (BMI 44), Hypertension, Type 2 diabetes mellitus, Obstructive sleep apnea (severe, on CPAP), Gastroesophageal reflux disease, History of difficult intubation"
+    "value": "Obesity (BMI 44), Hypertension, Type 2 diabetes mellitus, Obstructive sleep apnea (severe, CPAP prescribed; adherence not recently verified), Gastroesophageal reflux disease, History of difficult intubation"
    },
    {
     "label": "Medications",
@@ -699,8 +697,8 @@
     "id": "f5",
     "category": "hpi",
     "topic": "breathing with activity",
-    "chart": "Reports dyspnea on exertion; becomes short of breath climbing one flight of stairs, must pause partway.",
-    "says": "If I go up one flight of stairs at work I gotta stop halfway, I'm huffing and puffing pretty good.",
+    "chart": "Reports dyspnea on exertion; becomes short of breath climbing one flight of stairs and must pause partway; unable to climb two flights of stairs without stopping.",
+    "says": "If I go up one flight of stairs at work I gotta stop halfway, I'm huffing and puffing pretty good. Two flights? Forget it, no way I'm making it up without stopping.",
     "tier": "initial",
     "importance": "critical"
    },

@@ -10,7 +10,9 @@
     "name": "Vital signs review (from chart)",
     "result": "BP 128/82 mmHg, HR 76 bpm, RR 14, Temp 98.2°F, reported via home cuff at urgent care visit 3 weeks ago; no vitals indicating acute illness",
     "importance": "minor",
-    "artifactIds": []
+    "artifactIds": [
+     "d5"
+    ]
    },
    {
     "id": "a2",
@@ -197,8 +199,8 @@
     "author": "Allentown Urgent Care",
     "date": "3 weeks ago",
     "release": {
-     "when": "fact",
-     "ref": "f6"
+     "when": "action",
+     "ref": "a1"
     },
     "body": "Patient restricted to light duty: no lifting greater than 10 lbs, no repetitive bending, duration 4 weeks from date of visit, re-evaluate at follow-up. Employer: regional distribution warehouse."
    }

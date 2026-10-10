@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "record",
     "name": "Review CPAP device download/compliance report",
-    "result": "Download for the past 30 nights: used 12 of 30 nights (40%), average use on nights used 2 h 10 min, average leak 38 L/min (large), residual AHI 14/hr, median pressure 10 cmH2O on auto-CPAP range 6-14 cmH2O.",
+    "result": "Download for the past 30 nights: used 12 of 30 nights (40%), average use on nights used 2 h 10 min, average leak 38 L/min (large), residual AHI 14/hr, median pressure 10 cmH2O on auto-CPAP range 6-14 cmH2O. (Detailed nightly chart available for the most recent 14 nights shows a similar intermittent pattern, with usage on roughly half of nights.)",
     "importance": "critical",
     "artifactIds": [
      "d1"
@@ -72,9 +72,9 @@
    {
     "id": "a8",
     "kind": "assessment",
-    "name": "Screen for drowsy driving / occupational safety risk",
-    "result": "On direct questioning, patient discloses he nearly fell asleep operating a forklift at work about one month ago; no accident occurred; he has not reported this to his employer.",
-    "importance": "critical",
+    "name": "Administer fatigue risk / drowsy driving screening tool (e.g., Epworth-based occupational risk screen)",
+    "result": "Structured fatigue-risk screening administered. Patient endorses borderline-high risk score consistent with excessive daytime sleepiness in safety-sensitive settings; score alone is non-diagnostic and does not specify any particular incident. Further direct, private conversation recommended to explore occupational safety concerns.",
+    "importance": "important",
     "abnormal": true,
     "artifactIds": []
    },
@@ -154,7 +154,7 @@
       },
       {
        "cells": [
-        "Average 95th %ile leak",
+        "Mean leak (95th percentile)",
         "38 L/min (large leak)"
        ],
        "flag": "H"
@@ -177,7 +177,7 @@
     },
     "chart": {
      "kind": "line",
-     "xLabel": "Night (past 2 weeks)",
+     "xLabel": "Night (most recent 14 of past 30 nights)",
      "yLabel": "Hours of use",
      "refLow": 4,
      "series": [
@@ -696,7 +696,7 @@
     "factId": "f2",
     "artifactId": "d1",
     "patientClaim": "Patient states he wears the CPAP 'pretty much all night' every night.",
-    "recordEvidence": "CPAP download report shows use on only 12 of 30 nights (40%), averaging 2 hours 10 minutes per night used.",
+    "recordEvidence": "CPAP download report shows use on only 12 of 30 nights (40%), averaging 2 hours 10 minutes per night used, with the detailed 14-night chart confirming an intermittent, far-from-nightly pattern.",
     "teachingPoint": "Self-reported adherence is often overestimated; always verify with objective device download data before coaching plans, and explore reasons for the gap non-judgmentally."
    },
    {
@@ -704,8 +704,8 @@
     "factId": "f13",
     "artifactId": "d1",
     "patientClaim": "Initially does not mention any workplace safety concerns and only discloses the forklift near-miss when asked directly and privately about drowsy driving/operating machinery.",
-    "recordEvidence": "High residual AHI (14/hr) and poor adherence pattern on the download are consistent with persistent excessive daytime sleepiness that would explain a safety-relevant near-miss episode.",
-    "teachingPoint": "Objective sleepiness risk (poor adherence + high residual AHI) should prompt direct, private screening for occupational and driving safety, since patients may fear disclosing safety incidents due to job security concerns."
+    "recordEvidence": "High residual AHI (14/hr) and poor adherence pattern on the download, together with a borderline-high fatigue-risk screening score, are consistent with persistent excessive daytime sleepiness that could explain a safety-relevant near-miss episode, though neither the download nor the screening tool states any specific incident.",
+    "teachingPoint": "Objective sleepiness risk (poor adherence + high residual AHI + elevated fatigue-risk screen) should prompt direct, private screening for occupational and driving safety, since patients may fear disclosing safety incidents due to job security concerns, and such incidents only surface through genuine rapport-building conversation, not a chart lookup."
    }
   ],
   "objectives": [
@@ -736,7 +736,7 @@
    },
    {
     "id": "o3",
-    "text": "Elicit sensitive safety information (occupational near-miss due to sleepiness) using a private, direct, non-judgmental questioning approach, recognizing the patient's fear of job loss as a barrier to disclosure.",
+    "text": "Use a non-diagnostic fatigue-risk screening tool to identify elevated sleepiness-related safety risk, then build rapport and ask direct, private, sensitive questions in conversation to elicit any occupational safety concerns and the patient's fear of job loss as a barrier to disclosure.",
     "factIds": [
      "f13",
      "f14"

@@ -3,7 +3,7 @@ import { chatStream, MODELS, type Turn } from "../llm";
 import { FACT_CATEGORIES } from "../types";
 import type { Artifact, CaseProfile, EncounterConfig, EncounterState, Fact, Knobs, Perturbation } from "../types";
 import { applyPerturbation, knobsForLevel, PERTURBATIONS } from "./difficulty";
-import { caseFacts, decide, gatekeep, matchActions } from "./gatekeeper";
+import { auditReply, caseFacts, decide, gatekeep, matchActions } from "./gatekeeper";
 import { patientSystem } from "./patient";
 
 export interface EncounterRow {
@@ -261,7 +261,7 @@ const addMessage = (encId: string, turn: number, speaker: MessageRow["speaker"],
 
 export type TurnEvent =
   | { type: "delta"; text: string }
-  | { type: "done"; text: string; messageId: number; chart: ChartView; newFactIds: string[]; deflected: boolean; rapportDelta: number }
+  | { type: "done"; text: string; notice: string | null; messageId: number; chart: ChartView; newFactIds: string[]; deflected: boolean; rapportDelta: number }
   | { type: "error"; message: string };
 
 /** One student utterance -> gatekeeper -> deterministic disclosure -> streamed patient reply. */
@@ -303,10 +303,10 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
   try {
     for await (const chunk of chatStream({
       model: MODELS.chat,
-      system: patientSystem({ c, cfg, state, known, reveal: d.reveal, deflect: d.deflect, gate }),
+      system: patientSystem({ c, cfg, state, known, reveal: d.reveal, deflect: d.deflect, gate, lockedTopics: locked.filter((f) => !d.reveal.includes(f)).map((f) => f.topic) }),
       messages: turns,
       maxTokens: 500,
-      temperature: 0.8,
+      temperature: 0.6,
     })) {
       reply += chunk;
       yield { type: "delta", text: chunk };
@@ -316,8 +316,14 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
     run("DELETE FROM messages WHERE encounter_id = ? AND turn = ?", encId, state.turn);
     return void (yield { type: "error", message: "The patient connection dropped. Please send that again. (" + (e as Error).message + ")" });
   }
-  reply = reply.trim() || "...";
+  // Body-language cues are kept only when the patient is deflecting, and then only the first one.
+  let cues = 0;
+  reply = reply.replace(/\*[^*\n]{1,80}\*/g, (m) => (d.deflect.length && cues++ === 0 ? m : ""));
+  reply = reply.replace(/[ \t]+\n/g, "\n").replace(/\n{2,}/g, "\n").replace(/ {2,}/g, " ").trim() || "...";
+  // Grounding audit: anything clinical the patient said beyond the approved facts is flagged, never filed.
+  const unsupported = await auditReply(reply, [...known, ...d.reveal], c.persona.background, c.scenario.openingLine);
   const inserted = addMessage(encId, state.turn, "patient", reply, {
+    unsupported,
     revealed: d.reveal.map((f) => f.id),
     deflected: d.deflect.map((f) => f.id),
     questionType: gate.question_type,
@@ -326,10 +332,13 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
     rapportDelta: d.rapportDelta,
     state, // snapshot: lets a student rewind to this point
   });
+  const notice = unsupported.length ? `Not in the approved case record: ${unsupported.map((u) => `"${u}"`).join("; ")}. Treat this as unverified. It is not filed in the chart and does not count for or against you.` : null;
+  if (notice) addMessage(encId, state.turn, "system", notice, { kind: "unsupported" });
   save(encId, state);
   yield {
     type: "done",
     text: reply,
+    notice,
     messageId: Number(inserted.lastInsertRowid),
     chart: chartView(c, cfg, state),
     newFactIds: d.reveal.map((f) => f.id),

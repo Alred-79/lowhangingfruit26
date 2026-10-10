@@ -36,5 +36,13 @@
    "where": "action a8 CHA2DS2-VASc calculation",
    "problem": "CHA2DS2-VASc for an 81-year-old male with HTN and DM, no vascular disease, no prior stroke/TIA, no CHF: age≥75=2, HTN=1, DM=1, sex=0(male) = total 4, not 5. The result lists 'female sex N/A' oddly instead of simply 0 points for male sex, and sums to 5 only if an extra point is miscounted. Correct total CHA2DS2-VASc = 4, not 5."
   }
+ ],
+ "revised": [
+  "a4: Corrected apixaban dose-reduction analysis - all three criteria (age ≥80, weight ≤60kg, creatinine ≥1.5 mg/dL at 1.6) are met, not two; removed hedge language, now states clearly this is an overdose error requiring urgent prescriber communication",
+  "a13: Replaced vague 'roughly 300 mg once or twice daily' approximation with a more defensible renal dosing range (200-700 mg/day in 2-3 divided doses for CrCl 15-29 mL/min), noting variation by indication",
+  "a2 and d8: Removed interpretive phrase 'suggesting higher-than-prescribed consumption rate' / 'suggests consumption faster than once-daily dosing' from the fill-history action result and artifact, leaving only the objective fill-interval finding so the learner draws the double-dosing interpretation themselves; m1 still functions since the raw interval data (20-24 days vs 30 days) remains as evidence",
+  "a1: Removed leakage of hidden/discoverable fact identities (diphenhydramine, ginkgo) from the medication reconciliation action result; now states only that OTC/herbal use has not yet been assessed, preserving f6/f7 as learner-elicited discoveries",
+  "answerKey: Updated primaryProblem, differential, keyFindings, plan, and redFlags to reflect that apixaban 5 mg BID is a clear overdose error (all 3 criteria met) rather than an ambiguous 2-of-3 call, and to align gabapentin renal dosing guidance with the corrected range in a13",
+  "educationPoints: Updated wording to reflect precise application of apixaban dose-reduction criteria rather than approximate arithmetic"
  ]
 }

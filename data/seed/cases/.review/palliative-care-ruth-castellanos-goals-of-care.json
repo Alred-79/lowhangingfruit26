@@ -26,5 +26,9 @@
    "where": "d5 flowsheet weight trend vs f5 'lost about twenty pounds'",
    "problem": "Weight dropped from 64 kg to 55 kg over 10 weeks = 9 kg loss ≈ 19.8 lb, consistent with 'about twenty pounds' — verified correct, no fix needed."
   }
+ ],
+ "revised": [
+  "d6: Removed the free-text phrase 'I don't like how it makes my head feel and I don't want to end up dependent on it,' which leaked f18's fear-of-dependence/fogginess driver (a discoverable-tier fact) as a chart note; d6 now only documents objective dosing/frequency (oxycodone 5mg, ~2 doses/day) so f18 must be elicited through interview/assessment (a2/a13/a16).",
+  "d6: Removed the line 'Advance directive on file: No - haven't gotten around to it,' which duplicated f23 (discoverable tier) verbatim and surfaced it automatically via the f3-triggered release of d6. Advance directive status is now only discoverable through a11 (chart review) as intended; chartAtStart 'Code status: Not documented' remains the only pre-visit hint, consistent with existing design."
  ]
 }

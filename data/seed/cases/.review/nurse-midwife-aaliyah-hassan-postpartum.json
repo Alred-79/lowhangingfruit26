@@ -37,5 +37,12 @@
    "where": "d4 flowsheet vs a2 result",
    "problem": "a2 states 'No chills reported at time of call, though she had chills last night,' consistent with f3, but the home vitals log (d4) only tracks BP/HR/Temp and does not capture chills, so this is fine; however the yesterday temp in d4 is listed as 38.0°C while f3/a1 scenario implies fever 'last night' was presumably higher or coincides with chills — this is a minor inconsistency since the chills description says 'last night' but the log shows yesterday's recorded temp as 38.0 (not extremely high), which is plausible but worth noting creates a slightly confusing timeline between 'yesterday' logged temp and 'last night' chills onset described in f3/a2."
   }
+ ],
+ "revised": [
+  "chartAtStart: removed pre-disclosed 'history of childhood female genital cutting (Type I, per patient report)' from Problem list so the reluctant fact f11 is not leaked before the visit begins.",
+  "d1: redacted the FGC-specific etiology from the delivery summary body (now reads 'perineal rigidity' without reference to FGC); artifact remains released at start but no longer discloses the sensitive history, which must now be elicited via a11/direct disclosure during the visit per objective o4.",
+  "a8: removed the bundled disclosure of FGC history from this exam action's result; a8 now reports only visual/physical perineal exam findings (healed episiotomy, scar stability), consistent with an exam action rather than an interview disclosure. FGC history remains tied to fact f11 (reluctant tier) and should surface only through direct, sensitive questioning.",
+  "a11: removed the explicit statement that the episiotomy was 'related to prior FGC' from the chart-review result; a11 now reports only the objective delivery facts (rationale: perineal rigidity, EBL, uncomplicated course) without naming the underlying cause, preserving the teaching point that this history must be elicited by direct, respectful questioning rather than read off the chart.",
+  "m2: updated recordEvidence/teachingPoint wording to no longer state FGC outright in the artifact evidence, since d1 no longer names FGC; evidence now points to the unexplained 'perineal rigidity' rationale prompting the learner to ask directly, which still creates a valid patient-vs-chart mismatch without leaking fact f11 through the artifact."
  ]
 }

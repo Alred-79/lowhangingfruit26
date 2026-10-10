@@ -291,7 +291,8 @@
     "date": "Yesterday",
     "author": "Student Health Center, NP Visit",
     "release": {
-     "when": "start"
+     "when": "action",
+     "ref": "a12"
     },
     "body": "CC: Sore throat, fever x5 days.\nHPI: 20 yo male with 5 days sore throat, fever to 101F, fatigue, neck swelling. Roommate had 'strep throat' approximately 4 weeks ago.\nExam: Tonsillar erythema and exudate, tender bilateral cervical lymphadenopathy. No respiratory distress.\nRapid strep antigen test: Negative.\nThroat culture sent, pending.\nPlan: Supportive care - fluids, rest, acetaminophen/ibuprofen for fever and pain. Return precautions given for worsening symptoms, difficulty breathing/swallowing, or inability to tolerate fluids. Follow up in 2-3 days or sooner if worse.\n\n[Addendum, +48h]: Throat culture: No growth of Group A Streptococcus."
    }
@@ -315,7 +316,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "Temp 38.4°C, HR 96, BP 112/70, RR 16, SpO2 99% (recorded today)"
+    "value": "Temp 38.4°C (101.1°F) measured today, HR 96, BP 112/70, RR 16, SpO2 99%"
    },
    {
     "label": "Immunizations",
@@ -346,8 +347,8 @@
     "id": "f2",
     "category": "hpi",
     "topic": "fever pattern",
-    "chart": "Fever up to 38.6°C, intermittent, responds partially to ibuprofen",
-    "says": "My temperature's been going up to like 101.5 off and on. The ibuprofen helps a little but it comes back.",
+    "chart": "Fever history up to 38.6°C (101.5°F) by patient report, intermittent, responds partially to ibuprofen; today's measured temperature on vitals is 38.4°C (101.1°F)",
+    "says": "My temperature's been going up to like 101.5 off and on at its worst. The ibuprofen helps a little but it comes back.",
     "tier": "initial",
     "importance": "important"
    },

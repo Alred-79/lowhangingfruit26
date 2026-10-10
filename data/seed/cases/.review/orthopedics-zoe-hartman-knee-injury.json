@@ -30,5 +30,12 @@
    "where": "a7 result vs d1 body",
    "problem": "a7 result lists 'small peripheral tear of the lateral meniscus body' while d1 impression specifies 'posterior horn/body junction' — these are consistent enough but the action result omits the 'posterior horn' location detail present in the artifact, a minor inconsistency in level of detail between the action summary and the source artifact."
   }
+ ],
+ "revised": [
+  "a4: Reworded from an invalid self-performed Lachman/anterior-drawer test (which leaked the hidden instability finding and is not a feasible telehealth maneuver) to a guided pivot-shift apprehension/subjective-instability questioning action; result now reports only subjective apprehension/giving-way sensation, not an objective 'positive anterior translation' finding; importance lowered from critical to important since it no longer directly confirms the diagnosis.",
+  "o2: Updated text to reflect that a2/a3/a4/a5 constitute inspection, active ROM, and subjective instability questioning only, and explicitly note a valid remote Lachman cannot be performed.",
+  "o4: Removed a4 from actionIds (replaced by a5) since a4 no longer provides objective stability data informing operative counseling.",
+  "d6: Removed the fabricated 'Day 1 (ED)' flexion data point (40 degrees) that was not sourced from any ED exam — d3 explicitly states the ligamentous/ROM exam was deferred due to pain and guarding on day of injury. Chart now begins at Week 1, consistent with the ED note.",
+  "Confirmed d6 release remains tied to action a3 (release:action, ref:a3), so the chart only becomes visible after the learner performs the guided ROM exam, addressing the pre-exam framing concern; no leakage of exam results prior to the action."
  ]
 }

@@ -37,5 +37,19 @@
    "problem": "a7 (an action result) duplicates exactly what is already given in chartAtStart ('BP 128/82 mmHg, HR 88, reported by patient today'), making the action redundant with information already released at the start; while not harmful, it does not add new information when performed as an 'action,' which may puzzle users expecting new findings from actions."
   }
  ],
- "verdict": "major_fixes"
+ "verdict": "major_fixes",
+ "revised": [
+  "a2: Removed the leaking 'CIWA-Ar risk screen' that handed over reluctant facts f5/f8 via a canned history result. Renamed to 'Withdrawal risk history (not CIWA-Ar...)' and rewrote result so it no longer states the morning-shakiness or sweats/insomnia history itself - it now only notes that a true CIWA-Ar needs a live exam and that further history depends on the learner's own sensitive questioning. f5 and f8 remain reluctant/discoverable facts obtainable only through interview.",
+  "a7: Reframed from a counselor-performed vital-sign interpretation ('home BP/pulse check') to a 'recognize need for medical referral' action; kept the patient-reported vitals as a passive self-report datum but removed any counselor interpretation of withdrawal risk from vitals, consistent with scope limits (issue 4).",
+  "a8: Reframed from a counselor-performed camera tremor exam to a 'recognize need for medical referral' action; removed the counselor's own exam finding ('no visible tremor...') since physical exam maneuvers are outside addiction-counseling scope (issue 4).",
+  "d4: Recomputed to match real AUDIT structure: Q1-3 (Consumption) max 12, Q4-6 (Dependence symptoms) max 12, Q7-10 (Alcohol-related problems) max 16, with subscores 10+8+8=26 to correctly sum to the AUDIT total of 26 while respecting true item-group maxima (issue 2). Renamed chart title/axis accordingly and updated series point values/labels.",
+  "a1: Left result (26/40 severe AUDIT) unchanged; it is consistent with corrected d4 breakdown.",
+  "f12: Reworded to attribute the family's non-disclosure norm to 'her upbringing'/an individual pattern rather than implying it stems from being 'Indian-American'; removed implication that ethnicity explains the family silence, per dignity concern (issue 5). Patient ethnicity and persona.background left factually intact (ethnicity itself is not the problem; the issue was causal framing in facts/objectives/answer key), and o6/educationPoints now explicitly state the pattern is individual/familial, not a function of her ethnicity or culture.",
+  "o2: Reworded to require the learner to elicit withdrawal risk indicators through sensitive direct interview questioning (not via a bypassed history-based assessment), and to recognize that a counselor should not perform a physical withdrawal exam.",
+  "o6: Reworded to explicitly clarify the family communication pattern is not attributable to her ethnicity or culture.",
+  "o7: Expanded to include that formal withdrawal risk exams (CIWA-Ar) also require referral to a medical provider, consistent with a2's scope-limited reframing.",
+  "mismatches m1: Updated recordEvidence wording to reference the corrected AUDIT section labels (Consumption/Dependence/Alcohol-related problems) matching the revised d4 chart; mismatch logic (initial minimization vs. AUDIT score + quantification) still holds.",
+  "answerKey: Updated keyFindings, plan, and educationPoints to (a) note CIWA-Ar requires real-time exam/medical referral rather than history alone, (b) clarify withdrawal-risk exam and vital-sign interpretation are outside counselor scope and require medical referral, and (c) clarify family communication pattern reflects individual family dynamics, not ethnicity/culture, removing any implication that culture explains or caricatures the presentation.",
+  "No change made to patient.ethnicity or persona.background text itself, since ethnicity/background are not inherently inappropriate background details; the fix instead corrects the causal framing in facts/objectives/answer key so the family's silence is attributed to individual family dynamics/upbringing rather than being presented as an ethnic/cultural explanation."
+ ]
 }

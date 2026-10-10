@@ -31,5 +31,14 @@
    "where": "answerKey.plan item on counseling employer disclosure",
    "problem": "Directing the respiratory therapist student to 'strongly encourage him to inform his employer per workplace safety policy' edges toward occupational/legal counseling that is arguably outside core RT scope; this should be softened to encouraging the patient to discuss the safety concern with his sleep physician/PCP and offering referral to occupational health resources, with employer disclosure framed as the patient's own decision rather than an RT directive."
   }
+ ],
+ "revised": [
+  "a8: Converted from an interview-probe action that directly disclosed hidden fact f13 into a non-diagnostic fatigue-risk screening tool result; the forklift near-miss (f13) and job-loss fear (f14) now surface only through actual conversation with the simulated patient, preserving the hidden/reluctant tier structure.",
+  "a1: Clarified result wording to note the 30-night summary vs. the 14-night detailed chart so the two no longer appear contradictory; kept the accurate 12 of 30 nights (40%) summary figure.",
+  "d1 chart: Relabeled x-axis as 'most recent 14 of past 30 nights' to make clear it is a subset of the 30-night summary, resolving the apparent mismatch with a1/d1 table.",
+  "d1 table: Renamed metric from the self-contradictory 'Average 95th %ile leak' to 'Mean leak (95th percentile)' — this is the standard CPAP reporting metric (the 95th-percentile leak value, trended/averaged over the reporting period) and the H flag for 38 L/min is clinically appropriate and retained.",
+  "o3: Rewrote objective text and kept actionIds as [a8] to reflect that a8 is now a legitimate non-diagnostic screening action, with disclosure of f13/f14 expected to occur via direct conversation rather than via the action itself.",
+  "o4: No content change needed beyond retained actionIds; included in output for completeness alongside o3 edits.",
+  "m2: Updated recordEvidence to reference the fatigue-risk screening score alongside download data, without stating the hidden incident outright, so the mismatch still has valid supporting evidence after the a8 fix."
  ]
 }

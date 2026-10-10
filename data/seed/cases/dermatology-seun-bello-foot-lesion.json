@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "exam",
     "name": "Guided camera inspection of plantar lesion (close-up, good lighting)",
-    "result": "Left plantar heel/midfoot: single pigmented macule/patch ~11 mm, irregular asymmetric border, variegated brown-black to tan color. Pigment appears to track along skin ridges rather than furrows (parallel ridge pattern favored on review of submitted photo). No surface ulceration, bleeding, or satellite lesions visible on this image.",
+    "result": "Left plantar heel/midfoot: single pigmented macule/patch ~11 mm, irregular asymmetric border, variegated brown-black to tan color. On close review of the submitted photos, pigment appears to track along the skin ridges rather than the furrows between them (parallel ridge pattern) - a pattern favoring melanoma over a benign acral nevus, though in-person dermoscopy is required for definitive distinction. No surface ulceration, bleeding, or satellite lesions visible on this image.",
     "importance": "critical",
     "artifactIds": [
      "d1"
@@ -136,7 +136,7 @@
     "title": "Patient-submitted photographs: left plantar lesion",
     "author": "Patient-submitted via patient portal",
     "date": "Today, pre-visit upload",
-    "body": "Three images uploaded by patient: (1) wide shot of left sole showing lesion location on weight-bearing heel/midfoot transition; (2) close-up showing irregular border and two-tone brown-black pigmentation, estimated 11 mm; (3) image with coin placed for scale confirming ~11 x 9 mm size. Pigment pattern appears to follow the skin ridges (parallel ridge pattern) rather than the furrows between ridges, a feature favoring melanoma over benign acral nevus, though definitive distinction requires in-person dermoscopy.",
+    "body": "Three images uploaded by patient: (1) wide shot of left sole showing lesion location on weight-bearing heel/midfoot transition; (2) close-up showing irregular border and two-tone brown-black pigmentation, estimated 11 mm; (3) image with coin placed for scale confirming ~11 x 9 mm size. No measurement or pattern interpretation documented at time of upload.",
     "release": {
      "when": "start"
     }
@@ -739,16 +739,16 @@
   "answerKey": {
    "primaryProblem": "Pigmented lesion on left plantar heel/midfoot highly suspicious for acral lentiginous melanoma - requires urgent in-person dermoscopy and biopsy; cannot be diagnosed or excluded via telehealth alone.",
    "differential": [
-    "Acral lentiginous melanoma (leading concern given growth, ABCDE features, parallel ridge pattern, acral site, patient demographic)",
+    "Acral lentiginous melanoma (leading concern given growth, ABCDE features, parallel ridge pattern on exam, acral site, patient demographic)",
     "Benign acral nevus (possible but less likely given documented growth and irregular morphology)",
     "Subungual/plantar hematoma (less likely - no trauma history, lesion has persisted and grown over a year rather than resolving)",
     "Verruca (plantar wart) with secondary pigmentation (raised by colleague, but lacks typical verrucous surface change and does not explain the pigment pattern)",
-    "Talon noir (black heel) - typically resolves over weeks as skin exfoliates, inconsistent with a year of persistence and growth"
+    "Talon noir (black heel) - typically resolves over weeks as skin exfoliates, inconsistent with a year of persistence and growth; the classic bedside paring test to confirm blood vs. melanin is not possible by telehealth, another reason this lesion cannot be excluded remotely"
    ],
    "keyFindings": [
     "11 mm pigmented plantar lesion with irregular border and two-tone brown-black coloration",
     "Documented growth from ~5mm to ~11mm over approximately 12 months",
-    "Pigment pattern on photographs appears to follow skin ridges (parallel ridge pattern), a feature favoring melanoma",
+    "On dermatologist review of photographs, pigment pattern appears to follow skin ridges (parallel ridge pattern), a feature favoring melanoma",
     "No satellite lesions, no palpable regional lymphadenopathy, no nail pigment changes on remote exam",
     "Prior primary care documentation labeled the lesion 'callus' without photography, measurement, or referral - inadequate prior evaluation",
     "No personal or family history of melanoma; patient reports no sunburn history, consistent with the fact that acral melanoma arises independent of UV exposure"
@@ -764,13 +764,13 @@
    "redFlags": [
     "Documented lesion growth over 12 months on an acral, non-sun-exposed site in a patient with deeply pigmented skin - classic high-risk pattern for delayed melanoma diagnosis",
     "Irregular border and color variegation (ABCDE-positive)",
-    "Parallel ridge pattern suggested on photograph review",
+    "Parallel ridge pattern identified by dermatologist on photograph review",
     "Prior clinical encounter mislabeling the lesion as benign without appropriate documentation or referral"
    ],
    "educationPoints": [
     "Melanoma in patients with deeply pigmented skin disproportionately arises at acral and mucosal sites (palms, soles, nail units) rather than sun-exposed areas, and is frequently diagnosed at a more advanced stage due to delayed recognition by patients and clinicians.",
-    "The parallel ridge pattern on acral dermoscopy (pigment following the ridges rather than the furrows) is a feature associated with acral melanoma, as opposed to the parallel furrow or lattice patterns seen in benign acral nevi; definitive distinction still requires in-person dermoscopy and histology.",
-    "Teledermatology has real limits for pigmented acral lesions: photograph quality, lack of true dermoscopy, and inability to palpate or biopsy remotely mean any lesion with concerning growth or morphology warrants in-person referral rather than reassurance by video alone.",
+    "The parallel ridge pattern on acral dermoscopy (pigment following the ridges rather than the furrows) is a feature associated with acral melanoma, as opposed to the parallel furrow or lattice patterns seen in benign acral nevi; definitive distinction still requires in-person dermoscopy and histology - this pattern should be actively assessed by the examiner on photo review rather than assumed from the images alone.",
+    "Teledermatology has real limits for pigmented acral lesions: photograph quality, lack of true dermoscopy, inability to palpate or biopsy remotely, and inability to perform bedside tests such as the paring test for talon noir mean any lesion with concerning growth or morphology warrants in-person referral rather than reassurance by video alone.",
     "A benign label in a prior chart note (e.g., 'callus') does not substitute for proper documentation (photography, measurement) or an adequate risk assessment, and should not anchor the current evaluation.",
     "Pseudofolliculitis barbae is a separate, common, benign condition best managed conservatively and should be addressed without diverting attention or urgency from a potentially life-threatening lesion."
    ]

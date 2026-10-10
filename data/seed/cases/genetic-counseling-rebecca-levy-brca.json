@@ -69,7 +69,7 @@
     "id": "a8",
     "kind": "assessment",
     "name": "Assess patient understanding of inheritance pattern",
-    "result": "Patient verbalizes understanding (after counseling) that hereditary breast/ovarian cancer syndromes are typically autosomal dominant, meaning each first-degree relative (siblings, children) has up to a 50% chance of inheriting a familial pathogenic variant if one is identified.",
+    "result": "Baseline assessment (prior to counseling): Patient assumes 'the BRCA test' is a single yes/no test and has not previously been taught about autosomal dominant inheritance or the 50% risk to first-degree relatives. Baseline understanding of inheritance pattern is limited; patient is a good candidate for structured counseling on this topic.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -77,7 +77,7 @@
     "id": "a9",
     "kind": "assessment",
     "name": "Assess patient understanding of possible result categories",
-    "result": "Patient verbalizes understanding of three possible outcomes: positive (pathogenic/likely pathogenic variant found), negative (true negative only informative if a familial mutation is known, otherwise an 'uninformative negative'), and variant of uncertain significance (VUS) which is not currently used for clinical management decisions.",
+    "result": "Baseline assessment (prior to counseling): Patient is unaware that a 'maybe'/uncertain result category exists and assumes results are strictly positive or negative; she has not previously heard the term 'variant of uncertain significance.' Baseline understanding of result categories is limited; patient would benefit from counseling on positive, negative (including uninformative negative), and VUS results.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -95,7 +95,7 @@
     "id": "a11",
     "kind": "assessment",
     "name": "Discuss cascade testing implications for relatives",
-    "result": "Discussed that if a pathogenic variant is identified in the patient, targeted single-site testing would then be available and recommended for her sister (35), brother (41), and in the future her daughters (currently 6 and 9, testing deferred until adulthood per professional guidelines for adult-onset conditions). Discussed strategies for sharing information with family given sister's stated reluctance.",
+    "result": "Discussed that if a pathogenic variant is identified in the patient, targeted single-site testing would then be available and recommended for her sister (35) and brother (41), and in the future her daughters (currently 6 and 9), with testing for the daughters deferred until adulthood per professional guidelines for adult-onset conditions. Discussed general strategies for communicating genetic risk information with relatives and the importance of respecting each relative's autonomy, including their right not to pursue testing or not to know their own result.",
     "importance": "critical",
     "artifactIds": []
    },

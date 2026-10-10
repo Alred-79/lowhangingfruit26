@@ -64,8 +64,8 @@
     "id": "a7",
     "kind": "record",
     "name": "Review 3-day food record in chart",
-    "result": "Food record lists: tabbouleh (contains bulgur wheat), kibbeh (contains bulgur wheat), regular soy sauce (wheat-based), rolled oats (not labeled gluten-free), rice, lentils, hummus, grilled chicken, fruit, labneh.",
-    "importance": "critical",
+    "result": "Food record lists: tabbouleh salad, kibbeh, regular soy sauce (stir-fry), rolled oats, rice, lentils, hummus, grilled chicken, fish, fruit, labneh, almonds, store-bought granola bar (label not checked).",
+    "importance": "important",
     "artifactIds": [
      "d5"
     ]
@@ -74,7 +74,7 @@
     "id": "a8",
     "kind": "assessment",
     "name": "Take detailed gluten-free diet history (sources, labels, eating out)",
-    "result": "Patient reports reading most labels but not checking for 'wheat,' 'barley,' 'rye,' or hidden sources like soy sauce or bulgur; was unaware tabbouleh and kibbeh contain wheat; buys regular oats assuming 'oats are naturally gluten-free.'",
+    "result": "Patient reports reading labels mainly for the word 'wheat' but is unsure what else to look for (barley, rye, malt); says she assumed tabbouleh and kibbeh were fine since they are 'basically a salad' with 'just a little' grain; believed oats are naturally gluten-free and never checked for a gluten-free certification; thought soy sauce was 'just soybeans' and didn't know it could contain wheat.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -130,7 +130,7 @@
     "id": "a15",
     "kind": "assessment",
     "name": "Camera inspection of pantry/label items (patient holds up oats and soy sauce containers)",
-    "result": "Oats container label does not state 'gluten-free certified'; soy sauce bottle lists wheat as an ingredient.",
+    "result": "Oats container ingredient panel reads only 'whole grain rolled oats' with no 'gluten-free' certification mark anywhere on the label; soy sauce bottle ingredient list reads 'water, wheat, soybeans, salt.'",
     "importance": "important",
     "artifactIds": []
    },
@@ -273,15 +273,6 @@
         "g/dL",
         "12.0-15.5"
        ],
-       "flag": "H"
-      },
-      {
-       "cells": [
-        "Hemoglobin",
-        "10.9",
-        "g/dL",
-        "12.0-15.5"
-       ],
        "flag": "L"
       },
       {
@@ -414,7 +405,7 @@
    {
     "id": "d7",
     "type": "chart",
-    "title": "Ferritin and Vitamin D Trend",
+    "title": "Ferritin and Vitamin D Snapshot (3 Weeks Post-Diagnosis)",
     "author": "Lab trend summary",
     "date": "Today",
     "release": {
@@ -422,8 +413,8 @@
      "ref": "a4"
     },
     "chart": {
-     "kind": "line",
-     "xLabel": "Time",
+     "kind": "bar",
+     "xLabel": "Lab test",
      "yLabel": "Lab value",
      "refLow": 15,
      "refHigh": 150,

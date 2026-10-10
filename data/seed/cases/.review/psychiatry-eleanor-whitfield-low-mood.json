@@ -24,5 +24,10 @@
    "where": "objective o4 and a9/d4 regarding adherence mismatch",
    "problem": "Objective o4 is described as identifying the medical/endocrine contributor and the thyroid-lab mismatch (f17/f18), but f18 (adherence) is actually a separate mismatch (m2) about medication adherence, not thyroid/endocrine causation; bundling f18 under 'medical/endocrine contributor' objective is a mild topic mismatch — the adherence mismatch is more about reliability of self-report than ruling out an endocrine cause and could be clarified or moved to a more fitting objective."
   }
+ ],
+ "revised": [
+  "a2: Reworded C-SSRS result to be contingent on the resident actually eliciting the passive death wish (f8, hidden) and lethal means access (f10, reluctant) through rapport-building and direct sensitive questioning, rather than disclosing them as a standing lookup result; added that a cursory/closed approach yields only denial, consistent with the patient's minimizing, self-effacing style.",
+  "a13: Reworded lethal means/safety-planning result so the specific confirmation of oxycodone, rifle, and agreement to removal (f10, f13, both reluctant) is explicitly gated on the resident asking directly and sensitively after rapport is built; a generic question now yields only a vague, non-specific acknowledgment, preserving the need for the learner to probe further.",
+  "a10: Corrected internal contradiction — AUDIT-C score of 4 in a woman is at/above the standard cutoff of 3, so reworded result to state this is a positive screen requiring further assessment (not 'below cutoff'), while still correctly noting it reflects new low-quantity nightly use for sleep rather than an established use disorder, consistent with the clinical note that follows."
  ]
 }

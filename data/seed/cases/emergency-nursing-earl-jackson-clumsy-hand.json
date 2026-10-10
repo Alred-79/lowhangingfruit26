@@ -82,7 +82,7 @@
     "id": "a9",
     "kind": "exam",
     "name": "Grip strength comparison (ask patient to squeeze wife's hands, both sides)",
-    "result": "Right-hand grip clearly weaker than left per wife's report; patient dropped his coffee cup with that hand just before the call.",
+    "result": "Right-hand grip clearly weaker than left per wife's report.",
     "importance": "important",
     "abnormal": true,
     "artifactIds": []
@@ -91,10 +91,12 @@
     "id": "a10",
     "kind": "record",
     "name": "Review problem list and medication list in chart",
-    "result": "Problem list: atrial fibrillation, hypertension. Medication list shows apixaban 5 mg twice daily and amlodipine 10 mg daily active.",
+    "result": "Problem list: atrial fibrillation, hypertension. Medication list shows apixaban 5 mg twice daily and amlodipine 10 mg daily listed as active. Cross-checking pharmacy refill history reveals the apixaban was last filled 37 days ago (a 30-day supply), with no refill since - indicating approximately a 7-day gap in anticoagulation despite the chart listing it as active with no missed doses.",
     "importance": "important",
-    "abnormal": false,
-    "artifactIds": []
+    "abnormal": true,
+    "artifactIds": [
+     "d4"
+    ]
    },
    {
     "id": "a11",
@@ -148,6 +150,15 @@
     "result": "Nearest hospital with stroke/CT capability is approximately 35 minutes by private vehicle; patient initially wants to wait for Monday clinic appointment.",
     "importance": "critical",
     "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a17",
+    "kind": "vitals",
+    "name": "Respiratory rate and temperature check",
+    "result": "Respiratory rate 18/min, non-labored. Temperature 98.4°F (36.9°C) per home thermometer, afebrile.",
+    "importance": "minor",
+    "abnormal": false,
     "artifactIds": []
    }
   ],
@@ -307,8 +318,8 @@
     "author": "Retail Pharmacy Records",
     "date": "Reviewed today",
     "release": {
-     "when": "fact",
-     "ref": "f12"
+     "when": "action",
+     "ref": "a10"
     },
     "body": "Apixaban 5 mg tablets, 60-count bottle (30-day supply at twice daily dosing). Last filled 37 days ago. No refill picked up since. Expected next refill date was 7 days before today's call; refill not yet requested by patient or pharmacy auto-refill not triggered."
    },

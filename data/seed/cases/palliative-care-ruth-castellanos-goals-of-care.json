@@ -380,7 +380,7 @@
      "when": "fact",
      "ref": "f3"
     },
-    "body": "Pain location: upper abdomen radiating to back. Pain pattern: constant, worse after eating. Current pain medication: oxycodone 5 mg, taken 'as needed' - patient notes in free text: 'I only take it when I absolutely cannot stand it, usually twice a day. I don't like how it makes my head feel and I don't want to end up dependent on it.' Bowel movements: last 5 days ago. Advance directive on file: 'No - haven't gotten around to it.'"
+    "body": "Pain location: upper abdomen radiating to back. Pain pattern: constant, worse after eating. Current pain medication: oxycodone 5 mg, taken 'as needed' - patient notes in free text: 'I only take it when I absolutely cannot stand it, usually twice a day.' Bowel movements: last 5 days ago."
    }
   ],
   "chartAtStart": [

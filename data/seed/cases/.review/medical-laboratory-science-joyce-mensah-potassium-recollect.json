@@ -36,5 +36,14 @@
    "problem": "The assessment action a5 is categorized as 'assessment' which is allowed, but its content performs clinical reasoning that borders on diagnostic synthesis (weighing true hyperkalemia risk) beyond pure lab assessment scope; while plausible for MLS pre-analytical judgment, the phrase 'cannot be excluded without a clean recollection' edges toward clinical risk-stratification language more typical of a provider. This is minor since the role scope does include assessing pre-analytical plausibility, but should be worded to avoid any diagnostic certainty framing.",
    "suggested_fix": "Rephrase to clearly frame as a laboratory-only judgment about specimen validity rather than a hyperkalemia risk assessment per se."
   }
+ ],
+ "revised": [
+  "a2: Removed verbatim collection-log detail of '3 attempts, 4-min tourniquet, fist pumping' (facts f2-f4) that leaked initial-tier patient facts into a pre-visit record review. The log now only confirms timing/temperature/centrifugation facts and notes technique details were NOT recorded, preserving the need to elicit f2-f4 from the patient.",
+  "d2: Rewrote QA report body to remove the specific attempt-count/tourniquet-duration/fist-pump detail (now just 'draw described as difficult,' details not recorded), consistent with the fix to a2, and added explicit note that these specifics were not captured in the formal log.",
+  "a9: Renamed from a pure interview question ('Ask patient to describe her symptoms today') to a role-appropriate test/screen action ('Point-of-care style symptom screen for hyperkalemia') so it fits the test/exam/instrument action-kind constraint for this role while still eliciting the ROS facts f6-f10.",
+  "a10: Reworded result so the reluctant fact f12 is no longer handed over on a simple generic diet question; patient is now shown as initially hesitant and only discloses salt substitute use when asked a more specific, direct follow-up question, consistent with reluctant-tier disclosure rules.",
+  "f12: Updated chart/says text to reflect that disclosure requires a specific, direct question and initial hesitancy, preserving reluctant tier integrity (same core content, now properly gated).",
+  "f30: Updated chart/says to clarify this hidden fact only surfaces after the learner proactively explains the salt substitute's potassium content and checks patient understanding (a true 'unveiling' moment), separating it from a10's reluctant-tier disclosure and resolving the f12/f30 tier inconsistency without requiring a brand-new action (the explanation step is expected to occur during a6/a10 follow-up dialogue).",
+  "mismatches: Added m3, giving the learner a concrete artifact-vs-patient mismatch for the collection-technique details now that the log no longer states them outright (QA report omits specifics; patient interview reveals them), keeping the mismatch-design intact after the a2/d2 leakage fix."
  ]
 }

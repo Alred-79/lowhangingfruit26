@@ -37,7 +37,7 @@
     "id": "a4",
     "kind": "assessment",
     "name": "Bereavement/grief impact assessment",
-    "result": "Grandmother (primary caregiver during childhood) died 7 weeks ago. Patient attended funeral, returned to campus after 4 days to sit exams. Reports intrusive sadness, guilt about not grieving 'properly,' avoidance of reminders (stopped choir). Pattern consistent with normal acute grief complicated by academic pressure and limited social disclosure; does not currently meet criteria suggestive of prolonged grief disorder (symptom duration <6 months; no current evidence of grief impairment beyond expected range at 7 weeks) but warrants monitoring given co-occurring depressive symptoms.",
+    "result": "Grandmother (primary caregiver during childhood) died approximately 7 weeks ago per patient report. Patient attended funeral and returned to campus after a brief period to resume academic obligations. Duration of symptoms is under 6 months; functional criteria for prolonged grief disorder are not currently met, though co-occurring depressive symptoms and academic impact warrant monitoring. Pattern consistent with acute grief complicated by academic pressure.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": []
@@ -93,10 +93,12 @@
     "id": "a10",
     "kind": "record",
     "name": "Review academic adviser referral note",
-    "result": "Referral note from academic adviser: student placed on academic probation after GPA fell below 2.0 threshold this term; adviser noted student seemed 'withdrawn and exhausted' in a recent meeting and recommended counseling services as a condition of a probation support plan.",
+    "result": "Referral note (see d1) documents that the student was placed on academic probation and was referred for counseling as part of the probation support plan, with the adviser noting the student appeared withdrawn and fatigued in a recent meeting.",
     "importance": "important",
     "abnormal": true,
-    "artifactIds": []
+    "artifactIds": [
+     "d1"
+    ]
    },
    {
     "id": "a11",
@@ -144,9 +146,10 @@
     "title": "Academic Adviser Referral Note",
     "date": "8 days ago",
     "author": "T. Falcone, Academic Adviser, School of Nursing",
-    "body": "Student referred to University Counseling Services as part of academic probation support plan. GPA fell to 1.87 this term (below 2.0 retention threshold). In our meeting the student appeared withdrawn, fatigued, and tearful when asked about recent weeks; disclosed a family bereavement approximately 5-6 weeks prior. Student was reluctant to elaborate further. Recommend counseling intake and academic coaching. No disclosed safety concerns at time of meeting.",
+    "body": "Student referred to University Counseling Services as part of academic probation support plan. GPA fell to 1.87 this term (below 2.0 retention threshold). In our meeting the student appeared withdrawn and fatigued. Recommend counseling intake and academic coaching. No disclosed safety concerns at time of meeting.",
     "release": {
-     "when": "start"
+     "when": "action",
+     "ref": "a10"
     }
    },
    {
@@ -366,8 +369,8 @@
     "factId": "f20",
     "artifactId": "d1",
     "patientClaim": "Nia says her grandmother died about 7 weeks ago and she hasn't really talked to anyone at school about it besides the adviser knowing 'a little.'",
-    "recordEvidence": "The adviser's referral note (d1) states the bereavement occurred 'approximately 5-6 weeks prior' based on what the student disclosed in that meeting, and notes the student 'was reluctant to elaborate further.'",
-    "teachingPoint": "Minor timeline discrepancies between informant/referral notes and patient self-report are common and usually reflect imprecise recall or guarded disclosure rather than deception; the counselor should gently clarify the timeline rather than treat it as a credibility problem, and should note that the adviser's note itself documents limited disclosure."
+    "recordEvidence": "The adviser's referral note (d1) documents only that the student appeared 'withdrawn and fatigued' in their meeting and recommended counseling as part of the probation plan - it contains no detail about a bereavement, timeline, or emotional disclosure, consistent with the adviser having been told very little.",
+    "teachingPoint": "When a referral source's documentation contains far less detail than what the patient eventually discloses in counseling, this usually reflects guarded or limited disclosure at the time of the earlier contact, not deception; the counselor should recognize this gap as an opportunity to validate how hard it can be to share such things with an adviser, rather than treat it as a credibility problem."
    }
   ],
   "facts": [
@@ -743,9 +746,9 @@
     "Denies current/past suicidal ideation, intent, plan, or self-harm; no access-to-means concerns",
     "Grandmother (primary attachment figure) died 7 weeks ago; patient returned to campus after only 4 days to take exams",
     "Withdrawal from gospel choir, a primary coping/support outlet, since the loss",
-    "Significant guilt about family financial dependence, probation status, and 'not grieving properly'",
+    "Significant guilt about family financial dependence, probation status, and 'not grieving properly' (disclosed only with rapport, not volunteered automatically)",
     "Ambivalence about counseling and fear that disclosures will reach family, reflecting stigma and confidentiality concerns rather than lack of need",
-    "Timeline discrepancy between adviser's referral note (5-6 weeks) and patient's own report (7 weeks), reflecting limited disclosure at the time of the adviser meeting rather than inconsistency in the patient's story"
+    "The adviser's referral note documents far less detail about the bereavement than the patient ultimately shares in session, reflecting limited disclosure at the time of the adviser meeting rather than inconsistency in the patient's story"
    ],
    "plan": [
     "Continue weekly individual counseling focused on grief processing and adjustment to loss, paced to patient's readiness and cultural/spiritual framework",
@@ -768,6 +771,7 @@
     "Standardized screens (PHQ-9, GAD-7, suicide risk screen) should be interpreted alongside context (recent loss, academic/financial stress) rather than in isolation",
     "Cultural and faith-based coping (prayer, 'the Lord doesn't put more on you than you can bear') should be respected as a resource, not treated as denial or avoidance to be corrected",
     "Stigma and unfamiliarity with counseling in first-generation students/families is a common and valid barrier to engagement, best addressed through transparency about confidentiality and collaborative goal-setting rather than persuasion",
+    "Sensitive material such as guilt about grief timing or ambivalence about counseling often only emerges once trust is established - a structured screen or referral note cannot substitute for a rapport-building interview",
     "Minor discrepancies between a referral source's note and the patient's own account often reflect differing depth of disclosure at different times, not deception - clarify gently and non-confrontationally",
     "Recognizing the limits of counseling scope (no diagnosis of a chronic psychiatric disorder requiring medication, no prescribing) and knowing when routine monitoring is appropriate versus when referral/escalation is needed is a core competency"
    ]

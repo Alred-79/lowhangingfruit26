@@ -25,9 +25,9 @@
     "id": "a3",
     "kind": "exam",
     "name": "Patient-performed calf circumference measurement (tape, both legs)",
-    "result": "Left mid-calf 39 cm, right mid-calf 36.5 cm, measured by patient this morning per instruction.",
-    "importance": "important",
-    "abnormal": true,
+    "result": "Left mid-calf 39 cm, right mid-calf 36.5 cm, measured by patient this evening per instruction; morning measurements today were 37.5 cm vs 36.3 cm. Pattern (worse by evening, improves overnight) has been essentially stable over the past 3 weeks per home log.",
+    "importance": "minor",
+    "abnormal": false,
     "artifactIds": [
      "d8"
     ]
@@ -61,7 +61,7 @@
    {
     "id": "a7",
     "kind": "lab",
-    "name": "Review D-dimer drawn 2 weeks ago (while on apixaban)",
+    "name": "Review D-dimer drawn 2 weeks ago (routine recheck while on apixaban)",
     "result": "D-dimer 0.6 mg/L FEU (reference <0.5 mg/L FEU) — mildly elevated, but result is not interpretable for recurrence risk while anticoagulated.",
     "importance": "important",
     "abnormal": true,
@@ -72,8 +72,8 @@
    {
     "id": "a8",
     "kind": "lab",
-    "name": "Review urinalysis sent for haematuria work-up",
-    "result": "Urinalysis: 15-20 RBC/hpf (H), no RBC casts, no significant proteinuria, no WBCs, no nitrites.",
+    "name": "Review urinalysis sent for routine bleeding screen",
+    "result": "Urinalysis: 15-20 RBC/hpf (H), no RBC casts, no significant proteinuria, no WBCs, no nitrites. (Once the patient discloses the hematuria episode, this result confirms ongoing microscopic blood in the urine beyond the single visible episode he describes.)",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": [
@@ -332,7 +332,8 @@
        "flag": ""
       }
      ]
-    }
+    },
+    "body": "Routine labs ordered by primary care at a visit 2 weeks ago as part of a general screen for easy bruising reported by the patient at that time; hematuria was not reported or known about when these were ordered."
    },
    {
     "id": "d5",
@@ -452,7 +453,7 @@
          "y": 37.5
         },
         {
-         "x": "Evening (today, est.)",
+         "x": "Evening (today)",
          "y": 39
         }
        ]
@@ -473,7 +474,7 @@
          "y": 36.3
         },
         {
-         "x": "Evening (today, est.)",
+         "x": "Evening (today)",
          "y": 36.5
         }
        ]
@@ -903,20 +904,20 @@
    "keyFindings": [
     "Unprovoked left common femoral/femoral/popliteal DVT 3 months ago, no identifiable provoking factor",
     "Strong family history: father with PE at 45, paternal aunt with pregnancy-associated VTE, neither genetically tested",
-    "Residual left leg swelling worse by evening, calf circumference asymmetry (left 39 cm vs right 36.5 cm) consistent with post-thrombotic changes",
+    "Residual left leg swelling worse by evening, calf circumference asymmetry (left 39 cm vs right 36.5 cm in the evening); this diurnal pattern and degree of asymmetry has been essentially stable over the past 3 weeks per home log, which is reassuring against new/worsening thrombus and more consistent with chronic post-thrombotic change",
     "Admits missing apixaban doses 2-3 times/week despite pharmacy refill history looking fully adherent",
     "New recurrent epistaxis (~weekly) and bruising on forearms not previously reported",
-    "New hematuria: one visible episode plus confirmed microscopic hematuria (15-20 RBC/hpf) on this visit's urinalysis",
+    "New hematuria: one visible episode plus confirmed microscopic hematuria (15-20 RBC/hpf) on urinalysis, obtained once the patient disclosed the episode",
     "D-dimer mildly elevated while on apixaban - not interpretable for off-anticoagulation recurrence risk",
     "CBC and creatinine normal, apixaban dosing appropriate for renal function"
    ],
    "plan": [
     "Recommend extended (indefinite) anticoagulation given unprovoked proximal DVT, male sex, and significant family history of VTE, pending shared decision-making discussion of ongoing bleeding risk vs recurrence risk",
     "Address adherence directly and non-judgmentally: discuss barriers (fatigue after shifts, belief that occasional skipping is safe), consider reminder strategies/pillbox, reinforce that twice-daily dosing with short half-life means missed doses meaningfully raise recurrence risk",
-    "Refer to urology for new hematuria work-up (confirmed microscopic hematuria plus one visible episode) rather than attributing to apixaban alone; do not stop anticoagulation solely for this without urology input unless bleeding becomes major or hemodynamically significant",
+    "Elicit the hematuria history directly and sensitively, then order/confirm urinalysis; refer to urology for new hematuria work-up (confirmed microscopic hematuria plus one visible episode) rather than attributing to apixaban alone; do not stop anticoagulation solely for this without urology input unless bleeding becomes major or hemodynamically significant",
     "Do not order thrombophilia panel at this time; explain to patient that results would not change the recommendation for extended anticoagulation and may be unreliable while on apixaban/soon after acute clot",
     "Disregard D-dimer drawn on treatment for recurrence-risk decision-making; if an off-anticoagulation D-dimer strategy is ever considered in the future, it would need to be drawn after a trial period off anticoagulation, which is not being pursued here given risk profile",
-    "Counsel on compression stocking use and leg elevation for residual swelling/post-thrombotic symptoms; encourage more consistent use with practical modifications for hot work environment",
+    "Counsel on compression stocking use and leg elevation for residual swelling/post-thrombotic symptoms; note that the swelling pattern has been stable for weeks, which is reassuring, and encourage more consistent stocking use with practical modifications for hot work environment",
     "Advise on bleeding precautions: when to seek urgent care (heavy/uncontrollable bleeding, blood in stool, severe headache, chest pain, shortness of breath)",
     "Coordinate with primary care regarding ongoing monitoring and urology referral; schedule hematology follow-up in 4-6 weeks after urology evaluation and adherence reassessment"
    ],
@@ -924,15 +925,16 @@
     "New hematuria in an anticoagulated patient requires prompt objective testing and urology referral to exclude a structural lesion (e.g., malignancy) rather than attribution to the anticoagulant alone",
     "Recurrent epistaxis and easy bruising raise bleeding risk that must be weighed against recurrence risk, but are not yet major bleeding",
     "Any new chest pain, dyspnea, or hemoptysis would need urgent escalation for possible recurrent PE (currently absent)",
-    "Severe or worsening leg swelling with pain/warmth would need re-evaluation for DVT extension or recurrence"
+    "Severe or worsening leg swelling with pain/warmth would need re-evaluation for DVT extension or recurrence (current swelling pattern is stable over 3 weeks, which is reassuring)"
    ],
    "educationPoints": [
     "Unprovoked proximal (femoropopliteal) DVT in men carries a higher recurrence risk than distal or provoked clots, generally favoring extended or indefinite anticoagulation after shared decision-making about bleeding risk",
     "D-dimer measured while a patient is still anticoagulated does not reliably predict recurrence risk off treatment and should not be used to decide whether to stop therapy",
     "Thrombophilia testing rarely changes management in a patient who already has a clear indication for extended anticoagulation based on clinical risk factors (unprovoked proximal DVT, family history), and results can be altered by concurrent anticoagulation or by testing too soon after the acute event",
     "Pharmacy refill timing/quantity data can look perfectly adherent while missing real-world missed or intentionally skipped doses; direct, non-judgmental adherence conversations are essential, especially for short-half-life twice-daily DOACs",
-    "New bleeding symptoms such as hematuria in an anticoagulated patient should prompt a search for an underlying structural cause rather than being dismissed as an expected anticoagulant side effect",
-    "Family history of VTE (especially in a first-degree relative with PE at a young age) strengthens, but does not by itself confirm, an inherited thrombophilia, and does not need to be proven by genetic testing to influence the duration-of-anticoagulation decision in this patient"
+    "New bleeding symptoms such as hematuria in an anticoagulated patient should prompt a search for an underlying structural cause rather than being dismissed as an expected anticoagulant side effect, and must be actively elicited since patients may not spontaneously report a seemingly minor one-time episode",
+    "Family history of VTE (especially in a first-degree relative with PE at a young age) strengthens, but does not by itself confirm, an inherited thrombophilia, and does not need to be proven by genetic testing to influence the duration-of-anticoagulation decision in this patient",
+    "Stable, longstanding diurnal leg swelling asymmetry should be distinguished from new or worsening swelling; a stable pattern over weeks is reassuring and more consistent with chronic post-thrombotic change than with clot extension or recurrence"
    ]
   },
   "patient": {

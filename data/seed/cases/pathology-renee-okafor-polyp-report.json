@@ -42,7 +42,9 @@
      "gross exam",
      "specimen handling"
     ],
-    "artifactIds": []
+    "artifactIds": [
+     "d2"
+    ]
    },
    {
     "id": "a4",
@@ -89,7 +91,9 @@
     "aliases": [
      "polyp size documentation"
     ],
-    "artifactIds": []
+    "artifactIds": [
+     "d2"
+    ]
    },
    {
     "id": "a8",
@@ -134,13 +138,12 @@
    },
    {
     "id": "d2",
-    "type": "lab_report",
+    "type": "note",
     "title": "Surgical Pathology Report",
     "author": "Dept. of Pathology",
     "date": "10 days ago",
     "release": {
-     "when": "action",
-     "ref": "a2"
+     "when": "start"
     },
     "table": {
      "columns": [
@@ -744,7 +747,7 @@
    "plan": [
     "Reassure patient that no cancer was found and the premalignant tissue was completely removed with a clear margin",
     "Explain that high-grade dysplasia is a severity grade within the adenoma itself, not evidence of invasive cancer, and does not require chemotherapy or additional surgery",
-    "Clarify that pathology's role is limited to describing the specimen; decisions about surveillance colonoscopy timing (typically 3 years for an adenoma with high-grade dysplasia, per standard society guidelines) are made by the gastroenterologist based on the full clinical picture",
+    "Clarify that pathology's role is limited to describing the specimen; decisions about surveillance colonoscopy timing are made by the gastroenterologist based on the full clinical picture, including society guidelines - this determination is outside the pathology consult's scope and should be deferred to GI",
     "Note that family history of early-onset polyps is relevant and should be discussed with gastroenterology, who may consider referral to genetic counseling or earlier surveillance for her and her brother; pathology does not order or interpret germline genetic testing",
     "Document the consult and communicate directly with the gastroenterology team so the discussion is available before the scheduled follow-up visit",
     "Encourage patient to bring her remaining questions about surveillance interval and genetic testing to the already-scheduled GI follow-up"
@@ -759,7 +762,7 @@
     "'Tubular adenoma' names the growth pattern of this common type of precancerous colon polyp",
     "'Pedunculated' simply describes the polyp's shape - on a stalk, like a mushroom - which often makes complete snare removal easier",
     "A negative margin means the plane where the polyp was cut away from the bowel wall shows no dysplastic cells, supporting that the entire abnormal area was removed",
-    "Routine surveillance colonoscopy (commonly recommended at 3 years for adenomas with high-grade dysplasia) is a precaution to check for new polyps, not evidence that something was missed or left behind",
+    "Routine surveillance colonoscopy is a precaution to check for new polyps, not evidence that something was missed or left behind; the specific interval is a gastroenterology management decision outside the pathology consult's scope",
     "Pathology confirms what was found in the tissue sample; recommendations about future procedures, timing, and genetic counselling referrals belong to the treating gastroenterologist"
    ]
   },

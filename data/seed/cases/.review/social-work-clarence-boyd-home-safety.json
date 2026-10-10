@@ -37,5 +37,14 @@
    "where": "facts f21 and f30 both marked distractor plus a11/a10 minor actions",
    "problem": "Minor inconsistency: f21 (hearing aids) is marked distractor and importance minor, consistent; but a10 (medication review) is importance 'minor' yet surfaces an 'important' secondary finding (atorvastatin overdue) that is explicitly listed as a key finding and objective (o6) - the importance tag undersells an action tied to a listed objective and key finding. Fix: raise a10 importance to 'important' to match its role in objective o6/key findings."
   }
+ ],
+ "revised": [
+  "a2: removed auto-disclosure of f17 (loaded firearm by door) from C-SSRS result; result now only includes standard C-SSRS ideation/intent/plan/protective-factor findings plus a note that the patient is evasive about means access, requiring the learner to ask a direct, sensitive follow-up question to elicit the reluctant fact f17.",
+  "a5: removed emotionally loaded disclosures (patient 'has no choice', fear of nephew's arrest/his own institutionalization, tearfulness) mapping to reluctant/hidden facts f7/f9/f10 from the action result; result now limited to capacity/orientation/reasoning findings only, with only a neutral mention that an arrangement exists (not characterized).",
+  "a8: removed 'relationship is strained' characterization of nephew dynamic from action result, which foreshadowed reluctant facts f8/f9; result now states only factual contact frequency.",
+  "a7: softened capacity screen result to describe behavioral observations (oriented, articulate, consistent) and reframed as the social worker's clinical impression rather than a definitive/formal capacity determination, per correct scope-of-practice framing.",
+  "d7: removed the 'Overall mood/wellbeing' series from the chart (which leaked today's low mood score ahead of the PHQ-9/C-SSRS findings); artifact now plots only VFW attendance, consistent with its release gating on fact f13; retitled accordingly.",
+  "o1: added f17 to factIds since firearm access is now properly elicited via rapport-based interview rather than handed over by action a2.",
+  "o2: clarified text to reflect that firearm access (f17) must be elicited through direct sensitive follow-up questioning rather than being a scripted C-SSRS item; factIds unchanged (f17 already listed)."
  ]
 }

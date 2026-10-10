@@ -70,7 +70,6 @@
     "importance": "critical",
     "abnormal": true,
     "aliases": [
-     "Homan's sign",
      "calf swelling"
     ],
     "artifactIds": []
@@ -327,7 +326,7 @@
      "when": "action",
      "ref": "a13"
     },
-    "body": "Clinical signs/symptoms of DVT (leg swelling + pain on palpation of deep veins): +3\nPE is #1 diagnosis OR equally likely: +3\nHeart rate >100: +1.5\nImmobilization/surgery in previous 4 weeks: 0 (prolonged car travel noted but not scored per standard criteria)\nPrevious objectively diagnosed PE or DVT: 0\nHemoptysis: +1 (not scored in classic Wells, documented separately)\nMalignancy: 0\nTotal (Wells, classic): 7.5 → High probability of PE (score >6)"
+    "body": "Clinical signs/symptoms of DVT (leg swelling + pain on palpation of deep veins): +3\nPE is #1 diagnosis OR equally likely: +3\nHeart rate >100: +1.5\nImmobilization/surgery in previous 4 weeks: 0 (prolonged car travel noted but not scored per standard criteria)\nPrevious objectively diagnosed PE or DVT: 0\nMalignancy: 0\nTotal (Wells, classic): 7.5 → High probability of PE (score >6)"
    },
    {
     "id": "d6",
@@ -337,9 +336,9 @@
     "date": "Today",
     "release": {
      "when": "fact",
-     "ref": "f5"
+     "ref": "f8"
     },
-    "body": "Day 1 (5 days ago): Drove round-trip Sacramento to Las Vegas, approximately 9 hours each way with minimal stops, over 2 consecutive days.\nDay 3-4: Noted left calf soreness and swelling, attributed to 'sitting too long,' continued working.\nToday, morning: Acute onset sharp right-sided chest pain, worse with deep inspiration. Noted winded climbing a single flight of stairs at home. One episode of coughing up blood-streaked sputum this afternoon."
+    "body": "Day 1 (5 days ago): Drove round-trip Sacramento to Las Vegas, approximately 9 hours each way with minimal stops, over 2 consecutive days.\nDay 3-4: Reports increasing fatigue from the trip, continued working his usual driving shifts.\nToday, morning: Acute onset sharp right-sided chest pain, worse with deep inspiration. Noted winded climbing a single flight of stairs at home."
    }
   ],
   "chartAtStart": [

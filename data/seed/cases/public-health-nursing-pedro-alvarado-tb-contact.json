@@ -32,10 +32,11 @@
     "id": "a4",
     "kind": "record",
     "name": "Review pharmacy fill history for rifampin",
-    "result": "One 30-day supply of rifampin 600 mg capsules filled 5 weeks ago at a local pharmacy. No refills since. No subsequent fills on record.",
+    "result": "One 30-day supply (30 capsules) of rifampin 600 mg filled 5 weeks ago at a local pharmacy. A 30-day supply filled 5 weeks ago would be exhausted by about week 4 if taken daily. No subsequent fills or refill requests appear in the pharmacy record since that time.",
     "importance": "critical",
     "artifactIds": [
-     "d2"
+     "d2",
+     "d7"
     ]
    },
    {
@@ -72,8 +73,8 @@
     "id": "a8",
     "kind": "test",
     "name": "Ask patient to self-report any current side effects (nausea, dark urine, abdominal pain, rash, bruising)",
-    "result": "Reports nausea and orange-tinged urine occurred during the first two weeks of medication; both have resolved since he stopped the medication three weeks ago. Denies abdominal pain, rash, or easy bruising now.",
-    "importance": "critical",
+    "result": "Denies any current nausea, abdominal pain, rash, or easy bruising. No current urine color changes reported today.",
+    "importance": "important",
     "artifactIds": []
    },
    {
@@ -184,7 +185,7 @@
         "5 weeks ago",
         "30 capsules",
         "30 days",
-        "2"
+        "3"
        ],
        "flag": ""
       }
@@ -282,7 +283,8 @@
     "date": "Current",
     "author": "Public Health Nursing",
     "release": {
-     "when": "start"
+     "when": "action",
+     "ref": "a4"
     },
     "chart": {
      "kind": "line",
@@ -615,7 +617,7 @@
   "objectives": [
    {
     "id": "o1",
-    "text": "Elicit true medication adherence using nonjudgmental, trust-building questioning rather than accepting an initial 'I take it every day' statement at face value.",
+    "text": "Elicit true medication adherence using nonjudgmental, trust-building questioning rather than accepting an initial 'I take it every day' statement at face value, then cross-check against the pharmacy fill record.",
     "factIds": [
      "f3",
      "f4",
@@ -627,7 +629,7 @@
    },
    {
     "id": "o2",
-    "text": "Identify medication side effects (orange urine, nausea) as the probable driver of self-discontinuation and distinguish benign expected effects from signs requiring escalation to the prescribing clinician.",
+    "text": "Elicit medication side effects (orange urine, nausea) through sensitive follow-up questioning as the probable driver of self-discontinuation, and distinguish benign expected effects from signs requiring escalation to the prescribing clinician.",
     "factIds": [
      "f5",
      "f6",
@@ -665,7 +667,7 @@
    },
    {
     "id": "o5",
-    "text": "Screen for alcohol use given its relevance to hepatotoxicity risk with rifampin and determine that further clinical evaluation (liver function recheck, prescriber consult) is needed before restarting therapy, rather than independently restarting or adjusting the medication.",
+    "text": "Screen for alcohol use given its relevance to hepatotoxicity risk with rifampin, and refer to the prescribing clinician/TB program for further clinical evaluation (e.g., repeat liver function tests) before any restart, recognizing that determining restart readiness is outside PHN scope.",
     "factIds": [
      "f15"
     ],
@@ -694,8 +696,8 @@
     "factId": "f3",
     "artifactId": "d2",
     "patientClaim": "Patient states he is taking the rifampin every day as prescribed.",
-    "recordEvidence": "Pharmacy fill history shows only one 30-day supply filled five weeks ago, with no refills since, and 2 refills still remaining unfilled.",
-    "teachingPoint": "Self-reported adherence often overstates actual medication-taking; pharmacy refill history is an objective cross-check, and discrepancies should be explored supportively rather than confrontationally."
+    "recordEvidence": "Pharmacy fill history shows only one 30-day supply (30 capsules) filled five weeks ago, which if taken daily would have run out by about week 4; a 4-month course would require roughly 3 more 30-day fills, and the record shows 3 refills still remaining unused with no subsequent fills logged.",
+    "teachingPoint": "Self-reported adherence often overstates actual medication-taking; pharmacy refill history is an objective cross-check (a 30-day supply with no refills since week 1 cannot cover 5 weeks of daily dosing), and discrepancies should be explored supportively rather than confrontationally."
    },
    {
     "id": "m2",
@@ -787,23 +789,23 @@
   "answerKey": {
    "primaryProblem": "Nonadherence to latent TB infection (LTBI) treatment (rifampin) due to self-discontinuation after transient side effects, compounded by misunderstanding of latent vs. active disease and confidentiality/immigration concerns; ongoing contact investigation gaps.",
    "differential": [
-    "Latent TB infection with early treatment discontinuation (confirmed by pharmacy fill history)",
+    "Latent TB infection with early treatment discontinuation (consistent with pharmacy fill history showing no refills since the initial 30-day supply)",
     "Mild self-limited rifampin side effects (orange urine discoloration, nausea) now resolved, versus early drug-induced hepatotoxicity requiring clinical evaluation before restart",
     "Progression to active pulmonary TB disease (ruled out today by absence of cough, hemoptysis, fever, night sweats, or weight loss; prior chest X-ray clear)",
     "Alcohol use as a contributing risk factor for hepatotoxicity if rifampin is restarted"
    ],
    "keyFindings": [
-    "Patient reports taking rifampin daily, but pharmacy fill history shows only one 30-day supply filled 5 weeks ago with no refills",
-    "Patient discontinued rifampin after approximately 2 weeks due to orange urine and nausea, both now resolved, and because he felt well",
+    "Patient reports taking rifampin daily, but pharmacy fill history shows only one 30-day supply filled 5 weeks ago with no subsequent fills, inconsistent with 5 weeks of continuous daily use",
+    "On direct, supportive questioning, patient discloses he discontinued rifampin after approximately 2 weeks due to orange urine and nausea, both now resolved, and because he felt well",
     "Denies current symptoms of active TB disease (no cough, hemoptysis, fever, night sweats, weight loss)",
-    "Reports regular alcohol use (4-5 beers most evenings), a relevant risk factor for hepatotoxicity",
-    "Expresses concern that health department information could be shared with employer or immigration authorities",
+    "On sensitive questioning, reports regular alcohol use (4-5 beers most evenings), a relevant risk factor for hepatotoxicity",
+    "With trust established, voices concern that health department information could be shared with employer or immigration authorities",
     "Two household contacts remain untested per the case log, with documented outreach attempts"
    ],
    "plan": [
     "Provide health education correcting the misunderstanding that absence of symptoms means treatment is unnecessary; explain latent vs. active TB infection in simple terms",
     "Reassure patient using documented agency confidentiality policy that case information is not shared with employers or immigration enforcement, and offer interpreter services again without pressure",
-    "Refer back to prescribing clinician/TB program provider for clinical evaluation (including repeat liver function tests given alcohol use and prior side effects) before restarting rifampin, as medication restart and dosing decisions are outside public health nursing scope",
+    "Refer back to prescribing clinician/TB program provider for clinical evaluation (including repeat liver function tests given alcohol use and prior side effects) before restarting rifampin; medication restart, dosing, and determination of clinical readiness are outside public health nursing scope and belong to the prescribing clinician",
     "Document adherence gap and side-effect history clearly in the public health case record for the care team",
     "Continue contact investigation: coordinate outreach and testing scheduling for the two untested household contacts, document attempts and barriers",
     "Discuss practical barriers (work schedule, hourly pay with no sick leave) and connect patient with any applicable local resources (e.g., directly observed therapy options, flexible appointment times) to support adherence if treatment resumes",
@@ -819,7 +821,8 @@
     "Orange/red discoloration of urine, sweat, and tears is an expected, harmless effect of rifampin and does not by itself mean the medication must be stopped, but new side effects should be reported to the care team rather than silently discontinuing",
     "Public health case information is legally protected and is not routinely shared with employers, landlords, or immigration enforcement",
     "Alcohol use increases the risk of liver side effects from rifampin, so clinicians need accurate information about drinking patterns before restarting treatment",
-    "Testing household and workplace contacts promptly helps interrupt transmission and protect other people living with the patient"
+    "Testing household and workplace contacts promptly helps interrupt transmission and protect other people living with the patient",
+    "Pharmacy refill history is a useful objective adherence check: a single 30-day fill with no subsequent refills cannot sustain 5 weeks of daily dosing, pointing to a gap the nurse should explore directly with the patient"
    ]
   },
   "professions": [

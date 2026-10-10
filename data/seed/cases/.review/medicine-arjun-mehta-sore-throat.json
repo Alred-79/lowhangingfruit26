@@ -25,5 +25,11 @@
    "where": "a14 imaging action",
    "problem": "The action asks the medical student to 'order' an abdominal ultrasound, but the result states it cannot be performed and is not indicated - this is fine pedagogically, but the action name implies ordering is within scope when the result then contradicts that by saying it requires in-person imaging; consider rewording the action name to 'Consider ordering...' to avoid implying this telehealth visit can place such an order outright."
   }
+ ],
+ "revised": [
+  "d4: changed release from 'start' to action-gated on a12 (reviewing the student health visit note) so the prior exam findings, rapid strep negative result, and roommate exposure history are not pre-emptively visible before the learner elicits this history via f5/f6 and asks about prior care/testing.",
+  "a12/a11: result text unchanged, but these actions now properly trigger release of d4 (a12 is the primary gate; a11's reference to d4 remains valid since a12 or a11 performed later in visit after history-taking).",
+  "f2: clarified wording to distinguish patient-reported peak fever (38.6°C/101.5°F, 'at its worst') from today's measured vitals (38.4°C/101.1°F) in a1/chartAtStart, since these are different numbers representing fever history vs current measurement, not a contradiction.",
+  "chartAtStart: 'Last vitals' label clarified to specify 'measured today' with explicit °F conversion to align formatting with f2 and a1."
  ]
 }

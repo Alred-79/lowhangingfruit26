@@ -24,7 +24,7 @@
     "id": "a3",
     "kind": "assessment",
     "name": "Direct screening interview for metal/implants (go beyond paper form)",
-    "result": "On direct questioning patient discloses: spinal fusion hardware (2014), left total knee replacement, transdermal fentanyl patch currently on right upper arm, large tattoo sleeve on left arm, history of a metal sliver removed from left eye about 15 years ago.",
+    "result": "On direct questioning patient discloses: spinal fusion hardware (2014), left total knee replacement, transdermal fentanyl patch currently on right upper arm, large tattoo sleeve on left arm. No mention of any eye injury history at this point.",
     "abnormal": true,
     "importance": "critical",
     "artifactIds": []
@@ -33,7 +33,7 @@
     "id": "a4",
     "kind": "assessment",
     "name": "Occupational metal-exposure screening",
-    "result": "Patient reports 20+ years as a pipe welder/metal fabricator; grinds and welds metal regularly; admits inconsistent use of eye protection, especially in the earlier years of his career.",
+    "result": "Patient reports 20+ years as a pipe welder/metal fabricator; grinds and welds metal regularly. When asked generally about eye protection he says 'yeah I wear the goggles,' downplaying the topic.",
     "abnormal": true,
     "importance": "critical",
     "artifactIds": []
@@ -51,7 +51,7 @@
     "id": "a6",
     "kind": "assessment",
     "name": "Camera inspection of skin for tattoos near scan field",
-    "result": "Visual inspection shows a tattoo sleeve covering the left arm from shoulder to wrist; no tattoos noted over the lumbar spine region. Patient denies any swelling, burning, or redness in tattooed skin with prior MRI exposure.",
+    "result": "Visual inspection shows a tattoo sleeve covering the left arm from shoulder to wrist; no visible tattoo markings over the lumbar spine region on camera. Patient denies any swelling, burning, or redness in tattooed skin with prior MRI exposure.",
     "importance": "minor",
     "artifactIds": []
    },
@@ -90,7 +90,7 @@
     "id": "a10",
     "kind": "assessment",
     "name": "Claustrophobia and anxiety screening",
-    "result": "Patient reports one prior MRI during which he panicked, asked to be pulled out partway through. Minimizes it today, says he intends to 'push through' this time without mentioning it to staff.",
+    "result": "Patient reports one prior MRI during which he panicked, asked to be pulled out partway through. Minimizes it today, saying he's 'probably fine now' and does not mention any plan for today's exam.",
     "abnormal": true,
     "importance": "critical",
     "artifactIds": []
@@ -250,7 +250,7 @@
         "eGFR",
         "52",
         "mL/min/1.73m2",
-        "≥ 60 (normal); 45-59 = mild-moderate decrease"
+        "≥60 (normal); 45-59 = mild-to-moderate decrease (Stage 3a CKD)"
        ],
        "flag": "L"
       },
@@ -478,7 +478,7 @@
     "category": "social",
     "topic": "eye protection habits",
     "chart": "Admits inconsistent use of safety glasses/face shield while grinding, especially earlier in career.",
-    "says": "Honestly I didn't always wear the goggles, especially back when I was younger, you get used to it.",
+    "says": "Honestly... yeah, I didn't always wear the goggles, especially back when I was younger, you get used to it. Didn't think it was a big deal.",
     "tier": "reluctant",
     "importance": "critical"
    },
@@ -707,16 +707,16 @@
     "factId": "f4",
     "artifactId": "d1",
     "patientClaim": "Patient states he already completed the paper screening form and marked 'no' to all implant, metal, patch, and claustrophobia questions, implying there's nothing further to discuss.",
-    "recordEvidence": "The completed form (d1) shows blanket 'No' answers to every safety question, directly contradicted by what the direct interview later reveals (fusion hardware, knee replacement, fentanyl patch, eye metal history, claustrophobia).",
+    "recordEvidence": "The completed form (d1) shows blanket 'No' answers to every safety question, directly contradicted by what the direct interview later reveals (fusion hardware, knee replacement, fentanyl patch, prior scanner panic).",
     "teachingPoint": "Self-administered paper screening forms are frequently incomplete or inaccurate; a structured verbal interview by the technologist is required before every MRI, especially when occupational or surgical history suggests risk."
    },
    {
     "id": "m2",
     "factId": "f9",
     "artifactId": "d6",
-    "patientClaim": "Patient says he plans to just 'tough it out' this time and does not mention needing any accommodation for the scan.",
+    "patientClaim": "Patient downplays his prior panic episode and does not mention any plan for how he'll handle today's scan.",
     "recordEvidence": "Outside facility technologist note (d6) documents that three years ago the patient's MRI was aborted after about 4 minutes due to severe panic, and that he never followed up on the recommended anti-anxiety premedication.",
-    "teachingPoint": "A patient's intention to push through claustrophobia does not reliably predict tolerance of a lengthy contrast-enhanced lumbar MRI; documented history of an aborted exam should prompt proactive discussion of accommodations (coaching, open MRI, or sedation referral) rather than relying on patient reassurance."
+    "teachingPoint": "A patient's casual minimization of claustrophobia does not reliably predict tolerance of a lengthy contrast-enhanced lumbar MRI; documented history of an aborted exam should prompt proactive, direct, rapport-building questioning about his actual plan and discussion of accommodations rather than relying on surface-level reassurance."
    }
   ],
   "objectives": [
@@ -725,7 +725,6 @@
     "text": "Recognize that a self-reported paper MRI safety form may be inaccurate and conduct a thorough verbal screening interview that uncovers undisclosed implants, devices, and metal exposure history.",
     "factIds": [
      "f4",
-     "f6",
      "f10",
      "f14"
     ],
@@ -736,7 +735,7 @@
    },
    {
     "id": "o2",
-    "text": "Identify occupational metallic foreign body risk (welding/grinding history, prior ocular metal injury) and know to flag the patient for orbit X-rays before MRI to rule out retained intraorbital metal.",
+    "text": "Identify occupational metallic foreign body risk through welding/grinding history, and through direct, sensitive, rapport-building questioning uncover a prior ocular metal injury and inconsistent eye protection use; know to flag the patient for orbit X-rays before MRI to rule out retained intraorbital metal.",
     "factIds": [
      "f5",
      "f6",

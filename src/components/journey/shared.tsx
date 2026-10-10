@@ -59,7 +59,8 @@ export function useRun(runId: string, opts: { opened?: string } = {}) {
   }, [runId, opened]);
 
   useEffect(() => {
-    refresh();
+    const t = setTimeout(refresh, 0);
+    return () => clearTimeout(t);
   }, [refresh]);
 
   const waiting = !!view && (view.busy || view.next.kind === "wait");

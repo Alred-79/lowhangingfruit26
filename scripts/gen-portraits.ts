@@ -23,12 +23,9 @@ const force = args.includes("--force");
 const dry = args.includes("--dry");
 const client = new BedrockRuntimeClient({ region: "us-west-2", maxAttempts: 3 });
 
-function ageWords(age: number): string {
-  if (age < 2) return "a toddler";
-  if (age < 13) return `a ${age}-year-old child`;
-  if (age < 20) return `a ${age}-year-old teenager`;
-  // Stated ages come out about a decade too old, so ask for younger than the chart says.
-  return `a ${age >= 76 ? age - 6 : age >= 40 ? age - 10 : age}-year-old`;
+/** Stated ages come out about a decade too old, so ask for younger than the chart says. */
+function promptAge(age: number): number {
+  return age >= 76 ? age - 6 : age >= 40 ? age - 10 : age;
 }
 
 /** The model draws people much older than the stated age unless told otherwise. */
@@ -44,12 +41,22 @@ function ageHint(age: number): { text: string; negative: string } {
 /** Cases where a parent speaks for a small child: show the parent with the child. */
 export function promptFor(c: CaseProfile): string {
   const p = c.patient;
-  const sex = /^f|woman|girl/i.test(p.sex) ? (p.age < 18 ? "girl" : "woman") : /^m|man|boy/i.test(p.sex) ? (p.age < 18 ? "boy" : "man") : "person";
-  const subject = p.age < 10 ? `a parent sitting with ${ageWords(p.age)} ${sex} (${p.ethnicity})` : `${ageWords(p.age)} ${p.ethnicity} ${sex}`;
+  const female = /^f|woman|girl/i.test(p.sex);
+  const male = /^m|man|boy/i.test(p.sex);
+  let subject: string;
+  if (p.age < 10) {
+    // A parent speaks for a young child: show them together.
+    const child = p.age < 3 ? "toddler" : `${p.age}-year-old`;
+    subject = `a ${p.ethnicity} parent sitting close beside their ${child} ${female ? "daughter" : male ? "son" : "child"}, both fully clothed, both`;
+  } else if (p.age < 18) {
+    subject = `a ${p.age}-year-old ${p.ethnicity} teenage ${female ? "girl" : male ? "boy" : "person"}`;
+  } else {
+    subject = `a ${promptAge(p.age)}-year-old ${p.ethnicity} ${female ? "woman" : male ? "man" : "person"}`;
+  }
   // Keep only the first two sentences of the description: later ones tend to describe behaviour, not looks.
   const looks = p.appearance.split(/(?<=[.!?])\s+/).slice(0, 2).join(" ");
   return [
-    `Front-facing head-and-shoulders portrait photograph of ${subject}, centred, tightly framed from the chest up, eyes looking straight into the lens, neutral calm expression, mouth closed.`,
+    `Front-facing head-and-shoulders portrait photograph of ${subject} centred, tightly framed from the chest up, eyes looking straight into the lens, neutral calm expression, mouth closed.`,
     ageHint(p.age).text,
     looks,
     "Seen exactly as the other person on a video visit would see them: the camera itself, any laptop, phone or screen is out of frame. Ordinary everyday clothing, real skin texture, soft natural window light, plain lived-in home interior softly out of focus behind. Photorealistic, 50mm lens, documentary style, unposed.",

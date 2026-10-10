@@ -36,5 +36,19 @@
    "where": "patient.ethnicity 'Bulgarian-American' and background narrative",
    "problem": "The immigration background (Bulgarian immigrant, long-haul trucker) is not used as a causal explanation for the medical problem and is handled respectfully; no actual dignity violation, but flagging that the motel-room/dim lighting detail combined with 'between routes' framing borders on an unnecessary socioeconomic cue not tied to any teaching point — consider removing for tighter scope, though this is a stylistic note rather than a hard dignity violation."
   }
+ ],
+ "revised": [
+  "d6: removed the embedded interpretive teaching point ('progressively earlier onset of end-of-day aching'); chart now shows only raw patient-estimated size data over time so the aching-progression link must be elicited via interview (f1, f3, f4), matching objective o1/m1.",
+  "m1: recordEvidence/teachingPoint rewritten to cite only the size trend from d6 as corroboration, with the aching-progression insight now attributed to interview history rather than the artifact.",
+  "a4: renamed and reframed from 'ask patient to palpate' (an interview question) to a video-observed exam the resident performs (observing patient's self-reduction maneuver for pain behavior/guarding) rather than restating patient-reported tenderness verbatim; removed the fact-restating narrative result.",
+  "a12: renamed/reframed to a formally administered IPSS instrument with a numeric score (16/35, moderate) rather than narrative text that restates discoverable facts f13 verbatim.",
+  "a14: changed 'controlled hypertension' to 'uncontrolled/untreated hypertension' to be consistent with f19 (not on antihypertensive medication) and today's mildly elevated BP of 138/86.",
+  "f19: clarified wording to explicitly note today's BP is mildly elevated, for consistency with a14's 'uncontrolled/untreated' label.",
+  "f11: revised wording to specify aspirin was started for cardiovascular risk reduction with no known history of MI/stroke/vascular disease, clarifying this appears to be primary prevention rather than secondary prevention, per reviewer issue 3.",
+  "m2: recordEvidence/teachingPoint updated to flag the ambiguity between primary and secondary prevention aspirin use and the need to clarify this with the prescribing clinician rather than assuming continuation is automatically correct.",
+  "chartAtStart: problem list wording changed from 'Hypertension, untreated' to 'Hypertension, untreated/lifestyle-managed' for consistency with f19 and a14.",
+  "answerKey.keyFindings: updated aspirin finding to note it is apparently for primary prevention without documented atherosclerotic disease, and updated hypertension finding to reflect it is untreated/lifestyle-managed with today's BP 138/86; updated urinary finding to cite the new IPSS score instead of narrative restatement.",
+  "answerKey.plan: aspirin plan item rewritten to direct the learner to clarify primary vs. secondary prevention indication with the prescribing clinician before assuming continuation is appropriate, rather than stating continuation is generally the correct answer regardless of indication.",
+  "answerKey.educationPoints: aspirin education point rewritten to explain that continuation guidance differs for primary vs. secondary prevention and that the indication must be clarified; progression education point rewritten to emphasize interview-based history-taking over device/chart data."
  ]
 }

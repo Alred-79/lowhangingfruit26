@@ -36,5 +36,12 @@
    "where": "objective o6 and action a10",
    "problem": "Objective o6 lists caffeine, headache, and palpitations as distractors tied to actions a3 and a10, but a3 is a lab review action with no caffeine/headache content and a10 only covers sleep deprivation screening, not caffeine or headache; the linkage of distractor facts to these specific actionIds is loose and may confuse scoring logic, though not a major clinical issue."
   }
+ ],
+ "revised": [
+  "a8: Stripped result to pure camera observation (brief bilateral arm jerks, <1 sec, no LOC) and removed the interpretive 'consistent with myoclonic jerks' / 'since teenage years' framing that duplicated hidden/reluctant facts f7 and f8; removed a4 from this action's artifact linkage context and from o1 action list since the exam itself does not confirm chronicity/history.",
+  "d3 (EEG report, released via a4): Removed the diagnostic-label phrase 'consistent with a generalized epilepsy syndrome such as juvenile myoclonic epilepsy' from the IMPRESSION so the record states only the generalized polyspike-and-wave finding without naming the syndrome, preventing early leak of the working diagnosis before learner synthesis.",
+  "a13: Rewrote result to only reveal the discoverable fact (continued driving, unaware of restrictions) without pre-scripting the counseling/discussion as already completed, so the learner must still perform the counseling task.",
+  "o1: Removed a4 from actionIds (EEG review is a record action, not the exam eliciting the jerk history) and kept a8 since it remains the exam demonstrating the movement, now without leaking the chronic history.",
+  "m2: Clarified teachingPoint wording to ensure it does not imply the counseling conversation already occurred, keeping it focused on the discrepancy between ED documentation and patient recall that the learner must now address."
  ]
 }

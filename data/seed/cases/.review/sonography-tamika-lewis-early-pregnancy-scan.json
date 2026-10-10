@@ -31,5 +31,15 @@
    "where": "a3 result vs d3 and f9",
    "problem": "Action a3 result states 'no record of ectopic pregnancy in history' and d3 states 'no evidence of ectopic pregnancy on that scan,' which is consistent, but a3 also says 'no surgical evacuation documented' while d3 says 'expectant management offered and pursued' — these are consistent with each other, but a3 omits mentioning the expectant management entirely, creating a minor incomplete cross-reference that could read as a gap to a careful faculty reviewer. Align a3's wording to mention expectant management for full consistency with d3."
   }
+ ],
+ "revised": [
+  "chartAtStart: removed 'rule out ectopic pregnancy' framing from Problem list entry to avoid pre-biasing learner before history-taking elicits laterality (f4); retained explicit ectopic-rule-out language only in order text (d1) and order-review action (a1), which is appropriate as a reviewed order detail.",
+  "a1: kept explicit 'rule out ectopic pregnancy' and hCG value in the order-review result (appropriate since this is literally reviewing the order text, not a chart problem list) - no change needed here per reviewer's own recommendation to keep it in a1.",
+  "a7: renamed to 'Assess for shoulder-tip pain and signs of hemoperitoneum' and reworded result to reflect an examination/direct-questioning assessment phrased as a documented clinical screen rather than a verbatim restatement of f5's denial language, preserving f5 as the fact the learner must still elicit through conversation.",
+  "a8: reworded result similarly to a7, framed as a documented assessment rather than a flat denial duplicate of f6, preserving f6 for learner elicitation.",
+  "answerKey.keyFindings: removed the Rh-negative/Rh immunoglobulin mention (trimmed to a single mention elsewhere per reviewer).",
+  "answerKey.redFlags: removed the Rh-negative red flag item (trimmed to a single mention elsewhere).",
+  "answerKey.plan: simplified the Rh-negative plan item to a single brief mention ('Flag Rh-negative status to the ordering clinician for their awareness') without elaborating Rh immunoglobulin indications, consistent with sonography scope.",
+  "answerKey.educationPoints: softened the Rh immunoglobulin education point to note it is relevant context to pass along without implying the sonographer should reason about Rh immunoglobulin indications in detail."
  ]
 }

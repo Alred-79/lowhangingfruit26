@@ -8,9 +8,10 @@
     "id": "a1",
     "kind": "record",
     "name": "Review recent hospitalization/illness record",
-    "result": "Treated for aspiration pneumonia/chest infection 5 weeks ago by primary care; course of oral antibiotics, no hospitalization. Documented as 'community-acquired pneumonia, likely aspiration-related' per PCP note.",
+    "result": "Treated for pneumonia/chest infection 5 weeks ago by primary care; course of oral antibiotics (amoxicillin-clavulanate x7 days), no hospitalization, with symptom resolution. Documented as 'community-acquired pneumonia, right lower lobe, resolved' per PCP note. Chest X-ray at the time showed a right lower lobe infiltrate.",
     "importance": "critical",
     "artifactIds": [
+     "d1",
      "d6"
     ]
    },
@@ -18,9 +19,12 @@
     "id": "a2",
     "kind": "record",
     "name": "Review weight trend in chart",
-    "result": "Weight 68 kg three months ago; weight today 64 kg. 4 kg (5.9%) weight loss over 3 months, flagged as significant unintentional weight loss.",
+    "result": "Weight 68.0 kg three months ago; 66.2 kg six weeks ago; 64.0 kg today. Overall 4 kg (5.9%) weight loss over 3 months, with a steady downward trend across all three recorded points, flagged as significant unintentional weight loss.",
     "importance": "critical",
-    "artifactIds": []
+    "artifactIds": [
+     "d2",
+     "d3"
+    ]
    },
    {
     "id": "a3",
@@ -50,7 +54,7 @@
     "id": "a6",
     "kind": "test",
     "name": "Cervical auscultation during swallow (caregiver-assisted, phone/stethoscope if available)",
-    "result": "Caregiver reports no stethoscope available at home; cervical auscultation could not be performed this visit. Recommend formant assessment at instrumental study.",
+    "result": "Caregiver reports no stethoscope available at home; cervical auscultation could not be performed this visit.",
     "importance": "minor",
     "artifactIds": []
    },
@@ -110,7 +114,7 @@
     "title": "Primary Care Visit Note - Chest Infection",
     "author": "Dr. Linda Park, Internal Medicine",
     "date": "5 weeks ago",
-    "body": "73-year-old male with Parkinson disease presents with 4 days of productive cough, low-grade fever (100.8F), and fatigue. Exam notable for crackles at right lung base. Chest X-ray showed right lower lobe infiltrate. Assessment: Community-acquired pneumonia, right lower lobe, likely aspiration-related given underlying Parkinson disease and reported difficulty with liquids per spouse. Treated with oral amoxicillin-clavulanate 875mg/125mg twice daily x7 days with symptom resolution. Advised follow-up with speech-language pathology for swallow evaluation; family reports this is first time scheduling due to patient's reluctance.",
+    "body": "73-year-old male with Parkinson disease presents with 4 days of productive cough, low-grade fever (100.8F), and fatigue. Exam notable for crackles at right lung base. Chest X-ray showed right lower lobe infiltrate. Assessment: Community-acquired pneumonia, right lower lobe, resolved. Treated with oral amoxicillin-clavulanate 875mg/125mg twice daily x7 days with symptom resolution. Advised follow-up with speech-language pathology for swallow evaluation; family reports this is first time scheduling due to patient's reluctance.",
     "release": {
      "when": "start"
     }
@@ -260,7 +264,7 @@
     "title": "Chest X-ray Report",
     "author": "Radiology",
     "date": "5 weeks ago",
-    "body": "FINDINGS: Patchy airspace opacity in the right lower lobe, consistent with infectious infiltrate. No pleural effusion. IMPRESSION: Right lower lobe pneumonia, clinical correlation with aspiration risk recommended given history.",
+    "body": "FINDINGS: Patchy airspace opacity in the right lower lobe, consistent with infectious infiltrate. No pleural effusion. IMPRESSION: Right lower lobe pneumonia, improving clinically; recommend routine follow-up imaging if symptoms recur.",
     "release": {
      "when": "action",
      "ref": "a1"
@@ -270,7 +274,7 @@
   "chartAtStart": [
    {
     "label": "Reason for visit",
-    "value": "Swallowing and communication evaluation, referred after recent chest infection, per family request"
+    "value": "Swallowing and communication evaluation, referred after recent chest infection"
    },
    {
     "label": "Problem list",
@@ -597,7 +601,7 @@
     "factId": "f8",
     "artifactId": "d1",
     "patientClaim": "Patient states he does not choke and has no swallowing difficulty.",
-    "recordEvidence": "Primary care note documents pneumonia 'likely aspiration-related given underlying Parkinson disease and reported difficulty with liquids per spouse,' and chest X-ray confirms right lower lobe infiltrate consistent with aspiration.",
+    "recordEvidence": "Primary care note documents a recent right lower lobe pneumonia requiring antibiotic treatment, and chest X-ray confirmed a right lower lobe infiltrate; this recent pulmonary event in a patient with Parkinson disease and caregiver-reported coughing on liquids is inconsistent with his report of no swallowing problems.",
     "teachingPoint": "Patients, especially those with Parkinson disease, often have reduced laryngeal sensation and may genuinely be unaware of aspiration; clinicians must weigh caregiver report and medical record evidence over self-report alone, and silent aspiration should be considered even when the patient denies symptoms."
    },
    {

@@ -31,5 +31,12 @@
    "where": "chartAtStart 'Problem list' vs a7 result",
    "problem": "chartAtStart problem list says periapical radiolucency 'per imaging 14 months ago, untreated' which matches a7/d1, but a7's action result is gated behind the student reviewing imaging (action a7), while chartAtStart already discloses the existence and age of this radiograph and its abnormal finding before the student requests it. This substantially reduces the value of a7 as a discoverable action since the key finding is already summarized in the start-of-encounter chart."
   }
+ ],
+ "revised": [
+  "a3: clarified name/result to explicitly flag this as a patient-reported/estimated measurement, not a clinician-verified exam finding (reviewer issue 3 - minor consistency fix).",
+  "a12: revised rationale to explicitly note the absence of stridor/accessory muscle use and normal apparent respiratory rate as consistent with *early* Ludwig's angina, framing urgency as based on trajectory/red-flag constellation rather than contradicting a6/f8 (reviewer issue 4).",
+  "d4: changed release trigger from 'start' to an action-gated release tied to history-taking (a new history-taking/timeline-eliciting action, ref updated to a_history_timeline placeholder -- see note below) so the pre-plotted pain-improves/swelling-spikes pattern is not handed to the student before they take a history (reviewer issue 1).",
+  "d5: removed the pre-interpreted framing ('now improved' tooth pain juxtaposed with 'new overnight jaw swelling') and replaced with a neutral chief-complaint statement that does not pre-package the pain-improvement-then-swelling pattern (reviewer issue 2).",
+  "NOTE: d4's release.ref was updated to point to a history-taking action; because no existing action currently serves as an explicit 'take symptom timeline history' action, the intended fix requires either reusing an existing history action id in place of the placeholder or adding one -- flagging for case owner to confirm which action id should gate this artifact's release (ideally the action where the learner specifically asks about pain/swelling timeline, corresponding to eliciting f2/f3/f4)."
  ]
 }

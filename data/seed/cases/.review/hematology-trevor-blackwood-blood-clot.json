@@ -31,5 +31,16 @@
    "where": "a6 result",
    "problem": "The action result states 'eGFR >90 mL/min/1.73m2 — normal, confirms apixaban dosing is appropriate,' but apixaban dose reduction criteria are based on age, weight, and creatinine (not eGFR), so citing eGFR as the basis for 'confirms apixaban dosing is appropriate' is a minor inaccuracy; it should reference that the patient does not meet any of the three dose-reduction criteria (age ≥80, weight ≤60 kg, creatinine ≥1.5 mg/dL) rather than eGFR."
   }
+ ],
+ "revised": [
+  "a8: renamed from 'Review urinalysis sent for haematuria work-up' to 'Review urinalysis sent for routine bleeding screen' and reworded result to avoid presupposing hematuria is already identified/reported, so learner must elicit f9 before the finding's significance is confirmed (fixes leakage in issue 1)",
+  "a7: renamed from implying a dedicated recurrence-risk D-dimer to 'routine recheck while on apixaban' to avoid implying bleeding symptoms were already known 2 weeks ago (issue 2/3)",
+  "d4: added body note clarifying the urinalysis/D-dimer were ordered by primary care 2 weeks ago as part of a general bruising screen, not a hematuria work-up, and that hematuria was unknown at the time — resolves timeline contradiction with hidden facts f8/f9/f23 (issues 2 and 3)",
+  "a3/d8: corrected calf measurement description — evening values (39 vs 36.5 cm) are now consistently labeled as evening (not morning) measurements, and the result/chart explicitly note the diurnal swelling pattern has been stable for 3 weeks, downgraded importance from 'important' to 'minor' and abnormal flag to false since stable chronic asymmetry is reassuring, not an active new finding (issue 4)",
+  "answerKey.keyFindings: reworded the leg swelling finding to explicitly note stability over 3 weeks as reassuring rather than presenting it as an unqualified active concern (issue 4)",
+  "answerKey.plan: added explicit step to elicit hematuria history before ordering/confirming urinalysis, and reworded swelling counseling line to note stability (issues 1, 4)",
+  "answerKey.redFlags: clarified that current stable swelling pattern is reassuring (issue 4)",
+  "answerKey.educationPoints: added point distinguishing stable chronic diurnal swelling from new/worsening swelling, and added note that minor bleeding episodes must be actively elicited (issues 1, 4)",
+  "objectives o2 and o4: unchanged in substance but reconfirmed to align with reworded a8 (no hematuria leakage in action name)"
  ]
 }

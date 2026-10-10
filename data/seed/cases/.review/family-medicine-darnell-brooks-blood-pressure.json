@@ -37,5 +37,16 @@
    "where": "d3 artifact eGFR reference range column",
    "problem": "Reference range for eGFR is written as '60' instead of a proper range (e.g., '>60') with units in the Result column instead of a separate correct range field, which is inconsistent with the other rows' format of 'low-high'. Minor formatting inconsistency, not a factual error."
   }
+ ],
+ "revised": [
+  "a13: removed leaked reference to patient 'not disclosing any sleep issue to DOT' from the record result; now reports only certification date/validity, preserving f11 as a hidden fact the learner must elicit through direct questioning.",
+  "a9: corrected STOP-BANG score from 5/8 to 6/8, explicitly listing age >50 as a met criterion and noting BMI 33.3 does not meet the >35 threshold (so it does not count); updated result text accordingly.",
+  "chartAtStart: changed problem list entry 'Osteoarthritis, shoulder (presumed)' to 'Chronic shoulder pain, cause not yet established' to avoid pre-revealing f25/NSAID etiology before discoverable history.",
+  "m2: updated recordEvidence to remove the leaked DOT-disclosure line and instead frame evidence as a routine renewal with no sleep-related condition/restriction on file, contrasted with the new STOP-BANG score, so the mismatch still works without stating f11 outright.",
+  "answerKey.keyFindings and answerKey.plan: updated STOP-BANG score reference to 6/8 with corrected criteria, and added clarification that fitness-to-drive/DOT record review is outside family medicine telehealth scope, relying on patient-reported CDL status instead.",
+  "answerKey.educationPoints: added point on correct STOP-BANG scoring (crediting age >50) and a point clarifying that DOT/CDL certification record review is outside typical family medicine resident scope/access.",
+  "o4: removed a13 from actionIds since the action no longer serves as the primary vehicle for eliciting/confirming the hidden fact context; the objective is now assessed through patient disclosure and counseling rather than an out-of-scope record pull.",
+  "o5: added text clarifying that fitness-to-drive certification is outside family medicine scope and the resident should rely on patient-reported CDL status rather than independently pulling DOT records, addressing the scope/provenance concern (issue 5).",
+  "Retracted reviewer issue 4 (BMI/weight calculation in a12): recalculated BMI = 232 lb, 70 in -> (232/4900)*703 = 33.3 kg/m2, consistent with chartAtStart prior visit 228 lb/BMI 32.7; no error found, a12 left unchanged."
  ]
 }

@@ -25,5 +25,9 @@
    "where": "answerKey.plan item on screening referral",
    "problem": "Plan appropriately keeps screening referral outside radiology's scope by deferring to primary care, which is correct; however action a7 is labeled 'kind: assessment' performed by the radiology resident determining eligibility, which borders on practicing primary-care risk counseling—likely acceptable as an assessment but worth noting as a scope-boundary case to confirm with faculty."
   }
+ ],
+ "revised": [
+  "f12, f18, f19: downgraded importance from critical to important — these are discoverable-tier facts and d1/chartAtStart already corroborate the asbestos/plaque and no-prior-imaging findings at the artifact level; keeping them critical overstated their exclusivity as learner-elicited history given the partial pre-existing corroboration in the chart. The underlying content and tiers are unchanged (d1's mention of plaques 'consistent with prior asbestos exposure' is an imaging correlate, not a substitute for the learner eliciting the actual occupational exposure narrative, screening-naivety, and lack of awareness directly from the patient, so no further leakage fix to d1 or the facts' content was needed).",
+  "a7: tightened eligibility reasoning wording from the awkward/circular 'quit within last 15 years at time of eligibility window' to the clearer standard USPSTF phrasing '20+ pack-year history, current smoker or quit within the past 15 years, age 50-80' and explicitly showed the calculation (35 pack-years, quit 6 years ago) confirming eligibility."
  ]
 }

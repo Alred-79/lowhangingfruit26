@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "assessment",
     "name": "Mental Status Examination",
-    "result": "Alert, oriented x3. Appearance: casual home clothes, mild grooming neglect noted (same t-shirt as prior visit per patient report). Behavior: frequent pacing within camera frame, shifting weight foot to foot, unable to remain seated for more than ~1 minute. Speech: normal rate/volume, coherent. Mood: 'okay I guess, just restless.' Affect: anxious, mildly guarded. Thought process: linear, goal-directed. Thought content: denies current paranoia toward interviewer; endorses residual auditory experiences (see below). No bizarre or disorganized thought content voiced today. Insight: partial. Judgment: fair.",
+    "result": "Alert, oriented x3. Appearance: casual home clothes, mild grooming neglect noted (same t-shirt as prior visit per patient report). Behavior: frequent pacing within camera frame, shifting weight foot to foot, unable to remain seated for more than ~1 minute. Speech: normal rate/volume, coherent. Mood: 'okay I guess, just restless.' Affect: anxious, mildly guarded. Thought process: linear, goal-directed. Thought content: denies current paranoia toward interviewer; no bizarre or disorganized thought content voiced today; further exploration of hallucinatory content requires direct questioning. Insight: partial. Judgment: fair.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -58,7 +58,7 @@
     "id": "a7",
     "kind": "record",
     "name": "Pharmacy fill history review",
-    "result": "Risperidone 4 mg tablets, disp #7, 1 refill authorized, filled once on day of discharge; no refill requests since. Quantity dispensed consistent with approximately 7 days supply at 1 tablet nightly; no subsequent fills recorded.",
+    "result": "Risperidone 4 mg tablets, quantity dispensed 7 tablets, days supply 7 days, filled on day of discharge (8 days ago). Refills remaining: 1. Refill requests since initial fill: 0. See pharmacy fill history record for full detail.",
     "importance": "critical",
     "artifactIds": [
      "d3"
@@ -659,7 +659,7 @@
    },
    {
     "label": "Problem list",
-    "value": "First-episode psychosis (inpatient admission, resolved acute phase); rule out medication side effects"
+    "value": "First-episode psychosis (inpatient admission, resolved acute phase); on antipsychotic medication, monitoring for tolerability"
    },
    {
     "label": "Medications",

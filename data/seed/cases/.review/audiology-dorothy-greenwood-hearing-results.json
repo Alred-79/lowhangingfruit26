@@ -31,5 +31,10 @@
    "where": "a2 result 'asymmetry of 20 dB confirmed' vs d1 audiogram data",
    "problem": "Using corrected PTA values (Right 25, Left 46.7), the asymmetry is about 21.7 dB, which still meets criteria, but the stated '20 dB' figure in a2 should be corrected to reflect the actual calculated difference for accuracy to the audiometric data given."
   }
+ ],
+ "revised": [
+  "d1: Removed the IMPRESSION's interpretive conclusion naming 'asymmetric sensorineural hearing loss...word recognition score poorer than predicted...recommend medical/ENT referral' - this was the core diagnostic/red-flag synthesis the learner is tasked with discovering via a2/a3/a10. The artifact now reports only raw audiometric/tympanometric/speech data and history, with a neutral closing line, so the learner must synthesize the asymmetry/WRS red-flag pattern and referral recommendation themselves.",
+  "a4: f3 (tinnitus description) is tier 'initial' and already volunteered by the patient per the opening/initial facts, so a4's result no longer presents it as a new disclosure gated by the action; instead a4's result is reworded to reflect that the core tinnitus facts are already known and the action's value is in eliciting the more detailed timeline relative to hearing loss onset (f26, tier 'discoverable'), which is an appropriate thing for a dedicated history action to unlock.",
+  "a11: Changed kind from 'test' to 'record' since this action is purely interview-based history-taking (family history) with no instrument/measurement, consistent with the role's declared action kinds where 'test' should correspond to an actual measurement."
  ]
 }

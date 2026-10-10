@@ -30,5 +30,11 @@
    "where": "d8 artifact date vs a15 result wording",
    "problem": "d8 is dated '6 months ago' and documents eGFR 26 at that visit, while trend chart d3 shows eGFR 26 at '6 months ago' timepoint — consistent. No issue found here; omit."
   }
+ ],
+ "revised": [
+  "a16: Reworded result to report only observable guarded/anxious affect when KRT is mentioned, removing the handed-over fear/refusal content; the actual fear and refusal (f11/f13) must now be elicited by the learner via direct questioning rather than disclosed by an 'assessment' action.",
+  "chartAtStart Problem list: removed pre-attributed etiology ('diabetic and hypertensive nephropathy'); now reads 'Chronic kidney disease stage 4, etiology under evaluation' so the learner must work out the likely etiology from eGFR/ACR trends and labs.",
+  "a13: Softened the KFRE claim - removed the implication that a specific calculated risk was given; now states KFRE has not yet been calculated and should be, while keeping the correct 'rapid progression' KDIGO classification (eGFR decline ~8 mL/min/1.73m2/year > 5 mL/min/1.73m2/year threshold), which was already accurate and is retained.",
+  "o4: Reworded objective text to emphasize that f11/f13 must be elicited via direct, empathetic questioning (consistent with a16's revised result) rather than passively surfaced; factIds/actionIds unchanged since f11/f13 are correctly tier 'initial' per the facts array (reviewer item 4 was a false positive on tier status, but the phrasing is clarified for consistency with the a16 fix) and the real leak was isolated to a16's result wording and the chartAtStart problem list, as the reviewer's item 4 ultimately concluded."
  ]
 }

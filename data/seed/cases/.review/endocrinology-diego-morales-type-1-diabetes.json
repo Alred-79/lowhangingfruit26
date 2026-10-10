@@ -31,5 +31,13 @@
    "where": "a6 lipid panel / d4 referenced guideline range",
    "problem": "LDL reference range listed as '<100 (goal, T1DM)' is used as if it were a lab reference range with an H flag at 118; current ADA guidance for T1DM without additional ASCVD risk factors is not a universal <100 cutoff for all patients this age without other risk factors, so flagging as high against a goal-based target conflates reference range with treatment goal. Fix: label the flag/range as treatment goal rather than reference range, or clarify risk-stratified LDL goal differences."
   }
+ ],
+ "revised": [
+  "a14: Renamed to reflect a validated instrument (AUDIT-C) and changed result to report only the numeric score/threshold interpretation and the discoverable facts (f13 weekend timing, denial of morning drinking/withdrawal) rather than directly stating the reluctant facts substance1 (binge drinking amount) and f12 (not eating while drinking); those remain gated behind interview rapport.",
+  "a13: Changed result to report screen-positive/negative scores (Diabetes Distress Scale elevated, PHQ-2 negative) and retained the discoverable denial of suicidal ideation (f17), removing verbatim narration of reluctant facts f15/f16 ('tired of dealing with diabetes nearly every day', 'loss of motivation') so these require direct rapport-based questioning to surface.",
+  "a12: Removed the reluctant fact f27 (alarm silencing reason/behavior) from the device-settings review result; action now reports only objective threshold settings plus an objective observation (settings unchanged over a year), leaving the explanation for alarm silencing gated behind interview rapport.",
+  "d1: Added a body/summary field to the CGM artifact explicitly stating the aggregate statistics (TIR 38%, >180 52%, <70 7%, <54 3%) as part of the manufacturer report text, so action a2's stated statistics are consistent with and clearly derivable from the artifact itself rather than appearing to be invented beyond the sparse chart points.",
+  "o2: Updated text to clarify that AUDIT-C/alarm-settings actions only establish screening-level findings; the full behavioral narrative (binge drinking without eating, alarm silencing reason) still depends on the learner building rapport and asking directly, consistent with the reluctant tier of substance1/f12/f27.",
+  "o3: Updated text to clarify that screen-positive results on a13 should prompt the learner to ask further, empathetic, direct questions to uncover the full burnout narrative (f15/f16), which remain reluctant facts not handed over by the instrument alone."
  ]
 }

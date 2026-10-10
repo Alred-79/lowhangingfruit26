@@ -69,8 +69,8 @@
    {
     "id": "a8",
     "kind": "imaging",
-    "name": "Review chest imaging for metastatic/synchronous disease screening",
-    "result": "No prior chest imaging on file; order placed for chest x-ray or CT chest given smoking history and need for staging workup once primary site confirmed.",
+    "name": "Order chest imaging to screen for synchronous primary/metastasis",
+    "result": "No prior chest imaging on file; order placed for chest x-ray or CT chest to screen for a synchronous lung primary or metastatic disease given smoking history, to be coordinated with oncology once a primary site is confirmed; full staging determination will require multidisciplinary input.",
     "importance": "important",
     "artifactIds": []
    },
@@ -78,18 +78,23 @@
     "id": "a9",
     "kind": "record",
     "name": "Review urgent care visit note (prior antibiotic/PPI trial)",
-    "result": "Urgent care note from 7 weeks ago: diagnosed 'laryngitis, possible reflux,' prescribed azithromycin 5-day course and omeprazole 40 mg daily x4 weeks. No laryngoscopy performed. Patient reports no improvement in voice.",
+    "result": "Urgent care note from 7 weeks ago: diagnosed 'laryngitis, possible reflux,' prescribed azithromycin 5-day course and omeprazole 40 mg daily x4 weeks. No laryngoscopy performed. Note documents 'denies dysphagia at time of visit.' Patient reports no improvement in voice since.",
     "importance": "important",
-    "artifactIds": []
+    "artifactIds": [
+     "d1"
+    ],
+    "abnormal": false
    },
    {
     "id": "a10",
     "kind": "record",
     "name": "Review smoking/alcohol history documentation in chart",
-    "result": "Social history: tobacco use documented as 1 pack/day x40 years (40 pack-year history); alcohol use recorded as '3-4 bourbons most evenings' per today's visit, differing from prior chart entry of 'social drinker only.'",
-    "abnormal": true,
+    "result": "Social history (prior primary care note, 8 months ago): tobacco use documented as 1 pack/day x40 years (40 pack-year history); alcohol use recorded as 'social drinker only, denies heavy use.' No subsequent chart update on alcohol use is on file.",
+    "abnormal": false,
     "importance": "important",
-    "artifactIds": []
+    "artifactIds": [
+     "d6"
+    ]
    },
    {
     "id": "a11",
@@ -125,6 +130,17 @@
     "result": "WBC 7.2 x10^9/L (4.0-11.0), Hgb 12.6 g/dL (12.0-15.5), Platelets 240 x10^9/L (150-400) - all within normal limits; mild anemia risk flagged for monitoring given weight loss but currently normal.",
     "importance": "minor",
     "artifactIds": []
+   },
+   {
+    "id": "a15",
+    "kind": "record",
+    "name": "Review prior primary care social history note",
+    "result": "Social history (8 months ago): tobacco use - current smoker, 1 pack/day since age 20 (40 pack-year history), advised cessation multiple times, not ready to quit. Alcohol - 'social drinker only, denies heavy use.' Occupation: school bus dispatcher, works via two-way radio most of shift.",
+    "importance": "important",
+    "artifactIds": [
+     "d6"
+    ],
+    "abnormal": false
    }
   ],
   "answerKey": {
@@ -179,7 +195,8 @@
     "author": "Dr. R. Finch, Urgent Care",
     "date": "7 weeks ago",
     "release": {
-     "when": "start"
+     "when": "action",
+     "ref": "a9"
     },
     "body": "CC: Hoarse voice x4 weeks. HPI: 60F with hoarseness, denies fever, denies dysphagia at time of visit. Exam: oropharynx mildly erythematous, no exudate. Assessment: Acute laryngitis, possible laryngopharyngeal reflux. Plan: Azithromycin 250mg day1 then 250mg daily x4 days; Omeprazole 40mg daily x4 weeks; voice rest advised; follow up if not improved in 2-3 weeks. No laryngoscopy performed at this visit."
    },
@@ -362,7 +379,8 @@
     "author": "Dr. A. Patel, Primary Care",
     "date": "8 months ago",
     "release": {
-     "when": "start"
+     "when": "action",
+     "ref": "a10"
     },
     "body": "Social History: Tobacco use - current smoker, 1 pack/day, smoking since age 20 (40 pack-year history), advised cessation multiple times, patient not ready to quit. Alcohol - patient reports social drinker only, denies heavy use. Occupation: school bus dispatcher, works via two-way radio most of shift."
    },
@@ -386,7 +404,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Hypertension; Tobacco use disorder; Hoarseness (new)"
+    "value": "Hypertension; Hoarseness (new)"
    },
    {
     "label": "Medications",
@@ -731,8 +749,8 @@
     "factId": "f18",
     "artifactId": "d6",
     "patientClaim": "Patient initially states she only drinks socially and denies heavy alcohol use.",
-    "recordEvidence": "Prior primary care note from 8 months ago documents 'social drinker only, denies heavy use,' which matches her initial statement today but conflicts with what she later discloses (3-4 bourbons nightly) when asked directly and rapport is established.",
-    "teachingPoint": "Patients, including in prior documented visits, may underreport alcohol use; direct, non-judgmental screening at each visit is essential, especially when alcohol is a major risk factor for the suspected diagnosis."
+    "recordEvidence": "Prior primary care note from 8 months ago documents 'social drinker only, denies heavy use,' matching her initial statement today. No prior record documents any heavier use, so the chart alone cannot resolve whether this is accurate.",
+    "teachingPoint": "Prior charted social history may simply reflect what the patient reported previously, not the truth; a single prior note stating 'social drinking' does not rule out underreporting, and direct, non-judgmental re-screening at this visit is essential, especially when alcohol is a major risk factor for the suspected diagnosis."
    },
    {
     "id": "m2",
@@ -780,7 +798,8 @@
      "f19"
     ],
     "actionIds": [
-     "a10"
+     "a10",
+     "a15"
     ]
    },
    {

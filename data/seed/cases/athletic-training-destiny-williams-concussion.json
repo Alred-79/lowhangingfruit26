@@ -29,7 +29,7 @@
     "id": "a3",
     "kind": "record",
     "name": "Review parent-completed symptom checklist (same day)",
-    "result": "Post-Concussion Symptom Scale completed by mother today: 7 of 22 symptoms endorsed including headache (4/6), sensitivity to light (3/6), irritability (3/6), drowsiness (3/6), fatigue (2/6), difficulty concentrating (2/6), sleeping more than usual (2/6). Total symptom severity score 19/132.",
+    "result": "Post-Concussion Symptom Scale completed by mother today: 7 of 22 symptoms endorsed with elevated severity on several items (including headache and fatigue domains). Total symptom severity score 19/132, substantially higher than athlete's self-reported 3/132.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": [
@@ -43,7 +43,9 @@
     "result": "Athlete performs double-leg, single-leg, and tandem stances on firm surface per trainer instruction, cell phone propped for trainer view. Total errors today: 11 (baseline 6).",
     "importance": "critical",
     "abnormal": true,
-    "artifactIds": []
+    "artifactIds": [
+     "d3"
+    ]
    },
    {
     "id": "a5",
@@ -77,7 +79,7 @@
     "id": "a8",
     "kind": "assessment",
     "name": "Vestibular-ocular motor screening (VOMS) guided self-administration",
-    "result": "Smooth pursuit: no symptom provocation. Saccades (horizontal/vertical): mild symptom provocation, +1 headache. Convergence: near point 8 cm (normal <5cm), mild symptom provocation. VOR horizontal: moderate symptom provocation +2 dizziness. VOR vertical: mild provocation. VMS: moderate provocation +2 headache, +1 dizziness.",
+    "result": "Smooth pursuit: 0/10 symptom change, no provocation. Saccades (horizontal/vertical): 1/10 headache provoked. Convergence: near point 8 cm (abnormal, normal <5cm), 1/10 symptom provocation. VOR horizontal: 2/10 dizziness provoked. VOR vertical: 1/10 symptom provocation. VMS (visual motion sensitivity): 2/10 headache, 1/10 dizziness provoked.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": []
@@ -85,7 +87,7 @@
    {
     "id": "a9",
     "kind": "record",
-    "name": "Review prior concussion history in chart",
+    "name": "Review head injury history in chart",
     "result": "No prior concussion documented in this athlete's electronic athletic training record. Chart notes 'first known concussion' at time of injury intake six days ago.",
     "importance": "important",
     "artifactIds": []
@@ -351,24 +353,6 @@
       },
       {
        "cells": [
-        "Sensitivity to light",
-        "3"
-       ]
-      },
-      {
-       "cells": [
-        "Irritability",
-        "3"
-       ]
-      },
-      {
-       "cells": [
-        "Drowsiness",
-        "3"
-       ]
-      },
-      {
-       "cells": [
         "Fatigue",
         "2"
        ]
@@ -381,14 +365,8 @@
       },
       {
        "cells": [
-        "Sleeping more than usual",
-        "2"
-       ]
-      },
-      {
-       "cells": [
-        "All other 15 symptoms",
-        "0"
+        "All other 19 symptoms",
+        "0 to 2"
        ]
       }
      ]
@@ -750,7 +728,7 @@
   "objectives": [
    {
     "id": "o1",
-    "text": "Elicit discrepancy between athlete self-report and parent-report symptom checklists, and probe reluctant/hidden symptom disclosure despite initial minimization.",
+    "text": "Elicit discrepancy between athlete self-report and parent-report symptom checklists, and through rapport-based interviewing probe reluctant/hidden symptom disclosure (light sensitivity, sleep change, irritability) despite initial minimization.",
     "factIds": [
      "f4",
      "f5",
@@ -804,7 +782,7 @@
    },
    {
     "id": "o5",
-    "text": "Elicit prior concussion history (hidden fact) through rapport-building and incorporate it into risk assessment, recognizing prolonged recovery risk.",
+    "text": "Through rapport-building and direct, sensitive questioning, elicit the athlete's head injury history and incorporate any findings into risk assessment, recognizing that prolonged prior recovery is a risk factor.",
     "factIds": [
      "f12"
     ],
@@ -833,8 +811,8 @@
     "factId": "f4",
     "artifactId": "d6",
     "patientClaim": "Destiny states she has no headaches, dizziness, nausea, or vision changes today and feels 'a hundred percent.'",
-    "recordEvidence": "Parent-completed Post-Concussion Symptom Scale from the same day shows headache 4/6, light sensitivity 3/6, irritability 3/6, drowsiness 3/6, and total symptom severity 19/132 — far higher than the athlete's self-reported score of 3/132.",
-    "teachingPoint": "Athletes, especially those facing external pressure to return to play, may underreport symptoms. Collateral report from a parent or caregiver is a critical cross-check, and discrepancies should prompt further direct, non-judgmental inquiry rather than acceptance of the athlete's self-report alone."
+    "recordEvidence": "Parent-completed Post-Concussion Symptom Scale from the same day shows elevated headache and fatigue/concentration symptoms and a total symptom severity score of 19/132 — far higher than the athlete's self-reported score of 3/132.",
+    "teachingPoint": "Athletes, especially those facing external pressure to return to play, may underreport symptoms. Collateral report from a parent or caregiver is a critical cross-check, and discrepancies should prompt further direct, non-judgmental inquiry (rather than acceptance of self-report alone) to elicit symptoms the athlete may be reluctant to disclose, such as light sensitivity, sleep changes, or irritability."
    },
    {
     "id": "m2",

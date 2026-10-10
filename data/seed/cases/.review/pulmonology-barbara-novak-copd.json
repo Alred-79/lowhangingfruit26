@@ -30,5 +30,13 @@
    "where": "chartAtStart 'Last vitals' SpO2 93% vs home oximetry trend",
    "problem": "ChartAtStart lists in-clinic SpO2 93% two months ago, while home log over the last 2 weeks shows 90-92%, suggesting a real decline that the case wants the learner to notice via a1. This is consistent and appropriately subtle, not a leak — but worth confirming the 93% in-clinic value doesn't appear in any artifact released at start in a way that pre-emptively flags the hypoxemia trend before a1 is performed. It appears only in chartAtStart summary, which is acceptable per tier design; no fix needed."
   }
+ ],
+ "revised": [
+  "a5: Removed the interpretive phrase 'consistent with active tobacco use' from the result, leaving only the raw quantitative lab value (220 ng/mL, positive) with reference range, so the learner must interpret the discrepancy themselves rather than being handed the conclusion (fixes leakage of hidden facts f6/f7).",
+  "a5: Linked artifactIds to ['d2'] since this is the same lab report already referenced by a4, resolving the internal inconsistency where only one of the two actions sourced the same report.",
+  "a7: Reclassified kind from 'test' to 'exam' and added a parenthetical note clarifying this is patient-reported/observed, not a clinician-performed exam, per reviewer's scope concern.",
+  "a8: Reclassified kind from 'vitals' to 'exam' and added a parenthetical note clarifying this is a patient self-counted, non-standardized pulse check rather than a clinician-measured vital sign, to avoid overstating reliability in the answer key reasoning.",
+  "m1: Updated recordEvidence wording to state the raw quantitative value and reference threshold rather than asserting the conclusion outright, consistent with the fix to a5's result; the mismatch is still fully supported by d2's lab data.",
+  "No change made for issue 4 (GOLD group E / stage terminology) - reviewer confirmed this is accurate as written, not an error, so a9 and related answer key text are left unchanged."
  ]
 }

@@ -38,7 +38,7 @@
     "id": "a4",
     "kind": "vitals",
     "name": "Ask patient to report most recent home or clinic blood pressure, or offer to check via connected home cuff if available",
-    "result": "Patient has no home blood pressure cuff and cannot recall her last blood pressure reading; she believes it 'has always been fine' but has no documented reading in the past year.",
+    "result": "Patient has no home blood pressure cuff and says she cannot recall having her blood pressure checked recently; she believes it 'has always been fine' but cannot confirm any specific reading or date, and has no record of one herself.",
     "importance": "important",
     "artifactIds": []
    },
@@ -162,7 +162,7 @@
         "Combination tablet",
         "Take 1 tablet by mouth daily",
         "Dr. T. Patel, NP (Online Women's Health Service)",
-        "New e-prescription received today, pending"
+        "Pending"
        ],
        "flag": ""
       }
@@ -230,7 +230,7 @@
      "when": "action",
      "ref": "a3"
     },
-    "body": "ALERT 1 (Contraindication - Major): Combined hormonal contraceptive + migraine with aura -> increased risk of ischemic stroke (WHO Medical Eligibility Criteria Category 4, UK MEC/CDC US MEC Category 4: unacceptable health risk). ALERT 2 (Drug-Herb Interaction - Moderate): St John's wort (Hypericum perforatum) induces CYP3A4 and may reduce serum levels and efficacy of ethinylestradiol/levonorgestrel, increasing risk of breakthrough bleeding and contraceptive failure. ALERT 3 (Missing Data): No blood pressure documented within past 12 months; baseline BP required before initiating combined hormonal contraceptive per clinical guidelines."
+    "body": "ALERT 1 (Contraindication - Major): Combined hormonal contraceptive + migraine with aura -> increased risk of ischemic stroke. Classified as Category 4 (unacceptable health risk) under the WHO Medical Eligibility Criteria, and correspondingly under the UK MEC and US MEC (CDC) adaptations of this same classification system. ALERT 2 (Drug-Herb Interaction - Moderate): St John's wort (Hypericum perforatum) induces CYP3A4 and may reduce serum levels and efficacy of ethinylestradiol/levonorgestrel, increasing risk of breakthrough bleeding and contraceptive failure. ALERT 3 (Missing Data): No blood pressure documented within past 12 months; baseline BP required before initiating combined hormonal contraceptive per clinical guidelines."
    },
    {
     "id": "d5",
@@ -303,7 +303,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "Blood pressure 118/74 mmHg, recorded 2 years ago at university health visit; nothing documented since"
+    "value": "No vital signs recorded in the pharmacy system within the past 12 months."
    },
    {
     "label": "Care team",

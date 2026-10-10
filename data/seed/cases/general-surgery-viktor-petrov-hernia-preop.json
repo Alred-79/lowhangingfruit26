@@ -31,8 +31,8 @@
    {
     "id": "a4",
     "kind": "exam",
-    "name": "Ask patient to palpate for tenderness or firmness over bulge",
-    "result": "Patient reports bulge is soft, non-tender to his own palpation, easily compressible.",
+    "name": "Video-observed reduction maneuver",
+    "result": "On camera, patient demonstrates reducing the bulge himself: gentle manual pressure while supine causes the mass to flatten completely within seconds; no grimacing or guarding observed during the maneuver, consistent with an easily, painlessly reducible hernia.",
     "importance": "important",
     "artifactIds": []
    },
@@ -105,8 +105,8 @@
    {
     "id": "a12",
     "kind": "assessment",
-    "name": "Urinary symptom screen (IPSS-style questions)",
-    "result": "Patient reports weak stream, straining to initiate void, and occasional sense of incomplete emptying over past 1-2 years; no fever, no blood in urine, no prior UTI.",
+    "name": "International Prostate Symptom Score (IPSS) administered",
+    "result": "IPSS total score 16/35 (moderate symptom range), driven by weak stream, straining, and incomplete emptying domains; no hematuria or fever reported on associated screening questions.",
     "importance": "important",
     "artifactIds": []
    },
@@ -124,7 +124,7 @@
     "id": "a14",
     "kind": "assessment",
     "name": "Operative risk stratification (ASA class / functional capacity)",
-    "result": "ASA class II (controlled hypertension, obesity, tobacco use); reports walking long distances at truck stops and climbing into cab daily without chest pain or dyspnea, consistent with greater than 4 METs functional capacity.",
+    "result": "ASA class II (uncontrolled/untreated hypertension, obesity, tobacco use); reports walking long distances at truck stops and climbing into cab daily without chest pain or dyspnea, consistent with greater than 4 METs functional capacity.",
     "importance": "important",
     "artifactIds": []
    }
@@ -274,7 +274,7 @@
    {
     "id": "d6",
     "type": "chart",
-    "title": "Reported Groin Bulge Size and Symptom Trend",
+    "title": "Reported Groin Bulge Size (Patient Estimate Over Time)",
     "date": "Past 12 months",
     "author": "Patient-reported, compiled at today's visit",
     "release": {
@@ -410,8 +410,8 @@
     "id": "f11",
     "category": "medications",
     "topic": "blood thinning medication",
-    "chart": "Takes aspirin 81 mg daily for cardiovascular prophylaxis, no other anticoagulants",
-    "says": "I take a baby aspirin every morning, that's it for blood thinners.",
+    "chart": "Takes aspirin 81 mg daily, started by primary care for cardiovascular risk reduction given his hypertension, obesity, and smoking (no known heart attack, stroke, or vascular disease); no other anticoagulants",
+    "says": "I take a baby aspirin every morning, that's it for blood thinners. Doc put me on it a few years back, I don't think I've had a heart attack or anything, just said it was good for my heart.",
     "tier": "initial",
     "importance": "critical"
    },
@@ -482,7 +482,7 @@
     "id": "f19",
     "category": "pmh",
     "topic": "blood pressure history",
-    "chart": "History of hypertension, managed with lifestyle, not currently on antihypertensive medication",
+    "chart": "History of hypertension, managed with lifestyle only, not currently on antihypertensive medication, today's BP mildly elevated at 138/86",
     "says": "My blood pressure runs a little high sometimes but I'm not on anything for it, doctor just said watch my salt.",
     "tier": "discoverable",
     "importance": "minor"
@@ -704,16 +704,16 @@
     "factId": "f6",
     "artifactId": "d6",
     "patientClaim": "Patient states the bulge and discomfort are 'not a big deal' and he can 'live with it'",
-    "recordEvidence": "Patient-reported symptom trend chart shows bulge size nearly tripling over 12 months (1.5 cm to 4 cm) with progressively earlier onset of end-of-day aching, indicating clinically significant progression despite his minimizing language",
-    "teachingPoint": "Patients, especially those motivated to avoid time off work, may understate symptom severity; objective trend data and specific functional questions (effect on driving tolerance) reveal a more significant clinical picture than the patient's framing suggests."
+    "recordEvidence": "Patient-reported size trend chart shows the bulge nearly tripling in estimated size over 12 months (1.5 cm to 4 cm)",
+    "teachingPoint": "Patients, especially those motivated to avoid time off work, may understate symptom severity; eliciting a careful functional and chronologic history (effect on driving tolerance, timing of aching) reveals a more significant clinical picture than the patient's framing suggests, and objective size trend data corroborates this progression."
    },
    {
     "id": "m2",
     "factId": "f30",
     "artifactId": "d2",
     "patientClaim": "Patient plans to simply stop his aspirin 'a day or two before' surgery on his own",
-    "recordEvidence": "Medication list confirms aspirin 81 mg daily for cardiovascular prophylaxis with no documented cardiology clearance or structured perioperative plan; standard guidance for low-dose aspirin in low-bleeding-risk hernia repair is often to continue rather than stop, and any change should follow a specific perioperative plan rather than ad hoc self-adjustment",
-    "teachingPoint": "Perioperative medication management, especially antiplatelet agents taken for cardiovascular prophylaxis, must follow an explicit documented plan coordinated with the prescribing clinician rather than patient-initiated discontinuation, to avoid both bleeding and thrombotic risk."
+    "recordEvidence": "Medication list confirms aspirin 81 mg daily for cardiovascular risk reduction with no documented cardiology clearance or structured perioperative plan; standard guidance for low-dose aspirin in low-bleeding-risk hernia repair is often to continue rather than stop, and any change should follow a specific perioperative plan rather than ad hoc self-adjustment",
+    "teachingPoint": "Perioperative medication management, especially antiplatelet agents, must follow an explicit documented plan coordinated with the prescribing clinician rather than patient-initiated discontinuation, to avoid both bleeding and (if there is a true atherosclerotic indication) thrombotic risk; the indication for aspirin (primary vs. secondary prevention) should be clarified since this changes the risk-benefit calculus."
    }
   ],
   "chartAtStart": [
@@ -723,7 +723,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Right inguinal hernia (indirect, reducible); Hypertension, untreated; Tobacco use disorder; Obesity (BMI 31); Lower urinary tract symptoms, on tamsulosin"
+    "value": "Right inguinal hernia (indirect, reducible); Hypertension, untreated/lifestyle-managed; Tobacco use disorder; Obesity (BMI 31); Lower urinary tract symptoms, on tamsulosin"
    },
    {
     "label": "Medications",
@@ -809,16 +809,16 @@
     "One-year history of progressively enlarging right groin bulge with end-of-day aching, now ultrasound-confirmed indirect inguinal hernia containing fat",
     "Hernia always fully reducible, no history of incarceration, no overlying skin changes, no nausea/vomiting - no current emergent features",
     "30 pack-year current smoker, not yet ready to quit",
-    "BMI 31, untreated hypertension, ASA class II",
-    "On aspirin 81 mg daily for cardiovascular prophylaxis without a documented perioperative plan; patient intends to self-stop it a day or two before surgery",
-    "Undiagnosed, undertreated urinary symptoms (weak stream, straining, nocturia) on tamsulosin for 18 months without urology follow-up - a recognized risk factor for postoperative urinary retention",
-    "Patient significantly minimizes symptom severity relative to the objective one-year progression trend"
+    "BMI 31, untreated/lifestyle-managed hypertension (BP 138/86 today), ASA class II",
+    "On aspirin 81 mg daily apparently for primary cardiovascular risk reduction (no documented history of MI, stroke, or peripheral arterial disease) without a documented perioperative plan; patient intends to self-stop it a day or two before surgery",
+    "Undiagnosed, undertreated urinary symptoms (weak stream, straining, nocturia; IPSS 16/35 moderate) on tamsulosin for 18 months without urology follow-up - a recognized risk factor for postoperative urinary retention",
+    "Patient significantly minimizes symptom severity relative to the history of progressive enlargement and worsening aching"
    ],
    "plan": [
     "Confirm elective operative indication; schedule repair within the patient's 3-week layoff window if medically feasible, favoring open or laparoscopic mesh repair based on shared decision-making",
     "Discuss open vs. laparoscopic (TEP/TAPP) mesh repair approaches, including recovery differences, and provide balanced, evidence-based counseling on mesh safety to address his lawsuit-advertisement concerns, correcting misconceptions without dismissing them",
     "Review and address modifiable risk factors: strongly recommend smoking cessation (even short-term preoperative abstinence reduces wound and pulmonary complication risk) and offer referral to cessation resources",
-    "Do not instruct the patient to stop aspirin on his own; coordinate perioperative aspirin management explicitly with the prescribing primary care clinician given cardiovascular indication, per a documented plan rather than ad hoc discontinuation",
+    "Clarify with the prescribing clinician whether aspirin is for primary or secondary cardiovascular prevention; do not instruct the patient to stop aspirin on his own - low-dose aspirin can often be continued through low-bleeding-risk hernia repair when there is a clear secondary-prevention indication, but if it is primary prevention without documented atherosclerotic disease, the ongoing need for aspirin itself (not just perioperative timing) should be revisited with primary care, following a documented plan rather than ad hoc discontinuation",
     "Refer to primary care or urology for proper evaluation of lower urinary tract symptoms (consider post-void residual, possible BPH workup) before surgery, given risk of postoperative urinary retention, which is outside general surgery's scope to independently diagnose or manage definitively",
     "Provide explicit counseling on realistic return-to-driving (commercial driving typically restricted at least 1-2 weeks after mesh repair, pending surgeon clearance and any DOT medical requirements) and lifting restrictions (typically no heavy lifting over approximately 10-15 lbs for about 2 weeks, with gradual return) tailored to his job duties",
     "Teach incarceration/strangulation warning signs: sudden inability to reduce the hernia, severe or worsening pain, nausea/vomiting, fever, or skin discoloration over the bulge - instruct to seek emergency care immediately if these occur before scheduled surgery",
@@ -832,9 +832,9 @@
     "Acute urinary retention (inability to void) - requires urgent evaluation, outside elective timeline"
    ],
    "educationPoints": [
-    "A reducible, asymptomatic-seeming hernia can still be clinically significant; size and symptom progression over time are important objective indicators, and patients who minimize symptoms still warrant careful functional history-taking",
+    "A reducible, asymptomatic-seeming hernia can still be clinically significant; a careful chronologic and functional history (not just a device-generated trend) is the primary tool for uncovering progression in patients who minimize symptoms",
     "Hernia mesh is generally safe and is the evidence-based standard of care for most inguinal hernia repairs; publicized lawsuits often relate to specific product recalls or other mesh types (e.g., transvaginal mesh) rather than inguinal hernia mesh broadly, and this distinction should be explained clearly and respectfully",
-    "Low-dose aspirin taken for cardiovascular prophylaxis is often safely continued through low-bleeding-risk procedures like hernia repair, but any decision must be made jointly with the prescribing clinician, not self-directed by the patient",
+    "Whether low-dose aspirin can be safely continued through a low-bleeding-risk procedure like hernia repair depends on the indication: continuation is well supported when aspirin is for secondary prevention of documented atherosclerotic disease, but for primary prevention without such a diagnosis the risk-benefit balance - and even the ongoing indication for aspirin itself - should be clarified with the prescribing clinician rather than assumed; in no case should the patient self-direct stopping it",
     "Preoperative smoking cessation, even for a short period before surgery, meaningfully reduces wound healing and pulmonary complication risk and should be addressed at every opportunity without being punitive",
     "Undiagnosed or undertreated benign prostatic symptoms raise the risk of postoperative urinary retention after hernia repair under anesthesia, and should prompt referral for proper urologic evaluation rather than being overlooked because the surgical complaint is unrelated",
     "Occupational return-to-work counseling (driving, lifting) should be concrete and individualized, balancing the patient's economic pressures against safe tissue healing timelines"

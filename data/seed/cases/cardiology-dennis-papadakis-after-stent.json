@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "vitals",
     "name": "Review home blood pressure/heart rate log",
-    "result": "Home BP log (past 2 weeks): averages 138/86 mmHg, HR 78-92 bpm, several readings with HR >100 noted on days he describes feeling 'wired and short of breath'",
+    "result": "Home BP log (past 2 weeks): averages 138/86 mmHg, HR 78-92 bpm, with several isolated readings showing HR >100 (up to 110) on scattered days",
     "importance": "important",
     "artifactIds": [
      "d7"
@@ -25,8 +25,8 @@
    {
     "id": "a3",
     "kind": "exam",
-    "name": "Camera inspection of groin/femoral access site and sternal incision (if any)",
-    "result": "No prior sternotomy; right femoral access site well healed, no hematoma, no bruit reported by patient on self-palpation",
+    "name": "Camera inspection of femoral access site",
+    "result": "Right femoral access site well healed, no hematoma, no bruit reported by patient on self-palpation",
     "importance": "minor",
     "artifactIds": []
    },
@@ -130,9 +130,9 @@
    },
    {
     "id": "a15",
-    "kind": "assessment",
-    "name": "Ask about cardiac rehabilitation enrollment and attendance",
-    "result": "Patient was referred to cardiac rehab at discharge; zero sessions attended to date",
+    "kind": "record",
+    "name": "Review cardiac rehabilitation referral and attendance record",
+    "result": "Referral to cardiac rehabilitation was placed at discharge; attendance log shows zero sessions attended to date",
     "importance": "important",
     "artifactIds": []
    },
@@ -140,7 +140,7 @@
     "id": "a16",
     "kind": "test",
     "name": "Assess exertional tolerance via self-reported activity (stair climbing, walking distance)",
-    "result": "Reports avoiding stairs and exertion due to fear of triggering another heart attack; previously climbed 2 flights without issue pre-MI, now avoids entirely despite no reported chest pain or dyspnea when pushed by family to try short walks",
+    "result": "Reports avoiding stairs and exertion since discharge; previously climbed 2 flights without issue pre-MI, now avoids entirely and takes elevator instead, with no chest pain or dyspnea reported when pushed by family to try short walks",
     "importance": "important",
     "artifactIds": []
    },
@@ -175,7 +175,7 @@
    "plan": [
     "Urgently address DAPT gap: clarify true discontinuation date, assess chest pain/ischemic symptoms now, and restart dual antiplatelet therapy immediately given high stent thrombosis risk within first weeks-months of DES; if ticagrelor truly intolerable (dyspnea), discuss switching to clopidogrel 75mg (with cardiology-directed loading if indicated) rather than stopping antiplatelet coverage entirely",
     "Investigate and address cost barrier: engage pharmacy/social work for patient assistance program or formulary alternative; explore copay card for ticagrelor or transition plan",
-    "Reinforce absolute necessity of DAPT for at least 6-12 months post-DES; use teach-back to confirm understanding",
+    "Reinforce absolute necessity of DAPT for a minimum of 12 months post-DES (per cath report and current DES guidelines); use teach-back to confirm understanding",
     "Refer/strongly re-engage with cardiac rehabilitation; address access barriers (work schedule, cost, transportation)",
     "Intensify lipid-lowering therapy: continue high-intensity statin, consider adding ezetimibe given LDL 96 above goal; reinforce diet/lifestyle",
     "Screen result positive for depression - refer to behavioral health/primary care for formal evaluation and treatment; this is outside cardiology's prescribing scope for antidepressants but should be flagged and handed off",
@@ -190,7 +190,7 @@
     "Signs of heart failure decompensation (orthopnea, PND, rapid weight gain) given reduced EF - none currently present but educate patient to report"
    ],
    "educationPoints": [
-    "Dual antiplatelet therapy after drug-eluting stent must continue for the prescribed duration (typically 6-12+ months); premature discontinuation substantially raises stent thrombosis risk, which carries high mortality",
+    "Dual antiplatelet therapy after drug-eluting stent must continue for a minimum of 12 months per current DES protocol; premature discontinuation substantially raises stent thrombosis risk, which carries high mortality",
     "Medication cost and perceived side effects are common, under-disclosed reasons for nonadherence; proactively asking about affordability and side effects, and offering alternatives, improves adherence",
     "Post-MI depression and anxiety are common and under-recognized; routine screening is part of comprehensive cardiac care",
     "Discrepancy between patient-reported adherence and pharmacy refill data is a teaching moment for using objective adherence data respectfully, without accusation",

@@ -35,7 +35,7 @@
     "id": "a4",
     "kind": "exam",
     "name": "Guided abdominal self-palpation (patient presses below left and right ribs)",
-    "result": "Patient reports mild fullness and tenderness to palpation in the left upper quadrant, consistent with possible splenic enlargement; no rebound or guarding reported.",
+    "result": "Patient reports mild fullness and tenderness to palpation in the left upper quadrant; no rebound or guarding reported.",
     "importance": "important",
     "abnormal": true,
     "artifactIds": []
@@ -61,7 +61,7 @@
     "id": "a7",
     "kind": "record",
     "name": "Review travel and immunization history in chart",
-    "result": "No travel vaccinations or malaria chemoprophylaxis documented prior to this trip. Routine immunizations up to date per last primary care visit 1 year ago.",
+    "result": "No pre-travel consultation or chemoprophylaxis prescription documented in the chart prior to this trip. Routine immunizations up to date per last primary care visit 1 year ago.",
     "importance": "important",
     "artifactIds": []
    },
@@ -143,7 +143,7 @@
     "id": "a17",
     "kind": "test",
     "name": "Point-of-care capillary glucose check if home glucometer available",
-    "result": "Patient does not own a glucometer; home glucose check unavailable — reinforces need for in-person glucose testing given hypoglycemia risk in malaria.",
+    "result": "Patient does not own a glucometer; home glucose check unavailable.",
     "importance": "important",
     "artifactIds": []
    }
@@ -235,12 +235,13 @@
    },
    {
     "id": "d4",
-    "type": "chart",
+    "type": "other",
     "title": "Reported Fever Pattern Over Past 4 Days (Patient Log)",
     "author": "Patient self-report",
     "date": "Today",
     "release": {
-     "when": "start"
+     "when": "fact",
+     "ref": "f3"
     },
     "chart": {
      "kind": "line",
@@ -719,7 +720,7 @@
    }
   ],
   "answerKey": {
-   "primaryProblem": "Suspected malaria (possibly severe/complicated) in a febrile returning traveler from a malaria-endemic region, without chemoprophylaxis",
+   "primaryProblem": "Suspected malaria (clinical features raising concern for possible severe/complicated disease, pending confirmatory testing) in a febrile returning traveler from a malaria-endemic region, without chemoprophylaxis",
    "differential": [
     "Plasmodium falciparum or other species malaria (leading diagnosis)",
     "Typhoid (enteric) fever",
@@ -733,31 +734,32 @@
     "9 days post-return from 3-week stay in malaria-endemic Kumasi, Ghana",
     "No malaria chemoprophylaxis taken due to false belief in childhood-acquired immunity",
     "4 days of high fever (Tmax 39.4°C) with drenching sweats, headache, myalgias",
-    "New dark/tea-colored urine today suggesting hemolysis",
+    "New dark/tea-colored urine today, raising concern for possible hemolysis (unconfirmed, labs pending)",
     "Mild scleral icterus on camera exam",
-    "Reported left upper quadrant fullness/tenderness suggesting possible splenomegaly",
+    "Reported left upper quadrant fullness/tenderness on self-palpation, raising concern for possible splenomegaly (not confirmed by formal exam)",
     "Tachycardia (HR 112) and borderline hypotension on vitals",
     "Progressive fatigue/weakness over 2 days",
-    "No rash, no bleeding, no neck stiffness, no confusion — helps narrow differential and assess for severity"
+    "No rash, no bleeding, no neck stiffness, no confusion — helps narrow differential and assess for severity",
+    "No parasitemia, hemolysis, or organ function labs available yet; findings are suggestive but not yet diagnostic of severe malaria"
    ],
    "plan": [
     "Counsel patient that this is a medical emergency requiring same-day in-person evaluation, not manageable via telehealth alone",
     "Arrange immediate referral to emergency department for STAT thick and thin blood smears for malaria parasites and species identification",
     "Order STAT rapid malaria antigen test as an adjunct, understanding smear remains gold standard",
     "Order STAT CBC with differential to assess for anemia, thrombocytopenia, parasitemia clues",
-    "Order STAT basic metabolic panel to assess renal function and glucose (hypoglycemia risk in malaria)",
+    "Order STAT basic metabolic panel to assess renal function and glucose, given that hypoglycemia can occur in malaria and no home glucometer is available",
     "Order STAT total/direct bilirubin and AST/ALT given scleral icterus and dark urine to evaluate for hemolysis vs hepatic involvement",
     "Advise discontinuing further self-directed antibiotic use; amoxicillin has no role in treating malaria",
-    "Address patient's cost and work concerns empathetically while reinforcing non-negotiable urgency of same-day evaluation given risk of severe/complicated malaria and potential for rapid deterioration",
+    "Address patient's cost and work concerns empathetically while reinforcing non-negotiable urgency of same-day evaluation, explaining that current findings are concerning but require labs to confirm severity",
     "Coordinate with emergency department / inpatient team for admission and initiation of appropriate antimalarial therapy once species and severity are confirmed, as this is beyond the scope of this telehealth visit to prescribe before results",
     "Provide travel health education for future trips, including need for chemoprophylaxis regardless of childhood history or perceived immunity",
     "Document mismatch between patient's belief in lasting immunity and documented missed travel counseling opportunity for future quality improvement"
    ],
    "redFlags": [
     "Fever in a returning traveler from a malaria-endemic area is a medical emergency until proven otherwise",
-    "Jaundice/scleral icterus combined with dark urine suggests hemolysis and raises concern for severe malaria",
-    "Possible splenomegaly with tachycardia and borderline hypotension warrants urgent in-person assessment, not deferred outpatient testing",
-    "Risk of rapid clinical deterioration, including cerebral malaria, severe anemia, acute kidney injury, or hypoglycemia, can occur within hours in falciparum malaria",
+    "Jaundice/scleral icterus combined with dark urine raises concern for hemolysis, though this requires lab confirmation",
+    "Reported LUQ fullness, tachycardia, and borderline hypotension warrant urgent in-person assessment and formal exam, not deferred outpatient testing",
+    "Risk of rapid clinical deterioration, including cerebral malaria, severe anemia, acute kidney injury, or hypoglycemia, can occur within hours in falciparum malaria if confirmed",
     "Delay in diagnosis and treatment due to patient reluctance (work, cost) must be addressed directly given life-threatening potential"
    ],
    "educationPoints": [
@@ -766,7 +768,8 @@
     "Fever in a returning traveler always warrants a travel and exposure history as part of the initial assessment, and malaria must be excluded urgently given its potential lethality",
     "Thick and thin blood smears remain the diagnostic gold standard for malaria and must be obtained urgently, often requiring repeat smears if initial testing is negative but suspicion remains high",
     "Self-treatment with leftover antibiotics is a common but potentially harmful practice that can mask symptoms or delay appropriate care without providing any benefit against malaria",
-    "Clear, empathetic communication about the seriousness of a diagnosis can help patients overcome barriers related to work and financial concerns and accept urgent care recommendations"
+    "Clear, empathetic communication about the seriousness of a diagnosis can help patients overcome barriers related to work and financial concerns and accept urgent care recommendations",
+    "Remote self-reported findings (e.g., self-palpation tenderness) are suggestive but not equivalent to a formal clinical exam, and should be framed as findings to be confirmed in person rather than definitive diagnoses"
    ]
   },
   "patient": {

@@ -22,7 +22,6 @@ const ACTION_SOURCE: Record<string, EntrySource> = { exam: "exam", vitals: "test
 const MODEL_KINDS = ["assessment", "interpretation", "recommendation", "referral", "plan_item", "goal", "uncertainty", "open_question", "disagreement", "follow_up"] as const;
 const RELATIONS: Relation[] = ["uses", "confirms", "contradicts", "updates", "answers", "resolves"];
 
-const str = { type: "string" };
 const SCHEMA = {
   type: "object",
   required: ["entries", "uses"],
@@ -213,7 +212,7 @@ ${note.trim() || "(none)"}`,
       ev = { where: r.where === "note" ? "note" : "visit", turn: r.turn, quote: r.quote, verified: false };
       stats.downgraded++;
     }
-    let relatesTo = resolve(r.relates_to);
+    const relatesTo = resolve(r.relates_to);
     let relation = RELATIONS.includes(r.relation as Relation) ? (r.relation as Relation) : null;
     if (relatesTo && !relation) relation = "uses";
     if (!relatesTo) relation = null;

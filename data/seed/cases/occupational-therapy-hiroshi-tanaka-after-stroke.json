@@ -25,7 +25,7 @@
     "id": "a3",
     "kind": "exam",
     "name": "Camera-guided inspection of left hand/forearm skin",
-    "result": "2 cm x 3 cm partial-thickness burn with blistering and mild erythema on dorsum of left hand, no drainage, patient reports it occurred 2 days ago and he did not feel heat at the time; wound is uncovered and visibly healing without dressing.",
+    "result": "2 cm x 3 cm partial-thickness burn with blistering and mild erythema on dorsum of left hand, no drainage; wound is uncovered with no dressing or ointment visible. No other skin breakdown noted. Timing and mechanism of injury not evident on visual inspection alone and would require direct patient report.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": []
@@ -37,9 +37,7 @@
     "result": "Patient consistently misses all targets placed on the left wall and left half of a page held centrally; redirecting attention verbally allows him to find them, but he does not self-correct.",
     "importance": "critical",
     "abnormal": true,
-    "artifactIds": [
-     "d6"
-    ]
+    "artifactIds": []
    },
    {
     "id": "a5",
@@ -124,7 +122,7 @@
     "id": "a14",
     "kind": "test",
     "name": "Observed sensation screen - light touch comparison left vs right hand using patient's own fingertip and a household object",
-    "result": "Patient reports reduced but present light touch sensation on left hand compared to right; also reports he 'sometimes does not notice' when his left hand touches something hot, consistent with the recent burn.",
+    "result": "Patient reports reduced but present light touch sensation on left hand compared to right hand across fingertips and dorsum; protective sensation appears diminished on screening but patient is able to detect touch when attention is directed to the hand.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": []
@@ -289,10 +287,9 @@
     "date": "3 weeks ago, during inpatient stay",
     "author": "Inpatient Occupational Therapist",
     "release": {
-     "when": "action",
-     "ref": "a4"
+     "when": "start"
     },
-    "body": "Line bisection and letter cancellation tasks performed during admission showed left-sided omissions consistent with mild left spatial neglect. Patient denied awareness of any visual or attentional difficulty when asked directly; family was educated on neglect but patient was noted to minimize the finding and declined further discussion."
+    "body": "Line bisection and letter cancellation tasks performed during admission showed left-sided omissions consistent with mild left spatial neglect. Family was educated on neglect and strategies to cue attention to the left side. Recommended continued outpatient monitoring and compensatory strategy training, noting that length of stay limited the extent of in-depth training completed prior to discharge."
    }
   ],
   "facts": [
@@ -771,8 +768,8 @@
    "keyFindings": [
     "Left hand can grasp but has marked difficulty with voluntary finger extension/release (a5, a6)",
     "Left-sided omissions on camera-guided cancellation task and inpatient-documented neglect, despite patient's firm denial of any left-sided visual/attentional problem (a4, d6, f12)",
-    "Unrecognized and unaddressed partial-thickness burn to left hand sustained 2 days ago while attempting to cook unsupervised, disclosed reluctantly (a3, f11, f31)",
-    "Reduced light touch sensation in left hand correlating with delayed burn awareness (a14)",
+    "Unrecognized and unaddressed partial-thickness burn to left hand sustained 2 days ago while attempting to cook unsupervised, disclosed reluctantly only on direct, sensitive questioning (a3, f11, f31)",
+    "Reduced light touch sensation in left hand on screening, raising concern for impaired protective sensation that may relate to delayed burn awareness once disclosed (a14)",
     "Multiple home hazards in kitchen, hallway, and bathroom relevant to stated goals (a2, a8, a13)",
     "Afternoon fatigue pattern without current pacing strategy; home exercise program not being followed (a12, f4, f27)",
     "Wife has assumed all cooking and dressing tasks 'for safety,' consistent with role overload and reduced opportunity for the patient to practice/regain skills (f9, f10, f32)"
@@ -780,7 +777,7 @@
    "plan": [
     "Document findings in an OT evaluation note: occupational profile, COPM-style scores, analysis of occupational performance, goals, and plan",
     "Communicate the unaddressed left hand burn promptly to the patient's primary care physician or neurology team for wound assessment and sensory follow-up; do not manage the wound within OT scope",
-    "Initiate graded, safety-structured kitchen re-engagement: start with seated, right-hand-dominant tasks and simple left-hand assistive holding roles before progressing to stovetop/knife tasks, using adaptive equipment (non-slip mats, rocker knife, built-up chopstick aid) as tolerated",
+    "Initiate graded, safety-structured kitchen re-engagement starting with seated, right-hand-dominant tasks and simple left-hand assistive holding roles; any progression toward stovetop or knife-handling tasks should occur only in-person or under direct caregiver/clinician supervision with explicit safety protocols, not as unsupervised telehealth-directed practice, using adaptive equipment (non-slip mats, rocker knife, built-up chopstick aid) as tolerated",
     "Introduce explicit compensatory strategies for left neglect (visual scanning training, anchoring/organizing the workspace to the left, verbal/tactile cueing) and provide education to patient and wife about the nature of neglect and why self-report of 'seeing fine' is not sufficient reassurance of safety",
     "Recommend home environment modifications: remove or secure loose kitchen/bathroom mats, relocate or add safety features to the low knife drawer, install grab bars/non-slip surfaces in the bathroom, and address the narrow doorway (padding, visual marker, decluttering)",
     "Collaborate with patient and wife on a graded dressing and bathing retraining plan with adaptive techniques (e.g., dressing weaker arm first, button hook or pullover substitution) to shift tasks back toward patient-performed with supervision rather than wife performing fully",
@@ -797,9 +794,11 @@
    "educationPoints": [
     "Right-hemisphere stroke commonly produces left spatial neglect, which is frequently accompanied by anosognosia (lack of awareness), making patient self-report alone unreliable for safety determinations",
     "Occupational therapy assessment should combine client-centered interview (COPM) with direct observation of task performance and the physical environment, since reported ability and demonstrated ability can diverge significantly after stroke",
+    "Exam/screening findings (wound appearance, sensory responses) must be distinguished from information that only the patient can disclose (mechanism, timing, awareness at the time of injury); students should recognize when a finding requires a direct, sensitive interview question rather than being assumed from an exam result",
     "Loss of protective sensation combined with neglect substantially raises burn/injury risk during kitchen tasks and must be factored into any return-to-cooking plan",
     "Caregivers who take over tasks 'to keep the patient safe' can inadvertently reduce opportunities for skill practice and recovery; OT's role includes helping renegotiate shared, graded participation",
-    "Findings such as an unaddressed burn wound or caregiver strain are important to recognize and route to the appropriate team member (physician, social work) rather than managed solely within OT scope"
+    "Findings such as an unaddressed burn wound or caregiver strain are important to recognize and route to the appropriate team member (physician, social work) rather than managed solely within OT scope",
+    "Hazardous task retraining (stovetop, knife use) in a telehealth context carries supervision limitations and should be escalated to in-person or caregiver-supervised sessions with explicit safety protocols rather than directed solely by video"
    ]
   },
   "title": "Return to the Kitchen: Initial Home OT Evaluation After Right-Hemisphere Stroke",

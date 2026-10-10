@@ -43,5 +43,19 @@
    "where": "a9 vs d4 artifact title",
    "problem": "a9 is titled 'Order CBC' only, but its result and the linked artifact d4 also contain a full lipid panel; a10 ('Order lipid panel') duplicates the same data already in d4, which was released by a9. This creates redundant/overlapping actions-artifact linkage that could confuse timeline of what triggered release of lipid results."
   }
+ ],
+ "revised": [
+  "a5: linked to artifact d2 and reworded result to reflect the outside records summary language rather than an unsupported bare claim",
+  "a6: linked to artifact d2 and reworded result to reflect the outside records summary's explicit statement about hepatitis B serology",
+  "a8: linked to artifact d3 since that lab report already contains the FSH/Estradiol rows ordered by this action, removing ambiguity about which action unlocks which part of the report",
+  "a12: downgraded importance from 'critical' to 'minor' and reworded result to explicitly frame FIT as an interim/bridge option, not the primary recommended action, consistent with the answer key",
+  "a17 (new): added 'Refer to gastroenterology for colonoscopy' action marked critical, since the answer key's primary recommended action for colorectal risk had no corresponding action in the list",
+  "a13: left name/result focused on cervical cytology only; removed ambiguity by introducing a17 for colonoscopy referral so a13 is no longer overloaded to cover colon referral",
+  "a15: renamed from passive 'Review family history documentation in chart' to 'Elicit and document family history of cancer' and reworded result to make clear the paternal colon cancer history (f13, reluctant tier) is obtained via direct questioning during the encounter, not from a pre-existing chart review, since d7's body confirms the field was blank beforehand",
+  "d7: reworded body slightly to clarify the update occurred 'during this encounter' after direct questioning, reinforcing that this is not pre-existing chart leakage",
+  "o2: added a17 to actionIds and reworded text to reflect that the increased-risk strategy is colonoscopy referral with FIT as bridge",
+  "o6: replaced a12 with a17 since a12 is now a minor bridge action, not the primary negotiated plan action tied to psychosocial barriers",
+  "answerKey.plan[3] and educationPoints: updated to explicitly reference action a17 (colonoscopy referral) as the primary recommendation and a12 (FIT) as the bridge-only option, resolving the inconsistency flagged by the reviewer",
+  "mismatches m1 and m2 reviewed and left unchanged - both still have valid supporting artifact evidence (d2 outside records note; d7 blank-field documentation) that does not state hidden facts outright"
  ]
 }

@@ -43,5 +43,15 @@
    "where": "d5 Neurology note phrase 'Speech noted to be soft but not formally assessed'",
    "problem": "This is acceptable as a discoverable record finding supporting hypophonia, but combined with chartAtStart and d1's leaks, it compounds early disclosure of the voice/communication diagnosis dimension before any direct patient interaction, reducing the diagnostic challenge intended by objectives o4/o5. Consider moving this detail to be revealed only upon a specific record-review action rather than passively available at start (currently d5 release is 'start')."
   }
+ ],
+ "revised": [
+  "chartAtStart: 'Reason for visit' reworded to remove the explicit referral framing that gave away the aspiration conclusion ('after recent chest infection' kept neutral, removed 'referred ... per family request' phrasing implying aspiration workup).",
+  "d1: redacted explicit aspiration causal attribution; assessment line now reads 'Community-acquired pneumonia, right lower lobe, resolved' and removed 'reported difficulty with liquids per spouse' from the body so the pre-visit record no longer states the clinical conclusion.",
+  "d6: removed 'aspiration risk' language from the chest X-ray impression; now reads a neutral radiologic impression without the aspiration linkage, and remains released at action a1 (not at start) since it is only reviewed as part of a1.",
+  "a1: result text reworded to state only objective facts (diagnosis, treatment, resolution) without the 'likely aspiration-related' attribution; artifactIds now reference d1 and d6 (both reviewed as part of this record review) matching when d6 becomes visible.",
+  "m1: recordEvidence reworded to no longer state the aspiration conclusion outright; now cites the objective chest X-ray infiltrate finding and antibiotic treatment for pneumonia as evidence that conflicts with the patient's denial, without naming aspiration explicitly, preserving the teaching point.",
+  "a2: artifactIds now set to ['d2','d3'] so the weight-trend review action is traceable to the Weight Flowsheet and Weight Trend Chart artifacts.",
+  "a2: result text updated to reflect all three documented data points (68.0 kg three months ago, 66.2 kg six weeks ago, 64.0 kg today) rather than only the two endpoints, while retaining the correct 4 kg / 5.9% loss calculation.",
+  "a6: result text trimmed to remove the leaked plan recommendation ('Recommend formant assessment at instrumental study'); now simply reports that cervical auscultation could not be performed due to lack of equipment at home."
  ]
 }

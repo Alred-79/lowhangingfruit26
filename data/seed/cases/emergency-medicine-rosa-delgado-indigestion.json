@@ -63,25 +63,25 @@
    {
     "id": "a8",
     "kind": "exam",
-    "name": "Ask patient to point with one finger to the exact location of the pain/pressure",
-    "result": "Patient places whole hand flat over mid-epigastric/lower sternal area, cannot localize to one point",
-    "importance": "important",
+    "name": "Observe patient gesture toward pain location on camera",
+    "result": "Patient places whole hand flat over mid-epigastric/lower sternal area rather than pointing with one finger; gesture is nonspecific and does not localize to a single point",
+    "importance": "minor",
     "artifactIds": []
    },
    {
     "id": "a9",
     "kind": "exam",
-    "name": "Ask patient to self-palpate the abdomen lightly for tenderness",
-    "result": "Mild diffuse tenderness to palpation in epigastrium, no guarding, no rebound reported by patient",
-    "importance": "important",
+    "name": "Ask patient to lightly press on her abdomen and describe what she feels",
+    "result": "Reports mild diffuse discomfort with light pressure over the epigastrium; no report of severe pain, guarding, or rebound (self-reported only, not a substitute for in-person exam)",
+    "importance": "minor",
     "artifactIds": []
    },
    {
     "id": "a10",
     "kind": "exam",
-    "name": "Ask patient to describe arm, neck, and jaw sensation while moving jaw/arm",
-    "result": "Dull ache along jaw and left arm, present at rest, not reproduced or worsened by movement",
-    "importance": "critical",
+    "name": "Camera observation during passive jaw opening/closing and arm movement",
+    "result": "No reproducible or worsened discomfort with jaw or arm movement observed on camera; findings not suggestive of a musculoskeletal or TMJ source",
+    "importance": "important",
     "artifactIds": []
    },
    {
@@ -752,11 +752,7 @@
      "f25",
      "f32"
     ],
-    "actionIds": [
-     "a1",
-     "a2",
-     "a6"
-    ]
+    "actionIds": []
    },
    {
     "id": "o5",

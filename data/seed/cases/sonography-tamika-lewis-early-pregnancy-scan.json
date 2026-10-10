@@ -55,16 +55,16 @@
    {
     "id": "a7",
     "kind": "assessment",
-    "name": "Screen for shoulder-tip pain and signs of hemoperitoneum",
-    "result": "Patient denies shoulder-tip pain, denies lightheadedness, denies fainting, denies severe abdominal pain.",
+    "name": "Assess for shoulder-tip pain and signs of hemoperitoneum",
+    "result": "On direct questioning, patient reports no shoulder-tip pain and no severe abdominal pain.",
     "importance": "critical",
     "artifactIds": []
    },
    {
     "id": "a8",
     "kind": "assessment",
-    "name": "Screen for dizziness, syncope, or hemodynamic instability symptoms",
-    "result": "Patient denies dizziness, denies feeling faint, denies rapid heartbeat sensation at rest.",
+    "name": "Assess for dizziness, syncope, or hemodynamic instability symptoms",
+    "result": "On direct questioning, patient reports no dizziness, no feeling faint, and no sensation of rapid heartbeat at rest.",
     "importance": "important",
     "artifactIds": []
    },
@@ -767,7 +767,6 @@
     "Mild cramping, 2-3/10, slightly more left-sided on direct questioning",
     "No shoulder-tip pain, dizziness, syncope, or fever",
     "Uncertain LMP due to irregular cycles; single hCG 14,200 mIU/mL without a trend to assess appropriately",
-    "Rh negative blood type with implications for future Rh immunoglobulin consideration",
     "History of prior first-trimester loss with significant associated psychological distress"
    ],
    "plan": [
@@ -778,19 +777,18 @@
     "Explain transvaginal ultrasound procedure in plain language, address safety concerns, confirm she may decline or request transabdominal-only imaging, and document informed consent and chaperone preference",
     "Clarify facility policy on partner presence during the exam and confirm with imaging staff",
     "Set honest expectations: sonographer does not interpret or disclose diagnostic results; findings will come from the interpreting radiologist or ordering midwife per facility protocol",
-    "Flag Rh-negative status for the ordering clinician's attention regarding possible Rh immunoglobulin if bleeding or pregnancy loss is confirmed (outside sonographer's scope to administer or decide, but worth communicating)",
+    "Flag Rh-negative status to the ordering clinician for their awareness",
     "Acknowledge and validate the patient's prior traumatic experience without promising to personally disclose results, and offer to relay her concerns to the imaging team/radiologist in advance"
    ],
    "redFlags": [
     "Left-sided cramping with uncertain gestational dating and single elevated hCG raising concern for ectopic pregnancy",
-    "Any report of heavy bleeding, severe or worsening one-sided pain, shoulder-tip pain, dizziness, or syncope before the scheduled scan should trigger same-day in-person evaluation rather than waiting for the scheduled appointment",
-    "Rh-negative status should be communicated to the ordering clinician in case of confirmed pregnancy loss or bleeding requiring Rh immunoglobulin"
+    "Any report of heavy bleeding, severe or worsening one-sided pain, shoulder-tip pain, dizziness, or syncope before the scheduled scan should trigger same-day in-person evaluation rather than waiting for the scheduled appointment"
    ],
    "educationPoints": [
     "A sonographer's pre-scan history focuses on triage for urgency and procedural preparation, not diagnosis - any concerning findings should prompt escalation to the ordering clinician or emergency services, not interpretation of what the scan will show",
     "Transvaginal ultrasound is safe in early pregnancy and does not increase miscarriage risk; patients can decline it in favor of transabdominal-only imaging, understanding this may limit image quality",
     "Results disclosure belongs to the interpreting physician/ordering clinician per facility policy; sonographers should communicate this honestly and compassionately, especially to patients with prior traumatic experiences",
-    "Rh-negative status is clinically relevant context to pass along to the care team but administering or deciding on Rh immunoglobulin is outside the sonography role",
+    "Rh-negative status is relevant context to pass along to the care team, but reasoning about Rh immunoglobulin management is outside the sonography role",
     "Validating a patient's emotional recollection of a prior traumatic scan is appropriate even when it does not perfectly match documented details; the goal is trust-building and clear communication going forward, not correcting the patient's memory"
    ]
   },

@@ -342,11 +342,14 @@ export default function RunHub({ runId }: { runId: string }) {
   const follow = view ? (view.next.stageId ? view.next.stageId : view.next.kind === "huddle" ? "huddle" : "final") : null;
   const lastFollow = useRef<string | null>(null);
   useEffect(() => {
-    if (follow && follow !== lastFollow.current) {
+    if (!follow || follow === lastFollow.current) return;
+    // Move the learner to whatever needs their attention next, after the current render.
+    const t = setTimeout(() => {
       lastFollow.current = follow;
       setStep(follow);
       if (follow === "final") setTab("state");
-    }
+    }, 0);
+    return () => clearTimeout(t);
   }, [follow]);
 
   if (error && !view) return <p className="text-sm text-rose-700">{error}</p>;

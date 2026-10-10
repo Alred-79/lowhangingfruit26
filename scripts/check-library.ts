@@ -36,8 +36,6 @@ const asJson = args.includes("--json");
 const TIERS = ["initial", "discoverable", "reluctant", "hidden"];
 const KINDS = ["exam", "vitals", "lab", "imaging", "test", "record", "assessment", "procedure"];
 const empty = (v: unknown) => v === undefined || v === null || (typeof v === "string" && !v.trim()) || (Array.isArray(v) && !v.length);
-/** A result cell that carries a number needs a unit in the row; a qualitative result ("Negative") does not. */
-const hasNumber = (s: string) => /\d/.test(s);
 
 interface Report {
   file: string;
@@ -168,7 +166,7 @@ function check(file: string): Report {
         for (const r of d.table.rows || []) {
           const cells = r.cells || [];
           const result = ci.result >= 0 ? cells[ci.result] || "" : "";
-          if (!hasNumber(result) || /^\s*(\d\+|trace|[<>]?\s*1:\d+)\s*$/i.test(result)) continue; // qualitative result, dipstick grade or titre
+          if (!/^\s*[<>≤≥~]?\s*\d/.test(result) || /^\s*(\d\+|[<>]?\s*1:\d+)\s*$/.test(result)) continue; // qualitative result, dipstick grade or titre
           const unit = ci.unit >= 0 ? cells[ci.unit] || "" : "";
           // Unit may live in its own column or inline in the result ("8.9 g/dL").
           const inline = /\d\s*[a-zA-Zµμ%×x/^]/.test(result) || /%|ratio|index|\bph\b|inr|specific gravity/i.test(cells[0] || "");
@@ -391,6 +389,15 @@ async function fixOne(file: string, issues: Issue[]): Promise<string[]> {
   const remove = new Set(arr<string>(r.removeActionIds));
   if (remove.size && c.actions.length - remove.size >= 8) c.actions = c.actions.filter((a) => !remove.has(a.id));
   if (arr(r.mismatches).length) c.mismatches = arr(r.mismatches);
+  // The model sometimes names an action as the mismatch's artifact; artifactId is optional, so drop a bad one.
+  for (const m of c.mismatches || []) {
+    if (m.artifactId && !c.artifacts.some((d) => d.id === m.artifactId)) {
+      const via = c.actions.find((a) => a.id === m.artifactId)?.artifactIds?.[0];
+      if (via) m.artifactId = via;
+      else delete m.artifactId;
+    }
+    if (m.factId && !c.facts.some((x) => x.id === m.factId)) delete m.factId;
+  }
   if (arr(r.chartAtStart).length >= 2) c.chartAtStart = arr(r.chartAtStart);
   if (r.answerKey && typeof r.answerKey === "object") c.answerKey = { ...c.answerKey, ...(r.answerKey as CaseProfile["answerKey"]) };
   if (r.scenario && typeof r.scenario === "object") c.scenario = { ...c.scenario, ...(r.scenario as CaseProfile["scenario"]) };

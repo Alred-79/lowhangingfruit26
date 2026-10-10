@@ -18,10 +18,10 @@
    {
     "id": "a2",
     "kind": "assessment",
-    "name": "CIWA-Ar risk screen (history-based, no exam needed)",
-    "result": "History of morning shakiness and tremor relieved by drinking, plus sweats/insomnia on prior attempt to stop = indicators of withdrawal risk; current CIWA-Ar score cannot be done live without exam but history suggests moderate risk requiring medical evaluation before any cessation attempt",
+    "name": "Withdrawal risk history (not CIWA-Ar; requires elicitation, not a scored exam)",
+    "result": "Pending interview: real-time CIWA-Ar requires a live clinical exam (vitals, observed tremor, sweats, agitation, hallucinations) and cannot be completed by self-report alone. If the learner directly and sensitively asks about morning symptoms and prior cessation attempts, further history may clarify withdrawal risk and the need for medical evaluation before any cessation attempt.",
     "importance": "critical",
-    "abnormal": true,
+    "abnormal": false,
     "artifactIds": []
    },
    {
@@ -62,18 +62,18 @@
    },
    {
     "id": "a7",
-    "kind": "test",
-    "name": "Home blood pressure and pulse check (patient self-measured, reported)",
-    "result": "BP 128/82 mmHg, pulse 88 bpm, measured just prior to this visit per patient report; no tremor noted by patient at rest today",
+    "kind": "record",
+    "name": "Recognize need for medical referral for vital-sign/withdrawal risk exam",
+    "result": "No bedside vital-sign or physical withdrawal exam performed by this role; patient's self-reported home BP/pulse (128/82, 88 bpm) noted today, but any formal withdrawal risk exam (CIWA-Ar) and vital sign interpretation should be deferred to a medical provider",
     "importance": "important",
     "abnormal": false,
     "artifactIds": []
    },
    {
     "id": "a8",
-    "kind": "test",
-    "name": "Camera-observed tremor check (patient holds hands out, arms extended, on camera)",
-    "result": "No visible tremor at rest or with arms extended at this time",
+    "kind": "record",
+    "name": "Recognize need for medical referral rather than counselor-performed tremor exam",
+    "result": "No camera-based tremor exam performed; physical/exam-based withdrawal assessment is outside this role's scope and should be referred to a medical provider for in-person or supervised evaluation",
     "importance": "minor",
     "abnormal": false,
     "artifactIds": []
@@ -280,7 +280,7 @@
    {
     "id": "d4",
     "type": "chart",
-    "title": "AUDIT Score and Reported Drinking Pattern - Today's Visit",
+    "title": "AUDIT Item Score Breakdown - Today's Visit",
     "date": "Today",
     "author": "Addiction Counseling Intake",
     "release": {
@@ -289,23 +289,23 @@
     },
     "chart": {
      "kind": "bar",
-     "xLabel": "AUDIT Domain Score Range",
+     "xLabel": "AUDIT Section (official grouping)",
      "yLabel": "Patient's Score",
      "series": [
       {
        "name": "AUDIT Total",
        "points": [
         {
-         "x": "Hazardous use (Q1-3)",
+         "x": "Consumption (Q1-3, max 12)",
          "y": 10
         },
         {
-         "x": "Dependence symptoms (Q4-6)",
-         "y": 9
+         "x": "Dependence symptoms (Q4-6, max 12)",
+         "y": 8
         },
         {
-         "x": "Harmful use/consequences (Q7-10)",
-         "y": 7
+         "x": "Alcohol-related problems (Q7-10, max 16)",
+         "y": 8
         }
        ]
       }
@@ -519,7 +519,7 @@
     "id": "f12",
     "category": "family",
     "topic": "family communication norms",
-    "chart": "Describes family/cultural norm of not discussing emotional or substance issues openly",
+    "chart": "Describes a personal/family norm of not discussing emotional or substance issues openly, which she attributes to her upbringing",
     "says": "We're not a family that airs things out. My parents never talked about feelings, let alone anything like this. It's just not how we operate.",
     "tier": "discoverable",
     "importance": "minor"
@@ -723,7 +723,7 @@
    },
    {
     "id": "o2",
-    "text": "Identify withdrawal risk indicators (morning tremor relieved by drinking, prior cessation attempt with autonomic symptoms) and recognize need for medically supervised withdrawal rather than counselor-directed abrupt cessation",
+    "text": "Through sensitive, direct interview questioning, elicit withdrawal risk indicators (morning tremor relieved by drinking, prior cessation attempt with autonomic symptoms) and recognize need for medically supervised withdrawal rather than counselor-directed abrupt cessation or a counselor-performed physical exam",
     "factIds": [
      "f5",
      "f8",
@@ -771,7 +771,7 @@
    },
    {
     "id": "o6",
-    "text": "Identify and explore relationship/family consequences and recognize this patient's family communication pattern (not cause of drinking) as part of recovery environment assessment",
+    "text": "Identify and explore relationship/family consequences and recognize this patient's individual family communication pattern (not her ethnicity or culture, and not the cause of her drinking) as part of recovery environment assessment",
     "factIds": [
      "f10",
      "f11",
@@ -784,7 +784,7 @@
    },
    {
     "id": "o7",
-    "text": "Recognize that medication-assisted treatment (e.g., naltrexone, acamprosate) requires coordination with/referral to a prescribing physician, which is outside this role's scope to initiate directly",
+    "text": "Recognize that medication-assisted treatment (e.g., naltrexone, acamprosate) and formal withdrawal risk exams (e.g., CIWA-Ar) require coordination with/referral to a prescribing physician or medical provider, which is outside this role's scope to initiate directly",
     "factIds": [
      "f6",
      "f25"
@@ -806,22 +806,22 @@
    "keyFindings": [
     "AUDIT score 26/40 indicating severe alcohol use disorder",
     "Actual consumption closer to most of a 750mL bottle of wine nightly, more on weekends - well above initial self-report",
-    "Morning tremor relieved by drinking (relief drinking, a dependence indicator) on at least two occasions in past month",
+    "Morning tremor relieved by drinking (relief drinking, a dependence indicator) on at least two occasions in past month, elicited through sensitive direct questioning",
     "Autonomic withdrawal symptoms (sweats, insomnia, racing heart sensation) after only 4 days of abstinence during January attempt",
     "Blackout/memory gap episode during a client dinner",
     "Elevated AST (112), ALT (58), GGT (240), MCV (101) consistent with heavy alcohol use; marked rise from normal labs one year ago",
-    "No history of seizures to date, but withdrawal history indicates meaningful risk for future complicated withdrawal if she stops abruptly without medical supervision",
-    "Significant family relational consequences: husband sleeping separately, daughter poured out a bottle of wine, family does not openly discuss the issue",
+    "No history of seizures to date, but withdrawal history indicates meaningful risk for future complicated withdrawal if she stops abruptly without medical supervision; a formal CIWA-Ar exam requires a medical provider and real-time observation, not retrospective history alone",
+    "Significant family relational consequences: husband sleeping separately, daughter poured out a bottle of wine, family does not openly discuss the issue (an individual/family pattern, not an ethnic or cultural stereotype)",
     "High fear of professional/licensing consequences driving secrecy and reluctance to disclose",
     "Stage of change: ambivalent, early contemplation/preparation; importance 6/10, confidence only 3/10",
     "No reported occupational impairment (no missed deadlines/hearings) - functioning preserved, consistent with 'high-functioning' presentation that can mask severity"
    ],
    "plan": [
-    "Do NOT recommend or support unsupervised abstinence attempt given documented withdrawal symptoms with prior cessation attempt; refer urgently to referring physician (Dr. Chen) or appropriate medical provider for withdrawal risk assessment and consideration of medically supervised withdrawal management (possible inpatient or closely monitored outpatient detox given history)",
+    "Do NOT recommend or support unsupervised abstinence attempt given documented withdrawal symptoms with prior cessation attempt; refer urgently to referring physician (Dr. Chen) or appropriate medical provider for a formal withdrawal risk exam (CIWA-Ar) and consideration of medically supervised withdrawal management (possible inpatient or closely monitored outpatient detox given history)",
     "Communicate ASAM dimension findings to coordinate level of care determination; given Dimension 1 (withdrawal risk) and Dimension 2 (biomedical - abnormal LFTs) findings, likely ASAM Level 2.1 or higher (intensive outpatient or medically monitored) is appropriate pending medical clearance",
     "Use motivational interviewing to build on her stated motivators (daughter, marriage) rather than confronting denial; explore ambivalence around abstinence vs. moderation goal using open-ended reflective techniques",
     "Discuss confidentiality protections (e.g., 42 CFR Part 2 federal substance use treatment confidentiality protections) clearly and accurately; clarify what is and is not disclosed to employers or licensing boards without her consent, and discuss lawyer-assistance program (LAP) resources that are specifically designed to be confidential and separate from bar disciplinary processes",
-    "Refer to her physician for discussion of medication options for alcohol use disorder (e.g., naltrexone or acamprosate) - this is outside the counselor's scope to prescribe but should be actively coordinated",
+    "Refer to her physician for discussion of medication options for alcohol use disorder (e.g., naltrexone or acamprosate) and for any physical/vital-sign-based withdrawal risk exam - both are outside the counselor's scope to perform directly but should be actively coordinated",
     "Recommend family involvement in treatment planning (e.g., family therapy or psychoeducation) given husband's and daughter's reactions, respecting the family's current communication norms while gently inviting more open dialogue",
     "Screen and monitor for co-occurring anxiety; consider referral for formal mental health evaluation if anxiety symptoms persist independent of alcohol use",
     "Document findings using ASAM six-dimension framework and share with referring physician with patient's consent",
@@ -839,9 +839,10 @@
     "Relief drinking (using alcohol to settle morning shakiness) and withdrawal symptoms on attempted cessation are hallmark signs of physiologic dependence, not simply heavy social drinking",
     "Patients can be high-functioning (maintaining career performance) while having severe alcohol use disorder; functional status alone should not be used to rule out dependence",
     "Withdrawal history (even without prior seizure) means future unsupervised cessation attempts carry risk; any plan to stop drinking must involve medical evaluation and likely supervised withdrawal management",
-    "Addiction counselors coordinate with physicians for withdrawal management and medication-assisted treatment; prescribing and medical detox decisions are outside this role's scope",
+    "CIWA-Ar is a validated exam-based tool requiring real-time observed findings (vitals, tremor, sweats, agitation, hallucinations); it cannot be completed from history alone, and performing physical/vital-sign-based withdrawal exams is outside the addiction counselor's scope - these require referral to a medical provider",
+    "Addiction counselors coordinate with physicians for withdrawal management and medication-assisted treatment; prescribing, physical withdrawal exams, and medical detox decisions are outside this role's scope",
     "Confidentiality protections for substance use treatment (such as those under federal regulations) are an important, concrete tool to address fears about professional consequences and should be explained accurately rather than with vague reassurance",
-    "Family members' reactions (a spouse withdrawing, a child intervening) are important recovery-environment data points, not evidence of family dysfunction causing the drinking",
+    "Family members' reactions (a spouse withdrawing, a child intervening) are important recovery-environment data points reflecting this individual family's dynamics, not evidence that a patient's ethnicity or culture causes or explains substance use disorder",
     "Motivational interviewing techniques (readiness ruler, reflective listening, exploring ambivalence) are more effective than confrontation in a patient who is articulate, controlled, and likely to argue against a direct challenge"
    ]
   },
@@ -851,7 +852,7 @@
     "factId": "f2",
     "artifactId": "d4",
     "patientClaim": "Patient initially states she drinks 'a glass or two of wine to unwind' most nights",
-    "recordEvidence": "AUDIT total score of 26/40 with high scores across hazardous use, dependence symptoms, and harmful consequences domains, and detailed quantification (fact f4) reveals she actually consumes most of a 750mL bottle most nights",
+    "recordEvidence": "AUDIT total score of 26/40 with elevated scores across consumption, dependence, and alcohol-related problems sections, and detailed quantification (fact f4) reveals she actually consumes most of a 750mL bottle most nights",
     "teachingPoint": "Initial self-report of quantity is frequently minimized; structured screening tools and specific follow-up quantification questions are necessary to uncover the true extent of use, especially in high-functioning or image-conscious patients"
    },
    {

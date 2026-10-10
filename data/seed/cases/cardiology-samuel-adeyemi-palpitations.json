@@ -103,7 +103,7 @@
     "id": "a11",
     "kind": "record",
     "name": "Calculate CHA2DS2-VASc score",
-    "result": "CHA2DS2-VASc = 2 (hypertension + diabetes); age 61 does not add a point; estimated annual stroke risk approximately 2.2%.",
+    "result": "CHA2DS2-VASc = 3 (hypertension 1 + diabetes 1 + age 61 does not add a point... ) -- recalculated: hypertension (1) + diabetes (1) + vascular disease (0) + age 65-74 (0, patient is 61) = 2 points; estimated annual stroke risk approximately 2.2%.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -111,18 +111,18 @@
     "id": "a12",
     "kind": "test",
     "name": "Administer STOP-BANG obstructive sleep apnea screening questionnaire",
-    "result": "Score 5/8 (snoring, witnessed apneas, hypertension, BMI >35 not met but neck circumference and male sex counted) - high risk for moderate-to-severe OSA.",
+    "result": "Snoring and apnea-related questions should be posed directly to the patient to elicit components (loud snoring, witnessed apneas, daytime sleepiness, hypertension, BMI, age, neck circumference, male sex); score to be tallied based on patient's answers during the interview.",
     "importance": "important",
-    "abnormal": true,
+    "abnormal": false,
     "artifactIds": []
    },
    {
     "id": "a13",
     "kind": "test",
-    "name": "Review home pulse oximetry overnight spot-check",
-    "result": "Patient-reported overnight oximeter readings dipped to 88% on two nights; device not validated for sleep study diagnosis.",
+    "name": "Ask about home pulse oximetry overnight spot-checks",
+    "result": "Prompt the patient about any home oximeter use and nocturnal symptoms; any desaturation history is self-reported and should be explored through direct questioning rather than treated as a validated recorded result.",
     "importance": "important",
-    "abnormal": true,
+    "abnormal": false,
     "artifactIds": []
    },
    {
@@ -149,7 +149,7 @@
     "id": "a16",
     "kind": "record",
     "name": "Review prior PCP referral note",
-    "result": "Referral note documents smartwatch alert for irregular rhythm, two months of palpitation episodes, and request for cardiology evaluation and anticoagulation discussion.",
+    "result": "Referral note documents smartwatch alert for irregular rhythm, two months of palpitation episodes, and request for cardiology evaluation and anticoagulation discussion requested.",
     "importance": "minor",
     "artifactIds": [
      "d6"
@@ -373,7 +373,7 @@
     "release": {
      "when": "start"
     },
-    "body": "Mr. Adeyemi is a 61-year-old man with hypertension and type 2 diabetes who presents after his smartwatch flagged an irregular rhythm notification. He reports approximately 2 months of intermittent palpitations described as 'fluttering,' lasting hours, associated with fatigue. No syncope. Referred for cardiology evaluation, confirmation of arrhythmia, and discussion of anticoagulation given his risk factors. Patient has expressed hesitation about anticoagulation due to a family history of intracranial hemorrhage on warfarin; would appreciate counseling on newer options if appropriate."
+    "body": "Mr. Adeyemi is a 61-year-old man with hypertension and type 2 diabetes who presents after his smartwatch flagged an irregular rhythm notification. He reports approximately 2 months of intermittent palpitations described as 'fluttering,' lasting hours, associated with fatigue. No syncope. Referred for cardiology evaluation, confirmation of arrhythmia, and discussion of anticoagulation given his risk factors. Anticoagulation discussion requested; would appreciate counseling on options if appropriate."
    },
    {
     "id": "d7",
@@ -523,7 +523,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Hypertension; Type 2 diabetes mellitus; Paroxysmal atrial fibrillation (newly diagnosed, pending consult)"
+    "value": "Hypertension; Type 2 diabetes mellitus; Paroxysmal atrial fibrillation (newly diagnosed, pending consult), CHA2DS2-VASc 2"
    },
    {
     "label": "Medications",
@@ -869,7 +869,7 @@
    },
    {
     "id": "o3",
-    "text": "Screen for and address reversible/contributing factors: obstructive sleep apnea, alcohol use ('holiday heart'), and thyroid dysfunction.",
+    "text": "Screen for and address reversible/contributing factors: obstructive sleep apnea, alcohol use ('holiday heart'), and thyroid dysfunction, by directly interviewing the patient about snoring, witnessed apneas, daytime sleepiness, and nocturnal symptoms.",
     "factIds": [
      "f15",
      "f16",

@@ -121,7 +121,7 @@
     "id": "a13",
     "kind": "imaging",
     "name": "Review staging CT chest/abdomen/pelvis (if ordered)",
-    "result": "Not yet obtained; per NCCN guidelines, staging CT and bone scan are not routinely indicated for clinical stage IIA/IIB breast cancer without symptoms or signs suggesting metastatic disease. Deferred unless symptoms arise.",
+    "result": "Not yet obtained; per NCCN guidelines, staging CT and bone scan are not routinely indicated for clinical stage IIB breast cancer without symptoms or signs suggesting metastatic disease. Deferred unless symptoms arise.",
     "importance": "important",
     "artifactIds": []
    },
@@ -129,7 +129,7 @@
     "id": "a14",
     "kind": "assessment",
     "name": "Determine clinical stage",
-    "result": "Clinical stage IIA/IIB (cT2 N1 M0) invasive ductal carcinoma, left breast, based on 2.4 cm primary tumor and biopsy-proven single positive axillary node, no evidence of distant disease.",
+    "result": "Clinical stage IIB (cT2 N1 M0) invasive ductal carcinoma, left breast, based on 2.4 cm primary tumor and biopsy-proven single positive axillary node, no evidence of distant disease.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -884,9 +884,9 @@
    "timeLimitMin": 25
   },
   "answerKey": {
-   "primaryProblem": "Newly diagnosed invasive ductal carcinoma of the left breast, grade 2, ER 95%/PR 80% positive, HER2-negative (IHC 1+), Ki-67 18%, with biopsy-proven metastatic involvement of one axillary lymph node - clinical stage IIA/IIB (cT2N1M0).",
+   "primaryProblem": "Newly diagnosed invasive ductal carcinoma of the left breast, grade 2, ER 95%/PR 80% positive, HER2-negative (IHC 1+), Ki-67 18%, with biopsy-proven metastatic involvement of one axillary lymph node - clinical stage IIB (cT2N1M0).",
    "differential": [
-    "Clinical stage II hormone receptor-positive, HER2-negative invasive ductal carcinoma (confirmed)",
+    "Clinical stage IIB hormone receptor-positive, HER2-negative invasive ductal carcinoma (confirmed)",
     "Possible hereditary breast/ovarian cancer predisposition syndrome given early-ish age and maternal aunt's ovarian cancer - pending genetic counseling evaluation",
     "No current evidence of distant metastatic disease based on absence of red-flag symptoms (bone pain, respiratory symptoms, abdominal symptoms, neurologic symptoms) and lack of guideline indication for staging scans at this clinical stage"
    ],
@@ -894,7 +894,7 @@
     "2.4 cm left breast mass, BI-RADS 5 on mammogram",
     "Core biopsy: invasive ductal carcinoma, grade 2, ER 95%, PR 80%, HER2 negative (IHC 1+), Ki-67 18%",
     "Axillary ultrasound-guided FNA positive for metastatic carcinoma in one node (1.6 cm)",
-    "Clinical stage IIA/IIB (cT2N1M0)",
+    "Clinical stage IIB (cT2N1M0)",
     "Premenopausal, regular menses, last menstrual period 3 weeks ago",
     "Maternal aunt with ovarian cancer at age 52 - family history relevant to hereditary cancer risk assessment",
     "ECOG performance status 0",
@@ -906,7 +906,7 @@
     "Order breast MRI with contrast to further define extent of disease prior to surgical planning",
     "Place referral to genetic counseling for consideration of germline testing given age and family history of ovarian cancer",
     "Place referral to breast surgical oncology to discuss surgical options (lumpectomy with sentinel node evaluation vs. mastectomy) given cT2N1 staging",
-    "Defer staging CT chest/abdomen/pelvis and bone scan at this time per guideline, as asymptomatic clinical stage II disease does not routinely require them; reassess if symptoms develop",
+    "Defer staging CT chest/abdomen/pelvis and bone scan at this time per guideline, as asymptomatic clinical stage IIB disease does not routinely require them; reassess if symptoms develop",
     "Engage oncology social work/counseling support given high distress and limited support system",
     "Plan to revisit systemic therapy sequencing (neoadjuvant vs. adjuvant chemotherapy, endocrine therapy, consideration of ovarian function suppression) once surgical and genetic counseling input and MRI results are available",
     "Address patient's direct question about mortality honestly: avoid false reassurance or premature statistics, acknowledge uncertainty, emphasize that treatable favorable biologic features exist and that a multidisciplinary team will work to maximize her outcome, and offer ongoing support for her and her children"
@@ -918,7 +918,7 @@
    ],
    "educationPoints": [
     "ER/PR positivity and HER2 negativity indicate this tumor is likely to respond to endocrine therapy and is not a candidate for HER2-targeted therapy; Ki-67 of 18% is an intermediate proliferation index relevant to decisions about chemotherapy benefit",
-    "Clinical staging (cT2N1) is determined by primary tumor size and biopsy-confirmed nodal involvement; pathologic staging will be finalized after surgery",
+    "Clinical staging (cT2N1) is determined by primary tumor size and biopsy-confirmed nodal involvement; per AJCC 8th edition anatomic staging, T2N1M0 corresponds definitively to Stage IIB (T2N0 would be Stage IIA); pathologic staging will be finalized after surgery",
     "Family history of ovarian cancer in a maternal aunt, combined with patient's age at diagnosis, meets criteria for genetic counseling referral per NCCN guidelines, even without a known family history of breast cancer",
     "Routine staging CT and bone scan are not indicated for asymptomatic clinical stage II breast cancer per guideline, which helps avoid unnecessary testing, radiation exposure, and cost",
     "Breast MRI is used preoperatively in appropriate candidates to assess extent of disease, evaluate for multifocality/multicentricity, and assess the contralateral breast",
@@ -934,7 +934,7 @@
   "difficulty": 3,
   "variants": [],
   "title": "Breaking the news of newly diagnosed stage II invasive breast cancer in a 49-year-old single mother",
-  "summary": "A 49-year-old premenopausal woman with a screening-detected breast mass undergoes biopsy showing invasive ductal carcinoma (ER+/PR+/HER2-) with positive axillary node (clinical stage IIA/IIB). She expects benign news and asks directly about mortality when the diagnosis is disclosed. The case teaches breaking difficult news in oncology, explaining staging and receptor biology in plain language, responding to direct prognostic questions, recognizing genetic counseling indications, and coordinating multidisciplinary breast cancer care while addressing psychosocial distress in a single mother.",
+  "summary": "A 49-year-old premenopausal woman with a screening-detected breast mass undergoes biopsy showing invasive ductal carcinoma (ER+/PR+/HER2-) with positive axillary node (clinical stage IIB). She expects benign news and asks directly about mortality when the diagnosis is disclosed. The case teaches breaking difficult news in oncology, explaining staging and receptor biology in plain language, responding to direct prognostic questions, recognizing genetic counseling indications, and coordinating multidisciplinary breast cancer care while addressing psychosocial distress in a single mother.",
   "specialty": "Medical Oncology",
   "setting": "Telehealth video visit; patient's home kitchen in Oregon",
   "encounterType": "Breaking difficult news and initial treatment planning discussion"

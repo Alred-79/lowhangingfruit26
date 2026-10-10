@@ -72,7 +72,7 @@
     "id": "a8",
     "kind": "record",
     "name": "Review current medication list and refill/pharmacy fill history",
-    "result": "Fluticasone propionate HFA 110 mcg, 2 puffs BID prescribed 3 months ago (120-dose canister); pharmacy refill history shows only 1 refill in 3 months, consistent with roughly 1 puff/day average use rather than prescribed 4 puffs/day.",
+    "result": "Fluticasone propionate HFA 110 mcg, 2 puffs BID prescribed 3 months ago (120-dose canister, ~15-day supply at prescribed dosing); pharmacy refill history shows only 1 refill in 3 months (2 canisters total, 240 doses over ~90 days), consistent with roughly 2.5-3 puffs/day average use rather than prescribed 4 puffs/day - partial underuse, less severe than patient's 'when I remember' framing might suggest but still below prescribed dosing.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": []
@@ -111,16 +111,16 @@
    {
     "id": "a12",
     "kind": "test",
-    "name": "Screen for secondhand/environmental exposures via history (home device/air quality check not available) - ask about pets, smoke, allergens",
-    "result": "New household cat acquired approximately 6 weeks ago; no indoor tobacco smoke reported by father; home otherwise same as prior visits.",
-    "importance": "important",
+    "name": "Allergy/environmental symptom screening tool (structured questionnaire administered via telehealth)",
+    "result": "Score suggests mild allergic rhinitis symptom burden; tool does not itself specify home exposures — correlate with history obtained directly from patient/caregiver.",
+    "importance": "minor",
     "artifactIds": []
    },
    {
     "id": "a13",
     "kind": "exam",
     "name": "Visual inspection of nasal mucosa and oropharynx via camera (caregiver-assisted with flashlight)",
-    "result": "Nasal turbinates appear mildly pale/boggy; oropharynx clear, no exudate or erythema.",
+    "result": "Nasal mucosa appears mildly erythematous with slight boggy quality; oropharynx clear, no exudate or erythema. Findings are nonspecific and should be correlated with symptom history.",
     "importance": "minor",
     "abnormal": true,
     "artifactIds": []
@@ -719,13 +719,12 @@
    },
    {
     "id": "o4",
-    "text": "Identify and counsel on a new modifiable environmental trigger (new household cat) contributing to worsened asthma control.",
+    "text": "Elicit the new household cat exposure and correlating allergy symptoms through history-taking, and counsel on this modifiable environmental trigger contributing to worsened asthma control.",
     "factIds": [
      "f11",
      "f17"
     ],
     "actionIds": [
-     "a12",
      "a13"
     ]
    },
@@ -761,8 +760,8 @@
     "factId": "f5",
     "artifactId": "d2",
     "patientClaim": "Jaylen says he takes his fluticasone inhaler 'when I remember,' implying inconsistent but regular-ish use.",
-    "recordEvidence": "Medication list/refill history shows only 1 refill in 3 months for a 120-dose canister prescribed at 4 puffs/day, consistent with closer to 1 puff/day average - far less than reported.",
-    "teachingPoint": "Self-reported adherence often overestimates actual use; refill/pharmacy data and demonstrated technique provide more objective evidence and should be explored supportively, not punitively."
+    "recordEvidence": "Medication list/refill history shows only 1 refill in 3 months for a 120-dose canister prescribed at 4 puffs/day (2 canisters = 240 doses over ~90 days, ~2.5-3 puffs/day average) - below the prescribed 4 puffs/day but higher than a casual 'when I remember' framing might suggest, indicating partial but meaningful underuse.",
+    "teachingPoint": "Self-reported adherence often doesn't match objective refill data in either direction; refill/pharmacy data and demonstrated technique provide more objective evidence and should be explored supportively, not punitively."
    },
    {
     "id": "m2",
@@ -863,9 +862,9 @@
     "Rescue inhaler use 5-6x/week and nocturnal cough 2x/week indicate poorly controlled asthma",
     "ACT score 14/25 (very poorly controlled range)",
     "Peak flow 310 L/min = 73% of personal best (yellow zone)",
-    "Pharmacy refill pattern shows roughly 1 refill in 3 months versus prescribed BID dosing, indicating substantial ICS underuse despite patient report of partial use",
+    "Pharmacy refill pattern (1 refill in 3 months, ~2.5-3 puffs/day average) shows ICS use below the prescribed BID dosing despite patient reporting fairly regular partial use, highlighting a gap between self-report and objective data",
     "Poor MDI technique without spacer on camera observation, likely reducing effective lung deposition",
-    "New household cat (~6 weeks) with correlating nasal congestion/sneezing",
+    "New household cat (~6 weeks), elicited on history, with correlating nasal congestion/sneezing",
     "Daily nicotine vaping disclosed for ~4 months, previously undocumented and a plausible contributor to airway irritability",
     "Prior spirometry showing reversible obstruction consistent with persistent asthma, supporting ongoing controller need",
     "Stable current vitals and comfortable work of breathing today, no signs of acute distress requiring emergency referral at this visit"
@@ -874,7 +873,7 @@
     "Reinforce and reassess inhaled corticosteroid technique; prescribe/arrange a spacer and demonstrate correct use via video coaching",
     "Address adherence barriers collaboratively: align dosing with existing routines (e.g., tie to toothbrushing), consider discussing simplified regimen with supervising attending if needed",
     "Discuss step-up or confirm appropriate controller therapy with supervising attending/asthma specialist given ongoing poor control despite reported use; consider referral back to pulmonology for reassessment",
-    "Counsel on environmental trigger reduction related to the new cat (e.g., keeping cat out of bedroom, hand-washing, HEPA filtration) while respecting the family's wish to keep the pet",
+    "Elicit and counsel on environmental trigger reduction related to the new cat (e.g., keeping cat out of bedroom, hand-washing, HEPA filtration) while respecting the family's wish to keep the pet",
     "Provide confidential, nonjudgmental brief intervention and counseling on nicotine vaping cessation; offer referral to adolescent-focused tobacco/vaping cessation resources or counseling as appropriate within pediatric scope",
     "Review and update the written asthma action plan with the patient and ensure he can state red-flag symptoms requiring urgent care/ED return",
     "Schedule close follow-up (e.g., 2-4 weeks) to reassess control, technique, and adherence; coordinate with father on general asthma management while maintaining confidentiality about vaping per adolescent consent/confidentiality norms",
@@ -890,7 +889,7 @@
     "Objective measures (ACT score, peak flow versus personal best, pharmacy refill data) often reveal a different picture of control than patient self-report alone and should be used together, not as a 'gotcha'",
     "Confidential adolescent interviewing, explained clearly up front, increases disclosure of sensitive behaviors like vaping that caregivers and prior acute-care encounters may miss entirely",
     "Correct inhaler technique and spacer use substantially affect inhaled corticosteroid efficacy; technique should be observed, not assumed, at every visit",
-    "New household pets are a common and modifiable asthma trigger in adolescents and warrant specific screening after any exacerbation",
+    "New household pets are a common and modifiable asthma trigger in adolescents and warrant specific screening after any exacerbation, elicited through history rather than assumed",
     "Nicotine vaping is increasingly common among adolescent athletes and can worsen airway reactivity; routine, nonjudgmental screening is part of comprehensive asthma care",
     "Pediatric residents should recognize the limits of their scope and involve supervising attendings or asthma specialists for medication step-up decisions and complex cessation counseling referrals"
    ]

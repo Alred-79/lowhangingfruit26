@@ -30,5 +30,14 @@
    "where": "d6 table 'Today, 33 weeks' vs scenario stating 33w2d",
    "problem": "The weight flowsheet labels today's visit as '33 weeks' while the rest of the case (scenario, d5, chartAtStart) consistently states 33 weeks 2 days; this is a minor labeling inconsistency that should be corrected to '33w2d' for consistency."
   }
+ ],
+ "revised": [
+  "a5: softened result from an exact 'protein 2+' to 'trace to 2+' with explicit caveat that home dipstick color-matching is unvalidated and uncertain, since a self-read home strip cannot be reported with the false precision of a formal UA; downgraded importance from critical to important given a10 (formal urine protein/creatinine ratio) is the actual confirmatory test.",
+  "a4: reframed clonus result to explicitly state the partner-guided maneuver is not clinically reliable over video and cannot substitute for an in-person neuro exam, so the action teaches appropriate skepticism rather than modeling an unsafe/invalid screening method; kept as a minor-importance action rather than removing, since it still usefully prompts the learner to recognize its limitations.",
+  "answerKey.keyFindings: reworded the urine dipstick finding to reflect it as a suggestive but unreliable self-read result requiring formal confirmation, rather than a confirmed exam-equivalent finding.",
+  "answerKey.educationPoints: added explicit teaching point that home urine dipstick and partner-performed clonus checks are unreliable telehealth adjuncts, not substitutes for in-person testing, matching the softened a5/a4 results.",
+  "d6: corrected 'Visit 3' gestational age from '32 weeks' to '32 weeks 2 days' and 'Today' from '33 weeks' to '33 weeks 2 days' so the table reflects an exact 1-week interval between visits, consistent with the 3.5 kg/1-week gain stated in a14 and with chartAtStart.",
+  "d6.chart series: updated x-axis label for the 32-week point to '32w2d' and today to '33w2d' to match the corrected table.",
+  "chartAtStart 'Last vitals': changed from '2 weeks ago... fundal height 31 cm' to '1 week ago (32 weeks 2 days)...' to align with d6's actual visit interval of 1 week, resolving the timeline inconsistency flagged by the reviewer."
  ]
 }

@@ -46,7 +46,7 @@
     "id": "a5",
     "kind": "lab",
     "name": "Review kidney function (eGFR, urine ACR)",
-    "result": "eGFR 98 mL/min/1.73m^2 (normal). Urine albumin-creatinine ratio 22 mg/g (mildly increased, A2 category; normal <30 mg/g by some labs but this flags as borderline-elevated).",
+    "result": "eGFR 98 mL/min/1.73m^2 (normal). Urine albumin-creatinine ratio 22 mg/g, which falls in the A1 category (normal to mildly increased, <30 mg/g) by KDIGO staging, though it is on the higher end of normal and warrants monitoring given new diabetes diagnosis.",
     "importance": "important",
     "artifactIds": [
      "d1"
@@ -80,8 +80,8 @@
    {
     "id": "a9",
     "kind": "test",
-    "name": "Diabetes distress / self-management readiness discussion tool (brief verbal screen)",
-    "result": "Patient endorses moderate distress related to fear of complications and difficulty fitting self-care into shift work; motivated to make changes.",
+    "name": "Validated diabetes distress screening (Problem Areas in Diabetes-5, PAID-5)",
+    "result": "Score suggests moderate diabetes-related distress; patient identifies difficulty fitting self-care into shift work as a key stressor and expresses general motivation to make changes.",
     "importance": "important",
     "artifactIds": []
    },
@@ -157,7 +157,7 @@
         "Hemoglobin A1c",
         "8.6",
         "%",
-        "4.0-5.6 (normal); ≥6.5 diabetes"
+        "<5.7 normal; 5.7-6.4 prediabetes; ≥6.5 diabetes"
        ],
        "flag": "H"
       },
@@ -220,7 +220,7 @@
         "Urine albumin-creatinine ratio",
         "22",
         "mg/g",
-        "<30"
+        "<30 (A1); 30-300 (A2); >300 (A3)"
        ],
        "flag": ""
       },
@@ -801,7 +801,7 @@
    }
   ],
   "answerKey": {
-   "primaryProblem": "New diagnosis of type 2 diabetes mellitus (HbA1c 8.6%, fasting glucose 178 mg/dL) in a 38-year-old woman with prior gestational diabetes, strong family history, obesity (BMI 34), and acanthosis nigricans, with concurrent hyperlipidemia and mildly increased urine albumin-creatinine ratio.",
+   "primaryProblem": "New diagnosis of type 2 diabetes mellitus (HbA1c 8.6%, fasting glucose 178 mg/dL) in a 38-year-old woman with prior gestational diabetes, strong family history, obesity (BMI 34), and acanthosis nigricans, with concurrent hyperlipidemia and a urine albumin-creatinine ratio in the normal-to-mildly-increased (A1) range.",
    "differential": [
     "Type 2 diabetes mellitus (confirmed by HbA1c ≥6.5% and fasting glucose ≥126 mg/dL on two measures - lab and home log)",
     "Latent autoimmune diabetes in adults (less likely given age, obesity, acanthosis nigricans, and clinical picture consistent with insulin resistance rather than autoimmune beta-cell failure; not routinely tested for in this low-pretest-probability presentation)",
@@ -813,23 +813,23 @@
     "Classic osmotic symptoms (polyuria, polydipsia, fatigue) and recurrent candidal infections consistent with hyperglycemia",
     "Acanthosis nigricans on exam supporting insulin resistance",
     "LDL 142 mg/dL and total cholesterol 218 mg/dL indicate need for lipid management",
-    "Urine ACR 22 mg/g is mildly increased (approaching the 30 mg/g threshold), warranting monitoring and nephroprotective strategy; eGFR 98 is normal",
+    "Urine ACR 22 mg/g is in the A1 category (normal to mildly increased, <30 mg/g) but on the higher end of normal, warranting monitoring and nephroprotective strategy; eGFR 98 is normal",
     "BMI 34 kg/m^2 (Obesity Class I) is a modifiable risk factor",
     "History of gestational diabetes and strong family history of diabetic nephropathy place her at elevated lifetime risk",
     "Home glucose log confirms persistently elevated fasting values (165-188 mg/dL) over 10 days, corroborating lab findings"
    ],
    "plan": [
     "Diagnose type 2 diabetes mellitus and explain diagnosis clearly, addressing fear related to mother's dialysis course",
-    "Initiate metformin 500 mg orally once daily with evening meal, titrate up gradually (e.g., increase by 500 mg weekly as tolerated) to a target of 1000 mg twice daily, with counseling on GI side effects and taking with food",
+    "Initiate metformin 500 mg orally once daily with evening meal, titrate up gradually (e.g., increase by 500 mg every 1-2 weeks as tolerated) to a target of 1000 mg twice daily, with counseling on GI side effects and taking with food",
     "Confirm renal function supports metformin use (eGFR 98, normal) and plan to recheck renal function periodically",
     "Order repeat fasting lipid panel in 3 months; discuss statin therapy per ASCVD risk given LDL 142 and diabetes diagnosis (shared decision-making, likely moderate-intensity statin indicated)",
     "Refer for dilated eye exam (ophthalmology/optometry) within the next few months given no documented exam in the past year",
     "Perform/arrange comprehensive diabetic foot exam (in-person visit or community resource) with monofilament and vibration testing not feasible by camera alone",
-    "Repeat urine albumin-creatinine ratio in 3-6 months to confirm persistence of mild albuminuria; reinforce blood pressure control",
+    "Repeat urine albumin-creatinine ratio in 3-6 months to confirm it remains in the A1 range and monitor for progression; reinforce blood pressure control",
     "Set collaborative, shift-work-sensitive goals: reduce sweet tea/energy drink intake, substitute lower-sugar hydration options during shifts, aim to not skip breakfast, consider small protein-containing meal before shift",
     "Recommend brief walking or activity bouts fitted around caregiving/work schedule rather than a generic exercise prescription",
     "Address immunization gaps: offer influenza vaccine, Hepatitis B series (recommended for adults with diabetes under age 60), update Tdap timing per schedule, COVID-19 booster per current guidance",
-    "Screen for diabetes distress and depression (PHQ-9 administered, mild score); offer diabetes self-management education and support (DSME/S) referral",
+    "Screen for diabetes distress and depression (PHQ-9 administered, mild score; validated distress screen administered, moderate distress); offer diabetes self-management education and support (DSME/S) referral",
     "Discuss cost concerns: confirm metformin is low-cost/generic, explore patient assistance or $4 generic programs if needed",
     "Arrange follow-up visit in 4-6 weeks to assess metformin tolerance, titration, and glucose trends; reinforce home glucose monitoring technique and frequency",
     "Note copper IUD is non-hormonal and does not need to be changed; no interaction with metformin"
@@ -837,7 +837,7 @@
    "redFlags": [
     "Signs of diabetic ketoacidosis (nausea, vomiting, abdominal pain, rapid breathing) - advise to seek emergency care if these develop",
     "Severe hyperglycemia symptoms (confusion, extreme lethargy) warrant urgent evaluation",
-    "Progression of albuminuria or declining eGFR would need escalation to nephrology referral",
+    "Progression of albuminuria into the A2 range (30-300 mg/g) or declining eGFR would need escalation to nephrology referral",
     "Vision changes or eye pain should prompt urgent ophthalmologic evaluation"
    ],
    "educationPoints": [

@@ -31,5 +31,10 @@
    "where": "a2 result vs d5 chart",
    "problem": "Action a2 result lists maternal grandfather's prostate cancer as diagnosed 'age 60s' with status 'unknown' for living/death, while d5 chart gives a specific age of 62 at diagnosis. This is not strictly contradictory but is a minor inconsistency in precision between the two artifacts describing the same fact."
   }
+ ],
+ "revised": [
+  "a8: Reworded result to reflect a baseline (pre-counseling) assessment of the patient's understanding rather than a conclusion that counseling already succeeded, consistent with f17 (patient assumes test is simple yes/no).",
+  "a9: Reworded result to reflect baseline (pre-counseling) assessment of understanding of result categories, consistent with f31 (patient unaware of VUS), rather than stating understanding was already achieved.",
+  "a11: Removed the leaked reference to the sister's stated reluctance (f15) and the patient's guilt/conflict (f30) from the result; the action now only reflects general cascade-testing/communication counseling. The reluctant facts f15 and f30 will only surface if the learner asks a direct, sensitive question about how relatives might feel about testing or about the patient's feelings toward her sister's wishes, per the reluctant-tier rule. Retained the general content about targeted testing for siblings and deferral of daughters' testing (not leakage, appropriate counselor-stated content)."
  ]
 }

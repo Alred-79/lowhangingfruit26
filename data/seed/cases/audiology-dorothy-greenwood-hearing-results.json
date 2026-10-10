@@ -32,7 +32,7 @@
     "id": "a4",
     "kind": "test",
     "name": "Administer tinnitus history questions (onset, laterality, pulsatile quality, associated symptoms)",
-    "result": "Patient reports constant, non-pulsatile ringing in the left ear only, onset approximately 1 year ago, gradually worsening. No right-sided tinnitus.",
+    "result": "Patient reports constant, non-pulsatile ringing in the left ear only, gradually worsening since onset, with no right-sided tinnitus. Further questioning clarifies the ringing began roughly a year ago, after she had already noticed some hearing difficulty, though she cannot pinpoint the exact timeline.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -88,7 +88,7 @@
    },
    {
     "id": "a11",
-    "kind": "test",
+    "kind": "record",
     "name": "Ask about family history of hearing loss or genetic ear conditions",
     "result": "Patient reports her mother had gradual hearing loss in her 70s-80s; no known family history of sudden or asymmetric hearing loss, no known family history of acoustic neuroma or neurofibromatosis.",
     "importance": "minor",

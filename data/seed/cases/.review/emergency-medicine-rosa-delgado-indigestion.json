@@ -31,5 +31,13 @@
    "where": "a13 result vs d2 table",
    "problem": "Action a13 result states home BP log ranges '138/86 to 150/92,' which matches d2's rows (138/86 min, 150/92 max) — this is fine, but the phrasing 'ranging 138/86 to 150/92' understates the actual lowest-to-highest range direction (138 is lower than 142, 146), which could read as approximate; verify this is intended as min-max summary rather than chronological, which it is, so no actual error, but flagged for reviewer attention regarding clarity."
   }
+ ],
+ "revised": [
+  "a8: converted from a leaky interview-style 'point to the pain' question into a camera-observation exam action; result now reports only the objective gesture (nonspecific hand placement) without stating the 'cannot localize' interpretation that leaked ACS-vs-GI reasoning; downgraded importance to minor since it is a soft, non-diagnostic observation.",
+  "a9: reframed as a true exam/observation action the clinician directs during the video call (light self-palpation while clinician observes response) rather than a 'self-palpate and report' interview item; result kept as objective/self-reported discomfort only, explicitly noting it is not a substitute for in-person exam; downgraded importance to minor given its limited reliability via telehealth.",
+  "a10: converted from an interview question that leaked jaw/arm radiation (f3/f6) into a true exam maneuver (camera observation of passive jaw/arm movement); result now reports only objective findings (no reproducible/worsened discomfort with movement), with the radiation symptom itself remaining gated behind interview facts f3 (initial) and f6 (discoverable) as intended.",
+  "o1 unchanged in content but note a10 still appropriately listed there is fine since it refers to eliciting the symptom via facts f3/f6, not via the action; actionIds a8/a10 removed from o1 is not needed since o1's factIds (f3,f6) already carry the symptom-eliciting objective via interview; however since a8 and a10 no longer leak the radiation finding, left o1.actionIds as a8/a10 only insofar as they are the exam maneuvers that rule out musculoskeletal mimics complementing the interview-elicited symptoms. Kept o1 object itself unchanged since reviewer did not flag o1 directly and its factIds remain the true evidence source.",
+  "o4: removed actionIds a1,a2,a6 (duplicated from o3) since disposition is a cognitive/decision step not tied to a discrete vitals/exam action; o4 now has no actionIds, consistent with how o5 (another cognitive/communication objective) is handled.",
+  "Mismatches m1 and m2 remain valid: m1's evidence is pharmacy refill history (d4/a14), m2's evidence is the home BP log trend (d2/a13) — neither depends on a8/a9/a10, so no changes needed there."
  ]
 }

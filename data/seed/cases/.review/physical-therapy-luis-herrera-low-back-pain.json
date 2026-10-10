@@ -26,5 +26,9 @@
    "where": "a9 self-reported dermatome/myotome screen",
    "problem": "Labelling toe/heel walk and single-leg heel raise as part of a 'self-reported' screen is slightly misleading since these are performed, observed motor tests, not self-report; wording should clarify these are patient-performed functional strength tests observed via video, consistent with other action names in the case."
   }
+ ],
+ "revised": [
+  "patient.appearance: removed 'a visible back brace on the armrest nearby' leakage phrase so f10 (continuous back belt use) must be discovered through interview rather than visually revealed.",
+  "d5 release condition changed from fact f6 (tier initial, volunteered at opening) to action a1 (vitals/chart review), since f6 is disclosed immediately and should not gate a written document; a1 is the first chart-review action a student performs and plausibly would surface the work restriction note from the same urgent care encounter. This keeps d5 available early (consistent with other 'start'-released records from the same visit) but ties its appearance to an actual student action rather than a volunteered initial fact, preventing leakage via mere patient disclosure."
  ]
 }

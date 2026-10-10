@@ -46,9 +46,11 @@
     "id": "a5",
     "kind": "lab",
     "name": "Review serum cotinine from last visit",
-    "result": "Cotinine positive, consistent with active tobacco use, drawn at last visit 2 months ago.",
+    "result": "Serum cotinine, drawn at last visit 2 months ago: Positive, quantitative 220 ng/mL (reference: <10 ng/mL nonsmoker; >50 ng/mL consistent with active smoking).",
     "importance": "critical",
-    "artifactIds": []
+    "artifactIds": [
+     "d2"
+    ]
    },
    {
     "id": "a6",
@@ -60,17 +62,17 @@
    },
    {
     "id": "a7",
-    "kind": "test",
+    "kind": "exam",
     "name": "Ask patient to self-palpate for ankle/leg swelling",
-    "result": "Patient reports no swelling felt in ankles or shins bilaterally; no visible edema on camera when she lifts pant leg.",
+    "result": "Patient reports no swelling felt in ankles or shins bilaterally; no visible edema on camera when she lifts pant leg. (Patient-reported/observed, not a clinician-performed exam.)",
     "importance": "minor",
     "artifactIds": []
    },
    {
     "id": "a8",
-    "kind": "vitals",
+    "kind": "exam",
     "name": "Request patient check pulse rate via home device/wrist check",
-    "result": "Pulse 92 beats/min, regular, self-counted at wrist.",
+    "result": "Pulse 92 beats/min, regular, self-counted at wrist. (Patient-reported, not a clinician-measured vital sign; not independently verifiable.)",
     "importance": "minor",
     "artifactIds": []
    },
@@ -758,7 +760,7 @@
     "factId": "f6",
     "artifactId": "d2",
     "patientClaim": "Patient states she quit smoking entirely after her last exacerbation and has not smoked since.",
-    "recordEvidence": "Serum cotinine from 2 months ago (after the exacerbation she references) returned positive at a quantitative level of 220 ng/mL, consistent with active smoking, not quitting.",
+    "recordEvidence": "Serum cotinine from 2 months ago (after the exacerbation she references) returned positive at a quantitative level of 220 ng/mL, far above the <10 ng/mL nonsmoker threshold and well into the range consistent with active smoking.",
     "teachingPoint": "Self-reported smoking cessation is often inaccurate; biochemical confirmation (cotinine) should guide counseling intensity and should be revisited non-judgmentally rather than simply accepted or confronted punitively."
    },
    {

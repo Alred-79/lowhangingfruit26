@@ -64,15 +64,15 @@
     "id": "a8",
     "kind": "assessment",
     "name": "Confusion Assessment Method (CAM) screening questions by phone/video",
-    "result": "No acute fluctuating inattention or disorganized thinking at this visit; however patient and wife both describe new short-term memory lapses and word-finding trouble since discharge, concerning for post-ICU cognitive impairment rather than active delirium",
+    "result": "No acute fluctuating inattention or disorganized thinking identified on structured CAM screening at this visit; features of delirium (acute onset, fluctuating course, inattention, disorganized thinking) not elicited. Does not rule out underlying cognitive change outside the CAM's scope.",
     "importance": "critical",
     "artifactIds": []
    },
    {
     "id": "a9",
     "kind": "assessment",
-    "name": "PTSD/psychological screen (ask about nightmares, flashbacks, avoidance)",
-    "result": "Patient reports recurrent nightmares of being restrained, avoids discussing hospitalization, Carol reports irritability and withdrawal; screen positive for post-ICU psychological symptoms, warrants referral",
+    "name": "Administer validated post-ICU psychological screening tool (e.g., IES-6)",
+    "result": "Screening tool administered; patient endorses sleep disturbance and avoidance-type items sufficient to flag a positive screen for post-ICU psychological distress, warranting formal referral for further evaluation",
     "importance": "critical",
     "artifactIds": []
    },
@@ -80,7 +80,7 @@
     "id": "a10",
     "kind": "assessment",
     "name": "PHQ-2 depression screen",
-    "result": "Score 2/6 (little interest/pleasure some days, feeling down several days) - below threshold for further same-visit scoring but notable in context",
+    "result": "Score 3/6 (little interest/pleasure 'several days' = 2, feeling down 'some days' = 1) - at standard cutoff of ≥3, warrants further depression evaluation",
     "importance": "important",
     "artifactIds": []
    },
@@ -114,8 +114,8 @@
    },
    {
     "id": "a14",
-    "kind": "test",
-    "name": "Ask patient/Carol about swallowing pills - request description of current pill-taking method",
+    "kind": "record",
+    "name": "Review of medication administration technique with caregiver (interview/reconciliation)",
     "result": "Carol reports crushing some pills into applesauce because 'he says they get stuck,' not confirmed safe for all formulations by pharmacy or SLP",
     "importance": "important",
     "artifactIds": []
@@ -719,7 +719,6 @@
     "factIds": [
      "f4",
      "f8",
-     "f10",
      "f11"
     ],
     "actionIds": [

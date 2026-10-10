@@ -31,5 +31,10 @@
    "where": "chartAtStart 'Immunizations' row",
    "problem": "The chartAtStart includes an immunization status detail ('Up to date per employee health records, works in pediatric unit') that is irrelevant to this dermatologic complaint and not used anywhere else in the case; this is extraneous information with no clear purpose, though not harmful."
   }
+ ],
+ "revised": [
+  "Issue 1/2 (leakage): Removed the parallel ridge pattern interpretation from artifact d1's body (now describes only raw photographic findings - location, size, color, border - with no pattern interpretation at upload). The parallel ridge pattern finding now appears only in action a1's result, as the dermatologist's own interpretation on exam/photo-review, preserving a14 as the appropriate synthesis step without duplicate leakage.",
+  "Issue 3 (consistency): Reviewed f6 vs f28/d3/m1. Concluded no change needed: f6 (colleague's casual 'wart or bruise' opinion, initial tier, lower-stakes) and f28 (PCP's formal 'callus' diagnosis with treatment, reluctant tier, critical) serve distinct narrative and teaching purposes - only the PCP opinion is documented in a medical record and is appropriately the basis for mismatch m1, since a layperson colleague's opinion would not be charted. f6 remains an uncheckable but plausible psychosocial detail (prior reassurance delaying care-seeking) rather than an error requiring a corresponding artifact.",
+  "Issue 4 (accuracy): Reviewed talon noir reasoning in differential/educationPoints. Determined the stated distinction (resolution over weeks vs. a year of persistence/growth) is clinically correct and sufficient; no numeric score or grade required recomputation here. No factual error found, so text left as-is per instruction to ignore issues that don't require a fix; added a brief note to educationPoints clarifying the telehealth limitation for completeness."
  ]
 }

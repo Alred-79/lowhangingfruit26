@@ -37,5 +37,12 @@
    "where": "chartAtStart 'Medications' vs d2 medication_list",
    "problem": "chartAtStart states 'None on file prior to this visit (patient reports self-use of leftover amoxicillin, see note)' while d2 artifact lists amoxicillin and acetaminophen as 'Current Medication List' — these are inconsistent framings of the same information (one says none on file, the other lists two medications as current), which could confuse learners about what is officially documented versus self-reported."
   }
+ ],
+ "revised": [
+  "d4: changed release from start to fact f3 so the fever-pattern log only appears after the patient discloses the fever pattern history, instead of being handed over as a pre-made chart at visit start.",
+  "a4: renamed result to remove the leaked interpretive conclusion 'consistent with possible splenic enlargement'; now reports only the objective self-reported tenderness/fullness finding.",
+  "a17: removed embedded teaching/reasoning conclusion ('reinforces need for in-person glucose testing given hypoglycemia risk in malaria') from the action result; this reasoning is now reflected only in the answerKey plan where the learner should synthesize it.",
+  "a7: removed the direct leaked statement 'No travel vaccinations or malaria chemoprophylaxis documented prior to this trip' (which handed over f4) and reworded to a neutral record-review finding about absence of a documented pre-travel consultation/prescription, preserving the m1 mismatch evidence without stating f4 outright.",
+  "answerKey: reworded primaryProblem, keyFindings, redFlags, and plan to frame splenomegaly/hemolysis/severe malaria as suspected/unconfirmed pending labs and formal exam, avoiding near-diagnostic certainty when no parasitemia, hemolysis, or organ function labs have been reviewed yet; added an educationPoint on distinguishing self-reported remote findings from confirmed exam findings."
  ]
 }

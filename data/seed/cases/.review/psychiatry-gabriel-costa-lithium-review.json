@@ -25,5 +25,11 @@
    "where": "patient appearance / persona background",
    "problem": "The guitar in the background and 'Portuguese-American' ethnicity with immigrant family detail are included as flavor but are not tied to the clinical problem, which is appropriate; however, the explicit mention of 'Portuguese immigrant family' combined with 'hardworking, doesn't like to complain' risks a mild stereotype pairing ethnicity with stoicism/work ethic. Consider removing the explicit linkage of ethnicity to personality trait description to avoid any perceived stereotyping, even though it is not central to the case."
   }
+ ],
+ "revised": [
+  "o4: removed actionId a1 (generic MSE result does not surface hidden ambivalence/self-discontinuation facts) and left o4 mapped to facts f27/f28 only via interview questioning, with no action dependency, since no dedicated action exists for this and none should be fabricated per instructions to avoid unneeded additions — actionIds now empty to avoid implying MSE elicits/contains hidden content.",
+  "answerKey.primaryProblem and keyFindings and plan: reworded 'acute kidney injury' framing to 'acute-on-indeterminate kidney injury (meets KDIGO AKI stage 1 by creatinine rise, but no interim creatinine documented over the 2-week symptom course, so cannot strictly confirm acute vs subacute-on-chronic)' per reviewer's valid definitional point.",
+  "a9 result: added clarifying phrase noting creatinine rise from 0.9 to 1.3 mg/dL meets KDIGO AKI Stage 1 by ratio, but true onset timing is unconfirmed given no interim labs over the 2-week course.",
+  "No change made to a8/d2 regarding lithium level timing — reviewer confirmed this is consistent and not an error."
  ]
 }

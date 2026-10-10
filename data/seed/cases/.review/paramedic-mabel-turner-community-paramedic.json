@@ -31,5 +31,11 @@
    "where": "a9 vs f4",
    "problem": "a9 reports edema '2+ pitting to mid-shin' as a critical new objective finding, while f4 (initial, volunteered) already tells the learner 'ankles are tight against shoes, worse than discharge.' This is acceptable overlap (patient volunteering symptom, exam confirming), not a leak, but the degree described in a9 (mid-shin, shiny/taut skin) is more severe than the initial fact implies; consider aligning severity language so the artifact doesn't dramatically exceed what was volunteered, to maintain internal consistency of symptom progression."
   }
+ ],
+ "revised": [
+  "a3: Renamed to 'Heart rate and rhythm (manual radial pulse check)' and reworded result to clarify rhythm assessment is via manual palpation, not the home pulse ox device, so it does not imply a consumer pulse oximeter detects arrhythmia (a4 remains the separate SpO2-only action).",
+  "a13: Result text now reports only the objective pillbox finding (which slots contain tablets) without naming the reason/activity ('church'/'town') or asserting the behavioral explanation; also corrected day count to match d3/m1 (Wednesday and Friday only, not three days). The adherence reasoning remains gated behind reluctant fact f10, to be elicited via rapport-based interview rather than handed over by the record review action.",
+  "d3: Retitled/reauthored to reflect it is a paramedic camera inspection of the pillbox (objective artifact), and body text updated to state only which compartments contain tablets (Wednesday, Friday AM) without naming the day's activity/reason, removing the leaked tie to f10's bathroom-anxiety explanation while keeping it consistent with m1's 2-day evidence.",
+  "No change needed for a7/chartAtStart glucose and temperature values per reviewer item 3 (confirmed no discrepancy between a6/a7 and d5 flowsheet; both already match)."
  ]
 }

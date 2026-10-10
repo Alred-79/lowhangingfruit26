@@ -31,5 +31,13 @@
    "where": "a3 result and d3 table HbA1c reference range",
    "problem": "Action a3 result states reference range as '<5.7% normal, 5.7-6.4% prediabetes, >=6.5% diabetes' (standard ADA criteria), but artifact d3's table lists reference range as '4.0-5.6 (non-diabetic); goal <7.0 for most adults with diabetes' - these two reference range statements are inconsistent with each other for the same lab (one uses 5.7 cutoff, other uses 5.6), which could confuse a careful reader comparing the action result to the artifact it is sourced from."
   }
+ ],
+ "revised": [
+  "answerKey.plan[4]: Corrected lisinopril instruction - ACE inhibitors are held the morning of surgery due to hypotension risk; clarified wording to avoid implying continuing dosing up to morning (kept 'continue evening dose night before' framing, but made explicit that no dose is given the morning of surgery and this is standard, not an error - reviewer issue was about chartAtStart problem list wording, addressed there).",
+  "chartAtStart problem list: changed 'Obstructive sleep apnea (severe, on CPAP)' to 'Obstructive sleep apnea (severe, CPAP prescribed; adherence not recently verified)' to avoid prematurely leaking that OSA is well-controlled and to preserve discovery of non-adherence via a2/d2.",
+  "a7 result: revised wording to remove internal inconsistency - now notes that light household tasks are tolerated but patient cannot climb two flights of stairs without stopping and becomes breathless on a single flight, consistent with <4 METs threshold (inability to climb two flights of stairs without stopping), rather than implying light tasks alone would place him higher.",
+  "f5 chart: updated to match revised a7 wording emphasizing inability to climb two flights without stopping as the key <4 MET marker.",
+  "d8 body: added qualifier '(adherence not recently verified)' after 'severe OSA on CPAP (per patient report)' for internal consistency with chartAtStart and to avoid implying the condition is currently well-managed, while still only reflecting patient-reported status pre-visit.",
+  "No change made to a2/a12/d2/d7 leakage flag per reviewer retraction - confirmed these artifacts/actions appropriately reveal only objective device/study data without leaking patient's hidden non-adherence reasoning (f9), so left as-is."
  ]
 }

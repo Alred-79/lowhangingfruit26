@@ -30,5 +30,11 @@
    "where": "a4 and f7 overlap on timing",
    "problem": "a4 (forefoot exam) states 'mild swelling,' consistent with f7's description of foot symptoms starting '3-4 weeks ago,' but a1 (hand exam) describes 'mild overlying erythema' over MCPs which is not mentioned anywhere else (not in f1-f3, not in the referral note), introducing an exam finding (erythema) not corroborated elsewhere in the case; RA is typically non-erythematous bogginess, so this detail may mislead toward an alternative diagnosis (e.g., septic/crystal arthritis) not reflected in the differential or answer key."
   }
+ ],
+ "revised": [
+  "Issue 1: d5 referral note rewritten to describe only symptoms/exam findings; removed the family history detail and the explicit 'inflammatory arthritis'/RF-positive RA framing so family history (f6) and the diagnostic conclusion must be elicited/derived by the learner, consistent with o2.",
+  "Issue 2: d1 release changed from 'start' to 'action' tied to a7 (first serology review action), so the full lab panel (RF, anti-CCP, CRP/ESR, hepatitis serologies) is no longer visible before the learner takes history/exam; it now appears only once the learner begins ordering/reviewing labs, matching the gating pattern used for d3 and d4.",
+  "Issue 3: Removed a14 from o4's actionIds since a written medication-list review cannot be the mechanism for eliciting the reluctant/undisclosed herbal supplement facts (f20/f34); o4's text now clarifies these are obtained via direct interview. a14 remains in o6 for medication-list reconciliation purposes, which is appropriate since that action still correctly shows 'no DMARDs on file' without the supplement.",
+  "Issue 4: a15 renamed from 'Calculate DAS28 / joint count assessment' to 'Tender/swollen joint count (28-joint assessment)' and result reworded to present only the tender/swollen joint counts (10/8) as a joint count, noting that a full DAS28-CRP requires CRP and patient global assessment to be incorporated, rather than mislabeling an incomplete count as a computed DAS28 score."
  ]
 }

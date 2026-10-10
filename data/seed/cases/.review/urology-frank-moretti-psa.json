@@ -43,5 +43,14 @@
    "where": "answerKey.plan item on saw palmetto",
    "problem": "The plan says saw palmetto 'does not need to be stopped before MRI but should be documented' — reasonable, but the plan item is self-contradictory in listing 'discontinuing or disclosing' as options while also saying it doesn't need to be stopped; wording should be tightened to avoid implying conflicting guidance within the same bullet."
   }
+ ],
+ "revised": [
+  "a5/d7: Removed implied leakage of hidden fear (f13) tied to a5; result now reflects only the self-administered IIEF-5 score with no route to f13, since f13 requires rapport-based direct questioning.",
+  "o4: Removed a5 as the sole actionId implying f13 is elicited by the instrument; objective text now clarifies f13 requires sensitive direct questioning beyond the screen (no new actionId added since no dedicated 'ask about fears' action exists in the role's action kinds; the objective wording makes clear this is an interview skill, not a chart action).",
+  "a2/d4: Changed a2 from passively 'reviewing' a pre-existing DRE note to urology performing its own DRE (kind changed exam, consistent with role scope), and removed the DRE findings from the referral note d4 (now states DRE was deferred by referring physician, to be done by urology) so the critical finding is no longer leaked at visit start; a2 result now contains the DRE findings as newly elicited by the learner.",
+  "o2: Updated to reflect DRE is obtained via urology's own exam (a2), not just reviewed from an outside note.",
+  "a1: Kept as 'critical' importance after review — reviewer flagged this as 'odd' but did not conclude a change was needed; a1 synthesizes the full PSA trend including the pending free PSA and exercise confounder, which is a critical piece of risk stratification the learner must actively reason through, not merely restate, so importance is retained as critical with no change.",
+  "a4/d6: Corrected IPSS total from 17/35 to the mathematically correct sum of 18/35 everywhere (a4 result, d6 body, answerKey primaryProblem and keyFindings); removed the erroneous 'consistent with reported total of 17-18 depending on rounding' language and replaced with the correct moderate range descriptor (8-19).",
+  "a6/chartAtStart/d8: Removed the unverifiable BMI 29.4 figure from a6 result and chartAtStart 'Last vitals' line since no height is documented anywhere in the case to confirm the calculation; weight and other vitals retained as-is, consistent with d8."
  ]
 }

@@ -31,5 +31,10 @@
    "where": "answerKey.plan item on oral vitamin K and antibiotic adjustment",
    "problem": "Plan correctly flags vitamin K order and antibiotic adjustment as needing prescriber/cardiology collaboration, which is appropriate for scope, but the plan item ordering could more clearly separate pharmacist-authorized protocol actions from those requiring explicit physician order; this is a wording clarity issue only, not an error requiring major fix."
   }
+ ],
+ "revised": [
+  "a10: Reworded from an interview-style action to a true medication-reconciliation/record action ('Perform structured medication reconciliation using OTC/herbal screening checklist') per reviewer issue #2 so it no longer functions as a disguised interview question that bypasses fact tiering; kind unchanged conceptually as it still represents a structured checklist-based record review rather than open-ended questioning. Result wording left intact since f11 is tier 'discoverable' (not reluctant/hidden) and a checklist-based screening action is an appropriate way to surface a discoverable fact.",
+  "a11: Reworded from interview-style ('Diet/INR stability interview... Ask about...') to a structured screening/record action ('Review dietary/vitamin K intake pattern using structured nutrition screening tool') per reviewer issue #3, framing it as administering a standardized tool rather than an ad hoc interview question, so it legitimately surfaces discoverable facts f9/f10 as a structured assessment tool result rather than shortcutting dialogue-based discovery.",
+  "No change made for issue #1 (a9): reviewer concluded on reflection there is no actual leakage problem - a9 is a structured exam/ROS-type assessment action appropriately delivering initial facts f2/f3 and discoverable facts f4/f5/f23 via direct exam/self-report during a structured bleeding screen, which is consistent with how assessment actions are meant to surface discoverable-tier ROS findings. Kept as-is."
  ]
 }

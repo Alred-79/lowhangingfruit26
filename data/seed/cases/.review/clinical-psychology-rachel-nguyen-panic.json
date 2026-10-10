@@ -24,5 +24,10 @@
    "where": "a9 vs f12",
    "problem": "Action a9 result and fact f12 both describe ~5 cups/500mg caffeine daily, consistent, but a9 is tagged kind 'test' though it is essentially a self-report inventory akin to an interview tool; minor scope-labeling inconsistency with other similarly self-report actions (e.g., AUDIT-C a7 also 'test') - not a major issue but worth noting for consistency of action-kind taxonomy."
   }
+ ],
+ "revised": [
+  "a6: removed leaked reluctant fact f10 (lorazepam/partner) from result text; now only reports what artifact d5 actually shows (no benzodiazepine/psychiatric meds, only OTC omeprazole), preserving mismatch m1 as something only elicited via direct questioning, not chart review.",
+  "a5: corrected stated HR range from '110-130' to '118-128' to match actual vitals in d4/d6 (128, 118, 122).",
+  "o5: replaced actionIds a8 (Mental Status Exam, an observational action) with a11 (interview-based panel walkthrough capable of eliciting reluctant/discoverable facts f21, f24, f31 via direct questioning), since MSE cannot elicit cultural attitude or partner-awareness disclosures; reworded objective text to emphasize these are elicited via sensitive direct questioning rather than observed."
  ]
 }

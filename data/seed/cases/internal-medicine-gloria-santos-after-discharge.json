@@ -66,18 +66,18 @@
     "id": "a7",
     "kind": "record",
     "name": "Review current pharmacy fill/refill history",
-    "result": "Lisinopril 20mg last filled 34 days ago (90-day supply, pre-dating admission). Hydrochlorothiazide 25mg last filled 34 days ago. Metformin 1000mg last filled 34 days ago. No new fills since discharge, confirming she is taking medication from pre-admission stock, not a fresh discharge prescription.",
+    "result": "Lisinopril 20mg last filled 34 days ago (90-day supply, pre-dating admission). Hydrochlorothiazide 25mg last filled 34 days ago. Metformin 1000mg last filled 34 days ago. No new fills logged since discharge.",
     "importance": "important",
     "abnormal": true,
     "artifactIds": [
-     "d4"
+     "d7"
     ]
    },
    {
     "id": "a8",
     "kind": "lab",
     "name": "Repeat basic metabolic panel (yesterday, outpatient lab)",
-    "result": "See lab report: Creatinine 1.7 mg/dL (H), potassium 5.3 mmol/L (H), sodium 138 mmol/L, bicarbonate 20 mmol/L (L), BUN 38 mg/dL (H), glucose 142 mg/dL (H), eGFR 31 mL/min/1.73m2 (L).",
+    "result": "See lab report: Creatinine 1.7 mg/dL (H), potassium 5.3 mmol/L (H), sodium 138 mmol/L, bicarbonate 20 mmol/L (L), BUN 38 mg/dL (H), glucose 142 mg/dL (H), eGFR 31 mL/min/1.73m2 (L). Calculated anion gap = 138-100-20 = 18 mmol/L (H, reference 8-12), indicating a mild elevated anion-gap component to the metabolic picture; in this patient on metformin with reduced eGFR, this raises concern for early lactic acidosis and supports holding metformin.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": [
@@ -173,13 +173,13 @@
    "keyFindings": [
     "Discharge summary explicitly held lisinopril, HCTZ, and metformin pending outpatient clearance",
     "Patient restarted all three medications from old pill bottles 2 days before this visit, plus continued ibuprofen that was never held",
-    "Repeat labs show creatinine rising again (1.7 from discharge 1.4, against baseline 0.9) with new hyperkalemia (K 5.3) and metabolic acidosis (bicarb 20)",
+    "Repeat labs show creatinine rising again (1.7 from discharge 1.4, against baseline 0.9) with new hyperkalemia (K 5.3) and a mild elevated anion-gap metabolic acidosis (bicarb 20, anion gap 18)",
     "Symptomatic orthostatic hypotension (102/58 sitting dropping to 86/52 standing, HR rising to 108) consistent with volume depletion, compounded by HCTZ",
     "Poor oral intake (~1/3 usual meals, ~3 cups fluid/day) and decreased, concentrated urine output over past 2 days",
-    "Pharmacy refill history confirms medications are from pre-admission stock, not a new discharge-reconciled prescription, revealing the mismatch between patient's belief she is managing her meds correctly and the actual record"
+    "Pharmacy refill history shows no new fills for lisinopril, HCTZ, or metformin since 34 days ago (predating discharge), consistent with the patient taking medication from pre-admission stock rather than a fresh discharge-reconciled prescription"
    ],
    "plan": [
-    "Instruct patient to stop lisinopril, hydrochlorothiazide, and ibuprofen immediately today; hold metformin given reduced eGFR (31) and risk of accumulation/lactic acidosis",
+    "Instruct patient to stop lisinopril, hydrochlorothiazide, and ibuprofen immediately today; hold metformin given reduced eGFR (31) and risk of accumulation/lactic acidosis, especially with elevated anion gap today",
     "Arrange urgent same-day repeat BMP given K 5.3 and symptomatic hypotension; given today's values and symptoms, strongly consider same-day in-person evaluation or ED referral for IV fluids and hyperkalemia management given symptomatic orthostasis and inability to safely rehydrate orally at home",
     "Advise oral rehydration as tolerated while awaiting labs; hold diuretic and antihypertensives until renal function and volume status recover",
     "Arrange close follow-up (24-48 hours) with repeat BMP once medications held and hydration improved; do not resume held medications without explicit confirmation from the treating physician and repeat labs showing renal recovery toward baseline (~0.9 mg/dL)",
@@ -192,13 +192,14 @@
     "Potassium 5.3 mmol/L with symptomatic orthostatic hypotension - risk for arrhythmia, warrants urgent escalation despite reassuring ECG",
     "Standing BP 86/52 with HR 108 and lightheadedness - risk of falls, syncope, further prerenal injury",
     "Creatinine trending back up (1.4 to 1.7) with eGFR 31 - ongoing kidney injury, not yet recovered to baseline",
+    "Mild elevated anion-gap metabolic acidosis (bicarb 20, anion gap 18) in a patient on metformin with eGFR 31 - watch for progression to lactic acidosis",
     "Continued NSAID use in setting of recent and current AKI - avoid entirely",
     "If patient becomes unable to tolerate oral fluids, develops chest pain, palpitations, syncope, or labs worsen further, needs immediate in-person/ED evaluation"
    ],
    "educationPoints": [
     "The 'triple whammy' of ACE inhibitor/ARB + diuretic + NSAID significantly increases AKI risk, especially during volume depletion or recovery from a renal insult",
     "Discharge medication reconciliation must explicitly address medications that were held, not just those that were started or changed, especially when patients have access to old pill bottles at home",
-    "Metformin should remain held when eGFR is reduced (here 31 mL/min/1.73m2) due to lactic acidosis risk; resumption decisions should be based on current renal function, not prior dosing habits",
+    "Metformin should remain held when eGFR is reduced (here 31 mL/min/1.73m2) due to lactic acidosis risk; an elevated anion gap in this setting should prompt consideration of early lactic acidosis and reinforce holding metformin until renal function recovers",
     "Orthostatic vital sign assessment can be performed via telehealth using sequential home BP/HR readings in different positions and is an important part of a post-discharge AKI follow-up",
     "High health literacy and pride in self-management (a retired nurse) can paradoxically increase risk if the patient's knowledge is outdated or she bypasses current instructions, underscoring the need for explicit, non-judgmental confirmation of actual medication-taking behavior rather than assuming understanding equals adherence"
    ]
@@ -303,6 +304,15 @@
         "70-99 (fasting)"
        ],
        "flag": "H"
+      },
+      {
+       "cells": [
+        "Anion gap (calculated)",
+        "18",
+        "mmol/L",
+        "8-12"
+       ],
+       "flag": "H"
       }
      ]
     }
@@ -354,8 +364,8 @@
    {
     "id": "d4",
     "type": "medication_list",
-    "title": "Current Medication List - Reconciliation",
-    "author": "Internal Medicine Clinic",
+    "title": "Medication Reconciliation - Visit Note",
+    "author": "This clinic (generated during today's visit based on patient report)",
     "date": "Today",
     "release": {
      "when": "action",
@@ -374,7 +384,7 @@
         "Lisinopril",
         "20 mg",
         "Once daily",
-        "HELD per discharge summary; patient self-resumed 2 days ago from bottle last filled 34 days ago (pre-admission supply)"
+        "HELD per discharge summary; patient reports resumed 2 days ago"
        ],
        "flag": "H"
       },
@@ -383,7 +393,7 @@
         "Hydrochlorothiazide",
         "25 mg",
         "Once daily",
-        "HELD per discharge summary; patient self-resumed 2 days ago, last filled 34 days ago"
+        "HELD per discharge summary; patient reports resumed 2 days ago"
        ],
        "flag": "H"
       },
@@ -392,7 +402,7 @@
         "Metformin",
         "1000 mg",
         "Twice daily",
-        "HELD per discharge summary (eGFR 31); patient self-resumed 2 days ago, last filled 34 days ago"
+        "HELD per discharge summary (eGFR 31); patient reports resumed 2 days ago"
        ],
        "flag": "H"
       },
@@ -401,7 +411,7 @@
         "Ibuprofen",
         "400 mg",
         "Up to 3x daily PRN",
-        "Continued throughout admission and after discharge despite instruction to avoid; for chronic low back pain"
+        "Patient reports continued throughout admission and after discharge despite instruction to avoid; for chronic low back pain"
        ],
        "flag": "H"
       },
@@ -496,6 +506,73 @@
       }
      ]
     }
+   },
+   {
+    "id": "d7",
+    "type": "other",
+    "title": "Pharmacy Fill/Refill History",
+    "author": "Walgreens Pharmacy (patient's community pharmacy)",
+    "date": "Printed today, covers past 90 days",
+    "release": {
+     "when": "action",
+     "ref": "a7"
+    },
+    "table": {
+     "columns": [
+      "Medication",
+      "Dose",
+      "Last fill date",
+      "Supply dispensed"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Lisinopril",
+        "20 mg",
+        "34 days ago",
+        "90-day supply"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Hydrochlorothiazide",
+        "25 mg",
+        "34 days ago",
+        "90-day supply"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Metformin",
+        "1000 mg",
+        "34 days ago",
+        "90-day supply"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Amlodipine",
+        "5 mg",
+        "40 days ago",
+        "90-day supply"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Atorvastatin",
+        "40 mg",
+        "40 days ago",
+        "90-day supply"
+       ],
+       "flag": ""
+      }
+     ]
+    },
+    "body": "No fills for lisinopril, hydrochlorothiazide, or metformin recorded since the fill 34 days ago; no new prescriptions or fills logged since the recent hospitalization or discharge."
    }
   ],
   "chartAtStart": [
@@ -509,7 +586,7 @@
    },
    {
     "label": "Medications",
-    "value": "See discharge summary and medication reconciliation (held medications pending clearance: lisinopril, hydrochlorothiazide, metformin)"
+    "value": "Per discharge summary 6 days ago: lisinopril, hydrochlorothiazide, and metformin were held pending outpatient follow-up labs and clearance; amlodipine, atorvastatin, and remainder of amoxicillin-clavulanate course to continue. Current home medication-taking has not yet been reconciled this visit."
    },
    {
     "label": "Allergies",

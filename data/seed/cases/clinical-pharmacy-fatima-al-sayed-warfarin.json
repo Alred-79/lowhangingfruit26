@@ -94,8 +94,8 @@
    },
    {
     "id": "a10",
-    "kind": "assessment",
-    "name": "Screen for other new OTC/herbal products via structured interview",
+    "kind": "record",
+    "name": "Perform structured medication reconciliation using OTC/herbal screening checklist",
     "result": "Patient identifies turmeric-ginger joint supplement started 2 weeks ago, taken daily; no other new OTC products identified",
     "importance": "important",
     "abnormal": true,
@@ -103,9 +103,9 @@
    },
    {
     "id": "a11",
-    "kind": "assessment",
-    "name": "Diet/INR stability interview (vitamin K intake pattern)",
-    "result": "Patient reports fasting with reduced food intake and notably less leafy green vegetable consumption over the past 10 days compared to her usual pattern",
+    "kind": "record",
+    "name": "Review dietary/vitamin K intake pattern using structured nutrition screening tool",
+    "result": "Screening indicates reduced overall food intake and notably less leafy green vegetable consumption over the past 10 days compared to usual pattern",
     "importance": "important",
     "abnormal": true,
     "artifactIds": []

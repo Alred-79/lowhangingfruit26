@@ -37,5 +37,14 @@
    "where": "chartAtStart 'Last vitals' vs action a3/a4 and artifact d4",
    "problem": "chartAtStart lists 'Last vitals' as BP 124/78, HR 72, SpO2 99%, recorded 3 weeks ago at pre-op lab visit. Action a4 (today's current vitals) shows BP 126/80, HR 74, SpO2 98%, which is a reasonable change over time, but a3's reviewed home BP log (d4) only covers 'past 2 weeks' and does not include a measurement from 3 weeks ago matching the chartAtStart value, leaving a minor unexplained gap in the record continuity."
   }
+ ],
+ "revised": [
+  "a10: removed the leaked mention of 'malignant hyperthermia' and family anesthesia history from this medication-list review action; result now only reports the medication list contents (semaglutide, sumatriptan, ginkgo, fish oil).",
+  "o1, o2, o3, o7: removed 'a10' from actionIds since a10 is a chart/medication-list review action, not the interview through which the reluctant/hidden family-history facts (f10, f11, f12) are elicited; o7 retains a10 since medication/supplement reconciliation is appropriately tied to that action; family-history objectives now have no actionIds since elicitation occurs via direct conversation, not a scoped action.",
+  "a15: corrected Apfel score tally — all four classic criteria (female sex, nonsmoker, history of PONV, planned postoperative opioids) are met, so the score is 4/4, not 3/4; result text clarified to list all four factors explicitly.",
+  "a2: corrected STOP-BANG scoring — recounted each of the 8 items as 'no' per the described sub-answers (tiredness attributed to shift work scored 0, borderline BP not meeting hypertension threshold scored 0), yielding a corrected total of 0/8 instead of the inconsistent 1/8.",
+  "answerKey.plan: reworded items 2 and 3 so that the non-triggering anesthetic technique recommendation and genetics/testing referral are framed as questions/discussion points for the collaborative anesthesia care team decision rather than independent CRNA recommendations, consistent with objective o3 and the scope-of-practice caveat; differential and educationPoints updated to match this collaborative framing.",
+  "mismatches: m1 already uses d7 (intake form 'noncontributory') as evidence without naming MH, so no change needed there; confirmed it remains valid after a10 fix.",
+  "Note: reviewer issue 2's suggestion that family-history facts should not be linked to any listed action was implemented by clearing actionIds on o1/o2/o3; this is consistent with the family history being elicited through direct interview conversation, which is not an itemized action in this role's action-kind set."
  ]
 }

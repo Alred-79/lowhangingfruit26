@@ -80,7 +80,7 @@
     "id": "a9",
     "kind": "test",
     "name": "STOP-BANG sleep apnea screening questionnaire",
-    "result": "Score 5/8 (snoring, tiredness, observed apnea by partner, high BP, male sex) - high risk for obstructive sleep apnea.",
+    "result": "Score 6/8 (snoring, tiredness, observed apnea by partner, high BP, age >50, male sex; BMI 33.3 does not meet the >35 criterion) - high risk for obstructive sleep apnea.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -112,7 +112,7 @@
     "id": "a13",
     "kind": "record",
     "name": "Review commercial driver's license medical certification status",
-    "result": "CDL medical certificate renewed 8 months ago, valid for current period; patient has not disclosed any sleep issue to DOT examiner.",
+    "result": "CDL medical certificate renewed 8 months ago, valid for current period; standard certification renewal, no additional notes on file.",
     "importance": "important",
     "artifactIds": []
    },
@@ -581,7 +581,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Essential hypertension; Obesity (BMI 33); Osteoarthritis, shoulder (presumed)"
+    "value": "Essential hypertension; Obesity (BMI 33); Chronic shoulder pain, cause not yet established"
    },
    {
     "label": "Medications",
@@ -902,7 +902,7 @@
     "id": "m2",
     "factId": "f11",
     "patientClaim": "Patient discloses nearly falling asleep at a red light while driving the bus but asks that this not create trouble for him, implying he has not reported any sleep problem to anyone official.",
-    "recordEvidence": "CDL medical certificate record (a13) shows renewal 8 months ago with no sleep issue disclosed to the DOT examiner, and the high STOP-BANG score (a9) indicates high risk for a condition that could affect fitness to safely operate a commercial vehicle.",
+    "recordEvidence": "CDL medical certificate record (a13) shows a routine renewal 8 months ago with no mention of any sleep-related condition or restriction on file, despite the high STOP-BANG score (a9) now indicating high risk for a condition that could affect fitness to safely operate a commercial vehicle.",
     "teachingPoint": "When a patient's commercial driving safety may be at risk from a likely medical condition (suspected OSA), the clinician must balance patient confidentiality and trust with public safety obligations - this requires careful counseling about voluntary reporting/evaluation rather than silence, and referral for sleep study and DOT guidance, while recognizing scope: the family medicine resident refers rather than independently adjudicating fitness to drive."
    }
   ],
@@ -959,13 +959,11 @@
      "f11",
      "f12"
     ],
-    "actionIds": [
-     "a13"
-    ]
+    "actionIds": []
    },
    {
     "id": "o5",
-    "text": "Formulate an appropriately scoped family medicine plan: address adherence/cost barriers, counsel on NSAID/decongestant contribution to BP, refer for sleep study, and determine need for in-person visit or specialist referral rather than overreaching role boundaries.",
+    "text": "Formulate an appropriately scoped family medicine plan: address adherence/cost barriers, counsel on NSAID/decongestant contribution to BP, refer for sleep study, and determine need for in-person visit or specialist referral rather than overreaching role boundaries. Note that fitness-to-drive certification itself is outside family medicine scope; the resident should rely on patient-reported CDL status and counsel on voluntary disclosure rather than independently pulling or adjudicating DOT records.",
     "factIds": [
      "f7",
      "f27",
@@ -1054,8 +1052,8 @@
     "Home BP log averaging 156/96 over 3 weeks with correct cuff technique confirmed on camera",
     "Pharmacy refill history reveals amlodipine stretched (last filled 10 weeks ago for a 90-day supply) despite patient's belief that he takes it daily; lisinopril refilled on time",
     "Near-daily OTC ibuprofen use for chronic shoulder pain and frequent pseudoephedrine use for allergies, both of which can raise blood pressure",
-    "Positive STOP-BANG (5/8) and Epworth (14/24) screens indicating high risk for obstructive sleep apnea, with witnessed apneas and a near-miss drowsy-driving event at a red light",
-    "Patient has not disclosed sleep symptoms to his DOT medical examiner and is anxious about his CDL status",
+    "Positive STOP-BANG (6/8: snoring, tiredness, observed apnea, high BP, age >50, male sex) and Epworth (14/24) screens indicating high risk for obstructive sleep apnea, with witnessed apneas and a near-miss drowsy-driving event at a red light",
+    "Patient has not disclosed sleep symptoms or the near-miss driving event to anyone, including his DOT medical examiner, and is anxious about his CDL status",
     "Basic metabolic panel, lipid panel, A1c, and urine albumin/creatinine all normal/stable, lowering likelihood of secondary hypertension or early renal injury at this time"
    ],
    "plan": [
@@ -1066,7 +1064,7 @@
     "Recheck BP in 2-4 weeks once adherence and contributing OTC medication use are addressed before escalating antihypertensive regimen; defer any medication dose change until true adherence and reversible contributors are addressed, consistent with primary care scope",
     "Reinforce home BP monitoring technique and recommend validating/recalibrating the home cuff against a clinic reading",
     "Continue routine preventive monitoring (lipids, A1c, renal function) at next scheduled interval; no urgent escalation needed given reassuring labs",
-    "This visit remains within family medicine scope: refer to sleep medicine for formal testing/CPAP titration rather than diagnosing or managing OSA independently, and do not unilaterally report to DOT - counsel patient toward appropriate voluntary disclosure/process"
+    "This visit remains within family medicine scope: refer to sleep medicine for formal testing/CPAP titration and rely on patient-reported CDL status rather than independently pulling or adjudicating DOT certification records; do not unilaterally report to DOT - counsel patient toward appropriate voluntary disclosure/process"
    ],
    "redFlags": [
     "Witnessed breathing pauses during sleep and a near-miss drowsy-driving incident while operating a commercial vehicle warrant urgent attention given public safety implications",
@@ -1076,9 +1074,10 @@
    "educationPoints": [
     "Objective adherence data (refill history) often reveals gaps that patients are unaware of or reluctant to volunteer; approach discrepancies with curiosity and without judgment to uncover underlying barriers like cost",
     "Common over-the-counter medications (NSAIDs, decongestants) are frequently overlooked contributors to poor blood pressure control and should be routinely screened for in hypertension follow-up",
-    "Validated screening tools (STOP-BANG, Epworth) are efficient, remote-feasible ways to risk-stratify for obstructive sleep apnea in primary care",
+    "Validated screening tools (STOP-BANG, Epworth) are efficient, remote-feasible ways to risk-stratify for obstructive sleep apnea in primary care; STOP-BANG scoring should correctly credit all met criteria including age >50",
     "Clinicians caring for commercial drivers must understand the balance between patient confidentiality and public safety obligations, and should know the general framework for voluntary disclosure to DOT medical examiners rather than acting unilaterally",
-    "Resistant hypertension work-up should first exclude pseudo-resistance (adherence, white-coat effect, improper technique, interfering substances) before adding medications or pursuing secondary hypertension work-up"
+    "Resistant hypertension work-up should first exclude pseudo-resistance (adherence, white-coat effect, improper technique, interfering substances) before adding medications or pursuing secondary hypertension work-up",
+    "Family medicine residents typically do not have independent access to or authority over DOT/CDL certification records; fitness-to-drive determinations and record review are outside primary care telehealth scope and should rely on patient report plus appropriate referral"
    ]
   },
   "professions": [

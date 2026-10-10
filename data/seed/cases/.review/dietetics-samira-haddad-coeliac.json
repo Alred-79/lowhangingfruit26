@@ -24,5 +24,13 @@
    "where": "a16 result vs d6/a2",
    "problem": "a16 reports today's self-reported weight as 57.0 kg while a2/d6 list the most recent chart weight as 57.2 kg three weeks ago; the difference (0.2 kg) is trivial and framed as 'consistent,' which is fine, but the action is also tagged importance 'minor' while duplicating a2 — consider whether this redundant self-report action is necessary given the vitals flowsheet already covers this ground within the same visit timeframe."
   }
+ ],
+ "revised": [
+  "a7: food record result now lists foods only (no interpretive 'contains wheat'/'wheat-based'/'not labeled gluten-free' flags) so the learner must identify hidden gluten sources via their own clinical reasoning, per reviewer issue 1.",
+  "a8: diet history result expanded to carry the patient's lack-of-awareness content (f6-f8) as genuine discoverable elicitation (bulgur in tabbouleh/kibbeh, oats assumption, soy sauce assumption) rather than a redundant confirmation of a7.",
+  "a15: pantry inspection result rewritten to give neutral label text (ingredient panels) rather than stating the gluten conclusion outright, so the learner must interpret the label themselves.",
+  "d5: food record body left as-is (already neutral); confirmed it matches a7's revised neutral result.",
+  "d3: removed the erroneous duplicate Hemoglobin row flagged 'H' (10.9 g/dL against 12.0-15.5 is Low only); kept the correctly flagged 'L' row.",
+  "d7: retitled from 'Ferritin and Vitamin D Trend' to 'Ferritin and Vitamin D Snapshot (3 Weeks Post-Diagnosis)' and changed chart kind from 'line' to 'bar' since only a single time point exists for each value, which cannot represent a trend."
  ]
 }

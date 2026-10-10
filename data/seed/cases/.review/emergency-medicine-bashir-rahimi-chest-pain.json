@@ -31,5 +31,11 @@
    "problem": "a3 states respiratory rate 24/min 'mildly labored, no accessory muscle use' while a6 (general appearance) separately states 'speaking in full sentences but pausing to catch breath.' These are consistent with each other, but a10 (exertional walk) describes him becoming 'visibly short of breath' after 20 feet, which is a reasonable progression; no real inconsistency, flagged only as a very minor overlap in descriptors across three separate actions that could be streamlined, not a factual error."
   }
  ],
- "verdict": "major_fixes"
+ "verdict": "major_fixes",
+ "revised": [
+  "d6: changed release trigger from fact f5 to fact f8 (the later-disclosed of the two reluctant facts) and removed explicit documentation of hemoptysis and leg swelling from the body text so the artifact no longer hands over reluctant findings f6/f8 before the patient discloses them; timeline now only reflects travel/driving history and today's chest pain onset, consistent with f5 (discoverable) content only.",
+  "d5: removed the confusing extraneous 'Hemoptysis: +1 (not scored...)' line from the Wells worksheet since hemoptysis is not a Wells PE criterion and including it as a scored line (even annotated) risks misleading learners; total remains 7.5 and interpretation unchanged.",
+  "a7: removed the 'Homan's sign' alias since no passive dorsiflexion maneuver was performed in this action; kept 'calf swelling' alias.",
+  "No change made to chartAtStart/a11/a12/a14 per reviewer's own conclusion that this is not a formal issue requiring a fix."
+ ]
 }

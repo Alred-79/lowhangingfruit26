@@ -30,5 +30,14 @@
    "where": "a12 vs d4 fatigue values",
    "problem": "Action a12 result states fatigue 'rated 2/10 in morning rising to 7/10 by early afternoon' but artifact d4 chart shows fatigue peaking at 7 at 2 PM then declining to 6 at 4 PM and 5 at 6 PM - the action result omits the afternoon decline shown in the chart, which is a minor inconsistency between the narrative summary and the actual chart data."
   }
+ ],
+ "revised": [
+  "a3: removed leaked timing/mechanism ('occurred 2 days ago', 'did not feel heat') and awareness framing; result now limited to objective visual exam findings only (size, appearance, absence of dressing), noting mechanism/timing requires direct patient disclosure. This preserves f11/f31 as reluctant-tier facts the learner must elicit by direct question.",
+  "a14: removed leaked patient disclosure linking sensation loss to the burn ('sometimes does not notice... consistent with the recent burn'); result now reports only objective/screening sensation findings (diminished but present light touch, concern for protective sensation) without previewing the burn mechanism.",
+  "d6 release changed from 'action a4' to 'start' and body rewritten to remove the preview of the patient's denial/minimization pattern (the anosognosia teaching point tied to m1); note now only documents the objective inpatient neglect screening findings and recommendation for continued outpatient monitoring, without stating the patient minimized or declined discussion. This lets the learner discover the denial pattern directly through the interview (f12) rather than reading it in the chart.",
+  "a4: artifactIds cleared of d6 since d6 is now released at start rather than tied to this action's completion (artifact availability no longer depends on performing a4).",
+  "answerKey.plan: reworded the kitchen re-engagement step so that progression to stovetop/knife tasks is explicitly flagged as requiring in-person or caregiver/clinician-supervised practice with safety protocols, not something directed within the telehealth visit itself.",
+  "answerKey.keyFindings: reworded the burn and sensation findings to reflect that mechanism/timing is disclosed only on direct questioning (not from the exam itself) and that sensation screening alone raises concern rather than confirming a link to the burn.",
+  "answerKey.educationPoints: added a point distinguishing objective exam/screening findings from patient-disclosed information requiring direct, sensitive questioning, and added a point about telehealth supervision limits for hazardous task retraining (stovetop/knife work)."
  ]
 }

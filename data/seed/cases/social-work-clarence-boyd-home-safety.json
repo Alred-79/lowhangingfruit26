@@ -18,7 +18,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "Columbia Suicide Severity Rating Scale (C-SSRS) screening",
-    "result": "Passive ideation present ('no use to anybody'), no active plan, no intent, denies prior attempts, denies current access intent to use firearm on self when asked directly but confirms firearm is kept loaded by the front door 'for protection.' Protective factors: grandchildren he hopes to see, religious faith, dislike of being a burden to others.",
+    "result": "Passive ideation present ('no use to anybody'), no active plan, no intent, denies prior attempts. When asked directly about access to lethal means, patient is initially evasive and changes the subject. Protective factors: grandchildren he hopes to see, religious faith, dislike of being a burden to others.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -42,7 +42,7 @@
     "id": "a5",
     "kind": "assessment",
     "name": "Financial exploitation screening (capacity-based interview)",
-    "result": "Patient demonstrates intact orientation and reasoning about his finances; recalls his pension amount and due dates accurately; states he feels he 'has no choice' but to let nephew hold the card; becomes tearful when discussing restricting nephew's access, fearing nephew will be arrested or he himself will be institutionalized.",
+    "result": "Patient demonstrates intact orientation and reasoning about his finances; recalls his pension amount and due dates accurately; able to describe the general arrangement that his nephew holds his bank card. No impairment in reasoning or recall identified on this capacity-focused screen.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -58,7 +58,7 @@
     "id": "a7",
     "kind": "assessment",
     "name": "Decision-making capacity screen (social work bedside assessment)",
-    "result": "Patient is alert, oriented x4, articulates understanding of risks of his living situation and financial arrangement, and consistently and coherently states his own preferences across the interview; no evidence of cognitive impairment on brief conversational screen.",
+    "result": "Patient is alert and oriented x4, articulates understanding of his living situation and financial arrangement, and expresses his preferences consistently and coherently across the interview. On this brief conversational screen, the social worker's clinical impression is that there is no obvious evidence of cognitive impairment; this is not a formal capacity determination and would require further evaluation if a legal determination were needed.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -66,7 +66,7 @@
     "id": "a8",
     "kind": "assessment",
     "name": "Social support and isolation assessment",
-    "result": "Patient reports he used to attend a weekly veterans' breakfast at the VFW hall but has not gone in about two months; names one neighbor who checks in 'now and then' but no regular daily contact; nephew Dale is primary contact but relationship is strained.",
+    "result": "Patient reports he used to attend a weekly veterans' breakfast at the VFW hall but has not gone in about two months; names one neighbor who checks in 'now and then' but no regular daily contact; nephew Dale is primary contact.",
     "importance": "important",
     "artifactIds": []
    },
@@ -527,8 +527,8 @@
    {
     "id": "d7",
     "type": "chart",
-    "title": "Mood and Social Engagement Trend (self-report, past 6 months)",
-    "author": "Social Work composite from interview and prior notes",
+    "title": "Veterans' Breakfast (VFW) Attendance Trend (self-report, past 6 months)",
+    "author": "Social Work composite from interview",
     "date": "today",
     "release": {
      "when": "fact",
@@ -537,33 +537,8 @@
     "chart": {
      "kind": "line",
      "xLabel": "Months ago",
-     "yLabel": "Self-reported wellbeing (0-10 scale, patient estimate)",
+     "yLabel": "Attendance (1=attended that week, 0=did not)",
      "series": [
-      {
-       "name": "Overall mood/wellbeing (patient estimate)",
-       "points": [
-        {
-         "x": "6 mo ago",
-         "y": 6
-        },
-        {
-         "x": "4 mo ago",
-         "y": 5
-        },
-        {
-         "x": "2 mo ago",
-         "y": 4
-        },
-        {
-         "x": "1 mo ago",
-         "y": 3
-        },
-        {
-         "x": "today",
-         "y": 2
-        }
-       ]
-      },
       {
        "name": "VFW breakfast attendance (1=attended that week, 0=did not)",
        "points": [
@@ -596,12 +571,13 @@
   "objectives": [
    {
     "id": "o1",
-    "text": "Build rapport sufficient to elicit reluctant/hidden disclosures about financial exploitation and fear of consequences, demonstrating trust-building and trauma-informed interviewing.",
+    "text": "Build rapport sufficient to elicit reluctant/hidden disclosures about financial exploitation, fear of consequences, and firearm access, demonstrating trust-building and trauma-informed interviewing.",
     "factIds": [
      "f7",
      "f8",
      "f9",
      "f10",
+     "f17",
      "f27"
     ],
     "actionIds": [
@@ -610,7 +586,7 @@
    },
    {
     "id": "o2",
-    "text": "Conduct a thorough suicide risk assessment distinguishing passive ideation from active intent/plan, and account for firearm access as a lethality factor.",
+    "text": "Conduct a thorough suicide risk assessment distinguishing passive ideation from active intent/plan, and elicit firearm access as a lethality factor through direct, sensitive follow-up questioning.",
     "factIds": [
      "f16",
      "f17",

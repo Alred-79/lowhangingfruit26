@@ -23,8 +23,8 @@
    {
     "id": "a3",
     "kind": "vitals",
-    "name": "Heart rate and rhythm (home pulse ox / manual radial check)",
-    "result": "Pulse 92/min, irregularly irregular; patient reports known atrial fibrillation",
+    "name": "Heart rate and rhythm (manual radial pulse check)",
+    "result": "Pulse 92/min, irregularly irregular on manual radial palpation; patient reports known atrial fibrillation",
     "importance": "important",
     "artifactIds": []
    },
@@ -115,7 +115,7 @@
     "id": "a13",
     "kind": "record",
     "name": "Review pill box / medication adherence",
-    "result": "Furosemide slots full for the two days patient went to church and the day she went into town; all other daily doses taken as scheduled",
+    "result": "Pillbox photo shows Wednesday and Friday AM furosemide slots still contain tablets; all other furosemide slots empty. Metoprolol, apixaban, and lisinopril slots all empty/taken as scheduled for the full week.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": [
@@ -236,14 +236,14 @@
    {
     "id": "d3",
     "type": "other",
-    "title": "Medication Pillbox Photo Log (patient-reported, verified by paramedic review)",
+    "title": "Medication Pillbox Photo Log (camera inspection by paramedic)",
     "date": "Today",
-    "author": "Patient self-report, confirmed by camera inspection of pillbox",
+    "author": "Camera inspection of pillbox during visit",
     "release": {
      "when": "action",
      "ref": "a13"
     },
-    "body": "Weekly pillbox labeled Sun-Sat, AM slot. Furosemide tablet still present in Wednesday (church day) and Friday (day she went into town) compartments. All other furosemide compartments empty. Metoprolol, apixaban (AM and PM), and lisinopril compartments all empty/taken as scheduled for the full week."
+    "body": "Weekly pillbox labeled Sun-Sat, AM slot. Furosemide tablet still present in Wednesday and Friday AM compartments. All other furosemide compartments empty. Metoprolol, apixaban (AM and PM), and lisinopril compartments all empty/taken as scheduled for the full week."
    },
    {
     "id": "d4",

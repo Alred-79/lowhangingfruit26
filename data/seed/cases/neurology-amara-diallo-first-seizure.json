@@ -72,7 +72,7 @@
     "id": "a8",
     "kind": "exam",
     "name": "Patient self-demonstration of morning jerking movements",
-    "result": "Patient demonstrates brief, bilateral, arrhythmic upward jerks of both arms on request, lasting under a second each, without loss of consciousness - consistent with myoclonic jerks.",
+    "result": "On request, patient demonstrates brief, bilateral, arrhythmic upward jerks of both arms, lasting under a second each, without loss of consciousness or awareness change observed on camera.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -114,7 +114,7 @@
     "id": "a13",
     "kind": "assessment",
     "name": "Driving safety and legal reporting assessment",
-    "result": "Patient has continued driving to campus daily since the seizure. Discussed state DMV reporting requirements for new-onset seizure and need to stop driving until seizure-free for the mandated period.",
+    "result": "Patient reports she has continued driving to campus daily since the seizure and was unaware of state DMV reporting requirements or restrictions on driving after a seizure.",
     "importance": "critical",
     "artifactIds": []
    }
@@ -235,7 +235,7 @@
      "when": "action",
      "ref": "a4"
     },
-    "body": "HISTORY: 27-year-old woman, first witnessed generalized tonic-clonic seizure.\n\nBACKGROUND: Normal 9 Hz posterior dominant rhythm, reactive.\n\nACTIVATION: Photic stimulation and hyperventilation both provoked generalized bursts of 4-6 Hz polyspike-and-wave discharges lasting 1-3 seconds, bilaterally synchronous and symmetric, without clear focal onset. No electrographic seizure captured. No focal slowing or epileptiform discharges of focal onset.\n\nIMPRESSION: Generalized polyspike-and-wave discharges activated by photic stimulation and hyperventilation, consistent with a generalized epilepsy syndrome such as juvenile myoclonic epilepsy. Correlate clinically."
+    "body": "HISTORY: 27-year-old woman, first witnessed generalized tonic-clonic seizure.\n\nBACKGROUND: Normal 9 Hz posterior dominant rhythm, reactive.\n\nACTIVATION: Photic stimulation and hyperventilation both provoked generalized bursts of 4-6 Hz polyspike-and-wave discharges lasting 1-3 seconds, bilaterally synchronous and symmetric, without clear focal onset. No electrographic seizure captured. No focal slowing or epileptiform discharges of focal onset.\n\nIMPRESSION: Generalized polyspike-and-wave discharges activated by photic stimulation and hyperventilation. No focal features. Correlate clinically."
    },
    {
     "id": "d4",
@@ -653,8 +653,7 @@
     "factId": "f11",
     "patientClaim": "Patient says nobody at the ED explained that she should not be driving, and she was unaware of any restriction.",
     "recordEvidence": "ED discharge summary documents that the patient was advised to avoid driving pending neurology evaluation and verbalized understanding at discharge.",
-    "teachingPoint": "Discrepancies between documented discharge counseling and patient recall are common, especially amid post-ictal confusion or stress; the clinician should address driving safety again directly rather than assuming prior counseling was retained, and document the conversation clearly this visit.",
-    "artifactId": "d6"
+    "teachingPoint": "Discrepancies between documented discharge counseling and patient recall are common, especially amid post-ictal confusion or stress; the clinician should address driving safety again directly rather than assuming prior counseling was retained, and document the conversation clearly this visit, rather than assuming the ED discussion resolved the safety issue."
    }
   ],
   "objectives": [
@@ -667,7 +666,6 @@
      "f9"
     ],
     "actionIds": [
-     "a4",
      "a8"
     ]
    },

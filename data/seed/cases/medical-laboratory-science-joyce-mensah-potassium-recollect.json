@@ -16,9 +16,11 @@
     "id": "a2",
     "kind": "record",
     "name": "Review original specimen collection details from courier/collection log",
-    "result": "Collection site log: venipuncture attempted 3 times by phlebotomist, tourniquet applied approximately 4 minutes with patient instructed to 'pump fist' during difficult draw. Specimen collected 2:10 PM, picked up by courier 4:45 PM, received in lab 7:05 PM (~5 hours post-collection), transported unrefrigerated in delivery van on an 89°F day. Specimen was never centrifuged/separated prior to transport.",
+    "result": "Collection site log: specimen collected 2:10 PM, picked up by courier 4:45 PM, received in lab 7:05 PM (~5 hours post-collection), transported unrefrigerated in delivery van on an 89°F day. Specimen was never centrifuged/separated prior to transport. Log notes draw was described by site staff as 'difficult' but does not detail number of attempts, tourniquet time, or technique used — recommend confirming collection details directly with patient.",
     "importance": "critical",
-    "artifactIds": []
+    "artifactIds": [
+     "d2"
+    ]
    },
    {
     "id": "a3",
@@ -73,7 +75,7 @@
    {
     "id": "a9",
     "kind": "test",
-    "name": "Ask patient to describe her symptoms today (fatigue, palpitations, weakness, nausea)",
+    "name": "Point-of-care style symptom screen for hyperkalemia (ask patient to report any fatigue, palpitations, weakness, nausea)",
     "result": "Patient reports feeling well overall; denies palpitations, muscle weakness, numbness/tingling, nausea, or shortness of breath.",
     "importance": "important",
     "artifactIds": []
@@ -82,8 +84,8 @@
     "id": "a10",
     "kind": "record",
     "name": "Ask about diet and salt substitute use",
-    "result": "Patient reports using a potassium chloride salt substitute at most meals for about a year, in addition to prescribed lisinopril and spironolactone.",
-    "importance": "critical",
+    "result": "Patient mentions trying to eat healthier and cut back on salt per her doctor's advice; when asked more specifically about any salt substitutes or seasonings used regularly, she becomes a little hesitant before confirming she uses a 'no-salt' seasoning at most meals.",
+    "importance": "important",
     "artifactIds": []
    },
    {
@@ -210,7 +212,7 @@
     "release": {
      "when": "start"
     },
-    "body": "Hemolysis index: 2+ (moderate-to-marked hemolysis, visible pink/red tinge in serum). Specimen type: serum separator tube, received NOT centrifuged. Time from collection to receipt: 5 hours 0 minutes (collected 2:10 PM, received 7:05 PM). Transport condition: ambient temperature, non-refrigerated courier van; outdoor ambient temperature recorded at 89°F at time of transport. Collection notes from site: 'Difficult venipuncture, 3 attempts, prolonged tourniquet application (~4 min), patient asked to pump fist to assist vein location.' QA comment: Result flagged for pre-analytical review prior to release; critical value called per protocol pending recollection recommendation."
+    "body": "Hemolysis index: 2+ (moderate-to-marked hemolysis, visible pink/red tinge in serum). Specimen type: serum separator tube, received NOT centrifuged. Time from collection to receipt: 5 hours 0 minutes (collected 2:10 PM, received 7:05 PM). Transport condition: ambient temperature, non-refrigerated courier van; outdoor ambient temperature recorded at 89°F at time of transport. Collection site notes: 'Draw described as difficult by collecting staff; patient reported discomfort during procedure.' Specific details of number of attempts, tourniquet duration, and technique were not recorded in this QA report. QA comment: Result flagged for pre-analytical review prior to release; critical value called per protocol pending recollection recommendation."
    },
    {
     "id": "d3",
@@ -481,8 +483,8 @@
     "id": "f12",
     "category": "nutrition",
     "topic": "salt substitute use",
-    "chart": "Uses a potassium chloride-based salt substitute at most meals for approximately one year.",
-    "says": "Oh, I use that no-salt seasoning, the one with potassium in it, almost every meal. Been doing that about a year now since my doctor said to cut back on salt.",
+    "chart": "Uses a potassium chloride-based salt substitute at most meals for approximately one year; initially hesitant to mention it, discloses when asked specifically and directly about any salt substitutes or seasonings.",
+    "says": "Oh... I use that no-salt seasoning, the one with potassium in it, almost every meal. Been doing that about a year now since my doctor said to cut back on salt.",
     "tier": "reluctant",
     "importance": "critical"
    },
@@ -645,7 +647,7 @@
     "id": "f30",
     "category": "other",
     "topic": "understanding of salt substitute ingredients",
-    "chart": "Was unaware that the salt substitute contains potassium chloride until it is explained; thought it was just a 'healthier salt.'",
+    "chart": "Was unaware that the salt substitute contains potassium chloride until it is explained further; thought it was just a 'healthier salt.' This surfaces only once the learner specifically explains what the substitute contains and checks her understanding.",
     "says": "Wait, that stuff has potassium in it? I just thought it was the heart-healthy salt, I didn't know it had potassium in it.",
     "tier": "hidden",
     "importance": "critical"
@@ -778,6 +780,14 @@
     "patientClaim": "Patient did not realize her salt substitute contained potassium and considers it just a 'healthier salt' unrelated to her blood test.",
     "recordEvidence": "Medication list (d4) and clinical reasoning show she is on lisinopril (ACE inhibitor) and spironolactone (potassium-sparing diuretic) with no documented potassium supplement, yet her regular use of a potassium chloride-based salt substitute is a significant unlisted source of dietary potassium intake not captured anywhere in the formal medication list.",
     "teachingPoint": "Salt substitutes are frequently omitted from medication reconciliation because patients view them as food, not medicine; the learner should recognize this gap and understand why dietary potassium sources must be explored directly rather than relying on the medication list alone."
+   },
+   {
+    "id": "m3",
+    "factId": "f2",
+    "artifactId": "d2",
+    "patientClaim": "Patient reports a difficult venipuncture yesterday requiring multiple attempts, with the tourniquet left on a long time and being told to pump her fist.",
+    "recordEvidence": "The pre-analytical QA report (d2) only documents that the draw was 'difficult' per collecting staff, without recording number of attempts, tourniquet duration, or fist-pumping instruction - the specific technique details are missing from the formal log and must be obtained directly from the patient.",
+    "teachingPoint": "Collection logs and QA reports do not always capture granular technique details; interviewing the patient directly about her experience of the draw can reveal pre-analytical error sources that are not documented anywhere in the formal record."
    }
   ],
   "patient": {

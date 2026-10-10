@@ -43,5 +43,12 @@
    "where": "a11 weight loss percentage",
    "problem": "11 kg loss from a baseline of 90 kg is 12.2%, which rounds reasonably to '~12%' as stated — this is correct, no issue. (Confirmed correct, included for completeness, not an actual problem.)"
   }
+ ],
+ "revised": [
+  "a8: Reworded result to report only CAM-specific findings (inattention/disorganization present or absent) rather than narrating caregiver's spontaneous memory-lapse history (f10), which is volunteered by the patient/caregiver directly in conversation, not disclosed via this action.",
+  "a9: Renamed to a validated instrument ('Administer validated post-ICU psychological screening tool (e.g., IES-6)') and reworded result to reflect only the screening tool's quantitative/qualitative output (positive screen for distress) rather than verbatim disclosing the reluctant fact f8 (nightmares of restraint); that detail must now be discovered through direct rapport-based dialogue.",
+  "o1: Removed f10 from factIds since f10 is tier 'initial' and should be volunteered in dialogue, not gated behind action a8; kept f8 and f11 as cognitive/psychological domain facts appropriately tied to a8/a9 at the screening-instrument level.",
+  "a10: Corrected PHQ-2 scoring - 'several days' = 2 points and 'some days' = 1 point, summing to 3/6, which is at the standard positive-screen cutoff of ≥3 (not below threshold as previously stated); result and interpretation corrected accordingly.",
+  "a14: Renamed from an interview-phrased action to a record/interview reconciliation action ('Review of medication administration technique with caregiver') and reclassified kind from 'test' to 'record' to better reflect a caregiver-reported medication administration review rather than a direct interview question or an objective test; result unchanged as it already appropriately reflects the discoverable fact f15 and supports mismatch m1."
  ]
 }

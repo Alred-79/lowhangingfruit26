@@ -54,7 +54,7 @@
     "id": "a5",
     "kind": "record",
     "name": "Review ED visit records (3 visits, past 2 months)",
-    "result": "Three ED visits for chest tightness/palpitations/paresthesias. Vitals each visit: HR 110-130, BP mildly elevated, O2 sat normal. ECG normal sinus rhythm x3. Troponin negative x3. TSH/free T4 within normal limits. Discharge diagnosis each time: 'atypical chest pain, likely anxiety-related, cardiac workup negative.'",
+    "result": "Three ED visits for chest tightness/palpitations/paresthesias. Vitals each visit: HR 118-128, BP mildly elevated, O2 sat normal. ECG normal sinus rhythm x3. Troponin negative x3. TSH/free T4 within normal limits. Discharge diagnosis each time: 'atypical chest pain, likely anxiety-related, cardiac workup negative.'",
     "importance": "critical",
     "aliases": [
      "ED chart review",
@@ -66,7 +66,7 @@
     "id": "a6",
     "kind": "record",
     "name": "Review current medication list",
-    "result": "No prescribed psychiatric medications. Lorazepam 0.5mg tablets - not prescribed to patient (prescribed to partner). No other medications listed except occasional OTC antacid.",
+    "result": "No prescribed psychiatric medications or benzodiazepines on the medication reconciliation list. No other medications listed except occasional OTC omeprazole for heartburn.",
     "importance": "important",
     "aliases": [
      "medication reconciliation"
@@ -778,14 +778,14 @@
    },
    {
     "id": "o5",
-    "text": "Assess cultural and relational context affecting help-seeking and disclosure, including family attitudes toward mental health and partner's limited awareness of symptom severity.",
+    "text": "Assess cultural and relational context affecting help-seeking and disclosure, including family attitudes toward mental health and partner's limited awareness of symptom severity, through sensitive direct questioning once rapport is established.",
     "factIds": [
      "f21",
      "f24",
      "f31"
     ],
     "actionIds": [
-     "a8"
+     "a11"
     ]
    },
    {

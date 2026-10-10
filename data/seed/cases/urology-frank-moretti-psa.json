@@ -14,9 +14,9 @@
    },
    {
     "id": "a2",
-    "kind": "record",
-    "name": "Review referring physician's digital rectal exam note",
-    "result": "DRE by family physician: prostate moderately enlarged, smooth contour, no nodules, no asymmetry, mild tenderness absent.",
+    "kind": "exam",
+    "name": "Perform/review digital rectal exam",
+    "result": "Prostate moderately enlarged, smooth contour, no nodules, no asymmetry, non-tender.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -34,7 +34,7 @@
     "id": "a4",
     "kind": "assessment",
     "name": "Administer/review IPSS (International Prostate Symptom Score)",
-    "result": "IPSS total 17/35 (moderate), bothersome item score 3/6 (quality of life moderately affected). Dominant symptoms: nocturia x3, weak stream.",
+    "result": "IPSS total 18/35 (moderate), bothersome item score 3/6 (quality of life moderately affected). Dominant symptoms: nocturia x3, weak stream.",
     "importance": "critical",
     "artifactIds": [
      "d6"
@@ -44,7 +44,7 @@
     "id": "a5",
     "kind": "assessment",
     "name": "Administer/review IIEF-5 erectile function screen",
-    "result": "IIEF-5 score 15/25, consistent with mild-to-moderate erectile dysfunction.",
+    "result": "IIEF-5 score 15/25, consistent with mild-to-moderate erectile dysfunction. Patient completes screen without further elaboration.",
     "importance": "important",
     "abnormal": true,
     "artifactIds": [
@@ -55,7 +55,7 @@
     "id": "a6",
     "kind": "vitals",
     "name": "Review home vitals/weight log",
-    "result": "BP 134/82 mmHg, HR 76 bpm, weight 198 lb, BMI 29.4. No fevers reported.",
+    "result": "BP 134/82 mmHg, HR 76 bpm, weight 198 lb. No fevers reported.",
     "importance": "minor",
     "artifactIds": []
    },
@@ -310,7 +310,7 @@
     "release": {
      "when": "start"
     },
-    "body": "Mr. Moretti is a 62-year-old male referred for evaluation of rising PSA. Two years of PSA tracking show an increase from 3.1 to 6.8 ng/mL, with a repeat value of 6.5 ng/mL after the patient reported vigorous stationary cycling prior to the initial elevated draw. Digital rectal exam performed in office: prostate moderately enlarged, smooth, no nodularity or asymmetry noted, non-tender. No gross hematuria, dysuria, or fever reported. Patient endorses nocturia and weak urinary stream for approximately 18 months. Family history significant for paternal prostate cancer (deceased age 74) and a brother treated for prostate cancer at age 60. Referred to Urology for further workup including consideration of prostate MRI and possible biopsy."
+    "body": "Mr. Moretti is a 62-year-old male referred for evaluation of rising PSA. Two years of PSA tracking show an increase from 3.1 to 6.8 ng/mL, with a repeat value of 6.5 ng/mL after the patient reported vigorous stationary cycling prior to the initial elevated draw. Digital rectal exam deferred in office; recommend urology perform DRE as part of workup. No gross hematuria, dysuria, or fever reported. Patient endorses nocturia and weak urinary stream for approximately 18 months. Family history significant for paternal prostate cancer (deceased age 74) and a brother treated for prostate cancer at age 60. Referred to Urology for further workup including consideration of prostate MRI and possible biopsy."
    },
    {
     "id": "d5",
@@ -348,7 +348,7 @@
      "when": "action",
      "ref": "a4"
     },
-    "body": "Incomplete emptying: 3. Frequency: 3. Intermittency: 2. Urgency: 2. Weak stream: 4. Straining: 1. Nocturia: 3 (gets up 3x per night). Total IPSS = 18 (moderate range, consistent with reported total of 17-18 depending on rounding). Bother score (quality of life question): 3 - 'mostly dissatisfied.'"
+    "body": "Incomplete emptying: 3. Frequency: 3. Intermittency: 2. Urgency: 2. Weak stream: 4. Straining: 1. Nocturia: 3 (gets up 3x per night). Total IPSS = 18 (moderate range: 8-19). Bother score (quality of life question): 3 - 'mostly dissatisfied.'"
    },
    {
     "id": "d7",
@@ -714,7 +714,7 @@
    },
    {
     "id": "o2",
-    "text": "Elicit and synthesize prostate cancer risk factors (family history in father and brother, DRE findings) to risk-stratify and justify imaging before biopsy.",
+    "text": "Elicit and synthesize prostate cancer risk factors (family history in father and brother, DRE findings obtained via urology's own exam) to risk-stratify and justify imaging before biopsy.",
     "factIds": [
      "f5",
      "f6"
@@ -738,7 +738,7 @@
    },
    {
     "id": "o4",
-    "text": "Screen for and sensitively uncover erectile dysfunction and the patient's hidden fear that treatment will worsen sexual function, incorporating this into counseling and shared decision-making.",
+    "text": "Screen for erectile dysfunction using IIEF-5, and through sensitive, rapport-based direct questioning, uncover the patient's hidden fear that treatment will worsen sexual function, incorporating this into counseling and shared decision-making.",
     "factIds": [
      "f12",
      "f13",
@@ -774,7 +774,7 @@
    }
   ],
   "answerKey": {
-   "primaryProblem": "Rising PSA (3.1→6.8, repeat 6.5 ng/mL) with moderate LUTS (IPSS 17-18) in a 62-year-old man with strong family history of prostate cancer (father, brother) and benign-feeling prostate on DRE — findings warrant risk-stratified workup with prostate MRI before biopsy decision, in the context of coexisting mild-moderate erectile dysfunction that must be addressed in counseling.",
+   "primaryProblem": "Rising PSA (3.1→6.8, repeat 6.5 ng/mL) with moderate LUTS (IPSS 18/35) in a 62-year-old man with strong family history of prostate cancer (father, brother) and benign-feeling prostate on DRE — findings warrant risk-stratified workup with prostate MRI before biopsy decision, in the context of coexisting mild-moderate erectile dysfunction that must be addressed in counseling.",
    "differential": [
     "Clinically significant prostate cancer",
     "Benign prostatic hyperplasia (BPH) causing LUTS, independent contributor to or coincidental with PSA elevation",
@@ -784,19 +784,20 @@
    ],
    "keyFindings": [
     "PSA rose from 3.1 to 6.8 ng/mL over 2 years, repeat 6.5 ng/mL confirming elevation after excluding acute exercise effect",
-    "DRE: moderately enlarged, smooth prostate, no nodule/asymmetry",
+    "DRE (performed by urology): moderately enlarged, smooth prostate, no nodule/asymmetry",
     "Normal urinalysis excluding infection/hematuria as cause",
-    "IPSS 17-18 (moderate), dominant symptoms nocturia x3 and weak stream, consistent with BPH component",
+    "IPSS 18/35 (moderate), dominant symptoms nocturia x3 and weak stream, consistent with BPH component",
     "First-degree family history: father died of prostate cancer age 74, brother treated age 60 — qualifies for higher-risk category justifying earlier/more aggressive workup",
-    "IIEF-5 score 15/25: mild-to-moderate erectile dysfunction, patient fearful procedures will worsen this, previously undisclosed",
+    "IIEF-5 score 15/25: mild-to-moderate erectile dysfunction; patient's underlying fear that procedures will worsen this is uncovered only through direct, sensitive questioning, not the questionnaire itself",
     "No red-flag symptoms: no hematuria, dysuria, fever, bone pain, or weight loss"
    ],
    "plan": [
     "Explain to patient that PSA is a screening marker, not diagnostic for cancer; elevation can result from BPH, prostate size, age, and transient factors like vigorous exercise, but a persistently elevated repeat value after accounting for exercise still warrants further workup given family history",
+    "Perform digital rectal exam as part of urology's own evaluation rather than relying solely on the referring note",
     "Order multiparametric prostate MRI (PI-RADS scoring) prior to any biopsy decision to risk-stratify and guide targeted biopsy if indicated",
     "If MRI shows a suspicious lesion (PI-RADS 3-5) or risk remains elevated by calculator, proceed to MRI-targeted (+/- systematic) prostate biopsy, performed by urology; discuss biopsy risks (bleeding, infection, transient worsening of urinary/erectile symptoms) explicitly",
     "Address LUTS: discuss BPH management options (watchful waiting, alpha-blocker, 5-alpha-reductase inhibitor) separate from cancer workup; advise discontinuing or disclosing saw palmetto use as it is unregulated and of unproven benefit, and does not need to be stopped before MRI but should be documented",
-    "Directly address erectile dysfunction: validate the patient's fear, explain that pre-existing mild-moderate ED exists independent of any procedure, discuss that treatment approaches (active surveillance, surgery, radiation if cancer found) carry different sexual side-effect profiles, and that this will be part of shared decision-making if cancer is diagnosed",
+    "Directly and sensitively ask about erectile function and any fears about how treatment might affect it; validate the patient's fear once uncovered, explain that pre-existing mild-moderate ED exists independent of any procedure, discuss that treatment approaches (active surveillance, surgery, radiation if cancer found) carry different sexual side-effect profiles, and that this will be part of shared decision-making if cancer is diagnosed",
     "Encourage open conversation with spouse about sexual health concerns if patient is comfortable; offer referral to sexual health counseling or further ED workup as appropriate within urology scope",
     "Advise against repeating PSA immediately after vigorous exercise or ejaculation in the future to avoid false elevation on surveillance labs",
     "Set a realistic timeline for MRI scheduling and follow-up discussion of results before the patient's work travel in 6 weeks, with contingency plan if results are not back in time",
@@ -811,7 +812,7 @@
     "PSA is organ-specific but not cancer-specific; BPH, prostatitis, recent ejaculation, vigorous exercise, and even recent catheterization can transiently or chronically raise PSA",
     "Multiparametric MRI with PI-RADS scoring before biopsy improves detection of clinically significant cancer and can reduce unnecessary biopsies of low-risk disease",
     "First-degree relatives with prostate cancer, especially diagnosed at younger age (brother at 60), meaningfully raise lifetime risk and lower the threshold for earlier, more thorough workup",
-    "Shared decision-making requires explicitly asking about sexual function, since many men will not volunteer erectile concerns due to embarrassment or stoicism, especially when fearful of what a diagnosis or procedure might mean for intimacy",
+    "Shared decision-making requires explicitly asking about sexual function and underlying fears, since a questionnaire alone will not surface emotionally sensitive concerns that many men will not volunteer due to embarrassment or stoicism",
     "All major treatment options for localized prostate cancer (surgery, radiation, active surveillance) carry different but real risks to erectile and urinary function, and this should be discussed before, not after, a biopsy result changes the conversation"
    ]
   },
@@ -878,7 +879,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "BP 134/82 mmHg, HR 76 bpm, Weight 198 lb, BMI 29.4 (home log, today)"
+    "value": "BP 134/82 mmHg, HR 76 bpm, Weight 198 lb (home log, today)"
    },
    {
     "label": "Immunizations",

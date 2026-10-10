@@ -37,5 +37,15 @@
    "where": "a2 result vs d5 flowsheet",
    "problem": "a2 states temperature is '38.1 C (100.6 F) oral, reported by patient' from a home thermometer, but d5 flowsheet attributes vitals to 'RN telehealth assessment' as author, implying the RN measured it directly; this is a minor sourcing inconsistency since telehealth vitals are inherently patient self-measured/reported, which should be clarified in the flowsheet author field (e.g., 'Patient-reported, recorded by RN')."
   }
+ ],
+ "revised": [
+  "a8: removed leaked diagnostic conclusion ('consistent with known peripheral neuropathy'); now reports only the objective self-test finding (reduced/absent sensation to light touch, worse distally) so f20/d7 history must be obtained separately via interview or record review.",
+  "a18: renamed and converted from an interview-style 'ask about' action to a permitted 'record' action ('Review antibiotic adherence against pharmacy refill/dosing record'); result now reports objective dispensing/refill data rather than directly quoting the patient's adherence claim, so f10 is no longer handed over by the action itself (it remains available via patient interview as an 'initial' tier fact).",
+  "d8 (new): added Pharmacy Dispensing/Refill Record artifact, released on a18, to supply the objective evidence a18 now reports and to serve as the record evidence for mismatch m1.",
+  "m1: updated artifactId from d4 to d8 and reworded recordEvidence/patientClaim to use the new pharmacy dispensing record instead of the glucose log, since the glucose log is a weaker/indirect link to antibiotic (not insulin) adherence; teaching point retained.",
+  "o6: actionIds unchanged (a18, a11) but now a18 refers to the corrected record-review action.",
+  "a10 and d1: changed 'osteomyelitis ruled out on imaging at that time' to 'osteomyelitis not evident on plain films at that time' with a note on limited sensitivity of plain films, since plain films do not reliably rule out osteomyelitis; wording now consistent and clinically accurate between the action result and the discharge summary artifact.",
+  "a13: no change made; reviewer flagged this as lower priority/borderline acceptable since the result remains behavioral/observational rather than a diagnostic conclusion.",
+  "d3 vs d4 timing (issue 4): no change made; reviewer concluded this is a minor internal consistency issue not warranting a fix, and the existing timestamps (discharge glucose 228 vs home log starting Day 1 AM at 260) are not materially contradictory."
  ]
 }

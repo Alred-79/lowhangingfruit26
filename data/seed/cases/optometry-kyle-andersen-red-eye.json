@@ -68,7 +68,7 @@
     "id": "a8",
     "kind": "record",
     "name": "Review contact lens type and replacement schedule in chart",
-    "result": "Record shows monthly disposable soft contact lenses, no documented history of extended/overnight wear or water exposure prior to today's visit.",
+    "result": "Record shows patient fitted with monthly disposable soft contact lenses per prescribed schedule; chart contains no documentation of extended/overnight wear or water exposure as of today's visit.",
     "importance": "important",
     "artifactIds": [
      "d2"
@@ -88,7 +88,7 @@
     "id": "a10",
     "kind": "assessment",
     "name": "Triage severity assessment for red eye with corneal lesion",
-    "result": "Documented as a vision- and sight-threatening presentation requiring same-day in-person ophthalmic/optometric evaluation with corneal scraping and culture; contact lens wear and steroid use are not appropriate pending that assessment.",
+    "result": "Documented as a vision- and sight-threatening presentation with high-risk features for microbial keratitis (acute vision loss, corneal infiltrate, marked photophobia and pain in a contact lens wearer), requiring same-day in-person ophthalmic/optometric slit lamp evaluation; contact lens wear and steroid use are not appropriate pending that evaluation.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -96,7 +96,7 @@
     "id": "a11",
     "kind": "exam",
     "name": "Ask patient to inspect and photograph contact lens case and remaining lens on camera",
-    "result": "Patient shows an open lens case with visibly discolored, cloudy soaking solution and a lens case that appears overdue for replacement; patient confirms he has not changed solution daily.",
+    "result": "Patient shows an open lens case with visibly discolored, cloudy soaking solution and a lens case that appears old and overdue for replacement.",
     "importance": "important",
     "artifactIds": []
    },
@@ -141,7 +141,7 @@
         "Soft contact lenses",
         "Monthly disposable, both eyes",
         "Myopia correction",
-        "Active - patient reports extending wear to ~2 months per lens"
+        "Active - prescribed monthly replacement schedule"
        ]
       },
       {

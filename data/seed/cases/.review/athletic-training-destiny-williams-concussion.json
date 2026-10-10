@@ -42,5 +42,13 @@
    "problem": "This is appropriately a record-review action within AT scope, but the phrasing of the result ('Return-to-play protocol requires physician sign-off before beginning Stage 6') slightly misstates district policy as stated in d8, which says physician clearance is required before Stage 5 (full-contact practice) AND Stage 6 (competition), not just Stage 6.",
    "fixSuggestion": "Update a11 result to say 'before beginning Stage 5 (full-contact practice) or Stage 6 (competition)' to match d8 exactly."
   }
+ ],
+ "revised": [
+  "a3/d6: Removed verbatim parent-report wording that matched hidden/reluctant facts f6-f8 (light sensitivity, irritability, drowsiness) verbatim; result and table now report aggregate severity/discrepancy only, without disclosing the specific symptom items the learner is expected to elicit through interview. This preserves the self-report vs collateral-report discrepancy (teaching point) without pre-handing the reluctant-tier content.",
+  "d6 table: condensed symptom rows so specific reluctant-fact symptoms (light sensitivity, irritability, drowsiness) are no longer individually itemized; retained headache/fatigue/concentration (which are already discoverable/initial-tier or non-sensitive) and an aggregate row for the rest.",
+  "a9/o5/f12 topic: renamed action a9 from 'Review prior concussion history in chart' to 'Review head injury history in chart' and reworded objective o5 to avoid naming the hidden fact ('prior concussion') directly, so a reader scanning actions/objectives cannot infer the specific hidden finding before the learner elicits it via rapport-based questioning. (f12's topic label 'prior head injury history' is acceptable as a neutral topic tag per the fact-topic convention used elsewhere, e.g. f5 'headache pattern' for a reluctant fact, so left unchanged; the leak was in the action name and objective text, now fixed.)",
+  "a1 objectives update: o1 action list retained a2/a3 since those actions legitimately surface the self-report/collateral discrepancy (the sanitized a3/d6 no longer bypasses reluctant-tier elicitation of f6-f8); o1 text clarified that the learner must still elicit f6-f8 via interview, matching the now-sanitized artifact.",
+  "a4: added artifactIds [d3] since a4's numeric result (BESS today = 11) duplicates data already present in the d3 flowsheet table, resolving the sourcing inconsistency noted by the reviewer (no numeric contradiction existed, just missing artifact linkage).",
+  "a8 VOMS result: standardized all items to the conventional 0-10 symptom-change scoring rubric (removing mixed categorical terms like 'mild'/'moderate') for internal consistency; clinical interpretation (abnormal convergence, provocation on VOR/VMS) is unchanged."
  ]
 }

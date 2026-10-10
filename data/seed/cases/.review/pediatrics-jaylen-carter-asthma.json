@@ -31,5 +31,14 @@
    "where": "a9 and d6 BMI percentile labeling",
    "problem": "BMI percentile at 65th percentile for a 15-year-old male is within normal range, correctly stated as no concern, but the growth flowsheet doesn't specify sex-specific percentile curve or exact BMI formula check: 69 kg / (1.75 m)^2 = 22.53 kg/m2, which matches 22.5, so the calculation is correct; no fix needed here, flagged only to confirm accuracy (no actual issue)."
   }
+ ],
+ "revised": [
+  "a12: Converted from a disguised interview action that handed over f11/f12 as scripted 'test' results into a genuine structured allergy/environmental symptom screening tool whose result is a nonspecific score, not a disclosure of pet/smoking facts; pets and smoking status must now be elicited by the learner asking in dialogue per f11 (initial) and f12 (discoverable) tiers.",
+  "o4: Updated to reflect that the cat exposure/allergy history must be elicited via conversation rather than via a12 action; removed a12 from actionIds, kept a13 exam as supporting but not revealing the trigger itself.",
+  "a8: Corrected refill math - 120-dose canister with 1 refill in 3 months means 2 canisters (240 doses) used over ~90 days, which is ~2.5-3 puffs/day average, not 1 puff/day as originally stated; updated result text accordingly.",
+  "m1: Updated recordEvidence and teachingPoint to reflect corrected ~2.5-3 puffs/day average use figure instead of the erroneous 1 puff/day, keeping the mismatch meaningful (objective use still below the prescribed 4 puffs/day, illustrating self-report vs. refill-data discrepancy in either direction).",
+  "answerKey.keyFindings and answerKey.plan: Updated wording to match corrected refill-adherence math and to reflect that the cat trigger is elicited via history rather than delivered as a packaged action result.",
+  "a13: Softened exam finding from 'pale/boggy turbinates' (a classic textbook allergic rhinitis sign that foreshadows the cat-trigger diagnosis before history correlation) to a more neutral 'mildly erythematous, slight boggy quality' with an explicit note that findings are nonspecific and require correlation with history the learner must still elicit.",
+  "Note on reviewer issue 2 (peak flow percentages): confirmed 310/420=73.8% and 220/420=52.4% are both arithmetically correct and internally consistent with the case narrative (yellow zone today vs. near-red-zone during ED visit); no change made, as the reviewer themselves concluded no issue."
  ]
 }

@@ -56,7 +56,7 @@
     "id": "a7",
     "kind": "assessment",
     "name": "Assess lung cancer screening eligibility (USPSTF criteria)",
-    "result": "Patient meets USPSTF criteria for annual low-dose CT lung cancer screening (age 50-80, 20+ pack-year history, quit within last 15 years at time of eligibility window). He has not previously undergone a dedicated screening LDCT; this diagnostic CT was done for trauma, not screening.",
+    "result": "Patient meets USPSTF criteria for annual low-dose CT lung cancer screening: age 50-80, 20+ pack-year smoking history, and current smoker or quit within the past 15 years. He has 35 pack-years and quit 6 years ago, so he remains within the eligibility window. He has not previously undergone a dedicated screening LDCT; this diagnostic CT was done for trauma, not screening.",
     "importance": "important",
     "artifactIds": []
    },
@@ -418,7 +418,7 @@
     "chart": "Worked as a shipyard pipefitter; reports handling asbestos lagging material in the 1980s without respiratory protection.",
     "says": "I worked the shipyards most of my life. Back in the eighties we handled that lagging insulation stuff with asbestos in it, bare hands, no masks, nobody told us different back then.",
     "tier": "discoverable",
-    "importance": "critical"
+    "importance": "important"
    },
    {
     "id": "f13",
@@ -472,7 +472,7 @@
     "chart": "No prior chest CT or chest x-ray on record; has never had a dedicated lung cancer screening scan.",
     "says": "This is the first time I've ever had a chest scan, far as I know. Never had one of those screening ones they talk about.",
     "tier": "discoverable",
-    "importance": "critical"
+    "importance": "important"
    },
    {
     "id": "f19",

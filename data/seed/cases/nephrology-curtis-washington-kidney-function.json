@@ -117,7 +117,7 @@
     "id": "a13",
     "kind": "assessment",
     "name": "Calculate CKD stage and risk category",
-    "result": "CKD stage G4A3 (eGFR 22 mL/min/1.73m2, albuminuria category A3); KFRE-based 2-year kidney failure risk substantially elevated given trajectory.",
+    "result": "CKD stage G4A3 (eGFR 22 mL/min/1.73m2, albuminuria category A3). Rapid progression per KDIGO criteria (eGFR decline of ~8 mL/min/1.73m2/year, exceeding the >5 mL/min/1.73m2/year threshold). Formal Kidney Failure Risk Equation (KFRE) has not yet been calculated this visit; given the albuminuria and eGFR, 2-year risk is expected to be substantial and a formal KFRE calculation is warranted to quantify risk and guide referral timing.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": []
@@ -145,9 +145,10 @@
     "id": "a16",
     "kind": "assessment",
     "name": "Screen readiness for kidney replacement therapy education",
-    "result": "Patient verbalizes strong fear and refusal of dialysis based on family experience; no prior exposure to transplant or home dialysis options; appropriate target for structured modality education and referral.",
+    "result": "Patient becomes visibly guarded and anxious when kidney replacement therapy is mentioned, brief pause and tightened expression; no prior exposure to transplant or home dialysis options documented. Underlying beliefs and concerns not yet verbalized; direct, empathetic questioning needed to explore further.",
     "importance": "critical",
-    "artifactIds": []
+    "artifactIds": [],
+    "abnormal": true
    }
   ],
   "answerKey": {
@@ -636,7 +637,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Chronic kidney disease stage 4 (diabetic and hypertensive nephropathy); Type 2 diabetes mellitus; Hypertension; Dyslipidemia"
+    "value": "Chronic kidney disease stage 4, etiology under evaluation; Type 2 diabetes mellitus; Hypertension; Dyslipidemia"
    },
    {
     "label": "Medications",
@@ -1011,7 +1012,7 @@
    },
    {
     "id": "o4",
-    "text": "Elicit and respectfully explore the patient's fear-based refusal of dialysis rooted in family experience, and recognize the gap in prior kidney replacement therapy education.",
+    "text": "Through direct, empathetic questioning, elicit and respectfully explore the patient's fear-based refusal of dialysis rooted in family experience, and recognize the gap in prior kidney replacement therapy education.",
     "factIds": [
      "f11",
      "f13",

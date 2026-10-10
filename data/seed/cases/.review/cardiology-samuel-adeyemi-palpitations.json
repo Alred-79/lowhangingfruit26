@@ -23,5 +23,14 @@
    "kind": "consistency",
    "where": "chartAtStart Problem list"
   }
+ ],
+ "revised": [
+  "d6: Removed the sentence explicitly disclosing the patient's family history of intracranial hemorrhage on warfarin (f12) and his specific hesitation reason; replaced with a generic 'anticoagulation discussion requested' phrase so f12/f24 remain learner-elicited via interview, not pre-disclosed in the referral note.",
+  "a12: Converted from a pre-scored STOP-BANG result (5/8) handed over as a completed test to an action describing that the component questions (snoring, witnessed apnea, daytime sleepiness, etc.) must be asked directly of the patient; removed the finished score and abnormal flag so disclosure of f15/f16 only happens through interview.",
+  "a13: Converted from a 'reviewed' overnight oximetry result (reporting desaturation to 88%) to an action prompting the learner to ask the patient about home oximetry/nocturnal symptoms, since this was self-report masquerading as a chart/device review; removed the abnormal flag and the specific desaturation figure from the action result so it surfaces only via the interview-tier facts.",
+  "a11: Recomputed CHA2DS2-VASc explicitly: hypertension (1) + diabetes (1) + age 61 (0, since 65-74 required for a point) + no CHF/stroke/vascular disease/female sex = total 2, consistent with the rest of the case (previous result text was muddled/self-contradictory); clarified wording while keeping the correct total of 2 and ~2.2%/year stroke risk, matching answerKey and plan.",
+  "chartAtStart: Added 'CHA2DS2-VASc 2' to the Problem list entry for paroxysmal atrial fibrillation for consistency with a11/answerKey, since the reviewer flagged the problem list as not reflecting the computed risk score used throughout the rest of the case.",
+  "o3: Reworded to make explicit that OSA screening (STOP-BANG) and nocturnal symptom history must be obtained via direct patient interview rather than chart review, consistent with the fixes to a12/a13.",
+  "Confirmed mismatches m1 and m2 remain valid and unaffected: their evidence derives from d7 (home BP/pulse log) and d1 (patch monitor), not from the removed/changed STOP-BANG, oximetry, or referral-note content, so no further edits were needed there."
  ]
 }

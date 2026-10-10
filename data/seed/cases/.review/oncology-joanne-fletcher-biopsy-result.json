@@ -22,5 +22,10 @@
    "problem": "Genetic counseling referral rationale is based on age 49 and maternal aunt with ovarian cancer at 52; however, per NCCN criteria, a single second-degree relative with ovarian cancer at age 52 (not <50, and not a first-degree relative) does not clearly meet standard NCCN genetic testing criteria for hereditary breast/ovarian cancer syndrome based on family history alone. The case states this meets criteria without the usual qualifying detail (e.g., ovarian cancer at any age in a close relative, or breast cancer diagnosed <50 in the patient) that would make this a slam-dunk guideline indication.",
    "fix": "Either clarify that she meets criteria independently due to age at breast cancer diagnosis (NCCN includes diagnosis ≤50 as a stand-alone testing indication) rather than attributing it primarily to the aunt's ovarian cancer, or add a closer-degree relative/younger age to firmly justify the referral under family history criteria."
   }
+ ],
+ "revised": [
+  "a14: corrected clinical stage from internally inconsistent 'IIA/IIB' to definitive 'IIB' - AJCC 8th edition anatomic staging assigns T2N1M0 to Stage IIB specifically (T2N0 would be Stage IIA, but N1 is biopsy-confirmed here per a3), so a range was not appropriate.",
+  "a13: updated reference from 'stage IIA/IIB' to 'stage IIB' for consistency.",
+  "answerKey.primaryProblem, keyFindings, differential, plan, educationPoints: replaced all instances of 'stage IIA/IIB' with definitive 'Stage IIB' and added clarifying educational note on why T2N1M0 = IIB (not a range) given confirmed nodal involvement."
  ]
 }

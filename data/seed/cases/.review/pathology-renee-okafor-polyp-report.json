@@ -25,5 +25,11 @@
    "where": "answerKey.plan[2]",
    "problem": "The plan states a specific interval ('typically 3 years for an adenoma with high-grade dysplasia, per standard society guidelines') - current USMSTF/ACG guidance (2020) for adenoma with high-grade dysplasia (and no other high-risk features) is a 3-year interval, which is correct, but the pathology learner answer key is making a surveillance-interval recommendation that the case explicitly says belongs to gastroenterology (per o3 and task list). This creates an internal inconsistency: the role is supposed to defer this decision, yet the answer key states the specific guideline-based interval as if it were part of the pathology consult's content to deliver, which could blur scope boundaries for faculty reviewing fidelity to the stated role limits."
   }
+ ],
+ "revised": [
+  "a3: added artifactIds [d2] so its gross-exam content is grounded in the released pathology report artifact rather than unsupported; result left as-is since it is consistent with d2's 'specimen submission: entire polyp submitted' row and does not leak any reluctant/hidden fact",
+  "a7: added artifactIds [d2] so its size/morphology confirmation is grounded in the released pathology report artifact (which documents 14 mm, pedunculated) rather than being unsupported by any artifact",
+  "answerKey.plan[2]: removed the specific '3 years... per standard society guidelines' recommendation from the pathology plan item, rephrased to state that surveillance timing (including guideline-based intervals) is a GI management decision outside pathology's scope, consistent with o3 and the task list's scope boundary",
+  "answerKey.educationPoints[4]: removed the specific '3 years' interval figure from the education point for consistency, reframed as a general statement that interval decisions belong to GI, matching the scope-corrected plan"
  ]
 }

@@ -118,7 +118,7 @@
     "id": "a12",
     "kind": "test",
     "name": "Review pump/CGM alert settings",
-    "result": "Low alert threshold set at 70 mg/dL, high alert at 250 mg/dL; patient reports he silences alarms during work shifts.",
+    "result": "Low alert threshold set at 70 mg/dL, high alert at 250 mg/dL. Settings have not been modified in over a year despite the current glycemic pattern.",
     "abnormal": true,
     "importance": "important",
     "artifactIds": []
@@ -127,7 +127,7 @@
     "id": "a13",
     "kind": "assessment",
     "name": "Administer brief depression/burnout screen (PHQ-2 style, diabetes distress)",
-    "result": "Patient endorses feeling 'tired of dealing with diabetes nearly every day' and some loss of motivation for self-care; denies anhedonia most days or suicidal ideation.",
+    "result": "Diabetes Distress Scale score elevated (screen-positive for diabetes-related burnout); PHQ-2 score 1/6 (screen-negative for major depression). Patient denies suicidal ideation.",
     "abnormal": true,
     "importance": "critical",
     "artifactIds": []
@@ -135,8 +135,8 @@
    {
     "id": "a14",
     "kind": "assessment",
-    "name": "Review alcohol use pattern (AUDIT-style screening questions)",
-    "result": "Reports binge drinking (5-6+ drinks) on weekend nights after shifts, sometimes without eating; denies morning drinking or withdrawal symptoms.",
+    "name": "Administer AUDIT-C alcohol screening questionnaire",
+    "result": "AUDIT-C score 7/12 (positive screen for risky drinking pattern; threshold for further assessment in men is ≥4). Patient confirms weekend drinking after shifts; denies morning drinking or withdrawal symptoms.",
     "abnormal": true,
     "importance": "critical",
     "artifactIds": []
@@ -240,7 +240,8 @@
        ]
       }
      ]
-    }
+    },
+    "body": "Summary statistics (14-day CGM report): Time in range (70-180 mg/dL) 38%. Time >180 mg/dL 52%. Time <70 mg/dL 7%. Time <54 mg/dL 3%. Pattern: marked afternoon-evening hyperglycemia on work days (median trace above); recurrent nocturnal hypoglycemia (<54 mg/dL) concentrated on Friday and Saturday nights (example overnight trace above)."
    },
    {
     "id": "d2",
@@ -868,7 +869,7 @@
    },
    {
     "id": "o2",
-    "text": "Elicit, with empathy, the behavioral drivers of glycemic pattern: fear of hypoglycemia at work, alarm silencing, and weekend binge drinking without food.",
+    "text": "Elicit, with empathy, the behavioral drivers of glycemic pattern: fear of hypoglycemia at work, alarm silencing, and weekend binge drinking without food, moving beyond screening-tool scores to the underlying narrative once rapport is established.",
     "factIds": [
      "f7",
      "f27",
@@ -882,7 +883,7 @@
    },
    {
     "id": "o3",
-    "text": "Screen for and recognize diabetes burnout/distress as a contributor to nonadherence, distinguishing it from major depression with suicidal ideation.",
+    "text": "Screen for and recognize diabetes burnout/distress as a contributor to nonadherence, distinguishing it from major depression with suicidal ideation, and follow up screen-positive results with direct, empathetic questions to uncover the full picture.",
     "factIds": [
      "f15",
      "f16",

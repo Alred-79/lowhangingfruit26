@@ -36,7 +36,7 @@
     "id": "a4",
     "kind": "exam",
     "name": "Guided self-exam: patellar/ankle clonus check by patient",
-    "result": "Patient reports no rhythmic jerking when partner-assisted ankle dorsiflexion attempted; limited reliability given remote setting.",
+    "result": "Partner attempted ankle dorsiflexion with patient reporting no rhythmic jerking; this maneuver is not clinically reliable when performed by an untrained partner over video and cannot substitute for a formal in-person neurologic exam.",
     "importance": "minor",
     "abnormal": false,
     "artifactIds": []
@@ -45,8 +45,8 @@
     "id": "a5",
     "kind": "test",
     "name": "Home urine dipstick (patient performs on camera)",
-    "result": "Dipstick shows protein 2+ (patient holds strip to camera; color-matched to chart on canister).",
-    "importance": "critical",
+    "result": "Dipstick shows color change consistent with trace to 2+ protein (patient holds strip to camera; color-matched to chart on canister); self-read home test, color interpretation uncertain and not a validated substitute for formal urinalysis.",
+    "importance": "important",
     "abnormal": true,
     "artifactIds": []
    },
@@ -439,14 +439,14 @@
       {
        "cells": [
         "Visit 3",
-        "32 weeks",
+        "32 weeks 2 days",
         "72.0"
        ]
       },
       {
        "cells": [
         "Today",
-        "33 weeks",
+        "33 weeks 2 days",
         "75.5"
        ],
        "flag": "H"
@@ -470,11 +470,11 @@
          "y": 70.5
         },
         {
-         "x": "32w",
+         "x": "32w2d",
          "y": 72
         },
         {
-         "x": "33w",
+         "x": "33w2d",
          "y": 75.5
         }
        ]
@@ -502,7 +502,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "2 weeks ago: BP 118/76 mmHg, weight 72.0 kg, fundal height 31 cm"
+    "value": "1 week ago (32 weeks 2 days): BP 118/76 mmHg, weight 72.0 kg, fundal height 31 cm"
    },
    {
     "label": "Immunizations",
@@ -966,7 +966,7 @@
     "Right upper quadrant/epigastric discomfort",
     "2+ pitting edema plus facial and hand swelling",
     "Rapid weight gain of 3.5 kg in one week",
-    "Urine dipstick protein 2+ on home testing",
+    "Home urine dipstick suggestive of trace-2+ proteinuria (unreliable self-read, requires formal urine protein/creatinine ratio for confirmation)",
     "Prior labs 2 weeks ago normal, so this represents a new, rapidly evolving process"
    ],
    "plan": [
@@ -988,7 +988,7 @@
    ],
    "educationPoints": [
     "Severe-range BP plus new headache, visual symptoms, or RUQ pain meets criteria for preeclampsia with severe features until proven otherwise and mandates urgent in-person evaluation, even by telehealth triage.",
-    "Home BP cuffs and dipstick urine can be useful adjuncts in telehealth triage but do not replace in-person confirmatory labs, fetal monitoring, and formal BP measurement.",
+    "Home BP cuffs can be a useful adjunct in telehealth triage, but home urine dipstick color-matching and partner-performed clonus checks are unreliable and must not be treated as equivalent to formal in-person labs, urinalysis, or neurologic exam.",
     "Patients may normalize edema or headache as 'typical' late pregnancy; clinicians must actively screen for severe features rather than accepting reassurance at face value.",
     "Addressing real logistical barriers (transportation, childcare, lost wages) is part of safe disposition planning and should not delay urgent referral.",
     "This condition is outside the scope of outpatient telehealth management; the resident's role is to recognize urgency and mobilize in-person/hospital-based care, not to manage expectantly from home."

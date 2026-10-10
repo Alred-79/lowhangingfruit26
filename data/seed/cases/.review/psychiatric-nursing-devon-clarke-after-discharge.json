@@ -36,5 +36,11 @@
    "where": "action a10 (Urine toxicology screen)",
    "problem": "This action is labeled as a 'test' ordered this visit, but the result explains none was performed and none is on file, deferring to in-person follow-up. Ordering a urine tox screen is typically outside independent RN/PMHN student scope in a telehealth visit without point-of-care capability; the action should be reframed as 'reviewing/requesting' rather than 'ordering,' or removed since it cannot be completed and adds little educational value given the result is essentially 'not available.'"
   }
+ ],
+ "revised": [
+  "a1: Removed the phrase 'endorses residual auditory experiences (see below)' and hallucination-content framing from the general MSE result, since auditory hallucination details (f8/f9) are discoverable-tier facts that must be elicited by the learner through targeted questioning rather than bundled into the MSE action output. Replaced with a neutral note that further exploration of hallucinatory content requires direct questioning.",
+  "a7: Rewrote the pharmacy fill history action result to present only raw fill data (quantity, days supply, fill date, refills remaining, refill requests since) without interpretive language ('no refill requests since the only fill', 'consistent with only 7 days supply', 'no subsequent fills recorded') that pre-concluded the non-adherence mismatch. This preserves the pharmacy record (d3) as the source of raw data while requiring the learner to connect it to the patient's adherence claim (f5) themselves, keeping mismatch m1 intact and discoverable rather than moot.",
+  "chartAtStart: Changed Problem list entry from 'rule out medication side effects' (which telegraphs the akathisia/EPS diagnosis before assessment) to a neutral 'on antipsychotic medication, monitoring for tolerability' that does not reveal the differential, preserving objective o1's discovery-based design.",
+  "Reviewer point 4 (a7/d3/f7 redundancy): Addressed by the same a7 rewrite above - the action result no longer states the discrepancy's conclusion, so the mismatch m1 (comparing f5 to d3 pharmacy data) remains a genuine discovery task for the learner rather than being pre-solved by the action result. No change needed to d3, f7, or m1 themselves, as those were already presenting raw/patient-stated data appropriately."
  ]
 }

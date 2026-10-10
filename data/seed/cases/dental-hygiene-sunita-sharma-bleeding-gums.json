@@ -63,7 +63,7 @@
     "id": "a7",
     "kind": "assessment",
     "name": "Dry mouth screening questions (frequency of dry mouth, sipping fluids, saliva consistency)",
-    "result": "Patient reports mouth feels dry especially at night and mid-afternoon; saliva feels thick/sticky at times; sips sweetened chai frequently through the day to cope.",
+    "result": "Patient reports mouth feels dry especially at night and mid-afternoon; saliva feels thick/sticky at times.",
     "abnormal": true,
     "importance": "important",
     "artifactIds": []
@@ -88,9 +88,9 @@
    },
    {
     "id": "a10",
-    "kind": "assessment",
-    "name": "Review flossing technique and frequency through guided questioning",
-    "result": "On further questioning, patient clarifies she floss only when food feels stuck between teeth, not daily; technique not systematic.",
+    "kind": "exam",
+    "name": "Guided flossing technique demonstration on camera",
+    "result": "Patient demonstrates flossing on one lower anterior interproximal site; motion is inconsistent, snapping the floss rather than curving it against the tooth surface, and she does not reach molar contacts in the limited demonstration.",
     "abnormal": true,
     "importance": "critical",
     "artifactIds": []
@@ -98,10 +98,10 @@
    {
     "id": "a11",
     "kind": "assessment",
-    "name": "Tobacco and areca nut/paan use screening",
-    "result": "Patient chews paan containing areca nut at family gatherings, roughly 2-3 times per month; does not consider this tobacco use; no cigarette or smokeless tobacco use reported.",
-    "abnormal": true,
-    "importance": "critical",
+    "name": "Tobacco use screening",
+    "result": "Patient denies cigarette or smokeless tobacco use.",
+    "abnormal": false,
+    "importance": "important",
     "artifactIds": []
    },
    {
@@ -117,7 +117,7 @@
     "id": "a13",
     "kind": "record",
     "name": "Review most recent HbA1c result in chart",
-    "result": "HbA1c 8.2% (reference <5.7% normal, 5.7-6.4% prediabetes, ≥6.5% diabetes), drawn 2 months ago, indicating suboptimal glycemic control.",
+    "result": "HbA1c 8.2% (diagnostic reference: <5.7% normal, 5.7-6.4% prediabetes, ≥6.5% diabetes; treatment goal for most adults with diabetes is <7.0%), drawn 2 months ago, indicating suboptimal glycemic control above goal.",
     "abnormal": true,
     "importance": "critical",
     "artifactIds": [
@@ -215,7 +215,7 @@
         "Hemoglobin A1c",
         "8.2",
         "%",
-        "4.0-5.6 (non-diabetic); goal <7.0 for most diabetics"
+        "4.0-5.6 non-diabetic; 5.7-6.4 prediabetes; ≥6.5 diabetes; treatment goal <7.0 for most diabetics"
        ],
        "flag": "H"
       }
@@ -637,14 +637,14 @@
     "factId": "f13",
     "artifactId": "d5",
     "patientClaim": "Patient initially states she flosses daily, consistent with what she told the dentist 3 years ago, but on gentle follow-up today clarifies she only flosses when food feels stuck between teeth.",
-    "recordEvidence": "Dental Visit Note - 3 Years Ago documents 'patient reported flossing daily and brushing twice daily at that visit,' yet periodontal charting from the same visit showed 4-5 mm pockets with bleeding on probing in the molars - clinical findings inconsistent with effective daily interdental cleaning.",
-    "teachingPoint": "Self-reported home care often overestimates actual technique and frequency; clinical findings (pocket depths, bleeding on probing) are more reliable than self-report alone, and gentle, non-judgmental follow-up questioning can reveal the gap."
+    "recordEvidence": "Dental Visit Note - 3 Years Ago documents 'patient reported flossing daily and brushing twice daily at that visit,' yet periodontal charting from the same visit showed 4-5 mm pockets with bleeding on probing in the molars - clinical findings inconsistent with effective daily interdental cleaning. Today's guided flossing demonstration also shows inconsistent, non-systematic technique that would not reach interproximal/molar surfaces regularly.",
+    "teachingPoint": "Self-reported home care often overestimates actual technique and frequency; clinical findings (pocket depths, bleeding on probing) and direct observation of technique are more reliable than self-report alone, and gentle, non-judgmental follow-up questioning can reveal the gap."
    },
    {
     "id": "m2",
     "factId": "f14",
     "patientClaim": "Patient does not consider chewing paan with areca nut to be tobacco use or a health risk, framing it only as a cultural/social practice.",
-    "recordEvidence": "Areca nut chewing (with or without tobacco) is an established oral cancer risk factor independent of cigarette or smokeless tobacco use; this risk is not reflected in her own risk perception and was not previously documented or discussed at her last dental visit 3 years ago.",
+    "recordEvidence": "Areca nut chewing (with or without tobacco) is an established oral cancer risk factor independent of cigarette or smokeless tobacco use; this risk is not reflected in her own risk perception and was not previously documented or discussed at her last dental visit 3 years ago. Her tobacco screening today was negative for cigarettes/smokeless tobacco, so this risk factor would only surface through specific, direct, non-judgmental questioning about betel/areca/paan use.",
     "teachingPoint": "Oral cancer risk screening must explicitly ask about areca nut/paan use as a distinct risk factor, since patients may not categorize it as 'tobacco' and may not volunteer it unless asked directly and non-judgmentally."
    }
   ],

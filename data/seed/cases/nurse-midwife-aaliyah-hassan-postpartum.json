@@ -73,7 +73,7 @@
     "id": "a8",
     "kind": "exam",
     "name": "Camera inspection of perineum/episiotomy (patient self-exam with mirror, guided)",
-    "result": "Patient reports healed anterior episiotomy site, no gaping, no discharge, mild tenderness only with prolonged sitting. Patient describes prior female genital cutting (Type I) in childhood; scar tissue stable, no new tearing or distortion reported.",
+    "result": "Patient reports healed anterior episiotomy site, no gaping, no discharge, mild tenderness only with prolonged sitting. Visualized scar tissue appears stable, no new tearing or distortion reported.",
     "importance": "important",
     "abnormal": false,
     "artifactIds": []
@@ -100,7 +100,7 @@
     "id": "a11",
     "kind": "record",
     "name": "Review delivery and discharge summary",
-    "result": "Spontaneous vaginal delivery at 39+2 weeks, anterior episiotomy for perineal rigidity related to prior FGC, estimated blood loss 350 mL, uncomplicated postpartum course, discharged day 2.",
+    "result": "Spontaneous vaginal delivery at 39+2 weeks, anterior episiotomy performed for perineal rigidity, estimated blood loss 350 mL, uncomplicated postpartum course, discharged day 2. Summary does not elaborate on the specific cause of the perineal rigidity.",
     "importance": "minor",
     "abnormal": false,
     "artifactIds": []
@@ -147,7 +147,7 @@
     "release": {
      "when": "start"
     },
-    "body": "Patient is a 27-year-old G1P1 who presented in spontaneous labor at 39+2 weeks. Progressed to spontaneous vaginal delivery of a female infant, birth weight 3.4 kg, Apgars 8/9. Anterior midline episiotomy performed for perineal rigidity in the setting of childhood female genital cutting (Type I, per patient report), to facilitate delivery and avoid uncontrolled laceration. Repair intact, hemostasis achieved. Estimated blood loss 350 mL. Postpartum course uncomplicated; ambulating, voiding, breastfeeding initiated in recovery. Discharged home on postpartum day 2 with routine instructions, pelvic floor and perineal care counseling provided, follow-up postpartum visit scheduled."
+    "body": "Patient is a 27-year-old G1P1 who presented in spontaneous labor at 39+2 weeks. Progressed to spontaneous vaginal delivery of a female infant, birth weight 3.4 kg, Apgars 8/9. Anterior midline episiotomy performed for perineal rigidity to facilitate delivery and avoid uncontrolled laceration. Repair intact, hemostasis achieved. Estimated blood loss 350 mL. Postpartum course uncomplicated; ambulating, voiding, breastfeeding initiated in recovery. Discharged home on postpartum day 2 with routine instructions, pelvic floor and perineal care counseling provided, follow-up postpartum visit scheduled."
    },
    {
     "id": "d2",
@@ -387,7 +387,7 @@
    },
    {
     "label": "Problem list",
-    "value": "G1P1, spontaneous vaginal delivery 3 weeks ago; anterior episiotomy; history of childhood female genital cutting (Type I, per patient report)"
+    "value": "G1P1, spontaneous vaginal delivery 3 weeks ago; anterior episiotomy"
    },
    {
     "label": "Medications",
@@ -731,8 +731,8 @@
     "factId": "f9",
     "artifactId": "d1",
     "patientClaim": "Patient reports her bleeding is light, brown, and normal with no clots or odor, implying an uncomplicated postpartum recovery overall.",
-    "recordEvidence": "Delivery summary (d1) documents an anterior episiotomy performed specifically due to perineal rigidity from childhood female genital cutting, a detail the patient does not volunteer until directly and respectfully asked, despite it being clinically significant to her perineal healing assessment.",
-    "teachingPoint": "A patient's framing of her recovery as 'normal' may not surface all clinically relevant history; the record (delivery summary) prompts the clinician to ask specifically and respectfully about FGC-related healing, which the patient will not raise unprompted."
+    "recordEvidence": "Delivery summary (d1) documents an anterior episiotomy performed specifically for perineal rigidity, a detail whose underlying cause the patient does not volunteer until directly and respectfully asked, despite it being clinically significant to her perineal healing assessment.",
+    "teachingPoint": "A patient's framing of her recovery as 'normal' may not surface all clinically relevant history; the record (delivery summary) prompts the clinician to ask specifically and respectfully about the reason for her episiotomy and any related healing considerations, which the patient will not raise unprompted."
    }
   ],
   "objectives": [

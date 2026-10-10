@@ -236,7 +236,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
                 spokenTo += m[0].length;
               }
             } else if (ev.type === "done") {
-              setMessages((m) => [...m, { id: ev.messageId, turn, speaker: "patient", text: ev.text }]);
+              setMessages((m) => [...m, { id: ev.messageId, turn, speaker: "patient", text: ev.text }, ...(ev.notice ? [{ id: ev.messageId + 0.5, turn, speaker: "system" as const, text: ev.notice }] : [])]);
               setPending(null);
               const before = new Set([...(chart?.sections.flatMap((s) => s.items.map((x) => x.id)) || []), ...(chart?.artifacts.map((a) => a.id) || [])]);
               const after: ChartView = ev.chart;
@@ -514,7 +514,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
               )}
               {pending !== null && (
                 <div className="flex">
-                  <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-slate-100 px-3.5 py-2 text-sm text-slate-900">{pending || <span className="text-slate-400">{firstName} is thinking…</span>}</div>
+                  <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-slate-100 px-3.5 py-2 text-sm text-slate-900">{stripCues(pending) || <span className="text-slate-400">{firstName} is thinking…</span>}</div>
                 </div>
               )}
             </div>

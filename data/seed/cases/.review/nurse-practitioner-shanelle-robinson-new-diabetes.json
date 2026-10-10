@@ -37,5 +37,13 @@
    "where": "chartAtStart 'Immunizations' vs d4 Hepatitis B row",
    "problem": "chartAtStart immunizations summary does not mention Hepatitis B series status at all, while d4 artifact explicitly flags Hepatitis B as not completed and recommends completing - minor omission in the summary chart but not a contradiction, low severity."
   }
+ ],
+ "revised": [
+  "a5: corrected classification of urine ACR 22 mg/g from erroneous 'A2 category' to the KDIGO-correct 'A1 category' (normal to mildly increased, <30 mg/g), retaining the clinical nuance that it is at the higher end of normal and warrants monitoring",
+  "d1: HbA1c reference range corrected from '4.0-5.6 (normal); ≥6.5 diabetes' to the standard ADA ranges '<5.7 normal; 5.7-6.4 prediabetes; ≥6.5 diabetes' to match action a2 and eliminate the inconsistency; also added explicit A1/A2/A3 cutoffs to the urine ACR reference range row to support the corrected A1 classification",
+  "a9: renamed from a non-validated 'brief verbal screen' to a named validated instrument (Problem Areas in Diabetes-5, PAID-5) and reworded result to reflect a screening score plus patient-shared context, without surfacing the reluctant fact f25 (needle fear origin tied to mother) or the cost-concern fact f28 content beyond what is already discoverable/initial elsewhere; this keeps the action compliant as a legitimate instrument rather than a disguised interview question",
+  "answerKey.plan: softened metformin titration pace from 'by 500 mg weekly' to 'by 500 mg every 1-2 weeks' to better reflect standard practice minimizing GI side effects; target dose (1000 mg BID) unchanged as it was already appropriate",
+  "answerKey.keyFindings and redFlags: updated urine ACR description to A1 category language consistent with the a5 correction, and updated the albuminuria red flag to reference progression into the A2 range (30-300 mg/g) rather than implying 22 mg/g was already A2",
+  "answerKey.primaryProblem: updated phrasing from 'mildly increased urine albumin-creatinine ratio' to 'urine albumin-creatinine ratio in the normal-to-mildly-increased (A1) range' for consistency with the corrected classification"
  ]
 }

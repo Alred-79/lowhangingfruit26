@@ -7,9 +7,9 @@
    {
     "id": "a1",
     "kind": "vitals",
-    "name": "Review vital signs (temp, HR, BP, RR) reported by patient via home thermometer and pulse check",
-    "result": "Temp 38.0 C (100.4 F) oral, HR 96 bpm, BP 124/78 mmHg, RR 16/min, reported SpO2 98% on home pulse oximeter",
-    "importance": "critical",
+    "name": "Ask patient to check and report vital signs now (temp via home thermometer, pulse count) after asking about systemic symptoms",
+    "result": "Patient reports BP 124/78 mmHg (home cuff), RR 16/min, SpO2 98% on home pulse oximeter; temperature and pulse rate only obtained after specifically asking about fever/chills - see HR and Temp reported with that history",
+    "importance": "important",
     "artifactIds": [
      "d2"
     ]
@@ -229,7 +229,7 @@
         "16",
         "98"
        ],
-       "flag": "H"
+       "flag": "H,H,,,"
       }
      ]
     }
@@ -649,7 +649,7 @@
   "objectives": [
    {
     "id": "o1",
-    "text": "Elicit a focused history of a penetrating hand injury including mechanism, wound care, symptom progression, and systemic symptoms",
+    "text": "Elicit a focused history of a penetrating hand injury including mechanism, wound care, symptom progression, and systemic symptoms (fever/chills), then obtain vital signs",
     "factIds": [
      "f1",
      "f2",

@@ -25,5 +25,11 @@
    "where": "d3 title 'Admission History - COPD Exacerbations This Year'",
    "problem": "This artifact is appropriately gated behind action a1, but its title combined with the rows already reveals the full admission pattern immediately upon that single action, slightly short-circuiting the discovery intended to come from a2-a10; this is a minor pacing issue rather than a leak of hidden facts, since the three admissions are already stated in chartAtStart problem list and a1 result."
   }
+ ],
+ "revised": [
+  "d1: Replaced imprecise taper formula ('40mg daily, taper by 10mg every 3 days over 10 days total') with an exact day-range schedule (Days 1-3: 40mg, Days 4-6: 30mg, Days 7-9: 20mg, Day 10: 10mg, then stop) that resolves cleanly over the stated 10-day course.",
+  "d2: Updated Prednisone row dose/frequency columns to match the corrected exact day-range taper schedule instead of the formula that didn't divide evenly into 10 days.",
+  "a1: Updated discharge summary review result to reflect the corrected exact-dose taper schedule.",
+  "d4: Added a Day 0 (discharge) point of 93% to the home oximetry chart so it explicitly reconciles with chartAtStart's discharge SpO2 of 93% on 2L, and relabeled date range to 'Days 0-4 post-discharge' to show the two sources are the same continuous trend rather than an unaddressed drift (Day 1 reading of 92% remains unchanged and is now shown as a one-point decline from the discharge value rather than an unexplained gap)."
  ]
 }

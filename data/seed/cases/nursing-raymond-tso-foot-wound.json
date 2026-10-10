@@ -75,7 +75,7 @@
     "id": "a8",
     "kind": "assessment",
     "name": "Monofilament/light touch sensation check, bilateral feet (patient self-test with cotton ball per instruction)",
-    "result": "Patient reports markedly reduced sensation to light touch on both feet, worse at toes, consistent with known peripheral neuropathy",
+    "result": "Patient reports markedly reduced sensation to light touch on both feet, worse at the toes, with difficulty feeling the cotton ball at the distal aspects bilaterally.",
     "abnormal": true,
     "importance": "important",
     "artifactIds": [
@@ -95,7 +95,7 @@
     "id": "a10",
     "kind": "record",
     "name": "Review hospital discharge summary",
-    "result": "Discharged after 6 days IV antibiotics and surgical debridement for right first-toe diabetic foot infection with underlying osteomyelitis ruled out on imaging at that time; cultures grew MRSA and Enterobacter; discharged on amoxicillin-clavulanate 875/125 mg PO BID x14 days, new insulin glargine 14 units subcutaneous nightly, home dressing changes BID with wife as caregiver, follow-up in clinic in 9 days.",
+    "result": "Discharged after 6 days IV antibiotics and surgical debridement for right first-toe diabetic foot infection with surrounding cellulitis; osteomyelitis not evident on plain films at that time (plain films have limited sensitivity and do not definitively exclude bone infection). Cultures grew MRSA and Enterobacter; discharged on amoxicillin-clavulanate 875/125 mg PO BID x14 days, new insulin glargine 14 units subcutaneous nightly, home dressing changes BID with wife as caregiver, follow-up in clinic in 9 days.",
     "abnormal": false,
     "importance": "critical",
     "artifactIds": []
@@ -167,12 +167,14 @@
    },
    {
     "id": "a18",
-    "kind": "assessment",
-    "name": "Ask about antibiotic adherence",
-    "result": "Patient reports taking amoxicillin-clavulanate twice daily as prescribed, has not missed doses, about 5 days of the 14-day course remain.",
+    "kind": "record",
+    "name": "Review antibiotic adherence against pharmacy refill/dosing record",
+    "result": "Pharmacy fill record shows a 14-day supply of amoxicillin-clavulanate dispensed at discharge with no early refill requested; pill count/dosing pattern consistent with twice-daily use, no gaps identified in the dispensing record.",
     "abnormal": false,
     "importance": "important",
-    "artifactIds": []
+    "artifactIds": [
+     "d8"
+    ]
    }
   ],
   "answerKey": {
@@ -230,7 +232,7 @@
     "release": {
      "when": "start"
     },
-    "body": "68-year-old male with type 2 diabetes mellitus admitted for right first-toe diabetic foot infection with surrounding cellulitis. Underwent surgical debridement of right great toe. Wound cultures grew MRSA and Enterobacter cloacae, sensitive to the prescribed regimen. Plain films at admission did not show osteomyelitis. Treated with 6 days IV vancomycin and ceftriaxone, transitioned to oral amoxicillin-clavulanate 875/125 mg PO BID to complete a 14-day course. Started on insulin glargine 14 units SC nightly for persistently elevated inpatient glucose (metformin to be continued). Discharged home with wife performing BID dressing changes using provided supplies. Wound boot provided; patient instructed on strict non-weight-bearing/offloading of right foot. Follow-up in surgical clinic in 9 days or sooner if concerns. At discharge, erythema margin marked and measured at 4 cm from incision edge, photo on file."
+    "body": "68-year-old male with type 2 diabetes mellitus admitted for right first-toe diabetic foot infection with surrounding cellulitis. Underwent surgical debridement of right great toe. Wound cultures grew MRSA and Enterobacter cloacae, sensitive to the prescribed regimen. Plain films at admission did not show osteomyelitis; given the known low sensitivity of plain radiographs for early bone infection, this does not definitively rule it out. Treated with 6 days IV vancomycin and ceftriaxone, transitioned to oral amoxicillin-clavulanate 875/125 mg PO BID to complete a 14-day course. Started on insulin glargine 14 units SC nightly for persistently elevated inpatient glucose (metformin to be continued). Discharged home with wife performing BID dressing changes using provided supplies. Wound boot provided; patient instructed on strict non-weight-bearing/offloading of right foot. Follow-up in surgical clinic in 9 days or sooner if concerns. At discharge, erythema margin marked and measured at 4 cm from incision edge, photo on file."
    },
    {
     "id": "d2",
@@ -456,6 +458,37 @@
      "ref": "a8"
     },
     "body": "Patient with longstanding type 2 diabetes, poorly controlled, reports bilateral foot numbness and tingling for several years, consistent with diabetic peripheral neuropathy. Monofilament testing at that visit showed absent sensation at multiple sites bilaterally. Counseled extensively on daily foot checks and protective footwear given high risk for unnoticed injury."
+   },
+   {
+    "id": "d8",
+    "type": "medication_list",
+    "title": "Pharmacy Dispensing/Refill Record - Amoxicillin-Clavulanate",
+    "author": "Outpatient pharmacy",
+    "date": "2 days ago to today",
+    "release": {
+     "when": "action",
+     "ref": "a18"
+    },
+    "table": {
+     "columns": [
+      "Date dispensed",
+      "Medication",
+      "Quantity",
+      "Days supply",
+      "Notes"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "2 days ago (discharge)",
+        "Amoxicillin-clavulanate 875/125 mg",
+        "28 tablets",
+        "14 days",
+        "No early refill or replacement request logged to date"
+       ]
+      }
+     ]
+    }
    }
   ],
   "chartAtStart": [
@@ -791,10 +824,10 @@
    {
     "id": "m1",
     "factId": "f10",
-    "artifactId": "d4",
+    "artifactId": "d8",
     "patientClaim": "Patient states he has taken amoxicillin-clavulanate exactly as prescribed with no missed doses.",
-    "recordEvidence": "Despite reported antibiotic adherence, the home glucose log and clinical picture (spreading erythema, fever, purulent drainage) show the infection progressing rather than improving, suggesting either resistant/worsening infection despite good antibiotic adherence, or that adherence is being overstated; the inconsistency between reported adherence and clinical worsening should prompt the nurse to probe further and not accept the history at face value.",
-    "teachingPoint": "Reported medication adherence does not guarantee treatment response; worsening clinical signs despite stated adherence are themselves a red flag requiring escalation, not reassurance."
+    "recordEvidence": "Despite reported perfect antibiotic adherence, the pharmacy dispensing record shows no early refill was needed and the clinical picture (spreading erythema, fever, purulent drainage) shows the infection progressing rather than improving, suggesting either a resistant/worsening infection despite good adherence or that the full clinical picture needs closer scrutiny.",
+    "teachingPoint": "Reported medication adherence does not guarantee treatment response; worsening clinical signs despite stated adherence and an unremarkable dispensing record are themselves a red flag requiring escalation, not reassurance."
    },
    {
     "id": "m2",

@@ -5,7 +5,6 @@ import type { CaseProfile } from "../types";
 import { allClinicians } from "./store";
 import type { Stage } from "./types";
 
-const str = { type: "string" };
 
 /** The faculty guide: proposes an ordered set of encounters for a case from the persona roster and role catalog. */
 export async function proposeStages(caseId: string, brief = ""): Promise<{ title: string; summary: string; stages: Stage[] }> {

@@ -34,7 +34,7 @@
     "id": "a4",
     "kind": "test",
     "name": "Confrontation visual field screening by self-report (patient covers one eye, examiner moves finger/object on screen to four quadrants)",
-    "result": "Right eye: dense field cut in the lower-outer (inferotemporal) quadrant corresponding to a shadow 'like a curtain' rising from below; patient does not see the object in that quadrant. Left eye: full field to confrontation.",
+    "result": "Right eye: dense field cut in the lower-inner (inferonasal) quadrant - consistent with the patient's report of a shadow rising from the bottom, nose-side of his vision, and distinct from his temporal-sided flashes; patient does not see the object in that quadrant. Left eye: full field to confrontation.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -90,7 +90,7 @@
     "id": "a11",
     "kind": "assessment",
     "name": "Risk stratification for retinal detachment based on history and remote exam findings",
-    "result": "High-risk presentation: acute photopsia and floaters with a new, persistent visual field defect ('curtain') in a highly myopic, pseudophakic eye. Field defect location (inferotemporal) suggests a superior-nasal retinal break with detachment tracking inferiorly. Macula appears spared on functional testing but this does not exclude extramacular detachment requiring urgent repair.",
+    "result": "High-risk presentation: acute photopsia and floaters with a new, persistent visual field defect ('curtain') in a highly myopic, pseudophakic eye. Field defect location (inferonasal) suggests a corresponding supero-temporal retinal break, since retinal breaks produce field defects that are inverted both vertically and horizontally relative to their anatomic location. Macula appears spared on functional testing but this does not exclude extramacular detachment requiring urgent repair.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -116,7 +116,7 @@
    ],
    "keyFindings": [
     "Three days of new floaters and photopsia, right eye only",
-    "New inferior-nasal visual field shadow since this morning, consistent with superior retinal pathology",
+    "New inferonasal visual field shadow since this morning, consistent with a supero-temporal retinal break",
     "High myopia (~-8 D) and pseudophakia in that eye, both major retinal detachment risk factors",
     "Central acuity relatively preserved (20/30) and Amsler grid intact, suggesting macula currently attached",
     "No pain, no redness - typical for retinal detachment, helps distinguish from inflammatory/infectious red eye causes",
@@ -144,7 +144,8 @@
     "Preserved central vision and normal Amsler grid suggest the macula is still attached, which is prognostically important but does NOT lower the urgency of same-day evaluation",
     "Telehealth visual acuity, confrontation fields, and Amsler testing are useful triage tools but cannot replace dilated fundoscopy with scleral depression for peripheral retinal breaks/detachment",
     "Patients may minimize urgency due to competing life demands (e.g., work deadlines); clear, direct communication about vision-threatening risk is essential",
-    "Diabetic retinopathy history is a relevant comorbidity but should not anchor the differential away from retinal detachment when classic risk factors and symptoms are present"
+    "Diabetic retinopathy history is a relevant comorbidity but should not anchor the differential away from retinal detachment when classic risk factors and symptoms are present",
+    "Visual field defects are inverted both vertically and horizontally relative to the corresponding retinal pathology: an inferonasal field defect corresponds to a supero-temporal retinal break, not a supero-nasal one"
    ]
   },
   "artifacts": [
@@ -154,7 +155,7 @@
     "title": "Cataract Surgery Operative Note - Right Eye",
     "author": "Dr. A. Rosen, Ophthalmology",
     "date": "2 years ago",
-    "body": "Procedure: Phacoemulsification with posterior chamber intraocular lens implantation, right eye.\nIndication: Visually significant nuclear sclerotic cataract, right eye, in setting of high myopia.\nFindings: Uncomplicated procedure, posterior capsule intact, IOL well-centered in the bag.\nPostoperative course: Unremarkable per follow-up visits at 1 day, 1 week, 1 month. Final visual acuity 20/25 right eye with correction.\nPlan: Routine follow-up with comprehensive eye exams given high myopia; counseled on symptoms of retinal detachment (flashes, floaters, curtain/shadow) and to seek urgent care if these occur.",
+    "body": "Procedure: Phacoemulsification with posterior chamber intraocular lens implantation, right eye.\nIndication: Visually significant nuclear sclerotic cataract, right eye, in setting of high myopia.\nFindings: Uncomplicated procedure, posterior capsule intact, IOL well-centered in the bag.\nPostoperative course: Unremarkable per follow-up visits at 1 day, 1 week, 1 month. Final visual acuity 20/25 right eye with correction.\nPlan: Routine follow-up with comprehensive eye exams given high myopia; standard postoperative precautions reviewed and patient advised to report any new or unusual visual symptoms promptly.",
     "release": {
      "when": "start"
     }
@@ -165,7 +166,7 @@
     "title": "Comprehensive Dilated Eye Exam - 11 Months Ago",
     "author": "Dr. L. Chen, Ophthalmology",
     "date": "11 months ago",
-    "body": "Reason for visit: Annual diabetic eye exam.\nVisual acuity: 20/25 OD, 20/25 OS with correction.\nRefraction: OD -8.00 sphere, OS -8.25 sphere (longstanding high myopia).\nAnterior segment: Pseudophakic OD, clear lens OS, no cells or flare.\nVitreous: Early syneresis bilaterally, no hemorrhage.\nRetina: Mild nonproliferative diabetic retinopathy OU with scattered microaneurysms and dot-blot hemorrhages, no macular edema on exam. Peripheral retina flat 360 degrees OU, no holes, tears, or lattice degeneration identified with scleral depression.\nImpression: Mild NPDR OU, no DME. High myopia, pseudophakic OD. Counseled on retinal detachment warning signs given risk factors.\nPlan: Return in 12 months or sooner if new flashes, floaters, or visual field changes.",
+    "body": "Reason for visit: Annual diabetic eye exam.\nVisual acuity: 20/25 OD, 20/25 OS with correction.\nRefraction: OD -8.00 sphere, OS -8.25 sphere (longstanding high myopia).\nAnterior segment: Pseudophakic OD, clear lens OS, no cells or flare.\nVitreous: Early syneresis bilaterally, no hemorrhage.\nRetina: Mild nonproliferative diabetic retinopathy OU with scattered microaneurysms and dot-blot hemorrhages, no macular edema on exam. Peripheral retina flat 360 degrees OU, no holes, tears, or lattice degeneration identified with scleral depression.\nImpression: Mild NPDR OU, no DME. High myopia, pseudophakic OD.\nPlan: Return in 12 months or sooner if any new visual symptoms develop.",
     "release": {
      "when": "start"
     }
@@ -341,7 +342,7 @@
     "title": "Telehealth Triage Note - Today",
     "author": "Ophthalmology Resident (self, in progress)",
     "date": "today",
-    "body": "S: 57-year-old man with high myopia and pseudophakia OD (s/p uncomplicated cataract surgery 2 years ago), type 2 diabetes with known mild NPDR, presents via video with 3 days of new floaters and flashing lights OD, and since this morning a shadow/curtain rising from the inferonasal visual field (patient-reported as 'lower outer corner going dark'). No pain, no redness. Able to read with central vision when covering fellow eye. Concerned about work deadline, asks about drops or new glasses.\nO: Remote exam notable for right eye confrontation field defect in inferotemporal quadrant, visual acuity 20/30 OD (baseline 20/25), Amsler grid intact centrally OD. External exam unremarkable, no injection. Pupils grossly reactive on camera. Prior exam 11 months ago showed flat peripheral retina OU and mild NPDR without DME.\nA: Acute flashes/floaters with new field-corresponding visual field defect in high-risk eye (high myopia, pseudophakic) - presumed rhegmatogenous retinal detachment until proven otherwise by dilated exam with scleral depression. Macula appears attached by functional testing but this cannot be confirmed remotely.\nP: Same-day in-person dilated exam by retina service. Patient advised of urgency and sight-threatening nature; declined initial requests for drops/new glasses are not appropriate for this presentation. Will coordinate handoff and confirm patient has transportation/plan to be seen today.",
+    "body": "S: 57-year-old man with high myopia and pseudophakia OD (s/p uncomplicated cataract surgery 2 years ago), type 2 diabetes with known mild NPDR, presents via video with 3 days of new floaters and flashing lights OD (flashes noted temporally/laterally), and since this morning a shadow/curtain rising from the inferonasal visual field (patient-reported as 'bottom corner, nose side'). No pain, no redness. Able to read with central vision when covering fellow eye. Concerned about work deadline, asks about drops or new glasses.\nO: Remote exam notable for right eye confrontation field defect in the inferonasal quadrant, visual acuity 20/30 OD (baseline 20/25), Amsler grid intact centrally OD. External exam unremarkable, no injection. Pupils grossly reactive on camera. Prior exam 11 months ago showed flat peripheral retina OU and mild NPDR without DME.\nA: Acute flashes/floaters with new field-corresponding visual field defect (inferonasal field, suggesting a supero-temporal retinal break) in high-risk eye (high myopia, pseudophakic) - presumed rhegmatogenous retinal detachment until proven otherwise by dilated exam with scleral depression. Macula appears attached by functional testing but this cannot be confirmed remotely.\nP: Same-day in-person dilated exam by retina service. Patient advised of urgency and sight-threatening nature; declined initial requests for drops/new glasses are not appropriate for this presentation. Will coordinate handoff and confirm patient has transportation/plan to be seen today.",
     "release": {
      "when": "action",
      "ref": "a12"
@@ -663,7 +664,7 @@
     "id": "f32",
     "category": "hpi",
     "topic": "side of flashes vs shadow",
-    "chart": "Patient notes flashes temporally, shadow rising from inferonasal field - findings anatomically consistent with a superior retinal break",
+    "chart": "Patient notes flashes temporally, shadow rising from inferonasal field - findings anatomically consistent with a supero-temporal retinal break",
     "says": "The flashes are more on the outside part, toward my ear side, but the dark curtain is coming up from the bottom, closer to my nose side.",
     "tier": "discoverable",
     "importance": "important"

@@ -16,7 +16,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "STOP-BANG obstructive sleep apnea screening",
-    "result": "Snoring: no. Tiredness: occasional, attributed to work shifts. Observed apnea: no bed partner report of pauses. Pressure (BP): borderline per home cuff. BMI >35: no (BMI 33). Age >50: no. Neck circumference: patient reports collar size 14in (~35.5cm), not large. Gender male: no. Score 1/8, low risk for OSA.",
+    "result": "Snoring: no (0). Tiredness: occasional, attributed to work shifts, scored as no (0). Observed apnea: no bed partner report of pauses (0). Pressure (BP): borderline per home cuff but not meeting hypertension threshold, scored as no (0). BMI >35: no (BMI 33) (0). Age >50: no (0). Neck circumference: patient reports collar size 14in (~35.5cm), not large (0). Gender male: no (0). Score 0/8, low risk for OSA.",
     "importance": "important",
     "artifactIds": []
    },
@@ -86,7 +86,7 @@
     "id": "a10",
     "kind": "record",
     "name": "Review current medication list in chart",
-    "result": "Chart lists semaglutide 1mg subcutaneous weekly, sumatriptan 50mg PRN migraine, ginkgo biloba supplement daily, fish oil 2000mg daily. No chart entry regarding family anesthesia history or malignant hyperthermia risk.",
+    "result": "Chart lists semaglutide 1mg subcutaneous weekly, sumatriptan 50mg PRN migraine, ginkgo biloba supplement daily, fish oil 2000mg daily.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -126,7 +126,7 @@
     "id": "a15",
     "kind": "assessment",
     "name": "Postoperative nausea and vomiting (PONV) risk assessment (Apfel score)",
-    "result": "Risk factors present: female sex, history of PONV after prior sedation, nonsmoker. Opioid use planned. Apfel score estimated 3/4, high risk for PONV; multimodal antiemetic prophylaxis recommended.",
+    "result": "Risk factors present: female sex, nonsmoker, history of PONV/severe nausea-vomiting after prior sedation, and planned postoperative opioid use. All four classic Apfel criteria met. Apfel score estimated 4/4, high risk for PONV; multimodal antiemetic prophylaxis recommended.",
     "importance": "important",
     "artifactIds": []
    },
@@ -142,7 +142,7 @@
   "answerKey": {
    "primaryProblem": "Pre-anesthesia assessment for outpatient knee arthroscopy in a patient with possible undisclosed malignant hyperthermia (MH) susceptibility, prior severe PONV, GLP-1 agonist use, and class II obesity",
    "differential": [
-    "Malignant hyperthermia susceptibility (family history suggestive, unconfirmed) requiring non-triggering anesthetic technique and specialist consultation",
+    "Malignant hyperthermia susceptibility (family history suggestive, unconfirmed) requiring escalation to the anesthesia care team and collaborative decision-making about anesthetic technique",
     "High risk for postoperative nausea and vomiting given prior sedation history",
     "Delayed gastric emptying risk from weekly semaglutide affecting aspiration risk and NPO timing",
     "Obesity-related airway and ventilation considerations (BMI 33, otherwise reassuring airway exam)",
@@ -157,9 +157,9 @@
     "No prior personal anesthesia complications other than PONV; this would be her first general anesthetic exposure since dental sedation"
    ],
    "plan": [
-    "Document and escalate the family history suggestive of malignant hyperthermia susceptibility to the supervising anesthesiologist/anesthesia care team before proceeding",
-    "Recommend non-triggering anesthetic technique (avoid volatile anesthetics and succinylcholine; plan total intravenous anesthesia) pending further risk stratification, per MH susceptibility precautions",
-    "Consider referral/discussion with genetics or neuromuscular specialist and possible delay if additional work-up (e.g., caffeine-halothane contracture testing or genetic testing) is deemed necessary by the anesthesia team; this determination is outside CRNA independent scope and requires collaborative decision",
+    "Document and escalate the family history suggestive of malignant hyperthermia susceptibility to the supervising anesthesiologist/anesthesia care team before proceeding; this is a collaborative decision, not an independent CRNA determination",
+    "Discuss with the anesthesia care team whether a non-triggering anesthetic technique (avoiding volatile anesthetics and succinylcholine, e.g., total intravenous anesthesia) is warranted pending further risk stratification; final determination rests with the supervising anesthesiologist/team, not the CRNA independently",
+    "Flag the possible need for genetics or neuromuscular specialist referral or caffeine-halothane contracture/genetic testing as a question for the anesthesia team to decide, and note this is outside CRNA independent scope",
     "Implement multimodal PONV prophylaxis per Apfel score (e.g., combination antiemetics, consider regional/avoid volatile agents if feasible)",
     "Advise holding ginkgo biloba and fish oil supplements per standard preoperative supplement guidance (typically 5-7 days prior) in coordination with surgical team",
     "Reinforce standard ASA NPO guidance and confirm semaglutide dosing timeline relative to surgery date",
@@ -173,11 +173,11 @@
    ],
    "educationPoints": [
     "Always ask specifically about family history of anesthesia complications; patients may not recognize vague stories ('ran a very high fever,' 'medical alert bracelet') as medically significant",
-    "Malignant hyperthermia is a pharmacogenetic risk; a suggestive family history should prompt escalation and a non-triggering technique even without confirmatory testing on the day",
+    "Malignant hyperthermia is a pharmacogenetic risk; a suggestive family history should prompt escalation to the anesthesia care team for a collaborative decision about anesthetic technique, even without confirmatory testing on the day",
     "GLP-1 receptor agonists are associated with delayed gastric emptying; current society guidance should be applied to timing of last dose and NPO counseling",
     "Common herbal supplements (ginkgo, fish oil) carry bleeding risk and should be addressed in preoperative medication reconciliation",
-    "Apfel scoring helps standardize PONV risk assessment and prophylaxis planning",
-    "This case models a patient-vs-chart mismatch: the medication list in the chart does not reflect the family anesthetic history disclosed verbally, underscoring the importance of directly eliciting this history rather than relying on the record alone"
+    "Apfel scoring (female sex, nonsmoker, history of PONV/motion sickness, planned postoperative opioids) helps standardize PONV risk assessment and prophylaxis planning",
+    "This case models a patient-vs-chart mismatch: the intake form marked family history 'noncontributory,' which does not reflect the family anesthetic history disclosed verbally, underscoring the importance of directly eliciting this history through specific questioning rather than relying on the record alone"
    ]
   },
   "artifacts": [
@@ -824,9 +824,7 @@
      "f11",
      "f12"
     ],
-    "actionIds": [
-     "a10"
-    ]
+    "actionIds": []
    },
    {
     "id": "o2",
@@ -834,9 +832,7 @@
     "factIds": [
      "f10"
     ],
-    "actionIds": [
-     "a10"
-    ]
+    "actionIds": []
    },
    {
     "id": "o3",
@@ -846,9 +842,7 @@
      "f11",
      "f12"
     ],
-    "actionIds": [
-     "a10"
-    ]
+    "actionIds": []
    },
    {
     "id": "o4",

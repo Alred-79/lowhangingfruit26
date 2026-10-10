@@ -31,5 +31,13 @@
    "where": "f20 tobacco history vs patient appearance/background",
    "problem": "f20 states 'Former smoker, quit 15 years ago, 20 pack-year history' but no actual pack/day and years-smoked figures are given to verify the 20 pack-year calculation; this cannot be checked for accuracy and may mislead faculty reviewing the stated statistic. Fix: specify e.g. '1 pack/day for 20 years, quit 15 years ago' so the stated pack-year value is verifiable."
   }
+ ],
+ "revised": [
+  "d4: changed release trigger from fact f12 to action a10, so the pharmacy refill history reliably surfaces when the learner reviews the medication list action, consistent with action-kind-based release for this role.",
+  "a10: result expanded to include the pharmacy refill lapse finding (not just the flat active medication list), so reviewing a10 actually lets the learner discover the adherence mismatch as objective o4 claims.",
+  "a9: result edited to remove the leaked verbatim chief-complaint detail ('dropped his coffee cup with that hand just before the call'); now reports only the grip strength finding itself.",
+  "Added new action a17 'Respiratory rate and temperature check' (kind vitals) to complete the standard vital sign set used for triage acuity decisions, since RR/temp were never assessed in any existing action despite the answer key plan referencing reassessment of breathing.",
+  "o4 actionIds updated to reference a10 (now sufficient on its own since it surfaces the refill lapse).",
+  "mismatch m1 recordEvidence left as-is (already references d4 appropriately); confirmed it still works with d4's new action-based release since d4 is now reliably available once a10 is performed, before or during the mismatch discussion."
  ]
 }

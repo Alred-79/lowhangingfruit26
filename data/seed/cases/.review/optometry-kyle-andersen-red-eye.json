@@ -31,5 +31,12 @@
    "where": "d3 (14-month-old note) vs chartAtStart",
    "problem": "d3 is released 'at start' and documents detailed hygiene counseling given 14 months ago (nightly removal, water avoidance, case replacement every 3 months) - this primes the learner toward the risk-factor answer before they have taken any history, functioning as a soft leak of the eventual root cause (poor hygiene/water exposure) via chartAtStart release timing. Consider releasing d3 only when the learner actively queries past ocular/contact lens history (as a record-review action) rather than automatically at visit start."
   }
+ ],
+ "revised": [
+  "a9: no change needed (reviewer confirmed consistent) - left as is",
+  "d2: removed leaked reluctant fact f10 ('extending wear to ~2 months per lens') from the Status column; now shows only the prescribed/expected monthly replacement schedule, consistent with record predating patient's in-visit disclosure",
+  "a8: reworded result to align with corrected d2 (no documentation of extended/overnight wear or water exposure 'as of today's visit') so action result and artifact no longer contradict each other",
+  "a11: removed 'patient confirms he has not changed solution daily' - exam action now reports only the visually observed findings (cloudy solution, old case); the hygiene admission remains gated behind history-taking disclosure of hidden fact f13",
+  "a10: softened assessment result to findings-based triage urgency ('high-risk features for microbial keratitis... requires urgent in-person slit lamp evaluation') and removed the specific pre-emptive plan detail ('corneal scraping and culture'), leaving that for the learner to propose per the answer key"
  ]
 }

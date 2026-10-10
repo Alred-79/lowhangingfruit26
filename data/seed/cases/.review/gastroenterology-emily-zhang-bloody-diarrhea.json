@@ -30,5 +30,12 @@
    "where": "a9 vs d1 CRP reference range",
    "problem": "CRP reference range given as 0-5 mg/L in d1, which is a reasonable high-sensitivity-adjacent range, but standard conventional CRP reference ranges are typically 0-10 mg/L (or <3 mg/L for hs-CRP cardiac risk); using 0-5 is non-standard but not clearly wrong - verify this matches the lab's intended standard range or adjust to 0-10 mg/L for a conventional CRP panel to avoid confusion."
   }
+ ],
+ "revised": [
+  "chartAtStart: Trimmed 'Problem list' entry to just the referral reason ('Referred for evaluation of chronic diarrhea') instead of a pre-formed diagnostic problem list that gave away blood, weight loss, and anemia findings before the learner takes a history/reviews labs.",
+  "a15: Revised PGA from 3 (severe) to 2 (moderate) for internal consistency with stool frequency subscore 2 and bleeding subscore 2 (both moderate); recalculated partial Mayo total from 7 to 6, consistent with 'moderately active disease'. Updated result text accordingly.",
+  "answerKey.keyFindings: Updated 'Partial Mayo score ~7' to 'Partial Mayo score ~6' to match corrected a15 calculation.",
+  "a13: Removed invented quantified leakage detail ('blood noted in 6 of 7 days logged', '2 nighttime episodes documented') from the diary result; diary now only reports objective stool frequency count (5-7 BM/day over 3 weeks) since blood frequency and nocturnal symptoms are reluctant-adjacent/discoverable facts (f3, f5) that must be elicited directly from the patient rather than handed over passively via chart review.",
+  "d4: Clarified ambiguous wording 'No fever, no weight loss elicited at this visit' to 'No fever reported; weight loss not asked about or reported at this visit' to make clear this reflects a documentation/screening gap (anchoring failure) rather than an assertion that no weight loss had occurred by that time, preserving the m1 teaching point about anchoring bias without implying a timeline contradiction with f9."
  ]
 }

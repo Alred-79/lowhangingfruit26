@@ -31,5 +31,13 @@
    "where": "answerKey.plan item re: coordinating with academic adviser",
    "problem": "The plan item to 'coordinate with academic adviser regarding academic coaching/support resources' is reasonable, but the case does not clarify that such coordination requires signed release of information/consent beyond what's stated generically ('with patient's consent'), which is fine, but given probation is a condition tied to counseling attendance, there's a subtle confidentiality tension (adviser may expect attendance confirmation) that the plan does not address explicitly - a minor completeness gap rather than an error."
   }
+ ],
+ "revised": [
+  "chartAtStart: no content changes needed, but d1 release now tied to a10 (see artifacts) so start-of-visit chart no longer exposes bereavement timeline details.",
+  "d1: release changed from 'start' to action a10, and body trimmed to remove reluctant/hidden-tier content ('5-6 weeks prior' timeline, 'reluctant to elaborate', tearfulness) that belongs to f20/f29 and must be interview-elicited, not pre-disclosed.",
+  "a10: result rewritten to simply reference d1 rather than restate overlapping-but-different details (removed exact GPA figure duplication and emphasis mismatch), eliminating redundant/inconsistent duplicate record.",
+  "a4: result trimmed to reflect only what a structured grief-impact assessment instrument would show (precipitant, duration, functional/diagnostic criteria for prolonged grief disorder); removed automatic disclosure of guilt about 'not grieving properly' (f29, reluctant) and avoidance/choir-stopping reasoning (f6/f21, discoverable) so these must be elicited via interview, not handed over by a passive assessment action.",
+  "m1: updated recordEvidence and teachingPoint to match the trimmed d1 body (now only documents 'withdrawn and fatigued' with no bereavement timeline or disclosure-reluctance detail), while still giving the learner a genuine, discoverable discrepancy (adviser note's sparse detail vs. patient's fuller account) to reconcile.",
+  "answerKey: updated keyFindings and educationPoints wording to reflect that the timeline/disclosure mismatch is now about the adviser note's lack of detail (not a specific '5-6 weeks' vs '7 weeks' figure), and added an education point that sensitive content (guilt, ambivalence) must be elicited through rapport rather than appearing automatically in a screening action."
  ]
 }

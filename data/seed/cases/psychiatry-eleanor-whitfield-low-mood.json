@@ -18,7 +18,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "Columbia-Suicide Severity Rating Scale (C-SSRS) screening",
-    "result": "Passive death wish present ('wish I just wouldn't wake up'). No active suicidal ideation, no plan, no intent, no preparatory behavior, no past suicide attempts. Access to lethal means in home (opioid medication, firearm) identified. Risk stratified as moderate given passive ideation plus access to lethal means in context of major depressive episode.",
+    "result": "Documented outcome depends on how the interview is conducted. If the resident builds rapport and asks directly and sensitively about thoughts of death, self-harm, plan, intent, and access to means, the patient discloses a passive death wish and in-home access to potentially lethal items; if only asked in a brief, closed, or generic fashion, she denies any current thoughts of self-harm beyond what she already told her PCP, consistent with her reserved, self-effacing style and tendency to minimize distress to avoid 'taking up time.' No active suicidal ideation, plan, intent, or preparatory behavior is reported at any point, and there is no history of past attempts.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -91,7 +91,7 @@
     "id": "a10",
     "kind": "test",
     "name": "Alcohol Use Disorders Identification Test (AUDIT-C), administered verbally",
-    "result": "Score 4/12 (frequency: 5-7 days/week scored 3; typical quantity 1-2 drinks scored 1; no binge pattern). Below standard cutoff for alcohol use disorder in women (cutoff 3 flags further assessment; score here reflects nightly low-quantity use for sleep rather than a use disorder) — clinician notes this still warrants discussion given new onset and sedative interaction risk with any future sleep medication.",
+    "result": "Score 4/12 (frequency: 5-7 days/week scored 3; typical quantity 1-2 drinks scored 1; no binge pattern). This meets/exceeds the standard AUDIT-C positive-screen cutoff of 3 for women, so the result is a positive screen warranting further assessment rather than a reassuring subthreshold finding. Clinically this reflects new nightly low-quantity use for sleep onset rather than an established alcohol use disorder, but it still requires discussion given its new onset, its role in self-medicating insomnia, and sedative interaction risk with any future sleep medication.",
     "importance": "important",
     "artifactIds": []
    },
@@ -115,7 +115,7 @@
     "id": "a13",
     "kind": "assessment",
     "name": "Lethal means access and safety planning assessment",
-    "result": "Patient confirms husband's unused oxycodone prescription bottle (approximately 20 tablets) and his unlocked hunting rifle remain in the home. Patient agreeable to son removing both items this week and to involving son as a safety contact. Patient identifies faith community and grandchildren as reasons to live.",
+    "result": "This is not a passive record lookup: specific findings about items in the home and the patient's willingness to have them removed are only obtained if the resident asks directly, sensitively, and non-judgmentally about firearms and medications in the house, after sufficient rapport has been established. A generic or indirect question yields only a general acknowledgment that 'there are some of my husband's things still around' without further detail. When asked specifically and kindly, the patient becomes willing to discuss what remains in the home and to consider a concrete removal plan with her son's help, and to identify reasons for living such as her faith and grandchildren.",
     "importance": "critical",
     "artifactIds": []
    },

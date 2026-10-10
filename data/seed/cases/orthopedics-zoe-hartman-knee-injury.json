@@ -35,9 +35,9 @@
    {
     "id": "a4",
     "kind": "exam",
-    "name": "Guided patient-performed Lachman-equivalent self-stability check (anterior drawer self-test with mother assisting stabilization)",
-    "result": "Patient and mother report subjective increased anterior tibial translation on self-performed anterior drawer compared to left knee, soft endpoint; limited reliability given self-exam",
-    "importance": "critical",
+    "name": "Guided pivot-shift apprehension and subjective instability questioning (no manual laxity testing performed)",
+    "result": "Patient reports a strong sense of apprehension and 'giving-way' feeling when guided to describe attempting a pivoting/cutting motion; unable to perform a valid two-person laxity test by telehealth, so no objective anterior translation grade obtained — findings limited to subjective report of instability",
+    "importance": "important",
     "artifactIds": []
    },
    {
@@ -239,10 +239,6 @@
        "name": "Right knee flexion",
        "points": [
         {
-         "x": "Day 1 (ED)",
-         "y": 40
-        },
-        {
          "x": "Week 1",
          "y": 80
         },
@@ -259,10 +255,6 @@
       {
        "name": "Left knee flexion (reference)",
        "points": [
-        {
-         "x": "Day 1 (ED)",
-         "y": 140
-        },
         {
          "x": "Week 1",
          "y": 140
@@ -656,7 +648,7 @@
    },
    {
     "id": "o2",
-    "text": "Perform and interpret a guided remote knee examination (inspection, active ROM, self-performed stability maneuvers) recognizing its limitations compared to in-person exam.",
+    "text": "Perform and interpret a guided remote knee examination (inspection, active ROM, subjective instability/apprehension questioning) recognizing its limitations compared to in-person exam, including the impossibility of a valid remote Lachman/anterior drawer test.",
     "factIds": [
      "f5",
      "f7"
@@ -690,7 +682,6 @@
     ],
     "actionIds": [
      "a13",
-     "a4",
      "a5"
     ]
    },

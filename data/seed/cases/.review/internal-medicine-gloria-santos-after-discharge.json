@@ -50,5 +50,15 @@
    "where": "a8 lab result / d2 artifact - anion gap and acid-base assessment not flagged",
    "problem": "Bicarbonate 20 (L) with BUN 38 and Cr 1.7 in a patient with reduced oral intake and vomiting-prone state suggests a mild metabolic acidosis (possibly combined with early lactic acidosis risk from metformin at eGFR 31); the case does not calculate or mention anion gap (Na 138, Cl 100, HCO3 20 → AG =138-100-20=18, elevated), which is clinically relevant given metformin-associated lactic acidosis risk highlighted in educationPoints. This is a missed opportunity but not necessarily an error; however, if faculty expect anion gap calculation, it should be included as a discrete value in the lab report or action result for consistency with the metformin/lactic-acidosis teaching point stated in educationPoints to avoid an unsupported claim appearing to be given more weight than the data shows."
   }
+ ],
+ "revised": [
+  "chartAtStart 'Medications' row (leakage fix #1): removed the pre-stated discrepancy/self-resumption detail; now states only that meds were held per discharge summary and that current intake has not yet been reconciled this visit, preserving the mismatch as something the learner must uncover via a6/a12.",
+  "Issue #2 (a2 4.3% calculation): verified (138-132)/138=4.35%≈4.3%; arithmetic is correct, no change made.",
+  "Issue #3 (a7/d4 timeline consistency): verified fill date 34 days ago predates admission (~11 days ago) consistently; no error, no change made.",
+  "a7 (leakage fix #4): reworded result to report only objective fill dates/quantities ('no new fills logged since discharge') and removed the interpretive conclusion about pre-admission stock vs fresh prescription, so the inference is left to the learner; retitled underlying artifact reference to new d7 pharmacy fill history document instead of d4.",
+  "Added new artifact d7 'Pharmacy Fill/Refill History' (objective fill-date table) released on a7, separated from the medication reconciliation note d4, so a7's record review and a12's interview-based reconciliation draw from distinct, appropriately objective sources.",
+  "d4 (fix #5): retitled to 'Medication Reconciliation - Visit Note', author changed to 'This clinic (generated during today's visit based on patient report)' to clarify it is created from today's visit (gated on a12) rather than a pre-existing document, and row wording changed to 'patient reports resumed/continued' instead of referencing pharmacy fill data (which now lives in d7) to avoid implying prior knowledge of self-resumption.",
+  "Issue #6 (plan scope: metformin/ACEI/diuretic resumption, ED referral, pharmacy communication): reviewed, all within hospitalist/internal medicine telehealth scope; no change made.",
+  "a8 and d2 (fix #7): added calculated anion gap (Na 138 - Cl 100 - HCO3 20 = 18 mmol/L, H, ref 8-12) as an explicit lab value/result, flagging a mild elevated anion-gap component relevant to the metformin/lactic-acidosis teaching point; updated keyFindings, redFlags, and educationPoints in answerKey to reference the calculated anion gap consistently."
  ]
 }

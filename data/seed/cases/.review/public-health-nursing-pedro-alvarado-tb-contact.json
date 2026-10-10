@@ -40,5 +40,19 @@
    "where": "chartAtStart 'Last vitals' vs action a1",
    "problem": "chartAtStart lists 'weight 182 lb (patient-reported, home scale)' as last vitals already known at start, while action a1 re-elicits the same weight as if newly reviewed; this is a minor redundancy/leak since the student doesn't need to perform a1 to learn the weight, as it's already given in chartAtStart — not a critical leak since weight is not sensitive, but reduces the purpose of a1."
   }
+ ],
+ "revised": [
+  "a4: Reworded result to remove explicit 'No refills since. No subsequent fills on record' leak-y phrasing that pre-stated the nonadherence conclusion; now gives neutral fill-date/quantity facts and lets the learner reason that a 30-day supply filled 5 weeks ago would run out ~week 4, requiring the learner to connect this to the interview rather than being told the answer outright.",
+  "d2: Changed 'Refills remaining' from 2 to 3 to correctly reflect that a 4-month (120+ day) rifampin course needs about 4 total 30-day fills (1 used + 3 remaining), per reviewer issue 3.",
+  "d7 (Rifampin Adherence Timeline): Changed release from 'start' to 'action' tied to a4 (pharmacy fill history review), so this chart — which graphically reveals the exact nonadherence pattern (stopped after week 2) — is no longer available to the learner before any interview/record-check action, fixing the leakage in reviewer issue 2. Learner must still elicit the qualitative admission (f4) from the patient; this chart now functions as the same record-based corroboration as d2/a4, not a pre-visit giveaway.",
+  "a8: Rewrote the 'test' action so it only yields a neutral present-tense denial (no current symptoms) rather than disclosing the full discoverable history of past nausea/orange urine and its resolution timeline tied to stopping medication (f5/f6/f7). Those facts remain discoverable via interview questioning per the tiered design and are no longer bypassed by this single action.",
+  "o1: Added explicit mention of cross-checking against the pharmacy fill record so the objective reflects that a4 is a corroborating record check, not an interview shortcut.",
+  "o2: Reworded to emphasize these facts (f5/f6/f7) must be elicited through sensitive follow-up questioning in the interview, consistent with their 'discoverable' tier, since a8 no longer hands them over.",
+  "o5: Reworded to remove language implying the nurse 'determines' clinical readiness for restart; now explicitly limits the nurse's role to alcohol screening and referring to the prescribing clinician/TB program for further evaluation, per reviewer issue 5.",
+  "m1: Expanded recordEvidence to make explicit, without stating the hidden fact outright, that a single 30-day fill with no subsequent fills cannot cover 5 weeks of daily dosing, and corrected the refill count to 3 remaining (consistent with the d2 fix), so the mismatch still works after the a4/d2 wording changes.",
+  "answerKey.differential: Softened wording from 'confirmed by pharmacy fill history' to 'consistent with' since the record alone is circumstantial evidence, not an explicit confirmation, now that a4's result is less conclusory.",
+  "answerKey.keyFindings: Reworded the adherence and side-effect/confidentiality findings to reflect that these are elicited through direct/supportive interview questioning rather than auto-revealed by a single action, consistent with the a8 and d7 leakage fixes.",
+  "answerKey.plan: Tightened the medication-restart plan item to explicitly state determination of clinical readiness belongs to the prescribing clinician, not the PHN, per reviewer issue 5.",
+  "answerKey.educationPoints: Added a point about pharmacy refill history as an adherence-checking tool, reflecting the corrected a4/d2 reasoning the learner must now perform themselves."
  ]
 }

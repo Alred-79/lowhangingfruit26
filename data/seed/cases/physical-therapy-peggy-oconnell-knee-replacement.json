@@ -123,10 +123,11 @@
     "id": "a14",
     "kind": "record",
     "name": "Review prior PT evaluation note (postoperative week 2)",
-    "result": "At 2 weeks post-op: AROM 0-70 degrees, independent with walker for short distances, TUG not yet performed, pain 4/10 with exercise. Home exercise program issued including flexion and extension stretches, quad sets, heel slides, ankle pumps.",
+    "result": "At 2 weeks post-op: AROM 0-70 degrees flexion, full extension achieved passively; incision clean/dry/intact with staples removed. Independent with walker for short household distances. TUG deferred (patient fatigued easily). Pain 4/10 with exercise, 1/10 at rest. Home exercise program issued including flexion and extension stretches, quad sets, heel slides, ankle pumps. A linked flexion ROM trend chart (week 2 through week 6) is also available in the record.",
     "importance": "important",
     "artifactIds": [
-     "d4"
+     "d4",
+     "d5"
     ]
    }
   ],
@@ -138,8 +139,7 @@
     "author": "Dr. Allen Reyes, Orthopedic Surgery",
     "date": "6 weeks ago",
     "release": {
-     "when": "action",
-     "ref": "a1"
+     "when": "start"
     },
     "body": "PROCEDURE: Right total knee arthroplasty, cemented posterior-stabilized implant.\nINDICATION: End-stage osteoarthritis, right knee, failed conservative management.\nFINDINGS: Severe tricompartmental cartilage loss, osteophytes removed, patella resurfaced.\nCOMPLICATIONS: None.\nPOSTOP ORDERS: Weight-bearing as tolerated with assistive device. Physical therapy to begin postoperative day 1. Goals: knee flexion 110-120 degrees by 6 weeks, full extension, independent ambulation."
    },
@@ -309,8 +309,7 @@
     "author": "Physical Therapy",
     "date": "4 weeks ago",
     "release": {
-     "when": "action",
-     "ref": "a14"
+     "when": "start"
     },
     "body": "S: Patient reports pain 4/10 with exercise, 1/10 at rest. Using front-wheeled walker for all mobility.\nO: AROM right knee 0-70 degrees (flexion), full extension achieved passively. Incision clean, dry, intact with staples removed. Independent with walker for short household distances. TUG deferred, patient fatigued easily.\nA: Expected postoperative stiffness and quadriceps weakness, on track at 2 weeks but will need close monitoring of ROM progression.\nP: Progress HEP to include seated heel slides, prone hangs for extension, quad sets, straight leg raises as tolerated. Follow up in 2 weeks to reassess ROM and gait."
    },
@@ -321,7 +320,8 @@
     "author": "Physical Therapy",
     "date": "Postop weeks 2-6",
     "release": {
-     "when": "start"
+     "when": "action",
+     "ref": "a14"
     },
     "chart": {
      "kind": "line",
@@ -713,7 +713,7 @@
    },
    {
     "id": "o2",
-    "text": "Uncover the gap between self-reported exercise adherence and objective adherence data, and explore the underlying fear-avoidance belief driving avoidance of flexion exercises.",
+    "text": "Uncover the gap between self-reported exercise adherence and objective adherence data (via chart review alone shows the 'what'), and separately explore through interview the underlying fear-avoidance belief and misunderstanding driving avoidance of flexion exercises (the 'why', which requires asking directly rather than chart review).",
     "factIds": [
      "f2",
      "f6",

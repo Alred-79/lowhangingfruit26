@@ -25,5 +25,13 @@
    "where": "a12 lab result / d5 artifact",
    "problem": "a12 result says 'No CBC on file; none drawn today' which matches d5, but d5's row cell says 'Status: Not performed' with reference range column dashes - this is fine, but the action is listed as kind 'lab' despite no lab being performed; this is a reasonable design choice but borders on a non-informative action since it duplicates a9/a10 pattern of 'nothing found' - low impact, not a hard error."
   }
+ ],
+ "revised": [
+  "a1: Reworded as a patient-reported measurement-gathering action rather than a passive 'review of chart vitals'; temperature/HR are framed as part of the real-time self-report (not a prior chart entry), so they no longer leak the fever/tachycardia independent of the learner asking about systemic symptoms - action now explicitly prompts the learner to ask about fever/chills as part of eliciting these values, aligning with f7 (discoverable).",
+  "a1: downgraded importance from critical to important since it is now a measurement-gathering step dependent on history-taking rather than a standalone critical finding; the critical clinical significance is captured in f7 and in assessment a11/answerKey.",
+  "chartAtStart 'Last vitals' label clarified (left as prior-visit vitals from 2 years ago; no change needed there since it correctly reflects historical record, not today's values) - confirmed no leakage in chartAtStart.",
+  "d2: release remains tied to a1 (now the renamed vitals-gathering action), consistent with self-reported same-visit measurement, not a pre-existing chart artifact - avoids leakage since the artifact only appears after the learner performs the action.",
+  "d2: changed row-level flag 'H' to per-cell flags, flagging only Temp and HR as abnormal ('H,H,,,') while BP, RR, and SpO2 remain unflagged, since only temperature and heart rate are outside normal range.",
+  "o1: updated text and factIds/actionIds remain the same but clarified sequencing to require asking about systemic symptoms (f7) before/while obtaining vitals via a1, reinforcing that the fever history is elicited rather than auto-revealed."
  ]
 }

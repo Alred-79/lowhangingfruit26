@@ -37,5 +37,13 @@
    "problem": "No dignity issues identified; appearance and background are respectfully written without stereotyping."
   }
  ],
- "verdict": "minor_fixes"
+ "verdict": "minor_fixes",
+ "revised": [
+  "chartAtStart 'Last vitals': removed the leaked BP-gap framing ('nothing documented since') and the explicit prior reading; now just states no recent vitals summary without pre-revealing the discovery that is meant to come from a4/a12.",
+  "chartAtStart 'Problem list': kept migraine listed (this is legitimately known from neurology referral and is not itself a leak), left otherwise unchanged.",
+  "d1 Active Medication Profile: trimmed the Status column wording for the new contraceptive from a full narrative ('New e-prescription received today, pending') to a terse 'Pending' status, and removed directions detail overlap so a2 retains discovery value (a2 result unchanged, now provides the fuller detail not already shown in d1).",
+  "a4 result: reworded so it clearly reflects the patient's self-report only, without asserting no record exists anywhere, and removed the absolute phrase 'has always been fine' standing uncontested; now frames her belief as unconfirmed self-report pending record check.",
+  "f15 'says' and 'chart' left as patient's belief/self-report (unchanged in substance) but a4 result reworded to avoid implying no record exists at all, consistent with a12/d3 revealing an old record.",
+  "d4 Alert 1 wording: clarified citation phrasing so WHO MEC and UK MEC/US MEC are presented as aligned classification systems rather than implying WHO MEC is a separate, contradictory entity - minor wording clarity fix, not a clinical correction."
+ ]
 }

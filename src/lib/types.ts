@@ -305,7 +305,7 @@ export interface EncounterConfig {
   visitNumber?: number;
   memory?: string | null;
   /** Extra context injected for journey encounters (prior shared state). */
-  journey?: { runId: string; stageId: string; priorContext: string; patientMemory: string } | null;
+  journey?: { runId: string; stageId: string; priorContext: string; patientMemory: string; /** How the patient should think of the clinician in this stage, e.g. "cardiologist". */ roleTitle?: string } | null;
 }
 
 export interface DomainScore {

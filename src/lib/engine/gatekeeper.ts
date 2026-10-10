@@ -196,3 +196,43 @@ export async function matchActions(request: string, actions: ClinicalAction[]): 
 }
 
 export const caseFacts = (c: CaseProfile, knobs: Knobs) => c.facts.filter((f) => !(f.distractor && !knobs.distractors));
+
+// ---------- Grounding audit ----------
+
+const AUDIT_SCHEMA = {
+  type: "object",
+  required: ["unsupported"],
+  properties: {
+    unsupported: {
+      type: "array",
+      description: "Clinical details the patient asserted as true that are not supported by the approved list. Empty if none.",
+      items: { type: "string", description: "The unsupported claim, in a few words, quoting the patient where possible" },
+    },
+  },
+};
+
+/**
+ * Checks a finished patient reply against the facts the patient was allowed to use. Anything
+ * clinical that was asserted but is not approved is reported so it can be flagged in the chart.
+ */
+export async function auditReply(reply: string, allowed: Fact[], background: string, openingLine: string): Promise<string[]> {
+  try {
+    const res = await chatJSON<{ unsupported: string[] }>({
+      model: MODELS.fast,
+      temperature: 0,
+      maxTokens: 300,
+      schema: AUDIT_SCHEMA,
+      system:
+        "You audit a simulated patient's reply for a medical education simulator. You are given the only clinical facts the patient was approved to state, plus their non-medical background. List clinical details the reply ASSERTS AS TRUE that are not supported by that material: new symptoms, diagnoses, medications or doses, test results, numbers, dates of medical events, or family members' health. Do not list: denials, 'I don't know', vague non-answers, feelings and opinions, everyday non-medical life details, or reasonable rewording of an approved fact. Be strict about real additions and silent about everything else.",
+      messages: [
+        {
+          role: "user",
+          text: `APPROVED CLINICAL FACTS:\n${allowed.map((f) => `- ${f.chart} (patient wording: ${f.says})`).join("\n") || "(none yet)"}\n- Reason for visit, in the patient's words: ${openingLine}\n\nNON-MEDICAL BACKGROUND:\n${background}\n\nPATIENT REPLY TO AUDIT:\n${reply}`,
+        },
+      ],
+    });
+    return (res.unsupported || []).filter((x) => typeof x === "string" && x.trim()).slice(0, 4);
+  } catch {
+    return [];
+  }
+}

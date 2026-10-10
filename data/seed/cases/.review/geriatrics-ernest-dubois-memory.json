@@ -31,5 +31,13 @@
    "where": "answerKey.plan - amlodipine timing suggestion",
    "problem": "The plan recommends 'consider medication contribution from amlodipine timing' for orthostatic hypotension, but amlodipine (a long-acting dihydropyridine calcium channel blocker) is not typically associated with orthostatic hypotension to the degree implied, and timing adjustments would not meaningfully address orthostatic symptroms; this is a minor inaccuracy in the suggested intervention, better framed as 'consider dose or necessity of amlodipine' rather than 'timing.'"
   }
+ ],
+ "revised": [
+  "chartAtStart.Problem list: removed pre-leaked fall count and diagnostic framing not yet officially documented; replaced with 'Cognitive concern - under evaluation' and removed 'History of falls (x2, past 6 months)' since this is only discoverable via a4.",
+  "d1 (clinic note, released at start): removed the detailed MoCA breakdown (19/30, delayed recall 0/5, visuospatial/executive, orientation) so a1 remains a meaningful discovery action; d1 now references that cognitive screening was performed and results/labs/CT were sent for follow-up without pre-stating the score breakdown. Lost-driving episode detail retained since it is already an 'initial' tier fact (f3) appropriately corroborated at start and used for mismatch m2 (updated below to rely on CT/labs instead of MoCA breakdown pre-release, with MoCA score itself still appropriately gated to a1).",
+  "a1 result: unchanged in content (still the authoritative source for the MoCA breakdown), now serves as the actual place the learner first learns the full MoCA breakdown since it is no longer duplicated in d1.",
+  "m2 recordEvidence: updated to cite the corroborated lost-driving episode and labs/CT referenced in d1 rather than the MoCA breakdown, since that breakdown is now gated behind a1 and should not be used as pre-visit chart evidence for the mismatch before the learner performs a1. a1 result can still be cited once learner reviews it, but the artifact-based evidence (d1) itself must not state the breakdown.",
+  "a11 result: corrected timeline language from 'three days ago' to 'on Day 4 of the log (10 days ago)' to match d6/d5 chart timeline, removing the internal inconsistency.",
+  "d6 orthostatic flowsheet: added 'A' flag to the 1-minute standing row (122/70 mmHg) since a drop of 20/12 mmHg from supine already meets systolic orthostatic hypotension criteria (>=20 mmHg systolic or >=10 diastolic), in addition to the existing 3-minute flag."
  ]
 }

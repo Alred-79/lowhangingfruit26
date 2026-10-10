@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "record",
     "name": "Review medication list / fill history in EHR",
-    "result": "Active prescriptions per EHR: amlodipine 10 mg daily, lisinopril 20 mg daily, tamsulosin 0.4 mg daily, oxybutynin 5 mg BID, glipizide 10 mg BID, metformin 500 mg BID, atorvastatin 20 mg daily, omeprazole 20 mg daily, gabapentin 300 mg TID, lorazepam 0.5 mg QHS, apixaban 5 mg BID. No dose change documented in >1 year. OTC diphenhydramine PM product and ginkgo supplement are not listed in EHR.",
+    "result": "Active prescriptions per EHR: amlodipine 10 mg daily, lisinopril 20 mg daily, tamsulosin 0.4 mg daily, oxybutynin 5 mg BID, glipizide 10 mg BID, metformin 500 mg BID, atorvastatin 20 mg daily, omeprazole 20 mg daily, gabapentin 300 mg TID, lorazepam 0.5 mg QHS, apixaban 5 mg BID. No dose change documented in >1 year. No other medications reported by patient at this time; OTC/herbal product use not yet assessed.",
     "importance": "critical",
     "aliases": [
      "medication reconciliation",
@@ -20,7 +20,7 @@
     "id": "a2",
     "kind": "record",
     "name": "Review pharmacy refill/fill history (90-day)",
-    "result": "Apixaban 5 mg BID filled on time monthly. Lorazepam 0.5 mg #30 filled every 30 days without gaps x9 years. Gabapentin 300 mg #90 filled every 30 days (consistent with TID use). Tamsulosin 0.4 mg #30 refilled every 20-24 days instead of every 30 days over last 6 months, suggesting higher-than-prescribed consumption rate.",
+    "result": "Apixaban 5 mg BID filled on time monthly. Lorazepam 0.5 mg #30 filled every 30 days without gaps x9 years. Gabapentin 300 mg #90 filled every 30 days (consistent with TID use). Tamsulosin 0.4 mg #30 refilled every 20-24 days instead of every 30 days over last 6 months.",
     "importance": "critical",
     "aliases": [
      "refill history",
@@ -48,7 +48,7 @@
     "id": "a4",
     "kind": "lab",
     "name": "Review renal function (serum creatinine, estimated CrCl)",
-    "result": "Serum creatinine 1.6 mg/dL (H). Using Cockcroft-Gault with weight 58 kg, age 81, male: estimated CrCl ≈ 29 mL/min. This is below the apixaban dose-reduction threshold requirements combined with age ≥80 and weight ≤60 kg, meaning two of three dose-reduction criteria for apixaban are met (age, weight); current dose 5 mg BID is the full/standard dose and is not reduced.",
+    "result": "Serum creatinine 1.6 mg/dL (H). Using Cockcroft-Gault with weight 58 kg, age 81, male: estimated CrCl ≈ 29 mL/min. All three apixaban dose-reduction criteria are met: age ≥80 (81), weight ≤60 kg (58 kg), and serum creatinine ≥1.5 mg/dL (1.6 mg/dL). Per standard criteria, meeting ≥2 of 3 mandates dose reduction to 2.5 mg BID; the current prescribed dose of 5 mg BID is a clear overdose relative to criteria and warrants urgent communication to the prescriber.",
     "importance": "critical",
     "aliases": [
      "renal panel",
@@ -155,7 +155,7 @@
     "id": "a13",
     "kind": "lab",
     "name": "Review gabapentin renal dosing adequacy given current CrCl",
-    "result": "Current gabapentin dose 300 mg TID (900 mg/day) exceeds typical renal-adjusted dosing range for CrCl ~29 mL/min (guideline-suggested range roughly 300 mg once or twice daily at this CrCl); current regimen is supratherapeutic for renal function and increases sedation/fall risk.",
+    "result": "Current gabapentin dose 300 mg TID (900 mg/day) exceeds typical renal-adjusted dosing for CrCl ~29 mL/min. Common renal dosing references suggest a maintenance dose of approximately 200-700 mg/day in 2-3 divided doses for CrCl 15-29 mL/min (lower end for seizure/general use, allowing for higher end when treating neuropathic pain), so 900 mg/day is above range; current regimen is supratherapeutic for renal function and increases sedation/fall risk.",
     "importance": "important",
     "aliases": [
      "gabapentin dose check"
@@ -550,7 +550,7 @@
         "Tamsulosin 0.4 mg daily",
         "30 tablets x4 fills",
         "Every 20-24 days",
-        "Running out early - early refill requests suggest consumption faster than once-daily dosing"
+        "Running out early - early refill requests observed over last 6 months"
        ]
       }
      ]
@@ -982,14 +982,14 @@
    }
   ],
   "answerKey": {
-   "primaryProblem": "Polypharmacy-related adverse drug events in an older adult: medication-induced falls, evening confusion, and symptomatic orthostatic hypotension, driven by cumulative anticholinergic/sedative burden (oxybutynin + OTC diphenhydramine + lorazepam + gabapentin), compounded by unintentional tamsulosin double-dosing and possible glipizide-related hypoglycemia.",
+   "primaryProblem": "Polypharmacy-related adverse drug events in an older adult: medication-induced falls, evening confusion, and symptomatic orthostatic hypotension, driven by cumulative anticholinergic/sedative burden (oxybutynin + OTC diphenhydramine + lorazepam + gabapentin), compounded by unintentional tamsulosin double-dosing, an apixaban dosing error (overdose per all three dose-reduction criteria being met), and possible glipizide-related hypoglycemia.",
    "differential": [
     "Medication-induced orthostatic hypotension (amlodipine/lisinopril contributing, worsened by volume/autonomic effects) causing falls",
     "Cumulative anticholinergic and CNS-sedative burden (oxybutynin, diphenhydramine, lorazepam, gabapentin) causing evening confusion and fall risk",
     "Hypoglycemia from glipizide (tight HbA1c 6.1% with fasting glucose as low as 59-62 mg/dL) contributing to falls/confusion episodes",
     "Unintentional tamsulosin double-dosing (capsule mix-up) worsening orthostatic hypotension",
     "Underlying mild cognitive impairment or early dementia (less likely as sole cause given clear temporal link to nighttime medication dosing)",
-    "Renal impairment (CrCl ~29 mL/min) causing accumulation of renally-cleared drugs (gabapentin) worsening sedation"
+    "Renal impairment (CrCl ~29 mL/min) causing accumulation of renally-cleared drugs (gabapentin) worsening sedation, and meeting apixaban dose-reduction criteria"
    ],
    "keyFindings": [
     "Two falls in one month: one postural ('legs gave out'), one nocturnal with post-fall confusion",
@@ -999,15 +999,15 @@
     "Unlisted OTC diphenhydramine-containing sleep aid taken nightly plus ginkgo supplement",
     "Unauthorized extra chair-side dosing and tamsulosin/omeprazole capsule mix-up causing probable double-dosing of tamsulosin (confirmed by early refill pattern)",
     "Evening confusion occurring ~2 hours after nighttime medications (lorazepam, gabapentin, OTC diphenhydramine)",
-    "CHA2DS2-VASc = 5, supporting continued anticoagulation benefit, with apixaban dosed appropriately at full 5 mg BID (only 2 of 3 reduction criteria met: age ≥80 and weight ≤60 kg, but creatinine <1.5 mg/dL threshold not met at 1.6... requires prescriber confirmation of criteria arithmetic)"
+    "CHA2DS2-VASc = 5, supporting continued anticoagulation benefit; however apixaban is currently dosed at the full 5 mg BID despite meeting all three dose-reduction criteria (age ≥80, weight ≤60 kg, creatinine ≥1.5 mg/dL at 1.6 mg/dL) - this is a clear overdose error, not an ambiguous call, and should be flagged urgently to the prescriber for reduction to 2.5 mg BID"
    ],
    "plan": [
-    "Document drug therapy problems in SOAP/MTM note: (1) unnecessary/excessive therapy - duplicative chair-side dosing and tamsulosin double-dosing; (2) adverse drug reaction - anticholinergic/sedative polypharmacy causing falls and confusion; (3) adverse drug reaction - symptomatic orthostatic hypotension likely multifactorial (antihypertensives + volume/autonomic effect); (4) adverse drug reaction - hypoglycemia risk from glipizide given current A1c/glucose trend; (5) dosing problem - gabapentin dose not renally adjusted for CrCl ~29 mL/min; (6) indication problem - OTC diphenhydramine and ginkgo not reconciled, with bleeding-risk and sedation implications",
+    "Document drug therapy problems in SOAP/MTM note: (1) unnecessary/excessive therapy - duplicative chair-side dosing and tamsulosin double-dosing; (2) adverse drug reaction - anticholinergic/sedative polypharmacy causing falls and confusion; (3) adverse drug reaction - symptomatic orthostatic hypotension likely multifactorial (antihypertensives + volume/autonomic effect); (4) adverse drug reaction - hypoglycemia risk from glipizide given current A1c/glucose trend; (5) dosing problem - gabapentin dose not renally adjusted for CrCl ~29 mL/min; (6) dosing problem - apixaban 5 mg BID is an overdose given all three dose-reduction criteria are met (age, weight, creatinine); (7) indication problem - OTC diphenhydramine and ginkgo not reconciled, with bleeding-risk and sedation implications",
     "Recommend to prescriber: discontinue or taper oxybutynin (consider deprescribing given overactive bladder symptoms now mild and high anticholinergic burden); evaluate for lorazepam taper given 9-year chronic use, fall risk, and confusion (do not abruptly stop - recommend gradual taper plan with prescriber and possibly behavioral/non-benzodiazepine alternative)",
     "Recommend prescriber review and likely reduction/discontinuation of glipizide given HbA1c 6.1% and biochemical hypoglycemia; liberalize glycemic goal for frailty",
-    "Recommend renal dose adjustment of gabapentin (e.g., reduce to within guideline range for CrCl ~29 mL/min) to reduce sedation/fall risk; coordinate with prescriber on retitration for neuropathic pain control",
+    "Recommend renal dose adjustment of gabapentin (reduce toward the 200-700 mg/day range appropriate for CrCl 15-29 mL/min) to reduce sedation/fall risk; coordinate with prescriber on retitration for neuropathic pain control",
     "Advise discontinuation of OTC diphenhydramine-containing sleep aid; counsel on anticholinergic risk and offer non-pharmacologic/non-anticholinergic sleep strategies; recommend discontinuing ginkgo given lack of proven benefit and theoretical bleeding interaction with apixaban",
-    "Address apixaban dosing: flag to prescriber that patient meets 2 of 3 standard dose-reduction criteria (age ≥80, weight ≤60 kg) with creatinine 1.6 mg/dL; dose-reduction criteria require ≥2 of 3, so a reduced dose (2.5 mg BID) may actually be indicated rather than current 5 mg BID - recommend prescriber review per full apixaban dosing criteria rather than pharmacist independently changing anticoagulant dose",
+    "Urgently communicate to the prescriber that apixaban 5 mg BID should be reduced to 2.5 mg BID, since all three standard dose-reduction criteria are met (age ≥80, weight ≤60 kg, creatinine ≥1.5 mg/dL at 1.6 mg/dL); this is a clear dosing error, not a borderline case, and should not wait for routine follow-up",
     "Set up a single-source medication management strategy: recommend daughter take over all medication storage/dispensing (remove chair-side bottles) to prevent duplicate/unauthorized dosing; consider blister-pack or lockbox system",
     "Reinforce follow-up orthostatic vitals and glucose monitoring after medication changes; schedule close follow-up (1-2 weeks) to reassess falls, confusion, and labs",
     "Communicate findings and recommendations to referring PCP for medication changes, as prescribing authority is outside pharmacist's independent scope in this setting; pharmacist to document and route recommendations rather than change doses unilaterally unless under a collaborative practice agreement that covers these specific changes"
@@ -1017,14 +1017,14 @@
     "Symptomatic orthostatic hypotension with 22-point systolic drop",
     "Biochemical hypoglycemia (fasting glucose as low as 59 mg/dL) in a patient on sulfonylurea therapy",
     "Unauthorized/unsupervised extra dosing from chair-side bottles outside the daughter's organized system",
-    "Possible undertreated anticoagulation (if apixaban dose-reduction criteria are in fact met) in a patient with CHA2DS2-VASc = 5",
+    "Apixaban overdosed relative to all three met dose-reduction criteria in a patient with CHA2DS2-VASc = 5, raising bleeding risk",
     "Continued driving despite falls and evening confusion"
    ],
    "educationPoints": [
     "Best possible medication history must actively probe for OTC products and supplements, which patients often don't volunteer because they don't consider them 'real medicines'",
     "Pharmacy refill/fill history is an objective adherence tool that can reveal unintentional double-dosing even when patients sincerely report full adherence",
     "Cumulative anticholinergic burden tools (e.g., ACB scale) help quantify fall and cognitive risk from combinations of individually 'reasonable' prescriptions",
-    "Renal function must be reassessed periodically to catch drugs needing dose adjustment (e.g., gabapentin) and to verify anticoagulant dosing criteria are still being met correctly",
+    "Renal function must be reassessed periodically to catch drugs needing dose adjustment (e.g., gabapentin) and to verify anticoagulant dosing criteria using all three defined factors (age, weight, creatinine), each applied precisely rather than approximated",
     "Deprescribing conversations in frail older adults require addressing patient fears (loss of independence, belief that every pill is necessary) with empathy and shared decision-making before recommending changes to the prescriber",
     "Clinical pharmacists in a telehealth MTM visit identify and document drug therapy problems and communicate recommendations to the prescriber; they generally do not unilaterally alter anticoagulant or sulfonylurea dosing without a collaborative practice agreement explicitly covering that change"
    ]
@@ -1040,13 +1040,24 @@
    "appearance": "An elderly man with thinning white hair and a stocky build, seated in a worn armchair in a dimly lit living room with family photos visible on the wall behind him. He wears a flannel shirt, leans in toward the camera to hear better, and has a genial, slightly puzzled expression; a weekly pill organizer and a few loose medication bottles are visible on the side table next to him."
   },
   "persona": {
-   "speechExamples": [],
+   "speechExamples": [
+    "Say that again for me? This ear's not what it was.",
+    "The little white one, the oblong one, and that capsule, I take those with my coffee.",
+    "Doc put me on that years ago. Never had a reason to stop it.",
+    "My daughter fusses, but I've been taking care of myself since before she was born.",
+    "I just take a little something to help me sleep, everybody does."
+   ],
    "concerns": [
     "I've been feeling a bit woozy when I stand up lately, and I took a couple of tumbles—do you think it's just my age?",
     "My daughter wants to take away some of my pills, but I'm worried that if I stop any of them something bad will happen.",
     "Sometimes I get confused in the evenings and I don't know why—is that normal for someone my age?",
     "I'm not sure I'm taking everything right—the capsules all look the same to me."
-   ]
+   ],
+   "personality": "Genial, unhurried and proud of having looked after himself all his life. Trusts his doctors completely and believes every pill he was ever given is still essential.",
+   "communicationStyle": "Chatty and good-humoured, drifts into stories about the machine shop. Hard of hearing: asks for things to be repeated and sometimes answers a slightly different question. Describes tablets by colour and shape rather than by name.",
+   "healthLiteracy": "low",
+   "emotionalState": "Cheerful on the surface, privately unsettled by the two falls and by evenings when he feels muddled; worried that his daughter wants to take his pills away.",
+   "background": "Worked 41 years as a machinist at a tool-and-die plant in Dayton and still keeps a lathe in the garage. Widowed four years ago; his daughter lives ten minutes away, visits most days and fills his weekly pill organiser on Sundays. Follows the Cincinnati Reds on the radio and does the newspaper crossword every morning."
   },
   "scenario": {
    "studentBrief": "You are a pharmacy student on clinical rotation conducting a telehealth comprehensive medication review (MTM visit) for Harold Jennings, an 81-year-old man referred by his primary care physician after two falls in the past month and new reports of evening confusion. His daughter manages a weekly pill organizer but he also keeps extra bottles at his armchair. Review his history, medication list, labs, and vitals; interview him directly to complete a best possible medication history; identify drug therapy problems; and prepare recommendations for the referring prescriber. He may not initially volunteer everything - build rapport to uncover the full picture.",

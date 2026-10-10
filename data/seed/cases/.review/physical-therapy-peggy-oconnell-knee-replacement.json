@@ -31,5 +31,10 @@
    "where": "a14 vs d1 operative note goals",
    "problem": "d1 states surgeon's goal is 'knee flexion 110-120 degrees by 6 weeks,' and f18/f30 reference this goal, but d4 (week 2 note) does not reference this goal explicitly, which is fine, though worth confirming the 110-120 goal is consistently cited everywhere it appears (it is, in a5/a14 lead-in reasoning and answerKey) - no actual error found, flagging only to confirm no drift; remove if already consistent."
   }
+ ],
+ "revised": [
+  "d5: changed release from 'start' to action-gated on a14 (Review prior PT evaluation note), so the ROM trend chart is only revealed if the learner chooses to pull historical records, rather than being shown unprompted before the learner performs their own goniometry (a5/a6) or history-taking. This also required updating objective o1/o3 artifact linkage context is unaffected since artifacts aren't referenced there, but a14's artifactIds now includes d5 alongside d4.",
+  "a14: result text updated to include the full extension detail ('full extension achieved passively at 2 weeks') and the complete pain description (4/10 with exercise, 1/10 at rest) so the action summary faithfully represents the artifact (d4) it releases, and added a note that a trend chart (d5) is also available in the chart review for comparison.",
+  "m1/o2: no structural change needed to facts/tiers (f2 initial, f6/f7/f17/f31 discoverable/reluctant/reluctant are already correctly gated behind interview), but added clarifying language to o2's text to make explicit that reviewing the log alone (a2) only reveals the adherence gap ('what'), not the fear-avoidance belief driving it ('why'), which still requires interview-based discovery of f6/f7/f17/f31 - confirming reviewer's note #3 required no data changes, only this clarification."
  ]
 }

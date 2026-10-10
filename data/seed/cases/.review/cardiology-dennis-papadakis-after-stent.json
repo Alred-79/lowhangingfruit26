@@ -37,5 +37,13 @@
    "where": "a2 vitals vs chartAtStart 'Last vitals' and a1 home log",
    "problem": "a2 live vitals show HR 94 bpm regular while chartAtStart lists last vitals HR 88 bpm at discharge and home log (d7) shows HR up to 110 on certain days; these are not contradictory per se, but the case does not clarify whether the current measured tachycardia (94 bpm resting on beta-blocker) should prompt consideration of beta-blocker uptitration, which the answer key plan vaguely gestures at. Minor polish: explicitly note in plan that resting HR 94 on metoprolol 50mg succinate suggests need for uptitration, strengthening internal consistency between findings and plan rather than leaving it generic."
   }
+ ],
+ "revised": [
+  "a1: Rephrased result to report only objective home BP/HR log data (dates and values) and removed the quoted patient reasoning/feelings ('wired and short of breath'), which leaked f4/f8 before interview disclosure",
+  "a3: Removed 'sternal incision (if any)' inspection and its 'no prior sternotomy' finding since this PCI-only patient has no sternotomy; action now focuses solely on the femoral access site relevant to PCI; renamed accordingly",
+  "a15: Reclassified from an interview-style 'ask about' action to a 'record' kind reviewing the cardiac rehab referral/attendance record, consistent with allowed action kinds for this role; result reworded to reflect record review language while still surfacing f12 appropriately as a discoverable fact when asked, now also independently verifiable via chart review",
+  "a16: Removed the leaked reluctant fact f17 ('fear of triggering another heart attack') from the result; result now reports only objective exertional avoidance behavior, reserving the fear-of-recurrence disclosure for interview-based elicitation of f17",
+  "answerKey.plan: Changed vague 'at least 6-12 months' DAPT duration to 'minimum of 12 months (per cath report and current DES guidelines)' to align with d4 cath report and current DES guidance",
+  "answerKey.educationPoints: Updated DAPT duration education point from 'typically 6-12+ months' to 'minimum of 12 months per current DES protocol' for consistency with d4 and the corrected plan wording"
  ]
 }
