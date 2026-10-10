@@ -22,3 +22,20 @@ export async function GET(req: Request) {
     return bad("Voice is unavailable", 503);
   }
 }
+
+/** POST { e: encounterId, text } -> mp3 of one sentence, so speech can start while the reply is still streaming. */
+export async function POST(req: Request) {
+  const b = await req.json().catch(() => ({}));
+  const r = await encounterFor(String(b.e || ""), { faculty: "also" });
+  if (r instanceof Response) return r;
+  const text = spoken(String(b.text || "")).slice(0, 600);
+  if (!text) return new Response(null, { status: 204 });
+  try {
+    const p = r.enc.c.patient;
+    const audio = await synth(text, voiceFor(p.sex, p.name));
+    return new Response(Buffer.from(audio), { headers: { "Content-Type": "audio/mpeg", "Cache-Control": "no-store" } });
+  } catch (e) {
+    console.error(e);
+    return bad("Voice is unavailable", 503);
+  }
+}
