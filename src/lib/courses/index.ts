@@ -360,7 +360,7 @@ export function reviewQueue(user: User, limit = 20) {
     ...(mine ? [user.id] : []),
   );
   return rows
-    .map((r) => ({ ...r, reasons: parse<Partial<Feedback>>(r.feedback, {}).reviewReasons || [], feedback: undefined }))
+    .map((r) => ({ ...r, assignment: r.assignment && decodeEntities(r.assignment), reasons: parse<Partial<Feedback>>(r.feedback, {}).reviewReasons || [], feedback: undefined }))
     .slice(0, limit);
 }
 

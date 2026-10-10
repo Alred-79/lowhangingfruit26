@@ -18,7 +18,7 @@ export default async function EpisodesPage({ searchParams }: { searchParams: Pro
     <AppShell user={user}>
       <PageHeader
         title={faculty ? "Episodes" : "My visits"}
-        subtitle={faculty ? "Every recorded visit: search by patient, by who took part, by role, or by what was said." : "Every visit you have taken part in, plus your teammates' visits with a patient your class shares."}
+        subtitle={faculty ? "Every recorded visit (assignments and care journeys): search by patient, by who took part, by role, or by what was said. Students' private practice is not listed." : "Every visit you have taken part in, plus your teammates' visits with a patient your class shares."}
       />
       <Card className="mb-4 p-4">
         <form className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">

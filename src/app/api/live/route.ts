@@ -1,5 +1,6 @@
 import { apiUser } from "@/lib/auth";
 import { RECORDED_VISIT } from "@/lib/courses";
+import { decodeEntities } from "@/lib/courses/save";
 import { all, parse } from "@/lib/db";
 import type { EncounterConfig, EncounterState } from "@/lib/types";
 
@@ -24,7 +25,7 @@ export async function GET() {
       if (st.stats.judgmental >= 2) flags.push("Judgmental or dismissive moments");
       if (st.turn >= 6 && Object.keys(st.disclosed).length <= 2) flags.push("Little information gathered");
       if (Object.keys(st.deflected).length >= 2) flags.push("Patient is deflecting");
-      return { id: r.id, status: r.status, student: r.student, title: r.title, assignment: r.assignment, mode: cfg.mode, level: cfg.knobs.level, turn: st.turn, rapport: st.rapport, facts: Object.keys(st.disclosed).length, startedAt: r.started_at, lastAt: r.last_at, flags };
+      return { id: r.id, status: r.status, student: r.student, title: r.title, assignment: r.assignment && decodeEntities(r.assignment), mode: cfg.mode, level: cfg.knobs.level, turn: st.turn, rapport: st.rapport, facts: Object.keys(st.disclosed).length, startedAt: r.started_at, lastAt: r.last_at, flags };
     });
   return Response.json({ visits });
 }

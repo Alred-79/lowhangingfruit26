@@ -53,7 +53,7 @@ Use Chrome, Edge or Safari if you want to talk by microphone; typing works in an
 
 ## Walkthrough: Challenge 1 (create a patient, publish, run the visit, read the feedback)
 
-Wall-clock time is about 8 minutes, of which 2 to 3 minutes is the model drafting the patient and
+Wall-clock time is about 8 minutes, of which one to two minutes is the model drafting the patient and
 about 1 minute is scoring. To skip the drafting wait, open any existing patient in Patient Studio and
 start at step 5.
 

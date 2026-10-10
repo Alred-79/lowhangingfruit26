@@ -50,7 +50,8 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
   const enc = loadEncounter(id);
   if (!enc) notFound();
   const faculty = isFaculty(user);
-  if (enc.row.user_id !== user.id && !faculty && !canSeeEpisode(user, id)) notFound();
+  // Owner, a teammate on a class-shared patient, or faculty for recorded visits. Private practice stays private.
+  if (enc.row.user_id !== user.id && !canSeeEpisode(user, id)) notFound();
   const { row, c, cfg, state } = enc;
   const own = row.user_id === user.id;
   const role = profession(cfg.professionId);

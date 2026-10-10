@@ -7,6 +7,7 @@ import { Badge, Card, CardHeader, LinkButton, PageHeader } from "@/components/ui
 import { recommend } from "@/lib/adaptive";
 import { requireUser } from "@/lib/auth";
 import { all, parse } from "@/lib/db";
+import { decodeEntities } from "@/lib/courses/save";
 import { describeSettings, feedbackUrl, heldAssignmentIds, publishedCaseCards, studentAssignments, studentCaseLabels, toDate, TYPE_LABEL, visitUrl } from "@/lib/courses";
 import { LEVEL_NAMES } from "@/lib/engine/difficulty";
 import { profession } from "@/lib/professions";
@@ -199,7 +200,7 @@ export default async function StudentHome() {
                       <div className="min-w-0">
                         <div className="truncate text-sm font-medium text-slate-900">{labels.get(e.case_id) || "Visit"}</div>
                         <div className="text-xs text-slate-500">
-                          {e.assignment || MODE_LABEL[cfg.mode || "practice"]} · turn {st.turn ?? 0} · started <When at={e.started_at} />
+                          {(e.assignment && decodeEntities(e.assignment)) || MODE_LABEL[cfg.mode || "practice"]} · turn {st.turn ?? 0} · started <When at={e.started_at} />
                           {e.status === "paused" && " · paused by your instructor"}
                         </div>
                       </div>
@@ -227,7 +228,7 @@ export default async function StudentHome() {
                       <div className="min-w-0">
                         <div className="truncate text-sm font-medium text-slate-900">{labels.get(e.case_id) || "Visit"}</div>
                         <div className="text-xs text-slate-500">
-                          {e.assignment || MODE_LABEL[cfg.mode || "practice"]} · attempt {e.attempt} · level {cfg.knobs?.level ?? "?"} · <When at={e.ended_at} />
+                          {(e.assignment && decodeEntities(e.assignment)) || MODE_LABEL[cfg.mode || "practice"]} · attempt {e.attempt} · level {cfg.knobs?.level ?? "?"} · <When at={e.ended_at} />
                           {!hidden && e.faculty_note && " · instructor note"}
                         </div>
                       </div>

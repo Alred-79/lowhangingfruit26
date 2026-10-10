@@ -111,7 +111,7 @@ start from an empty profile (`components/studio/NewCaseWizard.tsx`).
    (`generateCase()` in `lib/casegen.ts`): 25 to 40 facts, 8 to 18 actions, 3 to 7 documents, 3 to 6
    objectives, the answer key and one or two mismatches. It is one call rather than a pipeline of
    small ones so that the history, medication list, lab tables and answer key are written together
-   and agree; the cost is a wait of two to three minutes with no partial result. If required
+   and agree; the cost is a wait of one to two minutes with no partial result. If required
    sections are missing the call is retried once. An uploaded source document is passed as guidance
    and attached as a knowledge source.
 3. **Normalise.** `normalizeCase()` repairs ids, removes references to items that do not exist,

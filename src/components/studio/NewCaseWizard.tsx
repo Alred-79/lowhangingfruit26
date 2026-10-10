@@ -258,7 +258,7 @@ export default function NewCaseWizard({ groups, defaultRole }: { groups: { group
               <span>
                 {elapsed < 60 && "Writing. Most patients are ready in one to two minutes."}
                 {elapsed >= 60 && elapsed < 120 && "Still writing. This is within the usual one to two minutes."}
-                {elapsed >= 120 && elapsed < 180 && `Still working at ${fmt(elapsed)}. This patient is taking longer than usual, which happens with detailed descriptions and cases that need several chart documents. Nothing has gone wrong; the whole case is written before any of it is shown.`}
+                {elapsed >= 120 && elapsed < 180 && `Still working at ${fmt(elapsed)}. This patient is taking longer than usual, which happens with detailed descriptions and cases that need several chart documents. No error has come back. The whole case is written before any of it is shown, so there is nothing to display yet.`}
                 {elapsed >= 180 && elapsed < 300 && `Still working at ${fmt(elapsed)}. The longest drafts are the ones with many facts, lab tables and documents that all have to agree with each other. You can keep this page open or leave it: the draft is saved to your library when it is done.`}
                 {elapsed >= 300 && `Still working at ${fmt(elapsed)}, which is much longer than usual. If the draft cannot be written, this page will say so and offer to try again. You can also check your library for the finished draft.`}
               </span>

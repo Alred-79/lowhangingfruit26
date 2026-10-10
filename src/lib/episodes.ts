@@ -9,7 +9,8 @@ import type { CaseProfile, EncounterConfig, EncounterState, Feedback, User } fro
  * the transcript, what was disclosed, the write-up and the score. This module is the one place that
  * searches them, shared by the Episodes page, the REST endpoint and the MCP endpoint.
  *
- * Visibility: faculty can search every episode. A student sees their own, plus teammates' episodes
+ * Visibility: faculty can search every recorded episode (assignment or journey visits) and their
+ * own test visits; private practice stays with the student. A student sees their own, plus teammates' episodes
  * on a class-shared patient in a course they are enrolled in.
  */
 export interface EpisodeQuery {
@@ -67,7 +68,9 @@ interface Row {
 }
 
 function visibleClause(user: User): { sql: string; params: unknown[] } {
-  if (isFaculty(user)) return { sql: "1=1", params: [] };
+  // Faculty see recorded visits (assignments and journeys) and their own test visits. A student's
+  // self-started practice is private to that student.
+  if (isFaculty(user)) return { sql: "(e.assignment_id IS NOT NULL OR e.journey_run_id IS NOT NULL OR e.user_id = ?)", params: [user.id] };
   return {
     sql: `(e.user_id = ? OR e.assignment_id IN (
             SELECT a.id FROM assignments a JOIN enrollments en ON en.course_id = a.course_id

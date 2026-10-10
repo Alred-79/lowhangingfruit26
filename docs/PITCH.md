@@ -106,7 +106,7 @@ losing a required item. Rehearse with a timer; the section times are targets.
 
 The Challenge 1 brief says a faculty member on the judging panel will create a new patient and then
 run an encounter with it. Two waits are unavoidable and are planned for below: drafting a patient
-takes 2 to 3 minutes and scoring a visit takes about 1 minute. A full care journey takes about 15
+takes one to two minutes and scoring a visit takes about 1 minute. A full care journey takes about 15
 minutes, so the Challenge 2 demo uses a run completed beforehand plus a short live start.
 
 ### Before the session
@@ -136,7 +136,7 @@ minutes, so the Challenge 2 demo uses a run completed beforehand plus a short li
 |---|---|---|---|
 | 0:00 | Judge, Window A tab A1 | **New patient**. In **Describe the patient**, pick the learner role and type a paragraph about a patient. Optional: learning goals, target difficulty, a source document. **Continue**. | "Describe anyone you teach with. Details you give are kept as written; the model fills in the rest." |
 | 0:40 | Judge | If **A few quick questions** appears: click answers, then **Draft the patient**. | "It asks only about things that would change the case clinically." |
-| 1:00 | Presenter, switch to tab A2 | Drafting is running (2 to 3 minutes). In Helen Kowalczyk's editor click **Facts and disclosure**. | "While that is being written, this is what will come back. Each fact has the patient's wording, the chart's wording and a tier: volunteered, when asked, needs trust, guarded." |
+| 1:00 | Presenter, switch to tab A2 | Drafting is running (one to two minutes). In Helen Kowalczyk's editor click **Facts and disclosure**. | "While that is being written, this is what will come back. Each fact has the patient's wording, the chart's wording and a tier: volunteered, when asked, needs trust, guarded." |
 | 1:40 | Presenter | **Documents**, open a lab report. Point at "When does this document appear in the student's chart?" | "Documents are released from the start, by an order, or by a disclosure." |
 | 2:10 | Presenter | **Consistency check**. Open one issue and its proposed fix. | "Rules catch structure. A model review compares every place the same value appears and proposes a patch. Nothing is applied until the faculty member accepts it." |
 | 2:40 | Presenter | **Student preview**, scroll to "Not visible yet". | "This is all a student sees at the start, and this is what they have to earn." |
