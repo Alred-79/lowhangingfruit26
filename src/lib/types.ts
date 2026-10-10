@@ -179,6 +179,20 @@ export interface CaseProfile {
   knowledge: KnowledgeSource[];
   rubricId: string;
   variants?: Variant[];
+  /** Deliberate conflicts between what the patient says and what the record shows. */
+  mismatches?: Mismatch[];
+}
+
+export interface Mismatch {
+  id: string;
+  /** What the patient claims (matches a fact's wording). */
+  patientClaim: string;
+  /** What the chart shows instead. */
+  recordEvidence: string;
+  /** How a strong student handles it. */
+  teachingPoint: string;
+  factId?: string;
+  artifactId?: string;
 }
 
 // ---------- Rubrics ----------
@@ -321,6 +335,7 @@ export interface Feedback {
   safetyConcerns: { text: string; turn?: number }[];
   accuracyIssues: { claim: string; correction: string; turn?: number }[];
   wrapUpReview: string;
+  mismatches?: { id: string; patientClaim: string; recordEvidence: string; noticed: boolean; comment: string }[];
   nextAttempt: string[];
   summary: string;
 }

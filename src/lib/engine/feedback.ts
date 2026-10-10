@@ -57,6 +57,11 @@ function schema(rubric: Rubric) {
         description: "Clinically incorrect or unsupported things the student told the patient or wrote in the wrap-up, judged against the answer key and knowledge sources only",
         items: { type: "object", required: ["claim", "correction"], properties: { claim: str, correction: str, turn: { type: "integer" } } },
       },
+      mismatches: {
+        type: "array",
+        description: "One entry per listed patient-versus-chart mismatch: did the student notice and explore it?",
+        items: { type: "object", required: ["id", "noticed", "comment"], properties: { id: str, noticed: { type: "boolean" }, comment: str } },
+      },
       wrapUpReview: { type: "string", description: "Assessment of the student's written wrap-up against the answer key" },
       nextAttempt: { type: "array", items: str, description: "3-5 concrete things to do differently next time, each phrased as an action, ideally with example wording" },
       summary: { type: "string", description: "3-4 sentence overall summary addressed to the student as 'you'" },
@@ -146,6 +151,7 @@ Red flags: ${c.answerKey.redFlags.join("; ")}
 Education points: ${c.answerKey.educationPoints.join("; ")}
 ${c.knowledge.length ? "\nKNOWLEDGE SOURCES (faculty-supplied)\n" + c.knowledge.map((k) => `## ${k.title}\n${k.text.slice(0, 6000)}`).join("\n\n") : ""}
 
+${c.mismatches?.length ? "PATIENT-VERSUS-CHART MISMATCHES BUILT INTO THE CASE\n" + c.mismatches.map((m) => `${m.id}: patient says "${m.patientClaim}" but the record shows: ${m.recordEvidence}. ${m.teachingPoint}`).join("\n") + "\n" : ""}
 LEARNING OBJECTIVES
 ${c.objectives.map((o) => `${o.id}: ${o.text}`).join("\n")}
 
@@ -172,6 +178,7 @@ ${role.wrapUp.map((f) => `${f.label}:\n${wrap[f.id] || "(left blank)"}`).join("\
   type Raw = {
     domains: { key: string; score: number | null; rationale: string; evidence: { turn: number; quote: string; note: string }[] }[];
     objectives: { id: string; met: "met" | "partial" | "not_met"; comment: string }[];
+    mismatches?: { id: string; noticed: boolean; comment: string }[];
   } & Pick<Feedback, "interview" | "strengths" | "improvements" | "safetyConcerns" | "accuracyIssues" | "wrapUpReview" | "nextAttempt" | "summary">;
 
   const raw = await chatJSON<Raw>({
@@ -225,6 +232,10 @@ ${role.wrapUp.map((f) => `${f.label}:\n${wrap[f.id] || "(left blank)"}`).join("\
     safetyConcerns: raw.safetyConcerns || [],
     accuracyIssues: raw.accuracyIssues || [],
     wrapUpReview: raw.wrapUpReview || "",
+    mismatches: (c.mismatches || []).map((m) => {
+      const r = raw.mismatches?.find((x) => x.id === m.id);
+      return { id: m.id, patientClaim: m.patientClaim, recordEvidence: m.recordEvidence, noticed: !!r?.noticed, comment: r?.comment || "" };
+    }),
     nextAttempt: raw.nextAttempt || [],
     summary: raw.summary || "",
   };

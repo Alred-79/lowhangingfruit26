@@ -1,0 +1,145 @@
+Alright, let's just dive right into this explainer.
+We're tackling the 2026 Recrease Health Hackathon's second challenge, the Connected Care
+Journey.
+And I want to kick things off with a story about what happens when healthcare collaboration
+completely breaks down.
+We often like to think of healthcare as this single, well-oiled machine, right?
+But the reality is that it's usually a disconnected team of isolated experts, and when those
+experts don't communicate effectively, the entire burden of care falls directly onto
+the shoulders of the very person who needs help.
+So Section 1, Denise's Broken Care Journey.
+To really understand the gravity of this challenge, we need to meet Denise.
+She's 58, and she's dealing with a brand new diagnosis of Type 2 diabetes, plus some
+early signs of kidney involvement.
+Now her care requires a primary care physician, a nephrologist, and a nutritionist.
+But here's the kicker.
+No single one of them ever sees the whole picture of her health.
+Let's look at how her care plays out when things go wrong, what the source material calls
+Act 1, no continuity at all.
+In Week 1, Denise's primary care doctor starts her on a new medication and refers her out
+with a basic, totally unhelpful one-line note.
+So by Week 2, she's sitting at the nephrologist.
+Because that note lacked any real detail, Denise has to repeat her entire medical history
+from scratch.
+The nephrologist, completely unaware of the new meds, adjust the dosage that directly
+conflicts with it.
+And finally, Week 3, she sits down with the nutritionist.
+Because the lab results weren't forwarded over, the nutritionist is forced to build a
+meal plan based entirely on what Denise can remember about her own labs.
+It's a mess.
+And here's the terrifying takeaway.
+Denise is literally doing the work of connecting her own care.
+And you know, it actually gets even more complicated than that.
+Let's say we have a scenario where the digital data does automatically move between these
+doctors.
+Well, if those clinicians only read the notes relevant to their specific specialty and
+just kind of file the rest without questioning it, we still have a massive problem.
+If nobody flags that conflicting dosage, or if they ignore Denise's personal goals,
+they say she wants to avoid major medication changes before her daughter is upcoming
+wedding, then the patient is still left holding this broken system together.
+The medical record gets longer, sure, but no actual collaborative care is happening.
+This brilliantly illustrates the massive gap between the absolute nightmare of Act 1,
+where there is zero continuity.
+And the ideal state of Act 3.
+In Act 3, clinicians aren't just tossing digital paper over the fence.
+They are actively catching conflicts.
+They're sharing actual lab results, acknowledging the patient's personal goals.
+And ultimately arriving at one coordinated care plan.
+They aren't just stapling three separate opinions together.
+They are synthesizing a unified strategy.
+Which brings us to Section 2, the Connected Care Challenge.
+This right here frames your exact mission for the hackathon.
+You aren't just building a static database or a glorified filing cabinet to store clinical
+notes.
+No way.
+You're tasked with creating an AI-powered multi-agent virtual simulation.
+You need to engineer an environment where one virtual patient moves through multiple
+encounters with different healthcare professionals, and that patient's medical state progressively
+and dynamically evolves because of those interactions.
+So what does this actually look like in practice?
+Imagine a real human clinical student logging in and taking on one specific professional
+role, let's say the cardiologist.
+While the human student conducts their encounter, AI agents dynamically simulate the virtual
+patient, as well as the rest of the medical team, like the surgeon or the dietician.
+Your system has to allow the student to practice their specific professional role while experiencing
+exactly how their decisions ripple out and affect the broader care team.
+Okay, let's look at the development tiers.
+Section 3, base level, longitudinal continuity.
+This base level is the absolute floor of the hackathon.
+Before you try anything fancy, you gotta prove your system can maintain one coherent patient
+across a sequence of at least three distinct medical encounters.
+A huge part of this is a technical concept called provenance.
+Your system must maintain an evolving, shared patient state, and it has to meticulously
+track the provenance of every single piece of data.
+If the surgeon notes that the patient has difficulty taking medication, your system must
+track that the patient reported it.
+The surgeon recorded it during encounter one at a specific time.
+You also have to clearly distinguish between established medical facts, unresolved uncertainties,
+and conflicting professional interpretations.
+Furthermore, your system can't just act like a series of independent chatbot conversations.
+Every single interaction in your architecture needs to prove that earlier encounters actually
+influence later ones.
+A successful encounter has to explicitly use relevant past info, contribute new professional
+insights, identify missing information or uncertainty, and communicate needs to the
+rest of the care team.
+Seriously, if the surgeon uncovers a medication issue and encounter one, the cardiologist needs
+to see that and ask about it in encounter two.
+And here is a massive reality check for this base level and really for the whole challenge.
+Clinical safety guardrails.
+Your AI agents absolutely cannot hallucinate lab results, vital signs, or medical facts
+just to keep the conversation flowing.
+Relying entirely on faculty-approved content isn't a limitation here.
+It is a mandatory safety feature.
+The AI is there to help with natural language interaction and formatting, but the clinical
+facts must remain strictly bounded by approved content, no exceptions.
+Once you nail that, you level up.
+Section four, the Enhanced Level, featuring SBR handoffs.
+Once you've got that rock solid-based tracking, provenance, and maintaining state, things
+get really dynamic.
+This Enhanced Level introduces structured team steps online communication between the
+healthcare professionals, removing from just dumping data to actually handing off care.
+Specifically, you need to support structured handoffs using the SBR framework.
+SBR stands for Situation, Background, Assessment, and Recommendation.
+Your system needs to ensure that, for instance, a surgeon can effectively pass a critical
+finding directly to the cardiologist.
+The surgeon states the current situation, the relevant medical background, their clinical
+assessment of the issue, and finally, a crystal clear recommendation for the exact next
+action the cardiologist needs to take.
+And, this is crucial for the developers out there, just generating that SBR message isn't
+enough.
+Your system actually has to evaluate whether the human student's communication was effective,
+and you cannot just spit out a meaningless black box number like Communication Score, 75
+out of 100, that helps literally no one.
+You have to provide explainable, evidence-based behavioral traces.
+If the student's successfully communicated a recommendation, your system must explicitly
+show exactly why it graded it that way, pointing directly to the evidence in the interaction.
+For those wanting to push the absolute limits, we have Section 5, the stretch level, active
+collaboration.
+For teams tackling this tier, you're breaking the fixed linear sequence of doctor visits
+entirely.
+Instead of moving an original line from Dr. A to Dr. B, clinicians must be able to actively
+reach across encounters in real time.
+Think about it.
+If the dietician sees a conflicting lab result from the nephrologist, they should be able
+to reach backward for clarification right then and there.
+You're looking at supporting team huddles, closed loop communication, and the real time
+reconciliation of conflicting clinical interpretations.
+Also the team can collaboratively modify the care plan on the fly.
+It's a real game changer.
+Finally we arrive at Section 6, the final coordinated plan.
+At the end of Denise's care journey, your prototype is judged on the final patient
+representation it produces.
+This is the culmination of all those encounters, all those SBAR handoffs, all that tracked
+provenance.
+To win your final presentation and working architecture must clearly show exactly what
+each profession contributed and how early information tangibly affected later decisions.
+You have to clearly outline what medical questions remain uncertain, and most importantly, you
+cannot just present three separate lists of recommendations.
+You must synthesize all of those professional perspectives into one unified coordinated
+care plan that addresses the whole patient.
+So as you gear up to design your data models and architectures for the 2026 Rutgers
+health hackathon, you've got to ask yourself this one vital question.
+Are you just building a glorified filing cabinet to hold disconnected notes, or are you ready
+to rescue patients like Denise by engineering a system that builds a true, collaborative,
+shared understanding?
+The challenge is yours to solve.

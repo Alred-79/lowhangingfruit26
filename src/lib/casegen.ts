@@ -134,6 +134,15 @@ export const CASE_SCHEMA = {
       description: "3-6 learning objectives, each linked to the facts/actions that demonstrate it",
       items: { type: "object", required: ["id", "text", "factIds", "actionIds"], properties: { id: { type: "string", description: "o1, o2, ..." }, text: str, factIds: strArr, actionIds: strArr } },
     },
+    mismatches: {
+      type: "array",
+      description: "1-2 deliberate, realistic conflicts between what the patient says and what the record shows (e.g. says they take every dose, but the refill history or a lab says otherwise). The patient's claim must be one of the facts; the evidence must be in an artifact or action result.",
+      items: {
+        type: "object",
+        required: ["id", "patientClaim", "recordEvidence", "teachingPoint"],
+        properties: { id: { type: "string", description: "m1, m2" }, patientClaim: str, recordEvidence: str, teachingPoint: str, factId: str, artifactId: str },
+      },
+    },
     answerKey: {
       type: "object",
       required: ["primaryProblem", "differential", "keyFindings", "plan", "redFlags", "educationPoints"],
@@ -151,6 +160,7 @@ Quality bar:
 - 'says' is the patient's voice (no jargon unless the persona would use it). 'chart' is concise clinician wording.
 - 'topic' labels must never reveal the answer.
 - Scope everything to what the learner's profession actually does in a telehealth visit. Actions must be ones that role would perform or request remotely.
+- Build in one or two patient-versus-chart mismatches: the patient sincerely says one thing while a chart document shows another. Spotting and gently exploring this is part of the exercise.
 - Include pertinent negatives as facts so the patient can answer common screening questions.
 - Keep lab values physiologically plausible with correct units and reference ranges.
 - Do not include real people or identifiable data. This is synthetic educational content.`;
@@ -268,5 +278,6 @@ export function normalizeCase(c: CaseProfile): CaseProfile {
   c.rubricId = c.rubricId || "default";
   c.professions = c.professions?.length ? c.professions : ["medicine"];
   c.variants = c.variants || [];
+  c.mismatches = asArray(c.mismatches);
   return c;
 }
