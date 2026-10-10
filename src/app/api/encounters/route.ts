@@ -9,9 +9,10 @@ export async function POST(req: Request) {
   const user = await apiUser();
   if (user instanceof Response) return user;
   const b = await req.json().catch(() => ({}));
-  const c = get<{ id: string; status: string; professions: string }>("SELECT id, status, professions FROM cases WHERE id = ?", b.caseId);
+  const c = get<{ id: string; status: string; professions: string; owner_id: string | null }>("SELECT id, status, professions, owner_id FROM cases WHERE id = ?", b.caseId);
   if (!c) return bad("Case not found", 404);
-  if (c.status !== "published" && user.role === "student") return bad("That patient is not published yet", 403);
+  // Students can start published patients, and private practice patients they created themselves.
+  if (c.status !== "published" && user.role === "student" && c.owner_id !== user.id) return bad("That patient is not published yet", 403);
 
   let mode = (["practice", "adaptive"].includes(b.mode) ? b.mode : "practice") as "practice" | "adaptive" | "homework" | "exam";
   let level: number | undefined = b.level ? Number(b.level) : undefined;
