@@ -7,117 +7,159 @@
    {
     "id": "a1",
     "kind": "record",
-    "name": "Review home medication list and pill organizer setup",
-    "result": "Weekly organizer filled by daughter each Sunday. Bottles for several meds also kept loose by armchair, including an extra tamsulosin bottle and an OTC diphenhydramine-containing night-time pain reliever and ginkgo bottle, neither listed on the pharmacy profile.",
+    "name": "Review medication list / fill history in EHR",
+    "result": "Active prescriptions per EHR: amlodipine 10 mg daily, lisinopril 20 mg daily, tamsulosin 0.4 mg daily, oxybutynin 5 mg BID, glipizide 10 mg BID, metformin 500 mg BID, atorvastatin 20 mg daily, omeprazole 20 mg daily, gabapentin 300 mg TID, lorazepam 0.5 mg QHS, apixaban 5 mg BID. No dose change documented in >1 year. OTC diphenhydramine PM product and ginkgo supplement are not listed in EHR.",
     "importance": "critical",
+    "aliases": [
+     "medication reconciliation",
+     "pharmacy fill history"
+    ],
     "artifactIds": []
    },
    {
     "id": "a2",
     "kind": "record",
-    "name": "Review pharmacy fill/refill history",
-    "result": "Apixaban 5 mg twice daily filled on time monthly, no dose-reduction order on file despite weight 58 kg and creatinine 1.6 mg/dL. Lorazepam 0.5 mg nightly filled continuously for 9 years, same pharmacy. Tamsulosin 0.4 mg capsules refilled roughly 10 days early for the last 3 months, consistent with taking extra doses.",
+    "name": "Review pharmacy refill/fill history (90-day)",
+    "result": "Apixaban 5 mg BID filled on time monthly. Lorazepam 0.5 mg #30 filled every 30 days without gaps x9 years. Gabapentin 300 mg #90 filled every 30 days (consistent with TID use). Tamsulosin 0.4 mg #30 refilled every 20-24 days instead of every 30 days over last 6 months, suggesting higher-than-prescribed consumption rate.",
     "importance": "critical",
+    "aliases": [
+     "refill history",
+     "adherence record"
+    ],
     "artifactIds": [
-     "d6"
+     "d8"
     ]
    },
    {
     "id": "a3",
     "kind": "vitals",
-    "name": "Review orthostatic vital signs from referral note",
-    "result": "Sitting BP 118/60, HR 72. Standing (1 min) BP 96/54, HR 88. Patient reports lightheadedness on standing.",
+    "name": "Review orthostatic blood pressure and heart rate (home device, caregiver-assisted)",
+    "result": "Sitting BP 118/60 mmHg, HR 70 bpm. Standing (after 2 minutes) BP 96/54 mmHg, HR 78 bpm. Patient reports lightheadedness on standing. Meets criteria for orthostatic hypotension (systolic drop >20 mmHg).",
     "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a4",
-    "kind": "lab",
-    "name": "Review renal function (serum creatinine, eGFR)",
-    "result": "Creatinine 1.6 mg/dL (H), eGFR approximately 32 mL/min/1.73m2 (H flag on creatinine).",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a5",
-    "kind": "lab",
-    "name": "Review HbA1c and fasting glucose trend",
-    "result": "HbA1c 6.1% (within goal, borderline low for frail elderly target); fasting glucose 62 mg/dL (L) last week, consistent with hypoglycemia risk.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a6",
-    "kind": "record",
-    "name": "Review fall and confusion timeline in chart",
-    "result": "Two falls in the past month, both in late afternoon/evening. New evening confusion noted by daughter over the past 2-3 weeks. No head injury or ER visit documented.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a7",
-    "kind": "assessment",
-    "name": "Calculate anticipated CrCl using Cockcroft-Gault",
-    "result": "Estimated CrCl approximately 28 mL/min using weight 58 kg, age 81, SCr 1.6 mg/dL (male) — meets 2 of 3 apixaban dose-reduction criteria (age ≥80, weight ≤60 kg) and renal impairment supports dose review.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a8",
-    "kind": "assessment",
-    "name": "Screen anticholinergic/sedative burden (Beers/Anticholinergic Cognitive Burden scale)",
-    "result": "High cumulative burden identified: oxybutynin, diphenhydramine (OTC), gabapentin, and lorazepam together substantially raise fall and confusion risk per Beers Criteria and ACB scale.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a9",
-    "kind": "record",
-    "name": "Review most recent fasting glucose log from home glucometer",
-    "result": "Home log shows readings ranging 58-104 mg/dL over past 2 weeks, with lowest readings in late afternoon, correlating with timing of evening confusion/falls.",
-    "importance": "important",
+    "aliases": [
+     "orthostatic vitals",
+     "standing BP"
+    ],
     "artifactIds": [
      "d4"
     ]
    },
    {
-    "id": "a10",
-    "kind": "vitals",
-    "name": "Review heart rate and rhythm from last office visit (for afib monitoring)",
-    "result": "Heart rate 70 bpm, irregularly irregular rhythm consistent with known atrial fibrillation; no new palpitations reported.",
+    "id": "a4",
+    "kind": "lab",
+    "name": "Review renal function (serum creatinine, estimated CrCl)",
+    "result": "Serum creatinine 1.6 mg/dL (H). Using Cockcroft-Gault with weight 58 kg, age 81, male: estimated CrCl ≈ 29 mL/min. This is below the apixaban dose-reduction threshold requirements combined with age ≥80 and weight ≤60 kg, meaning two of three dose-reduction criteria for apixaban are met (age, weight); current dose 5 mg BID is the full/standard dose and is not reduced.",
+    "importance": "critical",
+    "aliases": [
+     "renal panel",
+     "CrCl calculation"
+    ],
+    "artifactIds": []
+   },
+   {
+    "id": "a5",
+    "kind": "lab",
+    "name": "Review glycemic control labs (HbA1c, fasting glucose)",
+    "result": "HbA1c 6.1% (goal individualized; tight for frail 81-year-old). Fasting glucose last week 62 mg/dL (L), consistent with symptomatic or asymptomatic hypoglycemia risk on glipizide/metformin regimen.",
+    "importance": "critical",
+    "aliases": [
+     "A1c",
+     "glucose log"
+    ],
+    "artifactIds": []
+   },
+   {
+    "id": "a6",
+    "kind": "lab",
+    "name": "Review complete blood count (hemoglobin/hematocrit)",
+    "result": "Hemoglobin 13.2 g/dL (normal), hematocrit 39% (normal). No evidence of occult bleeding anemia at this time.",
     "importance": "minor",
+    "aliases": [
+     "CBC"
+    ],
+    "artifactIds": []
+   },
+   {
+    "id": "a7",
+    "kind": "lab",
+    "name": "Review liver function tests",
+    "result": "AST 24 U/L, ALT 28 U/L, both within normal reference range. No hepatotoxicity signal from atorvastatin or other agents.",
+    "importance": "minor",
+    "aliases": [
+     "LFTs"
+    ],
+    "artifactIds": []
+   },
+   {
+    "id": "a8",
+    "kind": "assessment",
+    "name": "Calculate CHA2DS2-VASc score from chart data",
+    "result": "CHA2DS2-VASc = 5 (age ≥75 = 2 points, hypertension = 1, diabetes = 1, female sex N/A, vascular disease 0, prior stroke/TIA 0, CHF 0) → consistent with strong indication for anticoagulation in atrial fibrillation.",
+    "importance": "important",
+    "aliases": [
+     "stroke risk score"
+    ],
+    "artifactIds": []
+   },
+   {
+    "id": "a9",
+    "kind": "assessment",
+    "name": "Calculate body mass index (BMI) from height/weight in chart",
+    "result": "Height 170 cm, weight 58 kg → BMI = 20.1 kg/m^2 (normal/lower end of normal range, notable low body weight relevant to apixaban dosing and fall risk).",
+    "importance": "important",
+    "aliases": [
+     "BMI calculation"
+    ],
+    "artifactIds": []
+   },
+   {
+    "id": "a10",
+    "kind": "assessment",
+    "name": "Apply anticholinergic burden screening (ACB-type tool) to current regimen",
+    "result": "Oxybutynin (score 3) + diphenhydramine (score 3, OTC, unlisted) + gabapentin (mild additive sedative, not anticholinergic itself) → cumulative anticholinergic burden score ≥6, high-risk category associated with falls, confusion, and cognitive impairment in older adults.",
+    "importance": "critical",
+    "aliases": [
+     "anticholinergic burden score",
+     "ACB score"
+    ],
     "artifactIds": []
    },
    {
     "id": "a11",
-    "kind": "lab",
-    "name": "Review liver function tests",
-    "result": "AST 24 U/L, ALT 28 U/L, both within reference range; no hepatic contraindication to current regimen.",
-    "importance": "minor",
+    "kind": "assessment",
+    "name": "Apply Beers Criteria / STOPP screen to medication list",
+    "result": "Multiple potentially inappropriate medications for this patient identified: oxybutynin (anticholinergic, avoid in older adults with falls/cognitive concerns), lorazepam (benzodiazepine, avoid - fall/cognitive risk), glipizide (long-acting sulfonylurea, high hypoglycemia risk in frail elderly), gabapentin (fall/sedation risk, dose adjustment needed for renal function), diphenhydramine OTC (anticholinergic, avoid).",
+    "importance": "critical",
+    "aliases": [
+     "Beers list review",
+     "STOPP criteria"
+    ],
     "artifactIds": []
    },
    {
     "id": "a12",
-    "kind": "assessment",
-    "name": "Review Beers Criteria list for gabapentin and glipizide dosing in renal impairment",
-    "result": "Gabapentin 300 mg three times daily and glipizide 10 mg twice daily are not renally adjusted; both require dose reduction given eGFR ~32 mL/min/1.73m2.",
+    "kind": "record",
+    "name": "Review fall and ED/urgent care visit documentation",
+    "result": "Two fall events documented in the past month: first fall at home described as 'legs gave out getting up from chair,' no fracture on exam at urgent care; second fall in bathroom at night, bruised hip, no head strike reported, not evaluated acutely. No new orthopedic or neurologic workup pending.",
     "importance": "important",
-    "artifactIds": []
+    "aliases": [
+     "fall history note",
+     "ED notes"
+    ],
+    "artifactIds": [
+     "d5",
+     "d6"
+    ]
    },
    {
     "id": "a13",
-    "kind": "record",
-    "name": "Review hearing/communication accommodation needs",
-    "result": "Patient has documented moderate hearing loss; uses hearing aids inconsistently. No cognitive screening on file.",
-    "importance": "minor",
-    "artifactIds": []
-   },
-   {
-    "id": "a14",
-    "kind": "assessment",
-    "name": "Mini-Cog or brief cognitive screen (patient self-report via video, caregiver input)",
-    "result": "Patient recalls 2 of 3 words after delay; daughter reports no prior cognitive concerns before the past few weeks, suggesting an acute/subacute process rather than baseline dementia.",
+    "kind": "lab",
+    "name": "Review gabapentin renal dosing adequacy given current CrCl",
+    "result": "Current gabapentin dose 300 mg TID (900 mg/day) exceeds typical renal-adjusted dosing range for CrCl ~29 mL/min (guideline-suggested range roughly 300 mg once or twice daily at this CrCl); current regimen is supratherapeutic for renal function and increases sedation/fall risk.",
     "importance": "important",
+    "aliases": [
+     "gabapentin dose check"
+    ],
     "artifactIds": []
    }
   ],
@@ -125,18 +167,17 @@
    {
     "id": "d1",
     "type": "medication_list",
-    "title": "Active Medication List",
-    "date": "Today",
-    "author": "Primary care clinic",
+    "title": "Active Medication List (EHR, prior to visit)",
+    "date": "Day of visit",
+    "author": "Primary Care Clinic EHR",
     "release": {
      "when": "start"
     },
     "table": {
      "columns": [
       "Medication",
-      "Dose",
-      "Route",
-      "Frequency",
+      "Strength",
+      "Directions",
       "Indication"
      ],
      "rows": [
@@ -144,8 +185,7 @@
        "cells": [
         "Amlodipine",
         "10 mg",
-        "PO",
-        "Once daily",
+        "1 tablet by mouth daily",
         "Hypertension"
        ]
       },
@@ -153,8 +193,7 @@
        "cells": [
         "Lisinopril",
         "20 mg",
-        "PO",
-        "Once daily",
+        "1 tablet by mouth daily",
         "Hypertension"
        ]
       },
@@ -162,8 +201,7 @@
        "cells": [
         "Tamsulosin",
         "0.4 mg",
-        "PO",
-        "Once daily",
+        "1 capsule by mouth daily",
         "BPH"
        ]
       },
@@ -171,8 +209,7 @@
        "cells": [
         "Oxybutynin",
         "5 mg",
-        "PO",
-        "Twice daily",
+        "1 tablet by mouth twice daily",
         "Overactive bladder"
        ]
       },
@@ -180,8 +217,7 @@
        "cells": [
         "Glipizide",
         "10 mg",
-        "PO",
-        "Twice daily",
+        "1 tablet by mouth twice daily",
         "Type 2 diabetes"
        ]
       },
@@ -189,8 +225,7 @@
        "cells": [
         "Metformin",
         "500 mg",
-        "PO",
-        "Twice daily",
+        "1 tablet by mouth twice daily",
         "Type 2 diabetes"
        ]
       },
@@ -198,8 +233,7 @@
        "cells": [
         "Atorvastatin",
         "20 mg",
-        "PO",
-        "Once daily",
+        "1 tablet by mouth nightly",
         "Hyperlipidemia"
        ]
       },
@@ -207,8 +241,7 @@
        "cells": [
         "Omeprazole",
         "20 mg",
-        "PO",
-        "Once daily",
+        "1 capsule by mouth daily",
         "GERD"
        ]
       },
@@ -216,8 +249,7 @@
        "cells": [
         "Gabapentin",
         "300 mg",
-        "PO",
-        "Three times daily",
+        "1 capsule by mouth three times daily",
         "Neuropathic pain"
        ]
       },
@@ -225,17 +257,15 @@
        "cells": [
         "Lorazepam",
         "0.5 mg",
-        "PO",
-        "Nightly",
-        "Insomnia/anxiety, x9 years"
+        "1 tablet by mouth at bedtime",
+        "Insomnia/anxiety"
        ]
       },
       {
        "cells": [
         "Apixaban",
         "5 mg",
-        "PO",
-        "Twice daily",
+        "1 tablet by mouth twice daily",
         "Atrial fibrillation, stroke prevention"
        ]
       }
@@ -245,9 +275,9 @@
    {
     "id": "d2",
     "type": "lab_report",
-    "title": "Basic Metabolic Panel and HbA1c",
-    "date": "5 days ago",
-    "author": "Reference Lab",
+    "title": "Basic Metabolic Panel and HbA1c, Last Week",
+    "date": "7 days prior",
+    "author": "Primary Care Clinic Lab",
     "release": {
      "when": "start"
     },
@@ -265,35 +295,33 @@
         "139",
         "mmol/L",
         "136-145"
-       ],
-       "flag": ""
+       ]
       },
       {
        "cells": [
         "Potassium",
         "4.3",
         "mmol/L",
-        "3.5-5.1"
-       ],
-       "flag": ""
+        "3.5-5.0"
+       ]
       },
       {
        "cells": [
         "Creatinine",
         "1.6",
         "mg/dL",
-        "0.6-1.3"
+        "0.7-1.3"
        ],
        "flag": "H"
       },
       {
        "cells": [
-        "eGFR",
-        "32",
-        "mL/min/1.73m2",
-        "≥60"
+        "BUN",
+        "28",
+        "mg/dL",
+        "7-20"
        ],
-       "flag": "L"
+       "flag": "H"
       },
       {
        "cells": [
@@ -309,9 +337,45 @@
         "HbA1c",
         "6.1",
         "%",
-        "<5.7 (nondiabetic); goal individualized"
+        "<5.7 (nondiabetic); individualized goal in frail elderly"
        ],
-       "flag": ""
+       "flag": "H"
+      }
+     ]
+    }
+   },
+   {
+    "id": "d3",
+    "type": "lab_report",
+    "title": "CBC and Liver Panel",
+    "date": "7 days prior",
+    "author": "Primary Care Clinic Lab",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Test",
+      "Result",
+      "Units",
+      "Reference range"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Hemoglobin",
+        "13.2",
+        "g/dL",
+        "13.0-17.0"
+       ]
+      },
+      {
+       "cells": [
+        "Hematocrit",
+        "39",
+        "%",
+        "38-50"
+       ]
       },
       {
        "cells": [
@@ -319,8 +383,7 @@
         "24",
         "U/L",
         "10-40"
-       ],
-       "flag": ""
+       ]
       },
       {
        "cells": [
@@ -328,51 +391,6 @@
         "28",
         "U/L",
         "7-56"
-       ],
-       "flag": ""
-      }
-     ]
-    }
-   },
-   {
-    "id": "d3",
-    "type": "flowsheet",
-    "title": "Orthostatic Vital Signs",
-    "date": "Today",
-    "author": "Home visit nurse / self-measured",
-    "release": {
-     "when": "start"
-    },
-    "table": {
-     "columns": [
-      "Position",
-      "BP (mmHg)",
-      "HR (bpm)",
-      "Symptoms"
-     ],
-     "rows": [
-      {
-       "cells": [
-        "Sitting (5 min rest)",
-        "118/60",
-        "72",
-        "None"
-       ]
-      },
-      {
-       "cells": [
-        "Standing (1 min)",
-        "96/54",
-        "88",
-        "Lightheaded, grabbed counter"
-       ]
-      },
-      {
-       "cells": [
-        "Standing (3 min)",
-        "94/56",
-        "90",
-        "Mild dizziness persists"
        ]
       }
      ]
@@ -380,81 +398,35 @@
    },
    {
     "id": "d4",
-    "type": "chart",
-    "title": "Home Fasting Glucose Log, Past 14 Days",
-    "date": "Today",
-    "author": "Patient/daughter home log",
+    "type": "flowsheet",
+    "title": "Orthostatic Vitals, Today's Visit",
+    "date": "Day of visit",
+    "author": "Caregiver-assisted home measurement, reviewed by pharmacist",
     "release": {
      "when": "action",
-     "ref": "a9"
+     "ref": "a3"
     },
-    "chart": {
-     "kind": "line",
-     "xLabel": "Day",
-     "yLabel": "Glucose (mg/dL)",
-     "refLow": 70,
-     "refHigh": 180,
-     "series": [
+    "table": {
+     "columns": [
+      "Position",
+      "BP (mmHg)",
+      "HR (bpm)"
+     ],
+     "rows": [
       {
-       "name": "Fasting/afternoon glucose",
-       "points": [
-        {
-         "x": "Day 1",
-         "y": 104
-        },
-        {
-         "x": "Day 2",
-         "y": 88
-        },
-        {
-         "x": "Day 3",
-         "y": 76
-        },
-        {
-         "x": "Day 4",
-         "y": 92
-        },
-        {
-         "x": "Day 5",
-         "y": 68
-        },
-        {
-         "x": "Day 6",
-         "y": 84
-        },
-        {
-         "x": "Day 7",
-         "y": 58
-        },
-        {
-         "x": "Day 8",
-         "y": 90
-        },
-        {
-         "x": "Day 9",
-         "y": 72
-        },
-        {
-         "x": "Day 10",
-         "y": 62
-        },
-        {
-         "x": "Day 11",
-         "y": 80
-        },
-        {
-         "x": "Day 12",
-         "y": 66
-        },
-        {
-         "x": "Day 13",
-         "y": 94
-        },
-        {
-         "x": "Day 14",
-         "y": 62
-        }
+       "cells": [
+        "Sitting (after 5 min rest)",
+        "118/60",
+        "70"
        ]
+      },
+      {
+       "cells": [
+        "Standing (2 min)",
+        "96/54",
+        "78"
+       ],
+       "flag": "H"
       }
      ]
     }
@@ -462,20 +434,81 @@
    {
     "id": "d5",
     "type": "note",
-    "title": "Fall and Confusion Referral Note",
-    "date": "3 days ago",
-    "author": "Dr. Patel, Primary Care",
+    "title": "Urgent Care Note - Fall #1",
+    "date": "3.5 weeks ago",
+    "author": "Urgent Care, Dayton OH",
     "release": {
-     "when": "start"
+     "when": "action",
+     "ref": "a12"
     },
-    "body": "81-year-old male referred for comprehensive medication review after second fall in one month, witnessed by daughter. No loss of consciousness, no head strike reported, no fracture on exam. Daughter reports new episodes of confusion and word-finding difficulty most evenings over the past 2-3 weeks, resolving by morning. Patient lives with intermittent daughter support; she fills a weekly pill organizer but patient also keeps original bottles within reach of his armchair. Requesting pharmacy medication review given polypharmacy, renal function, and anticoagulation on apixaban. Please assess for drug-related causes of falls and confusion and provide recommendations before next visit in 1 week."
+    "body": "81-year-old male presents after fall at home, reports 'legs gave out' while rising from armchair. No loss of consciousness reported. No head strike. X-ray left hip and wrist negative for fracture. Mild bruising noted. Advised follow-up with PCP for medication review given multiple fall-risk medications. Patient discharged home with daughter."
    },
    {
     "id": "d6",
+    "type": "note",
+    "title": "Urgent Care Note - Fall #2",
+    "date": "6 days ago",
+    "author": "Reported by patient/daughter, not formally evaluated",
+    "release": {
+     "when": "action",
+     "ref": "a12"
+    },
+    "body": "Per patient and daughter report: second fall occurred at night in bathroom approximately 2am. Patient was found by daughter with bruising to right hip, no head strike reported, patient was oriented but daughter noted he seemed 'confused and groggy' for about an hour afterward. Not taken for acute evaluation; daughter called clinic to schedule this medication review."
+   },
+   {
+    "id": "d7",
+    "type": "chart",
+    "title": "Fasting Glucose Trend, Past 4 Weeks (Home Glucometer Log via Daughter)",
+    "date": "Past 4 weeks",
+    "author": "Patient/caregiver home log, reviewed in chart",
+    "release": {
+     "when": "start"
+    },
+    "chart": {
+     "kind": "line",
+     "xLabel": "Date",
+     "yLabel": "Fasting glucose (mg/dL)",
+     "refLow": 70,
+     "refHigh": 99,
+     "series": [
+      {
+       "name": "Fasting glucose",
+       "points": [
+        {
+         "x": "4 wk ago",
+         "y": 94
+        },
+        {
+         "x": "3 wk ago",
+         "y": 81
+        },
+        {
+         "x": "2 wk ago",
+         "y": 68
+        },
+        {
+         "x": "9 days ago",
+         "y": 59
+        },
+        {
+         "x": "7 days ago",
+         "y": 62
+        },
+        {
+         "x": "2 days ago",
+         "y": 65
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d8",
     "type": "other",
-    "title": "Pharmacy Refill History (Past 6 Months)",
-    "date": "Today",
-    "author": "Community Pharmacy Records",
+    "title": "Pharmacy Fill History, 90-Day Summary",
+    "date": "Past 90 days",
+    "author": "Community Pharmacy Dispensing Records",
     "release": {
      "when": "action",
      "ref": "a2"
@@ -483,55 +516,41 @@
     "table": {
      "columns": [
       "Medication",
-      "Days supply",
-      "Last fill date",
-      "Next expected fill",
-      "Fill pattern"
+      "Days supply dispensed",
+      "Fill interval observed",
+      "Comment"
      ],
      "rows": [
       {
        "cells": [
-        "Apixaban 5 mg",
-        "30",
-        "12 days ago",
-        "On schedule",
-        "Consistent, on-time refills"
+        "Apixaban 5 mg BID",
+        "30-day supplies x3",
+        "Every 30 days",
+        "On time, consistent with prescribed use"
        ]
       },
       {
        "cells": [
-        "Lorazepam 0.5 mg",
-        "30",
-        "20 days ago",
-        "On schedule",
-        "Consistent x9 years, no early or late fills"
+        "Lorazepam 0.5 mg QHS",
+        "30-day supplies x3",
+        "Every 30 days",
+        "Consistent, 9-year continuous fill history"
        ]
       },
       {
        "cells": [
-        "Tamsulosin 0.4 mg",
-        "30",
-        "22 days ago",
-        "Early by ~10 days for 3 consecutive months",
-        "Pattern suggests taking 2 capsules/day on some days"
+        "Gabapentin 300 mg TID",
+        "90 tablets x3 fills",
+        "Every 30 days",
+        "Consistent with TID dosing as prescribed"
        ]
       },
       {
        "cells": [
-        "Metformin 500 mg",
-        "60",
-        "25 days ago",
-        "On schedule",
-        ""
-       ]
-      },
-      {
-       "cells": [
-        "Gabapentin 300 mg",
-        "30",
-        "18 days ago",
-        "On schedule",
-        ""
+        "Tamsulosin 0.4 mg daily",
+        "30 tablets x4 fills",
+        "Every 20-24 days",
+        "Running out early - early refill requests suggest consumption faster than once-daily dosing"
        ]
       }
      ]
@@ -542,9 +561,9 @@
    {
     "id": "f1",
     "category": "chief_complaint",
-    "topic": "falls and evening confusion",
-    "chart": "Patient referred after two falls in one month and new evening confusion over past 2-3 weeks.",
-    "says": "My daughter made me come talk to you because I've fallen twice and she says I get kind of foggy at night.",
+    "topic": "reason for referral",
+    "chart": "Patient referred for comprehensive medication review after two falls in the past month and new evening confusion.",
+    "says": "My daughter made me do this appointment because I've fallen twice and she says I get kind of foggy at night.",
     "tier": "initial",
     "importance": "critical"
    },
@@ -552,8 +571,8 @@
     "id": "f2",
     "category": "hpi",
     "topic": "fall circumstances",
-    "chart": "Both falls occurred in late afternoon/evening, no loss of consciousness, no injury requiring ER.",
-    "says": "Both times I just kind of got dizzy standing up from my chair and went down. Didn't hit my head or anything.",
+    "chart": "First fall: legs gave out rising from armchair, no injury on imaging. Second fall: nighttime bathroom fall with hip bruising, brief post-fall confusion per daughter.",
+    "says": "The first time I just stood up too fast and my legs went out from under me. The second one was worse - I was getting up to use the bathroom at night and next thing I know my daughter's standing over me.",
     "tier": "initial",
     "importance": "critical"
    },
@@ -561,8 +580,8 @@
     "id": "f3",
     "category": "hpi",
     "topic": "evening confusion pattern",
-    "chart": "Confusion/word-finding difficulty occurs most evenings, resolves by morning.",
-    "says": "Come evening I get muddled, forget what I was saying mid-sentence. By morning I'm sharp as a tack again.",
+    "chart": "Daughter reports patient becomes notably more confused and drowsy in the evenings, improving somewhat by late morning.",
+    "says": "My daughter says come about eight or nine at night I start slurring and don't make sense, but by the next morning I'm fine. I don't really notice it myself.",
     "tier": "initial",
     "importance": "critical"
    },
@@ -570,26 +589,26 @@
     "id": "f4",
     "category": "medications",
     "topic": "pill organizer setup",
-    "chart": "Daughter fills weekly pill organizer; patient also keeps original medication bottles by armchair.",
-    "says": "My daughter sets up my pills every Sunday in the little box. But I keep the bottles by my chair too, just in case.",
+    "chart": "Daughter fills a weekly pill organizer; patient also keeps additional medication bottles within reach of his armchair.",
+    "says": "My daughter sets up that plastic box with all the days of the week. But I keep a few bottles right by my chair too, just in case.",
     "tier": "initial",
     "importance": "important"
    },
    {
     "id": "f5",
     "category": "medications",
-    "topic": "tamsulosin dosing confusion",
-    "chart": "Patient reports sometimes taking two tamsulosin capsules in a day because they look similar to omeprazole capsules.",
-    "says": "Sometimes I grab a bottle and take one of those little capsules, and later I'm not sure if that was my water pill one or the prostate one, so I just take another to be safe. They look the same to me.",
+    "topic": "tamsulosin and omeprazole capsules",
+    "chart": "Patient reports taking an extra tamsulosin capsule on some days, mistaking it for omeprazole, because the capsules look similar.",
+    "says": "Sometimes I grab the wrong one from my chair bottles - the water pill-looking one, I think I take two some days by accident, they look just alike.",
     "tier": "discoverable",
     "importance": "critical"
    },
    {
     "id": "f6",
     "category": "medications",
-    "topic": "over-the-counter sleep aid",
-    "chart": "Takes an OTC nighttime pain reliever containing diphenhydramine most nights, not on the medication list.",
-    "says": "Oh, and I take one of those nighttime Tylenol-type pills most nights too, for my knees. That's not a real medicine though, I get it at the drugstore.",
+    "topic": "over the counter sleep aid",
+    "chart": "Patient takes an OTC nighttime pain reliever containing diphenhydramine most nights for sleep, not listed in his medication record.",
+    "says": "Oh, I also take one of those nighttime pain pills from the drugstore most nights, the pink box one, helps me sleep. That's not a real medicine though, so I didn't think to mention it before.",
     "tier": "discoverable",
     "importance": "critical"
    },
@@ -597,314 +616,252 @@
     "id": "f7",
     "category": "medications",
     "topic": "herbal supplement use",
-    "chart": "Takes ginkgo biloba supplement daily, not on medication list, started for memory.",
-    "says": "My neighbor told me ginkgo is good for the memory, so I've been taking that too, every morning.",
+    "chart": "Patient takes ginkgo biloba supplement daily, believing it helps his memory; not documented in medication list.",
+    "says": "I take a ginkgo pill every morning, my neighbor said it's good for the brain. Didn't figure that counted as a real medicine either.",
     "tier": "discoverable",
     "importance": "important"
    },
    {
     "id": "f8",
-    "category": "medications",
-    "topic": "lorazepam duration and attachment",
-    "chart": "Lorazepam 0.5 mg nightly for 9 years; patient believes he needs it to sleep and is resistant to stopping.",
-    "says": "That little yellow pill at bedtime, I've taken that for nine years. I will not sleep a wink without it, doctor.",
-    "tier": "discoverable",
-    "importance": "critical"
-   },
-   {
-    "id": "f9",
-    "category": "medications",
-    "topic": "belief about medication necessity",
-    "chart": "Patient believes every prescribed medication is essential and is reluctant to consider stopping any.",
-    "says": "The doctor gave me every one of these for a reason, so I figure I better keep taking all of them, no matter what.",
+    "category": "adherence",
+    "topic": "belief about all medications",
+    "chart": "Patient believes every prescribed medication is essential and expresses reluctance to stop any of them.",
+    "says": "Every one of these pills, the doctor gave me for a reason, I figure I need every single one. I don't like the idea of stopping anything.",
     "tier": "initial",
     "importance": "important"
    },
    {
-    "id": "f10",
+    "id": "f9",
     "category": "hpi",
-    "topic": "dizziness on standing",
-    "chart": "Reports lightheadedness when standing up quickly, especially from sitting in his armchair.",
-    "says": "When I pop up out of my chair too fast, the room kind of swims for a second.",
+    "topic": "lightheadedness on standing",
+    "chart": "Patient reports feeling dizzy/lightheaded when standing up quickly, especially in the morning and after meals.",
+    "says": "When I get up out of the chair fast, sometimes the room spins a little and I have to grab something.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f10",
+    "category": "ros",
+    "topic": "hypoglycemia symptoms",
+    "chart": "Patient reports occasional sweating, shakiness, and feeling 'off' mid-morning, which he treats by eating crackers; attributes it to 'low blood sugar spells.'",
+    "says": "Some mornings I get shaky and sweaty and have to eat a few crackers to feel right again. Been happening more lately.",
     "tier": "discoverable",
     "importance": "critical"
    },
    {
     "id": "f11",
     "category": "ros",
-    "topic": "low blood sugar symptoms",
-    "chart": "Reports occasional shakiness and sweating in late afternoon, sometimes eats a snack to feel better.",
-    "says": "Some afternoons I get the shakes and break out in a sweat, so I'll eat some crackers and it passes.",
+    "topic": "memory and confusion baseline",
+    "chart": "Patient denies noticing his own confusion; daughter is the primary reporter of cognitive changes.",
+    "says": "I feel sharp as a tack, if you ask me. It's my daughter who says I get mixed up.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f12",
+    "category": "hpi",
+    "topic": "neuropathic pain control",
+    "chart": "Patient reports ongoing burning pain in both feet attributed to diabetic neuropathy, says gabapentin helps somewhat.",
+    "says": "My feet still burn some, especially at night, but the gabapentin takes the edge off.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f13",
+    "category": "hpi",
+    "topic": "anxiety and sleep history",
+    "chart": "Patient has taken lorazepam 0.5 mg nightly for 9 years for anxiety/insomnia; reports it 'helps him sleep' and expresses fear of stopping it.",
+    "says": "I've taken that little yellow pill for nine years now to help me sleep. I'd be a wreck without it, I tried going without once and couldn't sleep a wink.",
     "tier": "discoverable",
     "importance": "critical"
    },
    {
-    "id": "f12",
-    "category": "ros",
-    "topic": "appetite and oral intake",
-    "chart": "Reports decreased appetite over past month, occasionally skips lunch.",
-    "says": "My appetite's not what it used to be, some days I just skip lunch altogether.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f13",
-    "category": "ros",
-    "topic": "bladder symptoms",
-    "chart": "Reports ongoing urinary frequency and urgency despite tamsulosin use.",
-    "says": "I still run to the bathroom a lot, that prostate pill hasn't helped as much as I'd like.",
-    "tier": "discoverable",
-    "importance": "minor"
-   },
-   {
     "id": "f14",
-    "category": "ros",
-    "topic": "dry mouth and constipation",
-    "chart": "Reports dry mouth and occasional constipation.",
-    "says": "My mouth gets awful dry, and I'm backed up more than I used to be.",
-    "tier": "discoverable",
-    "importance": "minor"
+    "category": "adherence",
+    "topic": "missed doses",
+    "chart": "Patient denies intentionally skipping any prescribed doses; believes he takes everything as directed aside from the tamsulosin mix-up.",
+    "says": "No sir, I take everything just like it says, every single day, no skipping.",
+    "tier": "initial",
+    "importance": "important"
    },
    {
     "id": "f15",
     "category": "ros",
-    "topic": "vision changes",
-    "chart": "No new vision changes reported.",
-    "says": "My eyes are about the same as always, no new trouble there.",
+    "topic": "urinary symptoms",
+    "chart": "Patient reports mild urinary urgency, improved somewhat since starting oxybutynin and tamsulosin.",
+    "says": "My bladder's better than it used to be, I don't have to run to the bathroom as much.",
     "tier": "discoverable",
     "importance": "minor"
    },
    {
     "id": "f16",
-    "category": "pmh",
-    "topic": "atrial fibrillation history",
-    "chart": "Diagnosed with atrial fibrillation 3 years ago, on apixaban for stroke prevention since diagnosis.",
-    "says": "I've got that irregular heartbeat thing, afib, for about three years now. That blood thinner is for that.",
-    "tier": "initial",
+    "category": "ros",
+    "topic": "bleeding symptoms",
+    "chart": "Patient denies blood in stool or urine, denies easy bruising beyond the fall-related bruises, denies gum bleeding or nosebleeds.",
+    "says": "No blood anywhere that I've seen, no extra bruising except where I fell.",
+    "tier": "discoverable",
     "importance": "important"
    },
    {
     "id": "f17",
-    "category": "pmh",
-    "topic": "diabetes history",
-    "chart": "Type 2 diabetes diagnosed approximately 15 years ago, previously well-controlled on current regimen.",
-    "says": "I've had the sugar diabetes a long time, probably fifteen years now.",
+    "category": "ros",
+    "topic": "chest pain or palpitations",
+    "chart": "Patient denies chest pain, palpitations, or shortness of breath currently; atrial fibrillation diagnosed 2 years ago, feels 'fine heart-wise.'",
+    "says": "My heart feels fine, no racing or chest pain, nothing like that.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f18",
+    "category": "social",
+    "topic": "living situation",
+    "chart": "Patient lives alone in a single-story home; daughter visits daily and manages medication organizer and most errands.",
+    "says": "I live by myself in my own house, but my daughter comes by every single day to check on me and set up my pills.",
     "tier": "initial",
     "importance": "important"
    },
    {
-    "id": "f18",
-    "category": "pmh",
-    "topic": "hypertension history",
-    "chart": "Hypertension diagnosed approximately 20 years ago.",
-    "says": "High blood pressure runs in my family, I've had it for twenty years or so.",
-    "tier": "initial",
-    "importance": "minor"
-   },
-   {
     "id": "f19",
-    "category": "pmh",
-    "topic": "benign prostatic hyperplasia",
-    "chart": "BPH diagnosed approximately 5 years ago.",
-    "says": "The prostate thing started maybe five years back.",
-    "tier": "discoverable",
+    "category": "social",
+    "topic": "hearing difficulty",
+    "chart": "Patient has significant hearing loss, uses hearing aids inconsistently, and often answers slightly off-topic due to mishearing questions.",
+    "says": "Pardon? Oh, I don't always wear my hearing aids, batteries are a hassle. What was that you asked?",
+    "tier": "initial",
     "importance": "minor"
    },
    {
     "id": "f20",
-    "category": "pmh",
-    "topic": "chronic pain history",
-    "chart": "Diagnosed with peripheral neuropathy in feet, on gabapentin for several years.",
-    "says": "My feet tingle and burn sometimes, that's why I'm on that nerve pill.",
+    "category": "nutrition",
+    "topic": "appetite and meals",
+    "chart": "Patient reports eating three regular meals daily, no recent weight loss noted by patient or daughter.",
+    "says": "I eat good, three meals a day, my daughter makes sure of that.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f21",
+    "category": "substance",
+    "topic": "alcohol use",
+    "chart": "Patient denies any current alcohol use; reports he quit drinking entirely about 20 years ago.",
+    "says": "I don't touch a drop, haven't in twenty years.",
     "tier": "discoverable",
     "importance": "minor"
    },
    {
-    "id": "f21",
-    "category": "social",
-    "topic": "living situation",
-    "chart": "Lives alone in a single-story home; daughter visits several times weekly and helps with medications.",
-    "says": "I live by myself in my house, but my daughter comes by a few times a week to check on me and set up my pills.",
-    "tier": "initial",
-    "importance": "important"
-   },
-   {
     "id": "f22",
-    "category": "social",
-    "topic": "hearing difficulty",
-    "chart": "Moderate hearing loss, inconsistent hearing aid use.",
-    "says": "What's that? Sorry, my ears aren't what they used to be. I've got hearing aids but they're uncomfortable so I don't always wear them.",
-    "tier": "initial",
+    "category": "pmh",
+    "topic": "diabetes history",
+    "chart": "Type 2 diabetes diagnosed approximately 15 years ago, previously on insulin briefly, now on oral agents only.",
+    "says": "I've had the sugar diabetes for fifteen years or so, used to be on the needle but switched to pills a long time back.",
+    "tier": "discoverable",
     "importance": "minor"
    },
    {
     "id": "f23",
-    "category": "function",
-    "topic": "daily activity level",
-    "chart": "Independent with most activities of daily living; uses a cane occasionally.",
-    "says": "I get around fine mostly, use my cane if my knees are acting up.",
-    "tier": "discoverable",
-    "importance": "minor"
-   },
-   {
-    "id": "f24",
-    "category": "adherence",
-    "topic": "missed doses",
-    "chart": "Denies intentionally skipping prescribed doses other than the tamsulosin duplication confusion.",
-    "says": "I don't skip my pills on purpose, I take what's in the box every day.",
+    "category": "pmh",
+    "topic": "atrial fibrillation history",
+    "chart": "Diagnosed with atrial fibrillation 2 years ago; started on apixaban at that time for stroke prevention, no bleeding events since.",
+    "says": "They found that irregular heartbeat thing a couple years back, that's when they put me on the blood thinner.",
     "tier": "discoverable",
     "importance": "important"
    },
    {
-    "id": "f25",
+    "id": "f24",
     "category": "family",
-    "topic": "family history of memory problems",
-    "chart": "Mother had dementia in her 80s, patient worried about similar decline.",
-    "says": "My mother got real forgetful in her eighties. I worry that's happening to me now too.",
-    "tier": "reluctant",
+    "topic": "family history of falls or dementia",
+    "chart": "Patient reports his late wife had dementia in her final years; no other significant family history volunteered.",
+    "says": "My wife, God rest her, had the dementia bad before she passed. Hope that's not coming for me too.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f25",
+    "category": "function",
+    "topic": "mobility and assistive device use",
+    "chart": "Patient ambulates independently at baseline without a cane or walker, though daughter has recently suggested he start using one.",
+    "says": "I get around fine on my own two feet, my daughter's been nagging me to use a cane but I don't think I need one.",
+    "tier": "discoverable",
     "importance": "minor"
    },
    {
     "id": "f26",
-    "category": "psychosocial",
-    "topic": "fear about losing independence",
-    "chart": "Expresses fear of being forced to move to assisted living if falls continue.",
-    "says": "If I keep falling my daughter's going to want to put me in one of those homes. I don't want that.",
-    "tier": "reluctant",
+    "category": "goals",
+    "topic": "patient's goals for visit",
+    "chart": "Patient's main goal is to stop falling and reassure his daughter, but he wants to keep taking all his current medications.",
+    "says": "I just want to quit falling down and get my daughter off my back, but I don't want you taking away my pills.",
+    "tier": "initial",
     "importance": "important"
    },
    {
     "id": "f27",
-    "category": "substance",
-    "topic": "alcohol use",
-    "chart": "Drinks one beer most evenings with dinner.",
-    "says": "I'll have a beer with my supper most nights, nothing crazy.",
-    "tier": "discoverable",
-    "importance": "important"
+    "category": "hpi",
+    "topic": "timing of confusion relative to doses",
+    "chart": "Daughter notes the evening confusion tends to occur a couple hours after the nighttime medications (lorazepam, gabapentin dose, and OTC sleep aid) are taken.",
+    "says": "My daughter says it's worse a couple hours after I take my nighttime pills, if that means anything.",
+    "tier": "reluctant",
+    "importance": "critical"
    },
    {
     "id": "f28",
-    "category": "nutrition",
-    "topic": "knee pain management",
-    "chart": "Reports chronic bilateral knee pain, osteoarthritis, uses OTC remedies and the nighttime pain reliever for this.",
-    "says": "My knees have been bad for years, arthritis the doctor called it.",
-    "tier": "initial",
-    "importance": "minor",
-    "distractor": true
+    "category": "adherence",
+    "topic": "who manages the extra bottles",
+    "chart": "Patient admits he sometimes takes extra doses from the chair-side bottles beyond what is in the weekly organizer, without telling his daughter.",
+    "says": "Truth is, sometimes if I don't feel right I'll just take an extra one from the bottle by my chair, I don't always tell my daughter when I do that.",
+    "tier": "reluctant",
+    "importance": "critical"
    },
    {
     "id": "f29",
-    "category": "other",
-    "topic": "hobby and daily routine",
-    "chart": "Enjoys woodworking in his garage workshop as a daily hobby.",
-    "says": "I still like to tinker in my workshop most afternoons, made birdhouses my whole life.",
-    "tier": "initial",
-    "importance": "minor",
-    "distractor": true
+    "category": "psychosocial",
+    "topic": "fear of losing independence",
+    "chart": "Patient expresses fear that admitting to falls or confusion will lead to his daughter or doctors deciding he needs to leave his home.",
+    "says": "If I tell you too much maybe you all decide I can't live on my own anymore. I don't want to leave my house.",
+    "tier": "hidden",
+    "importance": "important"
    },
    {
     "id": "f30",
-    "category": "ros",
-    "topic": "chest pain or palpitations",
-    "chart": "Denies chest pain, denies new palpitations.",
-    "says": "No chest pain, and I don't feel my heart doing anything funny.",
-    "tier": "discoverable",
-    "importance": "minor"
+    "category": "hpi",
+    "topic": "driving status",
+    "chart": "Patient still drives short distances locally despite the falls and evening confusion, has not had any accidents.",
+    "says": "I still drive myself to the barber and the grocery, just during the day, never had a wreck or anything.",
+    "tier": "reluctant",
+    "importance": "important"
    },
    {
     "id": "f31",
     "category": "ros",
-    "topic": "bleeding or bruising",
-    "chart": "Denies unusual bruising or bleeding, no blood in stool or urine noted.",
-    "says": "I haven't noticed any strange bruises or bleeding anywhere.",
+    "topic": "recent weight change",
+    "chart": "Patient denies significant intentional weight change; weight has been stable per his report, though he has not been weighed recently prior to this visit's recorded 58 kg.",
+    "says": "My weight's been about the same as always, I think.",
     "tier": "discoverable",
-    "importance": "important"
+    "importance": "minor",
+    "distractor": true
    },
    {
     "id": "f32",
-    "category": "goals",
-    "topic": "patient treatment goals",
-    "chart": "Wants to stay independent in his own home and avoid further falls.",
-    "says": "I just want to stay in my own house and not fall again, that's really all I'm after.",
-    "tier": "initial",
-    "importance": "important"
+    "category": "pmh",
+    "topic": "kidney function awareness",
+    "chart": "Patient is unaware his kidney function has declined; has not been told about any dose adjustments needed for his medications.",
+    "says": "Nobody's ever told me anything was wrong with my kidneys.",
+    "tier": "discoverable",
+    "importance": "minor"
    }
   ],
-  "mismatches": [
-   {
-    "id": "m1",
-    "factId": "f5",
-    "artifactId": "d6",
-    "patientClaim": "Patient reports occasionally taking an extra tamsulosin capsule because it looks similar to his omeprazole, implying this happens only 'sometimes.'",
-    "recordEvidence": "Pharmacy refill history shows tamsulosin 0.4 mg has been refilled approximately 10 days early for 3 consecutive months, indicating he is consistently taking roughly double the prescribed dose rather than only occasionally.",
-    "teachingPoint": "Refill/fill-pattern data can reveal the true frequency of a dosing error that a patient underestimates or minimizes; always cross-check self-report against objective dispensing records."
-   },
-   {
-    "id": "m2",
-    "factId": "f24",
-    "artifactId": "d6",
-    "patientClaim": "Patient states he does not skip or alter doses other than the tamsulosin mix-up and takes what is in the organizer every day.",
-    "recordEvidence": "Pharmacy refill history and the overall medication reconciliation reveal unlisted OTC diphenhydramine and ginkgo use plus the tamsulosin duplication pattern, showing his actual regimen differs meaningfully from the prescribed list he believes he is following exactly.",
-    "teachingPoint": "A sincere belief in full adherence can coexist with an inaccurate best-possible-medication-history; triangulate patient report, pill bottles/organizer, and pharmacy fill data to reconstruct what is actually being taken."
-   }
-  ],
-  "objectives": [],
-  "answerKey": {
-   "primaryProblem": "Polypharmacy-related falls and evening confusion in an 81-year-old man, driven by (1) orthostatic hypotension from antihypertensive therapy combined with inadvertent tamsulosin double-dosing, (2) hypoglycemia from glipizide given renal impairment and reduced appetite, and (3) excessive sedative/anticholinergic burden (lorazepam, oxybutynin, gabapentin, OTC diphenhydramine) in the setting of stage 3b-4 CKD causing drug accumulation.",
-   "differential": [
-    "Orthostatic hypotension secondary to amlodipine/lisinopril plus unintentional tamsulosin double-dosing",
-    "Hypoglycemia from glipizide (renally cleared) with reduced oral intake, mimicking/contributing to evening confusion",
-    "Cumulative sedative-hypnotic and anticholinergic burden (lorazepam + oxybutynin + gabapentin + OTC diphenhydramine) causing delirium-like evening confusion",
-    "Supratherapeutic apixaban exposure due to missed dose-reduction criteria in CKD, elevating bleeding risk (not causing the current falls/confusion but an urgent safety finding)",
-    "Underlying mild cognitive impairment or early dementia unmasked/worsened by drug effects (less likely given acute 2-3 week onset and family-reported baseline normalcy)"
-   ],
-   "keyFindings": [
-    "Orthostatic BP drop from 118/60 sitting to 96/54 standing with symptoms",
-    "Pharmacy refill pattern showing tamsulosin filled ~10 days early for 3 months, consistent with daily double-dosing",
-    "Fasting glucose 62 mg/dL (L) with home log showing multiple sub-70 readings concentrated in late afternoon, correlating with evening confusion",
-    "Creatinine 1.6 mg/dL, eGFR ~32 mL/min/1.73m2, meeting apixaban dose-reduction criteria (age ≥80, weight 58 kg ≤60 kg) with no dose adjustment made — apixaban currently overdosed relative to guideline criteria",
-    "Unlisted OTC diphenhydramine-containing nighttime pain reliever and ginkgo biloba identified only through direct questioning, not on the prescribed list",
-    "High anticholinergic/sedative cumulative burden (oxybutynin + diphenhydramine + gabapentin + lorazepam) consistent with Beers Criteria concerns and plausible contributor to evening confusion and fall risk",
-    "Gabapentin 300 mg TID and glipizide 10 mg BID are not renally dose-adjusted despite eGFR ~32"
-   ],
-   "plan": [
-    "Contact prescriber urgently to recommend apixaban dose reduction to 2.5 mg twice daily per renal/age/weight criteria, flagging potential bleeding risk from current dosing",
-    "Recommend prescriber discontinue or taper glipizide (or substitute with a non-hypoglycemic, renally-appropriate agent) given recurrent hypoglycemia and HbA1c already at/below target; reinforce home glucose monitoring with daughter",
-    "Recommend discontinuing tamsulosin/omeprazole look-alike risk: advise distinct pill shapes/colors or blister packaging, remove duplicate loose bottles from armchair, consolidate all medications into daughter's weekly organizer only",
-    "Recommend medically supervised slow taper of lorazepam given 9-year duration, fall/confusion risk, and anticholinergic burden; coordinate with prescriber on taper schedule and nonpharmacologic sleep strategies",
-    "Advise discontinuing OTC diphenhydramine-containing nighttime product and ginkgo biloba (bleeding interaction potential with apixaban, no proven benefit, adds anticholinergic/sedative load); communicate findings to prescriber",
-    "Recommend renal dose adjustment or alternative for gabapentin (lower dose/frequency) given eGFR ~32 mL/min/1.73m2",
-    "Recommend review of antihypertensive regimen (amlodipine/lisinopril) in context of orthostatic hypotension; consider dose reduction or spacing given sitting BP already at lower end of normal",
-    "Refer identified acute confusion and fall history back to primary care/geriatrics for in-person evaluation and formal cognitive assessment; this falls outside pharmacist scope to diagnose",
-    "Educate patient and daughter on orthostatic precautions (rise slowly, sit on bed edge before standing) and on medication safety storage (single consolidated source of truth, remove loose bottles)",
-    "Schedule follow-up medication review after prescriber implements changes to reassess falls, confusion, glucose, and orthostatic symptoms"
-   ],
-   "redFlags": [
-    "Standing BP 96/54 with symptomatic lightheadedness — ongoing fall risk",
-    "Fasting glucose 62 mg/dL with symptomatic hypoglycemia episodes — risk of severe hypoglycemia or further falls",
-    "Apixaban dosed above recommended level per renal/age/weight criteria — elevated bleeding risk requiring prompt prescriber notification, not a routine finding to defer"
-   ],
-   "educationPoints": [
-    "Best possible medication history must include direct, nonjudgmental questioning about OTC products and herbal supplements, which patients often do not volunteer as 'real medicine'",
-    "Cumulative anticholinergic and sedative burden across multiple drug classes can precipitate falls and delirium-like symptoms in older adults even when each individual drug seems reasonable in isolation",
-    "Renal function must be reassessed periodically for renally-cleared or renally-dose-adjusted medications (apixaban, gabapentin, glipizide), especially after any decline in eGFR",
-    "Pharmacy refill/fill-pattern data is an objective adjunct to self-report and can uncover unintentional dosing errors, especially with look-alike medications",
-    "Deprescribing benzodiazepines in long-term users requires a gradual, collaborative taper with the prescriber rather than abrupt discontinuation",
-    "Falls and new confusion in an older adult should prompt a structured medication review before assuming cognitive decline or 'normal aging'"
-   ]
-  },
   "chartAtStart": [
    {
     "label": "Reason for visit",
-    "value": "Comprehensive medication review following two falls in one month and new evening confusion; referred by primary care"
+    "value": "Comprehensive medication review, referred after two falls in past month and reported evening confusion"
    },
    {
     "label": "Problem list",
-    "value": "Atrial fibrillation; Type 2 diabetes mellitus; Hypertension; Chronic kidney disease stage 3b; Benign prostatic hyperplasia; Peripheral neuropathy; Osteoarthritis; GERD; Hyperlipidemia"
+    "value": "Hypertension; Type 2 diabetes mellitus; Atrial fibrillation; Benign prostatic hyperplasia; Overactive bladder; GERD; Peripheral neuropathy; Hyperlipidemia; Generalized anxiety/insomnia"
    },
    {
     "label": "Medications",
-    "value": "See active medication list (amlodipine, lisinopril, tamsulosin, oxybutynin, glipizide, metformin, atorvastatin, omeprazole, gabapentin, lorazepam, apixaban)"
+    "value": "See active medication list (11 prescribed medications, detailed in chart)"
    },
    {
     "label": "Allergies",
@@ -912,21 +869,166 @@
    },
    {
     "label": "Last vitals",
-    "value": "Weight 58 kg, Height 170 cm, BP 118/60 sitting (office), HR 72 irregular"
+    "value": "Sitting BP 118/60 mmHg, HR 70 bpm, weight 58 kg, height 170 cm (recorded 7 days ago)"
    },
    {
     "label": "Immunizations",
-    "value": "Influenza and pneumococcal vaccines up to date; COVID-19 booster received 6 months ago"
+    "value": "Influenza and pneumococcal vaccines up to date per record"
    },
    {
     "label": "Care team",
-    "value": "Dr. Patel (Primary Care), Dr. Nguyen (Cardiology, for atrial fibrillation), Clinical Pharmacy (medication management, referred this visit)"
+    "value": "Primary care physician (referring), daughter listed as emergency contact and caregiver"
    },
    {
     "label": "Code status",
     "value": "Full code"
    }
   ],
+  "mismatches": [
+   {
+    "id": "m1",
+    "factId": "f14",
+    "patientClaim": "Patient states he takes everything exactly as prescribed every day with no skipping or extra doses.",
+    "artifactId": "d8",
+    "recordEvidence": "Pharmacy fill history shows tamsulosin 0.4 mg being refilled every 20-24 days instead of the expected 30 days, indicating he is consuming it faster than once daily.",
+    "teachingPoint": "Patients may sincerely believe they are adherent while fill/refill patterns reveal unintentional double-dosing or medication mix-ups; refill history is an objective adherence check that should be reconciled against patient self-report."
+   },
+   {
+    "id": "m2",
+    "factId": "f17",
+    "patientClaim": "Patient reports his heart feels fine with no symptoms related to his atrial fibrillation.",
+    "artifactId": "d4",
+    "recordEvidence": "Orthostatic vitals flowsheet shows a drop from 118/60 sitting to 96/54 standing with symptomatic lightheadedness, which may be misattributed by the patient as unrelated to his cardiac/medication regimen when it is actually a medication-induced hemodynamic issue needing attention.",
+    "teachingPoint": "Patients may dissociate symptoms (orthostatic lightheadedness) from their cardiac diagnosis; objective vitals review uncovers a drug therapy problem (likely antihypertensive-related hypotension) that patient-reported review of systems alone would miss."
+   }
+  ],
+  "objectives": [
+   {
+    "id": "o1",
+    "text": "Conduct a best possible medication history (BPMH) that uncovers unlisted OTC/herbal products and discrepancies between prescribed and actual medication-taking behavior.",
+    "factIds": [
+     "f5",
+     "f6",
+     "f7",
+     "f28"
+    ],
+    "actionIds": [
+     "a1",
+     "a2"
+    ]
+   },
+   {
+    "id": "o2",
+    "text": "Identify an anticholinergic/sedative polypharmacy pattern (oxybutynin, diphenhydramine, lorazepam, gabapentin) contributing to falls and evening confusion, and link symptom timing to dosing.",
+    "factIds": [
+     "f3",
+     "f6",
+     "f13",
+     "f27"
+    ],
+    "actionIds": [
+     "a10",
+     "a11"
+    ]
+   },
+   {
+    "id": "o3",
+    "text": "Recognize symptomatic orthostatic hypotension and asymptomatic/symptomatic hypoglycemia as medication-induced drug therapy problems requiring dose adjustment, using objective vitals and lab trend data.",
+    "factIds": [
+     "f9",
+     "f10"
+    ],
+    "actionIds": [
+     "a3",
+     "a5"
+    ]
+   },
+   {
+    "id": "o4",
+    "text": "Apply renal function data to identify an apixaban dosing discrepancy risk and a supratherapeutic gabapentin dose, and determine when apixaban's standard (not reduced) dose remains appropriate using full dose-reduction criteria.",
+    "factIds": [
+     "f23",
+     "f32"
+    ],
+    "actionIds": [
+     "a4",
+     "a13"
+    ]
+   },
+   {
+    "id": "o5",
+    "text": "Calculate and interpret CHA2DS2-VASc and BMI to contextualize anticoagulation benefit-risk and weight-based dosing considerations.",
+    "factIds": [
+     "f23"
+    ],
+    "actionIds": [
+     "a8",
+     "a9"
+    ]
+   },
+   {
+    "id": "o6",
+    "text": "Elicit sensitive adherence and safety information (unauthorized extra dosing, driving, fear of losing independence) using rapport-building, and formulate recommendations within pharmacist scope, including when to hand back to the prescriber.",
+    "factIds": [
+     "f28",
+     "f29",
+     "f30",
+     "f8",
+     "f26"
+    ],
+    "actionIds": [
+     "a12"
+    ]
+   }
+  ],
+  "answerKey": {
+   "primaryProblem": "Polypharmacy-related adverse drug events in an older adult: medication-induced falls, evening confusion, and symptomatic orthostatic hypotension, driven by cumulative anticholinergic/sedative burden (oxybutynin + OTC diphenhydramine + lorazepam + gabapentin), compounded by unintentional tamsulosin double-dosing and possible glipizide-related hypoglycemia.",
+   "differential": [
+    "Medication-induced orthostatic hypotension (amlodipine/lisinopril contributing, worsened by volume/autonomic effects) causing falls",
+    "Cumulative anticholinergic and CNS-sedative burden (oxybutynin, diphenhydramine, lorazepam, gabapentin) causing evening confusion and fall risk",
+    "Hypoglycemia from glipizide (tight HbA1c 6.1% with fasting glucose as low as 59-62 mg/dL) contributing to falls/confusion episodes",
+    "Unintentional tamsulosin double-dosing (capsule mix-up) worsening orthostatic hypotension",
+    "Underlying mild cognitive impairment or early dementia (less likely as sole cause given clear temporal link to nighttime medication dosing)",
+    "Renal impairment (CrCl ~29 mL/min) causing accumulation of renally-cleared drugs (gabapentin) worsening sedation"
+   ],
+   "keyFindings": [
+    "Two falls in one month: one postural ('legs gave out'), one nocturnal with post-fall confusion",
+    "Orthostatic BP drop from 118/60 sitting to 96/54 standing with associated lightheadedness",
+    "HbA1c 6.1% with fasting glucose as low as 59 mg/dL and symptomatic hypoglycemia episodes (shakiness, sweating) on glipizide/metformin",
+    "Serum creatinine 1.6 mg/dL, estimated CrCl ~29 mL/min, weight 58 kg (BMI 20.1)",
+    "Unlisted OTC diphenhydramine-containing sleep aid taken nightly plus ginkgo supplement",
+    "Unauthorized extra chair-side dosing and tamsulosin/omeprazole capsule mix-up causing probable double-dosing of tamsulosin (confirmed by early refill pattern)",
+    "Evening confusion occurring ~2 hours after nighttime medications (lorazepam, gabapentin, OTC diphenhydramine)",
+    "CHA2DS2-VASc = 5, supporting continued anticoagulation benefit, with apixaban dosed appropriately at full 5 mg BID (only 2 of 3 reduction criteria met: age ≥80 and weight ≤60 kg, but creatinine <1.5 mg/dL threshold not met at 1.6... requires prescriber confirmation of criteria arithmetic)"
+   ],
+   "plan": [
+    "Document drug therapy problems in SOAP/MTM note: (1) unnecessary/excessive therapy - duplicative chair-side dosing and tamsulosin double-dosing; (2) adverse drug reaction - anticholinergic/sedative polypharmacy causing falls and confusion; (3) adverse drug reaction - symptomatic orthostatic hypotension likely multifactorial (antihypertensives + volume/autonomic effect); (4) adverse drug reaction - hypoglycemia risk from glipizide given current A1c/glucose trend; (5) dosing problem - gabapentin dose not renally adjusted for CrCl ~29 mL/min; (6) indication problem - OTC diphenhydramine and ginkgo not reconciled, with bleeding-risk and sedation implications",
+    "Recommend to prescriber: discontinue or taper oxybutynin (consider deprescribing given overactive bladder symptoms now mild and high anticholinergic burden); evaluate for lorazepam taper given 9-year chronic use, fall risk, and confusion (do not abruptly stop - recommend gradual taper plan with prescriber and possibly behavioral/non-benzodiazepine alternative)",
+    "Recommend prescriber review and likely reduction/discontinuation of glipizide given HbA1c 6.1% and biochemical hypoglycemia; liberalize glycemic goal for frailty",
+    "Recommend renal dose adjustment of gabapentin (e.g., reduce to within guideline range for CrCl ~29 mL/min) to reduce sedation/fall risk; coordinate with prescriber on retitration for neuropathic pain control",
+    "Advise discontinuation of OTC diphenhydramine-containing sleep aid; counsel on anticholinergic risk and offer non-pharmacologic/non-anticholinergic sleep strategies; recommend discontinuing ginkgo given lack of proven benefit and theoretical bleeding interaction with apixaban",
+    "Address apixaban dosing: flag to prescriber that patient meets 2 of 3 standard dose-reduction criteria (age ≥80, weight ≤60 kg) with creatinine 1.6 mg/dL; dose-reduction criteria require ≥2 of 3, so a reduced dose (2.5 mg BID) may actually be indicated rather than current 5 mg BID - recommend prescriber review per full apixaban dosing criteria rather than pharmacist independently changing anticoagulant dose",
+    "Set up a single-source medication management strategy: recommend daughter take over all medication storage/dispensing (remove chair-side bottles) to prevent duplicate/unauthorized dosing; consider blister-pack or lockbox system",
+    "Reinforce follow-up orthostatic vitals and glucose monitoring after medication changes; schedule close follow-up (1-2 weeks) to reassess falls, confusion, and labs",
+    "Communicate findings and recommendations to referring PCP for medication changes, as prescribing authority is outside pharmacist's independent scope in this setting; pharmacist to document and route recommendations rather than change doses unilaterally unless under a collaborative practice agreement that covers these specific changes"
+   ],
+   "redFlags": [
+    "Recurrent falls with injury risk in an 81-year-old living alone",
+    "Symptomatic orthostatic hypotension with 22-point systolic drop",
+    "Biochemical hypoglycemia (fasting glucose as low as 59 mg/dL) in a patient on sulfonylurea therapy",
+    "Unauthorized/unsupervised extra dosing from chair-side bottles outside the daughter's organized system",
+    "Possible undertreated anticoagulation (if apixaban dose-reduction criteria are in fact met) in a patient with CHA2DS2-VASc = 5",
+    "Continued driving despite falls and evening confusion"
+   ],
+   "educationPoints": [
+    "Best possible medication history must actively probe for OTC products and supplements, which patients often don't volunteer because they don't consider them 'real medicines'",
+    "Pharmacy refill/fill history is an objective adherence tool that can reveal unintentional double-dosing even when patients sincerely report full adherence",
+    "Cumulative anticholinergic burden tools (e.g., ACB scale) help quantify fall and cognitive risk from combinations of individually 'reasonable' prescriptions",
+    "Renal function must be reassessed periodically to catch drugs needing dose adjustment (e.g., gabapentin) and to verify anticoagulant dosing criteria are still being met correctly",
+    "Deprescribing conversations in frail older adults require addressing patient fears (loss of independence, belief that every pill is necessary) with empathy and shared decision-making before recommending changes to the prescriber",
+    "Clinical pharmacists in a telehealth MTM visit identify and document drug therapy problems and communicate recommendations to the prescriber; they generally do not unilaterally alter anticoagulant or sulfonylurea dosing without a collaborative practice agreement explicitly covering that change"
+   ]
+  },
   "patient": {
    "name": "Harold Jennings",
    "age": 81,
@@ -935,47 +1037,36 @@
    "ethnicity": "White",
    "occupation": "Retired machinist",
    "language": "English",
-   "appearance": "An older man with thinning white hair and a stocky build, seated in a worn armchair wearing a plaid flannel shirt. The room behind him shows a lamp, a side table crowded with pill bottles, and family photos on the wall; lighting is a bit dim and he leans forward toward the camera as if trying to hear better."
+   "appearance": "An elderly man with thinning white hair and a stocky build, seated in a worn armchair in a dimly lit living room with family photos visible on the wall behind him. He wears a flannel shirt, leans in toward the camera to hear better, and has a genial, slightly puzzled expression; a weekly pill organizer and a few loose medication bottles are visible on the side table next to him."
   },
   "persona": {
-   "personality": "Warm, talkative, and good-humored, with a tendency to downplay problems and insist his doctors know best.",
-   "communicationStyle": "Speaks in a folksy, meandering way, often needs questions repeated due to hearing loss, and tends to answer with stories before getting to the point.",
-   "healthLiteracy": "low",
-   "emotionalState": "Generally cheerful but with an undercurrent of worry about losing independence; slightly embarrassed when discussing mix-ups with pills.",
-   "background": "Worked 40 years as a machinist at a factory in Dayton, Ohio, before retiring at 65. Widowed six years ago. Enjoys woodworking in his garage workshop and has made birdhouses for the whole neighborhood. His daughter Linda lives twenty minutes away and checks on him several times a week.",
-   "speechExamples": [
-    "Well now, let me tell you, back when I worked the lathe we never had problems like this.",
-    "Come again? My ears aren't what they used to be, dear.",
-    "Oh, I take my pills just like the doctor says, every single one.",
-    "Linda's a good girl, she sets up my pill box every Sunday after church.",
-    "I don't want to end up in one of those homes, no sir."
-   ],
+   "speechExamples": [],
    "concerns": [
-    "Worried that continued falls will force him into assisted living against his wishes.",
-    "Believes every prescribed pill is necessary and may resist suggestions to stop any of them.",
-    "Embarrassed about mixing up his tamsulosin and omeprazole capsules.",
-    "Wants to keep driving and doing woodworking independently."
+    "I've been feeling a bit woozy when I stand up lately, and I took a couple of tumbles—do you think it's just my age?",
+    "My daughter wants to take away some of my pills, but I'm worried that if I stop any of them something bad will happen.",
+    "Sometimes I get confused in the evenings and I don't know why—is that normal for someone my age?",
+    "I'm not sure I'm taking everything right—the capsules all look the same to me."
    ]
   },
   "scenario": {
-   "studentBrief": "You are the clinical pharmacist on a geriatric primary care team conducting a telehealth comprehensive medication review for Harold Jennings, an 81-year-old man referred after two falls in the past month and new evening confusion. Review his home medication use, OTC/supplement use, labs, and vitals, identify drug therapy problems, and prepare recommendations for the referring prescriber. You will not prescribe or diagnose; focus on medication-related causes and appropriate escalation.",
-   "chiefComplaint": "Referred for medication review after two falls in one month and new evening confusion",
-   "openingLine": "Hi there, thanks for calling. My daughter made me set this up after I took a couple of tumbles lately — she says I get kind of foggy in the evenings too.",
+   "studentBrief": "You are a pharmacy student on clinical rotation conducting a telehealth comprehensive medication review (MTM visit) for Harold Jennings, an 81-year-old man referred by his primary care physician after two falls in the past month and new reports of evening confusion. His daughter manages a weekly pill organizer but he also keeps extra bottles at his armchair. Review his history, medication list, labs, and vitals; interview him directly to complete a best possible medication history; identify drug therapy problems; and prepare recommendations for the referring prescriber. He may not initially volunteer everything - build rapport to uncover the full picture.",
+   "chiefComplaint": "Referral for medication review after two falls in the past month and new evening confusion, per daughter's report.",
+   "openingLine": "Hi there, come on in - well, I guess that's not quite right for one of these video calls, is it? My daughter set this up because I've had a couple of falls and she says I get a little foggy some evenings.",
    "tasks": [
-    "Obtain a best possible medication history including OTC products and supplements not on the medication list",
-    "Identify and characterize drug therapy problems contributing to falls and evening confusion (orthostasis, hypoglycemia, sedative/anticholinergic burden, anticoagulation dosing)",
-    "Reconcile patient-reported adherence against pharmacy refill history and identify the tamsulosin dosing error",
-    "Formulate specific, prioritized recommendations to the prescriber, including appropriate referral for findings outside pharmacy scope",
-    "Educate patient and address his fear of losing independence while explaining proposed medication changes in plain language"
+    "Obtain a best possible medication history including OTC and herbal products not on the official list",
+    "Identify and reconcile the mismatch between patient's reported adherence and objective pharmacy fill/refill data",
+    "Assess for medication-related causes of falls and evening confusion using available vitals, labs, and anticholinergic/sedative burden screening",
+    "Formulate a drug therapy problem list and specific recommendations to communicate to the referring prescriber, respecting pharmacist scope of practice",
+    "Address the patient's adherence behaviors and fears about losing independence with empathy while still gathering needed safety information"
    ],
    "timeLimitMin": 25
   },
-  "difficulty": 4,
-  "encounterType": "comprehensive medication review",
-  "setting": "Telehealth video visit; patient at home in his armchair in Dayton, Ohio, with his daughter available by phone if needed",
-  "specialty": "Clinical Pharmacy / Geriatrics",
-  "summary": "An 81-year-old man on an 11-drug regimen including apixaban, glipizide, lorazepam, and oxybutynin is referred for comprehensive medication review after two falls and new evening confusion. The case teaches learners to uncover a dosing error (tamsulosin/omeprazole look-alike confusion), unlisted OTC/herbal use, orthostatic hypotension, renally-driven hypoglycemia, and an under-dosed apixaban situation that should be a dose reduction, all requiring prioritized, scope-appropriate recommendations to the prescriber.",
   "title": "Falls and Evening Confusion in an 81-Year-Old on Eleven Medications: A Comprehensive Medication Review",
+  "summary": "Harold Jennings is an 81-year-old man on eleven prescribed medications plus undisclosed OTC diphenhydramine and ginkgo, referred for medication review after two falls and new evening confusion. The case teaches learners to uncover anticholinergic/sedative polypharmacy, unintentional double-dosing (confirmed by refill-history mismatch), symptomatic orthostatic hypotension, and hypoglycemia risk, then formulate prescriber-directed recommendations within pharmacist scope rather than unilaterally changing anticoagulant or sulfonylurea therapy.",
+  "specialty": "Clinical Pharmacy / Geriatrics",
+  "setting": "Telehealth video visit, patient at home in his armchair in Dayton, Ohio, with his daughter available by phone if needed",
+  "encounterType": "Comprehensive medication review / medication therapy management (MTM) visit",
+  "difficulty": 4,
   "professions": [
    "clinical-pharmacy"
   ],

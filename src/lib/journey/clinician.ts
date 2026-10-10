@@ -1,7 +1,7 @@
 import { run as sql } from "../db";
 import { createEncounter, loadEncounter, messagesOf, runAction, runTurn } from "../engine/encounter";
 import { chatJSON, MODELS } from "../llm";
-import { aliasing, approvedCorpus, handoffTo, inboxFor, patientMemory, renderSbar, renderState, unverifiedValues } from "./context";
+import { aliasing, approvedCorpus, clean, handoffTo, inboxFor, patientMemory, renderSbar, renderState, unverifiedValues } from "./context";
 import { clinician, entriesOf, personaBrief, resolveProfession, type LoadedRun } from "./store";
 import type { Sbar, Stage, StateEntry } from "./types";
 
@@ -127,7 +127,7 @@ ${convo || "(not started. The patient has just joined the call.)"}`,
         },
       ],
     });
-    const say = (out.say || "").trim();
+    const say = clean(out.say);
     if (!say) break;
     const usedIds = i === AI_TURNS ? [] : [...new Set((out.uses || []).map(resolve).filter((x): x is string => !!x))].slice(0, 2);
     if (usedIds.length) declaredUses.push({ turn: i, entryIds: usedIds, quote: say });
@@ -212,7 +212,8 @@ ${mine.map((e) => `[${toAlias.get(e.id)}] (${e.kind}, ${e.status}) ${e.text}`).j
     ],
   });
   const corpus = approvedCorpus(run.c, all);
-  const sbar: Sbar = { situation: out.situation || "", background: out.background || "", assessment: out.assessment || "", recommendation: out.recommendation || "" };
+  out.note = clean(out.note);
+  const sbar: Sbar = { situation: clean(out.situation), background: clean(out.background), assessment: clean(out.assessment), recommendation: clean(out.recommendation) };
   const cites = [...new Set((out.cites || []).map(resolve).filter((x): x is string => !!x && mine.some((e) => e.id === x)))];
   return { note: out.note || "", sbar, cites, unverified: unverifiedValues(`${out.note} ${Object.values(sbar).join(" ")}`, corpus) };
 }

@@ -42,7 +42,7 @@ function ChainFlow({ chain, onOpen }: { chain: Chain; onOpen: (id: string) => vo
         <Badge tone="teal">Spans {chain.stagesSpanned} points in the journey</Badge>
         <span>{chain.steps.length} steps</span>
       </div>
-      <div className="flex items-stretch overflow-x-auto pb-1">
+      <div className="flex flex-wrap items-stretch gap-y-2">
         {chain.steps.map((s, i) => {
           const st = STEP_STYLE[s.kind];
           const body = (
@@ -56,9 +56,9 @@ function ChainFlow({ chain, onOpen }: { chain: Chain; onOpen: (id: string) => vo
             <div key={i} className="flex items-stretch">
               {i > 0 && <Arrow />}
               {s.entryId ? (
-                <button onClick={() => onOpen(s.entryId!)} className={cx("w-52 shrink-0 rounded-md border border-l-4 border-slate-200 bg-white p-2 text-left hover:bg-slate-50", st.bar)}>{body}</button>
+                <button onClick={() => onOpen(s.entryId!)} className={cx("w-48 shrink-0 rounded-md border border-l-4 border-slate-200 bg-white p-2 text-left hover:bg-slate-50", st.bar)}>{body}</button>
               ) : (
-                <div className={cx("w-52 shrink-0 rounded-md border border-l-4 border-slate-200 bg-slate-50 p-2", st.bar)}>{body}</div>
+                <div className={cx("w-48 shrink-0 rounded-md border border-l-4 border-slate-200 bg-slate-50 p-2", st.bar)}>{body}</div>
               )}
             </div>
           );

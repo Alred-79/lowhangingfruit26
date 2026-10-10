@@ -98,6 +98,8 @@ Compare every pair of places where the same clinical information appears:
 - age, sex and pregnancy status against conditions, medications and reference ranges
 - clinical plausibility: impossible or unsafe values, doses outside any used range, a result that cannot coexist with the stated diagnosis
 
+Structure is checked separately by rules, so do not report broken or missing ids, links to items that do not exist, duplicated facts, unlinked objectives or release rules that point nowhere. Report clinical and narrative contradictions only.
+
 The "mismatches" list holds conflicts between what the patient says and what the record shows that were written on purpose. Do not report those. Do report a listed mismatch whose two sides do not actually conflict in the case data.
 
 Severity:
@@ -107,9 +109,11 @@ Severity:
 
 Write for a faculty member who has never seen the JSON: in "where", "title", "why" and "fixSummary" name things the way the editor does ("Fact f7 (water pill timing)", "the Medication list document", "Chart at start: Last vitals", "the answer key's red flags"), never by JSON key or path such as chartAtStart, answerKey.redFlags or artifactId.
 
-Report only real problems you can point to in the data; quote the conflicting values in "why". Do not pad the list. If the case is consistent, return no issues. At most 12 issues, most serious first.
+Report only real problems you can point to in the data; quote the conflicting values in "why". Do not pad the list. Finish comparing before you write an issue: if the two places turn out to agree, or the point is a redundancy or a style preference, leave it out entirely. An issue must never say that something "is consistent" or "is not a contradiction". Each issue covers exactly one conflict. "title" is at most 14 words and states the conflict itself ("Furosemide dose differs between the medication list and Chart at start"). If the case is consistent, return no issues. At most 12 issues, most serious first.
 
-For each issue give a fix as a patch when editing specific fields resolves it. Choose the reading that agrees with the answer key and the majority of the case, and patch every field needed. When the right answer is a faculty judgment call, leave ops empty and say in fixSummary what they need to decide.
+A difference in wording or formatting between two places that state the same value is not an issue.
+
+For each issue give a fix as a patch when editing specific fields resolves it. Most contradictions can be fixed this way, so most issues should carry a patch. Choose the reading that agrees with the answer key and the majority of the case, and patch every field needed. When the right answer is a faculty judgment call, leave ops empty and say in fixSummary what they need to decide.
 
 ${PATCH_DOC}`,
     schema: {
@@ -121,7 +125,7 @@ ${PATCH_DOC}`,
           type: "array",
           items: {
             type: "object",
-            required: ["severity", "section", "where", "title", "why"],
+            required: ["severity", "section", "where", "title", "why", "fixSummary", "ops"],
             properties: {
               severity: { type: "string", enum: ["high", "medium", "low"] },
               section: { type: "string", enum: SECTION_IDS, description: "The editor section where the faculty member should look first" },
@@ -129,7 +133,7 @@ ${PATCH_DOC}`,
               title: { type: "string", description: "One short sentence naming the contradiction" },
               why: { type: "string", description: "What conflicts with what, quoting the values, and why it matters for a student" },
               fixSummary: { type: "string", description: "One sentence describing the proposed fix, or the decision the faculty member must make" },
-              ops: PATCH_OPS_SCHEMA,
+              ops: { ...PATCH_OPS_SCHEMA, description: "The patch that fixes it. Expected for every issue that editing fields can resolve; an empty list only when faculty must choose between clinically different options." },
             },
           },
         },
@@ -152,6 +156,8 @@ ${PATCH_DOC}`,
   const issues: Issue[] = [];
   for (const it of list as NonNullable<typeof raw.issues>) {
     if (!it || !it.title) continue;
+    // A finding that concludes nothing is wrong is not a finding.
+    if (/\b(is|are|remains?) (internally )?consistent\b|not a (real )?(contradiction|conflict)|no (contradiction|conflict)|otherwise (match|agree)/i.test(`${it.title} ${String(it.why || "").slice(-200)}`)) continue;
     const ops = validOps(p, it.ops);
     const section = (SECTION_IDS as readonly string[]).includes(it.section) ? (it.section as Issue["section"]) : ops[0] ? sectionForPath(ops[0].path) : "overview";
     issues.push({

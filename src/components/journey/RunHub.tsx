@@ -354,7 +354,8 @@ export default function RunHub({ runId }: { runId: string }) {
   const current = step || follow || view.stages[0].stage.id;
   const sv = view.stages.find((s) => s.stage.id === current);
   const me = view.stages.find((s) => s.isStudent);
-  const unresolved = view.entries.filter((e) => ["uncertain", "disputed", "open_question"].includes(e.effectiveStatus)).length;
+  const superseded = new Set(view.links.filter((l) => l.relation === "updates").map((l) => l.to));
+  const unresolved = view.entries.filter((e) => ["uncertain", "disputed", "open_question"].includes(e.effectiveStatus) && !superseded.has(e.id)).length;
   const n = view.next;
 
   return (

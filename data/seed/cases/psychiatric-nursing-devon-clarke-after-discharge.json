@@ -7,150 +7,126 @@
    {
     "id": "a1",
     "kind": "assessment",
-    "name": "Mental status exam - appearance and behavior",
-    "result": "Patient observed pacing continuously during video call, shifting weight foot to foot, unable to remain seated for more than ~30 seconds. Dressed appropriately, fair hygiene. Appears restless and uncomfortable.",
+    "name": "Mental Status Examination",
+    "result": "Alert, oriented x3. Appearance: casual home clothes, mild grooming neglect noted (same t-shirt as prior visit per patient report). Behavior: frequent pacing within camera frame, shifting weight foot to foot, unable to remain seated for more than ~1 minute. Speech: normal rate/volume, coherent. Mood: 'okay I guess, just restless.' Affect: anxious, mildly guarded. Thought process: linear, goal-directed. Thought content: denies current paranoia toward interviewer; endorses residual auditory experiences (see below). No bizarre or disorganized thought content voiced today. Insight: partial. Judgment: fair.",
     "importance": "critical",
     "artifactIds": []
    },
    {
     "id": "a2",
     "kind": "assessment",
-    "name": "Mood and affect assessment",
-    "result": "Mood described by patient as 'on edge, tired.' Affect restricted but reactive; some irritability noted when discussing hospitalization. No euphoria or elation observed.",
-    "importance": "important",
+    "name": "Columbia Suicide Severity Rating Scale (C-SSRS) Screen",
+    "result": "Denies current or recent passive or active suicidal ideation, intent, or plan. Denies history of suicide attempt. Denies thoughts of harming others.",
+    "importance": "critical",
     "artifactIds": []
    },
    {
     "id": "a3",
     "kind": "assessment",
-    "name": "Thought process and content assessment",
-    "result": "Thought process linear and goal-directed. Reports residual auditory hallucinations (voices commenting on him) occurring in evenings, now described as 'quieter' than during admission. No delusional content elicited today. Insight into illness partial.",
-    "importance": "critical",
+    "name": "Abnormal Involuntary Movement Scale (AIMS) - visual screen via camera",
+    "result": "No orofacial dyskinesia, no choreoathetoid limb or truncal movements observed. Movements present are consistent with restless, repetitive leg/foot shifting and pacing rather than dyskinesia.",
+    "importance": "important",
     "artifactIds": []
    },
    {
     "id": "a4",
     "kind": "assessment",
-    "name": "Suicide and homicide risk assessment",
-    "result": "Patient denies current or recent suicidal ideation, intent, or plan. Denies homicidal ideation or intent to harm others. No access to firearms reported. States voices do not command him to hurt himself or others.",
+    "name": "Barnes Akathisia Rating Scale (BARS) - patient-reported/observed",
+    "result": "Objective: restless movements of legs, inability to sit still observed throughout call, patient stands/paces repeatedly. Subjective: patient reports inner restlessness and urge to move, rates distress as moderate-severe. Global clinical assessment: moderate akathisia.",
     "importance": "critical",
     "artifactIds": []
    },
    {
     "id": "a5",
     "kind": "assessment",
-    "name": "Extrapyramidal symptom screen (self/camera-guided)",
-    "result": "Patient reports inner restlessness and inability to sit still (consistent with akathisia). On camera-guided exam: mild cogwheel-type stiffness reported by patient in arms, no visible tremor at rest, no dystonia or oculogyric crisis observed. Gait steady but patient paces rather than walks purposefully.",
-    "abnormal": true,
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a6",
-    "kind": "assessment",
-    "name": "Sleep pattern assessment",
-    "result": "Patient reports sleeping approximately 10 hours per night, feels groggy on waking. No early morning awakening or insomnia reported.",
+    "name": "Extrapyramidal symptom check - rigidity self-report/observation",
+    "result": "Patient reports stiffness in arms and jaw; demonstrates slow, slightly stiff arm movement on camera when asked to raise and lower arms. No drooling or acute dystonic posturing observed.",
     "importance": "important",
     "artifactIds": []
    },
    {
-    "id": "a7",
+    "id": "a6",
     "kind": "vitals",
-    "name": "Home blood pressure and pulse (patient-reported from home cuff)",
-    "result": "BP 118/76 mmHg, HR 88 bpm, measured sitting, taken this morning per patient report.",
+    "name": "Home vital signs (patient-reported/self-measured)",
+    "result": "BP 118/76 mmHg, HR 88 bpm regular, Temp 98.2°F (36.8°C) oral home thermometer, measured via patient's own cuff at home.",
     "importance": "minor",
     "artifactIds": [
      "d4"
     ]
    },
    {
-    "id": "a8",
-    "kind": "vitals",
-    "name": "Weight check (patient-reported from home scale)",
-    "result": "Weight 172 lb, patient reports this is about 3 lb above pre-admission weight.",
-    "importance": "minor",
-    "artifactIds": []
-   },
-   {
-    "id": "a9",
+    "id": "a7",
     "kind": "record",
-    "name": "Review discharge medication reconciliation",
-    "result": "Discharge prescription: Risperidone 4 mg PO nightly, quantity 14 tablets (14-day supply), 0 refills, with instruction to follow up with outpatient psychiatry within 7-10 days.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a10",
-    "kind": "record",
-    "name": "Review pharmacy fill history",
-    "result": "Pharmacy record shows the discharge risperidone prescription was filled once, for 7 tablets, 8 days ago. No subsequent fills or refill requests on file.",
-    "abnormal": true,
+    "name": "Pharmacy fill history review",
+    "result": "Risperidone 4 mg tablets, disp #7, 1 refill authorized, filled once on day of discharge; no refill requests since. Quantity dispensed consistent with approximately 7 days supply at 1 tablet nightly; no subsequent fills recorded.",
     "importance": "critical",
     "artifactIds": [
      "d3"
     ]
    },
    {
+    "id": "a8",
+    "kind": "record",
+    "name": "Discharge summary review",
+    "result": "Discharged 8 days ago after 2-week inpatient admission for first-episode psychosis. Started risperidone 4 mg PO nightly. Discharge instructions included outpatient psychiatry follow-up within 1-2 weeks and this nursing check-in call. No documented EPS at discharge.",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a9",
+    "kind": "test",
+    "name": "PHQ-9 depression screen",
+    "result": "Score 6/27 (mild range). Endorses sleep item (sleeping too much) and low energy; denies anhedonia, guilt, or suicidal ideation items.",
+    "importance": "minor",
+    "artifactIds": []
+   },
+   {
+    "id": "a10",
+    "kind": "test",
+    "name": "Urine toxicology screen (ordered this visit, result pending prior labs on file)",
+    "result": "No urine toxicology on file; none performed today as this is a remote visit without home collection capability. Deferred to in-person psychiatry follow-up.",
+    "importance": "minor",
+    "artifactIds": []
+   },
+   {
     "id": "a11",
     "kind": "record",
-    "name": "Review outpatient psychiatry follow-up appointment status",
-    "result": "No outpatient psychiatry follow-up appointment is documented as scheduled or completed since discharge 8 days ago.",
-    "abnormal": true,
-    "importance": "critical",
+    "name": "Outpatient psychiatry follow-up appointment status",
+    "result": "Scheduled appointment with outpatient psychiatry clinic in 4 days; patient confirmed appointment time on record.",
+    "importance": "important",
     "artifactIds": [
      "d6"
     ]
    },
    {
     "id": "a12",
-    "kind": "record",
-    "name": "Review discharge summary diagnosis and plan",
-    "result": "Discharge diagnosis: First episode psychosis, unspecified. Hospital course: two-week inpatient admission, started risperidone 4 mg nightly, discharged with instructions for outpatient psychiatry follow-up and this nursing check-in call.",
-    "importance": "important",
+    "kind": "vitals",
+    "name": "Weight trend review (self-reported, home scale)",
+    "result": "Current self-reported weight 172 lb, consistent with weight at hospital discharge 8 days ago (170 lb); no significant interval change.",
+    "importance": "minor",
     "artifactIds": [
-     "d2"
+     "d5"
     ]
-   },
-   {
-    "id": "a13",
-    "kind": "test",
-    "name": "PHQ-9 depression screen (administered verbally)",
-    "result": "Score 6/27 (mild range). Positive items: trouble sleeping, feeling tired, trouble concentrating. Denies anhedonia at a level suggesting major depression. No item endorsed for thoughts of self-harm.",
-    "importance": "minor",
-    "artifactIds": []
-   },
-   {
-    "id": "a14",
-    "kind": "test",
-    "name": "Columbia Suicide Severity Rating Scale (C-SSRS) screening",
-    "result": "Screens negative for suicidal ideation, lifetime or current. No history of suicidal behavior or self-harm reported.",
-    "importance": "critical",
-    "artifactIds": []
-   },
-   {
-    "id": "a15",
-    "kind": "record",
-    "name": "Review substance use documentation from admission",
-    "result": "Admission note documents patient reports prior intermittent cannabis use (several times per month) in the year preceding admission; no documented stimulant, opioid, or hallucinogen use.",
-    "importance": "important",
-    "artifactIds": []
-   },
-   {
-    "id": "a16",
-    "kind": "assessment",
-    "name": "Orientation and cognition check",
-    "result": "Patient alert and fully oriented to person, place, time, and situation. Able to recall 3/3 objects at 5 minutes. Attention intact to serial tasks.",
-    "importance": "minor",
-    "artifactIds": []
    }
   ],
   "artifacts": [
    {
     "id": "d1",
-    "type": "medication_list",
-    "title": "Discharge Medication List",
+    "type": "note",
+    "title": "Inpatient Discharge Summary",
+    "author": "Dr. A. Reyes, Inpatient Psychiatry",
     "date": "8 days ago",
-    "author": "Inpatient Psychiatry (discharge)",
+    "release": {
+     "when": "start"
+    },
+    "body": "24-year-old male admitted x2 weeks for first-episode psychosis with auditory hallucinations and paranoia. Responded to risperidone, titrated to 4 mg PO nightly at discharge. Mental status at discharge: calm, cooperative, residual mild auditory hallucinations, no SI/HI, no EPS noted on exam. Discharge plan: risperidone 4 mg PO qHS, outpatient psychiatry follow-up in 1-2 weeks, nursing telehealth check-in within 1 week of discharge, psychoeducation provided to patient and grandmother (healthcare proxy/support person) regarding medication adherence and early warning signs."
+   },
+   {
+    "id": "d2",
+    "type": "medication_list",
+    "title": "Current Medication List",
+    "author": "EHR Medication Reconciliation",
+    "date": "Today",
     "release": {
      "when": "start"
     },
@@ -160,8 +136,8 @@
       "Dose",
       "Route",
       "Frequency",
-      "Quantity dispensed",
-      "Refills"
+      "Start Date",
+      "Status"
      ],
      "rows": [
       {
@@ -169,70 +145,84 @@
         "Risperidone",
         "4 mg",
         "Oral",
-        "Nightly at bedtime",
-        "14 tablets",
-        "0"
+        "Nightly (qHS)",
+        "8 days ago (discharge)",
+        "Active - per discharge order"
        ]
       }
      ]
     }
    },
    {
-    "id": "d2",
-    "type": "note",
-    "title": "Inpatient Discharge Summary",
-    "date": "8 days ago",
-    "author": "Inpatient Psychiatry Attending",
-    "release": {
-     "when": "action",
-     "ref": "a12"
-    },
-    "body": "24-year-old male admitted for a first episode of psychosis with auditory hallucinations and disorganized behavior over approximately 3 weeks prior to admission, per family (grandmother) report. No prior psychiatric hospitalizations. Started risperidone, titrated to 4 mg nightly with good tolerance of acute agitation; some early reports of restlessness noted by nursing staff on the unit, which the patient attributed to 'nerves.' Admission substance use history: cannabis use several times monthly over the past year, no other substances reported or detected on urine toxicology at admission. Diagnosis: First episode psychosis, unspecified (rule out schizophreniform disorder, further workup to be completed outpatient). Discharged home with grandmother, who was present for discharge teaching. Plan: outpatient psychiatry follow-up within 7-10 days, nursing check-in call scheduled day 7-8 post-discharge, continue risperidone 4 mg nightly, follow up on EPS/akathisia symptoms, monitor for medication adherence and substance use."
-   },
-   {
     "id": "d3",
     "type": "other",
     "title": "Pharmacy Fill History",
+    "author": "Community Pharmacy Records",
     "date": "Today",
-    "author": "Community Pharmacy (electronic record)",
-    "release": {
-     "when": "action",
-     "ref": "a10"
-    },
-    "body": "Risperidone 4 mg tablets, prescribed quantity 14, 0 refills authorized. Fill #1: filled 8 days ago, quantity dispensed 7 tablets (patient requested partial fill, stated cost concern at time of pick-up). No fill #2 on record. No refill requests received by pharmacy since."
-   },
-   {
-    "id": "d4",
-    "type": "flowsheet",
-    "title": "Vitals and Weight Flowsheet",
-    "date": "Today",
-    "author": "Nursing",
     "release": {
      "when": "action",
      "ref": "a7"
     },
     "table": {
      "columns": [
-      "Date",
-      "BP (mmHg)",
-      "HR (bpm)",
-      "Weight (lb)"
+      "Medication",
+      "Quantity Dispensed",
+      "Days Supply",
+      "Date Filled",
+      "Refills Remaining",
+      "Refill Requests Since"
      ],
      "rows": [
       {
        "cells": [
-        "Discharge day",
-        "122/78",
-        "82",
-        "169"
+        "Risperidone 4 mg tablets",
+        "7 tablets",
+        "7 days",
+        "Day of discharge (8 days ago)",
+        "1",
+        "0"
+       ],
+       "flag": "H"
+      }
+     ]
+    }
+   },
+   {
+    "id": "d4",
+    "type": "flowsheet",
+    "title": "Vital Signs Flowsheet - Today's Visit",
+    "author": "Nursing",
+    "date": "Today",
+    "release": {
+     "when": "action",
+     "ref": "a6"
+    },
+    "table": {
+     "columns": [
+      "Parameter",
+      "Value",
+      "Reference Range"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Blood Pressure",
+        "118/76 mmHg",
+        "90/60 - 120/80 mmHg"
        ]
       },
       {
        "cells": [
-        "Today (8 days post-discharge, patient-reported)",
-        "118/76",
-        "88",
-        "172"
+        "Heart Rate",
+        "88 bpm",
+        "60-100 bpm"
+       ]
+      },
+      {
+       "cells": [
+        "Temperature",
+        "98.2°F (36.8°C)",
+        "97.0-99.0°F"
        ]
       }
      ]
@@ -241,40 +231,28 @@
    {
     "id": "d5",
     "type": "chart",
-    "title": "Reported Auditory Hallucination Severity (self-rated 0-10) Since Discharge",
+    "title": "Weight Trend Since Discharge",
+    "author": "Nursing",
     "date": "Today",
-    "author": "Patient self-report, charted by nursing",
     "release": {
-     "when": "fact",
-     "ref": "f6"
+     "when": "action",
+     "ref": "a12"
     },
     "chart": {
      "kind": "line",
-     "xLabel": "Days since discharge",
-     "yLabel": "Self-rated voice intensity (0-10)",
+     "xLabel": "Day",
+     "yLabel": "Weight (lb)",
      "series": [
       {
-       "name": "Voice intensity",
+       "name": "Weight",
        "points": [
         {
-         "x": "Day 1",
-         "y": 7
+         "x": "Discharge (Day 0)",
+         "y": 170
         },
         {
-         "x": "Day 3",
-         "y": 6
-        },
-        {
-         "x": "Day 5",
-         "y": 5
-        },
-        {
-         "x": "Day 7",
-         "y": 4
-        },
-        {
-         "x": "Day 8 (today)",
-         "y": 4
+         "x": "Today (Day 8)",
+         "y": 172
         }
        ]
       }
@@ -284,55 +262,23 @@
    {
     "id": "d6",
     "type": "note",
-    "title": "Outpatient Follow-up Scheduling Status",
-    "date": "Today",
-    "author": "Care Coordination",
+    "title": "Outpatient Psychiatry Referral",
+    "author": "Discharge Planning",
+    "date": "8 days ago",
     "release": {
      "when": "action",
      "ref": "a11"
     },
-    "body": "No outpatient psychiatry appointment found in scheduling system for this patient since hospital discharge 8 days ago. Referral was faxed to outpatient clinic at discharge; clinic has no record of patient or family contacting to schedule. Recommend active outreach/warm handoff."
+    "body": "Referral placed to outpatient psychiatry clinic for follow-up within 1-2 weeks of discharge. Appointment scheduled for 4 days from today's nursing check-in. Patient and grandmother given clinic contact information and crisis line number at discharge."
    }
   ],
-  "chartAtStart": [
-   {
-    "label": "Reason for visit",
-    "value": "Post-discharge psychiatric nursing check-in, day 8 after inpatient admission for first episode psychosis"
-   },
-   {
-    "label": "Problem list",
-    "value": "First episode psychosis, unspecified (new); Cannabis use, intermittent"
-   },
-   {
-    "label": "Medications",
-    "value": "Risperidone 4 mg PO nightly (discharge prescription, 14 tablets, 0 refills)"
-   },
-   {
-    "label": "Allergies",
-    "value": "No known drug allergies"
-   },
-   {
-    "label": "Last vitals",
-    "value": "BP 122/78 mmHg, HR 82 bpm, weight 169 lb (recorded at discharge)"
-   },
-   {
-    "label": "Care team",
-    "value": "Inpatient Psychiatry (discharging service), Outpatient Psychiatry (referral pending), Community Nursing (this visit)"
-   },
-   {
-    "label": "Code status",
-    "value": "Full code (not applicable to outpatient psychiatric care)"
-   }
-  ],
-  "difficulty": 4,
-  "encounterType": "Post-discharge follow-up / medication monitoring check-in",
   "facts": [
    {
     "id": "f1",
     "category": "chief_complaint",
     "topic": "reason for call",
-    "chart": "Patient reports feeling restless and unable to sit still since starting medication; here for scheduled post-discharge check-in.",
-    "says": "I've just been really restless, like I have to keep moving all the time. I can't even sit through my classes.",
+    "chart": "Patient reports restlessness and difficulty sitting still since starting medication after recent psychiatric hospitalization.",
+    "says": "They told me I had to do this check-in call since I got out of the hospital. I guess I'm okay, just... I can't sit still, it's driving me crazy.",
     "tier": "initial",
     "importance": "critical"
    },
@@ -340,8 +286,8 @@
     "id": "f2",
     "category": "hpi",
     "topic": "restlessness description",
-    "chart": "Describes inner urge to move constantly, worse during the day, interfering with concentration and sitting in lecture.",
-    "says": "It's like my legs won't let me stay still. I end up pacing around my room instead of studying.",
+    "chart": "Describes inner restlessness, urge to keep moving, cannot sit through lecture.",
+    "says": "It's like my legs have their own idea. I was in class yesterday and I had to just get up and leave, I felt like I have to keep moving.",
     "tier": "initial",
     "importance": "critical"
    },
@@ -349,391 +295,487 @@
     "id": "f3",
     "category": "hpi",
     "topic": "muscle stiffness",
-    "chart": "Reports subjective stiffness in arms, denies tremor.",
-    "says": "My arms feel kind of stiff and tight, like after a hard workout but I didn't even work out.",
+    "chart": "Reports subjective stiffness in arms and jaw.",
+    "says": "My arms feel kind of stiff, like tight. My jaw too sometimes.",
     "tier": "initial",
     "importance": "important"
    },
    {
     "id": "f4",
     "category": "hpi",
-    "topic": "sleep since discharge",
-    "chart": "Sleeping about 10 hours nightly, wakes groggy.",
-    "says": "I sleep like ten hours but I still wake up feeling kind of foggy.",
+    "topic": "sleep pattern",
+    "chart": "Sleeping approximately 10 hours nightly since discharge.",
+    "says": "I'm sleeping like ten hours a night. I don't know if that's normal or not.",
     "tier": "initial",
     "importance": "important"
    },
    {
     "id": "f5",
     "category": "medications",
-    "topic": "medication-taking pattern",
-    "chart": "States he is taking risperidone as prescribed every night.",
-    "says": "Yeah, I've been taking it every night like they told me to.",
+    "topic": "medication adherence",
+    "chart": "States he is taking the medication as prescribed every night.",
+    "says": "Yeah, I'm taking it, every night like they told me.",
     "tier": "initial",
     "importance": "critical"
    },
    {
     "id": "f6",
-    "category": "hpi",
-    "topic": "voices since discharge",
-    "chart": "Auditory hallucinations (voices commenting on him) persist but patient rates them as quieter/less frequent than at admission, occurring mainly in the evening.",
-    "says": "The voices are still there sometimes, mostly at night, but they're quieter than before, not as loud as in the hospital.",
-    "tier": "discoverable",
+    "category": "medications",
+    "topic": "missed doses reason",
+    "chart": "Admits, when pressed and after rapport is built, to skipping the last 3 nights because the restlessness got worse after taking it.",
+    "says": "Okay... honestly, I didn't take it the last few nights. Three nights I think. Every time I take it I feel like I'm going to lose it, so I just stopped.",
+    "tier": "hidden",
     "importance": "critical"
    },
    {
     "id": "f7",
-    "category": "hpi",
-    "topic": "content of voices",
-    "chart": "Voices described as commenting on his behavior/appearance, non-command, no instructions to harm self or others.",
-    "says": "They just kind of talk about me, like saying stuff about what I'm doing. They don't tell me to do anything.",
+    "category": "medications",
+    "topic": "pharmacy pickup",
+    "chart": "Has not picked up a refill; only the initial 7-tablet supply from discharge was filled.",
+    "says": "I only got the one bottle from when I left the hospital. I haven't been back to the pharmacy.",
     "tier": "discoverable",
     "importance": "critical"
    },
    {
     "id": "f8",
     "category": "hpi",
-    "topic": "safety - self harm",
-    "chart": "Denies current or past suicidal ideation, intent, or plan.",
-    "says": "No, I'm not thinking about hurting myself. I just want this restless feeling to stop.",
-    "tier": "initial",
+    "topic": "auditory experiences",
+    "chart": "Reports residual auditory hallucinations, quieter than before, occurring mainly in the evening, commenting on him.",
+    "says": "The voices are still there sometimes, mostly at night. They're quieter than before though, like background noise almost. They talk about me, say stuff.",
+    "tier": "discoverable",
     "importance": "critical"
    },
    {
     "id": "f9",
     "category": "hpi",
-    "topic": "safety - harm to others",
-    "chart": "Denies thoughts or intent to harm others; denies command hallucinations.",
-    "says": "I would never hurt anybody. The voices don't tell me to do that.",
+    "topic": "content of voices",
+    "chart": "Describes voices as commentary/critical in nature, not commanding.",
+    "says": "They just kind of narrate what I'm doing, or say mean stuff about me. They don't tell me to do anything.",
     "tier": "discoverable",
-    "importance": "critical"
+    "importance": "important"
    },
    {
     "id": "f10",
-    "category": "adherence",
-    "topic": "actual pill-taking",
-    "chart": "Discloses, once trust established, that he skipped the medication the last three nights because the restlessness got too uncomfortable.",
-    "says": "Okay, honestly... I haven't taken it the last three nights. The jittery feeling got so bad I just couldn't make myself take another pill.",
-    "tier": "reluctant",
+    "category": "ros",
+    "topic": "self-harm thoughts",
+    "chart": "Denies suicidal ideation, intent, or plan.",
+    "says": "No, I'm not thinking about hurting myself or anything like that.",
+    "tier": "initial",
     "importance": "critical"
    },
    {
     "id": "f11",
-    "category": "adherence",
-    "topic": "reason for skipping doses",
-    "chart": "Patient attributes skipped doses to belief that the medication itself is causing the unbearable restlessness, not understanding this is a treatable side effect.",
-    "says": "I figured the pill was what was making me feel like this, so I thought maybe not taking it would help.",
-    "tier": "reluctant",
+    "category": "ros",
+    "topic": "harm to others",
+    "chart": "Denies any thoughts of harming others.",
+    "says": "No, I wouldn't want to hurt anybody.",
+    "tier": "initial",
     "importance": "critical"
    },
    {
     "id": "f12",
-    "category": "adherence",
-    "topic": "prescription fill amount",
-    "chart": "Confirms he only picked up part of the prescription at the pharmacy due to cost.",
-    "says": "They only gave me like a week's worth at the pharmacy, I think because of the price. I was going to go back for more.",
-    "tier": "discoverable",
+    "category": "substance",
+    "topic": "cannabis use",
+    "chart": "Smoked cannabis twice in the past week to self-soothe restlessness/anxiety.",
+    "says": "I smoked weed twice this week, just a little, to try to calm down. I know I probably shouldn't with the meds.",
+    "tier": "reluctant",
     "importance": "important"
    },
    {
     "id": "f13",
     "category": "substance",
-    "topic": "cannabis use this week",
-    "chart": "Smoked cannabis twice this week, states it was to calm the restlessness/anxiety.",
-    "says": "I smoked weed twice this week, just a little, to try to calm myself down. It kind of helped for a bit.",
-    "tier": "reluctant",
-    "importance": "critical"
+    "topic": "alcohol use",
+    "chart": "Denies alcohol use.",
+    "says": "I don't really drink.",
+    "tier": "discoverable",
+    "importance": "minor"
    },
    {
     "id": "f14",
     "category": "substance",
-    "topic": "other substance use",
-    "chart": "Denies alcohol, cocaine, stimulant, or other illicit drug use.",
-    "says": "No, just the weed. I don't drink or do anything else.",
+    "topic": "other drug use",
+    "chart": "Denies use of other illicit substances.",
+    "says": "No, just the weed, nothing else.",
     "tier": "discoverable",
     "importance": "minor"
    },
    {
     "id": "f15",
     "category": "psychosocial",
-    "topic": "fear about hospital return",
-    "chart": "Expresses fear that disclosing symptoms will result in being sent back to the hospital.",
-    "says": "Please don't send me back to the hospital. I just got out, I can't go through that again.",
-    "tier": "discoverable",
+    "topic": "fear of rehospitalization",
+    "chart": "Expresses fear that disclosing symptoms will lead to being sent back to the hospital.",
+    "says": "I don't want to go back there. If I tell you too much are you going to send me back?",
+    "tier": "reluctant",
     "importance": "critical"
    },
    {
     "id": "f16",
     "category": "psychosocial",
-    "topic": "privacy at college",
-    "chart": "Worried that classmates or professors will find out about his hospitalization and diagnosis.",
-    "says": "Nobody at my school knows I was in the hospital. I really don't want that getting out.",
-    "tier": "discoverable",
+    "topic": "privacy at school",
+    "chart": "Worried peers at college will find out about hospitalization and diagnosis.",
+    "says": "Nobody at school knows about this. I want to keep it that way. If people find out, that's it for me there.",
+    "tier": "reluctant",
     "importance": "important"
    },
    {
     "id": "f17",
-    "category": "social",
-    "topic": "living situation",
-    "chart": "Lives with grandmother in the Bronx; she is aware of diagnosis and supportive.",
-    "says": "I live with my grandmother. She knows what happened, she's been checking on me.",
-    "tier": "initial",
-    "importance": "minor"
+    "category": "function",
+    "topic": "school attendance",
+    "chart": "Missing classes due to inability to sit still; concerned about falling behind.",
+    "says": "I've missed two classes this week because I can't sit in that room. I'm worried I'm going to fail.",
+    "tier": "discoverable",
+    "importance": "important"
    },
    {
     "id": "f18",
-    "category": "social",
-    "topic": "school status",
-    "chart": "Enrolled part-time at community college; has missed some classes since discharge due to restlessness and concentration difficulty.",
-    "says": "I'm in community college, part-time. I've missed a couple classes 'cause I just can't sit still.",
+    "category": "family",
+    "topic": "living situation and support",
+    "chart": "Lives with grandmother who is supportive and aware of diagnosis and discharge plan.",
+    "says": "I live with my grandmother. She knows what happened, she's been checking on me, bringing me soup and stuff.",
     "tier": "initial",
     "importance": "important"
    },
    {
     "id": "f19",
     "category": "family",
-    "topic": "family mental health history",
-    "chart": "Reports an uncle on his father's side had 'some kind of breakdown' in his twenties, never clearly diagnosed.",
-    "says": "My uncle, my dad's brother, had some kind of breakdown when he was young, but nobody really talked about what it was.",
+    "topic": "grandmother's involvement in meds",
+    "chart": "Grandmother is not actively supervising medication administration.",
+    "says": "She doesn't really watch me take it, she trusts me to do it myself.",
     "tier": "discoverable",
     "importance": "minor"
    },
    {
     "id": "f20",
-    "category": "ros",
-    "topic": "appetite and eating",
-    "chart": "Reports appetite slightly increased since starting medication; mild weight gain noted.",
-    "says": "I've been hungrier than usual, I think I put on a few pounds.",
+    "category": "psychosocial",
+    "topic": "cultural view of mental illness",
+    "chart": "Expresses some family/community stigma around psychiatric illness.",
+    "says": "In my family, people don't really talk about this kind of thing. My grandmother prays about it more than anything.",
     "tier": "discoverable",
     "importance": "minor"
    },
    {
     "id": "f21",
-    "category": "ros",
-    "topic": "mood symptoms",
-    "chart": "Denies pervasive sadness or hopelessness; reports feeling tired and on edge rather than depressed.",
-    "says": "I wouldn't say I'm sad, more just tired and on edge all the time.",
-    "tier": "initial",
-    "importance": "minor"
+    "category": "nutrition",
+    "topic": "appetite",
+    "chart": "Reports appetite roughly unchanged since discharge.",
+    "says": "I'm eating about the same as always, maybe a little less because I'm up moving around so much.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
    },
    {
     "id": "f22",
     "category": "ros",
-    "topic": "anxiety symptoms",
-    "chart": "Reports increased anxiety related to the restlessness and fear of relapse/rehospitalization.",
-    "says": "I feel anxious a lot, mostly worrying about feeling this way or ending up back in the hospital.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f23",
-    "category": "psychosocial",
-    "topic": "support system",
-    "chart": "Grandmother supportive but patient hesitant to tell her about skipped doses and cannabis use.",
-    "says": "My grandmother would be upset if she knew I stopped taking it or that I smoked. I haven't told her.",
-    "tier": "reluctant",
-    "importance": "important"
-   },
-   {
-    "id": "f24",
-    "category": "goals",
-    "topic": "patient's goal",
-    "chart": "States his main goal is to return to classes without feeling constantly restless.",
-    "says": "I just want to be able to sit in class again without feeling like I'm going to jump out of my skin.",
-    "tier": "initial",
-    "importance": "important"
-   },
-   {
-    "id": "f25",
-    "category": "psychosocial",
-    "topic": "understanding of diagnosis",
-    "chart": "Has partial understanding of diagnosis; uses term 'psychosis' but is unclear what it means long-term, fears it means he is 'crazy.'",
-    "says": "They said psychosis, but I don't really get what that means for me long term. Does that mean I'm crazy?",
+    "topic": "mood symptoms",
+    "chart": "Denies pervasive sad mood; describes mood as mostly anxious/restless rather than depressed.",
+    "says": "I wouldn't say I'm sad, more just antsy and on edge.",
     "tier": "discoverable",
     "importance": "minor"
    },
    {
-    "id": "f26",
+    "id": "f23",
+    "category": "ros",
+    "topic": "anxiety symptoms unrelated to akathisia",
+    "chart": "Reports some generalized worry about school performance, distinct from medication-related restlessness.",
+    "says": "Even before the hospital I used to worry a lot about school, grades and stuff.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f24",
     "category": "hpi",
-    "topic": "onset of restlessness relative to medication",
-    "chart": "Restlessness began within the first few days of starting risperidone in the hospital and has persisted since discharge.",
-    "says": "It started maybe like 2 or 3 days after they started the medicine in the hospital, and it's still here.",
+    "topic": "timeline of restlessness onset",
+    "chart": "Restlessness began approximately 3-4 days after starting risperidone, worsened since.",
+    "says": "It started a few days after I left the hospital, and it's gotten worse since then.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f25",
+    "category": "hpi",
+    "topic": "belief about restlessness cause",
+    "chart": "Initially unsure whether restlessness is 'part of being crazy' versus a medication effect; relieved to learn it may be medication-related.",
+    "says": "I thought maybe this restless feeling was part of me going crazy again. Nobody told me the pill could do this.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f26",
+    "category": "adherence",
+    "topic": "understanding of medication purpose",
+    "chart": "Has partial understanding that medication is meant to help with voices but limited understanding of EPS as a side effect.",
+    "says": "I know it's supposed to help with the voices. I didn't know it could make me feel like this.",
     "tier": "discoverable",
     "importance": "important"
    },
    {
     "id": "f27",
-    "category": "substance",
-    "topic": "caffeine intake",
-    "chart": "Drinks 1-2 cups of coffee daily; no recent increase.",
-    "says": "I drink a cup or two of coffee a day, nothing new there.",
-    "tier": "discoverable",
-    "importance": "minor",
-    "distractor": true
-   },
-   {
-    "id": "f28",
-    "category": "ros",
-    "topic": "headache",
-    "chart": "Reports occasional mild tension headaches, longstanding, unrelated to current presentation per patient.",
-    "says": "I get a little headache sometimes but I've had that since high school, it's nothing new.",
-    "tier": "discoverable",
-    "importance": "minor",
-    "distractor": true
-   },
-   {
-    "id": "f29",
-    "category": "pmh",
-    "topic": "medical history",
-    "chart": "No chronic medical conditions, no prior psychiatric diagnoses before this admission.",
-    "says": "I've never had any health problems before. This is the first time anything like this happened.",
+    "category": "social",
+    "topic": "occupation/school",
+    "chart": "Enrolled part-time at community college studying business.",
+    "says": "I'm doing business classes, part-time, trying to get my associate's degree.",
     "tier": "initial",
     "importance": "minor"
    },
    {
-    "id": "f30",
+    "id": "f28",
     "category": "psychosocial",
     "topic": "trust in nurse",
-    "chart": "Initially guarded, becomes more open after reassurance that the goal is to help him stay out of the hospital, not to immediately readmit him.",
-    "says": "Okay... I guess I can tell you more if you're not just gonna send me back right away.",
-    "tier": "discoverable",
+    "chart": "States he feels more comfortable talking after nurse reassures confidentiality limits and non-punitive intent.",
+    "says": "Okay, I believe you. I guess it's a relief to actually say this stuff out loud.",
+    "tier": "reluctant",
+    "importance": "minor"
+   },
+   {
+    "id": "f29",
+    "category": "hpi",
+    "topic": "effect of restlessness on sitting still during call",
+    "chart": "Reports needing to stand/pace during the call itself to tolerate the restlessness.",
+    "says": "Sorry, I know this looks weird, I just have to stand up and move around while we talk.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f30",
+    "category": "goals",
+    "topic": "what patient wants from today's visit",
+    "chart": "Wants help with the restlessness and reassurance he is not relapsing, without being readmitted.",
+    "says": "I just want this restless feeling to stop, and I want to know I'm not getting sicker.",
+    "tier": "initial",
     "importance": "important"
    },
    {
     "id": "f31",
-    "category": "function",
-    "topic": "daily functioning",
-    "chart": "Able to perform self-care (showering, dressing) independently; grandmother prepares most meals.",
-    "says": "I can still shower and get dressed fine on my own. My grandma does most of the cooking.",
-    "tier": "initial",
-    "importance": "minor"
+    "category": "family",
+    "topic": "family history of mental illness",
+    "chart": "Reports maternal uncle had 'nervous breakdown' in young adulthood, never formally diagnosed.",
+    "says": "My uncle on my mom's side had some kind of breakdown when he was young, but nobody really talks about what it was.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
    },
    {
     "id": "f32",
-    "category": "hpi",
-    "topic": "what helps restlessness",
-    "chart": "Reports pacing and the cannabis use are the only things that have given temporary relief from the restlessness.",
-    "says": "Walking around helps a little, and the weed helped some too, but nothing really makes it go away.",
+    "category": "pmh",
+    "topic": "prior psychiatric history",
+    "chart": "Denies any psychiatric hospitalizations or treatment prior to this first episode.",
+    "says": "No, this was my first time, I never had anything like this before.",
     "tier": "discoverable",
-    "importance": "important"
+    "importance": "minor"
    }
   ],
-  "objectives": [],
+  "objectives": [
+   {
+    "id": "o1",
+    "text": "Differentiate medication-induced akathisia and parkinsonian rigidity from psychotic agitation or relapse using observation and rating scales.",
+    "factIds": [
+     "f2",
+     "f3",
+     "f24"
+    ],
+    "actionIds": [
+     "a1",
+     "a3",
+     "a4",
+     "a5"
+    ]
+   },
+   {
+    "id": "o2",
+    "text": "Elicit and verify true medication adherence by exploring the discrepancy between the patient's stated adherence and pharmacy fill data, using a non-judgmental approach.",
+    "factIds": [
+     "f5",
+     "f6",
+     "f7"
+    ],
+    "actionIds": [
+     "a7"
+    ]
+   },
+   {
+    "id": "o3",
+    "text": "Conduct a thorough risk assessment including suicidal/homicidal ideation and residual psychotic symptoms, correctly identifying no acute safety escalation is needed while still noting ongoing hallucinations.",
+    "factIds": [
+     "f8",
+     "f9",
+     "f10",
+     "f11"
+    ],
+    "actionIds": [
+     "a2"
+    ]
+   },
+   {
+    "id": "o4",
+    "text": "Assess substance use (cannabis) and its interaction with antipsychotic treatment and symptom self-management, approaching disclosure with reduced stigma.",
+    "factIds": [
+     "f12",
+     "f13",
+     "f14"
+    ],
+    "actionIds": [
+     "a1"
+    ]
+   },
+   {
+    "id": "o5",
+    "text": "Identify psychosocial barriers to care including fear of rehospitalization, stigma, and confidentiality concerns about school, and build sufficient trust to support disclosure.",
+    "factIds": [
+     "f15",
+     "f16",
+     "f20",
+     "f28"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o6",
+    "text": "Provide psychoeducation on akathisia/EPS as a treatable medication side effect (not worsening illness) and formulate an SBAR-based plan to communicate adherence barriers and side effects to the prescriber without unnecessary hospitalization.",
+    "factIds": [
+     "f25",
+     "f26"
+    ],
+    "actionIds": [
+     "a8",
+     "a11"
+    ]
+   }
+  ],
   "mismatches": [
    {
     "id": "m1",
     "factId": "f5",
     "artifactId": "d3",
-    "patientClaim": "Patient states he has been taking risperidone every night as prescribed.",
-    "recordEvidence": "Pharmacy fill history shows only one partial fill of 7 tablets 8 days ago with no refills, and patient later discloses skipping the last 3 nights; a 7-tablet fill 8 days ago cannot cover 8 nights of nightly dosing through today.",
-    "teachingPoint": "Always verify stated adherence against objective sources (pharmacy fill data, pill counts) rather than accepting self-report alone, especially when side effects create incentive to underreport nonadherence; approach discrepancies with curiosity, not confrontation."
-   },
-   {
-    "id": "m2",
-    "factId": "f6",
-    "artifactId": "d5",
-    "patientClaim": "Patient reports the voices are 'quieter' and implies they are nearly resolved.",
-    "recordEvidence": "Self-rated voice intensity trend chart shows a plateau at 4/10 from day 7 to day 8 rather than continued improvement, suggesting symptom control may be stalling, possibly related to missed doses.",
-    "teachingPoint": "Trend data can reveal plateauing or subtle worsening that a single reassuring statement from the patient may obscure; correlate symptom trends with adherence gaps before assuming steady improvement."
+    "patientClaim": "Patient states he is taking risperidone every night as prescribed.",
+    "recordEvidence": "Pharmacy fill history shows only one fill of 7 tablets since discharge 8 days ago, with zero refill requests and one refill remaining unused.",
+    "teachingPoint": "Self-reported adherence often overestimates actual medication-taking; cross-checking pharmacy fill/refill data is an important objective adherence check, especially when side effects like akathisia may be driving covert non-adherence. Approach discrepancies with curiosity rather than confrontation to preserve trust."
    }
   ],
-  "answerKey": {
-   "primaryProblem": "Medication-induced akathisia from risperidone 4 mg nightly, compounded by covert medication nonadherence (missed last 3 nights, only partial pharmacy fill obtained) and residual, improving but persistent auditory hallucinations in a patient 8 days post-discharge from first-episode psychosis admission, with an overdue outpatient psychiatry follow-up and recent cannabis use.",
-   "differential": [
-    "Akathisia (extrapyramidal side effect of risperidone) - most consistent with description of inner restlessness, pacing, onset days after starting medication",
-    "Psychotic relapse/worsening agitation - less likely given linear thought process, improving (not worsening) hallucination trend, and clear temporal link of restlessness to medication start",
-    "Generalized anxiety related to fear of rehospitalization and stigma - contributing but not primary driver of motor restlessness",
-    "Cannabis-induced anxiety/restlessness - possible contributor but restlessness predates and is distinct in character from reported cannabis effects",
-    "Caffeine-related jitteriness - unlikely given stable, modest caffeine intake (distractor)"
-   ],
-   "keyFindings": [
-    "Continuous pacing and inability to sit still observed on camera, consistent with akathisia, onset 2-3 days after starting risperidone in hospital",
-    "Subjective arm stiffness without tremor; sleeping 10 hours but waking groggy",
-    "Patient states full adherence, but pharmacy fill history shows only one 7-tablet partial fill 8 days ago and patient later discloses skipping last 3 nights",
-    "Residual evening auditory hallucinations (non-command, commenting type), self-rated intensity plateaued at 4/10 over the last 2 days rather than continuing to improve",
-    "C-SSRS and direct questioning negative for suicidal or homicidal ideation, no command hallucinations to harm self/others",
-    "Cannabis use twice this week, used by patient to self-manage restlessness",
-    "No outpatient psychiatry follow-up appointment scheduled or completed since discharge 8 days ago, despite referral faxed at discharge",
-    "Significant fear of rehospitalization and stigma at college underlying guardedness and nonadherence"
-   ],
-   "plan": [
-    "Complete and document full mental status exam, EPS/akathisia screen, and suicide/homicide risk assessment (C-SSRS) this visit",
-    "Communicate urgently with prescribing/outpatient psychiatry (or on-call psychiatric provider) regarding significant akathisia and partial medication nonadherence so dose or agent can be reassessed by the prescriber - this is outside independent nursing scope to adjust",
-    "Facilitate active scheduling of overdue outpatient psychiatry follow-up; consider warm handoff/same-week urgent appointment given medication intolerance and partial adherence",
-    "Provide psychoeducation: akathisia is a treatable medication side effect, not a sign the medication is 'poisoning' him or that he is getting worse; encourage not stopping medication abruptly without provider guidance, and report side effects promptly",
-    "Discuss cannabis use and psychosis risk in a nonjudgmental, harm-reduction-oriented way; recommend reducing use and discuss with psychiatry",
-    "Address cost/access barrier to the full prescription fill; connect with pharmacy assistance program or social work/case management",
-    "Support disclosure to grandmother and care team with patient's consent to strengthen home support and medication monitoring",
-    "Reassure regarding confidentiality at college per policy while clarifying nurse's duty to escalate safety concerns if they arise",
-    "Schedule close follow-up contact (e.g., 24-48 hour check-in call) given medication intolerance and adherence gap, pending psychiatry input",
-    "Document SBAR summary and risk assessment clearly, including the adherence/pharmacy discrepancy and plan for provider notification"
-   ],
-   "redFlags": [
-    "Partial medication adherence in a patient with first-episode psychosis significantly raises relapse risk and should prompt urgent provider communication",
-    "Any emergence of command hallucinations to harm self or others, or any suicidal/homicidal ideation, would require immediate escalation and possibly emergency evaluation",
-    "Worsening (rather than plateauing) auditory hallucinations or new disorganized behavior would be a red flag for relapse",
-    "Severe, worsening akathisia carries a small but documented association with increased agitation, distress, and suicidality risk and must be reported promptly, not managed by stopping medication abruptly without guidance",
-    "Missed outpatient psychiatry follow-up beyond the recommended window needs active remediation, not passive tracking"
-   ],
-   "educationPoints": [
-    "Akathisia is a common, uncomfortable extrapyramidal side effect of antipsychotics like risperidone that can mimic anxiety or agitation but has a distinct inner restlessness quality and clear temporal link to medication start/dose changes",
-    "Self-reported adherence is often inaccurate, especially when side effects are distressing; objective data (pharmacy fill records, pill counts) should be reviewed and discrepancies explored with curiosity rather than confrontation",
-    "Abruptly stopping antipsychotics without provider guidance can increase relapse risk even when the motivation (intolerable side effects) is understandable",
-    "Cannabis use can worsen psychotic symptoms over time and interact with antipsychotic efficacy; harm-reduction conversations are more effective than confrontation",
-    "Fear of rehospitalization and stigma can drive nondisclosure; establishing trust and clarifying the goal of keeping the patient safely out of the hospital can improve honesty and engagement",
-    "Trend data (e.g., symptom rating charts) should be reviewed over time rather than relying on a single reassuring verbal report, since plateaus or subtle worsening can be missed",
-    "Nursing scope includes thorough assessment, psychoeducation, risk screening, and escalation/communication with prescribers - not independent medication changes"
-   ]
-  },
+  "chartAtStart": [
+   {
+    "label": "Reason for visit",
+    "value": "Post-discharge psychiatric nursing check-in, 8 days after inpatient discharge for first-episode psychosis"
+   },
+   {
+    "label": "Problem list",
+    "value": "First-episode psychosis (inpatient admission, resolved acute phase); rule out medication side effects"
+   },
+   {
+    "label": "Medications",
+    "value": "Risperidone 4 mg PO nightly (started at discharge)"
+   },
+   {
+    "label": "Allergies",
+    "value": "No known drug allergies"
+   },
+   {
+    "label": "Last vitals",
+    "value": "BP 122/78 mmHg, HR 82 bpm, Temp 98.4°F - recorded at hospital discharge"
+   },
+   {
+    "label": "Immunizations",
+    "value": "Up to date per outpatient primary care record"
+   },
+   {
+    "label": "Care team",
+    "value": "Inpatient psychiatry (discharging provider), outpatient psychiatry clinic (pending first visit), primary care provider, community health nursing (telehealth check-in)"
+   },
+   {
+    "label": "Code status",
+    "value": "Full code (per standard admission default, not applicable to outpatient psychiatric care)"
+   }
+  ],
   "patient": {
    "name": "Devon Clarke",
    "age": 24,
    "sex": "male",
    "pronouns": "he/him",
    "ethnicity": "Jamaican-American",
-   "occupation": "Part-time community college student",
+   "occupation": "Part-time community college student (business studies)",
    "language": "English",
-   "appearance": "A young man of average build with short dark hair, wearing a plain T-shirt, appears tired with slightly flushed cheeks. He is visibly unable to stay seated, frequently standing up, pacing across the frame of the camera, and shifting his weight from foot to foot throughout the call. His bedroom is dimly lit with posters on the wall; he glances at the door occasionally as if checking who might overhear."
+   "appearance": "A young man of average build with short dark hair, wearing a plain gray t-shirt, visible in a small bedroom with a bed and desk in the background, dim overhead lighting. He is rarely seated for long, repeatedly standing up, shifting his weight foot to foot, and pacing in and out of the camera frame throughout the call, with a somewhat guarded, anxious facial expression."
   },
   "persona": {
-   "personality": "Guarded and anxious at first, but earnest and cooperative once he feels safe; has a dry, understated sense of humor that surfaces when he relaxes.",
-   "communicationStyle": "Speaks in short, hedging sentences when nervous; opens up with more detail and emotion once trust is established; avoids clinical jargon, uses his own descriptive phrases.",
+   "personality": "Guarded but earnest; wants to be seen as capable and not 'crazy'; protective of his privacy and image, especially around school.",
+   "communicationStyle": "Speaks in short, sometimes clipped sentences when anxious; opens up more with warmth and non-judgmental reassurance; uses casual, plain language, no clinical jargon.",
    "healthLiteracy": "low",
-   "emotionalState": "Anxious, physically agitated, fearful of being judged or sent back to the hospital, underlying hope that he can return to normal life.",
-   "background": "Grew up in the Bronx after his family moved from Jamaica when he was a child; lives with his grandmother, who raised him and has been his main support since his hospitalization. He is enrolled part-time at a community college studying business, works occasionally helping a cousin with deliveries, and had never experienced any mental health issues before this first episode.",
+   "emotionalState": "Anxious, physically restless, wary of being judged or rehospitalized, with moments of relief when reassured.",
+   "background": "Grew up in the Bronx raised partly by his grandmother after his mother moved for work; first in his family attending college; close with his grandmother who is religious and has limited public discussion of mental illness in the family; enjoys basketball and listening to dancehall music, used to play pickup games before admission.",
    "speechExamples": [
-    "I've just been really restless, like I have to keep moving all the time.",
-    "Please don't send me back to the hospital. I just got out, I can't go through that again.",
-    "Okay, honestly... I haven't taken it the last three nights.",
-    "Nobody at my school knows I was in the hospital. I really don't want that getting out.",
-    "I just want to be able to sit in class again without feeling like I'm going to jump out of my skin."
+    "It's like my legs have their own idea, I can't make them stop.",
+    "I don't want to go back there, if I tell you too much are you going to send me back?",
+    "Nobody at school knows about this, and I want to keep it that way.",
+    "I know it's supposed to help with the voices, I didn't know it could make me feel like this.",
+    "Okay... honestly, I didn't take it the last few nights."
    ],
    "concerns": [
-    "Fear of being readmitted to the hospital if he admits his symptoms are not fully controlled",
-    "Worry that classmates or professors at college will find out about his hospitalization",
-    "Confusion and fear about what a 'psychosis' diagnosis means for his future",
-    "Frustration that the medication meant to help him is causing unbearable restlessness",
-    "Concern about disappointing or worrying his grandmother"
+    "Being sent back to the hospital if he says too much",
+    "Classmates or professors finding out about his diagnosis or hospitalization",
+    "Whether the restlessness means he is getting sicker",
+    "Falling behind in his classes due to missed lectures",
+    "Whether he will have to be on this medication forever"
    ]
   },
   "scenario": {
-   "studentBrief": "You are a psychiatric-mental health nursing student conducting a telehealth post-discharge check-in with Devon Clarke, a 24-year-old man who was discharged 8 days ago after a two-week inpatient admission for a first episode of psychosis. He was started on risperidone 4 mg nightly at discharge. This is a scheduled nursing follow-up call to assess his mental status, safety, and medication tolerance/adherence, and to coordinate ongoing care. You do not yet know his current symptom status, side effects, or adherence - assess thoroughly and build rapport before probing sensitive topics.",
-   "chiefComplaint": "Restlessness and inability to sit still since starting antipsychotic medication after recent psychiatric hospitalization",
-   "openingLine": "Hi... yeah, I've just been really restless, like I have to keep moving all the time. I can't even sit through my classes.",
+   "studentBrief": "You are a psychiatric-mental health nursing student conducting a telehealth post-discharge check-in with Devon Clarke, 24, who was discharged 8 days ago after a 2-week inpatient admission for first-episode psychosis. He was started on risperidone 4 mg nightly at discharge. Your tasks are to assess his mental status, medication effects, adherence, and safety, and to plan next steps per SBAR for the care team.",
+   "chiefComplaint": "Restlessness and stiffness since starting antipsychotic medication after recent psychiatric hospitalization",
+   "openingLine": "They told me I had to do this check-in call since I got out of the hospital. I guess I'm okay, just... I can't sit still, it's driving me crazy.",
    "tasks": [
-    "Perform a mental status exam including appearance, mood, affect, thought process, and perceptual disturbances via video",
-    "Conduct a thorough suicide/homicide risk assessment and screen for command hallucinations",
-    "Assess for extrapyramidal symptoms/akathisia and explore the timeline relative to medication start",
-    "Explore medication adherence sensitively, cross-check with pharmacy/record data, and identify any discrepancies",
-    "Screen for substance use and its relationship to symptoms",
-    "Provide psychoeducation and determine appropriate escalation/follow-up plan within nursing scope"
+    "Perform a mental status exam and assess for residual psychotic symptoms",
+    "Screen for suicidal/homicidal ideation and overall safety",
+    "Assess for extrapyramidal side effects (akathisia, rigidity) and differentiate from psychiatric relapse",
+    "Explore medication adherence, including gently addressing any discrepancy with pharmacy records",
+    "Provide psychoeducation on side effects and adherence, and identify when to escalate to the prescriber or increase visit frequency versus manage within nursing scope"
    ],
    "timeLimitMin": 25
   },
-  "setting": "Telehealth video visit; patient at home in his bedroom in the Bronx, New York, on his personal laptop",
+  "answerKey": {
+   "primaryProblem": "Risperidone-induced akathisia (and probable mild parkinsonian rigidity) leading to covert medication non-adherence in a patient recently discharged after first-episode psychosis, with residual but diminished auditory hallucinations and no acute safety risk.",
+   "differential": [
+    "Antipsychotic-induced akathisia/extrapyramidal side effects (most likely, given temporal onset 3-4 days after starting risperidone, subjective inner restlessness, objective pacing, and stiffness)",
+    "Psychotic agitation/relapse (less likely: thought process remains linear, no new delusions, hallucinations are quieter not worsening, and restlessness has a clear temporal link to medication rather than symptom progression)",
+    "Generalized anxiety related to school stress and stigma (contributory but does not explain the motor restlessness pattern)",
+    "Cannabis-related anxiety or intoxication effect (possible minor contributor given recent use, but restlessness pattern and timeline fit akathisia better)"
+   ],
+   "keyFindings": [
+    "Pacing/restlessness and inability to sit still beginning 3-4 days after starting risperidone 4 mg nightly, consistent with akathisia",
+    "Subjective stiffness in arms/jaw suggesting mild parkinsonian rigidity",
+    "Patient reports adherence but pharmacy fill history shows only a single 7-tablet fill with no refills since discharge, and patient later discloses skipping the last 3 nights due to worsening restlessness after dosing",
+    "Residual auditory hallucinations present but quieter, non-command, occurring mainly evenings; no SI/HI on C-SSRS screen",
+    "Recent cannabis use twice this week as self-management for restlessness/anxiety",
+    "Significant psychosocial barriers: fear of rehospitalization, stigma/privacy concerns about school and family, limited education about side effects at discharge"
+   ],
+   "plan": [
+    "Within nursing scope: validate and normalize side effect experience, correct misattribution that restlessness means 'getting sicker,' and reinforce that this is a common, treatable medication effect",
+    "Communicate findings urgently to prescribing psychiatrist via SBAR: akathisia/rigidity symptoms, probable covert non-adherence (3 missed doses, pharmacy fill discrepancy), residual but stable hallucinations, cannabis use, no acute SI/HI - request medication review (e.g., dose adjustment or adjunct for akathisia) rather than nurse independently changing or stopping the medication",
+    "Encourage patient to keep the already-scheduled outpatient psychiatry appointment in 4 days; advocate for sooner appointment if possible given distress level and non-adherence risk",
+    "Provide brief psychoeducation on akathisia versus psychotic symptoms, and on interaction risks between cannabis and antipsychotic efficacy/adherence, in a non-judgmental way",
+    "Reinforce confidentiality limits honestly (what must be reported, e.g., imminent safety risk) to rebuild trust given his fear of involuntary rehospitalization",
+    "Discuss involving grandmother (with patient's consent) in medication support, respecting patient's autonomy and privacy concerns",
+    "Schedule closer follow-up or safety check given non-adherence and residual symptoms; document plan clearly for care team continuity"
+   ],
+   "redFlags": [
+    "Any emergence of suicidal or homicidal ideation, intent, or plan",
+    "Any escalation in frequency/intensity of auditory hallucinations or new command hallucinations",
+    "Development of acute dystonia, neuroleptic malignant syndrome signs (fever, severe rigidity, autonomic instability), or inability to tolerate medication at all",
+    "Complete medication discontinuation without any outpatient follow-up in place",
+    "Signs of worsening disorganization or inability to care for self"
+   ],
+   "educationPoints": [
+    "Akathisia is a common, distressing extrapyramidal side effect of antipsychotics (especially at higher doses like risperidone 4 mg) that can be mistaken by patients for worsening mental illness, and is a well-documented driver of covert medication non-adherence.",
+    "Self-reported adherence is often inaccurate; cross-referencing pharmacy fill/refill history is a practical, low-friction way to objectively assess adherence in a telehealth visit.",
+    "Nursing scope in medication monitoring includes identifying and escalating side effects and adherence concerns to the prescriber, not independently adjusting antipsychotic dosing.",
+    "Building trust around confidentiality and non-punitive intent is essential to eliciting sensitive disclosures (missed doses, substance use, fear of rehospitalization) in patients recently discharged from involuntary or urgent psychiatric care.",
+    "Residual, quieter hallucinations without command content or distress escalation can be monitored rather than treated as an immediate crisis, but should still be documented and communicated to the prescribing team."
+   ]
+  },
+  "title": "Post-Discharge Check-In After First-Episode Psychosis: Restlessness, Hidden Non-Adherence, and Residual Voices",
+  "summary": "A 24-year-old man discharged 8 days ago after a first psychiatric hospitalization for first-episode psychosis presents for a routine telehealth nursing check-in on risperidone 4 mg nightly, visibly pacing and restless. The case teaches learners to recognize antipsychotic-induced akathisia versus relapse, to uncover covert non-adherence driven by that side effect using pharmacy records, and to conduct a safety-focused mental status exam while navigating the patient's fear of rehospitalization and stigma, culminating in an SBAR escalation to the prescriber rather than independent medication changes.",
   "specialty": "Psychiatric-Mental Health Nursing",
-  "summary": "An 8-day post-discharge telehealth check-in with a 24-year-old man after a first psychotic episode, presenting with akathisia from risperidone that he has misattributed as the medication 'making him worse,' leading to covert nonadherence and a cost-related partial pharmacy fill, alongside residual but improving auditory hallucinations and recent cannabis use. The case teaches risk assessment, EPS recognition, rapport-based elicitation of hidden nonadherence/substance use, and appropriate nursing-scope escalation when outpatient follow-up has lapsed.",
-  "title": "Akathisia and Covert Nonadherence After First-Episode Psychosis Discharge",
+  "setting": "Telehealth video visit, patient at home in his bedroom in the Bronx, NY",
+  "encounterType": "Post-discharge medication monitoring and safety check-in",
+  "difficulty": 4,
   "professions": [
    "psychiatric-nursing"
   ],

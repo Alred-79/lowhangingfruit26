@@ -1,0 +1,30 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "artifact d6 (Palliative Care Intake Questionnaire)",
+   "problem": "This chart artifact, released via fact f3 but containing the patient's own quoted free text ('I don't like how it makes my head feel and I don't want to end up dependent on it'), hands over f3's reluctant-adjacent psychological driver (fear of dependence/fogginess, which maps to f18, a 'discoverable' tier fact) as a chart note rather than requiring the learner to elicit it in interview. Fix: strip the fear-of-dependence free text from d6 and leave only objective dosing/frequency facts; let f18 be elicited only through the assessment action/interview."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "d6 and f23 vs chartAtStart 'Code status: Not documented'",
+   "problem": "d6 states 'Advance directive on file: No - haven't gotten around to it,' duplicating f23 (tier: discoverable) verbatim before the learner asks; since d6 release is tied to f3, this document surfaces f23 content as a side effect of an unrelated fact trigger. Fix: remove the advance directive line from d6 so f23 is only discoverable through a1 1/action a11 (chart review) as intended."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a4 result vs d4 medication list",
+   "problem": "a4 states 'Not currently on any scheduled bowel regimen,' and d4 says senna is 'None currently prescribed / Not taking,' which is consistent, but a4's result duplicates info also given in a1/a2 framing (e.g., 'as needed' pain regimen) without issue — no actual error, retracting this item is unnecessary.",
+   "dummy": "ignore"
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "d5 flowsheet weight trend vs f5 'lost about twenty pounds'",
+   "problem": "Weight dropped from 64 kg to 55 kg over 10 weeks = 9 kg loss ≈ 19.8 lb, consistent with 'about twenty pounds' — verified correct, no fix needed."
+  }
+ ]
+}

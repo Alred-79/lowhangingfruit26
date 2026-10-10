@@ -41,11 +41,11 @@ export async function proposeStages(caseId: string, brief = ""): Promise<{ title
         },
       },
     },
-    system: "You help health-professions faculty turn one patient case into a connected, interprofessional care journey for a telehealth simulation: several encounters with the same patient by different professionals, where each depends on what the earlier ones found. Choose professions whose lenses genuinely differ for this patient, order them so information flows forward naturally, and give each a focus that builds on the previous encounter. Use only the supplied clinician personas.",
+    system: "You help health-professions faculty turn one patient case into a connected, interprofessional care journey for a telehealth simulation: several encounters with the same patient by different professionals, where each depends on what the earlier ones found. Choose professions whose lenses genuinely differ for this patient, order them so information flows forward naturally, and give each a focus that builds on the previous encounter. Use only the supplied clinician personas. The title, summary and every focus are shown to students and steer the AI clinicians, so write them only from the record at start: name topics to explore, never findings, behaviours or attitudes that the patient has not yet disclosed, and never tell a later professional what an earlier one will have found.",
     messages: [
       {
         role: "user",
-        text: `CASE: ${c.title}\n${c.summary}\nSetting: ${c.setting}\nRecord at start:\n${(c.chartAtStart || []).map((x) => `- ${x.label}: ${x.value}`).join("\n")}\nTopics the patient can be asked about: ${[...new Set((c.facts || []).map((f) => f.category))].join(", ")}\nApproved checks: ${(c.actions || []).map((a) => a.name).slice(0, 25).join("; ")}\n\nCLINICIAN PERSONAS\n${roster.map((r) => `${r.id}: ${r.name}, ${r.role}`).join("\n")}\n\nROLE CATALOG\n${roles.map((r) => `${r.id}: ${r.name}`).join("\n")}\n\n${brief ? "FACULTY REQUEST: " + brief : ""}`,
+        text: `PATIENT: ${c.patient?.name}, ${c.patient?.age}, ${c.patient?.sex}. Specialty of the source case: ${c.specialty}\nRecord at start (this is ALL that is known before the first encounter):\n${(c.chartAtStart || []).map((x) => `- ${x.label}: ${x.value}`).join("\n")}\nTopics the patient can be asked about: ${[...new Set((c.facts || []).map((f) => f.category))].join(", ")}\nApproved checks: ${(c.actions || []).map((a) => a.name).slice(0, 25).join("; ")}\n\nCLINICIAN PERSONAS\n${roster.map((r) => `${r.id}: ${r.name}, ${r.role}`).join("\n")}\n\nROLE CATALOG\n${roles.map((r) => `${r.id}: ${r.name}`).join("\n")}\n\n${brief ? "FACULTY REQUEST: " + brief : ""}`,
       },
     ],
   });
@@ -54,7 +54,12 @@ export async function proposeStages(caseId: string, brief = ""): Promise<{ title
     .filter((s) => roster.some((r) => r.id === s.clinicianId) && !used.has(s.clinicianId) && !!used.add(s.clinicianId))
     .slice(0, 6)
     .map((s, i) => ({ id: `s${i + 1}`, order: i + 1, professionId: s.professionId, roleTitle: s.roleTitle, clinicianId: s.clinicianId, focus: s.focus, simTime: s.simTime, visitLabel: s.visitLabel }));
-  return { title: out.title || c.title, summary: out.summary || "", stages };
+  const titles = stages.map((x) => x.roleTitle.toLowerCase());
+  return {
+    title: out.title?.trim() || `${c.patient?.name}: a connected care journey across ${stages.length} professions`,
+    summary: out.summary?.trim() || `${c.patient?.name}, ${c.patient?.age}, is seen in turn by ${titles.slice(0, -1).join(", ")} and ${titles[titles.length - 1]}. Each professional starts from what the others recorded, adds their own findings, and hands off with an SBAR. Join as any one of them; the AI plays the rest.`,
+    stages,
+  };
 }
 
 /** Cleans a faculty-edited spec before it is stored. */

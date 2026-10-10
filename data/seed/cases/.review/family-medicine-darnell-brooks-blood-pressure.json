@@ -1,0 +1,41 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "a13 result",
+   "problem": "Action 'Review commercial driver's license medical certification status' is a record review that directly hands over the hidden fact f11 context (that patient has not disclosed any sleep issue to DOT) before the learner has elicited the near-miss drowsy driving event through sensitive questioning. This leaks the connection between OSA risk and undisclosed DOT status, which the case intends to be reluctant/hidden. Fix: the action result should only report the certification date/validity, not comment on 'has not disclosed any sleep issue to DOT examiner.'"
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart Problem list",
+   "problem": "Problem list includes 'Osteoarthritis, shoulder (presumed)' which pre-reveals the shoulder pain etiology (f25, a discoverable/distractor fact) before the patient discloses it via history. This primes the learner and reduces the discoverability of the NSAID-use connection (f8). Fix: remove this entry or make it generic ('chronic shoulder pain, cause not yet established') without presuming OA."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a9 result vs STOP-BANG scoring",
+   "problem": "STOP-BANG score is stated as 5/8 counting 'snoring, tiredness, observed apnea by partner, high BP, male sex' - this is only 5 items explicitly listed, but STOP-BANG also includes BMI, age, and neck circumference criteria. Patient is BMI 33.3 (>35 threshold not met, so BMI doesn't count), age 52 (<50? no, age >50 counts, patient is 52 so age SHOULD count as a positive criterion), making the true score at least 6/8 (adding age). The stated 5/8 omits the age criterion, which is objectively met (age >50). This is a scoring error - correct score should be 6/8 (or verify neck circumference too, but age alone pushes it to 6/8 minimum)."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a12 BMI calculation",
+   "problem": "BMI calculation: weight 232 lb, height 5'10' (70 inches). BMI = (232/70^2)*703 = (232/4900)*703 ≈ 33.3. This checks out correctly. However the chartAtStart lists prior visit as 228 lb BMI 32.7, and action a12 says 'current weight 232 lb... prior visit 228lb' - these are consistent. No issue found here on recheck - retracting this as a flagged issue."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a13 and m2 teaching point",
+   "problem": "The scope note states 'the family medicine resident refers rather than independently adjudicating fitness to drive,' but the action a13 itself (reviewing CDL certification status) is likely outside typical family medicine telehealth scope/access - resident physicians generally do not have direct access to DOT certification records in the EHR; this may not be a feasible record for a family medicine chart review during a telehealth visit unless the patient explicitly provided it. Clarify artifact provenance or restrict to patient-reported CDL status rather than an independent record pull."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "d3 artifact eGFR reference range column",
+   "problem": "Reference range for eGFR is written as '60' instead of a proper range (e.g., '>60') with units in the Result column instead of a separate correct range field, which is inconsistent with the other rows' format of 'low-high'. Minor formatting inconsistency, not a factual error."
+  }
+ ]
+}

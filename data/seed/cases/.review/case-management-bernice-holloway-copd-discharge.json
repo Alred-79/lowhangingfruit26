@@ -1,0 +1,29 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "d2 medication list / d1 discharge summary vs prednisone taper math",
+   "problem": "Taper is described as '40mg daily, taper by 10mg every 3 days over 10 days total.' Working this out: Days1-3 at 40mg, days4-6 at 30mg, days7-9 at 20mg, day10 at 10mg would be a 10-day course but doesn't cleanly resolve to zero in exactly 10 days with 3-day steps (3+3+3+1). This is a minor arithmetic imprecision in the taper schedule description that a pharmacist-literate reader may flag; consider specifying exact daily doses by day range instead of a formula that doesn't divide evenly into 10 days."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "chartAtStart Last vitals vs d4 oximetry chart",
+   "problem": "chartAtStart lists SpO2 93% on 2L O2 at discharge, but d4 chart's Day 1 (post-discharge) point shows 92%, and the day-of-discharge value isn't included as a chart point — this is a very minor gap but the two sources (discharge vitals vs home oximetry Day 1) are not explicitly reconciled, which could read as a drift in baseline that isn't addressed in findings."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a4 result vs chartAtStart Last vitals",
+   "problem": "RR is 20 at discharge (chartAtStart) and 22 now (a4) — this is intended as a mild/stable finding, but the case never explicitly states the acceptable delta, leaving it ambiguous whether this represents the 'baseline' breathlessness mentioned in f3 or a true change; a brief anchor value for 'baseline RR' would strengthen internal consistency for grading mild tachypnea."
+  },
+  {
+   "severity": "low",
+   "kind": "leakage",
+   "where": "d3 title 'Admission History - COPD Exacerbations This Year'",
+   "problem": "This artifact is appropriately gated behind action a1, but its title combined with the rows already reveals the full admission pattern immediately upon that single action, slightly short-circuiting the discovery intended to come from a2-a10; this is a minor pacing issue rather than a leak of hidden facts, since the three admissions are already stated in chartAtStart problem list and a1 result."
+  }
+ ]
+}

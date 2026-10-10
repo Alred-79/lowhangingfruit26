@@ -1,0 +1,41 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart Problem list",
+   "problem": "The problem list states 'history of childhood female genital cutting (Type I, per patient report)' at visit start, before the patient has disclosed this (fact f11 is tier 'reluctant'). This leaks a sensitive, reluctant disclosure that the learner is supposed to elicit through sensitive questioning (per objective o4). Fix: remove this line from chartAtStart; it should only surface via a11 (delivery summary review) or direct patient disclosure during the visit, not be pre-populated in the chart snapshot shown before the encounter even starts."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "artifact d1 (Delivery & Postpartum Discharge Summary), release: start",
+   "problem": "d1 explicitly documents 'Anterior midline episiotomy performed for perineal rigidity in the setting of childhood female genital cutting (Type I, per patient report)' and is released 'at start' (before any learner action). This hands the FGC history to the learner immediately, bypassing the sensitive interview objective (o4) and the reluctant fact tier (f11). Fix: either delay release of d1 until action a11 is performed, or redact the FGC detail from the start-released summary and only reveal it via a11 (chart review) or patient disclosure."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "action a8 vs fact f11 tier",
+   "problem": "Action a8 result states 'Patient describes prior female genital cutting (Type I) in childhood' as part of a camera exam of the perineum — but FGC history is a historical/psychosocial fact (f11, tier reluctant), not something revealed by a physical exam action. An exam action should report only visual/physical findings; disclosure of FGC history should occur through dialogue (interview), not be bundled into an exam result. This conflates an assessment action with an interview disclosure and risks leaking the reluctant fact through an action that is nominally an exam."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a11 (Review delivery and discharge summary) result",
+   "problem": "a11 result reveals 'anterior episiotomy for perineal rigidity related to prior FGC' directly, which combined with d1 being released at start means the FGC fact is revealed through multiple channels before/without requiring the sensitive direct question specified in objective o4. This undermines the teaching point that patients will not volunteer this unprompted and must be respectfully elicited."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "action a2 result",
+   "problem": "HR 96 bpm is described as 'patient-counted via home pulse oximeter' — pulse oximeters measure HR via plethysmography automatically; a patient would not typically 'count' a HR using a pulse oximeter, they would read a displayed number. Minor wording inconsistency; should read 'measured by home pulse oximeter' rather than 'patient-counted.'"
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "d4 flowsheet vs a2 result",
+   "problem": "a2 states 'No chills reported at time of call, though she had chills last night,' consistent with f3, but the home vitals log (d4) only tracks BP/HR/Temp and does not capture chills, so this is fine; however the yesterday temp in d4 is listed as 38.0°C while f3/a1 scenario implies fever 'last night' was presumably higher or coincides with chills — this is a minor inconsistency since the chills description says 'last night' but the log shows yesterday's recorded temp as 38.0 (not extremely high), which is plausible but worth noting creates a slightly confusing timeline between 'yesterday' logged temp and 'last night' chills onset described in f3/a2."
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a2 result / artifact d2",
+   "problem": "The collection log result (and d2 artifact) directly hands over facts f2, f3, and f4 (3 attempts, 4-min tourniquet, fist pumping) verbatim as a record review, bypassing the interview entirely. These are tagged as 'initial' tier facts the patient would volunteer, but having them also fully documented in the collection log before the learner asks the patient makes the interview questions (and the fact tiers) redundant/leaked. If these are meant to be elicited from the patient as initial facts, the record review action should not pre-empt them with identical detail, or the facts should be marked discoverable only via the artifact (not duplicated via patient dialogue tier 'initial').",
+   "suggested_fix": "Either remove fist-pumping/tourniquet-time granularity from the collection log artifact (leave it to the patient interview) or mark f2-f4 as not independently elicited since the chart already discloses them at start."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a10 result",
+   "problem": "Action a10 is phrased as 'Ask about diet and salt substitute use' but its result directly delivers the reluctant fact f12 (salt substitute use, duration) without requiring a sensitive, rapport-building question — this is a simple ask-action handing over a reluctant-tier fact immediately, which bypasses the tiered-disclosure design intended for reluctant facts.",
+   "suggested_fix": "Either downgrade f12 to discoverable tier (consistent with the ease of eliciting it here), or make the action text reflect only an initial/general diet question and require a follow-up probe before the salt substitute detail is revealed."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a9 name",
+   "problem": "Action a9 is named 'Ask patient to describe her symptoms today' which is purely an interview question, not an examination/measurement/instrument/record review as required for this role's action kinds; it directly returns ROS answers (f6-f10) without any instrument-based elicitation, which is an interview bypass inconsistent with the role's action-kind constraints.",
+   "suggested_fix": "Reframe as a structured symptom checklist/instrument review (e.g., 'Administer structured symptom screen') or remove it as an action and let these facts emerge only through free-text dialogue."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "facts f12 vs f30 tier",
+   "problem": "f12 (salt substitute use) is tagged 'reluctant' while f30 (patient unaware it contains potassium) is tagged 'hidden' and both are revealed by essentially the same question in action a10's result area; action a10 only asks about 'diet and salt substitute use' yet its result reveals the full year-long habit (reluctant tier content) without a hidden-tier unveiling action producing f30 separately, creating inconsistency between the fact-tier design and the single action's result.",
+   "suggested_fix": "Split into two distinct interview moments: one eliciting salt substitute use (reluctant, requires rapport) and a separate, more direct question revealing her unawareness of its potassium content (hidden, requires a direct sensitive question), each with its own action/result."
+  },
+  {
+   "severity": "low",
+   "kind": "other",
+   "where": "action a5 and keyFindings",
+   "problem": "The assessment action a5 is categorized as 'assessment' which is allowed, but its content performs clinical reasoning that borders on diagnostic synthesis (weighing true hyperkalemia risk) beyond pure lab assessment scope; while plausible for MLS pre-analytical judgment, the phrase 'cannot be excluded without a clean recollection' edges toward clinical risk-stratification language more typical of a provider. This is minor since the role scope does include assessing pre-analytical plausibility, but should be worded to avoid any diagnostic certainty framing.",
+   "suggested_fix": "Rephrase to clearly frame as a laboratory-only judgment about specimen validity rather than a hyperkalemia risk assessment per se."
+  }
+ ]
+}

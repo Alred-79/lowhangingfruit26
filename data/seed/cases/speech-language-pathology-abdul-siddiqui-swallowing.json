@@ -3,94 +3,144 @@
  "reviewed": false,
  "profile": {
   "version": 1,
-  "actions": [],
-  "answerKey": {
-   "primaryProblem": "Oropharyngeal dysphagia with signs of aspiration risk (delayed pharyngeal swallow, wet vocal quality, delayed cough with thin liquids) and hypokinetic dysarthria/hypophonia, both consistent with underlying Parkinson disease progression.",
-   "differential": [
-    "Dysphagia primarily due to Parkinson disease (oropharyngeal, hypokinetic pattern)",
-    "Medication-related swallow changes (off-period bradykinesia around dosing, pill residue)",
-    "Contribution from reduced hydration/nutrition secondary to self-restriction of thin liquids",
-    "Hypokinetic dysarthria with voice/loudness decline (candidate for LSVT LOUD)",
-    "Less likely: primary esophageal dysphagia (no reflux/odynophagia pattern reported), structural lesion (no red flags), early cognitive-communication disorder (screen unremarkable)"
-   ],
-   "keyFindings": [
-    "Caregiver-reported coughing with thin liquids at most meals, delayed cough after swallow",
-    "Wet vocal quality after water swallow on camera; cervical auscultation suggests residue",
-    "4 kg (6%) weight loss over 3 months and meals taking over an hour",
-    "Recent chest infection treated empirically, no prior swallow study",
-    "Patient's self-report of normal swallowing conflicts with observed signs and caregiver report",
-    "Hypophonic, monotone voice; reduced tongue range/speed; mild tremor",
-    "Pills (including carbidopa-levodopa) sticking, no modified formulation yet",
-    "Social withdrawal from community gathering due to voice difficulty",
-    "Nectar-thick liquids tolerated better than thin on trial"
-   ],
-   "plan": [
-    "Recommend referral for instrumental swallow evaluation (videofluoroscopic swallow study or FEES) to characterize pharyngeal physiology and aspiration risk objectively; defer definitive diet texture prescription to that result",
-    "Communicate findings and aspiration risk concern to neurology/PCP given recent chest infection and ongoing cough with thin liquids",
-    "Interim compensatory strategies pending instrumental study: smaller sips, chin-tuck trial with thin liquids if tolerated, alternating bites and sips, upright positioning during and 30 minutes after meals, extra time/no distractions at meals",
-    "Discuss liquid consistency modification cautiously (e.g., trial of nectar-thick liquids) as temporary strategy, not definitive, until instrumental confirmation",
-    "Refer to physician for review of pill-swallowing difficulty (consider alternative formulation, crushing per pharmacist/physician guidance, or administration technique) - outside SLP scope to change medication form independently",
-    "Recommend LSVT LOUD or similar intensive voice treatment program for hypophonia/monotone voice; discuss candidacy, intensity (typically 4x/week x 4 weeks), and goal of improved loudness/intelligibility to support re-engagement in social activities",
-    "Educate patient and caregiver on signs of aspiration risk to monitor (coughing, wet voice, recurrent chest infections, temperature) and when to seek medical attention",
-    "Encourage nutrition/hydration monitoring and consider dietitian referral given unintentional weight loss",
-    "Address patient's dignity and autonomy: include him directly in all discussions, validate his frustration, avoid speaking about him in third person during visit"
-   ],
-   "redFlags": [
-    "Unintentional weight loss (~6% in 3 months)",
-    "Recent chest infection suspicious for aspiration pneumonia",
-    "Delayed cough and wet vocal quality after thin liquid swallow",
-    "Patient's denial of swallowing problems despite objective signs (impaired symptom awareness, common in Parkinson disease) - safety risk if unaddressed",
-    "Pills sticking - risk of incomplete medication intake affecting Parkinson symptom control"
-   ],
-   "educationPoints": [
-    "Parkinson disease commonly causes both hypokinetic dysarthria (quiet, monotone voice) and oropharyngeal dysphagia with reduced awareness of swallowing difficulty",
-    "Clinical swallow exam findings (wet voice, delayed cough, cervical auscultation) raise concern for aspiration but cannot confirm or rule it out - instrumental study is needed for definitive characterization",
-    "LSVT LOUD is an evidence-based intensive voice treatment for Parkinson-related hypophonia and can improve participation in valued social activities",
-    "Medication timing and swallow difficulty can interact in Parkinson disease; coordination with physician/pharmacist is needed before changing pill form or administration",
-    "Caregiver report and patient self-report may genuinely differ in Parkinson disease due to impaired interoceptive awareness, not necessarily denial or dishonesty - this requires sensitive, non-confrontational exploration"
-   ]
-  },
+  "actions": [
+   {
+    "id": "a1",
+    "kind": "record",
+    "name": "Review recent hospitalization/illness record",
+    "result": "Treated for aspiration pneumonia/chest infection 5 weeks ago by primary care; course of oral antibiotics, no hospitalization. Documented as 'community-acquired pneumonia, likely aspiration-related' per PCP note.",
+    "importance": "critical",
+    "artifactIds": [
+     "d6"
+    ]
+   },
+   {
+    "id": "a2",
+    "kind": "record",
+    "name": "Review weight trend in chart",
+    "result": "Weight 68 kg three months ago; weight today 64 kg. 4 kg (5.9%) weight loss over 3 months, flagged as significant unintentional weight loss.",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a3",
+    "kind": "record",
+    "name": "Review current medication list",
+    "result": "Carbidopa-levodopa 25-100 mg, 1 tablet PO four times daily with meals and at bedtime; patient reports tablets sometimes stick in throat before swallowing.",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a4",
+    "kind": "test",
+    "name": "Observed trial swallow: thin liquid (water), camera view",
+    "result": "Patient swallows 5 mL water on camera. Voice sounds wet/gurgly immediately after swallow. Delayed cough response approximately 8-10 seconds after the swallow. No overt choking.",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a5",
+    "kind": "test",
+    "name": "Observed trial swallow: thicker consistency (yogurt via spoon)",
+    "result": "Patient swallows one spoonful of yogurt. No wet vocal quality noted after this trial. No immediate or delayed cough observed over 1 minute of monitoring.",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a6",
+    "kind": "test",
+    "name": "Cervical auscultation during swallow (caregiver-assisted, phone/stethoscope if available)",
+    "result": "Caregiver reports no stethoscope available at home; cervical auscultation could not be performed this visit. Recommend formant assessment at instrumental study.",
+    "importance": "minor",
+    "artifactIds": []
+   },
+   {
+    "id": "a7",
+    "kind": "assessment",
+    "name": "Perceptual voice screening (sustained /ah/, max phonation time)",
+    "result": "Sustained /ah/ produced for 6 seconds (reduced; expected >15-20 sec for age). Voice quality: breathy, monotone, reduced loudness (hypophonic). Pitch and loudness variability markedly reduced.",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a8",
+    "kind": "assessment",
+    "name": "Oral mechanism exam via camera (lips, tongue, jaw, velum)",
+    "result": "Facial masking noted, reduced spontaneous blink rate. Lip seal adequate at rest but reduced lip rounding/retraction range. Tongue protrusion and lateralization present but slowed with reduced range. Palate elevates symmetrically on 'ah'. No overt facial asymmetry.",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a9",
+    "kind": "test",
+    "name": "Diadochokinetic rate (repeat 'puh-tuh-kuh')",
+    "result": "Slow and effortful; rate reduced compared to age norms, with some imprecision on sequential motion rate; consistent with hypokinetic dysarthria pattern.",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a10",
+    "kind": "assessment",
+    "name": "Functional communication/participation screening (interview-based)",
+    "result": "Patient reports stopping attendance at weekly community gathering over past 2 months because others ask him to repeat himself; reports frustration and embarrassment but denies feeling depressed.",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a11",
+    "kind": "record",
+    "name": "Review prior neurology note on Parkinson disease staging",
+    "result": "Neurology note from 6 months ago: Parkinson disease, Hoehn and Yahr stage 3, moderate bilateral bradykinesia and rigidity, mild postural instability. No prior formal speech or swallow referral on file.",
+    "importance": "minor",
+    "artifactIds": []
+   },
+   {
+    "id": "a12",
+    "kind": "test",
+    "name": "Caregiver-reported mealtime duration and behaviors",
+    "result": "Wife reports meals now take over 60 minutes (previously about 25-30 minutes), with frequent coughing on tea and water at most meals and patient needing to re-swallow pills multiple times.",
+    "importance": "critical",
+    "artifactIds": []
+   }
+  ],
   "artifacts": [
    {
     "id": "d1",
     "type": "note",
-    "title": "PCP Visit Note - Chest Infection",
-    "author": "Dr. Patricia Nolan, Internal Medicine",
-    "date": "6 weeks ago",
+    "title": "Primary Care Visit Note - Chest Infection",
+    "author": "Dr. Linda Park, Internal Medicine",
+    "date": "5 weeks ago",
+    "body": "73-year-old male with Parkinson disease presents with 4 days of productive cough, low-grade fever (100.8F), and fatigue. Exam notable for crackles at right lung base. Chest X-ray showed right lower lobe infiltrate. Assessment: Community-acquired pneumonia, right lower lobe, likely aspiration-related given underlying Parkinson disease and reported difficulty with liquids per spouse. Treated with oral amoxicillin-clavulanate 875mg/125mg twice daily x7 days with symptom resolution. Advised follow-up with speech-language pathology for swallow evaluation; family reports this is first time scheduling due to patient's reluctance.",
     "release": {
      "when": "start"
-    },
-    "body": "73-year-old male with Parkinson disease presents with 4 days of productive cough, low-grade fever (max 100.8F), and fatigue. Lungs with crackles at right base. Clinical diagnosis of community-acquired pneumonia / chest infection, possibly aspiration-related given underlying Parkinson disease. Treated with amoxicillin-clavulanate 875mg BID x10 days with symptomatic improvement. Chest X-ray not obtained (treated empirically). Recommend swallow evaluation given history of coughing with liquids reported by spouse at this visit; patient did not endorse swallowing concerns. Referral placed to Speech-Language Pathology."
+    }
    },
    {
     "id": "d2",
     "type": "flowsheet",
     "title": "Weight Flowsheet",
-    "author": "Clinic nursing staff",
-    "date": "ongoing",
-    "release": {
-     "when": "start"
-    },
+    "author": "Nursing/Clinic Staff",
+    "date": "Last 3 months",
     "table": {
      "columns": [
       "Date",
       "Weight (kg)",
-      "BMI"
+      "BMI (kg/m2)"
      ],
      "rows": [
       {
        "cells": [
         "3 months ago",
         "68.0",
-        "23.4"
+        "23.5"
        ],
        "flag": ""
       },
       {
        "cells": [
         "6 weeks ago",
-        "66.0",
-        "22.7"
+        "66.2",
+        "22.9"
        ],
        "flag": ""
       },
@@ -103,17 +153,17 @@
        "flag": "L"
       }
      ]
+    },
+    "release": {
+     "when": "start"
     }
    },
    {
     "id": "d3",
     "type": "chart",
     "title": "Weight Trend Over 3 Months",
-    "author": "Clinic nursing staff",
-    "date": "today",
-    "release": {
-     "when": "start"
-    },
+    "author": "Clinic Staff",
+    "date": "Today",
     "chart": {
      "kind": "line",
      "xLabel": "Time",
@@ -128,7 +178,7 @@
         },
         {
          "x": "6 weeks ago",
-         "y": 66
+         "y": 66.2
         },
         {
          "x": "Today",
@@ -137,135 +187,98 @@
        ]
       }
      ]
+    },
+    "release": {
+     "when": "start"
     }
    },
    {
     "id": "d4",
     "type": "medication_list",
-    "title": "Current Medication List",
-    "author": "Primary care clinic",
-    "date": "today",
-    "release": {
-     "when": "start"
-    },
+    "title": "Current Medications",
+    "author": "Primary Care",
+    "date": "Today",
     "table": {
      "columns": [
       "Medication",
       "Dose",
       "Route",
-      "Frequency"
+      "Frequency",
+      "Notes"
      ],
      "rows": [
       {
        "cells": [
         "Carbidopa-levodopa",
         "25-100 mg",
-        "Oral tablet",
-        "4 times daily, with meals and at bedtime"
+        "Oral",
+        "4 times daily (with meals and at bedtime)",
+        "Patient reports tablets occasionally stick in throat"
        ],
        "flag": ""
       },
       {
        "cells": [
-        "Pramipexole",
-        "0.5 mg",
-        "Oral tablet",
-        "3 times daily"
+        "Amlodipine",
+        "5 mg",
+        "Oral",
+        "Once daily",
+        "For hypertension"
        ],
        "flag": ""
       },
       {
        "cells": [
-        "Omeprazole",
+        "Atorvastatin",
         "20 mg",
-        "Oral capsule",
-        "Once daily"
+        "Oral",
+        "Once daily at bedtime",
+        ""
        ],
        "flag": ""
       }
      ]
+    },
+    "release": {
+     "when": "start"
     }
    },
    {
     "id": "d5",
     "type": "note",
-    "title": "Neurology Follow-Up Note (Most Recent)",
-    "author": "Dr. Imran Chaudhry, Neurology",
-    "date": "4 months ago",
+    "title": "Neurology Follow-up Note",
+    "author": "Dr. Samuel Reyes, Neurology",
+    "date": "6 months ago",
+    "body": "73-year-old male with 8-year history of idiopathic Parkinson disease, Hoehn and Yahr stage 3. On exam: moderate bilateral bradykinesia, mild-moderate rigidity, mild postural instability on pull test, hypomimia noted. Gait shows reduced arm swing bilaterally with occasional freezing. Speech noted to be soft but not formally assessed. Continue carbidopa-levodopa regimen, follow up in 6 months. No referral to speech-language pathology made at this visit.",
     "release": {
      "when": "start"
-    },
-    "body": "73-year-old male, Parkinson disease diagnosed 8 years ago, Hoehn and Yahr stage 3. Motor symptoms reasonably controlled on current carbidopa-levodopa and pramipexole regimen with some end-of-dose wearing off reported by spouse. Spouse notes voice has become progressively quieter over the past year and patient has been asking to repeat himself less often in social settings, which she attributes to him withdrawing rather than improving. No falls reported. Plan: continue current medications, follow up in 4 months, consider referral to speech-language pathology for voice and swallow evaluation at next visit if symptoms persist."
+    }
    },
    {
     "id": "d6",
-    "type": "lab_report",
-    "title": "Basic Metabolic Panel",
-    "author": "Clinic Lab",
-    "date": "6 weeks ago",
+    "type": "other",
+    "title": "Chest X-ray Report",
+    "author": "Radiology",
+    "date": "5 weeks ago",
+    "body": "FINDINGS: Patchy airspace opacity in the right lower lobe, consistent with infectious infiltrate. No pleural effusion. IMPRESSION: Right lower lobe pneumonia, clinical correlation with aspiration risk recommended given history.",
     "release": {
-     "when": "start"
-    },
-    "table": {
-     "columns": [
-      "Test",
-      "Result",
-      "Units",
-      "Reference range"
-     ],
-     "rows": [
-      {
-       "cells": [
-        "Sodium",
-        "138",
-        "mmol/L",
-        "135-145"
-       ],
-       "flag": ""
-      },
-      {
-       "cells": [
-        "Potassium",
-        "4.1",
-        "mmol/L",
-        "3.5-5.0"
-       ],
-       "flag": ""
-      },
-      {
-       "cells": [
-        "Creatinine",
-        "0.9",
-        "mg/dL",
-        "0.6-1.3"
-       ],
-       "flag": ""
-      },
-      {
-       "cells": [
-        "Albumin",
-        "3.6",
-        "g/dL",
-        "3.5-5.0"
-       ],
-       "flag": ""
-      }
-     ]
+     "when": "action",
+     "ref": "a1"
     }
    }
   ],
   "chartAtStart": [
    {
     "label": "Reason for visit",
-    "value": "Swallowing and communication evaluation - referred by neurology and PCP for voice changes and reported coughing with liquids"
+    "value": "Swallowing and communication evaluation, referred after recent chest infection, per family request"
    },
    {
     "label": "Problem list",
-    "value": "Parkinson disease (8 years, Hoehn and Yahr stage 3); recent chest infection (6 weeks ago); unintentional weight loss"
+    "value": "Parkinson disease (8 years, Hoehn and Yahr stage 3); Hypertension; Hyperlipidemia; Community-acquired pneumonia (resolved, 5 weeks ago)"
    },
    {
     "label": "Medications",
-    "value": "Carbidopa-levodopa 25-100mg PO QID with meals/bedtime; Pramipexole 0.5mg PO TID; Omeprazole 20mg PO daily"
+    "value": "Carbidopa-levodopa 25-100mg PO QID with meals/bedtime; Amlodipine 5mg PO daily; Atorvastatin 20mg PO qhs"
    },
    {
     "label": "Allergies",
@@ -273,11 +286,11 @@
    },
    {
     "label": "Last vitals",
-    "value": "BP 128/76, HR 78, RR 16, SpO2 97% room air, Weight 64 kg (down from 68 kg three months ago), Temp 98.2F"
+    "value": "BP 128/78, HR 76, RR 16, Temp 98.2F, O2 sat 97% room air (recorded at PCP visit 5 weeks ago)"
    },
    {
     "label": "Care team",
-    "value": "Dr. Imran Chaudhry (Neurology), Dr. Patricia Nolan (Internal Medicine), newly referred to Speech-Language Pathology"
+    "value": "Primary care: Dr. Linda Park; Neurology: Dr. Samuel Reyes"
    },
    {
     "label": "Code status",
@@ -285,14 +298,14 @@
    }
   ],
   "difficulty": 3,
-  "encounterType": "communication and swallowing evaluation",
+  "encounterType": "diagnostic interview / swallowing and communication evaluation",
   "facts": [
    {
     "id": "f1",
     "category": "chief_complaint",
     "topic": "reason for referral",
-    "chart": "Patient and spouse present for SLP evaluation after referral from neurology and PCP for voice changes and reported coughing with liquids.",
-    "says": "My doctor sent me here, but honestly, I think my swallowing is fine. My wife worries too much.",
+    "chart": "Patient and spouse present for swallow/communication evaluation after recent chest infection; patient reports no swallowing problems.",
+    "says": "My wife wanted us to come. I don't think there's anything wrong with my swallowing, honestly.",
     "tier": "initial",
     "importance": "critical"
    },
@@ -301,7 +314,7 @@
     "category": "hpi",
     "topic": "coughing with liquids",
     "chart": "Spouse reports patient coughs with tea and water at most meals.",
-    "says": "He coughs almost every time he drinks his tea or water, it happens at nearly every meal.",
+    "says": "He coughs almost every time he drinks his tea, every single day, it worries me.",
     "tier": "initial",
     "importance": "critical"
    },
@@ -309,17 +322,17 @@
     "id": "f3",
     "category": "hpi",
     "topic": "meal duration",
-    "chart": "Meals currently take over one hour.",
-    "says": "Dinner used to take twenty minutes. Now it takes over an hour, every single time.",
+    "chart": "Meals now take over an hour, previously 25-30 minutes.",
+    "says": "Dinner used to take half an hour. Now I'm sitting at the table for over an hour watching him eat.",
     "tier": "initial",
     "importance": "important"
    },
    {
     "id": "f4",
     "category": "hpi",
-    "topic": "weight change",
-    "chart": "Reports approximately 4 kg weight loss over past 3 months.",
-    "says": "He's lost weight, I'd say about nine pounds in the last few months, and his clothes don't fit right anymore.",
+    "topic": "recent weight change",
+    "chart": "Patient has lost about 4 kg over 3 months.",
+    "says": "I have noticed my clothes are looser lately, but I think I'm just not that hungry anymore.",
     "tier": "initial",
     "importance": "critical"
    },
@@ -327,8 +340,8 @@
     "id": "f5",
     "category": "hpi",
     "topic": "recent illness",
-    "chart": "Treated for chest infection approximately 6 weeks ago.",
-    "says": "He had a bad chest infection last month, needed antibiotics for it.",
+    "chart": "Treated for chest infection with antibiotics about 5 weeks ago.",
+    "says": "I had a bad cough and fever last month, the doctor gave me antibiotics and I got better.",
     "tier": "initial",
     "importance": "critical"
    },
@@ -336,340 +349,342 @@
     "id": "f6",
     "category": "hpi",
     "topic": "voice changes",
-    "chart": "Reports voice has become quiet and monotone over the past year.",
-    "says": "My voice just doesn't carry anymore. People say I sound flat, like I have no energy in it.",
+    "chart": "Patient's voice has become quieter and monotone over the past year.",
+    "says": "My son keeps telling me to speak up, but I feel like I'm already shouting.",
     "tier": "initial",
-    "importance": "important"
+    "importance": "critical"
    },
    {
     "id": "f7",
     "category": "hpi",
-    "topic": "social participation",
-    "chart": "Patient has withdrawn from weekly community gathering due to being asked to repeat himself.",
-    "says": "I stopped going to my Friday group. People kept asking me to say things twice and it got embarrassing, so I just stayed home.",
+    "topic": "social withdrawal",
+    "chart": "Patient stopped attending weekly community gathering because others ask him to repeat himself.",
+    "says": "I stopped going to the Friday gathering. Everyone kept asking 'what did you say' and it got tiresome.",
     "tier": "discoverable",
     "importance": "important"
    },
    {
     "id": "f8",
     "category": "hpi",
-    "topic": "self-perception of swallowing",
-    "chart": "Patient denies any swallowing difficulty when asked directly.",
-    "says": "I don't have any trouble swallowing. I eat the same foods I've always eaten.",
+    "topic": "self-assessment of swallowing",
+    "chart": "Patient denies any swallowing difficulty despite caregiver-reported coughing episodes.",
+    "says": "I don't choke. Maybe I clear my throat sometimes, everyone does that.",
     "tier": "initial",
     "importance": "critical"
    },
    {
     "id": "f9",
     "category": "hpi",
-    "topic": "pill swallowing",
-    "chart": "Reports pills, including carbidopa-levodopa, sometimes feel stuck in throat.",
-    "says": "Sometimes the pills get stuck right here in my throat, and I have to take a few sips of water to get them down.",
+    "topic": "medication tablet sensation",
+    "chart": "Patient reports carbidopa-levodopa tablets occasionally feel stuck in his throat at mealtimes.",
+    "says": "Sometimes the pill feels like it's sitting right here, and I have to drink more water to push it down.",
     "tier": "discoverable",
-    "importance": "important"
+    "importance": "critical"
    },
    {
     "id": "f10",
     "category": "hpi",
-    "topic": "liquid avoidance",
-    "chart": "Spouse reports patient has started avoiding plain water on his own because it makes him cough.",
-    "says": "He's been drinking less water lately. He told me water makes him cough so he just avoids it now.",
+    "topic": "throat clearing frequency",
+    "chart": "Patient reports frequent throat clearing, several times per meal.",
+    "says": "I clear my throat a lot, but that's just a habit, it doesn't mean anything.",
     "tier": "discoverable",
     "importance": "important"
    },
    {
     "id": "f11",
     "category": "hpi",
-    "topic": "food sensation",
-    "chart": "Reports occasional sensation of food 'sitting' in throat after swallowing, denies pain.",
-    "says": "Sometimes I feel like the food just sits there in my throat for a bit. Doesn't hurt though.",
-    "tier": "reluctant",
-    "importance": "important"
+    "topic": "wet voice after swallow",
+    "chart": "Spouse reports patient's voice sounds 'gurgly' or wet right after swallowing liquids.",
+    "says": "Right after he drinks water his voice sounds different, kind of bubbly, then he coughs a bit later.",
+    "tier": "discoverable",
+    "importance": "critical"
    },
    {
     "id": "f12",
-    "category": "hpi",
-    "topic": "coughing timing",
-    "chart": "Spouse notes cough with liquids occurs a few seconds after swallow, not immediately.",
-    "says": "It's strange, the cough doesn't happen right away. It's like a few seconds after he swallows, then he starts coughing.",
-    "tier": "discoverable",
-    "importance": "important"
+    "category": "ros",
+    "topic": "choking episodes",
+    "chart": "Denies any overt choking or Heimlich-requiring episodes.",
+    "says": "No, nothing like that, I've never turned blue or anything dramatic.",
+    "tier": "initial",
+    "importance": "minor"
    },
    {
     "id": "f13",
-    "category": "hpi",
-    "topic": "solid food tolerance",
-    "chart": "Reports fewer problems with solid, soft foods compared to thin liquids.",
-    "says": "Solid food, like rice or soft chicken, that goes down okay mostly. It's really the water and tea that give him trouble.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f14",
-    "category": "pmh",
-    "topic": "Parkinson disease history",
-    "chart": "Diagnosed with Parkinson disease 8 years ago, Hoehn and Yahr stage 3 per neurology.",
-    "says": "I've had Parkinson's for about eight years now. I used to be very active before that.",
-    "tier": "initial",
-    "importance": "important"
-   },
-   {
-    "id": "f15",
-    "category": "pmh",
-    "topic": "other medical history",
-    "chart": "History of hypertension, well-controlled, no other major medical conditions.",
-    "says": "I also have high blood pressure but that's well controlled with my pills.",
+    "category": "ros",
+    "topic": "heartburn or reflux",
+    "chart": "Denies heartburn, regurgitation, or reflux symptoms.",
+    "says": "No burning in my chest or anything like that.",
     "tier": "discoverable",
     "importance": "minor"
    },
    {
+    "id": "f14",
+    "category": "ros",
+    "topic": "drooling",
+    "chart": "Spouse reports occasional drooling, especially when watching television, not noticed by patient.",
+    "says": "I do notice a little drool on his chin sometimes when he's watching TV, but he says he doesn't feel it.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f15",
+    "category": "pmh",
+    "topic": "Parkinson disease duration",
+    "chart": "Diagnosed with idiopathic Parkinson disease 8 years ago.",
+    "says": "I've had Parkinson's for about eight years now.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
     "id": "f16",
+    "category": "pmh",
+    "topic": "other medical history",
+    "chart": "History of hypertension and hyperlipidemia, both well-controlled.",
+    "says": "I also have high blood pressure and cholesterol, but those are under control.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f17",
     "category": "medications",
-    "topic": "Parkinson medication timing",
-    "chart": "Takes carbidopa-levodopa four times daily, timed with meals and bedtime.",
+    "topic": "medication timing",
+    "chart": "Takes carbidopa-levodopa with meals and at bedtime, four times daily.",
     "says": "I take my Parkinson's pills four times a day, with my meals and before bed.",
     "tier": "initial",
     "importance": "important"
    },
    {
-    "id": "f17",
-    "category": "medications",
-    "topic": "medication adherence",
-    "chart": "Reports taking medications as prescribed, no missed doses reported.",
-    "says": "I take every dose, I never miss. I set alarms on my phone for it.",
-    "tier": "initial",
-    "importance": "minor"
-   },
-   {
     "id": "f18",
-    "category": "ros",
-    "topic": "reflux symptoms",
-    "chart": "Denies heartburn, regurgitation, or odynophagia.",
-    "says": "No heartburn or burning, nothing like that. Swallowing doesn't hurt.",
+    "category": "medications",
+    "topic": "medication effect on symptoms",
+    "chart": "Spouse reports symptoms seem slightly better when medication is working well (ON periods) versus wearing off.",
+    "says": "When his medicine is working well he seems to do a bit better with eating, but when it's wearing off it's worse.",
     "tier": "discoverable",
     "importance": "minor"
    },
    {
     "id": "f19",
-    "category": "ros",
-    "topic": "voice fatigue pattern",
-    "chart": "Reports voice gets quieter as the day progresses and with fatigue.",
-    "says": "By evening my voice is almost a whisper. In the morning it's a little better.",
+    "category": "family",
+    "topic": "family support",
+    "chart": "Wife is primary caregiver and prepares all meals; adult son lives nearby and visits weekly.",
+    "says": "My wife does all the cooking. Our son comes by every weekend to check on us.",
     "tier": "discoverable",
     "importance": "minor"
    },
    {
     "id": "f20",
-    "category": "ros",
-    "topic": "drooling",
-    "chart": "Spouse reports occasional drooling, mild, mostly at night.",
-    "says": "Sometimes I notice a little drool on his pillow in the morning, but it's not a big thing.",
-    "tier": "discoverable",
+    "category": "social",
+    "topic": "occupation history",
+    "chart": "Retired pharmacist, worked for over 30 years before retiring.",
+    "says": "I was a pharmacist for over thirty years before I retired. I understand medications quite well.",
+    "tier": "initial",
     "importance": "minor"
    },
    {
     "id": "f21",
-    "category": "ros",
-    "topic": "memory and thinking",
-    "chart": "Denies significant memory or cognitive concerns; occasional word-finding slowness attributed to slowed speech, not memory.",
-    "says": "My mind is still sharp, thank God. Sometimes the words come out slow, but I know what I want to say.",
+    "category": "social",
+    "topic": "community involvement",
+    "chart": "Previously active in a weekly community gathering at the local mosque, valued the social connection.",
+    "says": "I used to really look forward to seeing my friends every Friday. It was the highlight of my week.",
     "tier": "discoverable",
-    "importance": "minor"
+    "importance": "important"
    },
    {
     "id": "f22",
-    "category": "family",
-    "topic": "caregiver role",
-    "chart": "Spouse is primary caregiver, prepares all meals and monitors medication.",
-    "says": "I do all the cooking and I remind him about his pills. I'm the one who really sees what happens at mealtimes.",
-    "tier": "initial",
-    "importance": "minor"
+    "category": "psychosocial",
+    "topic": "emotional response to voice changes",
+    "chart": "Patient reports feeling embarrassed and frustrated when asked to repeat himself, denies depressed mood.",
+    "says": "It's embarrassing, having to repeat yourself over and over. But I'm not sad about it, just annoyed.",
+    "tier": "reluctant",
+    "importance": "important"
    },
    {
     "id": "f23",
-    "category": "social",
-    "topic": "occupation history",
-    "chart": "Retired pharmacist; worked over 30 years before retiring.",
-    "says": "I was a pharmacist for over thirty years before I retired. I know a fair bit about medicines myself.",
+    "category": "psychosocial",
+    "topic": "denial of swallowing problem",
+    "chart": "Patient minimizes swallowing concerns and attributes caregiver's worry to overprotectiveness.",
+    "says": "My wife worries too much. I've managed fine my whole life, I think I know my own body.",
     "tier": "initial",
-    "importance": "minor",
-    "distractor": true
+    "importance": "important"
    },
    {
     "id": "f24",
-    "category": "social",
-    "topic": "living situation",
-    "chart": "Lives at home with spouse in the Chicago suburbs; two adult children live out of state.",
-    "says": "We live just the two of us now. Our kids are grown and live out of state, but they call often.",
-    "tier": "initial",
-    "importance": "minor"
+    "category": "nutrition",
+    "topic": "appetite changes",
+    "chart": "Reports decreased appetite over past few months, eats smaller portions.",
+    "says": "I just don't feel as hungry as I used to. I eat less than I did before.",
+    "tier": "discoverable",
+    "importance": "important"
    },
    {
     "id": "f25",
-    "category": "psychosocial",
-    "topic": "attitude toward diagnosis",
-    "chart": "Patient expresses pride and some reluctance to accept assistance; prefers being addressed directly rather than discussed through spouse.",
-    "says": "I'd appreciate it if you'd ask me directly. I'm still capable of answering for myself, you know.",
+    "category": "nutrition",
+    "topic": "food avoidance",
+    "chart": "Spouse reports patient has started avoiding thin liquids like plain water, preferring thicker drinks without realizing why.",
+    "says": "I noticed he drinks less plain water now, he says he just prefers juice or milk instead.",
     "tier": "discoverable",
     "importance": "important"
    },
    {
     "id": "f26",
-    "category": "psychosocial",
-    "topic": "frustration with voice",
-    "chart": "Expresses frustration and sadness about reduced social participation due to voice changes.",
-    "says": "It's hard. I used to be the one everyone listened to at the meetings, now I feel invisible.",
-    "tier": "reluctant",
-    "importance": "important"
-   },
-   {
-    "id": "f27",
-    "category": "nutrition",
-    "topic": "appetite",
-    "chart": "Appetite described as fair, though portions have become smaller.",
-    "says": "My appetite's okay, I just can't finish what I used to. Everything takes so long to eat.",
-    "tier": "discoverable",
-    "importance": "important"
-   },
-   {
-    "id": "f28",
-    "category": "nutrition",
-    "topic": "usual diet texture",
-    "chart": "No current diet modification; eats regular table food and thin liquids at home.",
-    "says": "We haven't changed what we eat. Regular food, regular tea and water, same as always.",
-    "tier": "initial",
-    "importance": "important"
-   },
-   {
-    "id": "f29",
-    "category": "hpi",
-    "topic": "breathing during meals",
-    "chart": "Spouse denies choking, turning blue, or needing Heimlich maneuver; denies immediate severe choking episodes.",
-    "says": "He's never turned blue or anything like that, no emergency choking, just the coughing afterward.",
-    "tier": "discoverable",
-    "importance": "minor"
-   },
-   {
-    "id": "f30",
-    "category": "hpi",
-    "topic": "fatigue with eating",
-    "chart": "Reports feeling tired by the end of meals, attributes it partly to effort of eating slowly.",
-    "says": "By the time dinner's over I'm exhausted, just from the effort of eating so slowly.",
-    "tier": "discoverable",
-    "importance": "minor"
-   },
-   {
-    "id": "f31",
-    "category": "other",
-    "topic": "hearing",
-    "chart": "Denies hearing difficulty; wears no hearing aids.",
-    "says": "My hearing's fine, no issues there.",
+    "category": "function",
+    "topic": "mobility status",
+    "chart": "Ambulates independently with occasional use of a cane outdoors, no falls in past 6 months.",
+    "says": "I still walk on my own, I just use my cane sometimes outside for balance.",
     "tier": "discoverable",
     "importance": "minor",
     "distractor": true
    },
    {
-    "id": "f32",
+    "id": "f27",
+    "category": "function",
+    "topic": "hearing status",
+    "chart": "No reported hearing difficulty; last hearing test was normal 2 years ago.",
+    "says": "My hearing is fine, I had it checked a couple years back and they said it was normal.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f28",
     "category": "ros",
-    "topic": "speech clarity complaints",
-    "chart": "Spouse notes speech is sometimes mumbled or runs together, especially when tired.",
-    "says": "Sometimes his words kind of run together, especially when he's tired, and I have to ask him to slow down.",
+    "topic": "cognitive changes",
+    "chart": "Denies memory problems; spouse confirms no significant cognitive decline noted.",
+    "says": "My memory is still sharp, ask me anything.",
     "tier": "discoverable",
     "importance": "minor"
    },
    {
-    "id": "f33",
+    "id": "f29",
     "category": "goals",
     "topic": "patient priorities",
-    "chart": "Patient states his main goal is to be able to speak loudly enough to participate in his community group again.",
-    "says": "If I could just get my voice back so people don't keep asking me to repeat myself, I'd go back to my group.",
-    "tier": "discoverable",
+    "chart": "Patient states his main goal is to return to attending the community gathering, not swallowing concerns.",
+    "says": "If you can help me get back to my Friday group without people asking me to repeat myself, that's what matters to me.",
+    "tier": "initial",
     "importance": "important"
    },
    {
-    "id": "f34",
-    "category": "goals",
-    "topic": "caregiver priorities",
-    "chart": "Spouse's main goal is for mealtimes to feel safer and less worrisome.",
-    "says": "I just want to feel like mealtime isn't scary. I worry every single time he takes a sip of water.",
+    "id": "f30",
+    "category": "adherence",
+    "topic": "attitude toward prior referral",
+    "chart": "Patient delayed scheduling this evaluation for several months despite PCP recommendation after pneumonia.",
+    "says": "The doctor mentioned seeing someone like you after I was sick, but I didn't see the urgency, so we put it off.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f31",
+    "category": "psychosocial",
+    "topic": "attitude toward being discussed",
+    "chart": "Patient becomes visibly irritated when spouse answers questions directed at him or speaks about him in third person.",
+    "says": "I can answer for myself, you know. I'm right here.",
     "tier": "initial",
     "importance": "important"
+   },
+   {
+    "id": "f32",
+    "category": "hpi",
+    "topic": "nighttime symptoms",
+    "chart": "Denies nighttime coughing or choking episodes during sleep.",
+    "says": "No, I sleep through the night fine, no coughing then that I know of.",
+    "tier": "discoverable",
+    "importance": "minor"
    }
   ],
   "mismatches": [
    {
     "id": "m1",
     "factId": "f8",
-    "artifactId": "a9",
-    "patientClaim": "I don't have any trouble swallowing. I eat the same foods I've always eaten.",
-    "recordEvidence": "Observed trial of thin liquid intake on camera (action a9) shows delayed laryngeal elevation, wet vocal quality after swallow, and a delayed cough 5-8 seconds later - objective signs inconsistent with his self-report of normal swallowing.",
-    "teachingPoint": "In Parkinson disease, impaired interoceptive awareness can lead patients to sincerely underreport swallowing difficulty; clinicians should weigh caregiver report and direct observation over self-report alone, without framing this as dishonesty."
+    "artifactId": "d1",
+    "patientClaim": "Patient states he does not choke and has no swallowing difficulty.",
+    "recordEvidence": "Primary care note documents pneumonia 'likely aspiration-related given underlying Parkinson disease and reported difficulty with liquids per spouse,' and chest X-ray confirms right lower lobe infiltrate consistent with aspiration.",
+    "teachingPoint": "Patients, especially those with Parkinson disease, often have reduced laryngeal sensation and may genuinely be unaware of aspiration; clinicians must weigh caregiver report and medical record evidence over self-report alone, and silent aspiration should be considered even when the patient denies symptoms."
    },
    {
     "id": "m2",
-    "factId": "f17",
-    "artifactId": "d1",
-    "patientClaim": "I take every dose, I never miss. I set alarms on my phone for it.",
-    "recordEvidence": "PCP note (d1) and pill-swallowing history (action a13) document that tablets, including carbidopa-levodopa, frequently feel stuck and require multiple attempts to swallow, raising the possibility that effective medication intake/absorption may be inconsistent even if doses are not technically skipped.",
-    "teachingPoint": "Adherence is not only about remembering to take a dose - swallowing difficulty with pills can undermine effective medication delivery even when a patient reports perfect adherence; this is relevant to coordinating with the prescribing physician."
+    "factId": "f30",
+    "artifactId": "d5",
+    "patientClaim": "Patient suggests the referral for speech-language evaluation only came up casually after his pneumonia and he didn't feel it was urgent.",
+    "recordEvidence": "Neurology note from 6 months prior already documented 'speech noted to be soft but not formally assessed' with no referral made at that time, and the PCP note from 5 weeks ago explicitly recommended SLP follow-up, indicating a documented pattern of noted concerns and delayed action over time rather than a single casual mention.",
+    "teachingPoint": "Review of longitudinal records can reveal that warning signs (such as soft speech) were noted earlier but not acted upon; this highlights the importance of timely referral when hypophonia or swallowing concerns are first observed in progressive neurological disease."
    }
   ],
   "objectives": [
    {
     "id": "o1",
-    "text": "Elicit a thorough swallowing history from both patient and caregiver, recognizing discrepancies between self-report and caregiver/observed findings.",
+    "text": "Elicit a swallowing history from both patient and caregiver, recognizing discrepancies between patient self-report and caregiver-observed signs of dysphagia.",
     "factIds": [
      "f2",
      "f8",
-     "f12"
+     "f11",
+     "f23"
     ],
-    "actionIds": []
+    "actionIds": [
+     "a4",
+     "a12"
+    ]
    },
    {
     "id": "o2",
-    "text": "Conduct and interpret an observed trial of liquid intake on camera, identifying signs suggestive of aspiration risk (wet vocal quality, delayed cough, cervical auscultation findings).",
+    "text": "Identify clinical signs of aspiration risk during observed oral intake trials, including delayed cough and wet vocal quality.",
     "factIds": [
      "f2",
-     "f12"
+     "f11"
     ],
-    "actionIds": []
+    "actionIds": [
+     "a4",
+     "a5"
+    ]
    },
    {
     "id": "o3",
-    "text": "Perform a focused oral mechanism and perceptual voice exam via telehealth and relate findings to hypokinetic dysarthria/hypophonia in Parkinson disease.",
-    "factIds": [
-     "f6",
-     "f19"
-    ],
-    "actionIds": []
-   },
-   {
-    "id": "o4",
-    "text": "Synthesize red flags (weight loss, recent chest infection, delayed cough with thin liquids) to justify referral for instrumental swallow evaluation rather than making a definitive diagnosis from clinical exam alone.",
+    "text": "Recognize red flags warranting urgent instrumental swallow evaluation, including unintentional weight loss and recent aspiration pneumonia.",
     "factIds": [
      "f4",
      "f5"
     ],
-    "actionIds": []
+    "actionIds": [
+     "a1",
+     "a2",
+     "a12"
+    ]
+   },
+   {
+    "id": "o4",
+    "text": "Assess hypokinetic dysarthria and hypophonia associated with Parkinson disease through perceptual voice and oral motor screening.",
+    "factIds": [
+     "f6",
+     "f7",
+     "f29"
+    ],
+    "actionIds": [
+     "a7",
+     "a8",
+     "a9"
+    ]
    },
    {
     "id": "o5",
-    "text": "Recommend appropriate interim compensatory strategies and discuss LSVT LOUD candidacy for voice/loudness while respecting patient autonomy and goals.",
+    "text": "Identify the patient-record mismatch regarding awareness/reporting of swallowing difficulty and discuss how silent aspiration can occur in Parkinson disease.",
     "factIds": [
-     "f33",
-     "f34",
-     "f25"
+     "f8"
     ],
-    "actionIds": []
+    "actionIds": [
+     "a1"
+    ]
    },
    {
     "id": "o6",
-    "text": "Identify the pill-swallowing and medication-related mismatch and recognize the need for coordination with the prescribing physician rather than independently altering medication form.",
+    "text": "Formulate an appropriate, in-scope plan including referral for instrumental swallow study (e.g., videofluoroscopic swallow study), interim compensatory strategies, and recommendation of LSVT LOUD for voice treatment, respecting patient autonomy and dignity.",
     "factIds": [
      "f9",
-     "f17"
+     "f29",
+     "f31"
     ],
-    "actionIds": []
+    "actionIds": [
+     "a4",
+     "a7"
+    ]
    }
   ],
   "patient": {
@@ -680,43 +695,90 @@
    "ethnicity": "Pakistani-American",
    "occupation": "Retired pharmacist",
    "language": "English",
-   "appearance": "An older man with a neatly trimmed white beard and thinning gray hair, seated upright in a cushioned armchair in a well-lit living room with family photos visible on the wall behind him. He wears a collared shirt and has a steady, dignified posture, though his face shows reduced expressiveness (mild masked facies) and his movements appear slightly slowed."
+   "appearance": "An older man with a neat white beard, thinning gray hair, and a somewhat masked facial expression typical of Parkinson disease, seated upright at a dining table in a well-lit room with family photos visible on the wall behind him. He wears a cardigan over a collared shirt and holds himself with dignified, formal posture; his wife sits beside him, visible in the frame but he maintains direct eye contact with the camera when speaking."
   },
   "persona": {
-   "personality": "Proud, intelligent, and precise in his speech; values being treated as a capable adult rather than discussed about by others.",
-   "communicationStyle": "Measured and formal, often pausing to find the right word; prefers direct questions addressed to him rather than to his wife.",
+   "personality": "Proud, articulate, and intellectually engaged; was a respected professional for decades and expects to be treated as a capable adult, not spoken about or over.",
+   "communicationStyle": "Formal and measured, uses precise vocabulary from his pharmacy background, but his speech is notably soft and monotone, sometimes trailing off at the end of sentences; prefers direct questions addressed to him rather than his wife.",
    "healthLiteracy": "high",
-   "emotionalState": "Mildly defensive about his swallowing when first asked, but becomes visibly saddened when discussing his withdrawal from social activities; appreciates being asked directly.",
-   "background": "Worked as a community pharmacist in the Chicago suburbs for over three decades before retiring eight years ago, around the time of his Parkinson disease diagnosis. He and his wife Nasreen have two adult children living out of state and remain active in their local Pakistani-American community, though his attendance at the weekly gathering has recently stopped. He enjoys reading history and used to lead discussions at his community group.",
+   "emotionalState": "Mildly defensive about swallowing concerns, visibly irritated when his wife answers for him, but warms with respectful, direct engagement; underlying frustration and embarrassment about voice and social withdrawal that surfaces only with rapport.",
+   "background": "Worked as a community pharmacist in the Chicago suburbs for over 30 years before retiring. Immigrated from Lahore, Pakistan in his twenties with his wife Nasreen. Has two adult children; a son lives nearby and visits weekly. Enjoyed weekly gatherings at his local mosque with longtime friends, discussing current events and sharing meals, until recently.",
    "speechExamples": [
-    "I appreciate you asking me directly, doctor - I'm still quite capable of answering for myself.",
-    "My swallowing is fine, truly. My wife tends to worry more than is necessary.",
-    "It's... difficult... to explain, but by evening my voice barely... comes out at all.",
-    "I was a pharmacist for over thirty years, so I do know my medications fairly well.",
-    "I used to lead the discussions at my community group. Now I just... stay home."
+    "I was a pharmacist for thirty-two years, young man, I know my medications quite well.",
+    "I can speak for myself, thank you, dear.",
+    "No, I don't choke. I just clear my throat now and then, like anyone would.",
+    "It is... tiresome, having people ask you to repeat yourself at every turn.",
+    "If you could help me get back to my Friday gathering, that would mean more to me than anything else."
    ],
    "concerns": [
     "Being treated as incapable or spoken about rather than to",
-    "Losing his place in his community due to his voice changes",
-    "Whether his swallowing changes mean something serious is wrong",
-    "Not wanting to be a burden to his wife at mealtimes"
+    "Losing his social connections and sense of independence",
+    "Whether his voice changes are permanent or treatable",
+    "Not wanting unnecessary tests or being overly medicalized"
    ]
   },
   "scenario": {
-   "studentBrief": "You are seeing Mr. Abdul Rahman Siddiqui, a 73-year-old man with an 8-year history of Parkinson disease, for a telehealth speech-language pathology evaluation. He was referred by his neurologist and primary care physician for voice changes and caregiver-reported coughing with liquids. His wife Nasreen will join the call. Conduct a case history, observe liquid intake on camera, screen voice/speech/cognitive-communication, and determine recommendations within SLP scope.",
-   "chiefComplaint": "Referred for evaluation of voice changes and caregiver-reported coughing with liquids/possible swallowing difficulty",
-   "openingLine": "My doctor sent me here, but honestly, I think my swallowing is fine. My wife worries too much.",
+   "studentBrief": "You are a speech-language pathology student conducting a telehealth communication and swallowing evaluation for Mr. Abdul Rahman Siddiqui, a 73-year-old man with an 8-year history of Parkinson disease. He was referred after a recent chest infection. His wife Nasreen will join the call. Review the chart, gather a history from the patient (and caregiver as needed), and complete feasible remote screening tasks.",
+   "chiefComplaint": "Referral for swallowing and communication evaluation after recent chest infection; patient reports no swallowing problems himself.",
+   "openingLine": "My wife wanted us to come in today. I don't think there's anything wrong with my swallowing, honestly, but I suppose we're here now.",
    "tasks": [
-    "Obtain a case history from both patient and caregiver, respectfully managing differing perspectives",
-    "Observe trial liquid intake on camera and interpret signs of possible aspiration risk",
-    "Screen voice, oral motor function, and cognitive-communication status",
-    "Formulate recommendations including referral for instrumental swallow study, interim strategies, and voice treatment discussion, staying within SLP scope"
+    "Obtain a case history from the patient and caregiver, respectfully managing differing perspectives on swallowing difficulty",
+    "Conduct feasible remote swallowing screening including observed trial swallows of different consistencies",
+    "Screen voice and motor speech function using perceptual voice tasks and oral mechanism exam via camera",
+    "Identify aspiration risk indicators and red flags (weight loss, recent pneumonia, wet voice, delayed cough) warranting referral for instrumental swallow study",
+    "Discuss interim compensatory strategies and introduce the recommendation for LSVT LOUD voice treatment, respecting the patient's autonomy and goals"
    ],
    "timeLimitMin": 25
   },
-  "setting": "Telehealth video visit; patient at home in suburban Chicago, Illinois, seated in his living room with his wife Nasreen present nearby",
-  "summary": "This case portrays a 73-year-old man with 8-year Parkinson disease referred for voice and swallowing evaluation after caregiver-reported coughing with liquids, recent chest infection, and unintentional weight loss, while the patient himself denies any swallowing problem. It teaches SLP students to reconcile patient self-report with caregiver observation and clinical signs, recognize aspiration risk requiring instrumental evaluation, and counsel on LSVT LOUD for hypophonia, all while respecting patient autonomy and dignity in a culturally sensitive telehealth encounter.",
-  "title": "Swallowing and Voice Evaluation in a Man with Parkinson Disease Who Denies Any Problem",
+  "summary": "A 73-year-old man with 8-year history of Parkinson disease presents for telehealth swallow and communication evaluation after a recent aspiration pneumonia, with caregiver-reported coughing on liquids, prolonged meal times, and unintentional weight loss, despite the patient denying any swallowing difficulty. The case teaches recognition of silent aspiration risk, hypokinetic dysarthria/hypophonia, and appropriate in-scope referral for instrumental swallow evaluation and LSVT LOUD, while modeling respectful management of a proud patient who dislikes being discussed in the third person.",
+  "title": "Silent Aspiration Risk and Hypophonia in a Man with Parkinson Disease Who Denies Swallowing Difficulty",
+  "specialty": "Speech-Language Pathology",
+  "setting": "Telehealth video visit; patient at home at the dining table with his wife, suburban Chicago",
+  "answerKey": {
+   "primaryProblem": "Oropharyngeal dysphagia with aspiration risk and hypokinetic dysarthria/hypophonia secondary to Parkinson disease",
+   "differential": [
+    "Parkinson disease-related oropharyngeal dysphagia with silent aspiration",
+    "Hypokinetic dysarthria with hypophonia secondary to Parkinson disease",
+    "Medication (carbidopa-levodopa) pill dysphagia contributing to intake difficulty",
+    "Reflux-related or structural esophageal dysphagia (less likely given denial of reflux symptoms, exam pattern favors oropharyngeal/neurogenic cause)",
+    "Unintentional weight loss from reduced oral intake secondary to dysphagia versus decreased appetite alone"
+   ],
+   "keyFindings": [
+    "Caregiver-reported coughing on tea and water at most meals; meals now take over an hour",
+    "4 kg (5.9%) unintentional weight loss over 3 months",
+    "Recent aspiration-related pneumonia 5 weeks ago per primary care documentation and chest X-ray",
+    "Wet vocal quality and delayed cough (8-10 seconds) after observed thin liquid trial on camera",
+    "No wet voice or cough noted with thicker (yogurt) consistency trial",
+    "Patient denies any swallowing difficulty despite objective and caregiver evidence of aspiration risk",
+    "Carbidopa-levodopa tablets reported to stick in throat at mealtimes",
+    "Reduced maximum phonation time (6 seconds), breathy/monotone/hypophonic voice",
+    "Reduced diadochokinetic rate and oral motor range consistent with hypokinetic dysarthria",
+    "Social withdrawal from valued weekly community gathering due to communication breakdown"
+   ],
+   "plan": [
+    "Recommend referral for an instrumental swallow evaluation (videofluoroscopic swallow study, VFSS) given red flags: recent aspiration pneumonia, significant unintentional weight loss, wet voice and delayed cough on thin liquids",
+    "Recommend interim compensatory strategies pending instrumental study: trial of nectar-thick or thickened liquids for high-risk thin liquids (tea, water), chin-tuck posture during swallows, smaller bites/sips, remaining upright for 30 minutes post-meal",
+    "Discuss medication administration strategy with patient and prescribing provider: consider alternative pill-taking strategy (e.g., with puree or thickened liquid) or formulation review if tablets continue to stick, in coordination with neurology/pharmacy",
+    "Recommend and discuss initiating LSVT LOUD voice treatment to address hypophonia and improve functional communication participation",
+    "Refer back to primary care/neurology with findings; communicate aspiration risk and weight loss findings given overlap with medical management",
+    "Address patient's stated goal (returning to community gathering) by framing voice treatment and swallowing strategies in terms of his functional priorities, respecting his autonomy and avoiding paternalistic framing",
+    "Schedule follow-up SLP visit to review instrumental study results and finalize treatment plan"
+   ],
+   "redFlags": [
+    "Recent aspiration pneumonia (5 weeks ago)",
+    "Unintentional weight loss of 5.9% body weight over 3 months",
+    "Wet vocal quality and delayed cough with thin liquids on observed trial, suggesting possible silent aspiration",
+    "Patient's denial of symptoms despite objective and caregiver evidence, raising concern for reduced laryngeal sensation and risk of continued silent aspiration without intervention"
+   ],
+   "educationPoints": [
+    "Patients with Parkinson disease may have reduced laryngeal sensation and can silently aspirate without overt coughing or choking, so self-report alone is insufficient for ruling out dysphagia",
+    "Wet vocal quality and delayed cough after swallowing are clinical indicators warranting further instrumental evaluation, not a diagnosis of aspiration itself",
+    "Hypophonia and monotone speech in Parkinson disease (hypokinetic dysarthria) can significantly impact social participation and quality of life, and is a distinct but related treatment target from swallowing",
+    "LSVT LOUD is an evidence-based, intensive voice treatment specifically designed for individuals with Parkinson disease to improve vocal loudness and intelligibility",
+    "Respecting patient autonomy and addressing the patient directly, especially when caregivers are present, is essential for building trust and encouraging adherence, particularly in patients who value independence and dislike being discussed in the third person",
+    "Unintentional weight loss combined with recent aspiration pneumonia are objective red flags that should prompt referral for instrumental swallow assessment regardless of patient-reported symptoms"
+   ]
+  },
   "professions": [
    "speech-language-pathology"
   ],

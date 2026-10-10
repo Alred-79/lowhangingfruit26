@@ -1,0 +1,41 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "artifact d4 (Home Vitals Log) release.when: fact ref f6",
+   "problem": "d4 is set to release when fact f6 is revealed, but f6 is tiered 'reluctant' (the sensitive reason she didn't call). This ties disclosure of a hidden psychosocial fact to unlocking an objective record, and more importantly the chart's mismatch m1 depends on d4 to reveal that her fever never fully resolved — but gating this objective flowsheet behind a reluctant fact means the learner cannot get the critical vitals trend (f5/f7/f9 corroboration) unless the patient first admits her reluctance to call, which inverts the intended discovery order and makes the critical safety data contingent on an unrelated sensitive admission. Fix: release d4 when a vitals-related action/fact (e.g., f5 fever history) is obtained, not f6."
+  },
+  {
+   "severity": "high",
+   "kind": "accuracy",
+   "where": "a11 result / d2 label / timeline",
+   "problem": "a11 result states CBC was 'drawn on day 10 after cycle 1,' and d2 is titled 'Post Cycle 1, Day 10' dated 'approx. 19 days ago.' But d5 (growth factor discussion note) is dated 'approx. 10 days after cycle 1 (about 19 days ago)' and cycle 2 was given 9 days ago. If cycle 1 nadir CBC was 19 days ago (day 10 post-cycle 1), cycle 1 was then ~9 days before cycle 2, meaning cycle 1 to cycle 2 interval was only 9 days — inconsistent with standard AC q2-3 week dosing and with d1's cycle 2 note stating normal infusion 9 days ago. The timeline math doesn't support a 2-3 week cycle interval; needs correction (e.g., cycle 1 nadir CBC should be dated ~19-23 days before cycle 2, i.e., further back, for a 14-21 day cycle gap)."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a2 result vs vitals log d4",
+   "problem": "a2 states HR 108 bpm 'measured by patient at wrist per instruction' — this is a patient self-measured pulse, which is less reliable than an exam-based reading, yet the answer key and objectives treat 108 bpm as a hard, critical tachycardia finding ('early sepsis physiology'). This should be flagged in the case as a limitation or corroborated by RR/SpO2/other clinical signs, or the action kind clarified, since relying solely on patient self-palpation for a critical safety determination is a feasibility/accuracy concern for a telehealth vitals action's reliability."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "a14 and answerKey.plan item 4",
+   "problem": "a14 says ordering stat CBC/cultures is 'deferred — cannot be drawn via telehealth' and plan item 4 says labs are 'to be ordered by evaluating provider, not nursing student' — this is correctly scoped, but the action's name ('Order/request stat CBC...') implies the nursing student is ordering, which conflicts with the result text clarifying it's a recommendation only. Rename the action to 'Recommend stat CBC and blood cultures be obtained' to avoid implying an ordering action outside RN/student scope."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "d4 chart series third point label",
+   "problem": "The chart's third x-axis point is labeled 'Now (call)' with y=37.9, matching a1's 37.9°C — fine — but the table row says 'Now (video call)' while chart says 'Now (call)'; minor label mismatch, cosmetic but worth aligning wording."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "chartAtStart 'Last vitals' and a12 result",
+   "problem": "chartAtStart lists last vitals as 'recorded at infusion visit 9 days ago, pre-chemo' with Temp 36.8, HR78 etc., and a12 says cycle 2 was given 9 days ago — consistent. However, d1 (visit note dated 9 days ago) does not mention these vitals explicitly, and the growth factor discussion in d1 says 'plan to revisit at this visit' (meaning at cycle 2 administration) but d5 (dated 19 days ago, which is prior to cycle 2) already describes the growth factor discussion in detail as if finalized ('no growth factor given with cycle 2 due to ongoing authorization issue') — this creates a temporal contradiction: d5 (19 days ago) already states growth factor was not given with cycle 2, but cycle 2 only happened 9 days ago, meaning d5 is describing a future event (cycle 2) before it occurred. Fix: d5's date or content should be adjusted so it doesn't retrospectively describe cycle 2 administration before cycle 2 happened."
+  }
+ ]
+}

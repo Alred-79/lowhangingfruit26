@@ -89,7 +89,7 @@
    },
    {
     "id": "a9",
-    "kind": "lab",
+    "kind": "test",
     "name": "Order/review urinalysis with microscopy and urine culture (via home health or local lab draw)",
     "result": "See lab report: urinalysis shows pyuria and bacteriuria; culture pending at time of visit, to be followed up",
     "importance": "critical",
@@ -517,7 +517,7 @@
    },
    {
     "id": "f10",
-    "category": "skin",
+    "category": "ros",
     "topic": "skin changes noticed",
     "chart": "Girlfriend noticed a reddened open area on his sacrum about one week ago; patient was unaware until she pointed it out",
     "says": "My girlfriend saw something back there about a week ago and told me, I can't really see it myself.",
@@ -526,7 +526,7 @@
    },
    {
     "id": "f11",
-    "category": "skin",
+    "category": "ros",
     "topic": "photo of area",
     "chart": "Patient reluctantly agrees to show a photo of the sacral area taken by his girlfriend after being asked directly",
     "says": "I guess I can show you the picture she took, it's kind of embarrassing but here.",

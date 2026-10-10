@@ -668,7 +668,6 @@
    {
     "id": "m2",
     "factId": "f24",
-    "artifactId": "a5",
     "patientClaim": "Patient states spotting has stayed light and brown for 3 days without worsening.",
     "recordEvidence": "Assessment of current bleeding severity documents light brown spotting less than one pad per day with no clots, consistent with patient's report, but the order (d1) was placed urgently for possible ectopic given hCG level and left-sided cramping, showing clinical concern can exist despite reassuring bleeding alone.",
     "teachingPoint": "Reassuring bleeding pattern alone does not rule out ectopic pregnancy; laterality of pain and hCG trend remain important red-flag considerations requiring correlation with the ordering clinician's concern."

@@ -5,7 +5,7 @@ import { Badge, Button, Select, Textarea, cx } from "@/components/ui";
 import type { RunView } from "@/lib/journey/types";
 import { post, Spinner } from "./shared";
 
-const ACT_LABEL: Record<string, string> = { request: "Request", question: "Question", information: "Information", checkback: "Check-back", confirmation: "Confirmation", callout: "Call-out", readback: "Read-back", answer: "Answer", clarifying_question: "Asks for clarification" };
+const ACT_LABEL: Record<string, string> = { request: "Request", question: "Question", information: "Information", checkback: "Check-back", confirmation: "Confirmation", callout: "Call-out", readback: "Read-back", answer: "Answer", correction: "Correction", clarifying_question: "Asks for clarification" };
 
 /** Page any colleague, earlier or later in the journey, or call something out to the whole team. */
 export default function ConsultPanel({ view, refresh, compact }: { view: RunView; refresh: () => void; compact?: boolean }) {

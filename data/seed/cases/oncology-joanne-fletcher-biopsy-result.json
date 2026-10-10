@@ -932,6 +932,11 @@
   "knowledge": [],
   "rubricId": "default",
   "difficulty": 3,
-  "variants": []
+  "variants": [],
+  "title": "Breaking the news of newly diagnosed stage II invasive breast cancer in a 49-year-old single mother",
+  "summary": "A 49-year-old premenopausal woman with a screening-detected breast mass undergoes biopsy showing invasive ductal carcinoma (ER+/PR+/HER2-) with positive axillary node (clinical stage IIA/IIB). She expects benign news and asks directly about mortality when the diagnosis is disclosed. The case teaches breaking difficult news in oncology, explaining staging and receptor biology in plain language, responding to direct prognostic questions, recognizing genetic counseling indications, and coordinating multidisciplinary breast cancer care while addressing psychosocial distress in a single mother.",
+  "specialty": "Medical Oncology",
+  "setting": "Telehealth video visit; patient's home kitchen in Oregon",
+  "encounterType": "Breaking difficult news and initial treatment planning discussion"
  }
 }

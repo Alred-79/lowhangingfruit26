@@ -369,7 +369,11 @@
     "My jaw's been kind of aching too, that's strange, right?",
     "Is this going to cost a lot? I don't have good insurance through my job."
    ],
-   "concerns": []
+   "concerns": [
+    "I think this is just indigestion from last night's dinner—can you give me something for my stomach?",
+    "I can't miss my shift today, I need to get to work soon.",
+    "I'm really worried about the hospital bill if I go in."
+   ]
   },
   "scenario": {
    "studentBrief": "You are the emergency medicine resident staffing a tele-triage video line. Rosa Delgado, 58, calls about upper abdominal pressure and nausea that started 2 hours ago. Assess her remotely and determine the correct disposition.",

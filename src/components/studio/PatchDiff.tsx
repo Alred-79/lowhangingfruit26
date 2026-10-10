@@ -26,6 +26,9 @@ function wordDiff(a: string, b: string): { before: { t: string; ch: boolean }[];
   }
   while (i < m) before.push({ t: A[i++], ch: true });
   while (j < n) after.push({ t: B[j++], ch: true });
+  // When most of the text is new, word marks are noise; show the two versions plainly instead.
+  const words = (xs: { t: string; ch: boolean }[], ch?: boolean) => xs.filter((w) => w.t.trim() && (ch === undefined || w.ch === ch)).length;
+  if (words(before, true) + words(after, true) > 0.6 * (words(before) + words(after))) return null;
   return { before, after };
 }
 

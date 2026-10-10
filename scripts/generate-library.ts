@@ -19,6 +19,7 @@ import path from "node:path";
 import { generateCase, normalizeCase } from "../src/lib/casegen";
 import { chatJSON, MODELS } from "../src/lib/llm";
 import { profession, professions } from "../src/lib/professions";
+import { FACT_CATEGORIES } from "../src/lib/types";
 import type { ActionKind, CaseProfile } from "../src/lib/types";
 
 interface Spec {
@@ -228,13 +229,45 @@ const KIND_FALLBACK: Record<ActionKind, ActionKind[]> = {
   record: ["assessment"],
   procedure: ["assessment", "exam", "test"],
 };
+const CATEGORY_FALLBACK: Record<string, string> = {
+  falls: "function", mobility: "function", sleep: "function", occupation: "social", work: "social", academic: "social", travel: "social",
+  insurance: "social", financial: "social", skin: "ros", pain: "hpi", mood: "psychosocial", safety: "psychosocial", diet: "nutrition",
+  immunizations: "pmh", obstetric: "pmh", developmental: "pmh", distractor: "other", hidden: "other",
+};
 const blank = (v: unknown) => typeof v !== "string" || !v.trim();
 
 /** Fixes the recurring structural slips. Returns the list of things changed (empty = untouched). */
 export async function repair(c: CaseProfile, s: Spec): Promise<string[]> {
   const changed: string[] = [];
   const role = profession(s.p);
-  if (!c.actions?.length) throw new Error("case has no actions");
+  if ((c.actions || []).length < 6) throw new Error(`case has only ${(c.actions || []).length} actions`);
+  if ((c.artifacts || []).length < 2) throw new Error("case has no artifacts");
+  if ((c.objectives || []).filter((o) => !blank(o.text)).length < 3) throw new Error("case has no usable objectives");
+
+  // Fact categories outside the fixed list (the model invents "falls", "skin", "travel"...).
+  for (const f of c.facts) {
+    if (f.category in FACT_CATEGORIES) continue;
+    const to = CATEGORY_FALLBACK[f.category] || "other";
+    changed.push(`fact ${f.id} category ${f.category} -> ${to}`);
+    if (f.category === "distractor") f.distractor = true;
+    f.category = to;
+  }
+
+  // Table rows must have one cell per column.
+  for (const d of c.artifacts) {
+    if (!d.table) continue;
+    const n = d.table.columns.length;
+    for (const r of d.table.rows) {
+      if (r.cells.length === n) continue;
+      changed.push(`artifact ${d.id} row "${r.cells[0]}" ${r.cells.length} -> ${n} cells`);
+      if (r.cells.length > n) {
+        const extra = r.cells.splice(n);
+        const flag = extra.find((x) => /^[HLA]$/.test(x.trim()));
+        if (flag && !r.flag) r.flag = flag.trim() as "H" | "L" | "A";
+      }
+      while (r.cells.length < n) r.cells.push(/flag/i.test(d.table.columns[r.cells.length]) ? r.flag || "" : "");
+    }
+  }
 
   for (const a of c.actions) {
     if (role.actionKinds.includes(a.kind)) continue;

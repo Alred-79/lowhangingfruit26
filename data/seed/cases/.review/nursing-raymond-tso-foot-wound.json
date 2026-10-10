@@ -1,0 +1,41 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a8 result",
+   "problem": "a8 is phrased as an instructed self-test ('Monofilament/light touch sensation check... patient self-test with cotton ball per instruction') but its result directly hands over the hidden/discoverable PMH fact f20 (longstanding diabetic peripheral neuropathy) and even characterizes it as 'consistent with known peripheral neuropathy,' which is a diagnostic conclusion the RN hasn't established yet. Fix: report only the objective self-test finding (e.g., 'patient reports reduced sensation to light touch bilaterally, worse distally') without labeling it as a known/longstanding diagnosis; let the clinical history (f20, d7) be obtained separately via interview or record review."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a18 result",
+   "problem": "a18 is named 'Ask about antibiotic adherence' which is an interview-question-style action, not an assessment/vitals/exam/record action type permitted for this role per the action-kind restriction, and it is used to directly hand over fact f10. This bypasses the interview tier structure (f10 is tier 'initial' so it's less severe, but the action itself is out of the allowed action kinds listed: assessment, vitals, exam, record) — 'ask about X' should not be an action kind at all; it should be removed or converted into a record/assessment type action with an observable result."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a13 result",
+   "problem": "a13 ('Ask patient to demonstrate insulin pen technique on camera') is similarly an interview-style/demonstration action labeled as 'assessment', but its result leaks the hidden fact f9 (uncertainty about priming/site rotation) in clinical conclusion form rather than through the patient's own words/behavior being interpreted by the learner. This is borderline acceptable as an observed demonstration (which is a legitimate nursing assessment technique), but the result text should stay purely behavioral/observational, which it does reasonably well — flag only if stricter review is wanted; this is lower priority than a8/a18."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "d3 (Inpatient Labs at Discharge) vs chartAtStart 'Last vitals'",
+   "problem": "d3 shows random glucose 228 mg/dL at discharge, consistent with chartAtStart temp 37.0/pulse 84, but a11's home log d4 shows readings starting at 260 just 'Day 1 AM' (first day home) rising immediately — the jump from 228 at discharge to 260-340 within objectively ambiguous timeframe is plausible but the artifact lacks a clear timestamp anchor matching 'today' being day 2; this is a minor internal consistency issue, not a major one worth separate note."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a10 result / d1 body",
+   "problem": "a10 states 'surrounding cellulitis... osteomyelitis ruled out on imaging at that time' while d1 says 'Plain films at admission did not show osteomyelitis' — plain films alone do not reliably rule out osteomyelitis (sensitivity is low; MRI is preferred). Describing it as 'ruled out' is clinically inaccurate; it should be phrased as 'not evident on plain films at that time' to avoid overstating diagnostic certainty, since the current presentation (CRP 42, spreading infection) raises concern for possible osteomyelitis that was never definitively excluded."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a2 result vs d5 flowsheet",
+   "problem": "a2 states temperature is '38.1 C (100.6 F) oral, reported by patient' from a home thermometer, but d5 flowsheet attributes vitals to 'RN telehealth assessment' as author, implying the RN measured it directly; this is a minor sourcing inconsistency since telehealth vitals are inherently patient self-measured/reported, which should be clarified in the flowsheet author field (e.g., 'Patient-reported, recorded by RN')."
+  }
+ ]
+}

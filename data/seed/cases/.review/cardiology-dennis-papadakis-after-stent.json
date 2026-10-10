@@ -1,0 +1,41 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart Medications",
+   "problem": "chartAtStart lists current medications as 'Ticagrelor 90mg BID' alongside the others with no indication of discontinuation, which is fine as a stale discharge record, but combined with a1's home BP/HR log result text explicitly stating HR>100 'on days he describes feeling wired and short of breath' this pre-interview artifact result leaks the patient's own words/complaint before he has volunteered it. Fix: rephrase a1 result to report only objective chart/log data (dates and values) without quoting the patient's reasoning or feelings, which should only emerge via interview tiers f4/f8."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a16 result",
+   "problem": "a16 is framed as an assessment action ('Assess exertional tolerance via self-reported activity') but its result directly hands over the reluctant fact f17 ('fear of triggering another heart attack') without the learner asking a sensitive direct question. This bypasses the interview tier for a hidden/reluctant fact. Fix: either remove this action or have its result report only objective exertional capacity (e.g., 'avoids stairs, no detailed reason') and reserve the fear-of-recurrence disclosure for the interview-based fact f17."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a15 result",
+   "problem": "a15 is labeled 'Ask about cardiac rehabilitation enrollment and attendance' which is an interview-style action, not an exam/vitals/lab/imaging/test/record/assessment action per the role's allowed action kinds; its result directly discloses discoverable fact f12. This is borderline leakage of a discoverable fact through an action rather than through the interview. Fix: reclassify as a 'record' action (e.g., review cardiac rehab referral/attendance record) so the result reflects a record review rather than bypassing the interview."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a3 and action kind list",
+   "problem": "a3 inspects a 'sternal incision (if any)' but this patient underwent PCI with stenting, not CABG/sternotomy, so there would be no sternal incision to inspect; the action result correctly notes 'no prior sternotomy' but including this exam item is clinically irrelevant/confusing for a stent-only patient and could imply uncertainty about procedure type. Fix: remove the sternal incision portion of the exam action, retaining only the femoral access site check relevant to PCI."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "d4 cath report / answerKey plan item 1",
+   "problem": "The cath report (d4) correctly states DAPT duration 'minimum 12 months' for DES, which is appropriate per current guidelines; however, the plan text in answerKey says 'at least 6-12 months' which is inconsistent with the record's explicit 12-month minimum. Fix: align plan wording to 'minimum 12 months (per cath report and current DES guidelines)' rather than the vaguer 6-12 month range to avoid internal inconsistency."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a2 vitals vs chartAtStart 'Last vitals' and a1 home log",
+   "problem": "a2 live vitals show HR 94 bpm regular while chartAtStart lists last vitals HR 88 bpm at discharge and home log (d7) shows HR up to 110 on certain days; these are not contradictory per se, but the case does not clarify whether the current measured tachycardia (94 bpm resting on beta-blocker) should prompt consideration of beta-blocker uptitration, which the answer key plan vaguely gestures at. Minor polish: explicitly note in plan that resting HR 94 on metoprolol 50mg succinate suggests need for uptitration, strengthening internal consistency between findings and plan rather than leaving it generic."
+  }
+ ]
+}

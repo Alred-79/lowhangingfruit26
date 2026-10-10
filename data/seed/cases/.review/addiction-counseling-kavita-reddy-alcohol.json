@@ -1,0 +1,41 @@
+{
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "a2 CIWA-Ar risk screen result",
+   "problem": "This action's result hands over the reluctant facts f5 (morning shakiness relieved by drinking) and f8 (sweats/insomnia on prior cessation attempt) directly through a 'history-based' assessment rather than requiring the learner to elicit them via sensitive interview questioning. As written, simply running this assessment bypasses the interview and leaks hidden facts f5/f8. Fix by removing this action (it is not an observation/instrument but a restatement of interview answers) or by making its result only reflect what the learner has already elicited rather than supplying the history itself."
+  },
+  {
+   "severity": "high",
+   "kind": "consistency",
+   "where": "d4 AUDIT Domain Score Range chart vs a1 result",
+   "problem": "a1 states AUDIT total score is 26/40, but d4 chart shows domain subscores of 10 (Hazardous use, Q1-3), 9 (Dependence symptoms, Q4-6), and 7 (Harmful use/consequences, Q7-10), which sum to 26. However, AUDIT Q1-3 (hazardous use) has a maximum possible score of 12, Q4-6 (dependence) max is 12, and Q7-10 (harmful use) max is 16 (4 questions x 4 points) - the domain groupings and maxima are mismatched/inconsistent with the official AUDIT instrument structure, and the chart's groupings as presented don't clearly correspond to real AUDIT item groupings. This could confuse learners about how AUDIT is actually scored."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a2 CIWA-Ar risk screen name/result",
+   "problem": "CIWA-Ar is a validated clinical exam-based tool (with vitals, observed tremor, sweats, agitation, hallucinations) and cannot be meaningfully estimated purely from retrospective history without a current clinical exam; labeling this a 'CIWA-Ar risk screen' misrepresents the instrument. It would be clearer to call this a withdrawal risk history (not CIWA-Ar) since actual CIWA-Ar requires real-time observed exam findings, which this role cannot do with confidence via self-report alone."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "a2 and a8 (camera-observed tremor check) and a7 (home BP/pulse)",
+   "problem": "These are quasi-physical-exam maneuvers (observing tremor on camera, interpreting vitals for withdrawal risk) that stray toward medical assessment rather than the addiction counselor's defined scope (assessment, test, record covering substance use history, stage of change, level-of-care, MI, relapse prevention). The role description does not include performing physical/vital-sign based withdrawal risk exams; these should be medical-provider actions, with the counselor instead recognizing the need for referral rather than attempting a bedside withdrawal exam."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "patient.ethnicity vs persona.background",
+   "problem": "The patient is specified as 'Indian-American' ethnicity, and the persona.background further specifies 'grew up in a high-achieving Indian-American family... where emotions and personal struggles were rarely discussed openly.' Combined with f12 ('We're not a family that airs things out... It's just not how we operate') and f22 (a family member's drinking being euphemized), this risks framing the patient's culture/ethnicity as the explanation for family silence and under-recognition of her alcohol problem, which is a dignity concern (culture used to explain/caricature the presentation) rather than simply individual family dynamics unrelated to ethnicity."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a7 result vs chartAtStart 'Last vitals'",
+   "problem": "a7 (an action result) duplicates exactly what is already given in chartAtStart ('BP 128/82 mmHg, HR 88, reported by patient today'), making the action redundant with information already released at the start; while not harmful, it does not add new information when performed as an 'action,' which may puzzle users expecting new findings from actions."
+  }
+ ],
+ "verdict": "major_fixes"
+}

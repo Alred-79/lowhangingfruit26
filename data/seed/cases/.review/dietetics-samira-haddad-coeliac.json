@@ -1,0 +1,28 @@
+{
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "facts f6, f7, f8 tier=\"discoverable\" with action a7 (food record review) release at start of action, plus studentBrief/chartAtStart",
+   "problem": "The food record artifact (d5) and action a7 result already explicitly reveal that tabbouleh/kibbeh contain bulgur wheat, soy sauce is wheat-based, and oats are not gluten-free certified — this is the core hidden-gluten discovery the learner is supposed to work out via interview (f6, f7, f8 are tagged 'discoverable' facts about the patient's lack of awareness). Because a7's result already states the gluten content outright as objective record data, the discoverable facts about the patient's *understanding* (f6-f8) are only thinly hidden; the diet history action (a8) and camera inspection (a15) become redundant confirmations rather than true elicitation. This is a scope/leakage overlap: the food record review (a reviewable action) is appropriate, but it should list ingredients neutrally (e.g., 'tabbouleh, kibbeh, soy sauce, oats') without the record itself flagging 'contains bulgur wheat'/'wheat-based'/'not labeled gluten-free' as interpretive flags, since that interpretation is the clinical reasoning the student must perform, not information handed to them before they reason about it. Fix: have a7's result list the foods only (as actually documented in d5), and let the identification of hidden gluten sources be the learner's own clinical reasoning, with a8/a15 providing the patient's lack of awareness/pantry label text as the actual discoverable content."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "artifact d3 row 1 and 2 (Hemoglobin)",
+   "problem": "The CBC artifact table lists Hemoglobin twice with duplicate conflicting flags (one row flagged 'H' and another flagged 'L' for the same 10.9 g/dL value against the same reference range 12.0-15.5). A value of 10.9 against 12.0-15.5 is clearly Low only; the 'H' flagged duplicate row is an error and should be removed."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "d7 artifact title 'Ferritin and Vitamin D Trend' / chart kind 'line'",
+   "problem": "The artifact is titled and typed as a 'trend' line chart, but it contains only a single data point each for ferritin and vitamin D ('3 weeks ago'). A single point cannot show a trend and a line chart with one point is not meaningful; this should either be relabeled as a single lab snapshot (bar or table) or additional historical points should be added if a trend is intended."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a16 result vs d6/a2",
+   "problem": "a16 reports today's self-reported weight as 57.0 kg while a2/d6 list the most recent chart weight as 57.2 kg three weeks ago; the difference (0.2 kg) is trivial and framed as 'consistent,' which is fine, but the action is also tagged importance 'minor' while duplicating a2 — consider whether this redundant self-report action is necessary given the vitals flowsheet already covers this ground within the same visit timeframe."
+  }
+ ]
+}

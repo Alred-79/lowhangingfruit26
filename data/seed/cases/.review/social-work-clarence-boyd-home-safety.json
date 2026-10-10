@@ -1,0 +1,41 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a2 (C-SSRS screening) result",
+   "problem": "The action is framed as a named screening instrument, but its result includes 'confirms firearm is kept loaded by the front door' - this is fact f17, which is tier 'reluctant' and per the rules should only be obtainable via rapport-building and a direct, sensitive question, not handed over automatically by running a standard screening tool. The C-SSRS does not itself ask about firearm storage location/loaded status as a scripted item; this hands over a reluctant fact via an instrument the learner merely administers, bypassing the interview. Fix: have a2's result only include standard C-SSRS ideation/intent/plan findings, and require a separate interview action/sensitive question to elicit f17, or re-tier f17 as discoverable if it is meant to surface from the instrument."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a5 (financial exploitation screening) result",
+   "problem": "The result directly states the patient 'has no choice' about the nephew holding the card and reveals fear of nephew being arrested/himself institutionalized - these map to reluctant/hidden facts f7, f9/f10. A capacity-based interview action should not auto-disclose reluctant/hidden emotional content merely from running the screen; per the rules this content should be reserved for rapport + direct sensitive questioning in the interview, not surfaced by an action result. Fix: strip the emotionally loaded disclosures from a5's result, leaving only capacity/orientation findings; the fear/exploitation content should emerge only through dialogue-based fact tiers."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a8 (social support/isolation assessment) result",
+   "problem": "Result states nephew relationship 'is strained' - this characterization foreshadows the exploitation dynamic (facts f8/f9, reluctant) before the learner has done the sensitive interviewing needed to earn that disclosure. Fix: remove 'relationship is strained' from the action result; let that emerge only through the interview-based reluctant facts."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "d7 artifact release condition vs mood trend data",
+   "problem": "d7 is released on fact f13 (VFW attendance stopping ~2 months ago) but the chart also plots 'Overall mood/wellbeing' declining from 6 months ago to today, which encodes the mood trajectory (including today's low score of 2) before the learner has conducted the depression/suicide risk assessment (a1/a2). This leaks the severity/trajectory of mood ahead of the PHQ-9/C-SSRS findings. Fix: limit d7 to only the VFW attendance series, or gate release on completion of the depression screen as well."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "a6 and a7 action names/kinds",
+   "problem": "a6 'Fall risk and functional mobility self-report' and a7 'Decision-making capacity screen (social work bedside assessment)' are both labeled kind 'assessment,' but the action kinds listed for this role are only 'assessment' and 'record' - that is fine, but a7's capacity determination (stating definitively 'no evidence of cognitive impairment,' consistent and coherent preferences) is more typically a clinical/medical determination of capacity, which usually requires physician/psychiatric evaluation for formal determination, not a brief social work conversational screen asserting a conclusive capacity finding. Fix: soften a7's result to describe observations only (oriented, articulate, consistent) without asserting a formal capacity determination, which should be framed as the social worker's clinical impression rather than a definitive capacity screen."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "facts f21 and f30 both marked distractor plus a11/a10 minor actions",
+   "problem": "Minor inconsistency: f21 (hearing aids) is marked distractor and importance minor, consistent; but a10 (medication review) is importance 'minor' yet surfaces an 'important' secondary finding (atorvastatin overdue) that is explicitly listed as a key finding and objective (o6) - the importance tag undersells an action tied to a listed objective and key finding. Fix: raise a10 importance to 'important' to match its role in objective o6/key findings."
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "accuracy",
+   "where": "a14 result / mismatch m1 / answerKey",
+   "problem": "The acetaminophen total is miscalculated or at least not clearly shown to approach/exceed 3000-3250mg. Per d5 and f14/f15: 2 scheduled 650mg doses = 1300mg, plus 2 OTC tablets x325mg = 650mg, totaling 1950mg so far 'today' — well under the 3000-3250mg/24h max, not 'approaching/exceeding' it. The case overstates the current cumulative dose; this is only concerning if extrapolated to a full day of q6h dosing (4 doses = 2600mg) plus continued cold medicine (if taken q4-6h, could add 1300-1950mg more, totaling up to 4000+mg), which would be a projected risk, not a current measured exceedance. The action result and mismatch should clarify this is a projected 24h total based on current dosing pattern continuing, not already-exceeded intake today, or recalculate explicitly with scheduled doses per 24h (4 x 650mg = 2600mg) plus 2 cold tablets (650mg) = 3250mg, which does hit the upper threshold - but the action result as written ('2 doses so far today' of scheduled APAP + 2 cold tablets) only sums to 1950mg, not matching the 'approaching/exceeding 3000mg' claim."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "f21 (reluctant) vs a5/a7 action design",
+   "problem": "f21 (docusate non-adherence) is tagged 'reluctant' tier requiring rapport and a direct sensitive question, but no action in the action list is designed to elicit this specific fact (e.g., 'Ask about stool softener adherence'). a5 is a record review (discharge med list) and a7 is a GI symptom screen; neither explicitly targets medication adherence, so this critical reluctant fact may not be reliably surfaced by any listed action, risking it being missed entirely or requiring an unscripted interview question outside the action list."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "a14 name and result",
+   "problem": "The action name 'Review total daily analgesic intake from patient report' is itself an interview-style prompt ('Ask about intake') rather than a true record/vitals/exam action, and its result directly hands over the hidden overdose-risk calculation (f14) including the specific OTC product identity and exact dosing, bypassing the discoverable-tier interview process where the patient downplays the cold medicine as 'not real medicine.' This leaks the critical finding without requiring the learner to specifically probe OTC product use."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "d4 chart point 'Evening (home)' pain=4 vs a4 result 'Pain 3/10'",
+   "problem": "a4 result states current pain is 3/10, consistent with d4's 'This morning' and 'Now' points, but the discharge summary (d2) states patient was discharged post-op day 0 'tolerating clears' with no explicit evening-at-home pain measurement timestamp; the chart's 'Evening (home)' data point post-discharge is plausible, but if discharge was same-day evening, having both 'Post-op 8h' and 'Evening (home)' as separate points same day is slightly redundant/ambiguous but not a hard error."
+  }
+ ]
+}

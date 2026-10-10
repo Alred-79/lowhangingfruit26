@@ -177,28 +177,36 @@ export interface GenerateInput {
 
 export async function generateCase(input: GenerateInput): Promise<CaseProfile> {
   const p = profession(input.professionId);
-  const raw = await chatJSON<Omit<CaseProfile, "version" | "professions" | "knowledge" | "rubricId">>({
-    model: MODELS.smart,
-    system: SYSTEM,
-    maxTokens: 20000,
-    schema: CASE_SCHEMA as unknown as Record<string, unknown>,
-    messages: [
-      {
-        role: "user",
-        text: `Write a complete telehealth simulation case.
-
-LEARNER ROLE: ${p.name} (${p.roleTitle})
-ROLE SCOPE: ${p.scope}
-TYPICAL ENCOUNTERS: ${p.encounterTypes.join(", ")}
-ACTION KINDS THIS ROLE USES: ${p.actionKinds.join(", ")}
-DOCUMENTATION FORMAT: ${p.noteFormat}
-${input.level ? `TARGET INTRINSIC DIFFICULTY: ${input.level} of 5` : ""}
-${input.guidance ? `FACULTY GUIDANCE:\n${input.guidance}\n` : ""}
-CASE DESCRIPTION FROM FACULTY (treat every detail given here as fixed; fill in only what is missing):
-${input.description}`,
-      },
-    ],
-  });
+  type Raw = Omit<CaseProfile, "version" | "professions" | "knowledge" | "rubricId">;
+  let raw!: Raw;
+  // The model occasionally omits required sections; one retry is cheaper than a broken case.
+  for (let attempt = 0; attempt < 2; attempt++) {
+    raw = await chatJSON<Raw>({
+      model: MODELS.smart,
+      system: SYSTEM,
+      maxTokens: 20000,
+      schema: CASE_SCHEMA as unknown as Record<string, unknown>,
+      messages: [
+        {
+          role: "user",
+          text: `Write a complete telehealth simulation case.
+  
+  LEARNER ROLE: ${p.name} (${p.roleTitle})
+  ROLE SCOPE: ${p.scope}
+  TYPICAL ENCOUNTERS: ${p.encounterTypes.join(", ")}
+  ACTION KINDS THIS ROLE USES: ${p.actionKinds.join(", ")}
+  DOCUMENTATION FORMAT: ${p.noteFormat}
+  ${input.level ? `TARGET INTRINSIC DIFFICULTY: ${input.level} of 5` : ""}
+  ${input.guidance ? `FACULTY GUIDANCE:\n${input.guidance}\n` : ""}
+  CASE DESCRIPTION FROM FACULTY (treat every detail given here as fixed; fill in only what is missing):
+  ${input.description}`,
+        },
+      ],
+    });
+    const missing = (CASE_SCHEMA.required as readonly string[]).filter((k) => (raw as unknown as Record<string, unknown>)[k] === undefined || (raw as unknown as Record<string, unknown>)[k] === "");
+    if (!missing.length) break;
+    if (attempt === 1) throw new Error(`The draft came back incomplete (missing ${missing.join(", ")}). Please try again.`);
+  }
   const profile: CaseProfile = {
     version: 1,
     ...raw,

@@ -53,11 +53,13 @@ Rules:
 - For each behaviour decide: observed "yes", "no", or "na" (the situation gave no opportunity).
 - "yes" requires a quote copied exactly from the stated location. If you cannot quote it, it is "no".
 - For "no", name the location where it should have appeared and say exactly what was missing.
+- Use "na", not "no", when nothing in the encounter called for the behaviour (for example, no safety concern arose, so there was nothing to escalate).
+- Quote one continuous passage. Do not stitch separate sentences together and do not paraphrase.
 - Feedback is addressed to the author as "you", concrete and kind: what the receiver could or could not do with what was written, and example wording.
 - Judge against what was actually known in this encounter (listed for you). Do not expect things that were never found.`;
 
 function check(observed: Observed, quote: string, located: boolean, feedback: string): Pick<BehaviourResult, "observed" | "verified" | "feedback"> {
-  if (observed === "yes" && !located) return { observed: "no", verified: false, feedback: `${feedback} (The evaluator could not point to the exact words for this, so it is not credited.)` };
+  if (observed === "yes" && !located) return { observed: "no", verified: false, feedback: `Not credited: the evaluator described this behaviour but the words it cited could not be found at the stated place. Its comment was: ${feedback}` };
   return { observed, verified: observed === "yes" ? true : !!quote && located, feedback };
 }
 
@@ -154,7 +156,8 @@ export async function evaluateStudent(run: LoadedRun): Promise<TraceEvaluation> 
   const msgs = sr?.encounter_id ? messagesOf(sr.encounter_id).filter((m) => m.speaker === "student" || m.speaker === "patient" || m.speaker === "system") : [];
   const note = Object.values(parse<Record<string, string>>(enc?.wrapup, {})).filter(Boolean).join("\n");
   const team = messagesOfRun(runId);
-  const consults = team.filter((m) => m.thread.startsWith("consult:") || m.kind === "callout");
+  const consults = team.filter((m) => m.thread.startsWith("consult:") || m.kind === "callout" || m.kind === "callout_ack");
+  const openedState = team.some((m) => m.kind === "state_opened");
   const huddle = team.filter((m) => m.thread === "huddle");
   const byId = new Map(entries.map((e) => [e.id, e]));
   const myEntryIds = new Set(entries.filter((e) => e.stageId === stage.id).map((e) => e.id));
@@ -185,6 +188,7 @@ Earlier entries that were uncertain, disputed or unanswered when the learner sta
 ${priorOpen.map((e) => `- (${e.status}) ${e.text}`).join("\n") || "(none)"}
 
 SYSTEM-RECORDED FACTS ABOUT THE LEARNER'S USE OF PRIOR INFORMATION (reliable)
+- ${openedState ? "The learner opened the Care team tab (shared patient state and incoming handoff) during their visit." : "The learner did not open the Care team tab (shared patient state and incoming handoff) during their visit."}
 ${used.length ? used.map((l) => `- Turn ${l.evidence?.turn}: built on "${byId.get(l.to)!.text}" (from ${byId.get(l.to)!.contributorName})`).join("\n") : "- No turn in the learner's visit was linked to an earlier entry."}
 
 SOURCE visit: THE LEARNER'S VISIT

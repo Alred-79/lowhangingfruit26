@@ -427,7 +427,12 @@
     "Can I shower today? I feel kind of gross.",
     "I don't want to take too many pain pills, so I've just been pushing through it mostly."
    ],
-   "concerns": []
+   "concerns": [
+    "I'm worried this shoulder pain might be my heart—is that normal?",
+    "I haven't had a bowel movement in three days and I feel really bloated. Is that okay?",
+    "When am I allowed to shower and get the dressings wet?",
+    "When can I drive again and go back to lifting things at work?"
+   ]
   },
   "scenario": {
    "studentBrief": "You are the RN conducting a telehealth discharge follow-up call with Priya Nair, 28, who had an uncomplicated laparoscopic appendectomy yesterday. She was discharged the same day. Your goals are to perform a focused post-operative assessment, screen for complications, and provide discharge teaching on pain management, constipation, wound care, and activity restrictions. Review her medication list and ask about all medications/supplements she is taking, including OTC products.",
@@ -821,6 +826,11 @@
   "knowledge": [],
   "rubricId": "default",
   "difficulty": 3,
-  "variants": []
+  "variants": [],
+  "title": "Post-operative day 1 telehealth follow-up after laparoscopic appendectomy in a 28-year-old with acetaminophen overdose risk",
+  "summary": "A 28-year-old woman one day after uncomplicated laparoscopic appendectomy presents for routine discharge follow-up. She is recovering well but has inadvertently combined prescribed paracetamol with an OTC cold remedy also containing paracetamol, creating overdose risk. She also has typical post-operative constipation and referred shoulder-tip gas pain she fears is cardiac. This case teaches safe post-operative assessment via telehealth, medication reconciliation to identify polypharmacy risks, and differentiation of expected recovery findings from complications requiring escalation.",
+  "specialty": "Post-operative nursing",
+  "setting": "Telehealth video visit; patient's apartment in Austin",
+  "encounterType": "Discharge follow-up"
  }
 }

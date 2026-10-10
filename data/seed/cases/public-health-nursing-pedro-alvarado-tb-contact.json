@@ -828,6 +828,11 @@
   "knowledge": [],
   "rubricId": "default",
   "difficulty": 3,
-  "variants": []
+  "variants": [],
+  "title": "Non-adherence to latent TB treatment in a 36-year-old roofer with side effects and confidentiality concerns",
+  "summary": "A 36-year-old Guatemalan-born roofer with latent TB infection self-discontinued daily rifampin after two weeks due to orange urine and nausea, misunderstanding that he needs treatment while feeling healthy. He has confidentiality concerns about employer and immigration authorities, drinks 4-5 beers daily (hepatotoxicity risk), and two housemates remain untested. This case teaches non-judgmental adherence assessment, distinguishing benign from serious medication effects, health literacy about latent TB, addressing confidentiality within public health scope, alcohol screening relevant to rifampin safety, and contact investigation follow-up.",
+  "specialty": "Public Health Nursing",
+  "setting": "Telehealth video visit; patient's shared rental home (kitchen table)",
+  "encounterType": "Communicable disease follow-up"
  }
 }

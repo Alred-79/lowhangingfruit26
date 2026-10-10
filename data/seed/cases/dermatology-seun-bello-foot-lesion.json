@@ -122,7 +122,7 @@
    },
    {
     "id": "a14",
-    "kind": "assessment",
+    "kind": "test",
     "name": "Overall teledermatology risk stratification and triage decision",
     "result": "Lesion is high-risk for acral lentiginous melanoma based on history (growth over 1 year), morphology (ABCDE-positive, parallel ridge pattern on photo), and acral location in a patient with deeply pigmented skin. Cannot be excluded or confirmed without in-person dermoscopy and tissue biopsy. Urgent in-person referral indicated within 2 weeks; teledermatology alone is insufficient for definitive diagnosis.",
     "importance": "critical",

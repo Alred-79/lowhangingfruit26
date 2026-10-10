@@ -1,0 +1,26 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a14 result / answerKey.primaryProblem / keyFindings",
+   "problem": "Clinical staging cT2N1M0 for a 2.4 cm tumor (T2 = >2cm to ≤5cm, correct) with N1 (1-3 positive axillary nodes) is actually AJCC stage IIB only if T2N1, but per AJCC 8th edition anatomic staging, T2N1M0 is Stage IIB, not 'IIA/IIB.' T2N0 would be IIA. Since nodal involvement is confirmed (N1), stage should be stated definitively as IIB, not an IIA/IIB range, which is internally inconsistent given the biopsy-proven node described in a14/a3.",
+   "fix": "Change staging to 'Clinical stage IIB (cT2N1M0)' throughout (a14, answerKey.primaryProblem, keyFindings, title) rather than 'IIA/IIB.'"
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "d8 Weight Trend chart vs f10",
+   "problem": "The weight trend artifact shows a gradual gain from 161 to 165 lb over 3 months (about 4 lb), consistent with f10's 'slight weight gain' claim, but a4/d7 vitals action result states weight is 'unchanged from last visit' (165 lb vs 163 lb three weeks ago) which is a 2 lb difference, not unchanged.",
+   "fix": "Correct a4 result to reflect the actual 2 lb increase (165 lb vs 163 lb three weeks prior) rather than stating 'unchanged.'"
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "a11 / f17 / answerKey.educationPoints",
+   "problem": "Genetic counseling referral rationale is based on age 49 and maternal aunt with ovarian cancer at 52; however, per NCCN criteria, a single second-degree relative with ovarian cancer at age 52 (not <50, and not a first-degree relative) does not clearly meet standard NCCN genetic testing criteria for hereditary breast/ovarian cancer syndrome based on family history alone. The case states this meets criteria without the usual qualifying detail (e.g., ovarian cancer at any age in a close relative, or breast cancer diagnosed <50 in the patient) that would make this a slam-dunk guideline indication.",
+   "fix": "Either clarify that she meets criteria independently due to age at breast cancer diagnosis (NCCN includes diagnosis ≤50 as a stand-alone testing indication) rather than attributing it primarily to the aunt's ovarian cancer, or add a closer-degree relative/younger age to firmly justify the referral under family history criteria."
+  }
+ ]
+}

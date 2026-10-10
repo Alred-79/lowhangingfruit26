@@ -682,7 +682,6 @@
    {
     "id": "m1",
     "factId": "f10",
-    "artifactId": "a4",
     "patientClaim": "Patient states the shadow 'feels about the same' as this morning and has not noticed it getting worse",
     "recordEvidence": "Confrontation visual field testing today demonstrates a dense, well-defined inferotemporal field cut - a formal objective measurement the patient has not actually performed on himself since this morning, so his subjective sense of stability is not confirmed by any real comparison data",
     "teachingPoint": "Patients often estimate symptom stability by casual self-observation rather than structured testing; clinicians should perform objective field/acuity testing at the visit rather than relying on the patient's impression that things are 'about the same,' since early detachment progression can be subtle and the patient has no true baseline to compare against from earlier today."

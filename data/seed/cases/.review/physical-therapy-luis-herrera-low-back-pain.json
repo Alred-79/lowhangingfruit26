@@ -1,0 +1,30 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "patient.appearance",
+   "problem": "The appearance description states 'a visible back brace on the armrest nearby,' which gives away fact f10 (continuous back belt use) before the student asks about it. This should be removed or made non-specific so the student must discover this through interview."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "artifact d5 release condition",
+   "problem": "d5 (Light Duty Work Restriction Note) is released on fact f6, but f6 is tier 'initial' (volunteered by patient at opening), meaning the artifact becomes available essentially immediately without the student doing any record-review action, bypassing action a-level engagement. This is a minor leak/mismatch since the student gets written documentation of restriction details (10 lbs, 4 weeks, employer name) merely by the patient volunteering the fact, not by an actual record review action tied to this artifact in the actions list.",
+   "where2": "artifacts d5"
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "action a1 vs chartAtStart 'Last vitals'",
+   "problem": "Vitals are described as 'reported via home cuff' in a1 but chartAtStart simply lists them as standard vitals without noting the home cuff caveat; minor inconsistency in how the measurement method is presented across the two sources."
+  },
+  {
+   "severity": "low",
+   "kind": "other",
+   "where": "a9 self-reported dermatome/myotome screen",
+   "problem": "Labelling toe/heel walk and single-leg heel raise as part of a 'self-reported' screen is slightly misleading since these are performed, observed motor tests, not self-report; wording should clarify these are patient-performed functional strength tests observed via video, consistent with other action names in the case."
+  }
+ ]
+}

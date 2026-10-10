@@ -1,0 +1,23 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a4 result",
+   "problem": "Action a4 is phrased as an assessment/teach-back ('Ask caregiver to walk through actual insulin administration steps') but its result directly hands over multiple reluctant/discoverable facts (f7, f8, f9) verbatim without requiring the separate direct questioning implied by the fact tiers. This is acceptable as a teach-back demonstration (a legitimate nursing action), but the result text reveals f9 (site rotation issue, tier 'discoverable') and implicitly touches f10 (correction dosing, tier 'reluctant') territory in one combined dump rather than being gated by rapport/directness consistent with tier design. Consider ensuring correction-dosing specifics (f10) remain exclusive to a16 only, since a4 result does not mention correction scale, which is fine, but flag that f10 is tier 'reluctant' yet is only gated behind a16's teach-back question rather than requiring a more sensitive/rapport-based approach as 'reluctant' implies elsewhere in the case design (e.g., f11, f32)."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "d2 home glucose log vs a3/f5/f6 timing",
+   "problem": "The log labels the low as 'Day2 2:15pm (school, treated late)' and a3 states it was 'treated approximately 20-25 minutes after symptoms noted,' while f6 has the caregiver saying she told the school to wait 'like 20 minutes' - these are roughly consistent but the log's day numbering (Day2) vs f2's 'three days since discharge' and chartAtStart 'yesterday' (per f5: 'yesterday the school called') creates a minor timeline ambiguity: discharge was 3 days ago, log shows Day1, Day2, Day3, and 'Today AM' - so the hypoglycemic event on 'Day2' would be two days ago, not 'yesterday' as caregiver states in f5. This is a minor off-by-one inconsistency in the timeline."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "d4 correction scale / answerKey plan",
+   "problem": "The correction scale's top tier (300+: 4 units and call diabetes team) combined with Today AM glucose of 268 mg/dL (a8) would correspond to the 250-299 band (3 units) per d4, which is internally consistent, but the answerKey/plan does not flag that today's actual reading (268) already warranted a correction dose discussion in the visit; this is a missed opportunity for consistency but not a factual error, so is low severity."
+  }
+ ]
+}

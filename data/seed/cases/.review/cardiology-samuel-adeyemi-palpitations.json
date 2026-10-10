@@ -1,0 +1,27 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "d6 (Referral Note from Primary Care, released at start)",
+   "problem": "The referral note explicitly states 'Patient has expressed hesitation about anticoagulation due to a family history of intracranial hemorrhage on warfarin' — this discloses the reluctant/hidden fact f12 (brother's ICH on warfarin) and the critical psychosocial concern f24 before the learner ever asks. This should be removed from the artifact or replaced with a generic 'anticoagulation discussion requested' without revealing the family history reason."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "a12 result (STOP-BANG) and a13 result (home oximetry)",
+   "problem": "STOP-BANG is a self-report questionnaire that must be administered by asking the patient the component questions (snoring, witnessed apneas, etc.); handing back a finished score of 5/8 as an 'exam/test' result without the learner eliciting components (which match reluctant fact f15/f16) bypasses interview-based elicitation of hidden facts. Likewise a13 hands over overnight oximetry desaturation to 88% as if objectively measured/reviewed, but this is 'patient-reported' per the result text, meaning it is being disclosed as a record review though it is actually self-report that should normally emerge only through conversation. Both actions in effect hand over reluctant information (snoring/apnea awareness, nocturnal hypoxia) that otherwise requires rapport-building questions; fix by either making these true instrument reviews with a scored outcome sheet artifact or removing them as actions and leaving disclosure to the interview tier facts (f15, f16)."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a11 CHA2DS2-VASc calculation"
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "chartAtStart Problem list"
+  }
+ ]
+}

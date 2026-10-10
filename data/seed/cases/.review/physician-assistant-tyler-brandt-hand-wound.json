@@ -1,0 +1,29 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a1 result / chartAtStart 'Last vitals'",
+   "problem": "Vitals action a1 is framed as 'Review vital signs' but the result is actually self-reported by the patient in real time (temp 38.0, HR 96) during this visit - this is really an interview/measurement-gathering moment, not a chart review, and it hands over the fever/tachycardia (critical finding f7-adjacent) without the learner asking about fever/chills first. Fever is listed as a 'discoverable' fact (f7) that should require the learner to ask, but action a1 (which has no prerequisite question) auto-reveals the objective fever value, bypassing the interview tier for that finding. Fix: either make a1 contingent on the learner asking about systemic symptoms, or clarify this is an objective vitals-taking action (acceptable) but ensure f7 behaves as the subjective counterpart rather than being redundant/leaked."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "artifact d2 flag 'H' vs columns",
+   "problem": "The flowsheet row has a single flag 'H' applied to the whole row, but only Temp (38.0) and HR (96) are abnormally high; BP, RR, and SpO2 are normal. A single row-level flag is ambiguous/inaccurate for a table meant to show which specific values are flagged; it should flag only Temp and HR cells, not the whole row at once with one tag."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "answerKey.keyFindings / plan - tetanus threshold",
+   "problem": "The case states a 5-year booster threshold applies for 'contaminated' wounds, which is correct per ACIP guidance for tetanus-prone wounds, but the wording in keyFindings ('booster recommended at 10 years for clean wound but this is a contaminated wound requiring booster if >5 years') is correct; however, barbed wire wound with only water rinse plus 3-day delay should also prompt consideration of tetanus immune globulin (TIG) status, which is not mentioned - this is a dirty wound and if vaccination history is uncertain/incomplete TIG may be indicated in addition to Tdap. This is a minor omission in the plan given the specialty-level teaching point about tetanus."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a12 lab result / d5 artifact",
+   "problem": "a12 result says 'No CBC on file; none drawn today' which matches d5, but d5's row cell says 'Status: Not performed' with reference range column dashes - this is fine, but the action is listed as kind 'lab' despite no lab being performed; this is a reasonable design choice but borders on a non-informative action since it duplicates a9/a10 pattern of 'nothing found' - low impact, not a hard error."
+  }
+ ]
+}

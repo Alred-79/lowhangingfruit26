@@ -1,0 +1,47 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a5 result / artifact d7",
+   "problem": "The IIEF-5 is a self-administered questionnaire about intercourse/erections; its result handing over f12 (erectile difficulty) is fine as a screening tool, but the action result also states the score is 'consistent with mild-to-moderate erectile dysfunction' and the fact f13 (hidden fear that treatment will worsen ED) is listed under objective o4 as elicited via a5, yet a5's result contains no route to the hidden fear — f13 can only be elicited by a sensitive interview question, not the instrument itself. The objective o4 should not list a5 as the sole actionId for uncovering f13; the hidden fear requires a direct, rapport-based question, not just administering the screen."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "a2 result / d4 referral note",
+   "problem": "The referring physician's note (d4, released at start) already states the DRE findings in full ('moderately enlarged, smooth, no nodularity or asymmetry, non-tender') before the learner ever orders/reviews a2. This duplicates and leaks a critical finding (o2) at visit start rather than requiring the learner to actively review the DRE note as an action, undermining the critical-importance action a2 and objective o2's intent to have the learner elicit/synthesize risk factors through their own workup rather than being handed the answer in the opening chart."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a1 result vs d1/d2 vs d4",
+   "problem": "a1 result states 'Free PSA % pending' while a10 separately re-states this; d1/d2 artifacts don't show free PSA at all. This is consistent but a1's critical importance level is odd for an action that essentially just restates chartAtStart/d1/d2 content already released at start (problem list already states the PSA trend), making the 'critical' action somewhat redundant with pre-visit leaked data rather than new discovery."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a4 result / d6 IPSS total",
+   "problem": "IPSS item scores in d6 sum to 3+3+2+2+4+1+3 = 18, but a4's result states 'IPSS total 17/35' while d6 says 'Total IPSS = 18... consistent with reported total of 17-18 depending on rounding.' IPSS is a simple integer sum with no rounding step; the correct total is 18, not an ambiguous 17-18. The action result and artifact should both state 18/35 consistently."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "d8 Home Vitals Log vs a6/chartAtStart weight",
+   "problem": "d8 shows weight at 'Today' as 198 lb matching a6 and chartAtStart, but 5 days ago was 197 lb and 12 days ago was 199 lb — fine, but BMI 29.4 is stated for weight 198 lb without a stated height; this is not verifiable/mismatched since no height is given anywhere in the case, so BMI cannot be confirmed as mathematically correct."
+  },
+  {
+   "severity": "low",
+   "kind": "leakage",
+   "where": "f16 distractor / mismatch m1",
+   "problem": "f16 is tagged as a distractor fact but mismatch m1 uses it as a key teaching point to explain persistent PSA elevation; labeling it 'distractor' when it is actually load-bearing for a core objective (o1) is an internal inconsistency in fact tagging."
+  },
+  {
+   "severity": "low",
+   "kind": "scope",
+   "where": "answerKey.plan item on saw palmetto",
+   "problem": "The plan says saw palmetto 'does not need to be stopped before MRI but should be documented' — reasonable, but the plan item is self-contradictory in listing 'discontinuing or disclosing' as options while also saying it doesn't need to be stopped; wording should be tightened to avoid implying conflicting guidance within the same bullet."
+  }
+ ]
+}

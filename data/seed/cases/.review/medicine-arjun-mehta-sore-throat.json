@@ -1,0 +1,29 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "chartAtStart / d4 (release when:start) and f6",
+   "problem": "The student health visit note (d4) is released at start and already contains the full prior exam findings, rapid strep negative result, and roommate exposure history, which duplicates/pre-empts what the learner is supposed to elicit via history (f5, f6) and reduces the diagnostic reasoning task. Consider releasing d4 only after the learner asks about prior care/testing (action-gated) rather than at visit start."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "f2 vs a1 and chartAtStart",
+   "problem": "f2 states fever up to 38.6°C (101.5°F) but the recorded vitals in a1/chartAtStart show 38.4°C (101.1°F) as 'last vitals' - these are presented as consistent same-visit values but represent different numbers; this should be clarified as fever history (patient-reported peak) vs today's measured temp, or the numbers should be aligned if meant to represent the same reading."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "chartAtStart 'Reason for visit' vs scenario.chiefComplaint and f1",
+   "problem": "chartAtStart lists '6 days' of symptoms, matching f1 and scenario, but a12 (student health note from yesterday) and d4 state '5 days' at that visit, which is internally consistent with a one-day gap, but worth confirming is intentional (it is, so no action needed) — flagging only because the artifact mismatch could appear as an error to a reader who doesn't track the timeline carefully."
+  },
+  {
+   "severity": "low",
+   "kind": "scope",
+   "where": "a14 imaging action",
+   "problem": "The action asks the medical student to 'order' an abdominal ultrasound, but the result states it cannot be performed and is not indicated - this is fine pedagogically, but the action name implies ordering is within scope when the result then contradicts that by saying it requires in-person imaging; consider rewording the action name to 'Consider ordering...' to avoid implying this telehealth visit can place such an order outright."
+  }
+ ]
+}

@@ -168,7 +168,7 @@ function check(file: string): Report {
         for (const r of d.table.rows || []) {
           const cells = r.cells || [];
           const result = ci.result >= 0 ? cells[ci.result] || "" : "";
-          if (!hasNumber(result)) continue; // qualitative result
+          if (!hasNumber(result) || /^\s*(\d\+|trace|[<>]?\s*1:\d+)\s*$/i.test(result)) continue; // qualitative result, dipstick grade or titre
           const unit = ci.unit >= 0 ? cells[ci.unit] || "" : "";
           // Unit may live in its own column or inline in the result ("8.9 g/dL").
           const inline = /\d\s*[a-zA-Zµμ%×x/^]/.test(result) || /%|ratio|index|\bph\b|inr|specific gravity/i.test(cells[0] || "");

@@ -1,0 +1,28 @@
+{
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a2 (C-SSRS screening) result",
+   "problem": "The C-SSRS result directly hands over the hidden/reluctant facts f8 (passive death wish) and f10/f13 (lethal means access to opioids and firearm) as a flat instrument readout, without requiring the resident to actually elicit them through rapport-building and sensitive direct questioning as the case design intends (f8 is tier 'hidden', f10/f13 are tier 'reluctant'). This bypasses the interview. Fix: the action result should only reflect what a properly administered C-SSRS would reveal if the questions are asked in the encounter — i.e., gate this action's full result on rapport/interview actions, or make the result conditional, not a standing lookup that discloses hidden/reluctant content outright."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a13 (Lethal means access and safety planning assessment) result",
+   "problem": "This action's result directly states the patient 'confirms' the oxycodone and rifle (f10, reluctant tier) and her agreement to removal (f13, reluctant tier) as if it were a passive record/exam finding, short-circuiting the sensitive-question requirement that reluctant facts are only given with rapport and direct probing. As written it reads as an automatic lookup rather than contingent on the interview. Fix: reword to make clear this is the documented outcome only after the learner directly and sensitively asks, or restrict the action's independent result to generic lethal-means screening prompts, not the specific confirmed answer."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a10 AUDIT-C result vs f14 drinking amount",
+   "problem": "Fact f14 states patient drinks 2 glasses of sherry nightly, but action a10 result describes 'typical quantity 1-2 drinks scored 1' and frames it as 'nightly low-quantity use,' which is roughly consistent, but the AUDIT-C frequency score of 3 (for 5-7 days/week) plus quantity score of 1 should sum with the third AUDIT-C item (binge/6+ drinks occasion) to total 4, which matches total score 4 — this part is fine. However, standard AUDIT-C cutoff for women is 3 (not 4), and the action result's own text says 'cutoff 3 flags further assessment' then says the score 'reflects...rather than a use disorder' despite being at/above the cutoff for women — this is a mild internal contradiction, since a score of 4 in a woman actually meets/exceeds the standard positive-screen threshold of 3, so stating it is 'below standard cutoff' is incorrect; it should be stated as positive/above cutoff requiring further assessment, consistent with the clinical note that follows it."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "objective o4 and a9/d4 regarding adherence mismatch",
+   "problem": "Objective o4 is described as identifying the medical/endocrine contributor and the thyroid-lab mismatch (f17/f18), but f18 (adherence) is actually a separate mismatch (m2) about medication adherence, not thyroid/endocrine causation; bundling f18 under 'medical/endocrine contributor' objective is a mild topic mismatch — the adherence mismatch is more about reliability of self-report than ruling out an endocrine cause and could be clarified or moved to a more fitting objective."
+  }
+ ]
+}

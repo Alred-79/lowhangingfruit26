@@ -1,0 +1,35 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart 'Problem list' and d1/a1 order text",
+   "problem": "The chartAtStart problem list and the order (artifact d1, released at start, and action a1) explicitly state the clinical concern 'rule out ectopic pregnancy' alongside the left-sided-cramping-adjacent clinical reasoning, but more importantly the order text in d1 and a1 both state hCG 14,200 and 'rule out ectopic' before the learner has even taken the history that is supposed to elicit laterality (f4) as a discoverable fact. Since f4 (left-sided cramping) is tiered 'discoverable' and meant to be elicited by the learner's own questioning per objective o1, having the order already frame 'rule out ectopic' this prominently at the very start (chartAtStart problem list, released before any learner action) substantially pre-biases/leaks the diagnostic reasoning the learner is meant to work out, rather than letting the learner discover the laterality clue and build the concern themselves. Fix: soften chartAtStart problem list to omit 'rule out ectopic' framing (e.g., just 'intrauterine pregnancy of undetermined viability, light spotting'), keeping the explicit ectopic rule-out language only in the order review action a1 result, which is more appropriate as a reviewed order detail than an upfront chart problem list entry."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "answerKey.plan item on Rh immunoglobulin and keyFindings/redFlags Rh-negative items",
+   "problem": "The plan, key findings, and red flags all repeatedly emphasize Rh-negative status and the need for Rhogam/Rh immunoglobulin consideration. While flagging Rh status to the ordering clinician is reasonable, this is a sonography pre-scan history/consent case and the repeated clinical emphasis on Rh immunoglobulin management (3 separate mentions across keyFindings, plan, and redFlags) is disproportionate scope creep for a role whose job is limited to history-taking and prep/consent; it risks implying the sonography student should be reasoning about Rh immunoglobulin indications in detail, which is outside this role's defined scope. Trim to a single mention that it should be passed along, without elaborating indications."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a2 result and action a7/a8 result phrasing",
+   "problem": "Action a2 result reveals the LMP/dating uncertainty as a flat statement, which is fine, but action a7 and a8 results are phrased as flat denials ('Patient denies shoulder-tip pain, denies lightheadedness...') identical to facts f5/f6, meaning the 'action' here is really just restating interview questions ('Screen for...') rather than an observable sign the sonographer role would check via examination/instrument. Per the action-kind rules, these should either be examination/instrument-based findings or removed/reclassified, since 'screen for X by asking' is an interview question bypassing the tiered fact-elicitation (f5, f6 are tier 'discoverable', meant to be revealed only when the learner asks in conversation, not via a generic screening action result that pre-packages the answer)."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "d6 artifact chart points",
+   "problem": "The hCG trend chart (d6) plots a point at x=-14 with y=0 labeled 'home urine test positive,' which is inconsistent since a positive urine pregnancy test does not correspond to hCG=0; this mislabels the data point and could confuse the qualitative home test result with a quantitative zero value. Fix by removing the y=0 point or labeling the home test result as a qualitative marker rather than a quantitative hCG value of 0."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a3 result vs d3 and f9",
+   "problem": "Action a3 result states 'no record of ectopic pregnancy in history' and d3 states 'no evidence of ectopic pregnancy on that scan,' which is consistent, but a3 also says 'no surgical evacuation documented' while d3 says 'expectant management offered and pursued' — these are consistent with each other, but a3 omits mentioning the expectant management entirely, creating a minor incomplete cross-reference that could read as a gap to a careful faculty reviewer. Align a3's wording to mention expectant management for full consistency with d3."
+  }
+ ]
+}

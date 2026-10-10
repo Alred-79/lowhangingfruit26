@@ -1,0 +1,35 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart (Problem list / Reason for visit) + d1/d2 released at 'start'",
+   "problem": "d1 (adviser referral note) is released at visit start and already discloses the bereavement timeline ('5-6 weeks prior'), that the student was 'reluctant to elaborate,' and tearfulness - this is reluctant/hidden-tier material (f20, f29) being handed to the learner before any interview occurs, bypassing the task of eliciting it. Fix by having the adviser note release later (e.g., tied to action a10 'Review academic adviser referral note') rather than at start, consistent with how d1 is treated via a10/d1 overlap - currently both a10 result and d1 duplicate content and d1 is released at start, undercutting the intended discovery task on a10."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a10 result vs d1 body",
+   "problem": "a10's result text differs slightly in content/emphasis from the artifact d1 it is meant to reflect (a10 does not mention 'reluctant to elaborate' or exact GPA 1.87, while d1 does), creating redundant/inconsistent duplicate records of the same referral note. Fix by making a10's result simply reference d1 and not restate overlapping but non-identical details, or remove the duplicate text in one place."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "a4 result (bereavement/grief impact assessment)",
+   "problem": "This action's result discloses guilt about 'not grieving properly,' avoidance (stopped choir), and reasons/pattern analysis that are tagged in facts as reluctant (f29) or discoverable (f6, f21) tiers, but the action is framed as a passive 'assessment' that hands over this content without the learner performing the sensitive, rapport-building interview questions required to elicit reluctant facts like f29. Fix by limiting a4's result to what a structured grief-impact assessment instrument would show (duration, functional criteria) and reserving guilt/avoidance disclosures for interview-elicited facts only, not an automatic action result."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a9 result vs d4 chart data",
+   "problem": "a9 narrative states 'averages 5-6 hours/night (previously 7-8)' and 'waking 2-3 times nightly,' but the d4 sleep chart shows the most recent nights (Night 2, Night 1) at 6 and 5.5 hours and does not show any explicit night-time awakenings count; the 'waking 2-3 times nightly' detail is not actually present in the artifact. This is a minor mismatch between stated record evidence (a9) and what the named artifact (d4) actually contains."
+  },
+  {
+   "severity": "low",
+   "kind": "scope",
+   "where": "answerKey.plan item re: coordinating with academic adviser",
+   "problem": "The plan item to 'coordinate with academic adviser regarding academic coaching/support resources' is reasonable, but the case does not clarify that such coordination requires signed release of information/consent beyond what's stated generically ('with patient's consent'), which is fine, but given probation is a condition tied to counseling attendance, there's a subtle confidentiality tension (adviser may expect attendance confirmation) that the plan does not address explicitly - a minor completeness gap rather than an error."
+  }
+ ]
+}

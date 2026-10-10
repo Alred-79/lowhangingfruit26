@@ -83,7 +83,7 @@
    },
    {
     "id": "a10",
-    "kind": "imaging",
+    "kind": "record",
     "name": "Review CT head report from last week",
     "result": "Mild generalized cerebral atrophy. Moderate chronic small-vessel ischemic changes (white matter hyperintensities) in periventricular and deep white matter. No acute hemorrhage, mass, or large territory infarct.",
     "abnormal": true,
@@ -531,7 +531,7 @@
    },
    {
     "id": "f8",
-    "category": "falls",
+    "category": "function",
     "topic": "fall circumstances",
     "chart": "Two falls in past 6 months: one tripping over rope in carport, one nocturnal fall getting up to urinate; no loss of consciousness, no fracture, did not seek medical care.",
     "says": "I tripped over my own boat rope out in the carport, felt like a fool. Then another time I got up in the night to use the bathroom and went down on the floor, bruised my hip something awful.",
@@ -540,7 +540,7 @@
    },
    {
     "id": "f9",
-    "category": "falls",
+    "category": "function",
     "topic": "fear of falling",
     "chart": "Patient minimizes fall risk, denies fear of falling, does not want to use a walker or cane.",
     "says": "I'm not about to start walking around with one of them walkers like an old man. I'm fine.",
@@ -788,7 +788,6 @@
    {
     "id": "m1",
     "factId": "f5",
-    "artifactId": "a3",
     "patientClaim": "Patient states he manages and takes his own medications independently without any help or missed doses.",
     "recordEvidence": "Camera inspection of the pill organizer (a3) shows multiple full, untouched compartments across the current week (Monday AM, Wednesday AM, Thursday AM, Tuesday PM, Friday PM), and the medication list review (a7) confirms no supervision system is in place.",
     "teachingPoint": "Self-report of medication independence is unreliable in cognitive impairment; direct observation (pill organizer check) is an essential, low-tech telehealth assessment that often reveals a gap between stated and actual adherence."

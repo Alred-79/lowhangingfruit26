@@ -1,0 +1,29 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "facts f12, f18, f19 tier=discoverable but importance=critical, and chartAtStart/d1 already disclose plaques consistent with asbestos",
+   "problem": "The CT report (d1), released at start, already states pleural plaques are 'consistent with prior asbestos exposure,' which effectively confirms the occupational exposure finding before the learner asks f12. This reduces f12 from a true discoverable fact to something already corroborated by chartAtStart artifact, partially leaking the asbestos link the learner is meant to elicit via history."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a7 result / Fleischner & USPSTF eligibility reasoning",
+   "problem": "USPSTF 2021 criteria require 20+ pack-year history and current smoker or quit within past 15 years, ages 50-80 — patient (35 pack-years, quit 6 years ago at 63) does meet criteria, which is correctly stated; however the phrasing 'quit within last 15 years at time of eligibility window' is awkward/circular and could confuse graders checking the calculation (quit 6 years ago, age 57 at cessation, now 63 — still within 15-year window, correctly eligible, but the awkward wording should be tightened to '20+ pack-years, current or former smoker who quit within 15 years, age 50-80' for clarity)."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a5 result vs f10",
+   "problem": "a5 states quit 'at approximately age 57' while f10 says quit 'six years back when his first grandson was born' with no explicit age given; this is consistent arithmetically (63-6=57) but the age is only asserted in the record review action, not independently confirmable from the patient's own words, which is a minor internal-consistency reliance rather than an error—flagging for cross-check only, no fix needed if arithmetic holds (it does: 63-6=57, correct)."
+  },
+  {
+   "severity": "low",
+   "kind": "scope",
+   "where": "answerKey.plan item on screening referral",
+   "problem": "Plan appropriately keeps screening referral outside radiology's scope by deferring to primary care, which is correct; however action a7 is labeled 'kind: assessment' performed by the radiology resident determining eligibility, which borders on practicing primary-care risk counseling—likely acceptable as an assessment but worth noting as a scope-boundary case to confirm with faculty."
+  }
+ ]
+}

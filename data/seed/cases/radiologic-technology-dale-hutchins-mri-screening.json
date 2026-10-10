@@ -457,7 +457,7 @@
    },
    {
     "id": "f5",
-    "category": "occupation",
+    "category": "social",
     "topic": "work with metal",
     "chart": "Works as a pipe welder/metal fabricator over 20 years.",
     "says": "I weld pipe for a living, been doing it over twenty years now, lots of grinding and cutting metal too.",
@@ -890,6 +890,8 @@
   ],
   "knowledge": [],
   "rubricId": "default",
-  "variants": []
+  "variants": [],
+  "specialty": "Radiologic Technology / Medical Imaging",
+  "setting": "Telehealth video visit; patient's home garage/workshop in Tulsa, Oklahoma"
  }
 }

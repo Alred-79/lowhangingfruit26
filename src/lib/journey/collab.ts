@@ -1,7 +1,7 @@
 import { run as sql } from "../db";
 import { messagesOf } from "../engine/encounter";
 import { chatJSON, MODELS } from "../llm";
-import { aliasing, approvedCorpus, entryLine, renderState, unverifiedValues } from "./context";
+import { aliasing, approvedCorpus, clean, entryLine, renderState, unverifiedValues } from "./context";
 import { addEntry, addLink, addMessage, clinician, entriesOf, linksOf, loadRun, messagesOfRun, personaBrief, stageRun, stageRuns, studentNameOf, type LoadedRun } from "./store";
 import type { Huddle, HuddleItem, Stage, Synthesis } from "./types";
 
@@ -36,7 +36,7 @@ const CONSULT_SCHEMA = {
   properties: {
     learner_act: { type: "string", enum: ["question", "request", "information", "checkback", "confirmation", "other"], description: "What the learner's latest message does. checkback = restates what you said to confirm they understood it; confirmation = confirms your read-back was right." },
     reply: { type: "string", description: "Your reply, 1-4 sentences, in your own voice." },
-    reply_act: { type: "string", enum: ["answer", "readback", "request", "confirmation", "clarifying_question"], description: "readback = you repeat back a request or information to confirm you received it correctly" },
+    reply_act: { type: "string", enum: ["answer", "readback", "request", "confirmation", "correction", "clarifying_question"], description: "readback = you repeat back a request or information to confirm you received it correctly; confirmation = the learner's check-back was right; correction = the learner's check-back was partly wrong and you put it right" },
     cites: { ...labels, description: "Labels of the shared-state entries your reply relies on" },
     answers: { type: "string", description: "Label of ONE unanswered question or uncertain entry that your reply settles using information already on record. Empty string if none." },
   },
@@ -96,7 +96,7 @@ ${text}`,
   const prev = history[history.length - 1];
   const prev2 = history[history.length - 2];
   // Loop the learner opened: learner request/information -> colleague read-back -> learner confirmation.
-  const learnerCloses = (out.learner_act === "confirmation" || out.learner_act === "checkback") && prev?.fromIsAi && prev.meta?.act === "readback" && prev2 && !prev2.fromIsAi;
+  const learnerCloses = (out.learner_act === "confirmation" || out.learner_act === "checkback") && prev?.fromIsAi && (prev.meta?.act === "readback" || prev.meta?.act === "correction") && !!prev2 && !prev2.fromIsAi;
   // Loop the colleague opened: colleague answer/request -> learner check-back -> colleague confirmation.
   const checkbackClosed = out.learner_act === "checkback" && out.reply_act === "confirmation";
   addMessage(runId, { thread, kind: "consult", fromRole: me.roleTitle, fromName: student, fromIsAi: false, toRole: cl.name, text, meta: { stageId: to.id, act: out.learner_act, duringStage: at.id, loop: learnerCloses ? "closed" : out.learner_act === "request" || out.learner_act === "information" ? "opened" : undefined } });
@@ -104,7 +104,7 @@ ${text}`,
   const cites = [...new Set((out.cites || []).map(resolve).filter((x): x is string => !!x))];
   const corpus = approvedCorpus(run.c, entries) + " " + entries.map((e) => e.text).join(" ") + " " + text + " " + transcript;
   const unverified = unverifiedValues(out.reply || "", corpus);
-  const reply = (out.reply || "").trim() || "I do not have anything on that in the record.";
+  const reply = clean(out.reply) || "I do not have anything on that in the record.";
   addMessage(runId, { thread, kind: "consult", fromRole: to.roleTitle, fromName: cl.name, fromIsAi: true, toRole: student, text: reply, meta: { stageId: to.id, act: out.reply_act, cites, duringStage: at.id, loop: checkbackClosed ? "closed" : out.reply_act === "readback" ? "read_back" : undefined } });
 
   // The exchange becomes part of the shared state, attributed to the colleague, linked to what it drew on.
@@ -170,7 +170,7 @@ export async function callOut(runId: string, text: string) {
   for (const a of out.acks || []) {
     const s = others.find((x) => `S${x.order}` === String(a.stage).toUpperCase().trim());
     if (!s || !a.text) continue;
-    addMessage(runId, { thread: "callout", kind: "callout_ack", fromRole: s.roleTitle, fromName: clinician(s.clinicianId).name, fromIsAi: true, toRole: student, text: a.text, meta: { stageId: s.id, act: "readback", entryId, duringStage: at.id, loop: "read_back" } });
+    addMessage(runId, { thread: "callout", kind: "callout_ack", fromRole: s.roleTitle, fromName: clinician(s.clinicianId).name, fromIsAi: true, toRole: student, text: clean(a.text), meta: { stageId: s.id, act: "readback", entryId, duringStage: at.id, loop: "read_back" } });
   }
   return { ok: true };
 }
@@ -227,7 +227,7 @@ export async function startHuddle(runId: string): Promise<Huddle> {
       },
       system: `An interprofessional care team is holding a huddle at the end of a patient's care journey in a clinical training simulation. For each agenda item, write the position of the one or two AI team members whose role it touches most. Where two members would reasonably see it differently because of their professional lens, let them differ; do not manufacture a conflict.
 
-Rules: positions rest only on the shared record (cite entry labels). No new clinical facts, values or doses. Each position says how confident the member is and what information or action would settle the item. The learner will respond next, so leave the decision open.`,
+Rules: positions rest only on the shared record (give entry labels in cites only; never write a label such as E12 inside the spoken text). No new clinical facts, values or doses. Each position says how confident the member is and what information or action would settle the item. The learner will respond next, so leave the decision open.`,
       messages: [
         {
           role: "user",
@@ -243,8 +243,8 @@ Rules: positions rest only on the shared record (cite entry labels). No new clin
         if (!s || !p.text) continue;
         const cl = clinician(s.clinicianId);
         const cites = [...new Set((p.cites || []).map(resolve).filter((x): x is string => !!x))];
-        item.positions.push({ stageId: s.id, name: cl.name, role: s.roleTitle, text: p.text, cites });
-        addMessage(runId, { thread: "huddle", kind: "position", fromRole: s.roleTitle, fromName: cl.name, fromIsAi: true, text: p.text, meta: { stageId: s.id, itemId: item.entryId, cites } });
+        item.positions.push({ stageId: s.id, name: cl.name, role: s.roleTitle, text: clean(p.text), cites });
+        addMessage(runId, { thread: "huddle", kind: "position", fromRole: s.roleTitle, fromName: cl.name, fromIsAi: true, text: clean(p.text), meta: { stageId: s.id, itemId: item.entryId, cites } });
       }
     }
   }
@@ -290,7 +290,7 @@ export async function resolveHuddleItem(runId: string, entryId: string, text: st
         cites: labels,
       },
     },
-    system: `You are the AI members of an interprofessional care team in a huddle. The learner has proposed how to settle an agenda item. Respond as the member best placed to, honestly: agree when the proposal is sound and supported by the record, push back when it is not, and never settle a question by inventing a fact. An item that needs information the team does not have stays open with an owner and a next step. No values, doses or results that are not in the record.`,
+    system: `You are the AI members of an interprofessional care team in a huddle. The learner has proposed how to settle an agenda item. Respond as the member best placed to, honestly: agree when the proposal is sound and supported by the record, push back when it is not, and never settle a question by inventing a fact. Entry labels (E12) go in cites only, never in the spoken or recorded text. An item that needs information the team does not have stays open with an owner and a next step. No values, doses or results that are not in the record.`,
     messages: [
       {
         role: "user",
@@ -301,6 +301,8 @@ export async function resolveHuddleItem(runId: string, entryId: string, text: st
 
   const sp = ai.find((x) => `S${x.order}` === String(out.speaker).toUpperCase().trim()) || ai[0];
   const cl = clinician(sp.clinicianId);
+  out.teamResponse = clean(out.teamResponse);
+  out.recorded = clean(out.recorded);
   const cites = [...new Set((out.cites || []).map(resolve).filter((x): x is string => !!x && x !== entryId))];
   addMessage(runId, { thread: "huddle", kind: "response", fromRole: sp.roleTitle, fromName: cl.name, fromIsAi: true, text: out.teamResponse, meta: { stageId: sp.id, itemId: entryId, cites, act: "readback", loop: "closed" } });
   const corpus = approvedCorpus(run.c, entries) + " " + entries.map((e) => e.text).join(" ") + " " + text;
@@ -384,6 +386,8 @@ export async function proposePlanChange(runId: string, itemId: string, text: str
   });
   const sp = ai.find((x) => `S${x.order}` === String(out.speaker).toUpperCase().trim()) || ai[0];
   const cl = clinician(sp.clinicianId);
+  out.response = clean(out.response);
+  out.revisedAction = clean(out.revisedAction);
   addMessage(runId, { thread: "plan", kind: "proposal", fromRole: me.roleTitle, fromName: student, fromIsAi: false, text, meta: { itemId, act: "request", loop: "opened" } });
   addMessage(runId, { thread: "plan", kind: "response", fromRole: sp.roleTitle, fromName: cl.name, fromIsAi: true, text: out.response, meta: { stageId: sp.id, itemId, act: out.accepted ? "readback" : "answer", loop: out.accepted ? "closed" : undefined } });
   const corpus = approvedCorpus(run.c, entries) + " " + entries.map((e) => e.text).join(" ") + " " + text;

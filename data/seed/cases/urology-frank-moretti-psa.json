@@ -917,6 +917,11 @@
   "knowledge": [],
   "rubricId": "default",
   "difficulty": 3,
-  "variants": []
+  "variants": [],
+  "title": "Rising PSA with strong family history in a 62-year-old man with erectile concerns",
+  "summary": "A 62-year-old building contractor with PSA rising from 3.1 to 6.8 ng/mL over two years presents for results discussion. He has moderate LUTS, strong family history (father died of prostate cancer at 74, brother treated at 60), and unspoken erectile dysfunction fears. The case teaches risk-stratified workup with MRI before biopsy, interpreting PSA trends with confounders (cycling), distinguishing BPH symptoms from cancer risk, and sensitively eliciting hidden concerns about sexual function in shared decision-making.",
+  "specialty": "Urology",
+  "setting": "Telehealth video visit; patient's home office in Philadelphia",
+  "encounterType": "Results discussion and shared decision-making"
  }
 }

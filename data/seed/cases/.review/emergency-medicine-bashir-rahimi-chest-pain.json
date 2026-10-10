@@ -1,0 +1,35 @@
+{
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "d6 (Patient-Reported Symptom Timeline) release.when 'fact', ref f5",
+   "problem": "This artifact's body text explicitly documents the hemoptysis (f8) and leg swelling (f6) as already-recorded facts ('Day 3-4: Noted left calf soreness and swelling...One episode of coughing up blood-streaked sputum this afternoon'), even though f6 and f8 are tiered as 'reluctant' and are supposed to only be shared with direct, sensitive questioning. Releasing this artifact when f5 (a discoverable fact) is elicited hands over the reluctant findings for free, bypassing the interview. Fix: artifact should only release after both f6 and f8 are actually disclosed by the patient, or should omit these reluctant details until then."
+  },
+  {
+   "severity": "high",
+   "kind": "accuracy",
+   "where": "a13 result / d5 Wells score calculation",
+   "problem": "The Wells score components used (DVT signs +3, PE most likely diagnosis +3, HR>100 +1.5) sum to 7.5, which is correctly computed arithmetically, but the standard Wells criteria category list omits 'hemoptysis' entirely (it is not a Wells criterion) and the worksheet oddly notes 'Hemoptysis: +1 (not scored in classic Wells, documented separately)' then still arrives at 7.5 without including that +1 — this is fine arithmetically, but immobilization/surgery is scored only for surgery within 4 weeks or bedridden >3 days, not long-distance driving, and the worksheet correctly notes 0, which is good. However, the real Wells PE criteria DVT sign component threshold is specifically 'clinical signs/symptoms of DVT (leg swelling + pain with palpation of deep veins)' +3, which matches a7's exam findings reasonably, so the score stands. No fix needed here beyond removing the confusing extraneous hemoptysis note since it is not part of Wells and could mislead learners into thinking it was scored."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a7 exam name and alias 'Homan's sign'",
+   "problem": "The action is described as 'guided calf inspection and self-palpation' but is aliased to 'Homan's sign,' which is a specific maneuver (passive dorsiflexion of the foot to elicit calf pain) not performed or described in this action's result. This mislabels the action and could confuse the learner about what was actually assessed. Fix: remove the 'Homan's sign' alias since no dorsiflexion maneuver was performed."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "chartAtStart 'Reason for visit' plus a11/a12/a14 record review actions",
+   "problem": "These record-review actions have low informational yield (all unremarkable) yet are not flagged as such; this is more a scope/design issue — including them is fine, but the chartAtStart 'Reason for visit' field already states 'Sharp right-sided chest pain and shortness of breath, onset this morning,' which duplicates the chief complaint without issue; however no leak found here beyond minor redundancy — reclassify as low priority, not listed as a formal issue."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a3 result vs a6 result",
+   "problem": "a3 states respiratory rate 24/min 'mildly labored, no accessory muscle use' while a6 (general appearance) separately states 'speaking in full sentences but pausing to catch breath.' These are consistent with each other, but a10 (exertional walk) describes him becoming 'visibly short of breath' after 20 feet, which is a reasonable progression; no real inconsistency, flagged only as a very minor overlap in descriptors across three separate actions that could be streamlined, not a factual error."
+  }
+ ],
+ "verdict": "major_fixes"
+}

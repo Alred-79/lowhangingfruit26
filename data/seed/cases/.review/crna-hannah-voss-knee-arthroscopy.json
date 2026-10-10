@@ -1,0 +1,41 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a10 result",
+   "problem": "Action a10 ('Review current medication list in chart') result states: 'No chart entry regarding family anesthesia history or malignant hyperthermia risk.' This is a record-review action that explicitly names 'malignant hyperthermia' in its result, directly leaking the hidden diagnosis the learner is supposed to work out via direct questioning (f10/f11/f12 are reluctant/hidden facts). Fix: the medication list review action should report only the medication list contents (semaglutide, sumatriptan, ginkgo, fish oil) and should not mention family anesthesia history or MH at all; the absence of family history documentation can instead be revealed via the chart note artifact d7 ('noncontributory') without naming MH."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a9 and a10 names/objectives linking to a10",
+   "problem": "Objectives o1, o2, o3, o7 all list actionIds:['a10'] as the action through which the family-history and MH-suggestive facts (f10, f11, f12) are elicited, but a10 is a chart/medication-list review action, not an interview action. The family history facts are reluctant/hidden and should only be revealed through direct interview questioning (not listed among actions, since this role's action kinds are assessment/exam/vitals/lab/test/record and the actual elicitation would occur via conversation, not an action). Having a10's result imply chart review surfaces MH-relevant info is both a scope mismatch and a leak; the medication-list action should not be the vehicle for this disclosure in the answer key linkage."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "action a15 (Apfel/PONV) result",
+   "problem": "Apfel score calculation is miscounted. The four classic criteria are: female sex, nonsmoker, history of PONV/motion sickness, and planned postoperative opioids. The result lists 'female sex, history of PONV, nonsmoker' plus 'opioid use planned' as a separate note, totaling 4 risk factors present, yet the result states 'Apfel score estimated 3/4.' All four factors described are actually met, so the score should be 4/4, not 3/4."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "action a2 STOP-BANG result vs patient demographics",
+   "problem": "STOP-BANG result states 'BMI >35: no (BMI 33)' which is correct, but then scores overall '1/8' when it should recount: Snoring-no(0), Tiredness-occasional but attributed to shift work, ambiguous scoring, Observed apnea-no(0), Pressure-'borderline' is ambiguous but counted as unclear, BMI-no(0), Age-no(0), Neck-no(0), Gender-no(0). If tiredness and borderline BP are each counted as 0 (as implied), total should be 0/8, not 1/8; if either is counted as yes it would be 1 or 2/8. The result's final tally doesn't clearly map to the described sub-answers, creating an unexplained scoring inconsistency a careful reader would flag."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "answerKey.plan items 2-3 (non-triggering anesthetic technique, genetics referral)",
+   "problem": "The plan has the CRNA student independently recommending a specific anesthetic technique change (avoid volatile agents/succinylcholine, plan TIVA) and recommending genetics/neuromuscular referral or caffeine-halothane testing. While item 3 does caveat 'outside CRNA independent scope,' item 2 states the recommendation plainly as if it's within the CRNA's independent purview, which is inconsistent with the stated scope-of-practice note in item 3 and with objective o3's framing that this decision requires collaborative team decision-making, not independent CRNA recommendation."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "chartAtStart 'Last vitals' vs action a3/a4 and artifact d4",
+   "problem": "chartAtStart lists 'Last vitals' as BP 124/78, HR 72, SpO2 99%, recorded 3 weeks ago at pre-op lab visit. Action a4 (today's current vitals) shows BP 126/80, HR 74, SpO2 98%, which is a reasonable change over time, but a3's reviewed home BP log (d4) only covers 'past 2 weeks' and does not include a measurement from 3 weeks ago matching the chartAtStart value, leaving a minor unexplained gap in the record continuity."
+  }
+ ]
+}

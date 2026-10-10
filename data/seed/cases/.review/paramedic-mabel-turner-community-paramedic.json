@@ -1,0 +1,35 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "a13 result / d3 artifact",
+   "problem": "Action a13 ('Review pill box / medication adherence') directly hands over the reluctant fact f10 (that she skips furosemide on days she leaves the house, tied to bathroom anxiety) as an objective record finding, before the patient has disclosed the reasoning via rapport/interview. The pillbox photo can legitimately show which compartments are full/empty (that's a real artifact), but the result text should only report the physical finding (which slots have tablets) without stating 'the two days patient went to church and the day she went into town' as fact — that interpretive linkage belongs to the interview-elicited f10, not an objective exam finding. Fix: have a13/d3 report only 'Wednesday and Friday AM furosemide slots still contain tablets; all others empty' without naming the reason/activity, and let the patient reveal the behavioral reason through rapport-based questioning per f10."
+  },
+  {
+   "severity": "high",
+   "kind": "consistency",
+   "where": "a13 result text",
+   "problem": "a13 says furosemide slots full 'for the two days patient went to church and the day she went into town' = 3 days, but d3 and the mismatch m1 both specify only 2 days (Wednesday and Friday). This is an internal inconsistency in day count between the action text and the artifact/mismatch."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a7 / chartAtStart glucose and vitals",
+   "problem": "POC glucose 104 mg/dL is listed as 'minor' importance with no issue, which is fine, but temperature 97.8°F listed in a6 result matches d5 flowsheet — no error there; flagging only to confirm no discrepancy found. (Not an issue - remove)"
+  },
+  {
+   "severity": "medium",
+   "kind": "feasibility",
+   "where": "a3 and a4 names/results",
+   "problem": "a3 is named 'Heart rate and rhythm (home pulse ox / manual radial check)' but the result reports pulse 92 and irregularly irregular rhythm, which a basic home pulse oximeter cannot determine (most consumer pulse ox devices do not reliably detect irregular rhythm); the manual radial check justifies the rhythm finding but the action name conflates two different tools inconsistently with a4 (separate SpO2 action). Clarify that rhythm assessment is via manual radial palpation only, not the home pulse ox device, to avoid implying the device detects arrhythmia."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a9 vs f4",
+   "problem": "a9 reports edema '2+ pitting to mid-shin' as a critical new objective finding, while f4 (initial, volunteered) already tells the learner 'ankles are tight against shoes, worse than discharge.' This is acceptable overlap (patient volunteering symptom, exam confirming), not a leak, but the degree described in a9 (mid-shin, shiny/taut skin) is more severe than the initial fact implies; consider aligning severity language so the artifact doesn't dramatically exceed what was volunteered, to maintain internal consistency of symptom progression."
+  }
+ ]
+}

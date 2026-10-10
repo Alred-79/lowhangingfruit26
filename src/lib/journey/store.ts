@@ -360,9 +360,16 @@ export const norm = (s: string) => (s || "").toLowerCase().replace(/[^a-z0-9 ]+/
 
 /** True when `quote` occurs (ignoring case and punctuation) in `text`. Quotes shorter than 3 words never verify. */
 export function quoteIn(quote: string, text: string): boolean {
-  const q = norm(quote);
-  if (q.split(" ").length < 3) return false;
-  return norm(text).includes(q);
+  const hay = norm(text);
+  if (!hay) return false;
+  // A quote may be stitched with ellipses; every fragment must be present.
+  const parts = (quote || "").split(/\.{3,}|…|\[\.\.\.\]/).map(norm).filter((p) => p.split(" ").length >= 3);
+  if (!parts.length) return false;
+  if (parts.every((p) => hay.includes(p))) return true;
+  // Otherwise accept a long verbatim run (models sometimes trim or add a word at the edges).
+  const words = norm(quote).split(" ");
+  for (let n = Math.min(words.length - 1, 14); n >= 8; n--) for (let i = 0; i + n <= words.length; i++) if (hay.includes(words.slice(i, i + n).join(" "))) return true;
+  return false;
 }
 
 export function who(run: LoadedRun, stage: Stage, studentName: string) {

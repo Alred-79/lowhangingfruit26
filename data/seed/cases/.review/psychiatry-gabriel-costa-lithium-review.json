@@ -1,0 +1,29 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a1 (Mental status examination) result / objective o4",
+   "problem": "The MSE action result as written does not contain the hidden facts f27/f28, which is correct, but objective o4 maps the hidden ambivalence/self-discontinuation facts to action a1 (MSE) rather than to a direct interview question with rapport-building. Since a1's result text shown is generic MSE findings only, this is fine as written, but there is no action in the action list that elicits f27/f28 at all — they can only come from interview, which is appropriate, but the case provides no action a user could take to confirm these were elicited (e.g., no 'rapport-building exploration of medication feelings' action), making o4 difficult to score via actions. This is a design gap rather than leakage, but should be clarified: either add a dedicated interview-outcome action/placeholder or remove the actionId a1 from o4 since MSE alone would not surface this hidden content, risking confusion that MSE 'contains' the hidden ambivalence."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a9 renal function panel / d2 flowsheet",
+   "problem": "eGFR of 68 with creatinine 1.3 mg/dL in a young 29-year-old male is roughly consistent, but the case labels this as 'acute kidney injury' and 'Stage' is not specified; using KDIGO AKI criteria, a rise from baseline 0.9 to 1.3 mg/dL (ratio 1.44) within presumably <7 days meets AKI Stage 1, which is fine, but the timeline here is 2 weeks of symptoms with no documented intermediate creatinine, making it hard to confirm this is 'acute' versus subacute; the plan/answer key should specify this is presumed subacute-on-chronic rather than flatly 'AKI' given lack of a recent baseline within 48h-7days as per strict KDIGO definition. This is a minor definitional looseness, not a major error."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a8 lithium level result and d2 flowsheet",
+   "problem": "a8 states the level was drawn '~12 hours post-dose per patient report,' implying a trough level, but therapeutic lithium levels are standardly drawn 12 hours post-dose, so 1.4 mmol/L is a true elevated trough — this is actually fine and consistent, not an error; no action needed. (Flagging only to confirm no mismatch.)"
+  },
+  {
+   "severity": "low",
+   "kind": "other",
+   "where": "patient appearance / persona background",
+   "problem": "The guitar in the background and 'Portuguese-American' ethnicity with immigrant family detail are included as flavor but are not tied to the clinical problem, which is appropriate; however, the explicit mention of 'Portuguese immigrant family' combined with 'hardworking, doesn't like to complain' risks a mild stereotype pairing ethnicity with stoicism/work ethic. Consider removing the explicit linkage of ethnicity to personality trait description to avoid any perceived stereotyping, even though it is not central to the case."
+  }
+ ]
+}

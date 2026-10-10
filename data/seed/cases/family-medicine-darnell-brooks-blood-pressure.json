@@ -901,7 +901,6 @@
    {
     "id": "m2",
     "factId": "f11",
-    "artifactId": "a9",
     "patientClaim": "Patient discloses nearly falling asleep at a red light while driving the bus but asks that this not create trouble for him, implying he has not reported any sleep problem to anyone official.",
     "recordEvidence": "CDL medical certificate record (a13) shows renewal 8 months ago with no sleep issue disclosed to the DOT examiner, and the high STOP-BANG score (a9) indicates high risk for a condition that could affect fitness to safely operate a commercial vehicle.",
     "teachingPoint": "When a patient's commercial driving safety may be at risk from a likely medical condition (suspected OSA), the clinician must balance patient confidentiality and trust with public safety obligations - this requires careful counseling about voluntary reporting/evaluation rather than silence, and referral for sleep study and DOT guidance, while recognizing scope: the family medicine resident refers rather than independently adjudicating fitness to drive."

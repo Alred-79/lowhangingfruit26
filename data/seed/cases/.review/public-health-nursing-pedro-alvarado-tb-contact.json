@@ -1,0 +1,44 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a4 result / artifact d2",
+   "problem": "Action a4 result states 'No refills since' and 'No subsequent fills on record,' and the pharmacy history is release-on-action — this directly hands the learner the nonadherence finding without requiring any interview probing. More importantly, this is fine as a record check (that's the point of o1), but the mismatch is between d2's 'Refills remaining: 2' field and action a4's narrative which says 'no refills since' (ambiguous phrasing could be read as consistent, but it should explicitly show the quantity dispensed is a 30-day supply only lasting through roughly week 4, so the gap in weeks 4-5 is objectively evident, which is appropriate). Also check: d2 column 'Refills remaining: 2' is static/order-level, not fill history, which is a minor consistency wrinkle but not leakage."
+  },
+  {
+   "severity": "high",
+   "kind": "consistency",
+   "where": "artifact d7 (Rifampin Adherence Timeline) vs facts f3/f4 and action a1",
+   "problem": "d7 is released 'at start' and shows doses taken per week: Week1=7, Week2=6, Week3=0, Week4=0, Week5=0. This chart is available to the learner before any interview and directly reveals the actual nonadherence pattern (stopped after week 2), which is the reluctant fact f4 that the case design intends the learner to elicit through rapport-building questioning (per o1). This is a leak: the hidden/reluctant adherence truth is given away by a chart released at visit start, bypassing the intended interview-based discovery.",
+   "problem_fix": "Either remove d7 or change its release to be gated on an action (e.g., tied to a7/a4) so it does not leak before the interview, or make it only show reported pharmacy fills (same as d2) rather than directly plotting 'doses taken' which is the exact fact being tested."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "artifact d2 table / action a4 result",
+   "problem": "The pharmacy fill history table shows 'Refills remaining: 2' for a 30-day fill with 0 refills used, but the action a4 narrative says 'No refills since. No subsequent fills on record,' which is consistent with having 2 refills still available/unfilled — but a 4-month (120+ day) course of daily rifampin would require roughly 3 additional 30-day fills; stating 'refills remaining: 2' undercounts what is needed for a 4-month regimen (should be ~3 refills remaining to cover 4 months total).",
+   "problem_fix": "Correct the refills-remaining value to reflect the quantity needed to complete a 4-month regimen (e.g., 3 refills remaining of 30-day supplies), or state the total days-supply prescribed matches 4 months."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a8 name/result",
+   "problem": "Action a8 is phrased as 'Ask patient to self-report any current side effects' but its result reveals the reluctant/discoverable facts f5/f6/f7 (nausea, orange urine, timing of resolution tied to stopping medication) in full narrative detail, essentially answering the adherence-and-cause story directly rather than simulating an interview response the learner must elicit with sensitive follow-up questions. Since this is categorized as a 'test' action but is actually only an interview question, it bypasses the tiered fact-elicitation design (f5 is 'discoverable', meant to be elicited by directed questioning, not auto-revealed by a single click).",
+   "problem_fix": "Either remove this as a scripted action (leave these facts to be surfaced only via actual learner questioning/dialogue) or convert it into a true assessment action (e.g., a structured ROS checklist) whose result is a simple yes/no without the narrative explanation of causality."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "answerKey.plan item 3 / objective o5",
+   "problem": "The plan appropriately says medication restart is outside PHN scope and defers to the prescribing clinician, which is correct; however, action a7 (reviewing baseline LFTs) is tagged to o5 as if the PHN would use alcohol screening results to independently determine 'further clinical evaluation... needed before restart' — this is fine, but the objective text implies the nurse 'determines' clinical next steps, which could be read as the nurse making a clinical restart-readiness determination rather than simply referring out. Wording should be tightened so the nurse's role is limited to screening/documentation and referral, not clinical determination of readiness."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "chartAtStart 'Last vitals' vs action a1",
+   "problem": "chartAtStart lists 'weight 182 lb (patient-reported, home scale)' as last vitals already known at start, while action a1 re-elicits the same weight as if newly reviewed; this is a minor redundancy/leak since the student doesn't need to perform a1 to learn the weight, as it's already given in chartAtStart — not a critical leak since weight is not sensitive, but reduces the purpose of a1."
+  }
+ ]
+}

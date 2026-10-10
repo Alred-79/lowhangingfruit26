@@ -1,0 +1,35 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "d1 artifact (Audiologic Evaluation Report), released at start",
+   "problem": "The chartAtStart/d1 artifact released at the start of the encounter already contains the full IMPRESSION statement naming 'asymmetric sensorineural hearing loss... word recognition score poorer than predicted... Recommend medical/ENT referral prior to amplification given asymmetry and WRS findings.' This hands the learner the entire diagnostic reasoning and red-flag conclusion (the core teaching point/task of the case) before any learner action, making actions a1-a3 and a10 redundant rehearsals rather than discoveries. Fix by removing the IMPRESSION's interpretive conclusion/referral recommendation from the artifact and leaving only raw audiometric/tympanometric data, so the learner must synthesize the red-flag pattern and referral recommendation themselves."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a4 result vs f3/f26 tier",
+   "problem": "Action a4 is labeled as 'Administer tinnitus history questions' but is phrased as an interview-only action ('Ask about...') yet its result hands over f3 (tier: initial, already volunteered) directly as if testing was needed; this is a minor mismatch between an 'initial' tier fact (already told to the student per f3) and an action gating access to it. Since f3 is tier 'initial' it should already be known without a dedicated action; verify a4 is not needed to unlock an initial-tier fact, or reclassify f3 appropriately."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "a11 and the action's 'kind' field",
+   "problem": "a11 ('Ask about family history...') is tagged kind:'test' but it is purely an interview question with no instrument or measurement involved, inconsistent with the role's declared action kinds (test, assessment, exam, record) which should correspond to an actual instrument/measurement for 'test'. This should be recategorized as a record or removed as a leak-prone pure interview action, or the kind label should better reflect it as history-taking within an allowed category."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a2 result vs d1 chart data",
+   "problem": "a2 states Right PTA = 28 dB HL using 500/1000/2000 Hz values (20,25,30 → average 25, not 28) and Left PTA = 48 dB HL (40,45,55 → average 46.7, not 48); recompute: Right PTA should be 25 dB HL, Left PTA approximately 46.7 (or 47) dB HL, not 28/48 as stated."
+  },
+  {
+   "severity": "low",
+   "kind": "mismatch",
+   "where": "a2 result 'asymmetry of 20 dB confirmed' vs d1 audiogram data",
+   "problem": "Using corrected PTA values (Right 25, Left 46.7), the asymmetry is about 21.7 dB, which still meets criteria, but the stated '20 dB' figure in a2 should be corrected to reflect the actual calculated difference for accuracy to the audiometric data given."
+  }
+ ]
+}

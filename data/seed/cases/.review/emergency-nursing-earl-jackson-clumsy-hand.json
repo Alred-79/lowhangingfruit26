@@ -1,0 +1,35 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "artifact d1 and d2 (release when:start)",
+   "problem": "The medication list (d1) and 3-month-old clinic note (d2) are released at encounter start and both document apixaban as 'active' with no missed doses, while the pharmacy refill history (d4) proving the lapse is gated behind action a10/fact f12. This is fine, but chartAtStart also lists 'Apixaban 5 mg PO BID ... Active' as a flat fact, which combined with d1 pre-commits the record to a false adherence status before the learner has even asked - this is acceptable since it is the believed/charted status, not the hidden fact itself, but the real leak is that d4's release trigger is 'ref: f12' (a fact id) rather than an action id; facts are not something a nurse learner directly triggers via an action-execution model, so the artifact may never surface unless the specific interview question is asked and the engine ties artifact release to fact disclosure rather than an action. Fix: gate d4 release to an action id (e.g., a10 'Review problem list and medication list' or a dedicated 'Review pharmacy refill history' action) so it reliably surfaces through an action the learner takes, consistent with the action-kind rule for this role."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a9 'Grip strength comparison' result",
+   "problem": "The result states 'patient dropped his coffee cup with that hand just before the call,' which duplicates/leaks the chief-complaint detail from f1 verbatim as if it were a new objective exam finding; this is consistent but makes the exam action redundant leakage of an initial fact rather than new information from the grip-strength maneuver itself. Fix: result should report only the grip strength finding (e.g., 'right grip strength reduced compared to left') without re-stating the dropped-cup narrative."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "a10 and action list for role 'record' kind",
+   "problem": "Action a10 'Review problem list and medication list in chart' is mapped as the trigger for objective o4 ('Elicit and reconcile a mismatch between patient self-report...and objective pharmacy/record evidence'), but a10's result only shows the active medication list (same info already in chartAtStart) - it does not actually surface the pharmacy refill lapse (that is tied to d4/f12 instead). This mismatches the objective's actionIds, since reviewing a10 alone will not let the learner discover the adherence mismatch as the objective claims. Fix: either add a dedicated 'Review pharmacy refill history' record action to the actionIds for o4, or have a10's result itself include the refill gap."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a4 result vs a16/f10 context",
+   "problem": "Pulse is reported as 96 bpm irregular in a4, but the SpO2 action a5 and other vitals don't include respiratory rate or temperature at all, which are standard components of a full vital sign set for triage acuity decisions (especially to screen for fever/sepis mimics or respiratory compromise); omission is a minor completeness gap for a 'vitals' category but not necessarily an error - however the chartAtStart lists only BP/HR from 3 months ago with no indication of baseline RR, making it hard for faculty to verify a response for 'reassess airway, breathing' in the answer key plan when RR was never actually assessed in any action. Fix: add a respiratory rate check action or at least note its absence is intentional (not currently addressed)."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "f20 tobacco history vs patient appearance/background",
+   "problem": "f20 states 'Former smoker, quit 15 years ago, 20 pack-year history' but no actual pack/day and years-smoked figures are given to verify the 20 pack-year calculation; this cannot be checked for accuracy and may mislead faculty reviewing the stated statistic. Fix: specify e.g. '1 pack/day for 20 years, quit 15 years ago' so the stated pack-year value is verifiable."
+  }
+ ]
+}

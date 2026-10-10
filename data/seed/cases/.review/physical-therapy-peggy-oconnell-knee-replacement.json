@@ -1,0 +1,35 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "artifact d5 (Right Knee Active Flexion ROM Over Time), release: start",
+   "problem": "This chart is released at visit start (before any action) and plots flexion at Week 2 (70°), Week 4 (78°), Week 6 (85°) against a reference band of 110-120°, visually handing the learner the entire key finding (ROM deficit/trajectory) before they perform their own goniometry (a5) or even take a history. This duplicates and preempts actions a5/a14 and the critical finding in the answer key. Fix: either remove d5 or gate its release to an action (e.g., attach it to the record review a14) so the learner must choose to review it rather than being shown it unprompted at the start."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a14 result vs d4 body",
+   "problem": "a14 result states 'TUG not yet performed' and 'pain 4/10 with exercise' with no mention of extension, but d4 body explicitly says 'full extension achieved passively' at week 2 and pain 4/10 with exercise/1/10 at rest. The action result omits the extension detail present in the artifact it releases, and slightly compresses the pain description (loses the rest-pain value), which is a minor inconsistency between the action summary and the artifact text it is supposed to represent."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "a2 result (Review home exercise log) vs facts f2/f6/f31",
+   "problem": "The action result directly states 'no bending/flexion exercises logged in the last 3 weeks,' which is objective record evidence and fine, but it is tied to mismatch m1 whose teaching point is to let the learner discover the adherence gap by comparing to the patient's verbal claim (f2). Because the log is release-on-action (fine), but the fact f2 is tier 'initial' (volunteered) while f6/f31 (reasons for avoidance) are discoverable/reluctant - the student could get the full avoidance picture simply by pulling the log without ever asking about fear-avoidance, slightly short-circuiting objective o2's intent to 'explore the underlying belief.' This is a design/flow risk rather than a strict leak, but worth tightening so the log alone doesn't fully explain the 'why' (it currently only shows the 'what', which is appropriate) — no changes needed if objective o2 is understood as requiring the interview for f6/f7/f17/f31; recommend confirming instructions make clear chart review alone does not satisfy the full objective."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "a9 result (sit-to-stand) interpretation",
+   "problem": "5 sit-to-stands in 15 seconds using arm push-off is reported as abnormal, but no normative comparison or age-based reference is given to substantiate the abnormal flag; for a 74-year-old 6 weeks post-TKA this may be unremarkable without context. Consider adding a brief reference (e.g., '5x sit-to-stand norm ~11-12 sec for this age without arm use') to justify the abnormal flag."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a14 vs d1 operative note goals",
+   "problem": "d1 states surgeon's goal is 'knee flexion 110-120 degrees by 6 weeks,' and f18/f30 reference this goal, but d4 (week 2 note) does not reference this goal explicitly, which is fine, though worth confirming the 110-120 goal is consistently cited everywhere it appears (it is, in a5/a14 lead-in reasoning and answerKey) - no actual error found, flagging only to confirm no drift; remove if already consistent."
+  }
+ ]
+}

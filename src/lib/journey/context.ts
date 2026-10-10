@@ -12,11 +12,20 @@ export function aliasing(entries: StateEntry[]) {
   });
   const resolve = (a: unknown): string | null => {
     if (typeof a !== "string") return null;
-    const m = a.trim().toUpperCase().match(/E\d+/);
-    return (m && fromAlias.get(m[0])) || null;
+    const m = a.trim().toUpperCase().match(/E?(\d+)/);
+    return (m && fromAlias.get(`E${m[1]}`)) || null;
   };
   return { toAlias, fromAlias, resolve };
 }
+
+/** Removes prompt-only entry labels (E12) that a model let slip into text people will read. */
+export const clean = (s: string | undefined | null) =>
+  (s || "")
+    .replace(/\s*[\[(](?:E\d{1,3}(?:\s*[,;&]\s*|\s+and\s+)?)+[\])]/g, "")
+    .replace(/\b(?:entry|entries|item)\s+E\d{1,3}\b/gi, "this item")
+    .replace(/\bE\d{1,3}\b/g, "this item")
+    .replace(/[ \t]{2,}/g, " ")
+    .trim();
 
 export function entryLine(e: StateEntry, alias?: string) {
   const by = e.stageId === RECORD_STAGE ? "existing record" : `${e.contributorName}, ${e.contributorRole}, ${e.simTime}`;

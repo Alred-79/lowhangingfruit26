@@ -1,7 +1,7 @@
 import { loadEncounter, messagesOf, type MessageRow } from "../engine/encounter";
 import { chatJSON, MODELS } from "../llm";
 import { get } from "../db";
-import { aliasing, approvedCorpus, entryLine, unverifiedValues } from "./context";
+import { aliasing, approvedCorpus, clean, entryLine, unverifiedValues } from "./context";
 import { addEntry, addLink, entriesOf, norm, quoteIn, RECORD_STAGE, studentNameOf, who, type LoadedRun } from "./store";
 import type { EntryKind, EntrySource, EntryStatus, Evidence, Relation, Stage } from "./types";
 
@@ -196,7 +196,8 @@ ${note.trim() || "(none)"}`,
   const seen = new Set(mine.map((e) => norm(e.text)));
   const created: { id: string; turn?: number; relatesTo?: string }[] = [];
   for (const r of raw.entries || []) {
-    if (!MODEL_KINDS.includes(r.kind as (typeof MODEL_KINDS)[number]) || !r.text?.trim()) continue;
+    r.text = clean(r.text);
+    if (!MODEL_KINDS.includes(r.kind as (typeof MODEL_KINDS)[number]) || !r.text) continue;
     const key = norm(r.text);
     if (seen.has(key)) continue;
     const kind = r.kind as EntryKind;

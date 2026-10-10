@@ -947,7 +947,12 @@
     "My son's family does so much for me already, I don't want to add to their plate.",
     "I suppose I thought once I was feeling stronger, it made sense to just go back to my normal pills."
    ],
-   "concerns": []
+   "concerns": [
+    "I'm just feeling weak and dizzy—is this normal after pneumonia, or is something else going on?",
+    "I've been taking my regular medicines because I know what I need, but now I'm worried I did something wrong.",
+    "I don't want to go back to the hospital or be a burden on my son's family—can we just fix this at home?",
+    "Why are my kidneys acting up again? I thought I was getting better when they sent me home."
+   ]
   },
   "scenario": {
    "studentBrief": "You are seeing Gloria Santos, a 78-year-old woman, for a scheduled telehealth post-discharge follow-up. She was hospitalized 6 days ago for 5 days with community-acquired pneumonia complicated by acute kidney injury (creatinine peaked at 2.1 mg/dL, baseline 0.9 mg/dL, discharge 1.4 mg/dL). Several home medications were held at discharge pending outpatient clearance. Conduct a focused interview and remote assessment, review her available records and labs, and determine next steps.",

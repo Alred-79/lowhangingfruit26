@@ -1,0 +1,47 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart 'Reason for visit' and 'Problem list'",
+   "problem": "chartAtStart states 'Persistent hoarseness x8 weeks, not improved with antibiotics/PPI' which is fine, but combined with d1 and d6 being released 'at start' (see below), the learner is handed the entire red-flag picture before any history-taking occurs."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "artifact d6 release.when = start",
+   "problem": "d6 (Prior Primary Care Note - Social History) reveals the 40 pack-year smoking history AND documents 'social drinker only, denies heavy use' as already charted. This hands the learner the tobacco history and the alcohol-discrepancy setup before they ask anything, bypassing the interview task (o3) of eliciting an honest substance history. This should be a record the learner must actively pull up as an action, or at minimum not be in the start packet alongside the reluctant fact's setup."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "artifact d1 (Urgent Care Visit Note) release.when = start",
+   "problem": "Releasing the urgent care note at start (rather than as a 'record' action the learner must choose to review) gives away that dysphagia was absent at the prior visit, pre-empting the clinical reasoning task o2/m2 is designed to test via the learner's own record-review action."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "a10 record review result",
+   "problem": "The result for a10 directly states the reluctant/hidden fact f19 ('3-4 bourbons most evenings') as a chart finding, even though facts state f19 is tier 'reluctant' and can only be shared 'with rapport and a direct, sensitive question' from the patient — not simply by reviewing a record. This action lets the learner bypass the sensitive interview entirely and get the hidden fact for free. Fix: a10 result should only show what was charted previously (the 'social drinker only' note) and discrepancy should only be resolved by the patient's own disclosure during interview, not via a record review action with the answer embedded."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a2 result vs a3 result vs d6/chartAtStart",
+   "problem": "a2 (camera neck inspection) locates the mass at 'level II' near the jaw angle, while a3 (self-palpation) says 'below the right jaw angle' — these are roughly consistent, but a2 states 2 cm 'at level II' while f8/f9 just say 'lump on right side of neck' with no level specified; the specific anatomic level (II) in an exam action is reasonable, but there's no artifact or finding establishing why level II was chosen over level III (both plausible for laryngeal primary) — minor internal consistency flag, not a major problem, but worth noting there's no conflict needing resolution since mass level isn't tested elsewhere; this is low confidence and likely fine."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a9 result vs d1 body",
+   "problem": "a9 result says urgent care note is 'from 7 weeks ago' with azithromycin 5-day course, while d1 body specifies the actual regimen as 'Azithromycin 250mg day1 then 250mg daily x4 days' which is a standard Z-pack (5-day total), so the 5-day course description is consistent; no real issue, flagged only for completeness."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "a8 result",
+   "problem": "The action orders chest imaging for metastatic/staging screening, which is reasonable to initiate as a referring order, but actual lung cancer staging workup and interpretation is typically coordinated with medical oncology/radiology, not independently staged by the ENT resident alone in a telehealth visit; the plan item is acceptable as 'order chest imaging' but calling it full 'staging workup' slightly overstates ENT's independent scope. Minor wording fix: clarify this is to screen for synchronous primary/metastasis, not to perform full staging determination."
+  }
+ ]
+}

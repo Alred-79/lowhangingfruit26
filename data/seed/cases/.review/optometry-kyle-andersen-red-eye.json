@@ -1,0 +1,35 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a9 result / artifact d2",
+   "problem": "a9 ('Review medication list for any prescribed ocular medications') result states 'No ocular medications currently prescribed... No steroid or antibiotic eye drops on file' - this is consistent, but d2's row for contact lens wear leaks the hidden/reluctant fact f10 directly in the chart: the Status column reads 'Active - patient reports extending wear to ~2 months per lens.' This is a reluctant fact (f10) that the patient has not yet disclosed when a8 is reviewed, so the EHR record cannot already contain it. Fix: remove the 'extending wear to ~2 months' detail from d2's table; the record should only show the prescribed/expected schedule (monthly disposable), not the patient's undisclosed non-adherent behavior."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a11 result",
+   "problem": "a11 is phrased as an exam/observation action, but its result ('patient confirms he has not changed solution daily') hands over confirmation of poor hygiene behavior as if it were visually observed, partially bypassing the interview-based disclosure of reluctant fact f13 (lens case care, tier hidden). The visual observation (cloudy solution, old-looking case) is fine as an exam finding, but the 'patient confirms...' phrasing should be removed or deferred to history-taking; the exam action should only report what is visually observed, not elicit a confirmed admission."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a8 result vs d2 table vs f10/f11",
+   "problem": "a8's result text ('no documented history of extended/overnight wear... prior to today's visit') contradicts d2's table row which already documents 'extending wear to ~2 months per lens' as an EHR fact. The action result and the artifact it releases disagree with each other on whether extended wear is already documented at the time of this visit."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a10 (triage assessment) result",
+   "problem": "The assessment result states a presumptive specific plan including 'corneal scraping and culture' and explicitly rules in a sight-threatening diagnosis before the learner has synthesized findings - this is acceptable for an assessment action, but it also pre-empts the differential/plan the learner is meant to generate, effectively doing the clinical reasoning for them. Consider softening to findings-based triage urgency (e.g., 'high-risk features for microbial keratitis, requires urgent in-person slit lamp evaluation') without naming the specific procedure, which should remain part of the answer key for the learner to propose rather than being handed to them as an action result."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "d3 (14-month-old note) vs chartAtStart",
+   "problem": "d3 is released 'at start' and documents detailed hygiene counseling given 14 months ago (nightly removal, water avoidance, case replacement every 3 months) - this primes the learner toward the risk-factor answer before they have taken any history, functioning as a soft leak of the eventual root cause (poor hygiene/water exposure) via chartAtStart release timing. Consider releasing d3 only when the learner actively queries past ocular/contact lens history (as a record-review action) rather than automatically at visit start."
+  }
+ ]
+}

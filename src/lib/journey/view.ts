@@ -38,6 +38,7 @@ export function buildChains(entries: StateEntry[], links: StateLink[], handoffs:
   };
 
   const chains: Chain[] = [];
+  const nodeSets = new Map<string, Set<string>>();
   for (const root of entries) {
     if (!inbound.has(root.id) || hasEarlierParent(root.id)) continue;
     const path = best(root.id, new Set([root.id]));
@@ -70,9 +71,24 @@ export function buildChains(entries: StateEntry[], links: StateLink[], handoffs:
     const item = planItems.find((p) => p.restsOn.some((id) => ids.has(id)));
     if (item) steps.push({ kind: "plan", label: "In the coordinated care plan", detail: item.action, who: item.ownerRoles.join(", "), stageOrder: 99 });
     chains.push({ id: root.id, title: root.text, steps, stagesSpanned: stages.size });
+    nodeSets.set(root.id, new Set(nodes.map((n) => n.id)));
   }
   void stageName;
-  return chains.sort((a, b) => b.stagesSpanned - a.stagesSpanned || b.steps.length - a.steps.length).slice(0, 10);
+  // Chains that start inside an encounter tell the story best; then longer reach. Chains that mostly
+  // retrace one already chosen are left out so each flow shown is a different thread.
+  const fromEncounter = (c: Chain) => (byId.get(c.id)!.stageOrder > 0 ? 1 : 0);
+  chains.sort((a, b) => fromEncounter(b) - fromEncounter(a) || b.stagesSpanned - a.stagesSpanned || b.steps.length - a.steps.length);
+  const chosen: Chain[] = [];
+  const covered = new Set<string>();
+  for (const c of chains) {
+    const ids = [...nodeSets.get(c.id)!];
+    const fresh = ids.filter((id) => !covered.has(id)).length;
+    if (chosen.length && fresh / ids.length < 0.5) continue;
+    chosen.push(c);
+    ids.forEach((id) => covered.add(id));
+    if (chosen.length >= 6) break;
+  }
+  return chosen;
 }
 
 export function buildPillars(run: NonNullable<ReturnType<typeof loadRun>>, entries: StateEntry[], links: StateLink[], handoffs: Handoff[], student: string): PillarRow[] {

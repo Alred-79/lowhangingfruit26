@@ -1,0 +1,35 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a9 result",
+   "problem": "Action a9 is named as an assessment (bleeding risk screen via camera and self-report) but its result directly hands over f2 and f3 (gum bleeding, thigh bruise) which are tier 'initial' facts anyway, so that part is fine; however it also directly delivers the denial facts f4, f5, f23 which are tier 'discoverable' - this is acceptable since it's a structured exam/ROS action, not a leak. No actual issue here on reflection; remove if duplicate."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a10 name and result",
+   "problem": "Action a10 is named as a 'structured interview' which is an interview, not an exam/record/lab/vitals action type listed for this role (record, lab, assessment, vitals). It is labeled kind 'assessment' but functions purely as an interview question ('Screen for other new OTC/herbal products via structured interview') and its result hands over the reluctant/hidden-adjacent fact f11 (turmeric supplement) directly, bypassing the need for rapport-building interview tiering. Reword as a true record/medication-reconciliation action (e.g., 'Perform structured medication reconciliation using screening checklist') or keep as assessment but ensure it doesn't bypass the tier system for f25 reluctant fact."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a11 name and result",
+   "problem": "Similarly, a11 'Diet/INR stability interview' is phrased as an interview ('Ask about...') style action but is categorized as 'assessment'; it directly yields discoverable facts f9/f10 without requiring the learner to ask a direct question in the interview itself, short-circuiting the fact-tier system via an action-based shortcut rather than genuine interview dialogue."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a9 vs f23",
+   "problem": "a9 result states patient denies blood in urine 'beyond prior UTI symptoms' matching f23, but f14 states UTI symptoms have already resolved by today; the phrasing 'beyond prior UTI symptoms' is slightly inconsistent with resolved symptoms, though not materially contradictory - a reader may notice the phrasing oddity."
+  },
+  {
+   "severity": "low",
+   "kind": "scope",
+   "where": "answerKey.plan item on oral vitamin K and antibiotic adjustment",
+   "problem": "Plan correctly flags vitamin K order and antibiotic adjustment as needing prescriber/cardiology collaboration, which is appropriate for scope, but the plan item ordering could more clearly separate pharmacist-authorized protocol actions from those requiring explicit physician order; this is a wording clarity issue only, not an error requiring major fix."
+  }
+ ]
+}

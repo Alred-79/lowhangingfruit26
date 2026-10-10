@@ -712,7 +712,6 @@
    {
     "id": "m2",
     "factId": "f31",
-    "artifactId": "a3",
     "patientClaim": "Patient states the burn 'is not that bad' and that he only rinsed it with water, implying no further care is needed.",
     "recordEvidence": "Camera inspection shows a 2x3 cm partial-thickness burn with blistering, uncovered and unassessed by any clinician, which is outside the scope of OT wound management.",
     "teachingPoint": "OT students must recognize when a finding requires medical referral (wound/burn care, possible loss of protective sensation) rather than being managed within the OT plan, and communicate promptly with the primary care or rehab physician."

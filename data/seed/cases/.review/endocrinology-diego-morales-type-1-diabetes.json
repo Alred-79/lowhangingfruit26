@@ -1,0 +1,35 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a14 result",
+   "problem": "Action a14 ('Review alcohol use pattern (AUDIT-style screening questions)') is purely an interview question (\"Explore/ask about alcohol use\") and its result directly hands over the reluctant hidden facts (substance1, f12 - binge drinking without eating) without the learner needing rapport or a direct sensitive question. This bypasses the reluctant tier. Fix: either remove this action, or restrict its result to what a standardized screening score/instrument would show (e.g., an AUDIT-C numeric score) rather than directly stating the binge-drinking narrative and eating pattern that are tagged as reluctant facts."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a13 result",
+   "problem": "Action a13 is a validated screening tool (acceptable as an action), but its result text directly states reluctant fact f15 content ('tired of dealing with diabetes nearly every day,' 'loss of motivation') verbatim as if freely volunteered during an instrument administration, even though f15/f16 are tagged 'reluctant' requiring rapport-building. The instrument can report screen-positive/negative and a score, but should not pre-emptively narrate the full reluctant disclosure content."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a12 result",
+   "problem": "Action a12 ('Review pump/CGM alert settings') result includes 'patient reports he silences alarms during work shifts' - this is reluctant fact f27, but the action is a device/settings review (appropriate), yet the patient-report clause folds in the reluctant disclosure without requiring the sensitive follow-up question. Fix: the device settings review action should only report the objective threshold settings (which is leak-free), and the explanation for why alarms are muted should remain gated behind interview rapport (f27), not auto-attached to the settings review result."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "d1 CGM artifact vs a2 result",
+   "problem": "The CGM artifact chart only plots two series (14-day median and a 4-point 'Fri/Sat overnight' example), but action a2's result states precise aggregate statistics (TIR 38%, >180 52%, <70 7%, <54 3%) that are not derivable from or shown in the sparse chart data; the chart as drawn (median hovering 90-245) would not obviously yield those exact percentages. This is a minor mismatch between stated artifact content and the summary numbers attributed to it."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "a6 lipid panel / d4 referenced guideline range",
+   "problem": "LDL reference range listed as '<100 (goal, T1DM)' is used as if it were a lab reference range with an H flag at 118; current ADA guidance for T1DM without additional ASCVD risk factors is not a universal <100 cutoff for all patients this age without other risk factors, so flagging as high against a goal-based target conflates reference range with treatment goal. Fix: label the flag/range as treatment goal rather than reference range, or clarify risk-stratified LDL goal differences."
+  }
+ ]
+}

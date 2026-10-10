@@ -342,27 +342,32 @@
       {
        "cells": [
         "Auto-CPAP device",
-        "Pressure range 6-14 cmH2O, auto mode"
+        "Pressure range 6-14 cmH2O, auto mode",
+        ""
        ],
        "flag": ""
       },
       {
        "cells": [
         "Mask interface",
-        "Full-face mask, size medium"
+        "Full-face mask, size medium",
+        ""
        ],
        "flag": ""
       },
       {
        "cells": [
         "Heated humidifier",
-        "Integrated, heat setting not adjusted since setup"
+        "Integrated, heat setting not adjusted since setup",
+        ""
        ],
        "flag": "H"
       },
       {
        "cells": [
-        "Ramp"
+        "Ramp",
+        "",
+        ""
        ],
        "flag": ""
       }

@@ -901,6 +901,11 @@
   "knowledge": [],
   "rubricId": "default",
   "difficulty": 3,
-  "variants": []
+  "variants": [],
+  "title": "Poorly controlled persistent asthma in a 15-year-old athlete following emergency department visit",
+  "summary": "A 15-year-old Black male basketball player presents for asthma follow-up two weeks after an ED visit. He has frequent rescue inhaler use and nocturnal symptoms despite prescribed inhaled corticosteroid, which he takes inconsistently and without a spacer. Once confidentiality is established, he discloses daily nicotine vaping for four months and embarrassment about using inhalers in front of teammates. A new household cat and poor adherence contribute to suboptimal control (peak flow 73% of personal best). The case teaches adolescent confidential interviewing, asthma control assessment, identifying adherence barriers and environmental triggers, and shared decision-making around controller therapy intensification and vaping cessation.",
+  "specialty": "Pediatrics",
+  "setting": "Telehealth video visit; patient's bedroom at home in Atlanta",
+  "encounterType": "Follow-up visit"
  }
 }

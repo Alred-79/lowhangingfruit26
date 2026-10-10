@@ -643,7 +643,6 @@
    {
     "id": "m2",
     "factId": "f14",
-    "artifactId": "a11",
     "patientClaim": "Patient does not consider chewing paan with areca nut to be tobacco use or a health risk, framing it only as a cultural/social practice.",
     "recordEvidence": "Areca nut chewing (with or without tobacco) is an established oral cancer risk factor independent of cigarette or smokeless tobacco use; this risk is not reflected in her own risk perception and was not previously documented or discussed at her last dental visit 3 years ago.",
     "teachingPoint": "Oral cancer risk screening must explicitly ask about areca nut/paan use as a distinct risk factor, since patients may not categorize it as 'tobacco' and may not volunteer it unless asked directly and non-judgmentally."
@@ -823,6 +822,10 @@
   ],
   "knowledge": [],
   "rubricId": "default",
-  "variants": []
+  "variants": [],
+  "title": "Bleeding gums and halitosis in a 52-year-old with diabetes and prior periodontal disease",
+  "summary": "A 52-year-old Indian-American woman with poorly controlled type 2 diabetes (HbA1c 8.2%) and a history of localized moderate periodontitis presents for tele-hygiene assessment of bleeding gums and bad breath. The case teaches oral health risk assessment via telehealth, including camera-guided exam and home care demonstration, recognition of systemic and medication-related contributors to periodontal and caries risk (diabetes, amlodipine-associated gingival overgrowth, xerostomia, frequent sweetened beverage intake), culturally sensitive screening for areca nut/paan as an oral cancer risk, and appropriate referral to the dentist for findings beyond the hygienist's scope.",
+  "specialty": "Dental Hygiene",
+  "setting": "Telehealth video visit; patient's home office in Edison, New Jersey"
  }
 }

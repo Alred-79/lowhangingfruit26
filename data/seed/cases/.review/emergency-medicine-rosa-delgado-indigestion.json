@@ -1,0 +1,35 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a10 result",
+   "problem": "Action a10 ('Ask patient to describe arm, neck, and jaw sensation while moving jaw/arm') is purely an interview-style question whose result hands over the critical hidden/discoverable radiation pattern (f6, f3) directly, bypassing the need for the learner to actually ask about radiation during history-taking. This is an interview question dressed as an exam action and leaks the anginal-equivalent pattern. Fix: either remove this action or convert it to a true exam maneuver (e.g., palpate jaw/TMJ, passive arm movement) whose result only reports objective findings (e.g., no reproducible tenderness with palpation), not the radiation symptom itself which should only be elicited via the interview facts f3/f6."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a8 result",
+   "problem": "Action a8 ('Ask patient to point with one finger to the exact location of pain') is an interview question, and its result ('cannot localize to one point') strongly signals cardiac rather than GI pathology, leaking the diagnosis-relevant finding before the learner elicits it through history. This duplicates/pre-empts facts f2/f6 and biases the learner toward ACS via an action rather than through the interview tier system."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "action a9 'Ask patient to self-palpate the abdomen'",
+   "problem": "Self-palpation by the patient during a video call is not a clinically reliable exam maneuver and does not fit the 'exam' action kind as something the learner performs; it should be removed or reframed as an interview question (e.g., 'Ask about abdominal tenderness') rather than labeled as an exam action, since the clinician cannot verify guarding/rebound via self-report during telehealth."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "objective o4 actionIds and o3 actionIds",
+   "problem": "Objective o4 lists actionIds a1, a2, a6 (vitals/exam) as the actions supporting disposition decision-making, but these are identical to the actionIds listed for o3, which conflates two distinct objectives (red flag recognition vs. disposition) under the same evidence set. This is an internal consistency/mapping issue a careful reviewer would flag — o4's actions should instead reference the actual disposition-decision actions (which don't exist as discrete actions, since disposition is a cognitive step), or o4 should have no actionIds similar to o5, rather than reusing o3's list verbatim."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a13 result vs d2 table",
+   "problem": "Action a13 result states home BP log ranges '138/86 to 150/92,' which matches d2's rows (138/86 min, 150/92 max) — this is fine, but the phrasing 'ranging 138/86 to 150/92' understates the actual lowest-to-highest range direction (138 is lower than 142, 146), which could read as approximate; verify this is intended as min-max summary rather than chronological, which it is, so no actual error, but flagged for reviewer attention regarding clarity."
+  }
+ ]
+}

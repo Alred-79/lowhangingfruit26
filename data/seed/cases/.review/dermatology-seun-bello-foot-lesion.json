@@ -1,0 +1,35 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "artifact d1 body and action a1 result",
+   "problem": "The chartAtStart-released artifact d1 (released 'at start', before any learner action) explicitly states the parallel ridge pattern 'favoring melanoma over benign acral nevy' and asserts it as an interpreted finding. This gives away the diagnosis before the learner performs any guided inspection or ABCDE analysis, bypassing the clinical reasoning the case is meant to test. Fix: d1's body should only describe raw photographic findings (location, size, color, border) without pattern interpretation; the parallel ridge pattern interpretation should only appear in action a1's result, since that is the dermatologist's own exam/photo-review action."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a14 result (teledermatology risk stratification)",
+   "problem": "This action's result states the lesion is 'high-risk for acral lentiginous melanoma' and essentially names the leading diagnosis outright as a conclusion rather than requiring the learner to synthesize findings. While this is appropriate as a final triage output, pairing it with d1 already leaking the parallel ridge pattern at start means the diagnosis is revealed twice before/without learner synthesis. This duplicate leak should be resolved by fixing d1 so a14 remains the appropriate place for synthesis."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "facts f6 and f28 vs mismatch m1 and d3",
+   "problem": "f6 states a nursing colleague suggested the lesion was a wart or bruise, while f28 (reluctant) states the primary care doctor called it a callus and gave cream. d3 corroborates the callus story only. The two separate reassurances (colleague's wart/bruise opinion vs. PCP's callus opinion) are a bit redundant/overlapping as both serve the same narrative purpose, but this is not strictly an error -- flagging only because the mismatch (m1) is built solely around f28/d3, while f6's distinct 'wart or bruise' claim has no corresponding record artifact or action to verify it, leaving it as an uncheckable claim. This is a minor consistency gap, not necessarily an error, but a careful reviewer may expect it to be either verifiable or removed."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "educationPoints / differential - talon noir description",
+   "problem": "Talon noir (black heel) is stated to 'typically resolve over weeks as skin exfoliates' which is accurate, but the differential dismisses it only on the basis of persistence/growth over a year. This is fine, but the case does not include any action/result confirming absence of trauma pattern (e.g., paring test for blood vs melanin) which is the classic bedside way to distinguish talon noir from melanoma; while paring is outside telehealth scope, the differential reasoning given to the learner never explicitly notes this limitation, which could be added for completeness but is not a factual error."
+  },
+  {
+   "severity": "low",
+   "kind": "other",
+   "where": "chartAtStart 'Immunizations' row",
+   "problem": "The chartAtStart includes an immunization status detail ('Up to date per employee health records, works in pediatric unit') that is irrelevant to this dermatologic complaint and not used anywhere else in the case; this is extraneous information with no clear purpose, though not harmful."
+  }
+ ]
+}

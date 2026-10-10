@@ -1,0 +1,40 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a8 'Patient self-demonstration of morning jerking movements'",
+   "problem": "This action's result reports the hidden/reluctant fact f7 (myoclonic jerks since teenage years) and gives an expert interpretation ('consistent with myoclonic jerks') without the learner needing to ask the sensitive history question first. An exam-type action should only show what camera observation reveals (brief bilateral arm jerks), not retroactively confirm the full history or hand over the diagnostic label; the chronicity/history (since teens, mornings, dropping objects) must only be obtainable via the interview (f7/f8), not via this action result. Fix: have the action require that the fact has already been elicited (precondition), or strip the result down to pure observation ('brief bilateral arrhythmic jerks observed, <1 sec, no LOC') without the interpretive 'since teenage years' framing that duplicates f7/f8."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a4 result / artifact d3 EEG report"
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "problem": "The EEG report impression explicitly states 'consistent with a generalized epilepsy syndrome such as juvenile myoclonic epilepsy,' which hands the working diagnosis to the learner directly from a record review before they synthesize history and exam. This is a leak of the target diagnosis via an artifact available early in the encounter.",
+   "where": "artifact d3 body (EEG impression)"
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a13 result",
+   "problem": "The driving assessment action result already states the discrepancy and includes a full discussion/counseling outcome ('Discussed state DMV reporting requirements... and need to stop driving') as if the counseling was already done, which pre-empts the learner's actual counseling task rather than just revealing the fact (f11) that she has continued driving. Fix: the action result should only reveal the discoverable fact (continued driving, unaware of restriction) and not pre-script the resident's counseling as already completed."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "facts f9 vs chartAtStart/f28",
+   "problem": "f9 states the cousin with epilepsy is 'on maternal side' and lives in Senegal, consistent with f28 (family in Senegal/NY), but this is a reluctant fact revealed only in dialogue — ensure no artifact or chart field preemptively lists family history, which was checked and is fine; flagging only for consistency confirmation, no actual error found but worth noting there is no redundant leak elsewhere."
+  },
+  {
+   "severity": "low",
+   "kind": "other",
+   "where": "objective o6 and action a10",
+   "problem": "Objective o6 lists caffeine, headache, and palpitations as distractors tied to actions a3 and a10, but a3 is a lab review action with no caffeine/headache content and a10 only covers sleep deprivation screening, not caffeine or headache; the linkage of distractor facts to these specific actionIds is loose and may confuse scoring logic, though not a major clinical issue."
+  }
+ ]
+}

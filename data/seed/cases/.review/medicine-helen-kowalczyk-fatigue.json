@@ -1,0 +1,44 @@
+{
+ "parameter": {
+  "verdict": "major_fixes",
+  "issues": [
+   {
+    "severity": "high",
+    "kind": "leakage",
+    "where": "action a14 'Home stool color/consistency log review'",
+    "problem": "This action directly hands over the reluctant fact f7 (melena) via a chart/log review rather than through sensitive interview questioning. Per the role's action rules, a record/test action that bypasses the interview and reveals a reluctant/hidden fact is a leak. Fix by removing this action (letting melena surface only via direct interview question per f7's tier) or by making the result generic/non-diagnostic until the patient discloses it in dialogue."
+   },
+   {
+    "severity": "high",
+    "kind": "leakage",
+    "where": "artifact d9 'Hemoglobin Trend' release when:'fact', ref:'f10'",
+    "problem": "This artifact is tied to release of fact f10 (reluctant fact about prior low blood count), meaning asking about or eliciting that reluctant fact auto-releases a chart artifact showing the full 14-month downward trend — this leaks the chronic/progressive nature of the anemia (a key diagnostic conclusion) without the learner having to order/review labs via an action. The chart should instead be released only through an explicit record-review action (e.g., 'Review hemoglobin trend in chart'), not automatically via the patient disclosing a reluctant fact."
+   },
+   {
+    "severity": "medium",
+    "kind": "consistency",
+    "where": "action a7 vs. mismatch m1 / fact f10",
+    "problem": "Action a7 only reviews CBC 'from last week' (single value Hb 8.9), but objective o5 and mismatch m1 require correlating with the 8-months-ago low Hb (11.4) and 14-months-ago Hb (13.1) via artifact d9. There is no action that explicitly triggers release of d9 independent of the fact-reveal, making it unclear how a learner is supposed to access the trend without triggering the leak described above. Add a distinct record-review action for the Hb trend."
+   },
+   {
+    "severity": "medium",
+    "kind": "accuracy",
+    "where": "a7 CBC result and d1 CBC artifact",
+    "problem": "RDW of 18% is extremely elevated (normal ~11.5-14.5%); while plausible in severe iron deficiency, double-check this is intentional - it is clinically consistent with IDA so this is likely fine, but flagged for confirmation it was deliberately chosen rather than a typo (e.g., meant 15-16%). Not a hard error, retained as medium given how far outside range it is for exam-writing conventions."
+   },
+   {
+    "severity": "low",
+    "kind": "consistency",
+    "where": "a16 result vs d8 weight chart",
+    "problem": "a16 result states 'Weight stable at 152-155 lb over past 6 months' which matches d8 data (152-155 range), fine — no issue, but note '153' appears twice (3 months ago and today) which is consistent; no actual problem, remove if not needed."
+   },
+   {
+    "severity": "medium",
+    "kind": "scope",
+    "where": "answerKey.plan item 'Initiate oral iron replacement per supervising physician's guidance' and 'Advise patient to stop naproxen immediately'",
+    "problem": "These are reasonable as supervised actions, but the plan should more explicitly frame these as recommendations proposed to the supervising physician rather than orders initiated independently by a medical student, to stay strictly within scope (student scope is to form a plan under supervision, not to initiate treatment)."
+   }
+  ]
+ },
+ "issues": []
+}

@@ -1,0 +1,47 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "a8 (CAM screening) result",
+   "problem": "This action is an interview-style question set ('Confusion Assessment Method... questions') whose result hands over the reluctant/hidden fact f10 (caregiver-reported new memory/word-finding difficulty) verbatim, bypassing the need for rapport-building interview. CAM is a valid instrument so the action itself is fine, but the result should only report the CAM-specific findings (inattention/disorganization present or absent) and not narrate the caregiver's spontaneous history of memory lapses, which f10 states is 'initial' tier (volunteered) — this conflicts with how it's being delivered through an assessment action rather than being spoken by the patient/caregiver directly in interaction."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "a9 (PTSD/psychological screen) action name and result",
+   "problem": "The action is phrased as 'ask about nightmares, flashbacks, avoidance' — a direct interview question, not a named instrument/exam the nursing role performs — and its result directly discloses f8 (nightmares of being restrained), which is tagged 'reluctant' and meant to require rapport and a sensitive direct question within the roleplay, not an action lookup. This leaks the hidden fact outside the interactive conversation. Fix: rename to a validated screening instrument (e.g., 'Administer IES-6 or PCL-5 screening tool') and have the result reflect only the instrument's quantitative/qualitative output, or remove this as an action and let the fact be discoverable only through dialogue."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "f10 tier vs a8 action",
+   "problem": "f10 is tagged tier 'initial' (volunteered) meaning Carol should spontaneously state this early in conversation, yet objective o1 and action a8 treat it as something uncovered via a CAM screening action. If f10 is truly volunteered/initial, it should not also be gated behind performing action a8; this is an internal inconsistency about when/how the fact becomes known."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a10 PHQ-2 result",
+   "problem": "PHQ-2 scoring: each of the 2 items is scored 0-3, max total 6, with a conventional positive-screen cutoff of ≥3, not described in terms of 'some days/several days' response categories mixed together inconsistently. The result text says 'Score 2/6 (little interest/pleasure some days, feeling down several days)' — 'some days' corresponds to a score of 1 and 'several days' corresponds to a score of 2 per standard PHQ scoring, which would sum to 3, not 2. This is a scoring calculation error; correct total should be 3/6, which is at the standard cutoff for further evaluation (not 'below threshold' as stated)."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "a14 action name and f15/m1",
+   "problem": "The action 'Ask patient/Carol about swallowing pills - request description of current pill-taking method' is primarily an interview question ('ask about') rather than a review of a record or observable test, yet it directly discloses the discoverable fact f15 and triggers mismatch m1. Because f15 is tier 'discoverable' this is acceptable for an ask-based action per the tier rules, but the action kind is listed as 'test' which mismatches its actual nature (a direct interview question, not a test). Reclassify as an interview/record action or ensure it fits the 'test' kind rubric used elsewhere (e.g., home pulse ox, weight)."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "d3 flowsheet Day 1 vs scenario timeline",
+   "problem": "The flowsheet d3 labels 'Day 1 (3 days post-discharge)' yet the visit is stated to occur 10 days post-discharge and d3 title says 'Past 7 Days' with Day 7 = today; this makes Day 1 = 4 days before Day 7, i.e., 10 days post-discharge minus 6 days = 4 days post-discharge, not 3 days post-discharge as labeled. Verify: if today is 10 days post-discharge and is Day 7, then Day 1 is 6 days earlier = Day 4 post-discharge, not Day 3. Correct the label to 'Day 1 (4 days post-discharge)' or adjust the 'today' day count."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "a11 weight loss percentage",
+   "problem": "11 kg loss from a baseline of 90 kg is 12.2%, which rounds reasonably to '~12%' as stated — this is correct, no issue. (Confirmed correct, included for completeness, not an actual problem.)"
+  }
+ ]
+}

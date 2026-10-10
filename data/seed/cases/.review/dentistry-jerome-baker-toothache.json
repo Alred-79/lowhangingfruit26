@@ -1,0 +1,35 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "d4 (Symptom Progression flowsheet), released at start",
+   "problem": "This artifact is released at the start of the encounter (release.when = 'start') and already plots the exact overnight jump in swelling (0→3) concurrent with the pain improvement — the key diagnostic pattern the student is supposed to elicit and recognize. Releasing this chart before any history-taking or exam hands the student the entire clinical reasoning pattern (decompression into soft tissue spaces) before they do any work. Fix: either withhold this flowsheet until an explicit history-taking action/review, or make it a plain intake note without the pre-plotted pain/swelling pattern so the student has to elicit the timeline themselves through questions (f2, f3, f4)."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "d5 (Teledentistry Intake Note), released at start",
+   "problem": "The start-released intake note states the patient 'now improved' tooth pain alongside new overnight jaw swelling, essentially pre-packaging the clinically significant 'pain improved then swelling developed' pattern (the central red flag) before the learner asks anything. This should be trimmed to a more neutral chief-complaint statement without pre-interpreting the significance of the pain/swelling relationship."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "a3 Maximal interincisal opening",
+   "problem": "This is listed as an 'exam' action performed via patient self-measurement with fingers over video, which is a reasonable telehealth proxy, but it duplicates a2's note about trismus and a11's self-palpation; the role scope says 'inspects by camera' — self-measured interincisal opening by patient fingers is a soft proxy. This is acceptable for telehealth but should be flagged as patient-reported/estimated in both the action name and result (it already is), so this is only a minor consistency issue, not a major scope violation."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a6 and f8 vs a12/a13 and m1",
+   "problem": "a6 and f8 both state the patient denies breathing difficulty and no stridor/accessory muscle use is observed, yet a12 and a13 immediately escalate to 'significant and time-sensitive' airway compromise and mandatory ED referral. This is intentional per the case's teaching point (m1), but the magnitude of urgency assigned in a13 ('immediate ED, not appropriate to do outpatient prescribing') should be double-checked against the fact that there is no stridor and respiratory rate appears normal — this is clinically defensible given the other red flags (trismus, muffled voice, dysphagia, inability to lie flat), so the plan is correct, but faculty reviewers may want the rationale in a12 to explicitly reference the absence of overt respiratory distress as part of 'early' Ludwig's rather than frank airway obstruction, to avoid implying contradictory signals are an error rather than the intended teaching point."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "chartAtStart 'Problem list' vs a7 result",
+   "problem": "chartAtStart problem list says periapical radiolucency 'per imaging 14 months ago, untreated' which matches a7/d1, but a7's action result is gated behind the student reviewing imaging (action a7), while chartAtStart already discloses the existence and age of this radiograph and its abnormal finding before the student requests it. This substantially reduces the value of a7 as a discoverable action since the key finding is already summarized in the start-of-encounter chart."
+  }
+ ]
+}

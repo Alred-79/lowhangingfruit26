@@ -1,0 +1,41 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a7 result / artifact d2",
+   "problem": "Fact f3 (back surgery/hardware) is tier 'initial' (patient volunteers it in opening dialogue per f3), but the chart review action a7 and artifact d2 only release after a7 is performed, which is fine; however a6 result reveals 'no tattoos noted over the lumbar spine region' and a3 result dumps essentially all reluctant/hidden facts (f6 eye injury - discoverable, f14 knee - discoverable, f10 patch - discoverable) in a single interview action labeled only 'go beyond paper form' without requiring the learner to actually ask sensitive follow-up questions - this collapses multiple distinct discoverable/reluctant facts (f6, f7-reluctant, f10, f14) into one action result, bypassing the need for a direct, sensitive, rapport-building question for the reluctant fact f7 (eye protection habits) which is supposed to require more than casual asking."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a10 result",
+   "problem": "Fact f9 (plan to not disclose claustrophobia) is tier 'reluctant', requiring rapport and a direct sensitive question. But action a10 'Claustrophobia and anxiety screening' hands over both f8 (discoverable) and f9 (reluctant) in one generic screening action result without the learner needing to build rapport or ask a pointed sensitive question — this is a leak of a reluctant fact via a single generic assessment action."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a4 result",
+   "problem": "Fact f7 (eye protection habits, inconsistent use) is tier 'reluctant' meaning it should only surface with a direct, sensitive question and rapport, but action a4 'Occupational metal-exposure screening' immediately yields this reluctant admission as a simple result of a generic occupational screening action, bypassing the required interview nuance."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a8 result vs d3/d5",
+   "problem": "a8 result states eGFR 52 mL/min/1.73m2 '(2 months ago)' which matches d3 and d5, but a8 also implies this is the 'most recent' - however d5 trend shows a continuing decline (68->63->58->52) with no note that this is still the most recent available value or whether a more recent one might exist before the scan in 3 days; this is a minor timeline consistency note rather than an error, so understate it unless learner expected to request a more recent value. This is a minor/low issue, flagging for completeness only."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "artifact d3 eGFR reference range / flag",
+   "problem": "d3 lists eGFR reference '≥60 (normal); 45-59 = mild-moderate decrease' and flags eGFR 52 as 'L', consistent, but CKD staging commonly labels eGFR 45-59 as Stage 3a (mild-moderate), not merely 'mild' as stated in a8's result text ('mildly reduced (Stage 3a CKD range)'); Stage 3a is typically described as 'mild to moderate' not just 'mild' — minor terminology inaccuracy that could mislead learners on CKD staging nomenclature."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "patient age/name vs d1 form",
+   "problem": "Patient is named Dale Hutchins, age 58, but the paper screening form (d1) answers 'No' to piercings/tattoos is contradicted by the visible tattoo sleeve mentioned in appearance and a6; while this contradiction is the intended mismatch (m1), the chartAtStart does not mention the tattoo at all despite appearance text being visible to the learner from the start of the encounter in a video visit, which may let an observant learner notice the tattoo immediately without needing to inspect via a6, slightly undercutting the discovery exercise."
+  }
+ ]
+}

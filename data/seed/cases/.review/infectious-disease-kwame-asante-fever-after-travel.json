@@ -1,0 +1,41 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "d4 artifact (Reported Fever Pattern Over Past 4 Days) released at start",
+   "problem": "This chart is labeled as patient self-report but is released at visit start as a structured artifact with a refHigh line, before the learner has taken a history. Fever pattern data should emerge through history-taking (facts f3) rather than being handed over as a pre-made chart artifact, which bypasses the interview."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "a4 action 'Guided abdominal self-palpation'",
+   "problem": "The action name is phrased as an exam/instrument (abdominal palpation), but it is actually just the patient reporting tenderness via self-palpation guided by questions, and the result directly hands over 'possible splenic enlargement' as a conclusion. This conflates an interview-style elicitation with an exam finding and leaks the diagnostic conclusion (splenomegaly) rather than reporting only the objective observation (e.g., 'patient reports tenderness when pressing left upper quadrant' without the interpretive 'consistent with possible splenic enlargement')."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a17 result and answerKey plan",
+   "problem": "The action result states 'reinforces need for in-person glucose testing given hypoglycemia risk in malaria' — this is an assessment/teaching conclusion embedded in what should be a factual action result (no glucometer available). This leaks part of the clinical reasoning (hypoglycemia risk) that the learner should be synthesizing themselves in their assessment, rather than being told directly in a vitals/test action result."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "a7 result 'Review travel and immunization history in chart'",
+   "problem": "The result states 'No travel vaccinations or malaria chemoprophylaxis documented prior to this trip' — this directly confirms f4 (no prophylaxis taken) as a record fact without the learner needing to ask the patient, when f4 is tagged as an initial fact meant to be volunteered via interview. This is a minor redundancy/leak since the chart review action independently reveals a reluctant-adjacent clinical detail before/alongside the interview."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a9/a10/a11/a12/a13 results and plan",
+   "problem": "Thick and thin smears, RDT, CBC, BMP, and bilirubin/LFTs are STAT labs ordered to be drawn in the ED, which is appropriate; however, the case does not have the learner actually review any of these results before the visit ends (all pending), yet the primaryProblem and keyFindings assert 'possibly severe/complicated malaria' as if confirmed — the dark urine/icterus/splenomegaly are suggestive but unconfirmed; the case should more explicitly frame this as suspected pending confirmation, which it mostly does, but the redFlags/plan read as near-diagnostic certainty that could overstate confidence absent any parasitemia or hemolysis labs."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "chartAtStart 'Medications' vs d2 medication_list",
+   "problem": "chartAtStart states 'None on file prior to this visit (patient reports self-use of leftover amoxicillin, see note)' while d2 artifact lists amoxicillin and acetaminophen as 'Current Medication List' — these are inconsistent framings of the same information (one says none on file, the other lists two medications as current), which could confuse learners about what is officially documented versus self-reported."
+  }
+ ]
+}

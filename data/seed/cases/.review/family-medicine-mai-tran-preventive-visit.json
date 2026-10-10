@@ -1,0 +1,47 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a5 result",
+   "problem": "Action a5 ('Review colorectal cancer screening history') is a passive record review labeled with the topic itself, and its result bluntly states 'no prior colonoscopy, FIT, or stool-based test on file' with no artifact backing it. This is fine as a record check, but there's no artifact (artifactIds is empty) to support this claim - it should be tied to an artifact like d2's outside records summary, or removed as an unsupported record action."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a6 result",
+   "problem": "Same issue as a5: 'Review hepatitis B screening history' has no artifactIds despite returning a definitive record finding. This should be linked to artifact d2 (the outside records summary) which does mention 'no hepatitis B serology found,' or the result is unsupported leakage of record content from nowhere."
+  },
+  {
+   "severity": "high",
+   "kind": "accuracy",
+   "where": "answerKey.plan[3] / a12 / a13 and action a12 importance",
+   "problem": "The plan correctly notes that with a first-degree relative diagnosed with colon cancer at 58 (<60), guidelines call for colonoscopy starting at age 40 or 10 years before relative's age (not FIT alone). Yet action a12 ('Order mailed FIT kit') is marked 'critical' importance and listed as a primary action in objective o2, while the answer key frames it as merely an 'interim/bridge' option. This creates inconsistency: the case treats ordering FIT as a critical/correct action, but the correct main action should be colonoscopy referral (a13 is actually for cervical cytology, not colonoscopy) - there is no action in the list for 'refer to GI for colonoscopy,' which the answer key explicitly recommends. This is a gap: the answer key's primary recommended action (colonoscopy referral) has no corresponding action in the actions list."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "action a13 name/result vs answerKey.plan",
+   "problem": "a13 is titled 'Schedule in-person cervical cytology with HPV co-testing' but is also referenced in objective o6 and o2 alongside colorectal screening discussions, causing ambiguity about whether a13 covers colon referral. The actions list lacks a distinct 'refer to gastroenterology for colonoscopy' action even though the answer key plan explicitly calls for this referral given the family history; this is a mismatch between the plan and available actions."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "fact f13 tier vs action a15/d7",
+   "problem": "f13 (father's colon cancer, reluctant tier) is appropriately gated, but d7 artifact is released on action a15 which is just 'Review family history documentation in chart' - a record review, not an interview action. Since the chart was blank before the visit (per d7 body), this action should not be able to reveal the paternal colon cancer history before the learner elicits it via direct questioning (f13 is reluctant). As written, if the learner performs a15 early, they obtain the hidden fact through a passive record check, bypassing the required rapport-building interview that the case intends to teach (per objective o2's explicit goal of eliciting non-volunteered family history)."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a8 result reference range vs d3 artifact",
+   "problem": "a8's inline result states reference ranges for FSH/estradiol redundantly with d3, but a8 has no artifactIds despite d3 containing the exact same FSH/estradiol rows under the 'Order TSH' action (a7's artifactId). This creates inconsistency: a7's artifact d3 already contains FSH/Estradiol/HepB rows, but a8 (ordering FSH/estradiol) has no artifactId, duplicating data across two actions without clear artifact linkage, confusing which action unlocks which part of the lab report."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a9 vs d4 artifact title",
+   "problem": "a9 is titled 'Order CBC' only, but its result and the linked artifact d4 also contain a full lipid panel; a10 ('Order lipid panel') duplicates the same data already in d4, which was released by a9. This creates redundant/overlapping actions-artifact linkage that could confuse timeline of what triggered release of lipid results."
+  }
+ ]
+}

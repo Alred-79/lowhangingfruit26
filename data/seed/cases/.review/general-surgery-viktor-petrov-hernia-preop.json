@@ -1,0 +1,40 @@
+{
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "artifact d6 (Reported Groin Bulge Size and Symptom Trend chart) and mismatch m1",
+   "problem": "d6 is described as 'patient-reported, compiled at today's visit' and is released when fact f3 is triggered, but it directly hands over the full quantified minimization-vs-progression teaching point (bulge tripling in size with earlier onset of aching) that the learner is supposed to elicit through interview and functional questioning. This bypasses the interview exercise in objective o1/m1. Fix: either remove this chart artifact and let the learner reconstruct progression purely from interview answers (f1, f3, f4), or restrict its content to raw size estimates only without the embedded 'progressively earlier onset of end-of-day aching' interpretive teaching point."
+  },
+  {
+   "severity": "high",
+   "kind": "scope",
+   "where": "action a12 'Urinary symptom screen (IPSS-style questions)' and action a4 'Ask patient to palpate for tenderness or firmness over bulge'",
+   "problem": "Both actions are framed as interview-style questions ('ask patient to...') rather than an exam/instrument the resident performs, yet they are tagged kind 'exam'/'assessment' and their results hand over reluctant/discoverable facts (f13, f12 content) directly. Per the rules, an action that is only an interview question whose result hands over facts bypasses the interview tier and is a leak. Fix: convert a4 into an actual tactile exam description if feasible via video (patient demonstrates reduction, surgeon observes), or remove it; for a12, make it a formally administered IPSS instrument with a numeric score result rather than narrative discoverable facts restated verbatim."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "answerKey.plan[2] and educationPoints re: aspirin",
+   "problem": "Current guidance (ACC/AHA perioperative guidelines) for low-dose aspirin taken for secondary cardiovascular prevention undergoing low-bleeding-risk surgery like open inguinal hernia repair generally supports continuing aspirin, but this patient's aspirin indication is listed only as 'cardiovascular prophylaxis' with no documented history of actual cardiovascular disease (no CAD, stroke, PAD noted anywhere in facts/artifacts). If this is primary prevention aspirin (common at his age with just HTN/smoking/obesity), guidelines increasingly recommend against primary-prevention aspirin, and perioperative continuation calculus differs from secondary prevention. The case should clarify why he is on aspirin (primary vs secondary prevention) since the recommended answer-key stance ('often safely continued') is standard for secondary prevention but not well justified if this is primary prophylaxis without an atherosclerotic diagnosis."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "facts f19 (hypertension) vs chartAtStart problem list vs a14 ASA classification",
+   "problem": "f19 states 'history of hypertension, managed with lifestyle, not currently on antihypertensive medication' and chartAtStart problem list says 'Hypertension, untreated.' Action a14 result labels ASA II as '(controlled hypertension, obesity, tobacco use)' - but the hypertension is explicitly described as untreated/not on medication, and today's BP is 138/86 (stage 1 elevated), so calling it 'controlled' is inconsistent with being untreated and still mildly elevated. Fix: change a14 result wording to 'uncontrolled/untreated hypertension' or adjust f19/chartAtStart to show it being treated and controlled."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "action a10 / artifact d3 HbA1c flag",
+   "problem": "HbA1c 5.7% is listed with flag 'H' in d3, but 5.7% is the exact lower boundary of the prediabetes range (5.7-6.4%) and is appropriately flagged, however action a10 result text says 'borderline' which is fine, but reference range notation '<5.7 normal; 5.7-6.4 prediabetes' makes 5.7 fall in prediabetes not normal, so flagging as H (high) is reasonable but mild inconsistency: value sits exactly at threshold and should perhaps be flagged as borderline/prediabetic rather than simply 'H' for high, since it's not elevated above the prediabetes range itself. This is a minor labeling nuance, not a hard error."
+  },
+  {
+   "severity": "low",
+   "kind": "other",
+   "where": "patient.ethnicity 'Bulgarian-American' and background narrative",
+   "problem": "The immigration background (Bulgarian immigrant, long-haul trucker) is not used as a causal explanation for the medical problem and is handled respectfully; no actual dignity violation, but flagging that the motel-room/dim lighting detail combined with 'between routes' framing borders on an unnecessary socioeconomic cue not tied to any teaching point — consider removing for tighter scope, though this is a stylistic note rather than a hard dignity violation."
+  }
+ ]
+}

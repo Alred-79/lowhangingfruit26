@@ -1,0 +1,34 @@
+{
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a5 (home urine dipstick) result",
+   "problem": "The urine dipstick is listed as an action with a result of 'protein 2+', but urine protein is not volunteered by the patient as an initial fact nor collected as a discoverable/reluctant fact — it only appears via this action. More importantly, this is one of the key findings supporting the diagnosis and is revealed purely by the learner choosing to order it, which is fine as an action, but the fact list has no corresponding fact (f-series) documenting that the patient already knew/noticed proteinuria, so there is no leakage from chart text; however the issue is that a home dipstick test with chart color-matching is not a validated clinical action and its result is reported with unrealistic certainty (exact '2+') for a patient self-read test — this should be softened to 'trace to 2+, color interpretation uncertain' to avoid overstating reliability, and the keyFindings list treats it as a confirmed exam finding equivalent to a formal UA, which overstates its validity relative to the real plan (urine protein/creatinine ratio ordered in a10)."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a14 result vs d6 table / chartAtStart last vitals",
+   "problem": "a14 says weight is up 3.5 kg 'over the past 1 week,' and d6 shows 72.0 kg at 32 weeks vs 75.5 kg today labeled '33 weeks' (not 33w2d), giving a 1-week gain of 3.5 kg, which is internally consistent, but chartAtstart 'Last vitals' says '2 weeks ago: BP 118/76, weight 72.0 kg, fundal height 31 cm' — this contradicts d6, which places the 72.0 kg visit at 32 weeks, i.e., 1 week before today (33w2d), not 2 weeks. The timeline is inconsistent by about a week and should be corrected to align (either chartAtStart should say '1 week ago' or d6 visit intervals should be adjusted to 2 weeks)."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a4 result and case design",
+   "problem": "Clonus cannot be meaningfully or safely assessed via a 'guided self-exam' by an untrained partner over video; this action is included as a scored action (importance minor) but is clinically not a valid or reproducible maneuver for a telehealth encounter and could mislead learners into thinking this is an appropriate way to screen for clonus. It should be removed or explicitly framed as 'not clinically reliable, cannot substitute for in-person neuro exam' to avoid teaching an unsafe practice pattern."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "d1 artifact rows vs a1 result text",
+   "problem": "a1 result states booking BP at 10 weeks was 112/70, but this value does not appear anywhere in artifact d1 (which only covers 'past 7 days') nor elsewhere in the chart; it is asserted only in the action result text with no supporting artifact, which is a minor sourcing inconsistency (the booking BP should either be added to a dedicated chart/history artifact or removed from the critical action result)."
+  },
+  {
+   "severity": "low",
+   "kind": "mismatch",
+   "where": "d6 table 'Today, 33 weeks' vs scenario stating 33w2d",
+   "problem": "The weight flowsheet labels today's visit as '33 weeks' while the rest of the case (scenario, d5, chartAtStart) consistently states 33 weeks 2 days; this is a minor labeling inconsistency that should be corrected to '33w2d' for consistency."
+  }
+ ]
+}

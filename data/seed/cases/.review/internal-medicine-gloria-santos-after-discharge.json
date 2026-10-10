@@ -1,0 +1,54 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart 'Medications' row",
+   "problem": "chartAtStart explicitly states 'held medications pending clearance: lisinopril, hydrochlorothiazide, metformin' at the very start of the encounter, before the learner has done any medication reconciliation (a6/a12) or discovered the self-resumption. This gives away the central twist (that she is taking held meds) before the learner even starts, since the student brief already frames the mismatch as something to 'uncover.' Fix: chartAtStart should state only that these meds were held at discharge per the discharge summary, without pre-stating the current reconciliation status/discrepancy, or defer this detail to artifact d1/d6 release at the appropriate action gate."
+  },
+  {
+   "severity": "high",
+   "kind": "accuracy",
+   "where": "a2 weight check result / percent calculation",
+   "problem": "4.3% is miscalculated or at least needs verification: (138-132)/138 = 4.35%, which rounds to 4.3%-4.4%; this is actually correct arithmetic. No issue here (verified correct) — remove this entry if no error found. Re-examine: Actually (6/138)*100 = 4.348%, so 4.3% is accurate. This item is not an error; retract it."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a7 pharmacy fill history vs d4 medication list reconciliation note",
+   "problem": "a7 states lisinopril/HCTZ/metformin were 'last filled 34 days ago,' predating the admission (6 days ago, 5-day stay = admitted ~11 days ago). But a 90-day supply filled 34 days ago would mean she'd still have about 56 days of pills left — this is consistent, but the fill date being 34 days ago while admission occurred ~11 days ago means the medications were already dispensed before hospitalization, which is fine; no real inconsistency. However, double-check timeline: discharge 6 days ago, 5-day hospitalization means admission was 11 days ago. Fill 34 days ago is before admission, consistent. This is not an error - retract.",
+   "problem_fix": "No action needed."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "a7 action name and result",
+   "problem": "The action 'Review current pharmacy fill/refill history' is framed as a record review (appropriate action type), but its result explicitly states the interpretive conclusion 'confirming she is taking medication from pre-admission stock, not a fresh discharge prescription' - this editorializes/concludes the reluctant fact (self-resumption) via a record lookup before the interview has happened, functioning as a shortcut around the sensitive history-taking (f5, f18) the case otherwise wants elicited through rapport. Fix: have the action result report only the objective fill dates/quantities, and let the learner draw the inference, preserving the interview-based elicitation of f5/f18 as intended."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a12 result and d4 artifact title/date",
+   "problem": "a12 result states the patient reports resuming meds '2 days ago,' matching f5/f18, which is consistent - however, d4 artifact is dated 'Today' and labeled 'Current Medication List - Reconciliation' authored by 'Internal Medicine Clinic,' implying this reconciled list already existed before the visit/action a12 was performed; since release is gated on a12, the artifact should instead be framed as generated as a result of this visit's reconciliation (e.g., 'author: this clinic, generated from today's visit') rather than appearing to be a pre-existing clinic document that already captured self-resumption, which would imply the system already knew the hidden fact before the learner elicited it."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a11 result vs d3 chart",
+   "problem": "a11 and d3 chart agree on creatinine trend values (baseline 0.9, admission 1.6, peak 2.1, discharge 1.4), consistent with a8 and d2 showing 1.7 now - this is fine, no issue; retract if listed."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "answerKey.plan - metformin/ACEI/diuretic resumption and ED referral instructions, and plan item 'Communicate with patient's pharmacy to flag held medications'",
+   "problem": "These are reasonable and within hospitalist/internal medicine scope; no issue. (No actual problem - retract.)"
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a8 lab result / d2 artifact - anion gap and acid-base assessment not flagged",
+   "problem": "Bicarbonate 20 (L) with BUN 38 and Cr 1.7 in a patient with reduced oral intake and vomiting-prone state suggests a mild metabolic acidosis (possibly combined with early lactic acidosis risk from metformin at eGFR 31); the case does not calculate or mention anion gap (Na 138, Cl 100, HCO3 20 → AG =138-100-20=18, elevated), which is clinically relevant given metformin-associated lactic acidosis risk highlighted in educationPoints. This is a missed opportunity but not necessarily an error; however, if faculty expect anion gap calculation, it should be included as a discrete value in the lab report or action result for consistency with the metformin/lactic-acidosis teaching point stated in educationPoints to avoid an unsupported claim appearing to be given more weight than the data shows."
+  }
+ ]
+}

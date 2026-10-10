@@ -33,7 +33,7 @@
    },
    {
     "id": "a4",
-    "kind": "vitals",
+    "kind": "assessment",
     "name": "Home/reported temperature",
     "result": "38.6°C (101.5°F) oral, taken this morning per patient report.",
     "importance": "critical",

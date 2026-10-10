@@ -1,0 +1,34 @@
+{
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "a5 result / chartAtStart & d1 (prior visit note)",
+   "problem": "Action a5 result states outright 'Cotinine positive, consistent with active tobacco use' and d1 (released at start) already documents 'cut back a lot' with cotinine ordered pending — but the mismatch m1 relies on the learner eliciting the discrepancy. Having an action whose result bluntly states the conclusion ('consistent with active tobacco use') before the learner interviews the patient hands over the hidden fact f6/f7 rather than letting the learner discover and interpret the discrepancy themselves. Fix: have a5 report only the raw lab value (as in d2, quantitative 220 ng/mL) without the interpretive phrase, since d2 (released by a4, not a5) already provides this; also a5 itself has no artifactId despite duplicating d2's content and should either be removed or linked to d2 with raw data only."
+  },
+  {
+   "severity": "high",
+   "kind": "consistency",
+   "where": "a5 vs d2 artifact linkage",
+   "problem": "a4 (eosinophil review) is linked to d2, which also contains the cotinine row, but a5 (cotinine review) has no artifactId at all — same source lab report is split across two actions with only one properly artifact-linked. This is an internal inconsistency; a5 should reference d2 as well, or the cotinine row should be removed from d2 if a5 is meant to be the source."
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "a7 (self-palpate for edema) and a8 (self-check pulse)",
+   "problem": "Asking the patient to self-palpate for edema and self-count pulse are reasonable telehealth adaptations, but labeling a8 as 'vitals' when it's actually a patient-performed, non-standardized pulse check is a stretch for an objective vitals action; this is a minor scope/feasibility issue rather than a true clinical measurement the fellow 'reviews.' Consider reclassifying as 'exam' with clear framing that this is patient-reported, not clinician-measured, to avoid overstating reliability of a 'vitals' action in the answer key reasoning."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a9 result / exacerbation definition",
+   "problem": "a9 states 'Two exacerbations in past 8 months, both treated with oral corticosteroids and antibiotics as outpatient; no hospitalizations documented,' which is used to justify GOLD group E (frequent exacerbator with ≥2 moderate exacerbations OR ≥1 leading to hospitalization). This is correctly group E only if GOLD's current definition counts 2 moderate (outpatient) exacerbations as sufficient — which it does — so this is fine; however, the case asserts GOLD 3 severity using only FEV1 48% without clarifying that GOLD stage numbering (1-4) is independent of group (A-E) and that 'group E' terminology replaced prior ABCD combined with exacerbation history in 2023 GOLD update — this is accurate, not an error. (No action needed - verified correct, removing as issue.)"
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "chartAtStart 'Last vitals' SpO2 93% vs home oximetry trend",
+   "problem": "ChartAtStart lists in-clinic SpO2 93% two months ago, while home log over the last 2 weeks shows 90-92%, suggesting a real decline that the case wants the learner to notice via a1. This is consistent and appropriately subtle, not a leak — but worth confirming the 93% in-clinic value doesn't appear in any artifact released at start in a way that pre-emptively flags the hypoxemia trend before a1 is performed. It appears only in chartAtStart summary, which is acceptable per tier design; no fix needed."
+  }
+ ]
+}

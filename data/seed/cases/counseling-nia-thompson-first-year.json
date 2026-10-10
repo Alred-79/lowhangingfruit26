@@ -178,7 +178,8 @@
        "cells": [
         "PHQ-9",
         "14",
-        "0-27"
+        "0-27",
+        ""
        ],
        "flag": "H"
       },
@@ -186,7 +187,8 @@
        "cells": [
         "GAD-7",
         "9",
-        "0-21"
+        "0-21",
+        ""
        ],
        "flag": "H"
       }
@@ -497,7 +499,7 @@
    },
    {
     "id": "f15",
-    "category": "academic",
+    "category": "social",
     "topic": "academic performance",
     "chart": "Reports missing two assignment deadlines and failing one quiz this semester, contributing to probation.",
     "says": "I missed two assignments and bombed a quiz. That's basically why I got put on probation.",

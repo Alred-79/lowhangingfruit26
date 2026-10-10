@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Badge, Button, cx } from "@/components/ui";
+import { Button, cx } from "@/components/ui";
 import type { CaseProfile } from "@/lib/types";
 import { openHigh, type ConsistencyResult, type Issue } from "@/lib/studio/checks";
 import { applyPatch, type PatchOp } from "@/lib/studio/patch";
@@ -34,6 +34,14 @@ interface Gate {
 type Role = { id: string; name: string; roleTitle: string };
 
 const AUTOSAVE_MS = 1200;
+
+function MenuItem({ label, onClick }: { label: string; onClick: () => void }) {
+  return (
+    <button type="button" className="block w-full px-3 py-1.5 text-left text-slate-700 hover:bg-slate-50" onClick={onClick}>
+      {label}
+    </button>
+  );
+}
 
 export default function CaseEditor({
   meta: initialMeta,
@@ -121,7 +129,9 @@ export default function CaseEditor({
     inflight.current = run;
     return run;
   }, [id, schedule]);
-  saveRef.current = save;
+  useEffect(() => {
+    saveRef.current = save;
+  }, [save]);
 
   const touch = useCallback(() => {
     version.current++;
@@ -156,7 +166,9 @@ export default function CaseEditor({
 
   // The guide is a column on wide screens and starts open there; on narrower screens it is a drawer and starts closed.
   useEffect(() => {
-    if (window.innerWidth >= 1280) setGuideOpen(true);
+    const wide = window.matchMedia("(min-width: 1280px)");
+    const t = requestAnimationFrame(() => wide.matches && setGuideOpen(true));
+    return () => cancelAnimationFrame(t);
   }, []);
   // Warn on a hard unload with unsaved edits; flush on in-app navigation.
   useEffect(() => {
@@ -186,7 +198,9 @@ export default function CaseEditor({
   const issuesOpen = (cons?.issues || []).filter((i) => i.status === "open").length;
 
   function pushUndo(label: string) {
-    setUndo((u) => [...u.slice(-9), { profile: profileRef.current, cons: consRef.current, label }]);
+    // Capture now: the updater below runs later, after the refs have moved on.
+    const snapshot = { profile: profileRef.current, cons: consRef.current, label };
+    setUndo((u) => [...u.slice(-9), snapshot]);
   }
   function undoLast() {
     const last = undo[undo.length - 1];
@@ -281,6 +295,29 @@ export default function CaseEditor({
       setFlash({ tone: "green", text: done });
     });
 
+  const toggleReviewed = () => (meta.reviewed ? simple("unreview", "Marked as not reviewed.") : simple("review", "Marked as faculty-reviewed."));
+  const duplicate = () =>
+    doing("dup", async () => {
+      await mustSave();
+      const r = await api<{ id: string }>(`/api/cases/${id}/duplicate`, { json: {} });
+      router.push(`/faculty/cases/${r.id}`);
+    });
+  const exportJson = () =>
+    doing("export", async () => {
+      await mustSave();
+      const a = document.createElement("a");
+      a.href = `/api/cases/${id}/export`;
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+  const toggleArchive = () => {
+    if (meta.status === "archived") return simple("restore", "Restored as a draft.");
+    if (window.confirm(meta.status === "published" ? "This patient is published. Archiving removes it from students' lists. Archive it?" : "Archive this patient? You can restore it from the library.")) return simple("archive", "Archived.");
+    setMenu(false);
+  };
+
   const counts: Partial<Record<SectionId, number>> = {
     facts: profile.facts.length,
     actions: profile.actions.length,
@@ -363,35 +400,10 @@ export default function CaseEditor({
               </Button>
               {menu && (
                 <div className="absolute right-0 z-40 mt-1 w-60 rounded-md border border-slate-200 bg-white py-1 text-sm shadow-lg">
-                  {[
-                    meta.reviewed
-                      ? { label: "Remove the faculty-reviewed mark", run: () => simple("unreview", "Marked as not reviewed.") }
-                      : { label: "Mark as faculty-reviewed", run: () => simple("review", "Marked as faculty-reviewed.") },
-                    {
-                      label: "Duplicate",
-                      run: () =>
-                        doing("dup", async () => {
-                          await mustSave();
-                          const r = await api<{ id: string }>(`/api/cases/${id}/duplicate`, { json: {} });
-                          router.push(`/faculty/cases/${r.id}`);
-                        }),
-                    },
-                    {
-                      label: "Export JSON",
-                      run: () =>
-                        doing("export", async () => {
-                          await mustSave();
-                          window.location.href = `/api/cases/${id}/export`;
-                        }),
-                    },
-                    meta.status === "archived"
-                      ? { label: "Restore from archive", run: () => simple("restore", "Restored as a draft.") }
-                      : { label: "Archive", run: () => window.confirm(meta.status === "published" ? "This patient is published. Archiving removes it from students' lists. Archive it?" : "Archive this patient? You can restore it from the library.") && simple("archive", "Archived.") },
-                  ].map((m) => (
-                    <button key={m.label} type="button" className="block w-full px-3 py-1.5 text-left text-slate-700 hover:bg-slate-50" onClick={m.run}>
-                      {m.label}
-                    </button>
-                  ))}
+                  <MenuItem label={meta.reviewed ? "Remove the faculty-reviewed mark" : "Mark as faculty-reviewed"} onClick={toggleReviewed} />
+                  <MenuItem label="Duplicate" onClick={duplicate} />
+                  <MenuItem label="Export JSON" onClick={exportJson} />
+                  <MenuItem label={meta.status === "archived" ? "Restore from archive" : "Archive"} onClick={toggleArchive} />
                 </div>
               )}
             </div>

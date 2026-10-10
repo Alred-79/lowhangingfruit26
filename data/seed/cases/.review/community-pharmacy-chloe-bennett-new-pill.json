@@ -1,0 +1,41 @@
+{
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart 'Problem list' and d1 Active Medication Profile (release at:start)",
+   "problem": "The chartAtStart problem list and d1 medication list are released at the start of the encounter, before any history-taking, yet d1's directions/status column for sumatriptan combined with the problem list ('Migraine, episodic') primes the learner toward migraine, and more importantly d2 (intake questionnaire summary) explicitly states 'no migraines reported' while the chart already lists migraine as an established problem - this contradiction is fine, but the bigger leak is that chartAtStart 'Last vitals' already states 'nothing documented since' which gives away the BP gap finding (meant to be discovered via a4/a12) before the learner does any work."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "d1 Active Medication Profile (release at:start)",
+   "problem": "d1 is released at start and already shows both medications and labels the new contraceptive as 'pending,' which is acceptable, but it duplicates/preempts action a2's result almost verbatim, making a2 redundant and reducing the discovery value of that action."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a4 result vs a12 result vs d3",
+   "problem": "a4 states the patient 'cannot recall her last blood pressure reading,' but a12/d3 reveal a reading does exist on file (118/74 mmHg from 2 years ago at a university health visit) which the pharmacist can see in the shared record - a4's framing implies no record exists at all, which conflicts with the fact that a documented (old) reading is retrievable via a12. The action wording for a4 should clarify it is asking the patient's self-report versus the record check in a12, which it does somewhat, but result phrasing 'has always been fine' implies she has never had it checked, contradicting the known 2-year-old record she presumably attended."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a1 result vs d5 chart",
+   "problem": "a1 result says last fill was '6 weeks ago, quantity 9 tablets' and d5 chart shows the most recent bar at '6 weeks ago' with y=9, which is consistent; however d5 also shows three prior fills at 7 months, 5 months, and 3.5 months ago all with quantity 9 - this is an unusually tight dispensing interval for a sumatriptan prescription with 'max 2 tabs/24h' and patient-reported use of only 2-3x/month (a13), which would use roughly 4-6 tablets/month, meaning a 9-tablet supply would last 6-8 weeks consistently - fills every ~5-7 weeks are plausible, so this is not actually an error; downgrading concern is noted here as low/non-issue but flagged for review since intervals (7mo, 5mo, 3.5mo, 6wk) are irregular/not evenly spaced which is a bit odd for a chart meant to show a clean trend."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "d4 Pharmacist Interaction & Contraindication Screen - Alert 1 citation",
+   "problem": "The alert cites both 'WHO Medical Eligibility Criteria Category 4' and 'UK MEC/CDC US MEC Category 4' as if interchangeable; in fact, migraine with aura at any age is UKMEC/WHO MEC Category 4, which is correct, but US MEC (CDC) also lists it as Category 4 - this part is accurate. However, labeling WHO MEC as a separate entity from UK MEC/US MEC in the same breath is slightly confusing phrasing; not a substantive clinical error, so this is a low-severity wording issue rather than a factual error."
+  },
+  {
+   "severity": "low",
+   "kind": "other",
+   "where": "persona.ethnicity and appearance",
+   "problem": "No dignity issues identified; appearance and background are respectfully written without stereotyping."
+  }
+ ],
+ "verdict": "minor_fixes"
+}

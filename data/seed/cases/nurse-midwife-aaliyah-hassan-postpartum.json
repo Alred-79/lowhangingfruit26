@@ -671,7 +671,7 @@
    },
    {
     "id": "f29",
-    "category": "distractor",
+    "category": "other",
     "topic": "recent travel history",
     "chart": "Reports a day trip to visit relatives in Wisconsin two weeks ago; no illness contacts reported.",
     "says": "We drove out to Wisconsin to see my cousin a couple weeks ago, just for the day. Everyone there was healthy.",
@@ -681,7 +681,7 @@
    },
    {
     "id": "f30",
-    "category": "distractor",
+    "category": "other",
     "topic": "recent dietary change",
     "chart": "Started taking a fenugreek supplement for milk supply one week ago, no adverse effects reported.",
     "says": "I started taking fenugreek capsules about a week ago because someone said it helps with milk supply.",

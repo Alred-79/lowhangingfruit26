@@ -1,0 +1,34 @@
+{
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a16 'Screen readiness for kidney replacement therapy education'",
+   "problem": "This action is phrased as an assessment but its result directly hands over the reluctant/hidden fact f11/f13 (fear-based refusal of dialysis tied to uncle's death) without the fellow having asked a direct, sensitive question. The result states 'Patient verbalizes strong fear and refusal of dialysis based on family experience' as if elicited passively by a 'screen', bypassing the interview. Fix: either remove this action, or make its result only report that the patient appears guarded/anxious when KRT is mentioned (observable affect), while the actual fear/refusal content is only revealed via a direct interview question captured in facts f11/f13, not as an action result."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart 'Problem list'",
+   "problem": "The problem list states 'Chronic kidney disease stage 4 (diabetic and hypertensive nephropathy)' at the start of the encounter, which hands the learner the differential/etiology (diabetic + hypertensive nephropathy) that the case intends for the fellow to work out via the eGFR/ACR trend review and labs. Fix: list only 'Chronic kidney disease stage 4' without pre-attributing etiology, or state 'CKD, etiology under evaluation'."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a13 result vs eGFR trend (d3) and CKD staging",
+   "problem": "CKD stage is given as G4A3 based on eGFR 22, which is correct for G4 (15-29), but the trend data in d3 shows GFR declining 34→30→26→22 over 18 months — a drop of 12 mL/min/1.73m2 in 18 months (loss of ~8/yr), which is correctly called 'rapid progression' per KDIGO (>5 mL/min/1.73m2/year decline). This is consistent, but a13 says 'KFRE-based 2-year kidney failure risk substantially elevated' without ever calculating or presenting an actual KFRE output, which could mislead a learner into thinking a specific calculated risk was given when none is specified; minor but should either give a representative percentage or soften the claim to 'warrants KFRE calculation'."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "objective o4 factIds includes f11",
+   "problem": "Objective o4 lists f11 (hidden/reluctant fear about dialysis from uncle's death) as a factId tied to tasks, but f11 is tagged tier 'initial' in the facts list, contradicting the case's intended reluctant/hidden handling. Actually f11 is tier 'initial' per facts array, meaning it's volunteered, not hidden — check: f11 tier is 'initial', meaning the patient volunteers this openly, so it's fine for a16 to surface it as information already given early; but then a16's role as an 'assessment' action that reveals it again is a duplicate/mismatch rather than a leak. Still, the issue is CKD stage/goals (f13) is tier 'initial' too, so the fear is openly stated per persona/opening - the real leak is only in chartAtStart's problem list in the record, not in a16/f11, so this item should be deprioritized."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "d8 artifact date vs a15 result wording",
+   "problem": "d8 is dated '6 months ago' and documents eGFR 26 at that visit, while trend chart d3 shows eGFR 26 at '6 months ago' timepoint — consistent. No issue found here; omit."
+  }
+ ]
+}

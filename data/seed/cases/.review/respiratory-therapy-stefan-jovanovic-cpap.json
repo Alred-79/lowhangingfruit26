@@ -1,0 +1,35 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "a8 'Screen for drowsy driving / occupational safety risk'",
+   "problem": "This action is phrased as an interview probe ('Screen for... Ask about') and its result directly hands over the hidden fact f13 (forklift near-miss) without requiring the learner to actually build rapport and ask a direct sensitive question in the conversation itself. As an action separate from the dialogue, it bypasses the interview tier structure for a 'hidden' fact and leaks it to any learner who simply selects this action. Fix by removing this as a discrete action (since f13/f14 are hidden/reluctant and should only surface through actual conversation with the simulated patient, not a selectable action) or convert it to a non-diagnostic observation (e.g., a validated screening instrument like the Epworth or a fatigue risk screening tool result) rather than one that directly reveals the disclosed near-miss."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a1 result vs d1 chart series",
+   "problem": "a1 result states '12 of 30 nights (40%)' used, but the d1 chart series only shows 14 nights of data (Night 1-14) with 7 nights of nonzero usage, not 12 of 30. The chart does not corroborate the stated 30-night summary for the number of nights used across the full period."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "d1 table row 'Average 95th %ile leak' flag H",
+   "problem": "38 L/min leak is clinically high and reasonably flagged, but mixing an 'average' value with a '95th percentile' label in the same cell is internally contradictory; it should be labeled consistently as either the mean leak or the 95th percentile leak, not both in one metric name."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a6 result vs facts",
+   "problem": "a6 states baseline Epworth was 14/24 'not re-administered today,' but no fact or artifact documents this baseline Epworth value elsewhere, so this number appears only in the action result with no corroborating chart entry, making it ungrounded framework info presented as if from a record."
+  },
+  {
+   "severity": "low",
+   "kind": "scope",
+   "where": "answerKey.plan item on counseling employer disclosure",
+   "problem": "Directing the respiratory therapist student to 'strongly encourage him to inform his employer per workplace safety policy' edges toward occupational/legal counseling that is arguably outside core RT scope; this should be softened to encouraging the patient to discuss the safety concern with his sleep physician/PCP and offering referral to occupational health resources, with employer disclosure framed as the patient's own decision rather than an RT directive."
+  }
+ ]
+}

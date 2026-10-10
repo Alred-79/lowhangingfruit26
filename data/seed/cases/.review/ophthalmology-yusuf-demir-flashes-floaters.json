@@ -1,0 +1,33 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "consistency",
+   "where": "facts f1/f4/f32 vs action a4 result vs assessment a11",
+   "problem": "Patient's description and chart consistently describe the shadow as rising from the 'bottom corner' with flashes toward the 'ear side' (temporal) and shadow toward 'nose side' (nasal) - i.e., inferonasal. But action a4 result and the field-cut description state 'inferotemporal' (lower-outer) quadrant, and a11 says this location 'suggests a superior-nasal retinal break' - which is internally contradictory. An inferotemporal field defect corresponds to a supero-NASAL retinal break (field defects are inverted relative to retinal location, both vertically and horizontally), and a shadow described as rising from the nasal side (f32) would actually produce a field defect in the TEMPORAL field, not inferotemporal. The anatomic correspondence between the patient's verbal description, the field testing result, and the retinal break location reasoning is inconsistent across f4, f32, a4, and a11.",
+   "fix": "Make the quadrant terminology consistent: if the patient reports the shadow near the nose (nasal) rising from below, the corresponding visual field defect is inferotemporal (correct direction already used by nasal retina maps to temporal field) - but then a11 should say this corresponds to a SUPERIOR-TEMPORAL retinal break (not superior-nasal), since field defect and retinal break are both opposite in each axis from the perceived shadow location but same as the field test location for horizontal axis given retina-to-field inversion is only in direction not mapping twice. Clarify and align all four elements (f4, f32, a4 result, a11 reasoning) so retinal break location logically follows standard inverted-field mapping."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "artifact d1 (Cataract Surgery Operative Note) and d2 (Dilated Eye Exam) released at start",
+   "problem": "Both chart-at-start artifacts explicitly state the patient was 'counseled on symptoms of retinal detachment (flashes, floaters, curtain/shadow)' before the visit even begins, which telegraphs the exact diagnosis and classic symptom triad to the learner before they take any history.",
+   "fix": "Remove or soften the counseling language in d1 and d2 (e.g., just note routine post-op follow-up and standard risk-factor counseling without listing the specific symptom triad verbatim) so the learner must elicit and recognize the triad independently."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "action a4 result vs facts f3/f32",
+   "problem": "a4 describes the field cut as being 'inferotemporal' and corresponding to a shadow 'like a curtain rising from below,' omitting the nasal/temporal distinction. But f3 and f32 clearly state flashes are temporal and the shadow is nasal-sided. The action result does not acknowledge this nasal detail reported by the patient during history, creating a disconnect between what the patient reports in interview facts and what the objective field test documents.",
+   "fix": "Align a4's result description with the patient-reported laterality (temporal flashes, nasal shadow) so the field test corroborates rather than contradicts the history, and ensure a11's break-location inference is recalculated accordingly."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "artifact d5 chart and action a3 result",
+   "problem": "The acuity trend lists today's result as 20/30, consistent with a3, but a3 attributes the mild blur entirely to 'his usual nearsightedness,' which is a patient attribution not an objective finding; listing it as fact in the action result rather than quoting the patient's belief is a minor framing issue but could lead a learner to dismiss the finding.",
+   "fix": "Rephrase a3 to clearly separate the objective measurement (20/30 OD) from the patient's subjective attribution, e.g., 'patient attributes this to...' as reported speech, which is already mostly done - low priority cosmetic clarification only."
+  }
+ ]
+}

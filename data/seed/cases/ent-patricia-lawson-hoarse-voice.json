@@ -40,7 +40,7 @@
    },
    {
     "id": "a5",
-    "kind": "vitals",
+    "kind": "exam",
     "name": "Review home/office vitals",
     "result": "BP 132/80 mmHg, HR 78 bpm, SpO2 97% on room air, weight 61 kg (down from 65 kg three months ago), BMI 23.",
     "importance": "important",

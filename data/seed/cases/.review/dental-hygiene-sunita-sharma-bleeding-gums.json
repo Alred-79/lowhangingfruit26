@@ -1,0 +1,35 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a11 result",
+   "problem": "Action a11 is described as 'Tobacco and areca nut/paan use screening' and its result directly hands over the reluctant fact f14 (paan/areca use) including frequency, without requiring rapport-building or a sensitive follow-up question as the tier 'reluctant' demands. The action name itself ('Tobacco and areca nut/paan use screening') also leaks the specific hidden risk factor the learner is supposed to discover by asking broadly about tobacco/betel use. Fix: rename the action to a neutral general substance-use screening (e.g., 'Tobacco use screening') and only reveal paan/areca use as a conversational fact gated by rapport/directness, not as an automatic action result that bypasses interview tiering."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a10 result",
+   "problem": "Action a10 ('Review flossing technique and frequency through guided questioning') is an interview-style action ('through guided questioning') whose result directly reveals the reluctant/discoverable clarification in f13 (she only flosses when something is stuck) without the learner needing to ask a direct, sensitive follow-up question. This bypasses the mismatch/tiering design (m1) where the discrepancy is supposed to be uncovered through gentle, direct questioning in conversation, not via a scripted action result. Fix: either remove this as an action and let the flossing frequency only emerge through conversation, or rephrase the action as a pure demonstration (e.g., 'Guided flossing technique demonstration on camera') with a result describing only observed technique, not self-reported frequency corrections."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "action a7 result",
+   "problem": "Action a7 ('Dry mouth screening questions') is phrased as an interview-based action, and its result reveals discoverable fact f9 (frequent sweetened chai sipping) which is categorized as 'discoverable,' but the result bundles it in automatically with the dry-mouth screen rather than requiring the learner to separately elicit it. This is a minor bypass of tiering since f9's tier is discoverable (less severe than reluctant), but still conflates two separate facts into one action result."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a13/d3 reference range vs f5",
+   "problem": "The HbA1c reference range in d3 states 'goal <7.0 for most diabetics' while a13 result states 'reference <5.7% normal, 5.7-6.4% prediabetes, ≥6.5% diabetes' - both are reasonable ADA-aligned statements but are inconsistently presented between the two artifacts (one using diagnostic cutoffs, the other using treatment goal), which could confuse a learner about what 8.2% signifies relative to goal vs diagnosis. Clarify by using consistent framing (diagnostic cutoffs AND treatment goal together) across both a13 and d3."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a9 vs f11",
+   "problem": "Action a9 result states the patient uses a 'firm/medium bristle brush,' while fact f11 states she 'believes harder brushing cleans better' with a 'firm-bristle brush' - these are consistent in substance but a9 hedges with 'firm/medium' which slightly waters down the clarity of the finding compared to the fact; align wording to 'firm-bristle brush' only for consistency."
+  }
+ ]
+}

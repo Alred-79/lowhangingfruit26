@@ -215,7 +215,7 @@ const FIELD_LABEL: Record<string, string> = {
   distractor: "Distractor", kind: "Kind", aliases: "Also matches", result: "Result", abnormal: "Abnormal", artifactIds: "Linked documents", type: "Type", date: "Date",
   author: "Author", body: "Body", table: "Table", columns: "Columns", rows: "Rows", cells: "Cells", flag: "Flag", release: "Release rule", text: "Text", factIds: "Linked facts",
   actionIds: "Linked actions", primaryProblem: "Primary problem", differential: "Differential", keyFindings: "Key findings", plan: "Plan", redFlags: "Red flags",
-  educationPoints: "Education points", patientClaim: "Patient says", recordEvidence: "Record shows", teachingPoint: "Teaching point", factId: "Linked fact",
+  educationPoints: "Education points", id: "Id", when: "When", ref: "Ref", xLabel: "X axis", yLabel: "Y axis", points: "Points", refLow: "Reference low", refHigh: "Reference high", patientClaim: "Patient says", recordEvidence: "Record shows", teachingPoint: "Teaching point", factId: "Linked fact",
   artifactId: "Linked document", label: "Label", value: "Value", description: "Description", series: "Series", fileUrl: "Uploaded file",
 };
 const ITEM_NOUN: Record<string, string> = { facts: "Fact", actions: "Action", artifacts: "Document", objectives: "Objective", mismatches: "Mismatch", knowledge: "Source", variants: "Variant", chartAtStart: "Chart item" };
@@ -242,11 +242,18 @@ export function formatValue(v: unknown): string {
     return v.map((x) => formatValue(x)).join("\n---\n");
   }
   const o = v as Record<string, unknown>;
+  if (typeof o.when === "string" && Object.keys(o).every((k) => k === "when" || k === "ref")) return o.when === "start" ? "from the start of the visit" : o.when === "action" ? `when action ${o.ref} is done` : `when fact ${o.ref} is disclosed`;
   return Object.keys(o)
-    .filter((k) => o[k] !== undefined && o[k] !== "" && !(Array.isArray(o[k]) && !(o[k] as unknown[]).length))
+    .filter((k) => o[k] !== undefined && o[k] !== "" && o[k] !== false && !(Array.isArray(o[k]) && !(o[k] as unknown[]).length))
     .map((k) => {
       const val = o[k];
-      const text = typeof val === "object" && val !== null ? JSON.stringify(val) : String(val);
+      let text: string;
+      if (k === "table" && val && typeof val === "object") {
+        const t = val as { columns?: string[]; rows?: { cells?: string[]; flag?: string }[] };
+        text = [(t.columns || []).join(" | "), ...(t.rows || []).map((r) => (r.cells || []).join(" | ") + (r.flag ? ` [${r.flag}]` : ""))].join("\n  ");
+      } else if (Array.isArray(val) && val.every((x) => typeof x !== "object")) text = val.join(", ");
+      else if (typeof val === "object" && val !== null) text = Array.isArray(val) ? JSON.stringify(val) : formatValue(val).replace(/\n/g, "; ");
+      else text = String(val);
       return `${FIELD_LABEL[k] || k}: ${text}`;
     })
     .join("\n");

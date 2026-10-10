@@ -242,9 +242,9 @@
         "HbA1c",
         "5.7",
         "%",
-        "<5.7 normal; 5.7-6.4 prediabetes",
-        "H"
-       ]
+        "<5.7 normal; 5.7-6.4 prediabetes"
+       ],
+       "flag": "H"
       }
      ]
     }
@@ -845,6 +845,10 @@
   ],
   "knowledge": [],
   "rubricId": "default",
-  "variants": []
+  "variants": [],
+  "title": "Pre-operative consultation for symptomatic right inguinal hernia in a 59-year-old truck driver",
+  "summary": "A 59-year-old male truck driver with a one-year history of enlarging, symptomatic right indirect inguinal hernia seeks surgical repair during his three-week winter layoff. The case teaches pre-operative risk assessment (smoking, obesity, urinary symptoms), informed consent for mesh herniorrhaphy, patient education about realistic recovery timelines for physically demanding work, and recognition of modifiable perioperative risks including smoking cessation and undiagnosed benign prostatic hyperplasia.",
+  "specialty": "General Surgery",
+  "setting": "Telehealth video visit; patient calling from a motel-style room between trucking routes"
  }
 }

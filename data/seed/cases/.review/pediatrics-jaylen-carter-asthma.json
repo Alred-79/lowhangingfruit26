@@ -1,0 +1,35 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "a12 name/result",
+   "problem": "Action name says 'Screen for secondhand/environmental exposures via history... ask about pets, smoke, allergens' which is purely an interview question (not an exam/vitals/lab/imaging/test/record/assessment per role's allowed action kinds), yet it directly hands over fact f11 (new cat) and f12 (no smoking) as a 'test' result. This bypasses the interview entirely for an initial-tier fact that should simply be volunteered or elicited by the learner asking, not delivered as an action result. Fix: remove this action or convert it to a genuine instrument/record (e.g., an allergy symptom screening tool) rather than labeling an interview as a 'test' action with scripted answers to history questions. Pets/smoke should be shared only when the learner actually asks in dialogue since f11 is 'initial' and f12/f17 are discoverable, not revealed via a formal action irrespective of what is asked."
+  },
+  {
+   "severity": "high",
+   "kind": "accuracy",
+   "where": "a2/d4 peak flow percentage",
+   "problem": "310/420 = 73.8%, correctly rounded this is fine, but the chart lists 'today' peak flow as 310 while the ED visit value was 220 — 220/420 = 52.4%, which is at/near the red zone (<50%) threshold the case's own red flags describe. The ED note (d1) states he had moderate distress with SpO2 93%, consistent with red zone, so the chart values are internally plausible; however, the case states peak flow 'today' of 310 is yellow zone (73% of personal best) while describing him as having 'no signs of acute distress' and 'comfortable breathing' today — this is fine actually, so disregard; no issue."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a8 result vs d2 medication list vs m1 mismatch",
+   "problem": "a8 result states 'roughly 1 puff/day average use' from only 1 refill in 3 months of a 120-dose canister prescribed at 4 puffs/day (2 puffs BID = 4 puffs/day). But a 120-dose canister used at 1 puff/day would last 120 days (~4 months), and with only 1 refill in 3 months (i.e., 2 canisters total used over ~3 months), actual average use is closer to 240 doses/90 days ≈ 2.6 puffs/day, not 1 puff/day. The math as described is inconsistent; clarify refill count/timeframe or correct the average-dose calculation to match canister math."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "a13 exam result 'nasal turbinates appear mildly pale/boggy'",
+   "problem": "This exam finding (allergic rhinitis sign) is presented as an objective exam action, which is appropriate, but it strongly reinforces/foreshadows the cat-trigger allergic rhinitis differential before the learner has elicited or correlated history (f17). This is a minor leak risk since the finding alone (without symptom correlation) nudges toward the diagnosis; consider softening to a more neutral finding or ensuring the only clearly abnormal element requires correlation with history the learner must still elicit."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "a9 and d6 BMI percentile labeling",
+   "problem": "BMI percentile at 65th percentile for a 15-year-old male is within normal range, correctly stated as no concern, but the growth flowsheet doesn't specify sex-specific percentile curve or exact BMI formula check: 69 kg / (1.75 m)^2 = 22.53 kg/m2, which matches 22.5, so the calculation is correct; no fix needed here, flagged only to confirm accuracy (no actual issue)."
+  }
+ ]
+}

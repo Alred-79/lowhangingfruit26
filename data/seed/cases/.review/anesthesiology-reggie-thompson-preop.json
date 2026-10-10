@@ -1,0 +1,35 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "accuracy",
+   "where": "answerKey.plan[4] (lisinopril instruction) and problem list / chartAtStart",
+   "problem": "See above."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "a2 result / d2 and a12 result / d7",
+   "problem": "Not an actual issue - retracted."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a7 result / answerKey functional capacity",
+   "problem": "Functional capacity is described as '<4 METs' based on becoming breathless climbing one flight of stairs; however, per standard METs tables, climbing one flight of stairs is typically rated around 4-5 METs, and inability to climb two flights without stopping is the classic '<4 METs' threshold marker (per ACC/AHA risk calculators, climbing a flight of stairs is often used as the ~4 MET benchmark). The description here (breathless on one flight, cannot do two) is roughly consistent with <4 METs, so this is borderline acceptable, but the phrasing 'can walk short distances and do light household tasks without symptoms' (which are usually <4 METs activities) alongside stair breathlessness is a bit internally inconsistent with being rated <4 METs since light household tasks are already in the 1-4 MET range and asymptomatic performance of them might suggest capacity is at least at that level, with the one-flight-stairs symptom being the determining downgrade. This is a minor internal consistency wrinkle, not a hard error."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "d8 (Bariatric Surgery Clinic Pre-op Note) vs a2/a12/mismatches",
+   "problem": "d8 states the patient has 'severe OSA on CPAP (per patient report)' which is consistent with the patient's own belief, but this artifact is released only via action a13, and nothing flags for the student that this note's OSA-control status is unverified; this is acceptable framing (reports patient-reported status) so not a strong issue, but combined with the problem list in chartAtStart stating 'Obstructive sleep apnea (severe, on CPAP)' as a flat fact (not qualified as patient-reported) this slightly leaks that OSA is 'controlled by CPAP' as an established fact at the very start of the encounter, undercutting the discovery of non-adherence. The chartAtStart problem list should instead state 'severe OSA, CPAP prescribed' without asserting current adequate control, or add a qualifier like '(adherence not recently verified)' to avoid prematurely implying the condition is well-managed."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "a3 result and d3 table HbA1c reference range",
+   "problem": "Action a3 result states reference range as '<5.7% normal, 5.7-6.4% prediabetes, >=6.5% diabetes' (standard ADA criteria), but artifact d3's table lists reference range as '4.0-5.6 (non-diabetic); goal <7.0 for most adults with diabetes' - these two reference range statements are inconsistent with each other for the same lab (one uses 5.7 cutoff, other uses 5.6), which could confuse a careful reader comparing the action result to the artifact it is sourced from."
+  }
+ ]
+}

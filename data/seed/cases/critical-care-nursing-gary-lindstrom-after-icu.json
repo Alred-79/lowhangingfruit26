@@ -172,7 +172,8 @@
         "Amoxicillin-clavulanate",
         "875-125 mg",
         "Oral",
-        "Twice daily"
+        "Twice daily",
+        ""
        ],
        "flag": ""
       },
@@ -190,7 +191,8 @@
         "Vitamin D3",
         "1000 IU",
         "Oral",
-        "Once daily"
+        "Once daily",
+        ""
        ],
        "flag": ""
       },
@@ -199,7 +201,8 @@
         "Multivitamin",
         "1 tablet",
         "Oral",
-        "Once daily"
+        "Once daily",
+        ""
        ],
        "flag": ""
       },
@@ -208,7 +211,8 @@
         "Acetaminophen",
         "650 mg",
         "Oral",
-        "As needed for pain, max 3g/day"
+        "As needed for pain, max 3g/day",
+        ""
        ],
        "flag": ""
       }
@@ -932,6 +936,11 @@
   "knowledge": [],
   "rubricId": "default",
   "difficulty": 3,
-  "variants": []
+  "variants": [],
+  "title": "Post-ICU syndrome after prolonged mechanical ventilation for septic shock in a 59-year-old farmer",
+  "summary": "A 59-year-old dairy farmer presents 10 days post-discharge after 16-day hospitalization (9 days ICU, mechanical ventilation) for septic shock from pyelonephritis. He exhibits physical (ICU-acquired weakness, dysphagia, dysphonia, weight loss), cognitive (memory impairment), and psychological (nightmares, avoidance, irritability) features of post-intensive care syndrome, with caregiver strain. The case teaches systematic remote screening for PICS domains, tele-assessment techniques (functional testing, wound inspection, swallow screen), recognition of scope boundaries, and structured escalation using SBAR.",
+  "specialty": "Critical Care Nursing",
+  "setting": "Telehealth video visit; patient's farmhouse living room in central Wisconsin",
+  "encounterType": "Post-ICU follow-up"
  }
 }

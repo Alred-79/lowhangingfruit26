@@ -1,0 +1,34 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a4 result",
+   "problem": "Action a4 is framed as an exam/special test ('Lachman-equivalent self-stability check') but its result directly hands over the critical hidden finding of anterior instability via a self-performed test done by the patient/mother at home, which is not a valid or feasible telehealth maneuver and effectively leaks the diagnosis conclusion rather than requiring the learner to synthesize history+MRI. A true Lachman cannot be reliably self-performed; this action should be removed or reworded to report only observable surrogate findings (e.g., subjective sense of instability on guided questioning) rather than a quasi-objective 'positive anterior translation' result."
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "d6 Knee ROM trend chart release:start-linked action a3, but chart data visible pre-exam framing"
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a9 vs d3",
+   "problem": "Action a9 result says 'referred to orthopedics for MRI and follow-up' and 'Physical therapy prehabilitation referral placed' matches d3, but d3 date is listed as '3 weeks ago' while a9 says 'day of injury' — the artifact date label should be consistent with the encounter timeline (3 weeks ago = day of injury), which is fine, but d6 chart's 'Day 1 (ED)' flexion value of 40 degrees is not sourced from any ED exam note (d3 states ROM exam deferred due to pain/guarding), creating a mismatch between chartAtStart/artifact d6 and the ED note d3's explicit statement that ligamentous/ROM exam was deferred."
+  },
+  {
+   "severity": "medium",
+   "kind": "feasibility",
+   "where": "action a4",
+   "problem": "A Lachman-equivalent self-test with a parent stabilizing the femur while the patient attempts to assess their own tibial translation is not a clinically valid or safely instructable telehealth maneuver within this role's scope (special tests should be learner-guided but performed by the patient on themselves, not a two-person manual stability test requiring trained hands) — this exceeds feasible video-visit special testing and should be replaced with a feasible guided test (e.g., pivot-shift apprehension question, functional hop/step test) rather than a drawer-type ligamentous laxity test."
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a7 result vs d1 body",
+   "problem": "a7 result lists 'small peripheral tear of the lateral meniscus body' while d1 impression specifies 'posterior horn/body junction' — these are consistent enough but the action result omits the 'posterior horn' location detail present in the artifact, a minor inconsistency in level of detail between the action summary and the source artifact."
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "verdict": "minor_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart.problem list",
+   "problem": "The problem list at chart-at-start already states 'Mild cognitive impairment vs. major neurocognitive disorder (under evaluation)' and 'History of falls (x2, past 6 months)' before the learner has elicited the fall history (a4) or performed cognitive assessment synthesis. This hands the learner the fall count and the diagnostic framing before they do the work; the problem list should be limited to what is already officially documented (e.g., 'Cognitive concern - under evaluation') and should not pre-list the fall count, which is discoverable only through a4."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "a1 result / d1 artifact (released at start)",
+   "problem": "d1, released at the start, already contains the full MoCA breakdown (19/30, delayed recall 0/5, visuospatial/executive, orientation) and the lost-driving episode details. Action a1 is redundant with information already leaked at start, meaning the 'review MoCA result' action no longer requires the learner to actively retrieve it - the key cognitive finding is given away before any action is taken, reducing the discovery value of a1 and front-loading the diagnosis before the interview."
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "a11 result vs d5 artifact",
+   "problem": "a11 result states 'One reading of 68 mg/dL three days ago' but the d5 chart lists the 68 reading as Day 4 of a 14-day log with the most recent entry being Day 14 (today) and Day 12 before that - there is no clear indication Day 4 corresponds to 'three days ago.' If Day 14 is today, Day 4 would be 10 days ago, not 3. This is an internal inconsistency between the action narrative and the artifact's timeline."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "a5 result and d6 artifact vs orthostatic hypotension definition",
+   "problem": "Standard orthostatic hypotension is defined as a drop of ≥20 mmHg systolic or ≥10 mmHg diastolic within 3 minutes of standing. Here supine is 142/82 and standing at 3 min is 118/68, a drop of 24/14 mmHg, which does meet criteria - this part is fine, but the flag 'A' is only placed on the 3-minute row in d6, not the 1-minute row (122/70, a drop of 20/12 which also meets systolic criteria). This under-represents the abnormality at 1 minute, which could confuse learners about when orthostasis is first detected (classically it should be assessed at both 1 and 3 minutes, and the 1-minute reading already meets criteria and should likely also be flagged)."
+  },
+  {
+   "severity": "low",
+   "kind": "accuracy",
+   "where": "answerKey.plan - amlodipine timing suggestion",
+   "problem": "The plan recommends 'consider medication contribution from amlodipine timing' for orthostatic hypotension, but amlodipine (a long-acting dihydropyridine calcium channel blocker) is not typically associated with orthostatic hypotension to the degree implied, and timing adjustments would not meaningfully address orthostatic symptroms; this is a minor inaccuracy in the suggested intervention, better framed as 'consider dose or necessity of amlodipine' rather than 'timing.'"
+  }
+ ]
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ArtifactView from "@/components/chart/ArtifactView";
 import { Badge, Button, cx, Input, Label, Select } from "@/components/ui";
 import type { Artifact, ArtifactChart, ArtifactTable } from "@/lib/types";
@@ -123,9 +123,12 @@ function textToPoints(text: string): { x: string; y: number }[] {
 function PointsEditor({ points, onChange }: { points: { x: string; y: number }[]; onChange: (pts: { x: string; y: number }[]) => void }) {
   const [text, setText] = useState(() => pointsToText(points));
   const incoming = pointsToText(points);
-  useEffect(() => {
-    setText((t) => (pointsToText(textToPoints(t)) === incoming ? t : incoming));
-  }, [incoming]);
+  // Re-sync when the points change from outside (guide patch, undo), but not while the user is mid-line.
+  const [seen, setSeen] = useState(incoming);
+  if (seen !== incoming) {
+    setSeen(incoming);
+    if (pointsToText(textToPoints(text)) !== incoming) setText(incoming);
+  }
   const lines = text.split("\n").filter((l) => l.trim()).length;
   const valid = textToPoints(text).length;
   return (
