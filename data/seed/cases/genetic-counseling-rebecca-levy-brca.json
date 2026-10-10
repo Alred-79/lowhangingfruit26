@@ -1,0 +1,684 @@
+{
+ "origin": "ai_draft",
+ "reviewed": false,
+ "profile": {
+  "version": 1,
+  "actions": [],
+  "artifacts": [
+   {
+    "id": "d1",
+    "type": "note",
+    "title": "Gynecology Referral Note",
+    "author": "Dr. A. Chen, MD, Obstetrics & Gynecology",
+    "date": "2 weeks ago",
+    "body": "38-year-old G2P2 woman presenting for annual well-woman visit. Discussed family history of breast and ovarian cancer on maternal side (mother dx breast cancer age 44, died age 51; maternal aunt ovarian cancer age 58; maternal grandfather prostate cancer 60s). Patient reports Ashkenazi Jewish ancestry. No personal history of cancer. No prior genetic testing in family. Referring to genetic counseling for hereditary cancer risk assessment and discussion of BRCA1/2 and multi-gene panel testing options prior to initiating any imaging or risk-reduction plan.",
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d2",
+    "type": "form",
+    "title": "Family History Intake Form (patient-completed)",
+    "author": "Patient-reported, pre-visit intake",
+    "date": "3 days ago",
+    "body": "Mother: breast cancer dx age 44, deceased age 51 (breast cancer). Maternal aunt (mother's sister): ovarian cancer dx age 58, living. Maternal grandfather: prostate cancer dx age ~62, living, age 79. Maternal grandmother: no cancer history, living, age 81. Father: adopted as infant, no known biological family medical history. Paternal grandparents: unknown (adoptive family history non-biological, not clinically relevant). Sister: age 35, no cancer history. Brother: age 41, no cancer history. Daughter 1: age 9, healthy. Daughter 2: age 6, healthy. Ethnicity reported: Ashkenazi Jewish (maternal and paternal, though paternal biological ancestry unconfirmed due to adoption).",
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d3",
+    "type": "flowsheet",
+    "title": "Vitals and Visit Metadata",
+    "author": "Telehealth platform auto-capture",
+    "date": "today",
+    "table": {
+     "columns": [
+      "Field",
+      "Value"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Visit type",
+        "Video telehealth, genetic counseling intake"
+       ]
+      },
+      {
+       "cells": [
+        "Patient location",
+        "Brooklyn, NY (home)"
+       ]
+      },
+      {
+       "cells": [
+        "Interpreter needed",
+        "No"
+       ]
+      },
+      {
+       "cells": [
+        "Consent for visit recording",
+        "Declined"
+       ]
+      }
+     ]
+    },
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d4",
+    "type": "lab_report",
+    "title": "Hereditary Cancer Multi-Gene Panel Report",
+    "author": "Genomics Reference Laboratory",
+    "date": "3 weeks after sample collection",
+    "table": {
+     "columns": [
+      "Gene",
+      "Result",
+      "Classification",
+      "Reference range/Interpretation"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "BRCA1",
+        "c.68_69delAG (p.Glu23Valfs)",
+        "Pathogenic",
+        "Variant classified pathogenic; associated with hereditary breast and ovarian cancer syndrome"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "BRCA2",
+        "No pathogenic variant detected",
+        "Negative",
+        "Normal range of variants for this gene; benign/no reportable finding"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "TP53",
+        "No pathogenic variant detected",
+        "Negative",
+        "Normal range of variants for this gene; benign/no reportable finding"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "PALB2",
+        "No pathogenic variant detected",
+        "Negative",
+        "Normal range of variants for this gene; benign/no reportable finding"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "MLH1/MSH2/MSH6/PMS2",
+        "No pathogenic variant detected",
+        "Negative",
+        "Normal range of variants for these genes; benign/no reportable finding"
+       ],
+       "flag": ""
+      }
+     ]
+    },
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d5",
+    "type": "other",
+    "title": "GINA / State Insurance Protections Patient Handout",
+    "author": "Genetic counseling department patient education materials",
+    "date": "today",
+    "body": "The Genetic Information Nondiscrimination Act (GINA, 2008) prohibits health insurers and employers (with 15+ employees) from using genetic test results or family history to deny coverage, set premiums, or make hiring/firing decisions. GINA does NOT apply to life insurance, disability insurance, or long-term care insurance - these companies may legally request and use genetic test results in underwriting decisions in most states. Patients considering genetic testing may wish to secure life/disability insurance before testing if that is a concern.",
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d6",
+    "type": "chart",
+    "title": "Family Cancer Diagnosis Ages - Maternal Line",
+    "author": "Genetic counseling pedigree summary",
+    "date": "today",
+    "chart": {
+     "kind": "bar",
+     "xLabel": "Family member",
+     "yLabel": "Age at cancer diagnosis (years)",
+     "series": [
+      {
+       "name": "Age at diagnosis",
+       "points": [
+        {
+         "x": "Mother (breast)",
+         "y": 44
+        },
+        {
+         "x": "Maternal aunt (ovarian)",
+         "y": 58
+        },
+        {
+         "x": "Maternal grandfather (prostate)",
+         "y": 62
+        }
+       ]
+      }
+     ]
+    },
+    "release": {
+     "when": "start"
+    }
+   }
+  ],
+  "chartAtStart": [
+   {
+    "label": "Reason for visit",
+    "value": "Pre-test genetic counseling for hereditary breast/ovarian cancer risk, referred by gynecology"
+   },
+   {
+    "label": "Problem list",
+    "value": "No active medical problems; family history of breast cancer, ovarian cancer, prostate cancer"
+   },
+   {
+    "label": "Medications",
+    "value": "None"
+   },
+   {
+    "label": "Allergies",
+    "value": "No known drug allergies"
+   },
+   {
+    "label": "Last vitals",
+    "value": "Not applicable - genetic counseling visit"
+   },
+   {
+    "label": "Immunizations",
+    "value": "Up to date per PCP record"
+   },
+   {
+    "label": "Care team",
+    "value": "PCP: Dr. R. Osei; Gynecologist: Dr. A. Chen (referring provider)"
+   },
+   {
+    "label": "Code status",
+    "value": "Not applicable"
+   }
+  ],
+  "difficulty": 3,
+  "encounterType": "pre-test genetic counseling (hereditary cancer risk assessment)",
+  "facts": [
+   {
+    "id": "f1",
+    "category": "chief_complaint",
+    "topic": "reason for visit",
+    "chart": "Patient presents requesting BRCA testing after gynecology referral given maternal family history of breast and ovarian cancer.",
+    "says": "My doctor sent me here because of my mom's breast cancer. I just want the BRCA test, like, today if possible.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f2",
+    "category": "hpi",
+    "topic": "mother's diagnosis",
+    "chart": "Mother diagnosed with breast cancer at age 44, died at age 51.",
+    "says": "My mom was diagnosed when she was 44. She fought it for years but she passed away when she was 51.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f3",
+    "category": "family",
+    "topic": "maternal aunt history",
+    "chart": "Maternal aunt diagnosed with ovarian cancer at age 58, currently living.",
+    "says": "My aunt - my mom's sister - had ovarian cancer. She was 58 when they found it. She's doing okay now, in remission.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f4",
+    "category": "family",
+    "topic": "maternal grandfather history",
+    "chart": "Maternal grandfather diagnosed with prostate cancer in his sixties, now age 79.",
+    "says": "My grandfather - my mom's dad - had prostate cancer, I think he was in his sixties. He's 79 now and doing fine.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f5",
+    "category": "family",
+    "topic": "paternal side history",
+    "chart": "Father's biological family history unknown; father was adopted as an infant.",
+    "says": "My dad's side is a total blank - he was adopted as a baby, so we have no idea about his biological family's health history.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f6",
+    "category": "family",
+    "topic": "siblings' health",
+    "chart": "Sister age 35 and brother age 41, both without personal cancer history.",
+    "says": "I have a younger sister, she's 35, and an older brother, 41. Neither of them has had cancer.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f7",
+    "category": "family",
+    "topic": "children's health",
+    "chart": "Two daughters, ages 6 and 9, both healthy.",
+    "says": "I have two daughters, 9 and 6. They're both healthy, thank God.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f8",
+    "category": "other",
+    "topic": "ancestry background",
+    "chart": "Patient reports Ashkenazi Jewish ancestry on maternal side; paternal biological ancestry unknown due to adoption.",
+    "says": "We're Ashkenazi Jewish on my mom's side. My dad's side - well, like I said, we don't know since he was adopted, but his adoptive family raised him Jewish too if that matters.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f9",
+    "category": "pmh",
+    "topic": "personal cancer history",
+    "chart": "No personal history of cancer.",
+    "says": "I've never had cancer myself, no.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f10",
+    "category": "hpi",
+    "topic": "testing expectations",
+    "chart": "Patient's primary goal is rapid BRCA1/2 testing; frames it as 'the BRCA test.'",
+    "says": "I've read a lot about this - I just need the BRCA test, right? That's the one that matters for my family.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f11",
+    "category": "hpi",
+    "topic": "assumptions about positive result",
+    "chart": "Patient assumes a positive BRCA result would mean she needs an immediate mastectomy.",
+    "says": "If it comes back positive, I'm assuming I'd just go ahead and get a mastectomy right away, right? Better safe than sorry.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f12",
+    "category": "family",
+    "topic": "family testing history",
+    "chart": "No family member has undergone genetic testing to date.",
+    "says": "Nobody in my family has ever actually gotten tested. It's always just been assumed it runs in the family.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f13",
+    "category": "psychosocial",
+    "topic": "sister's wishes about results",
+    "chart": "Patient's sister has explicitly stated she does not want to know her own genetic risk status and asked patient not to disclose results to her.",
+    "says": "Honestly, my sister told me she doesn't want to know any of this. She said if I get tested, please don't even tell her the results.",
+    "tier": "reluctant",
+    "importance": "critical"
+   },
+   {
+    "id": "f14",
+    "category": "psychosocial",
+    "topic": "motivation for testing",
+    "chart": "Patient reports strong fear of dying young like her mother as primary motivator for seeking testing.",
+    "says": "I guess I'm just scared I'm going to end up like my mom. She was gone by 51. My daughters need me.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f15",
+    "category": "ros",
+    "topic": "personal breast symptoms",
+    "chart": "Denies any breast lumps, nipple discharge, or skin changes.",
+    "says": "No, I haven't noticed any lumps or anything weird with my breasts.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f16",
+    "category": "ros",
+    "topic": "gynecologic symptoms",
+    "chart": "Denies abnormal vaginal bleeding, pelvic pain, or bloating.",
+    "says": "No unusual bleeding or pelvic pain, nothing like that.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f17",
+    "category": "psychosocial",
+    "topic": "insurance concerns",
+    "chart": "Patient has not previously considered implications of genetic testing for life or disability insurance.",
+    "says": "Wait, insurance? I hadn't even thought about that. I just figured my health insurance situation was the only thing to worry about.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f18",
+    "category": "psychosocial",
+    "topic": "understanding of inheritance",
+    "chart": "Patient initially frames genetic risk as relevant only to herself, not recognizing implications for siblings and children.",
+    "says": "I mean, this is really about me finding out my own risk, right? I don't think my kids need to worry about any of this for a long time.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f19",
+    "category": "social",
+    "topic": "occupation",
+    "chart": "Works as a freelance journalist.",
+    "says": "I'm a freelance journalist, so I do a ton of research - which is maybe part of why I've been reading everything I can find about this.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f20",
+    "category": "social",
+    "topic": "residence",
+    "chart": "Lives in Brooklyn, New York.",
+    "says": "I live in Brooklyn, been here about ten years now.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f21",
+    "category": "family",
+    "topic": "grandmother's health",
+    "chart": "Maternal grandmother has no cancer history, living, age 81.",
+    "says": "My grandmother - mom's mom - she's 81 and has never had cancer, knock on wood.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f22",
+    "category": "family",
+    "topic": "paternal grandparents' ethnicity",
+    "chart": "Patient reports her father's adoptive family identified as Ashkenazi Jewish, but this does not reflect biological ancestry.",
+    "says": "The family that adopted my dad was Jewish too, Ashkenazi actually, but I know that doesn't tell us anything about his real biological background.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f23",
+    "category": "psychosocial",
+    "topic": "VUS awareness",
+    "chart": "Patient was unaware that genetic test results can come back as a variant of uncertain significance rather than clearly positive or negative.",
+    "says": "Wait, there's a result that's neither positive nor negative? I didn't know that was even a thing.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f24",
+    "category": "psychosocial",
+    "topic": "testing children",
+    "chart": "Patient initially wonders whether her daughters, ages 6 and 9, should be tested now.",
+    "says": "Should I just get my girls tested too, so we know early and can get ahead of it?",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f25",
+    "category": "hpi",
+    "topic": "timeline pressure",
+    "chart": "Patient reports wanting results quickly due to upcoming work travel and desire to plan.",
+    "says": "I've got a big reporting trip coming up in a couple months, so if I could get this sorted before then, that'd be great.",
+    "tier": "initial",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f26",
+    "category": "psychosocial",
+    "topic": "emotional state regarding mother's death",
+    "chart": "Patient reports lingering grief and anxiety related to her mother's death from breast cancer.",
+    "says": "It's been thirteen years and I still think about her every single day. Some days this all just brings it right back.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f27",
+    "category": "social",
+    "topic": "support system",
+    "chart": "Patient reports husband is supportive and aware of the visit; discusses decisions with him.",
+    "says": "My husband knows I'm doing this, he's been really supportive through all of it.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f28",
+    "category": "other",
+    "topic": "screening history",
+    "chart": "Patient reports she has never had a mammogram or breast MRI.",
+    "says": "I haven't actually had a mammogram yet - I guess I thought I was too young, or that this appointment would come first.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f29",
+    "category": "psychosocial",
+    "topic": "relationship with sister",
+    "chart": "Patient reports close relationship with sister despite differing views on testing.",
+    "says": "My sister and I are really close otherwise - this is honestly the only thing we don't see eye to eye on.",
+    "tier": "reluctant",
+    "importance": "minor"
+   },
+   {
+    "id": "f30",
+    "category": "hpi",
+    "topic": "source of information",
+    "chart": "Patient reports researching hereditary cancer extensively online and through news articles prior to visit.",
+    "says": "Being a journalist, I went down a rabbit hole reading medical journal articles and news pieces about BRCA before this call.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f31",
+    "category": "psychosocial",
+    "topic": "decision-making readiness",
+    "chart": "Patient initially unsure whether she is prepared to receive a positive result, acknowledges needing to think it through.",
+    "says": "Honestly, when you ask it that way... I don't know if I've really thought through what I'd do if it came back positive.",
+    "tier": "hidden",
+    "importance": "important"
+   },
+   {
+    "id": "f32",
+    "category": "family",
+    "topic": "other cancers in family",
+    "chart": "Denies any history of pancreatic cancer, melanoma, or male breast cancer in the family.",
+    "says": "No, nobody's had pancreatic cancer or melanoma or anything like that that I know of, and no men in the family with breast cancer.",
+    "tier": "discoverable",
+    "importance": "minor"
+   }
+  ],
+  "mismatches": [
+   {
+    "id": "m1",
+    "factId": "f18",
+    "artifactId": "d2",
+    "patientClaim": "Patient initially believes genetic testing is relevant mainly to herself and that her children do not need to think about this for a long time.",
+    "recordEvidence": "The family history intake form (d2) and pedigree (a2) document an autosomal dominant pattern with first-degree relatives (daughters) each having a 50% chance of inheriting a pathogenic variant if one is found, meaning the implications extend immediately to her children's future risk and screening planning, not just to the patient herself.",
+    "teachingPoint": "Hereditary cancer syndromes are autosomal dominant; a counselor must correct the misconception that genetic risk is individual rather than familial, and clarify the 50% transmission risk to first-degree relatives including minor children, even though testing of asymptomatic minors for adult-onset conditions is deferred."
+   },
+   {
+    "id": "m2",
+    "factId": "f11",
+    "artifactId": "d4",
+    "patientClaim": "Patient assumes that if her BRCA test is positive, she will need to proceed directly to mastectomy right away.",
+    "recordEvidence": "When the panel result (d4) returns showing a pathogenic BRCA1 variant, the result itself does not specify or mandate any particular management; risk-reducing surgery is one of several options (alongside enhanced surveillance and chemoprevention) to be discussed with a breast/gyn oncology specialist, not an automatic or immediate next step dictated by the lab report.",
+    "teachingPoint": "A positive hereditary cancer result informs risk but does not prescribe a single mandatory intervention; management decisions are individualized, made collaboratively with oncology specialists, and are not urgent same-day actions despite the emotional pull toward immediate certainty."
+   }
+  ],
+  "objectives": [
+   {
+    "id": "o1",
+    "text": "Construct an accurate three-generation pedigree capturing cancer diagnoses, ages of onset, and ancestry, including gaps due to adoption, and use it to determine whether the family meets testing criteria.",
+    "factIds": [
+     "f2",
+     "f3",
+     "f4",
+     "f5",
+     "f8"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o2",
+    "text": "Explain autosomal dominant inheritance and correct the patient's misconception that genetic risk and testing implications are individual rather than familial, including 50% transmission risk to siblings and children.",
+    "factIds": [
+     "f18",
+     "f6",
+     "f7"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o3",
+    "text": "Counsel on the range of possible test results, including a variant of uncertain significance, and correct the assumption that a positive result mandates immediate mastectomy.",
+    "factIds": [
+     "f11",
+     "f23"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o4",
+    "text": "Discuss the scope and limits of GINA protections, including the gap for life, disability, and long-term care insurance, prompting the patient to consider timing of insurance applications relative to testing.",
+    "factIds": [
+     "f17"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o5",
+    "text": "Elicit and respect family dynamics around genetic risk disclosure, including a sister who does not wish to know her status, while discussing appropriate cascade testing recommendations for relatives, including deferring testing of asymptomatic minor daughters.",
+    "factIds": [
+     "f13",
+     "f24",
+     "f29"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o6",
+    "text": "Disclose and interpret a returned hereditary cancer panel result accurately, distinguishing the pathogenic BRCA1 finding from the negative results on other panel genes, and outline appropriate next steps and referrals within scope of practice.",
+    "factIds": [
+     "f9",
+     "f12"
+    ],
+    "actionIds": []
+   }
+  ],
+  "patient": {
+   "name": "Rebecca Levy",
+   "age": 38,
+   "sex": "female",
+   "pronouns": "she/her",
+   "ethnicity": "Ashkenazi Jewish",
+   "occupation": "Freelance journalist",
+   "language": "English",
+   "appearance": "A woman in her late thirties with shoulder-length dark hair pulled back, wearing a casual cardigan, seated at a cluttered desk with bookshelves visible behind her in what looks like a home office. She leans toward the camera when speaking, speaks quickly, and has a notebook open beside her laptop with handwritten questions, her expression alternating between composed and visibly tense around her eyes."
+  },
+  "persona": {
+   "personality": "Quick-thinking, articulate, and intellectually engaged; uses research and preparation as a way of managing anxiety.",
+   "communicationStyle": "Direct and fast-talking, asks pointed follow-up questions, sometimes interrupts with things she has already read, but softens and slows down when the conversation touches on her mother's death or her sister.",
+   "healthLiteracy": "high",
+   "emotionalState": "Underlying anxiety and grief masked by composure and intellectualization; becomes more vulnerable when asked directly about fear or family conflict.",
+   "background": "Rebecca has worked as a freelance journalist covering health and science topics for several years, which has made her comfortable reading primary literature but also prone to overconfidence about what she has learned online. She and her husband live in Brooklyn with their two daughters; she talks to her father occasionally but is closer with her mother's side of the family that remains, especially her aunt. She has structured much of her adult life around staying active and health-conscious after watching her mother's illness.",
+   "speechExamples": [
+    "Okay, I've read the NCCN guidelines, so I know I probably qualify for testing, but I want to hear it from you.",
+    "Sorry, I know I'm talking fast - this is just a lot, even though I've prepared for it.",
+    "If this comes back positive, I'm not messing around, I'll just get the surgery.",
+    "My sister and I don't always agree on this stuff, but it hasn't come between us... yet.",
+    "Can we talk about what happens with my girls? That's honestly the part that scares me most."
+   ],
+   "concerns": [
+    "Wants to know her own risk and act on it quickly",
+    "Worried about repeating her mother's early death",
+    "Unsure how to navigate her sister's wish not to know",
+    "Has not fully considered implications for her young daughters",
+    "Unaware of life/disability insurance discrimination gap in GINA",
+    "Assumes a positive result dictates an immediate, specific surgical plan"
+   ]
+  },
+  "scenario": {
+   "studentBrief": "You are a genetic counseling student conducting a telehealth pre-test counseling visit with Rebecca Levy, a 38-year-old woman referred by her gynecologist because of a family history of breast and ovarian cancer. She is requesting BRCA testing. Review the referral and intake history before the call. Your tasks are to build an accurate pedigree, assess whether she meets criteria for hereditary cancer testing, and provide informed-consent-level counseling before any sample is sent.",
+   "chiefComplaint": "Request for BRCA1/2 testing given maternal family history of early breast cancer and ovarian cancer",
+   "openingLine": "Hi, thanks for seeing me - my doctor sent me here because of my mom's breast cancer history. I've done a lot of reading and I just want to get the BRCA test, honestly as soon as possible.",
+   "tasks": [
+    "Elicit and document a complete three-generation family history and construct a pedigree, noting ancestry and gaps (e.g., adoption)",
+    "Determine and explain whether the family history meets criteria for hereditary cancer genetic testing and which test (single-gene vs. multi-gene panel) is appropriate",
+    "Assess and correct misconceptions about what a positive, negative, or uncertain (VUS) result would mean, including correcting the assumption that a positive result mandates immediate mastectomy",
+    "Counsel on implications for first-degree relatives (siblings and daughters), including cascade testing recommendations and the limits of testing minors, while respecting the sister's stated wish not to know",
+    "Discuss the scope of GINA protections and its gap for life/disability insurance, and support an informed decision about proceeding with testing"
+   ],
+   "timeLimitMin": 25
+  },
+  "summary": "This case centers on a 38-year-old Ashkenazi Jewish woman with a strong maternal family history of early-onset breast cancer and ovarian cancer who presents wanting rapid BRCA testing without having considered the broader implications of a result. It teaches genetic counseling students to build an accurate pedigree despite informational gaps (paternal adoption), correct common misconceptions about test outcomes and management, address family dynamics around a relative who does not want to know her risk, and counsel on the real scope and limits of legal protections against genetic discrimination.",
+  "specialty": "Genetic Counseling - Hereditary Cancer Risk",
+  "setting": "Telehealth video visit, patient at home in Brooklyn, NY",
+  "answerKey": {
+   "primaryProblem": "Hereditary breast and ovarian cancer risk assessment in an Ashkenazi Jewish woman with a first-degree relative diagnosed with breast cancer at 44 and a second-degree relative with ovarian cancer at 58, meeting NCCN criteria for germline genetic testing with a multi-gene hereditary cancer panel (not single-gene BRCA testing alone).",
+   "differential": [
+    "Hereditary breast and ovarian cancer syndrome (BRCA1/2-related)",
+    "Other hereditary cancer predisposition syndrome captured on multi-gene panel (e.g., PALB2, TP53, Lynch syndrome genes) given incomplete paternal history",
+    "Sporadic (non-hereditary) clustering of cancers in the family, though less likely given early age of onset and Ashkenazi ancestry increasing prior probability of a founder BRCA variant"
+   ],
+   "keyFindings": [
+    "First-degree relative (mother) with breast cancer diagnosed at age 44, died at 51",
+    "Second-degree relative (maternal aunt) with ovarian cancer diagnosed at 58",
+    "Ashkenazi Jewish ancestry increasing prior probability of a BRCA founder mutation",
+    "Paternal family history uninformative due to adoption",
+    "No prior genetic testing anywhere in the family",
+    "Patient has significant misconceptions: assumes result is individual rather than familial, assumes positive result mandates immediate mastectomy, unaware of VUS possibility, unaware of GINA's insurance gap",
+    "Family conflict: sister has explicitly declined to know her own genetic risk status"
+   ],
+   "plan": [
+    "Recommend germline multi-gene hereditary cancer panel (including BRCA1/2) rather than BRCA-only testing, given Ashkenazi ancestry and incomplete paternal history, obtained via informed consent and at-home sample collection kit",
+    "Provide pre-test counseling covering possible outcomes (positive, negative, VUS) and that management after a positive result is individualized and not a same-day decision; refer to breast/gyn oncology for management planning if result is positive",
+    "Counsel on autosomal dominant inheritance and 50% transmission risk to each sibling and each daughter; recommend cascade testing be offered to adult first-degree relatives (sister, brother) after disclosure, and defer testing of daughters (ages 6 and 9) until adulthood since this is an adult-onset condition with no indicated pediatric screening change",
+    "Explicitly respect and document the sister's stated wish not to know her own risk; discuss strategies for respecting her autonomy while leaving the door open for future testing on her own terms",
+    "Review GINA protections and their limits (no coverage for life, disability, or long-term care insurance) and suggest the patient consider securing such policies before testing if that is a priority for her",
+    "Refer patient for baseline breast imaging per age/risk guidelines through her gynecologist/primary care, as this falls outside genetic counseling scope",
+    "Document informed consent discussion and obtain explicit consent prior to sending the sample"
+   ],
+   "redFlags": [
+    "Early age of onset breast cancer in a first-degree relative (<45 years) combined with Ashkenazi ancestry substantially raises prior probability of a pathogenic variant and should prompt urgency in offering testing, though not same-day surgical decision-making",
+    "Patient's assumption that a positive result mandates immediate mastectomy without specialist input could lead to premature or uninformed decisions if not corrected before testing",
+    "Unaddressed sister refusal could create future family conflict or missed opportunity for cascade testing if not revisited sensitively over time"
+   ],
+   "educationPoints": [
+    "Ashkenazi Jewish ancestry substantially increases the prior probability of specific BRCA1/2 founder mutations and supports use of a broader multi-gene panel rather than single-gene testing when the family history also suggests other possible hereditary syndromes",
+    "A genetic test result is not solely about the individual tested; because hereditary cancer syndromes are autosomal dominant, results have direct 50% risk implications for first-degree relatives, including minor children, which should be discussed before testing",
+    "A variant of uncertain significance (VUS) is a distinct, non-actionable result category that should not be equated with a positive or negative result and does not currently change clinical management",
+    "GINA protects against genetic discrimination in health insurance and employment but explicitly does not extend to life, disability, or long-term care insurance, which is an important and frequently overlooked consideration before testing",
+    "Testing of asymptomatic minors for adult-onset hereditary cancer syndromes is generally deferred until adulthood, as there is no indicated change in pediatric management and it removes the child's future autonomy to decide",
+    "Respecting a relative's stated wish not to know their genetic risk is an important application of autonomy in genetic counseling, even when it creates tension with another family member's wish to share information"
+   ]
+  },
+  "title": "Pre-Test Hereditary Breast/Ovarian Cancer Counseling in a 38-Year-Old Ashkenazi Jewish Woman",
+  "professions": [
+   "genetic-counseling"
+  ],
+  "knowledge": [],
+  "rubricId": "default",
+  "variants": []
+ }
+}

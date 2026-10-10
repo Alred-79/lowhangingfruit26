@@ -165,7 +165,17 @@ export function runRuleChecks(p: CaseProfile, rubricIds?: string[]): Issue[] {
     if (d.table) {
       const n = d.table.columns.length;
       const off = d.table.rows.findIndex((r) => r.cells.length !== n);
-      if (off >= 0) add({ severity: "low", section: "artifacts", where, title: `A table row in "${d.title}" does not match the columns`, why: `Row ${off + 1} has ${d.table.rows[off].cells.length} cells but the table has ${n} columns.` });
+      const flagCol = n > 1 && /^flags?$/i.test(d.table.columns[n - 1].trim()) && d.table.rows.every((r) => r.cells.length === n - 1);
+      if (flagCol)
+        add({
+          severity: "low",
+          section: "artifacts",
+          where,
+          title: `"${d.title}" has a Flag column with no cells`,
+          why: "High and low flags are stored per row and drawn automatically, so this extra column shows up empty next to the real one.",
+          fix: { summary: "Remove the empty Flag column", ops: [{ op: "set", path: `artifacts.${d.id}.table.columns`, value: d.table.columns.slice(0, n - 1) }] },
+        });
+      else if (off >= 0) add({ severity: "low", section: "artifacts", where, title: `A table row in "${d.title}" does not match the columns`, why: `Row ${off + 1} has ${d.table.rows[off].cells.length} cells but the table has ${n} columns.` });
     }
   }
 

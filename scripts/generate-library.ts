@@ -4,13 +4,22 @@
  *
  * Run:  npx tsx --env-file=.env.local scripts/generate-library.ts [filter]
  *   filter: optional substring of the output file name, e.g. "cardiology" or "pediatrics-"
- *   CONCURRENCY=3 to change parallelism.
+ *   CONCURRENCY=3 to change parallelism. REVERSE=1 to start from the end of the list (for a second process).
  * To regenerate a case, delete its file in data/seed/cases and run again.
+ *
+ *   --repair   do not generate; re-run the repair pass (below) over the files already on disk.
+ *
+ * Repair pass, applied to every generated case: the model sometimes omits header fields (title,
+ * summary, specialty, setting, encounterType, concerns), points a mismatch at an action id instead
+ * of an artifact id, or labels an action with a kind the role does not use. Those are fixed here;
+ * a case with no actions is rejected so that it is generated again.
  */
 import fs from "node:fs";
 import path from "node:path";
-import { generateCase } from "../src/lib/casegen";
-import { professions } from "../src/lib/professions";
+import { generateCase, normalizeCase } from "../src/lib/casegen";
+import { chatJSON, MODELS } from "../src/lib/llm";
+import { profession, professions } from "../src/lib/professions";
+import type { ActionKind, CaseProfile } from "../src/lib/types";
 
 interface Spec {
   /** Profession id from data/professions.json. */
@@ -195,6 +204,8 @@ export const LIBRARY: Spec[] = [
 const COMMON_GUIDANCE = `This case is for a public seed library shown to health-professions faculty, labelled "AI-drafted, not faculty-reviewed". Hold a high bar:
 - Write 28-36 facts. The first fact must be category "chief_complaint" with tier "initial". Include pertinent negatives and 1-2 distractors.
 - Use only the action kinds listed for this role, and only actions this role would really perform or request in a video visit. Every examination must be feasible remotely (camera inspection, patient- or caregiver-performed manoeuvres, home devices) or be a review of a result already in the record.
+- Actions are things the learner does or reviews: an examination, a measurement, a named screening instrument, a record or result review. Never write an action that is just an interview question ("Ask about...", "Explore..."), and never let an action result or a record that exists before the visit reveal a reluctant or hidden fact: those are disclosed only by the patient in conversation. chartAtStart must not give away the diagnosis or anything the patient has told nobody.
+- Work out every score, grade and stage you state (CTCAE, CHA2DS2-VASc, Wells, CKD stage, BMI, percent weight change) and make sure it matches the numbers given.
 - Laboratory artifacts use a table with the columns Test, Result, Units, Reference range; every row has a unit and a reference range, and abnormal rows carry an H or L flag. Doses, units and values must be plausible and agree everywhere (facts, actions, artifacts, chartAtStart, answer key).
 - Every artifact released on an action or fact must name an existing id in release.ref. Include at least one trend chart when the description has values over time.
 - Every objective must list at least two fact ids and/or action ids that demonstrate it.
@@ -205,6 +216,83 @@ const COMMON_GUIDANCE = `This case is for a public seed library shown to health-
 - patient.appearance describes what is visible in the video frame (apparent age, build, hair, clothing, room, lighting, affect) in two or three sentences.`;
 
 const PROXY_GUIDANCE = `The patient is a young child. patient.name, age, sex and the clinical record describe the child. The person speaking on the call is the parent named in the description: write persona, every fact's "says", the opening line and speech examples in the parent's voice, talking about their child. patient.appearance describes the parent and child as seen together on camera. Mention in studentBrief that the history is given by the parent.`;
+
+/** Closest allowed kind when the model used one that is not in the role's actionKinds. */
+const KIND_FALLBACK: Record<ActionKind, ActionKind[]> = {
+  assessment: ["test", "exam", "record"],
+  exam: ["assessment", "test"],
+  test: ["assessment", "exam", "lab"],
+  lab: ["test", "record"],
+  imaging: ["record", "test"],
+  vitals: ["assessment", "exam", "test"],
+  record: ["assessment"],
+  procedure: ["assessment", "exam", "test"],
+};
+const blank = (v: unknown) => typeof v !== "string" || !v.trim();
+
+/** Fixes the recurring structural slips. Returns the list of things changed (empty = untouched). */
+export async function repair(c: CaseProfile, s: Spec): Promise<string[]> {
+  const changed: string[] = [];
+  const role = profession(s.p);
+  if (!c.actions?.length) throw new Error("case has no actions");
+
+  for (const a of c.actions) {
+    if (role.actionKinds.includes(a.kind)) continue;
+    const to = (KIND_FALLBACK[a.kind] || []).find((k) => role.actionKinds.includes(k)) || role.actionKinds[0];
+    changed.push(`action ${a.id} kind ${a.kind} -> ${to}`);
+    a.kind = to;
+  }
+
+  const artifactIds = new Set(c.artifacts.map((d) => d.id));
+  const factIds = new Set(c.facts.map((f) => f.id));
+  for (const m of c.mismatches || []) {
+    if (m.artifactId && !artifactIds.has(m.artifactId)) {
+      // Evidence that lives in an action result: use that action's document if it has one.
+      const viaAction = c.actions.find((a) => a.id === m.artifactId)?.artifactIds?.[0];
+      changed.push(`mismatch ${m.id} artifactId ${m.artifactId} -> ${viaAction || "(removed)"}`);
+      if (viaAction) m.artifactId = viaAction;
+      else delete m.artifactId;
+    }
+    if (m.factId && !factIds.has(m.factId)) {
+      changed.push(`mismatch ${m.id} factId ${m.factId} removed`);
+      delete m.factId;
+    }
+  }
+
+  const header = ["title", "summary", "specialty", "setting", "encounterType"] as const;
+  const missing: string[] = header.filter((k) => blank(c[k]));
+  if (!c.persona.concerns?.length) missing.push("concerns");
+  if (missing.length) {
+    const filled = await chatJSON<Record<string, unknown>>({
+      model: MODELS.chat,
+      maxTokens: 1200,
+      system: "You complete missing header fields of a telehealth simulation case for health-professions students. Be accurate to the case given, concise and plain. Do not invent clinical details that are not in the case.",
+      schema: {
+        type: "object",
+        required: missing,
+        properties: {
+          title: { type: "string", description: "Faculty-facing title, e.g. 'New-onset exertional chest pain in a 58-year-old smoker'. No patient name." },
+          summary: { type: "string", description: "2-3 sentence faculty-facing summary of the case and what it teaches" },
+          specialty: { type: "string", description: "Clinical specialty or discipline, 1-4 words" },
+          setting: { type: "string", description: "Starts with 'Telehealth video visit;' then where the patient is calling from" },
+          encounterType: { type: "string", description: "e.g. diagnostic interview, counseling, follow-up, medication review, discharge teaching" },
+          concerns: { type: "array", items: { type: "string" }, description: "3-4 worries or questions this patient may raise themselves, in the patient's words, using only what the case already contains" },
+        },
+      },
+      messages: [
+        {
+          role: "user",
+          text: `Fill in only these fields: ${missing.join(", ")}.\n\nLEARNER ROLE: ${role.name}\nCASE DESCRIPTION: ${s.description}\n\nPATIENT: ${JSON.stringify(c.patient)}\nAPPEARANCE AND SETTING ON CAMERA: ${c.patient.appearance}\nSTUDENT BRIEF: ${c.scenario.studentBrief}\nTASKS: ${c.scenario.tasks.join("; ")}\nEMOTIONAL STATE: ${c.persona.emotionalState}\nPRIMARY PROBLEM: ${c.answerKey.primaryProblem}\nOBJECTIVES: ${c.objectives.map((o) => o.text).join("; ")}`,
+        },
+      ],
+    });
+    for (const k of header) if (blank(c[k]) && !blank(filled[k])) c[k] = String(filled[k]).trim();
+    if (!c.persona.concerns?.length && Array.isArray(filled.concerns)) c.persona.concerns = filled.concerns.map(String);
+    changed.push("filled " + missing.join(", "));
+  }
+  normalizeCase(c);
+  return changed;
+}
 
 const AUTH_ERR = /ExpiredToken|UnrecognizedClient|InvalidSignature|InvalidClientTokenId|AccessDenied|CredentialsProvider|security token|not authorized/i;
 const outDir = path.join("data", "seed", "cases");
@@ -226,8 +314,9 @@ async function one(s: Spec): Promise<"ok" | "skip" | "fail"> {
         level: s.level,
         guidance: COMMON_GUIDANCE + (s.proxy ? "\n" + PROXY_GUIDANCE : ""),
       });
+      const fixes = await repair(c, s);
       fs.writeFileSync(file, JSON.stringify({ origin: "ai_draft", reviewed: false, profile: c }, null, 1));
-      console.log(`ok    ${path.basename(file)}  ${c.facts.length} facts, ${c.actions.length} actions, ${c.artifacts.length} docs, ${secs(t)}${attempt > 1 ? " (retry)" : ""}`);
+      console.log(`ok    ${path.basename(file)}  ${c.facts.length} facts, ${c.actions.length} actions, ${c.artifacts.length} docs, ${secs(t)}${attempt > 1 ? " (retry)" : ""}${fixes.length ? "  repaired: " + fixes.join("; ") : ""}`);
       return "ok";
     } catch (e) {
       const err = e as { name?: string; message?: string };
@@ -252,8 +341,12 @@ async function main() {
   const uncovered = [...known].filter((id) => !LIBRARY.some((s) => s.p === id));
   if (uncovered.length) console.warn("Roles with no case in the list:", uncovered.join(", "));
 
-  const filter = (process.argv[2] || "").toLowerCase();
+  const argv = process.argv.slice(2);
+  const filter = (argv.find((a) => !a.startsWith("--")) || "").toLowerCase();
   const queue = LIBRARY.filter((s) => path.basename(fileFor(s)).includes(filter));
+  // REVERSE=1 walks the list from the end, so a second process can work towards the first.
+  if (process.env.REVERSE) queue.reverse();
+  if (argv.includes("--repair")) return repairExisting(queue);
   const concurrency = Math.max(1, Number(process.env.CONCURRENCY) || 5);
   const counts = { ok: 0, skip: 0, fail: 0 };
   const failed: string[] = [];
@@ -278,6 +371,24 @@ async function main() {
     process.exit(2);
   }
   if (failed.length) process.exit(1);
+}
+
+/** Re-runs the repair pass over files already on disk; a case that cannot be repaired is reported, not deleted. */
+async function repairExisting(queue: Spec[]) {
+  for (const s of queue) {
+    const file = fileFor(s);
+    if (!fs.existsSync(file)) continue;
+    const data = JSON.parse(fs.readFileSync(file, "utf8")) as { profile: CaseProfile };
+    try {
+      const fixes = await repair(data.profile, s);
+      if (fixes.length) {
+        fs.writeFileSync(file, JSON.stringify(data, null, 1));
+        console.log(`repaired ${path.basename(file)}: ${fixes.join("; ")}`);
+      }
+    } catch (e) {
+      console.error(`CANNOT REPAIR ${path.basename(file)}: ${(e as Error).message} (delete the file and run again to regenerate)`);
+    }
+  }
 }
 
 if (process.argv[1] && /generate-library/.test(process.argv[1])) main();

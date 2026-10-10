@@ -118,7 +118,7 @@ function cleanAction(v: unknown): ClinicalAction {
     id: str(a.id),
     kind: oneOf(a.kind, KIND_IDS, "exam"),
     name: str(a.name),
-    aliases: strs(a.aliases),
+    aliases: strs(a.aliases).map((x) => x.trim()).filter(Boolean),
     result: str(a.result),
     importance: oneOf(a.importance, IMPORTANCE, "important"),
     artifactIds: strs(a.artifactIds),
@@ -353,4 +353,27 @@ export function releaseLabel(p: CaseProfile, d: Artifact): string {
   }
   const f = p.facts.find((x) => x.id === d.release.ref);
   return f ? `After the patient discloses: ${f.topic}` : "After a fact that no longer exists";
+}
+
+/**
+ * Format clean-up for freshly generated or imported cases. The chart renderer draws its own Flag column
+ * from each row's `flag`, so a literal "Flag" column in the data would show twice.
+ */
+export function tidyTables(p: CaseProfile): CaseProfile {
+  return {
+    ...p,
+    artifacts: p.artifacts.map((d) => {
+      const t = d.table;
+      if (!t || !t.columns.length) return d;
+      const last = t.columns.length - 1;
+      if (!/^flags?$/i.test(t.columns[last].trim())) return d;
+      const rows = t.rows.map((r) => {
+        if (r.cells.length <= last) return r;
+        const v = (r.cells[last] || "").trim().toUpperCase();
+        const flag = r.flag || (v === "H" || v === "HIGH" ? "H" : v === "L" || v === "LOW" ? "L" : v === "A" || v === "ABNORMAL" ? "A" : "");
+        return { cells: r.cells.slice(0, last), flag: flag as "H" | "L" | "A" | "" };
+      });
+      return { ...d, table: { columns: t.columns.slice(0, last), rows } };
+    }),
+  };
 }

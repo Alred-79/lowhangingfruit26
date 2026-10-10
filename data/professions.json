@@ -56,7 +56,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "SOAP",
     "wrapUp": [
@@ -93,7 +94,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "SOAP",
     "wrapUp": [
@@ -129,7 +131,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "ED note (focused HPI, MDM, disposition)",
     "wrapUp": [
@@ -170,7 +173,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "SOAP (with growth, development and immunization status)",
     "wrapUp": [
@@ -207,7 +211,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "Consult note (SOAP)",
     "wrapUp": [
@@ -281,7 +286,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "Consult note (SOAP)",
     "wrapUp": [
@@ -397,7 +403,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "SOAP (with obstetric and gynecologic history)",
     "wrapUp": [
@@ -645,7 +652,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "Consult note (SOAP)",
     "wrapUp": [
@@ -682,7 +690,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "Consult note (SOAP)",
     "wrapUp": [
@@ -718,7 +727,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "Consult note (SOAP)",
     "wrapUp": [
@@ -755,7 +765,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "Consult note (SOAP)",
     "wrapUp": [
@@ -792,7 +803,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "Consult note (SOAP)",
     "wrapUp": [
@@ -828,7 +840,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "Consult note (SOAP)",
     "wrapUp": [
@@ -938,7 +951,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "Consult note (SOAP)",
     "wrapUp": [
@@ -1082,7 +1096,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "SOAP",
     "wrapUp": [
@@ -1119,7 +1134,8 @@
       "lab",
       "imaging",
       "test",
-      "record"
+      "record",
+      "assessment"
     ],
     "noteFormat": "SOAP",
     "wrapUp": [

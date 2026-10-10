@@ -2,7 +2,7 @@ import { apiUser } from "@/lib/auth";
 import { normalizeCase } from "@/lib/casegen";
 import { bad } from "@/lib/http";
 import { professions } from "@/lib/professions";
-import { blankProfile, sanitizeProfile } from "@/lib/studio/profile";
+import { blankProfile, sanitizeProfile, tidyTables } from "@/lib/studio/profile";
 import { insertCase, listCases } from "@/lib/studio/store";
 
 /** The faculty member's library. */
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
   const raw = wrapped ? src.profile : src;
   if (!Array.isArray(raw.facts) || !raw.patient || !raw.scenario) return bad("That file is not a Rounds patient profile: it needs at least patient, scenario and facts.");
   try {
-    const profile = normalizeCase(sanitizeProfile(raw));
+    const profile = tidyTables(sanitizeProfile(normalizeCase(sanitizeProfile(raw))));
     if (!profile.title) profile.title = `${profile.patient.name || "Imported patient"}`;
     // An imported file keeps its AI-draft label unless it says a faculty member reviewed it.
     const origin = wrapped && src.origin === "ai_draft" ? "ai_draft" : "faculty";

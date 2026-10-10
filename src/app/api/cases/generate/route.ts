@@ -4,7 +4,7 @@ import { bad, longJson } from "@/lib/http";
 import { professions } from "@/lib/professions";
 import { fillHeader } from "@/lib/studio/ai";
 import { runRuleChecks } from "@/lib/studio/checks";
-import { sanitizeProfile } from "@/lib/studio/profile";
+import { sanitizeProfile, tidyTables } from "@/lib/studio/profile";
 import { insertCase } from "@/lib/studio/store";
 import { uploadRow } from "@/lib/studio/uploads";
 
@@ -58,7 +58,7 @@ export async function POST(req: Request) {
     const started = Date.now();
     const drafted = await generateCase({ professionId: b.professionId, description: description.slice(0, 30000), level, guidance: guidance || undefined });
     if (level) drafted.difficulty = level;
-    const profile = sanitizeProfile(await fillHeader(sanitizeProfile(drafted), level));
+    const profile = tidyTables(sanitizeProfile(await fillHeader(sanitizeProfile(drafted), level)));
     if (upload?.text) profile.knowledge.push({ id: "k1", title: upload.filename.replace(/\.[a-z0-9]+$/i, ""), text: upload.text.slice(0, 60000) });
     const id = insertCase({ ownerId: user.id, origin: "ai_draft", profile });
     const rules = runRuleChecks(profile);

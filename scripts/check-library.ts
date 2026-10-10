@@ -5,7 +5,15 @@
  *   filter   substring of the file name
  *   --all    also list cases with no problems
  *   --json   machine-readable output
+ *   --generated   skip the faculty sample-*.json files
  * Exit code 1 when any case has an ERROR-level problem.
+ *
+ * Clinical review (needs Bedrock credentials, so add --env-file=.env.local):
+ *   --review        ask the smart model to audit each case as a clinician-educator would and write
+ *                   data/seed/cases/.review/<case>.json: a list of issues, each with an exact find/replace.
+ *                   Skips cases that already have a review file (delete it to re-review).
+ *   --apply         apply the high and medium severity find/replace edits from those review files.
+ * The review is an aid for a human reader, not a substitute: read the issue list before applying.
  *
  * ERROR = the case should be fixed or regenerated before it is shown. WARN = worth a look.
  */
@@ -13,6 +21,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { FACT_CATEGORIES } from "../src/lib/types";
 import type { CaseProfile, Profession } from "../src/lib/types";
+import { chatJSON, MODELS } from "../src/lib/llm";
 
 const dir = path.join("data", "seed", "cases");
 const roles: Profession[] = JSON.parse(fs.readFileSync(path.join("data", "professions.json"), "utf8"));
@@ -139,10 +148,12 @@ function check(file: string): Report {
       const cols = d.table.columns || [];
       if (!cols.length) E(`artifact ${d.id}: table has no columns`);
       for (const [i, r] of (d.table.rows || []).entries()) {
-        if ((r.cells || []).length !== cols.length) {
-          E(`artifact ${d.id} "${d.title}": row ${i + 1} has ${(r.cells || []).length} cells for ${cols.length} columns`);
-          break;
-        }
+        const n = (r.cells || []).length;
+        if (n === cols.length) continue;
+        // A trailing "Flag" column with the flag carried on the row instead of in a cell still renders sensibly.
+        if (n === cols.length - 1 && /flag/i.test(cols[cols.length - 1])) W(`artifact ${d.id} "${d.title}": has a Flag column but no flag cells (flag is on the row)`);
+        else E(`artifact ${d.id} "${d.title}": row ${i + 1} has ${n} cells for ${cols.length} columns`);
+        break;
       }
       if (d.type === "lab_report") {
         const col = (re: RegExp) => cols.findIndex((x) => re.test(x));
@@ -217,7 +228,171 @@ function check(file: string): Report {
   return { file, role: roleId || "?", errors, warnings, stats };
 }
 
-const files = fs.readdirSync(dir).filter((f) => f.endsWith(".json") && f.toLowerCase().includes(filter)).sort();
+const files = fs
+  .readdirSync(dir)
+  .filter((f) => f.endsWith(".json") && f.toLowerCase().includes(filter) && !(args.includes("--generated") && f.startsWith("sample-")))
+  .sort();
+
+// ---------------------------------------------------------------- clinical review
+const reviewDir = process.env.REVIEW_DIR || path.join(dir, ".review");
+
+interface Issue {
+  severity: "high" | "medium" | "low";
+  kind: string;
+  where: string;
+  problem: string;
+  find?: string;
+  replace?: string;
+  actionId?: string;
+  newResult?: string;
+  deleteAction?: boolean;
+}
+
+const REVIEW_SYSTEM = `You are a senior clinician-educator and simulation director auditing an AI-drafted standardized-patient case before it is shown to health-professions faculty. You are exacting and you verify rather than assume. Check, in this order:
+1. Clinical accuracy: drug doses and frequencies, units, reference ranges, H/L flags, score and grade calculations (work each one out: CTCAE grades, CHA2DS2-VASc, Wells, eGFR stage, BMI, percent weight change, pack-years, cumulative doses), guideline statements, contraindications, and whether the answer-key plan is safe and current.
+2. Internal consistency: the same value, dose, date, age or name must agree across facts, actions, artifacts, chartAtStart, scenario, mismatches and the answer key. Timelines must add up.
+3. Leakage: chartAtStart, the student brief, the opening line, artifacts released at "start", and fact topic labels must not give away reluctant/hidden facts or the diagnosis the learner is meant to work out. A record cannot contain something the patient has told nobody. Actions are things the learner does or reviews (examination, measurement, a named screening instrument, a record or result review); an action that is only an interview question ("Ask about...", "Explore...") and whose result hands over a reluctant or hidden fact bypasses the interview and is a leak: give a newResult that reports only what an observation or instrument would show, or set deleteAction when the action is nothing but a question.
+4. Scope and feasibility: every action must be something this role does, and feasible in a video visit. The answer key must stay within the role's scope of practice.
+5. Dignity: stereotyped, caricatured or disrespectful portrayal; dialect spellings; culture, income, faith, body size or immigration status used as the cause of the problem.
+6. Mismatches: the stated record evidence must really be present in the named artifact or an action result.
+Report only real problems you are confident about. Do not report style preferences, and do not ask for more content. If the case is sound, return an empty list.`;
+
+const REVIEW_SCHEMA = {
+  type: "object",
+  required: ["verdict", "issues"],
+  properties: {
+    verdict: { type: "string", enum: ["sound", "minor_fixes", "major_fixes", "regenerate"], description: "regenerate only if the scenario itself is implausible, unsafe or offensive and cannot be fixed by text edits" },
+    issues: {
+      type: "array",
+      description: "At most 12, most serious first",
+      items: {
+        type: "object",
+        required: ["severity", "kind", "where", "problem"],
+        properties: {
+          severity: { type: "string", enum: ["high", "medium", "low"], description: "high = clinically wrong, unsafe, offensive, or gives the case away; medium = inconsistency a faculty reader would notice; low = cosmetic" },
+          kind: { type: "string", enum: ["accuracy", "consistency", "leakage", "scope", "feasibility", "dignity", "mismatch", "other"] },
+          where: { type: "string", description: "e.g. 'action a8 result', 'answerKey.plan[2]', 'artifact d3 row Potassium'" },
+          problem: { type: "string", description: "What is wrong and what is correct, in one or two sentences" },
+          find: { type: "string", description: "A verbatim substring of ONE string value in the case JSON (copy it exactly, 12-200 characters, no JSON punctuation around it) that should be replaced. Omit if the fix is not a simple text replacement." },
+          replace: { type: "string", description: "The corrected text to put in place of `find`. Same register and length as the original." },
+          actionId: { type: "string", description: "For a problem with a whole action result: the action id, with newResult or deleteAction" },
+          newResult: { type: "string", description: "Full replacement text for that action's result" },
+          deleteAction: { type: "boolean", description: "true to remove that action (only for actions that are purely interview questions)" },
+        },
+      },
+    },
+  },
+};
+
+async function reviewOne(file: string): Promise<{ verdict: string; issues: Issue[] }> {
+  const c = (JSON.parse(fs.readFileSync(path.join(dir, file), "utf8")) as { profile: CaseProfile }).profile;
+  const role = roles.find((r) => r.id === c.professions?.[0]);
+  const { version: _v, knowledge: _k, variants: _x, rubricId: _r, ...slim } = c;
+  return chatJSON<{ verdict: string; issues: Issue[] }>({
+    model: MODELS.smart,
+    system: REVIEW_SYSTEM,
+    maxTokens: 6000,
+    schema: REVIEW_SCHEMA as unknown as Record<string, unknown>,
+    messages: [
+      {
+        role: "user",
+        text: `LEARNER ROLE: ${role?.name} (${role?.roleTitle})\nROLE SCOPE: ${role?.scope}\nACTION KINDS THIS ROLE USES: ${role?.actionKinds.join(", ")}\nEvery encounter is a telehealth video visit. Fact tiers: initial = volunteered; discoverable = shared when asked; reluctant / hidden = shared only with rapport and a direct, sensitive question.\n\nCASE JSON:\n${JSON.stringify(slim)}`,
+      },
+    ],
+  });
+}
+
+/** Replaces `find` in every string value of the profile. Returns the number of replacements. */
+function replaceEverywhere(node: unknown, find: string, replace: string): number {
+  let n = 0;
+  const walk = (v: unknown, set: (x: string) => void) => {
+    if (typeof v === "string") {
+      if (v.includes(find)) {
+        n += v.split(find).length - 1;
+        set(v.split(find).join(replace));
+      }
+    } else if (Array.isArray(v)) v.forEach((x, i) => walk(x, (y) => (v[i] = y)));
+    else if (v && typeof v === "object") for (const k of Object.keys(v)) walk((v as Record<string, unknown>)[k], (y) => ((v as Record<string, unknown>)[k] = y));
+  };
+  walk(node, () => {});
+  return n;
+}
+
+async function reviewAll() {
+  fs.mkdirSync(reviewDir, { recursive: true });
+  const todo = files.filter((f) => !fs.existsSync(path.join(reviewDir, f)));
+  console.log(`${todo.length} cases to review (${files.length - todo.length} already reviewed)`);
+  let next = 0;
+  let stop = false;
+  await Promise.all(
+    Array.from({ length: Number(process.env.CONCURRENCY) || 6 }, async () => {
+      while (next < todo.length && !stop) {
+        const f = todo[next++];
+        const t = Date.now();
+        for (let attempt = 1; attempt <= 2; attempt++) {
+          try {
+            const r = await reviewOne(f);
+            r.issues = Array.isArray(r.issues) ? r.issues : [];
+            fs.writeFileSync(path.join(reviewDir, f), JSON.stringify(r, null, 1));
+            const by = (s: string) => r.issues.filter((i) => i.severity === s).length;
+            console.log(`${r.verdict.padEnd(12)} ${f}  high ${by("high")}, medium ${by("medium")}, low ${by("low")}  ${Math.round((Date.now() - t) / 1000)}s`);
+            break;
+          } catch (e) {
+            const msg = `${(e as Error).name}: ${(e as Error).message}`;
+            console.error(`error ${f} attempt ${attempt}: ${msg.slice(0, 200)}`);
+            if (/ExpiredToken|UnrecognizedClient|AccessDenied|security token/i.test(msg)) stop = true;
+          }
+        }
+      }
+    }),
+  );
+  if (stop) console.error("STOPPED: credentials problem.");
+}
+
+function applyAll() {
+  let applied = 0;
+  let skipped = 0;
+  for (const f of files) {
+    const rf = path.join(reviewDir, f);
+    if (!fs.existsSync(rf)) continue;
+    const r = JSON.parse(fs.readFileSync(rf, "utf8")) as { issues: (Issue & { applied?: number })[] };
+    const data = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { profile: CaseProfile };
+    let touched = false;
+    for (const i of r.issues) {
+      if (i.applied !== undefined || i.severity === "low") continue;
+      let n = 0;
+      const c = data.profile;
+      const act = i.actionId ? c.actions.find((a) => a.id === i.actionId) : undefined;
+      if (act && i.deleteAction) {
+        // Keep the case playable: never delete below 8 actions, and never orphan an objective or artifact.
+        const orphans = c.objectives.some((o) => o.factIds.length + o.actionIds.filter((x) => x !== act.id).length === 0) || c.artifacts.some((d) => d.release.when === "action" && d.release.ref === act.id);
+        if (c.actions.length > 8 && !orphans) {
+          c.actions = c.actions.filter((a) => a.id !== act.id);
+          for (const o of c.objectives) o.actionIds = o.actionIds.filter((x) => x !== act.id);
+          n = 1;
+        }
+      } else if (act && i.newResult) {
+        act.result = i.newResult;
+        n = 1;
+      } else if (i.find && i.replace !== undefined && i.find !== i.replace && i.find.length >= 8) {
+        n = replaceEverywhere(c, i.find, i.replace);
+      } else if (!i.find && !act) continue; // advisory only
+      i.applied = n;
+      if (n) {
+        applied++;
+        touched = true;
+      } else {
+        skipped++;
+        console.log(`not applied  ${f}  [${i.severity}] ${i.where}: ${i.problem.slice(0, 160)}`);
+      }
+    }
+    if (touched) fs.writeFileSync(path.join(dir, f), JSON.stringify(data, null, 1));
+    fs.writeFileSync(rf, JSON.stringify(r, null, 1));
+  }
+  console.log(`${applied} edits applied, ${skipped} could not be located (fix those by hand).`);
+}
+
+function structural() {
 const reports = files.map(check);
 
 // Coverage: every role should have at least one case.
@@ -239,3 +414,8 @@ if (asJson) {
   if (!filter) console.log(uncovered.length ? `roles with no case (${uncovered.length}): ${uncovered.join(", ")}` : `every one of the ${roles.length} roles has at least one case.`);
 }
 process.exit(reports.some((r) => r.errors.length) ? 1 : 0);
+}
+
+if (args.includes("--review")) reviewAll().then(() => process.exit(0));
+else if (args.includes("--apply")) applyAll();
+else structural();

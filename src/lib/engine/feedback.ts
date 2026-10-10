@@ -200,9 +200,7 @@ ${role.wrapUp.map((f) => `${f.label}:\n${wrap[f.id] || "(left blank)"}`).join("\
   const scored = domains.filter((d) => d.score !== null);
   const total = scored.reduce((s, d) => s + (d.score as number), 0);
   const max = scored.reduce((s, d) => s + d.max, 0);
-  // 4-point domains bottom out at 1, so rescale to a true 0-100%.
-  const floor = rubric.type === "domain4" ? scored.length : 0;
-  const percent = max > floor ? Math.round(((total - floor) / (max - floor)) * 100) : 0;
+  const percent = max ? Math.round((total / max) * 100) : 0;
   const reviewReasons = defs.filter((d) => d.review && domains.find((x) => x.key === d.key)?.score === 1).map((d) => `Scored 1 in ${d.name}`);
   if (raw.safetyConcerns?.length) reviewReasons.push("Safety concern flagged");
 

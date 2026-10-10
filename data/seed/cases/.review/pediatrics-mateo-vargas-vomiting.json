@@ -1,0 +1,51 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart.Medications",
+   "problem": "chartAtStart states 'Medications: None prescribed (see note: OTC medication given at home, disclosed on history)' which directly reveals the reluctant fact (loperamide given) before the learner even starts the interview, bypassing the need to sensitively elicit f14. This should be a neutral baseline value like 'None prescribed' with no hint of OTC medication use.",
+   "find": "None prescribed (see note: OTC medication given at home, disclosed on history)",
+   "replace": "None prescribed"
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a12 result / artifact d3",
+   "problem": "Action a12 is named 'Review medication list/history' (a record review), but its result and the linked artifact d3 directly state the mother gave adult loperamide — this is a reluctant fact (f14, tier: reluctant) that per the fact tier should only be revealed through sensitive direct questioning, not simply by reviewing a chart. A medication list artifact would not autonomously contain a caregiver-disclosed, undocumented home dosing event unless the caregiver told someone; this bypasses the interview requirement for a reluctant fact.",
+   "actionId": "a12",
+   "newResult": "No chronic medications listed. No prior allergy documented. No OTC medications documented on the existing medication list; caregiver should be asked directly about any over-the-counter products given at home."
+  },
+  {
+   "severity": "medium",
+   "kind": "leakage",
+   "where": "artifact d3 (Medication List)",
+   "problem": "The medication list artifact itself documents the loperamide dose as if it were already charted, which contradicts the fact being 'reluctant' (tier) and only elicited via sensitive questioning. This artifact should not contain the reluctant disclosure; it undermines the intended teaching point about needing to directly and sensitively ask.",
+   "find": "Loperamide (adult OTC, from home medicine cabinet)",
+   "replace": "No OTC medications currently documented"
+  },
+  {
+   "severity": "medium",
+   "kind": "accuracy",
+   "where": "answerKey.plan[1] and action a2 weight loss calc",
+   "problem": "Weight loss calculation: (10.4-10.1)/10.4 = 0.0288 = ~2.9%, which is correctly stated as mild/early dehydration per guidelines (3-5% is more classically 'mild' by some scales, but 2.9% is close to the mild dehydration threshold used in many references like WHO <5% mild). This is reasonably accurate, so no change needed here — but flagged for review consistency check only, no actual error found upon recompute.",
+   "severity_note": "no change required; included for audit transparency"
+  },
+  {
+   "severity": "low",
+   "kind": "consistency",
+   "where": "a1 vitals vs d1 flowsheet",
+   "problem": "Action a1 result states 'Temp 38.0°C' while fact f6 says 'maximum fever was 38.1C' — these are consistent (38.0 now vs 38.1 max), not an actual error. No fix needed; included for completeness.",
+   "severity_note": "no change required"
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "action a14 (Stool studies)",
+   "problem": "Action a14 'Stool studies (if sent)' is listed as a lab action but its result states stool studies are 'not indicated/not performed' — this is essentially a non-action that reports a clinical judgment conclusion rather than any actual observation or test result, which is a bit of a leak/mismatch (it preemptively tells the learner the diagnosis/plan rationale ('course is consistent with typical viral gastroenteritis') rather than being a true lab action result).",
+   "actionId": "a14",
+   "newResult": "Stool studies not sent at this visit; no stool sample available for testing via telehealth."
+  }
+ ]
+}

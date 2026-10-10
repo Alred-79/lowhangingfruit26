@@ -61,11 +61,12 @@ export async function saveUpload(file: File, ownerId: string): Promise<{ id: str
   const filename = path.basename(file.name).slice(0, 200);
   // The stored path is relative to UPLOAD_DIR so the directory can move between environments.
   run("INSERT INTO uploads (id, owner_id, filename, mime, path, text) VALUES (?,?,?,?,?,?)", id, ownerId, filename, mime, stored, text);
-  return { id, url: `/api/uploads/${id}`, filename, mime, text, note };
+  // The extension is part of the URL so viewers can tell a PDF from an image without a request.
+  return { id, url: `/api/uploads/${id}${ext}`, filename, mime, text, note };
 }
 
 export function readUpload(id: string): { row: UploadRow; data: Buffer } | null {
-  const row = get<UploadRow>("SELECT * FROM uploads WHERE id = ?", id);
+  const row = get<UploadRow>("SELECT * FROM uploads WHERE id = ?", id.replace(/\.[a-z0-9]+$/i, ""));
   if (!row) return null;
   const file = path.join(UPLOAD_DIR, path.basename(row.path));
   if (!fs.existsSync(file)) return null;

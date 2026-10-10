@@ -64,6 +64,7 @@ Rules:
 - Record only what the clinician actually said in the visit or wrote in the note: assessments, interpretations, recommendations, referrals, care-plan items, patient goals or preferences the clinician elicited that are not already listed, and explicitly: uncertainties, unanswered or open questions, and disagreements with an earlier entry (including when what the patient says does not match the record or a colleague's entry).
 - kind "disagreement" needs relates_to = the entry it disagrees with and relation "contradicts". kind "follow_up" is for when the clinician checked an earlier entry and it was confirmed or updated; give relates_to and relation.
 - An entry that answers an earlier unanswered question uses relation "answers"; one that settles an earlier uncertainty or dispute uses "resolves".
+- The simulated patient sometimes says clinical things that are not in the case file. The lists of recorded entries are the only confirmed clinical facts. If a clinician's conclusion depends on a symptom or event that appears only in the patient's words and not in any recorded entry, either leave it out or record it as "uncertain" and say in the text that it is not confirmed in the record.
 - Status: "established" only for something the clinician states firmly; "uncertain" for hedged or provisional judgements; "open_question" for things nobody knows yet; "disputed" for disagreements.
 - Every entry needs a quote copied exactly from the stated turn or from the note. If you cannot quote it, do not record it.
 - "uses": list every turn where the clinician's question or statement clearly draws on a specific earlier entry. Be strict: the link must be recognisable from the words used.
@@ -271,7 +272,7 @@ ${note.trim() || "(none)"}`,
     const target = prior.find((e) => e.id === u.entryId)!;
     if (learned.length) {
       for (const e of learned) addLink(runId, e.id, u.entryId, "uses", stage.id, ev);
-    } else if (!created.some((c) => c.relatesTo === u.entryId) && !now.some((e) => e.kind === "follow_up" && e.text.includes(target.text.slice(0, 60)))) {
+    } else if (target.stageOrder > 0 && !created.some((c) => c.relatesTo === u.entryId) && !now.some((e) => e.kind === "follow_up" && e.text.includes(target.text.slice(0, 60)))) {
       addEntry({ ...base, kind: "follow_up", text: `Asked about earlier information ("${target.text.slice(0, 160)}"); nothing new was disclosed in reply.`, status: "established", source: "clinician", evidence: ev, relatesTo: u.entryId, relation: "uses" });
     }
     stats.uses++;

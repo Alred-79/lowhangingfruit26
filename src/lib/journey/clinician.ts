@@ -16,7 +16,7 @@ export type StageEvent =
   | { type: "idle" }
   | { type: "error"; stageId?: string; message: string };
 
-export const AI_TURNS = Math.max(3, Math.min(10, Number(process.env.JOURNEY_AI_TURNS) || 6));
+export const AI_TURNS = Math.max(3, Math.min(10, Number(process.env.JOURNEY_AI_TURNS) || 5));
 
 /** Creates the engine encounter that carries a stage, with continuity from every earlier stage. */
 export function createStageEncounter(run: LoadedRun, stage: Stage, opts: { ai: boolean; visitorName: string }): string {
@@ -45,7 +45,7 @@ const TURN_SCHEMA = {
   required: ["say", "uses", "order"],
   properties: {
     say: { type: "string", description: "What you say to the patient now: 1-3 sentences, plain language, one question at a time." },
-    uses: { type: "array", items: { type: "string" }, description: "Labels (e.g. E4) of entries from the record or EARLIER encounters that this question directly follows up on. Empty when it does not." },
+    uses: { type: "array", items: { type: "string" }, description: "At most 2 labels (e.g. E4) of entries from the record or EARLIER encounters that specifically prompted this question. Empty for general questions, introductions and your closing summary." },
     order: { type: "string", description: "Optional: name ONE check from AVAILABLE CHECKS to review or perform now. Empty string for none." },
   },
 };
@@ -59,7 +59,7 @@ WHO YOU ARE
 ${personaBrief(cl)}
 
 THIS VISIT
-Encounter ${stage.order} of ${run.stages.length} in ${p.name}'s care journey (${stage.simTime}${stage.visitLabel ? `, ${stage.visitLabel}` : ""}). Your role here: ${stage.roleTitle}.
+The patient: ${p.name}, ${p.age}, ${p.sex}. Encounter ${stage.order} of ${run.stages.length} in their care journey (${stage.simTime}${stage.visitLabel ? `, ${stage.visitLabel}` : ""}). Your role here: ${stage.roleTitle}.
 Your purpose: ${stage.focus}
 
 HOW TO WORK
@@ -67,6 +67,9 @@ HOW TO WORK
 - Read the shared record and the handoff first. Do not re-ask what is already on record. Follow up on it instead: when a colleague found something relevant to your role, say so to the patient ("Dr. Lee mentioned that...") and dig one level deeper. List those entries in "uses".
 - If what the patient tells you does not fit the record or a colleague's entry, ask about the mismatch directly and kindly.
 - Be warm and respectful. Explain why you ask before a sensitive question. No jargon without explanation. Ask one thing at a time.
+- Clinical facts are ONLY what is in the shared record and in CONFIRMED IN THIS VISIT. If the patient mentions something clinical that is not in those lists, treat it as unconfirmed: do not build on it, do not repeat it back as fact, and leave it out of your summary.
+- Ask open, non-leading questions. Do not suggest symptoms, events or history that are not on record ("you came in because of...", "you mentioned...") unless the record or the confirmed list says so.
+- Do not announce a diagnosis, admission or medication change to the patient. Your interpretation goes in your note to the team.
 - Never tell the patient a test value, dose or diagnosis that is not in the shared record or the results of this visit.
 - You may review or perform checks relevant to your role by naming one in "order" (at most three in the visit). Results come from the case file.
 - In your final exchange, summarise what you heard, say what you will pass on to the team, and close.`;
@@ -94,6 +97,11 @@ export async function runAiVisit(run: LoadedRun, stage: Stage, encounterId: stri
     const msgs = messagesOf(encounterId).filter((m) => m.speaker === "student" || m.speaker === "patient" || m.speaker === "system");
     const convo = msgs.map((m) => `${m.speaker === "student" ? "YOU" : m.speaker === "patient" ? "PATIENT" : "CHART"}: ${m.text}`).join("\n");
     const doneChecks = enc.c.actions.filter((a) => enc.state.actions[a.id]).map((a) => a.name);
+    // What the engine's ledger says has really been established in this visit, as opposed to anything the patient model merely said.
+    const confirmed = [
+      ...enc.c.facts.filter((f) => enc.state.disclosed[f.id] && enc.state.disclosed[f.id].how !== "record").map((f) => `- Patient reported: ${f.chart}`),
+      ...enc.c.actions.filter((a) => enc.state.actions[a.id]).map((a) => `- ${a.name}: ${a.result}`),
+    ];
     const out = await chatJSON<{ say: string; uses: string[]; order: string }>({
       model: MODELS.chat,
       system,
@@ -109,6 +117,9 @@ ${renderState(prior, run.stages, { aliases: toAlias })}
 ${handoff ? "HANDOFF YOU RECEIVED\n" + renderSbar(handoff) : "No handoff: you are the first professional in this journey."}
 ${inbox ? "\nMESSAGES FROM COLLEAGUES\n" + inbox : ""}
 
+CONFIRMED IN THIS VISIT (from the case file)
+${confirmed.join("\n") || "(nothing yet)"}
+
 AVAILABLE CHECKS (${3 - orders} left): ${orders >= 3 ? "none" : checks.filter((c) => !doneChecks.includes(c)).join("; ")}
 
 THIS VISIT SO FAR (exchange ${i} of ${AI_TURNS}${i === AI_TURNS ? ", your final one: summarise and close" : ""})
@@ -118,7 +129,7 @@ ${convo || "(not started. The patient has just joined the call.)"}`,
     });
     const say = (out.say || "").trim();
     if (!say) break;
-    const usedIds = [...new Set((out.uses || []).map(resolve).filter((x): x is string => !!x))];
+    const usedIds = i === AI_TURNS ? [] : [...new Set((out.uses || []).map(resolve).filter((x): x is string => !!x))].slice(0, 2);
     if (usedIds.length) declaredUses.push({ turn: i, entryIds: usedIds, quote: say });
     emit({ type: "clinician", stageId: stage.id, turn: i, text: say, uses: usedIds });
 
@@ -170,7 +181,7 @@ export async function writeNoteAndHandoff(run: LoadedRun, stage: Stage, encounte
   const mine = all.filter((e) => e.stageId === stage.id);
   const prior = all.filter((e) => e.stageOrder < stage.order);
   const { toAlias, resolve } = aliasing(all);
-  const msgs = messagesOf(encounterId).filter((m) => m.speaker === "student" || m.speaker === "patient" || m.speaker === "system");
+  void encounterId;
   const out = await chatJSON<Sbar & { note: string; cites: string[] }>({
     model: MODELS.chat,
     schema: WRAP_SCHEMA,
@@ -181,7 +192,7 @@ export async function writeNoteAndHandoff(run: LoadedRun, stage: Stage, encounte
 ${personaBrief(cl)}
 
 Rules:
-- Use only what is in the entries from your encounter and the earlier record. Do not introduce any value, dose, result or diagnosis that is not listed there.
+- Use only what is in the entries from your encounter and the earlier record. They are the complete, verified account of the visit. Do not introduce any symptom, value, dose, result, age or diagnosis that is not listed there, even if you believe it came up.
 - Keep findings (what the patient reported, what a check showed) separate from your interpretation, and label the interpretation as yours.
 - State plainly what you are unsure of, what does not fit, and what you could not find out.
 - The Recommendation must ask the receiving professional for specific things within their role.
@@ -189,16 +200,14 @@ Rules:
     messages: [
       {
         role: "user",
-        text: `YOUR ROLE IN THIS ENCOUNTER: ${stage.roleTitle}. Purpose: ${stage.focus}
+        text: `PATIENT: ${run.c.patient.name}, ${run.c.patient.age}, ${run.c.patient.sex}.
+YOUR ROLE IN THIS ENCOUNTER: ${stage.roleTitle}. Purpose: ${stage.focus}
 
 RECORD BEFORE YOUR VISIT (for reference)
 ${prior.map((e) => `- ${e.text}`).join("\n").slice(0, 3500)}
 
 ENTRIES FROM YOUR ENCOUNTER (cite these labels)
-${mine.map((e) => `[${toAlias.get(e.id)}] (${e.kind}, ${e.status}) ${e.text}`).join("\n") || "(nothing new was disclosed)"}
-
-YOUR VISIT TRANSCRIPT
-${msgs.map((m) => `${m.speaker === "student" ? "YOU" : m.speaker === "patient" ? "PATIENT" : "CHART"}: ${m.text}`).join("\n")}`,
+${mine.map((e) => `[${toAlias.get(e.id)}] (${e.kind}, ${e.status}) ${e.text}`).join("\n") || "(nothing new was disclosed)"}`,
       },
     ],
   });

@@ -97,7 +97,6 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
     })
     .filter((c) => c.attempts.length);
   const heldCount = mine.filter((m) => m.assignment_id && held.has(m.assignment_id)).length;
-  const totalAttempts = perCase.reduce((s, c) => s + c.attempts.length, 0);
   const weakest = profile.weakest ? nameOf(profile.weakest) : null;
 
   return (
@@ -118,7 +117,7 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Stat label="Next adaptive level" value={`${profile.level} ${LEVEL_NAMES[profile.level]}`} note={profile.sessions ? `Expected score about ${Math.round(profile.expectedAtLevel * 100)}%` : "Starting level for new students"} />
         <Stat label="Overall rating" value={String(Math.round(profile.overall))} note={`Level ${profile.level} plays at ${LEVEL_RATING[profile.level]}`} />
-        <Stat label="Scored visits" value={String(profile.sessions)} note={`In this role. ${totalAttempts} across all patients shown below`} />
+        <Stat label="Scored visits" value={String(profile.sessions)} note="In this role, counted toward your ratings" />
         <Stat label="Weakest domain" value={weakest ? weakest.split(/[,(]| and /)[0] : "–"} note={weakest || "Shown after your first scored visit"} />
       </div>
 
@@ -145,7 +144,7 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
           </Card>
           <Card>
             <CardHeader title="Rating over time" subtitle="Your rating after each scored visit, against the same level lines." />
-            <div className="p-4">{series.length > 0 ? <RatingHistory series={series} ticks={ticks} lo={1000} hi={1450} /> : <p className="text-sm text-slate-500">No history yet.</p>}</div>
+            <div className="p-4">{series.length > 0 ? <RatingHistory series={series} ticks={ticks} lo={950} hi={1450} /> : <p className="text-sm text-slate-500">No history yet.</p>}</div>
           </Card>
         </div>
       )}

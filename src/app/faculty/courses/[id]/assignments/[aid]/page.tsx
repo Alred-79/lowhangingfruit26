@@ -102,7 +102,7 @@ export default async function AssignmentPage({ params }: { params: Promise<{ id:
           <p className="px-4 py-6 text-sm text-slate-500">The class summary appears once the first visit has been scored. It shows which rubric domains are weakest and which findings students most often miss.</p>
         </Card>
       ) : (
-        <div className="grid gap-5 lg:grid-cols-2">
+        <div className="grid items-start gap-5 lg:grid-cols-2">
           <Card>
             <CardHeader title="Rubric domains, weakest first" subtitle={`Class average for each domain as a percentage of full marks, from each student's latest scored visit (${insights.scored} in total).`} />
             <div className="p-2">
@@ -127,7 +127,7 @@ export default async function AssignmentPage({ params }: { params: Promise<{ id:
               ) : (
                 <BarList
                   unit="Share of students who missed each finding"
-                  items={insights.missed.slice(0, 8).map((m) => ({
+                  items={insights.missed.slice(0, 6).map((m) => ({
                     key: m.key,
                     label: m.chart,
                     sub: multiCase ? m.caseTitle : `Topic: ${m.topic}`,
@@ -138,14 +138,14 @@ export default async function AssignmentPage({ params }: { params: Promise<{ id:
                   }))}
                 />
               )}
-              {insights.missed.length > 8 && <p className="px-2 pb-1 pt-2 text-xs text-slate-500">{insights.missed.length - 8} more findings were missed by fewer students.</p>}
+              {insights.missed.length > 6 && <p className="px-2 pb-1 pt-2 text-xs text-slate-500">{insights.missed.length - 6} more findings were missed by fewer students.</p>}
             </div>
             {insights.actionsMissed.length > 0 && (
               <div className="border-t border-slate-100 p-2">
                 <div className="px-2 pb-1 pt-2 text-xs font-medium text-slate-600">Exams and orders most often skipped</div>
                 <BarList
                   unit="Share of students who skipped each exam or order"
-                  items={insights.actionsMissed.slice(0, 5).map((m) => ({
+                  items={insights.actionsMissed.slice(0, 4).map((m) => ({
                     key: m.key,
                     label: m.name,
                     sub: multiCase ? m.caseTitle : undefined,
@@ -175,8 +175,8 @@ export default async function AssignmentPage({ params }: { params: Promise<{ id:
                   <th className="px-3 py-2 text-right font-medium">Best</th>
                   <th className="px-3 py-2 text-right font-medium">Latest</th>
                   {g.domainCols.map((d) => (
-                    <th key={d.key} className="w-20 min-w-[5rem] px-2 py-2 text-right font-medium leading-tight" title={d.name}>
-                      <span className="line-clamp-3">{d.name}</span>
+                    <th key={d.key} className="min-w-[6.5rem] px-2 py-2 text-right font-medium leading-tight">
+                      {d.name}
                     </th>
                   ))}
                   <th className="px-3 py-2 font-medium">Review</th>

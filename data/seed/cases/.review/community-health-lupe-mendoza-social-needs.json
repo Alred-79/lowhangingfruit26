@@ -1,0 +1,42 @@
+{
+ "verdict": "major_fixes",
+ "issues": [
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "chartAtStart Problem list",
+   "problem": "The problem list includes 'Peripheral neuropathy (not yet documented - pending)' at the start of the encounter, before the patient has disclosed foot symptoms. This leaks the hidden/reluctant finding (f13, a critical fact meant to be elicited via a7) directly in the chart the learner sees at the outset, bypassing the need to screen for it.",
+   "find": "Type 2 diabetes mellitus; Hypertension; Peripheral neuropathy (not yet documented - pending)",
+   "replace": "Type 2 diabetes mellitus; Hypertension"
+  },
+  {
+   "severity": "high",
+   "kind": "leakage",
+   "where": "action a7 result",
+   "problem": "Action a7 is named 'Screen for diabetic foot/neuropathy symptoms' and is listed as kind 'assessment', but its result directly hands over the hidden diagnosis-adjacent fact (bilateral nocturnal burning/tingling for months) purely through a question rather than an observable screening instrument result, and even uses the term 'diabetic' in the action name, naming the suspected diagnosis for the learner. Rename the action to a neutral symptom screen (e.g., 'Ask about foot sensation symptoms') and ensure it doesn't presuppose the diagnosis.",
+   "find": "Screen for diabetic foot/neuropathy symptoms",
+   "replace": "Ask about foot sensation symptoms"
+  },
+  {
+   "severity": "medium",
+   "kind": "scope",
+   "where": "action a7 result",
+   "problem": "The result text says 'CHW advises visual inspection and reporting to care team; this is outside CHW scope to assess clinically' which is a bit confusing/redundant with a8, and risks the CHW action result editorializing on scope rather than simply reporting the finding.",
+   "find": "CHW advises visual inspection and reporting to care team; this is outside CHW scope to assess clinically.",
+   "replace": "Patient has not yet had feet examined visually this visit."
+  },
+  {
+   "severity": "medium",
+   "kind": "consistency",
+   "where": "fact f8 vs mismatch m1 vs action a1/a3",
+   "problem": "f8 is tagged 'discoverable' (shared when asked) but its content (patient tells clinic she takes insulin as prescribed to avoid being scolded) is essentially the same disclosure as f9/f10 which are 'reluctant.' Telling a CHW that she lies to the clinic is arguably as sensitive as admitting the rationing itself, so tiering f8 as merely 'discoverable' while f9/f10 are 'reluctant' is inconsistent in sensitivity level.",
+   "problem_detail": ""
+  },
+  {
+   "severity": "low",
+   "kind": "other",
+   "where": "d7 Prior Clinic Visit Note date vs a3 result",
+   "problem": "a3 result states last in-clinic visit was '7 months ago' matching d7, and HbA1c values match; this is fine, no actual issue — but worth noting weight 192 lb at 7 months is never followed up with a current weight, leaving percent weight change objective implied by chart but never actually assessed in this role, which is appropriate for CHW scope, not an issue per se."
+  }
+ ]
+}

@@ -279,7 +279,7 @@ export default function AssignmentBuilder({
             </div>
             <div>
               <Label htmlFor="as-instructions">Instructions shown to students</Label>
-              <Textarea id="as-instructions" rows={3} value={instructions} onChange={(e) => setInstructions(e.target.value)} maxLength={4000} placeholder="What to focus on. Do not give away findings." />
+              <Textarea id="as-instructions" rows={4} value={instructions} onChange={(e) => setInstructions(e.target.value)} maxLength={4000} placeholder="What to focus on. Do not give away findings." />
             </div>
             <div className="max-w-xs">
               <Label htmlFor="as-due">Due (optional)</Label>

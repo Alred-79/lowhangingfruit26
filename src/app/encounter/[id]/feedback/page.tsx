@@ -153,7 +153,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
             <div className="h-full rounded-full bg-brand-500" style={{ width: `${f.percent}%` }} />
           </div>
           <p className="mt-2 text-xs text-slate-500">
-            {f.percent}% of the scale{f.domains.some((d) => d.score === null) ? `, ${f.domains.filter((d) => d.score === null).length} domain(s) not applicable` : ""}. A discussion aid, not a pass or fail grade.
+            {f.percent}%{f.domains.some((d) => d.score === null) ? `, ${f.domains.filter((d) => d.score === null).length} domain(s) not applicable` : ""}. A discussion aid, not a pass or fail grade.
           </p>
         </Card>
         <Card className="p-5 lg:col-span-2">

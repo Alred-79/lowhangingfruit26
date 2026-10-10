@@ -1,0 +1,423 @@
+{
+ "origin": "ai_draft",
+ "reviewed": false,
+ "profile": {
+  "version": 1,
+  "actions": [],
+  "answerKey": {
+   "primaryProblem": "Tubular adenoma with focal high-grade dysplasia, completely excised, margins negative, no invasive carcinoma - a precancerous (not cancerous) finding requiring routine surveillance.",
+   "differential": [
+    "Tubular adenoma with high-grade dysplasia (confirmed diagnosis)",
+    "Invasive adenocarcinoma (excluded - no invasion identified on complete sectioning)",
+    "Tubulovillous or villous adenoma (not applicable here - architecture reported as tubular)",
+    "Serrated polyp/sessile serrated lesion (not applicable - different morphology, not what was found)"
+   ],
+   "keyFindings": [
+    "14 mm pedunculated sigmoid polyp removed intact in one piece",
+    "Tubular adenoma architecture with focal (not extensive) high-grade dysplasia",
+    "Dysplasia confined to the mucosa; no invasion into submucosa or deeper layers",
+    "Stalk/resection margin negative for dysplasia",
+    "No lymphovascular invasion identified",
+    "Second pathologist concurrence on the diagnosis"
+   ],
+   "plan": [
+    "Explain pathology terms in plain language: adenoma = benign/precancerous polyp type; high-grade dysplasia = more abnormal-looking cells than low-grade, but still not cancer; focal = only in a small part of the polyp",
+    "Clarify that 'no invasive carcinoma' means the abnormal cells have not broken through the layer that would make this cancer",
+    "Explain negative margin means the removal appears complete at the base",
+    "State that standard guidelines support surveillance colonoscopy in 3 years for this finding, but final timing and any additional workup is determined by her gastroenterologist, factoring in her full history",
+    "Address her brother's polyp history as something to discuss further with gastroenterology/genetics if risk assessment changes",
+    "Explicitly defer scheduling, additional testing, and any treatment decisions to the gastroenterology team",
+    "Encourage her to bring written questions to her upcoming GI appointment and offer to answer any further pathology-specific questions before then"
+   ],
+   "redFlags": [
+    "Rectal bleeding, unintentional weight loss, or iron-deficiency anemia (not reported here; would warrant more urgent gastroenterology attention if present)",
+    "Finding of invasive carcinoma, positive margins, or lymphovascular invasion (not present in this report) would change management substantially and require earlier gastroenterology/surgical input"
+   ],
+   "educationPoints": [
+    "High-grade dysplasia is a description of cell appearance within a polyp, not a stage of cancer; it means the cells look more abnormal and have more potential to progress if left behind, not that cancer is already present",
+    "'Focal' means the finding was limited to part of the polyp on the slides examined, not throughout it",
+    "A negative margin and complete excision in one piece are reassuring features that reduce the chance that abnormal tissue was left behind",
+    "Surveillance intervals (e.g., 3 years) are based on established guidelines balancing the small risk of missed or recurrent polyps against the burden of repeat colonoscopy",
+    "Family history details (such as a sibling with polyps) can affect future risk assessment and screening intervals, but formal risk assessment is done by the gastroenterologist, not the pathologist",
+    "The pathologist's role is to accurately describe and diagnose the tissue; decisions about further testing, intervals, and treatment belong to the treating clinician"
+   ]
+  },
+  "artifactIds": [],
+  "mismatches": [
+   {
+    "id": "m1",
+    "factId": "f12",
+    "artifactId": "a7",
+    "patientClaim": "Renee believes her brother's polyps mean colon cancer runs strongly in her family and that this should have changed how urgently her case was handled.",
+    "recordEvidence": "Documented history notes only a brother with polyps in his 40s; there is no first-degree relative with colorectal cancer on record, and her case was managed as average-risk screening based on the information available at the time.",
+    "teachingPoint": "A relative with polyps is relevant family history worth discussing further, but it is not the same as a relative with colon cancer; accurate risk stratification requires clarifying exactly what was found in the relative and should be revisited with gastroenterology, not assumed to have been missed."
+   }
+  ],
+  "chartAtStart": [
+   {
+    "label": "Reason for visit",
+    "value": "Patient-requested pathology consultation to review and explain colon polyp biopsy report before gastroenterology follow-up"
+   },
+   {
+    "label": "Problem list",
+    "value": "Status post sigmoid colon polypectomy (8 days ago); hypothyroidism"
+   },
+   {
+    "label": "Medications",
+    "value": "Levothyroxine 75 mcg oral once daily; multivitamin 1 tablet oral once daily"
+   },
+   {
+    "label": "Allergies",
+    "value": "No known drug allergies"
+   },
+   {
+    "label": "Last vitals",
+    "value": "BP 118/76, HR 72, Temp 98.2 F, documented at colonoscopy visit 8 days ago"
+   },
+   {
+    "label": "Immunizations",
+    "value": "Up to date per chart"
+   },
+   {
+    "label": "Care team",
+    "value": "Dr. Patel (Gastroenterology), Pathology Department, Primary Care Provider"
+   },
+   {
+    "label": "Code status",
+    "value": "Full code"
+   }
+  ],
+  "difficulty": 2,
+  "encounterType": "pathology report explanation",
+  "facts": [
+   {
+    "id": "f1",
+    "category": "chief_complaint",
+    "topic": "reason for consult",
+    "chart": "Patient requests explanation of colon polyp pathology report before upcoming GI follow-up, concerned the finding means she has cancer.",
+    "says": "I got my polyp results on the online portal and it says 'high-grade dysplasia' and when I looked that up it said cancer, so I wanted to talk to someone before my GI appointment, which isn't for three more weeks.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f2",
+    "category": "hpi",
+    "topic": "understanding of report",
+    "chart": "Patient has read the full pathology report and specifically questions the term 'high-grade dysplasia.'",
+    "says": "The report says 'tubular adenoma with focal high-grade dysplasia.' What does that actually mean? Is that cancer or not?",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f3",
+    "category": "hpi",
+    "topic": "emotional response to report",
+    "chart": "Patient reports significant anxiety since reading the report, difficulty sleeping over the past week.",
+    "says": "Honestly I haven't slept great this past week. Every time I close my eyes I think about the word 'dysplasia.'",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f4",
+    "category": "hpi",
+    "topic": "colonoscopy indication",
+    "chart": "Colonoscopy was performed due to a positive stool-based screening test (FIT), not symptoms.",
+    "says": "I did one of those at-home stool tests my doctor sent me, and it came back positive, so they said I needed a colonoscopy.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f5",
+    "category": "hpi",
+    "topic": "symptoms before procedure",
+    "chart": "Denies rectal bleeding, abdominal pain, or weight loss prior to colonoscopy.",
+    "says": "I didn't have any blood in my stool or pain or anything like that. I felt completely fine, which is actually part of why this is so scary.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f6",
+    "category": "hpi",
+    "topic": "meaning of adenoma",
+    "chart": "Patient unclear whether 'adenoma' itself is a cancer term.",
+    "says": "Is 'adenoma' already a type of cancer, or is that different from the dysplasia part?",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f7",
+    "category": "hpi",
+    "topic": "polyp removal method",
+    "chart": "Patient recalls GI described removing the polyp whole during the procedure.",
+    "says": "The doctor said they got the whole thing out in one piece during the colonoscopy, snipped it off like a little mushroom, is what she called it.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f8",
+    "category": "hpi",
+    "topic": "margin question",
+    "chart": "Patient asks specifically what 'margin negative' means on her report.",
+    "says": "It also says the 'margin' was negative. Does that mean they got all of it, or could something be left behind?",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f9",
+    "category": "hpi",
+    "topic": "fear of cancer diagnosis",
+    "chart": "Patient explicitly states she believes she has been diagnosed with colon cancer based on her own reading.",
+    "says": "I guess what I really want to know is: do I have colon cancer? That's what it sounded like when I googled it.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f10",
+    "category": "hpi",
+    "topic": "next colonoscopy timing",
+    "chart": "Patient has heard she may need another colonoscopy in a few years and wants to understand why.",
+    "says": "My GI's office mentioned something about coming back in three years for another scope. Why so long if this dysplasia thing is high-grade?",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f11",
+    "category": "hpi",
+    "topic": "concern about recurrence",
+    "chart": "Patient worried that if cells were 'high-grade' they could already be spreading before the next colonoscopy.",
+    "says": "If the cells were already that abnormal, how do you know something isn't growing again right now?",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f12",
+    "category": "family",
+    "topic": "family polyp history",
+    "chart": "Brother diagnosed with colon polyps in his 40s; patient uncertain of further details.",
+    "says": "My older brother had polyps found in his forties too. Doesn't that mean cancer runs in my family and this should've been caught sooner or treated more aggressively?",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f13",
+    "category": "family",
+    "topic": "extended family cancer history",
+    "chart": "No known family history of colorectal cancer in parents; patient unsure about grandparents' history.",
+    "says": "My mom and dad never had colon cancer that I know of. I'm honestly not sure about my grandparents, we didn't talk about things like that growing up.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f14",
+    "category": "pmh",
+    "topic": "other health conditions",
+    "chart": "History of hypothyroidism, well controlled on levothyroxine.",
+    "says": "I have an underactive thyroid, I take a pill for it every morning, otherwise I'm pretty healthy.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f15",
+    "category": "medications",
+    "topic": "current medications",
+    "chart": "Takes levothyroxine 75 mcg daily and a multivitamin; no other prescription medications.",
+    "says": "Just my thyroid pill and a multivitamin, that's it.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f16",
+    "category": "allergies",
+    "topic": "drug allergies",
+    "chart": "No known drug allergies.",
+    "says": "No allergies that I know of.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f17",
+    "category": "social",
+    "topic": "occupation and schedule",
+    "chart": "Works as a hospital billing specialist; comfortable navigating medical paperwork but not clinical terminology.",
+    "says": "I work in medical billing at a hospital, so I'm used to reading charts and codes, just not the actual medical meaning behind them.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f18",
+    "category": "social",
+    "topic": "living situation",
+    "chart": "Lives in Atlanta; born in the UK, moved to the US as a young adult; has supportive spouse.",
+    "says": "I was actually born in the UK, moved here when I was in my twenties. My husband's been great through all this worrying.",
+    "tier": "initial",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f19",
+    "category": "substance",
+    "topic": "tobacco and alcohol use",
+    "chart": "Denies tobacco use; drinks alcohol socially, about 1-2 drinks per week.",
+    "says": "I don't smoke. Maybe a glass of wine once or twice a week, nothing heavy.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f20",
+    "category": "goals",
+    "topic": "next steps question",
+    "chart": "Patient asks whether she needs genetic testing or additional scans given the finding.",
+    "says": "Should I be getting some kind of genetic test, or a CT scan, or something else now because of this?",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f21",
+    "category": "goals",
+    "topic": "appointment timing concern",
+    "chart": "Patient wants to know if she should try to move up her gastroenterology appointment sooner than 3 weeks.",
+    "says": "Do you think I need to push to get in with my GI doctor sooner, or can I really wait the three weeks?",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f22",
+    "category": "hpi",
+    "topic": "number of polyps found",
+    "chart": "Only one polyp was identified and removed during the colonoscopy; no other polyps seen.",
+    "says": "They said it was just the one polyp, nothing else was found.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f23",
+    "category": "hpi",
+    "topic": "polyp location understanding",
+    "chart": "Patient understands polyp was in the lower part of the colon (sigmoid) but is unsure what that means for her risk.",
+    "says": "They said it was in the sigmoid part, down near the end. Does location matter for how serious this is?",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f24",
+    "category": "ros",
+    "topic": "bowel symptoms since procedure",
+    "chart": "Mild rectal spotting for one day after polypectomy, resolved; denies ongoing bleeding, pain, or fever.",
+    "says": "I had a tiny bit of spotting the day after the procedure, but that stopped and I've felt fine since.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f25",
+    "category": "ros",
+    "topic": "weight and appetite",
+    "chart": "Denies unintentional weight loss or appetite change.",
+    "says": "My weight and appetite have been totally normal, no changes there.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f26",
+    "category": "psychosocial",
+    "topic": "information seeking behavior",
+    "chart": "Patient reports extensive internet research after receiving the portal result, which increased her anxiety.",
+    "says": "I spent hours on medical websites after I saw the word 'dysplasia.' Some of them made it sound really dire.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f27",
+    "category": "goals",
+    "topic": "desired outcome of visit",
+    "chart": "Patient's main goal for this visit is a clear, direct answer about whether she has cancer and what the report truly means.",
+    "says": "I just want someone to tell me straight what this report actually means, not just repeat the big words back to me.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f28",
+    "category": "hpi",
+    "topic": "understanding of focal finding",
+    "chart": "Patient unsure what 'focal' means in the context of her report and whether it implies the dysplasia is spreading.",
+    "says": "It says 'focal' high-grade dysplasia. Does focal mean it's just starting to spread?",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f29",
+    "category": "other",
+    "topic": "trust in prior explanation",
+    "chart": "Patient recalls the GI nurse gave a brief reassurance by phone but patient did not feel it was detailed enough.",
+    "says": "The nurse called and said 'don't worry, it's not cancer,' but she didn't really explain why, and that just made me more nervous honestly.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f30",
+    "category": "hpi",
+    "topic": "second opinion awareness",
+    "chart": "Patient is aware a second pathologist reviewed her slides and wants to understand how/why that happens.",
+    "says": "Someone told me a second doctor also looked at my slides. Why would they need two people to look at the same thing?",
+    "tier": "discoverable",
+    "importance": "minor"
+   }
+  ],
+  "patient": {
+   "name": "Renee Okafor",
+   "age": 44,
+   "sex": "female",
+   "pronouns": "she/her",
+   "ethnicity": "Black British-born, now US resident",
+   "occupation": "Hospital billing specialist",
+   "language": "English",
+   "appearance": "A woman in her mid-40s with short natural hair, wearing a cardigan over a blouse, seated at a tidy home desk with a laptop and a notepad with handwritten questions visible. Her posture is upright and alert; she maintains steady eye contact with the camera and her expression shows controlled worry rather than panic."
+  },
+  "persona": {
+   "personality": "Detail-oriented, articulate, and self-advocating; wants precise answers and is uncomfortable with vague reassurance.",
+   "communicationStyle": "Direct and organized, often refers to notes she has written down, asks follow-up questions if an answer feels incomplete.",
+   "healthLiteracy": "moderate",
+   "emotionalState": "Anxious but composed; working hard to stay rational and gather information rather than panic.",
+   "background": "Born in the United Kingdom to Nigerian parents, moved to the United States in her twenties for work, now settled in Atlanta with her husband. Works in hospital billing, which has given her comfort reading medical documents but not necessarily understanding clinical terminology. Enjoys gardening and running a small book club on weekends.",
+   "speechExamples": [
+    "Okay, so walk me through this like I'm smart but not a doctor.",
+    "I wrote down my questions so I don't forget anything.",
+    "I need to understand this before I can calm down, not the other way around.",
+    "Is there anything in here that you would consider a red flag that I'm missing?",
+    "I appreciate you not just telling me not to worry."
+   ],
+   "concerns": [
+    "Whether 'high-grade dysplasia' means she already has colon cancer",
+    "Whether the polyp was completely removed and nothing was left behind",
+    "Whether her brother's polyp history means she is at higher inherited risk",
+    "Whether she should wait three weeks for her gastroenterology appointment or seek care sooner",
+    "Whether she needs additional tests like a CT scan or genetic testing now"
+   ]
+  },
+  "scenario": {
+   "studentBrief": "You are the on-call pathology resident fielding a patient-requested telehealth consultation. Renee Okafor, 44, had her first colonoscopy after a positive stool screening test, which found a single 14 mm pedunculated polyp in the sigmoid colon, removed intact. Her pathology report shows tubular adenoma with focal high-grade dysplasia, negative margins, no invasive carcinoma. She found this report on her patient portal, researched the terms online, and believes she may have colon cancer. Her gastroenterology follow-up is three weeks away. She asked for a pathology consult to understand the report before that appointment.",
+   "chiefComplaint": "Patient requests explanation of a colon polyp pathology report showing 'high-grade dysplasia,' which she fears means she has cancer.",
+   "openingLine": "I got my polyp results on the online portal and it says 'high-grade dysplasia,' and when I looked that up it said cancer, so I wanted to talk to someone before my GI appointment, which isn't for three more weeks.",
+   "tasks": [
+    "Explain in plain language what was examined (the polyp, how it was processed) and define each pathology term in the report: tubular adenoma, high-grade dysplasia, focal, margin status, invasive carcinoma.",
+    "Directly and clearly address whether this report means she has colon cancer, correcting her misunderstanding without dismissing her fear.",
+    "Explain what is known (complete excision, clear margin, no invasion) and what remains for gastroenterology to decide (surveillance timing, risk stratification given family history).",
+    "Explain the general rationale for a 3-year surveillance colonoscopy interval for this type of finding in a way she can bring back to her GI appointment.",
+    "Explore the family history mismatch (brother with polyps vs. her assumption about inherited cancer risk) respectfully, and hand back next-step decisions (timing of GI visit, any additional testing) to her gastroenterologist rather than deciding this yourself."
+   ],
+   "timeLimitMin": 20
+  },
+  "setting": "Telehealth video visit; patient at home at her desk in Atlanta, Georgia",
+  "specialty": "Pathology",
+  "summary": "A 44-year-old woman undergoes her first colonoscopy after a positive stool screening test, and pathology reveals a tubular adenoma with focal high-grade dysplasia, completely excised with negative margins and no invasive carcinoma. The case exercises a pathology resident's ability to translate a precancerous (not cancerous) diagnosis into clear lay language, address a patient's self-directed internet research and anxiety, and appropriately hand back surveillance timing and family-history risk stratification to the treating gastroenterologist.",
+  "title": "Explaining a Tubular Adenoma with High-Grade Dysplasia After First Screening Colonoscopy",
+  "professions": [
+   "pathology"
+  ],
+  "knowledge": [],
+  "rubricId": "default",
+  "artifacts": [],
+  "objectives": [],
+  "variants": []
+ }
+}

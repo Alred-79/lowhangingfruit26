@@ -1,0 +1,749 @@
+{
+ "origin": "ai_draft",
+ "reviewed": false,
+ "profile": {
+  "version": 1,
+  "actions": [],
+  "artifacts": [
+   {
+    "id": "d1",
+    "type": "note",
+    "title": "Sideline Concussion Evaluation – Day of Injury",
+    "author": "J. Alvarez, ATC",
+    "date": "6 days ago",
+    "body": "16 y/o female basketball player struck posterior head on court floor during drive to basket. No witnessed loss of consciousness. Appeared dazed, slow to respond x~1 minute. Removed from play immediately per protocol. SCAT5 administered sideline: symptom score 8/22, severity 11. Immediate memory 4/5, concentration 3/5. Balance not formally tested sideline (court surface). Referred for physician evaluation same day; cleared ED visit not required per telephone triage, follow-up with primary care arranged. Diagnosis: Sport-related concussion. Removed from play, no return to sport or full academics pending graded protocol.",
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d2",
+    "type": "form",
+    "title": "Baseline Neurocognitive and Balance Testing (Preseason)",
+    "author": "Athletic Training Department",
+    "date": "This season, preseason",
+    "table": {
+     "columns": [
+      "Measure",
+      "Result",
+      "Reference/Baseline"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "ImPACT Composite – Verbal Memory",
+        "91",
+        "Within normal range"
+       ]
+      },
+      {
+       "cells": [
+        "ImPACT Composite – Visual Memory",
+        "84",
+        "Within normal range"
+       ]
+      },
+      {
+       "cells": [
+        "ImPACT Composite – Reaction Time",
+        "0.54 sec",
+        "Within normal range"
+       ]
+      },
+      {
+       "cells": [
+        "BESS total errors",
+        "8",
+        "Individual baseline"
+       ]
+      },
+      {
+       "cells": [
+        "SCAT5 symptom score",
+        "2/22",
+        "Individual baseline"
+       ]
+      }
+     ]
+    },
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d3",
+    "type": "note",
+    "title": "Problem List Entry – Prior Concussion History",
+    "author": "School Health Record",
+    "date": "2 years ago",
+    "body": "History of sport-related concussion sustained during soccer season two years prior. Documented recovery course of approximately 3 weeks before full return-to-play clearance. No subsequent head injuries documented until current event.",
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d4",
+    "type": "form",
+    "title": "Post-Injury Symptom Checklist – Athlete Self-Report (Today, Day 6)",
+    "author": "Destiny Williams (self-report)",
+    "date": "Today",
+    "table": {
+     "columns": [
+      "Symptom category",
+      "Severity (0-6)"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Headache",
+        "0"
+       ]
+      },
+      {
+       "cells": [
+        "Sensitivity to light",
+        "0"
+       ]
+      },
+      {
+       "cells": [
+        "Sensitivity to noise",
+        "0"
+       ]
+      },
+      {
+       "cells": [
+        "Fatigue/low energy",
+        "2"
+       ]
+      },
+      {
+       "cells": [
+        "Difficulty concentrating",
+        "2"
+       ]
+      },
+      {
+       "cells": [
+        "All other 17 items",
+        "0"
+       ]
+      }
+     ]
+    },
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d5",
+    "type": "form",
+    "title": "Post-Injury Symptom Checklist – Parent Report (Today, Day 6)",
+    "author": "Parent (Mrs. Williams)",
+    "date": "Today",
+    "table": {
+     "columns": [
+      "Symptom category",
+      "Severity (0-6)"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Headache",
+        "4"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Sensitivity to light",
+        "3"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Sensitivity to noise",
+        "2"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Irritability",
+        "4"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Sleeping more than usual",
+        "3"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Difficulty concentrating",
+        "3"
+       ],
+       "flag": "H"
+      }
+     ]
+    },
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d6",
+    "type": "chart",
+    "title": "Balance (BESS Errors) and Cognitive Screen Trend",
+    "author": "Athletic Training",
+    "date": "Baseline to Today",
+    "chart": {
+     "kind": "line",
+     "xLabel": "Timepoint",
+     "yLabel": "BESS total errors",
+     "series": [
+      {
+       "name": "BESS total errors",
+       "points": [
+        {
+         "x": "Preseason baseline",
+         "y": 8
+        },
+        {
+         "x": "Day 6 (today)",
+         "y": 14
+        }
+       ]
+      }
+     ]
+    },
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d7",
+    "type": "note",
+    "title": "School Nurse Communication Log",
+    "author": "School Health Office",
+    "date": "Today",
+    "body": "No contact received from athletic training staff or family regarding a recent head injury for this student. No academic accommodations or workload modifications currently on file. Student's attendance and assignment submissions show full participation in all classes this week, including a chemistry unit test scheduled for tomorrow.",
+    "release": {
+     "when": "start"
+    }
+   }
+  ],
+  "facts": [
+   {
+    "id": "f1",
+    "category": "chief_complaint",
+    "topic": "reason for visit",
+    "chart": "16F basketball player, 6 days post head injury, presents for concussion follow-up and return-to-play assessment ahead of Friday's semi-final.",
+    "says": "I'm here so you can clear me for Friday. I feel completely fine.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f2",
+    "category": "hpi",
+    "topic": "injury mechanism",
+    "chart": "Struck occiput on court floor during drive to basket 6 days ago.",
+    "says": "I went up for a layup, got fouled, and landed hard on the back of my head on the floor.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f3",
+    "category": "hpi",
+    "topic": "loss of consciousness",
+    "chart": "No witnessed loss of consciousness.",
+    "says": "I didn't black out, I just felt really dazed for like a minute.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f4",
+    "category": "hpi",
+    "topic": "return to play that day",
+    "chart": "Did not return to the game after injury; removed per protocol.",
+    "says": "They pulled me out right away, I didn't go back in.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f5",
+    "category": "hpi",
+    "topic": "current symptom status",
+    "chart": "Athlete reports feeling asymptomatic today, denies headache, dizziness, or light sensitivity.",
+    "says": "Honestly I feel like myself. No headache, nothing.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f6",
+    "category": "hpi",
+    "topic": "headache pattern",
+    "chart": "Experiences headaches most afternoons after school, worse by end of day.",
+    "says": "I mean... sometimes by the end of the school day my head's kind of pounding, but that's probably just because I'm hungry or tired.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f7",
+    "category": "hpi",
+    "topic": "light sensitivity",
+    "chart": "Requires dimmed lights at home in the evenings since injury.",
+    "says": "My mom's been turning the lights down for me at night, I guess the bright ones have been kind of a lot.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f8",
+    "category": "hpi",
+    "topic": "mood changes",
+    "chart": "Increased irritability noted by family since injury.",
+    "says": "My little brother says I've been snapping at him more, but he's annoying so I don't know if that's new.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f9",
+    "category": "hpi",
+    "topic": "sleep pattern",
+    "chart": "Going to bed around 8pm since injury, versus usual 10:30pm bedtime.",
+    "says": "I've just been really tired lately so I've been going to bed earlier than usual.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f10",
+    "category": "hpi",
+    "topic": "screen and schoolwork load",
+    "chart": "Has kept up full homework load and screen use without any academic accommodations.",
+    "says": "I didn't want to fall behind so I've been doing all my regular homework on my laptop like normal.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f11",
+    "category": "hpi",
+    "topic": "upcoming exam",
+    "chart": "Has a chemistry test tomorrow and reports it was hard to study for.",
+    "says": "I have a huge chem test tomorrow and I could barely focus studying for it, which is weird for me.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f12",
+    "category": "hpi",
+    "topic": "solo basketball activity",
+    "chart": "Has been shooting free throws alone in the driveway since injury, outside of supervised protocol.",
+    "says": "I've just been shooting free throws by myself in the driveway, nothing crazy, just to stay sharp.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f13",
+    "category": "pmh",
+    "topic": "prior head injury",
+    "chart": "History of concussion 2 years ago (soccer) that took approximately 3 weeks to fully resolve.",
+    "says": "I mean, I think I got a concussion playing soccer a while back? It wasn't a big deal.",
+    "tier": "reluctant",
+    "importance": "critical"
+   },
+   {
+    "id": "f14",
+    "category": "hpi",
+    "topic": "motivation for quick return",
+    "chart": "Athlete states a college scout is attending Friday's semi-final game.",
+    "says": "There's a college scout coming Friday. This is literally my one shot in front of her, I can't miss it.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f15",
+    "category": "psychosocial",
+    "topic": "coach pressure",
+    "chart": "Reports coach has texted multiple times asking when she will be cleared.",
+    "says": "Coach keeps texting me asking if I'm cleared yet, she's counting on me for Friday.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f16",
+    "category": "ros",
+    "topic": "vomiting or nausea",
+    "chart": "Denies nausea or vomiting since injury.",
+    "says": "No throwing up or anything like that, no.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f17",
+    "category": "ros",
+    "topic": "seizure activity",
+    "chart": "Denies any seizure-like episodes since injury.",
+    "says": "No, nothing like shaking or passing out.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f18",
+    "category": "ros",
+    "topic": "weakness or numbness",
+    "chart": "Denies focal weakness or numbness in arms or legs.",
+    "says": "My arms and legs feel totally normal, no numbness or weakness.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f19",
+    "category": "ros",
+    "topic": "speech or confusion changes",
+    "chart": "Denies slurred speech or worsening confusion since injury day.",
+    "says": "I'm not slurring my words or anything, I feel clear-headed.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f20",
+    "category": "ros",
+    "topic": "neck pain",
+    "chart": "Denies significant neck pain; mild stiffness day of injury that resolved.",
+    "says": "My neck was a little stiff that first day but it's fine now.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f21",
+    "category": "ros",
+    "topic": "vision changes",
+    "chart": "Reports mild blurriness with fast eye movements like reading quickly or scanning the court.",
+    "says": "Sometimes when I move my eyes fast, like scanning down the court, things get a little blurry for a second.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f22",
+    "category": "ros",
+    "topic": "dizziness",
+    "chart": "Reports occasional mild dizziness with quick head turns, not reported to anyone until now.",
+    "says": "When I turn my head really fast it feels a little off balance, but just for a second.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f23",
+    "category": "psychosocial",
+    "topic": "fear of losing scholarship chance",
+    "chart": "Expresses fear that missing Friday's game will cost her a scholarship opportunity.",
+    "says": "If I don't play Friday I might lose my shot at a scholarship, this could change my whole future.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f24",
+    "category": "psychosocial",
+    "topic": "minimizing symptoms to avoid sitting out",
+    "chart": "Admits she has been underreporting symptoms to clinicians and family because she fears being held out of Friday's game.",
+    "says": "Okay, honestly... I might have said I felt better than I actually do because I really don't want to sit out Friday.",
+    "tier": "hidden",
+    "importance": "critical"
+   },
+   {
+    "id": "f25",
+    "category": "family",
+    "topic": "parent observations at home",
+    "chart": "Mother reports observing headaches, light sensitivity, irritability, and early bedtime at home since injury.",
+    "says": "My mom's been telling the coach she's worried, she sees me holding my head and squinting at lights.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f26",
+    "category": "adherence",
+    "topic": "rest recommendation given at injury",
+    "chart": "Was told at time of injury to rest from physical and cognitive exertion but did not fully follow this (continued schoolwork, solo shooting).",
+    "says": "They told me to take it easy but I figured a little bit of homework and shooting around wouldn't hurt.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f27",
+    "category": "social",
+    "topic": "team role and identity",
+    "chart": "Starting point guard, team captain, has started every game this season.",
+    "says": "I'm the starting point guard, I've started every single game this year, the team needs me out there.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f28",
+    "category": "other",
+    "topic": "ankle sprain history",
+    "chart": "History of a mild right ankle sprain last season, fully healed, unrelated to current injury.",
+    "says": "I did roll my ankle last season but that's totally healed, not related to this at all.",
+    "tier": "initial",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f29",
+    "category": "nutrition",
+    "topic": "hydration and eating habits",
+    "chart": "Reports normal appetite and hydration, denies recent weight changes.",
+    "says": "I've been eating and drinking normally, nothing's changed there.",
+    "tier": "initial",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f30",
+    "category": "goals",
+    "topic": "long term goals",
+    "chart": "States her goal is to play Division I basketball and understands she needs to showcase herself to scouts.",
+    "says": "My whole goal is to play D1 ball, that's why this game matters so much to me.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f31",
+    "category": "function",
+    "topic": "driving or screen tolerance",
+    "chart": "Reports some difficulty tolerating long car rides with phone use, mild queasiness, not previously reported.",
+    "says": "Car rides where I'm on my phone the whole time make me feel a little sick now, that's new I guess.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f32",
+    "category": "psychosocial",
+    "topic": "trust in athletic trainer",
+    "chart": "States she trusts the athletic trainer more than other adults to be honest with about how she's feeling.",
+    "says": "You're actually the one person I feel like I can be real with about this, everyone else just wants me on the court.",
+    "tier": "discoverable",
+    "importance": "minor"
+   }
+  ],
+  "objectives": [
+   {
+    "id": "o1",
+    "text": "Elicit discrepancy between athlete's self-reported minimal symptoms and parent-reported/objective findings, demonstrating skill in detecting symptom under-reporting in a motivated athlete.",
+    "factIds": [
+     "f5",
+     "f6",
+     "f7",
+     "f24",
+     "f25"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o2",
+    "text": "Perform and interpret a full remote post-concussion test battery (cognitive screen, balance screen, oculomotor/VOMS screen) and compare to individualized baseline.",
+    "factIds": [
+     "f21",
+     "f22",
+     "f31"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o3",
+    "text": "Screen thoroughly for red-flag symptoms requiring urgent physician/ED referral and correctly determine none are present while still identifying incomplete recovery.",
+    "factIds": [
+     "f16",
+     "f17",
+     "f18",
+     "f19"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o4",
+    "text": "Explain and initiate appropriate return-to-learn accommodations given ongoing academic exertion without modification, and recognize prior concussion history as a risk factor for prolonged recovery.",
+    "factIds": [
+     "f10",
+     "f11",
+     "f13",
+     "f26"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o5",
+    "text": "Correctly withhold return-to-sport clearance, explain the graded return-to-play progression, and state that physician clearance is required before progression can begin — recognizing this decision is outside the athletic trainer's unilateral authority to override.",
+    "factIds": [
+     "f14",
+     "f15",
+     "f23"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o6",
+    "text": "Manage competing pressures from athlete, parent, and coach with professional communication while maintaining athlete safety as the priority.",
+    "factIds": [
+     "f15",
+     "f23",
+     "f27",
+     "f30",
+     "f32"
+    ],
+    "actionIds": []
+   }
+  ],
+  "mismatches": [
+   {
+    "id": "m1",
+    "factId": "f5",
+    "artifactId": "d5",
+    "patientClaim": "Destiny states she feels completely fine with no headache, no light sensitivity, and only mild fatigue/concentration trouble today.",
+    "recordEvidence": "Parent-completed symptom checklist from the same day shows headache 4/6, light sensitivity 3/6, noise sensitivity 2/6, irritability 4/6, and increased sleep 3/6 — total severity score 19 versus the athlete's self-reported score of 4.",
+    "teachingPoint": "Athletes, especially highly motivated ones facing a high-stakes event, may underreport concussion symptoms. Collateral report from a parent/guardian and objective testing are essential to avoid premature return-to-play clearance."
+   },
+   {
+    "id": "m2",
+    "factId": "f13",
+    "artifactId": "d3",
+    "patientClaim": "Destiny initially frames her prior concussion as 'not a big deal' and is reluctant to discuss it.",
+    "recordEvidence": "Problem list entry documents that her concussion two years ago took approximately 3 weeks to fully resolve before clearance, longer than a typical uncomplicated recovery.",
+    "teachingPoint": "A history of prior concussion, particularly one with a prolonged recovery course, is a known risk factor for extended recovery from a subsequent concussion and should raise the index of suspicion for a slower-than-expected course this time."
+   }
+  ],
+  "chartAtStart": [
+   {
+    "label": "Reason for visit",
+    "value": "Concussion follow-up / return-to-play assessment, day 6 post-injury"
+   },
+   {
+    "label": "Problem list",
+    "value": "Sport-related concussion (current, day 6); History of concussion 2 years ago (soccer); Right ankle sprain, resolved (last season)"
+   },
+   {
+    "label": "Medications",
+    "value": "None scheduled; acetaminophen PRN headache per parent report, use not confirmed today"
+   },
+   {
+    "label": "Allergies",
+    "value": "No known drug allergies"
+   },
+   {
+    "label": "Last vitals",
+    "value": "HR 68 bpm, BP 112/70 mmHg (home-reported, today)"
+   },
+   {
+    "label": "Immunizations",
+    "value": "Up to date per school athletic physical"
+   },
+   {
+    "label": "Care team",
+    "value": "School Athletic Trainer (primary contact), Primary Care Physician (Dr. R. Nguyen), School Nurse"
+   },
+   {
+    "label": "Code status",
+    "value": "N/A (outpatient pediatric/adolescent)"
+   }
+  ],
+  "patient": {
+   "name": "Destiny Williams",
+   "age": 16,
+   "sex": "female",
+   "pronouns": "she/her",
+   "ethnicity": "Black",
+   "occupation": "High school student, varsity basketball point guard",
+   "language": "English",
+   "appearance": "A fit, athletic-looking teenager with short braided hair pulled back, wearing a team hoodie, seated at a kitchen table with a laptop and basketball visible in the background. She sits upright with a confident, slightly guarded posture, making steady eye contact and offering quick, polished answers, though her eyes occasionally dart to someone off-camera (her mother) before she responds."
+  },
+  "persona": {
+   "personality": "Competitive, driven, and likeable, with a strong sense of responsibility to her team. Guarded about appearing weak or vulnerable, especially regarding anything that could threaten her playing status.",
+   "communicationStyle": "Quick, confident, slightly rehearsed answers upfront; softens and becomes more hesitant and genuine when asked open-ended or sensitive follow-up questions and given reassurance.",
+   "healthLiteracy": "moderate",
+   "emotionalState": "Anxious beneath a confident exterior; fears disappointing her team, coach, and family, and fears losing a possible scholarship opportunity if she can't play Friday.",
+   "background": "Destiny is a junior and starting point guard who has played basketball since age 7. She dreams of playing Division I basketball and is being recruited; a scout is attending Friday's regional semi-final. She has a close-knit family who attends every game, and her mother has been quietly tracking her symptoms at home.",
+   "speechExamples": [
+    "I'm good, seriously, I just want to get cleared.",
+    "It's not that bad, I can push through it.",
+    "Okay... maybe it's a little more than I said.",
+    "Coach keeps asking me when I'll be ready.",
+    "I don't want to let everyone down."
+   ],
+   "concerns": [
+    "Whether she will be cleared to play in Friday's regional semi-final",
+    "Whether the college scout attending will still consider her if she doesn't play",
+    "Being seen as weak or not tough enough by her coach and teammates",
+    "Falling behind in school if she has to cut back on screens/homework"
+   ]
+  },
+  "scenario": {
+   "studentBrief": "You are the athletic training student seeing Destiny Williams, 16, a varsity point guard, for a telehealth concussion follow-up 6 days after she struck her head on the court floor during a game. She was removed from play that day per protocol and has not yet been cleared to return. Today's visit is to assess her current status and determine next steps before Friday's regional semi-final. You have access to her baseline testing and the injury-day note in the chart.",
+   "chiefComplaint": "Concussion follow-up and return-to-play assessment, 6 days post head injury",
+   "openingLine": "Hey! Thanks for fitting me in today — I'm feeling totally back to normal and I'm hoping you can clear me for Friday's game.",
+   "tasks": [
+    "Conduct a thorough history and symptom interview, comparing athlete self-report to parent report and objective testing",
+    "Perform the appropriate remote post-concussion test battery (cognitive, balance, oculomotor/vestibular screening) and compare to baseline",
+    "Screen for red-flag symptoms requiring urgent escalation",
+    "Explain return-to-learn and graded return-to-sport progression, and the requirement for physician clearance before any progression begins",
+    "Communicate the decision and rationale professionally to the athlete, addressing pressure from the athlete and coach without compromising safety"
+   ],
+   "timeLimitMin": 25
+  },
+  "answerKey": {
+   "primaryProblem": "Sport-related concussion, day 6, with ongoing symptoms and objective deficits inconsistent with full recovery despite athlete's self-report of being asymptomatic — not yet eligible for return-to-sport progression.",
+   "differential": [
+    "Fully resolved concussion with athlete accurately reporting recovery (ruled out by parent report and objective testing)",
+    "Incomplete concussion recovery with symptom under-reporting by athlete (supported)",
+    "New or separate pathology (e.g., migraine, anxiety-related headache) in isolation (less likely given direct temporal link to head injury and consistent constellation of findings)",
+    "Cervical strain as sole cause of symptoms (ruled out by normal cervical screen and presence of cognitive/vestibular findings)"
+   ],
+   "keyFindings": [
+    "Athlete self-reported symptom score 4 (3/22 items) vs. parent-reported score 19 on the same day",
+    "Cognitive screen below individual baseline (immediate memory, delayed recall, concentration all reduced)",
+    "Balance screen worse than baseline (14 errors vs. baseline 8)",
+    "Mild oculomotor/vestibular provocation findings (increased near point of convergence, dizziness with head thrust)",
+    "No red-flag symptoms (no worsening headache, vomiting, seizure, focal weakness, slurred speech, worsening confusion)",
+    "No return-to-learn accommodations in place despite ongoing symptoms; full academic and some unsupervised physical exertion continuing",
+    "History of a prior concussion 2 years ago with a prolonged ~3 week recovery, a risk factor for slower recovery this time",
+    "Unsanctioned solo shooting activity outside of medical clearance"
+   ],
+   "plan": [
+    "Do not clear for return-to-sport; athlete has not met criteria for progression given symptomatic status and objective deficits below baseline",
+    "Communicate findings and rationale clearly and compassionately to athlete and parent, validating her competitive drive while prioritizing safety",
+    "Initiate/escalate return-to-learn accommodations in coordination with school nurse and teachers (e.g., reduced screen time, rest breaks, possible extension or modification for the chemistry test)",
+    "Instruct athlete to stop unsupervised physical activity (solo shooting) until cleared to begin graded return-to-sport protocol",
+    "Refer to primary care physician (Dr. Nguyen) or appropriate concussion-specialized provider for required medical clearance before any return-to-sport progression can begin, per state law and school protocol",
+    "Communicate professionally and factually with coach that athlete is not yet cleared, without disclosing confidential health details beyond clearance status, redirecting coach to proper channels",
+    "Schedule close follow-up (e.g., 48-72 hours) to reassess symptoms, cognitive/balance testing, and readiness for return-to-learn then return-to-sport steps once physician clearance obtained",
+    "Document discrepancy between self-report and parent/objective findings and counsel athlete on importance of honest symptom reporting for her own safety"
+   ],
+   "redFlags": [
+    "None present today (no worsening headache, repeated vomiting, seizure, focal weakness/numbness, slurred speech, or worsening confusion) — continue to monitor and educate on when to seek emergency care"
+   ],
+   "educationPoints": [
+    "Concussion symptoms can be under-reported by motivated athletes, especially facing high-stakes events; collateral history and objective testing are critical safeguards",
+    "A prior concussion with prolonged recovery is a risk factor for a slower recovery course with subsequent concussions",
+    "Return-to-learn should generally precede or run alongside return-to-sport, with academic accommodations (reduced screen time, modified workload) as needed before full cognitive exertion resumes",
+    "Graded return-to-sport is a stepwise process (symptom-limited activity → light aerobic → sport-specific exercise → non-contact training → full-contact practice → return to competition), each step requiring 24 hours symptom-free before progressing",
+    "Athletic trainers do not have authority to provide final medical clearance for return-to-sport after a concussion in this jurisdiction; a physician (or state-authorized licensed provider) must provide written clearance",
+    "Unsupervised physical activity (e.g., solo shooting drills) during recovery is inappropriate and should be stopped until medically cleared to begin a monitored graded protocol",
+    "Professional, non-confrontational communication with coaches and parents that protects the athlete's health information while being clear about clearance status is an essential skill"
+   ]
+  },
+  "title": "Point Guard Under Pressure: Concussion Follow-Up Before the Big Game",
+  "summary": "A 16-year-old high school point guard returns for a day-6 concussion follow-up ahead of a high-stakes semi-final with a college scout attending, insisting she is \"a hundred percent\" despite parent-reported symptoms and objective testing showing she remains below baseline. The case teaches athletic training students to detect symptom under-reporting through collateral history and standardized testing, apply return-to-learn/return-to-sport principles, and correctly withhold clearance while deferring final medical clearance to a physician.",
+  "specialty": "Athletic Training / Sports Medicine",
+  "setting": "Telehealth video visit, patient at home kitchen table with her mother present off-camera",
+  "encounterType": "Concussion follow-up / return-to-play assessment",
+  "difficulty": 3,
+  "professions": [
+   "athletic-training"
+  ],
+  "knowledge": [],
+  "rubricId": "default",
+  "variants": []
+ }
+}

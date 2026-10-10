@@ -137,8 +137,9 @@ export function recommend(userId: string, professionId: string): Recommendation 
   );
   // Prefer unseen cases, then cases whose intrinsic difficulty is near the target level.
   const ranked = cases
-    .map((c) => ({ c, cost: (done.get(c.id) || 0) * 3 + Math.abs(c.difficulty - profile.level) + Math.random() * 0.5 }))
-    .sort((a, b) => a.cost - b.cost);
+    .map((c) => ({ c, cost: (done.get(c.id) || 0) * 3 + Math.abs(c.difficulty - profile.level) }))
+    // Stable order, so the recommendation does not change between page loads.
+    .sort((a, b) => a.cost - b.cost || a.c.id.localeCompare(b.c.id));
   const pick = ranked[0]?.c || null;
   const pct = Math.round(profile.expectedAtLevel * 100);
   const reason =

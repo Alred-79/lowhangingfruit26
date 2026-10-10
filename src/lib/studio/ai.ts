@@ -154,7 +154,8 @@ ${PATCH_DOC}`,
     // A decision the model left to faculty still needs to be visible.
     if (!ops.length && it.fixSummary) issues[issues.length - 1].why += ` Suggested: ${it.fixSummary}`;
   }
-  return { summary: String(raw.summary || ""), issues };
+  const summary = String(raw.summary || "").trim() || (issues.length ? "" : "The clinical review found no contradictions between the history, medications, results, documents and answer key.");
+  return { summary, issues };
 }
 
 // ---------- Editor guide: plain-language request -> proposed patch ----------
@@ -189,13 +190,14 @@ ${PATCH_DOC}`,
     schema: {
       type: "object",
       required: ["reply", "ops"],
-      properties: { reply: { type: "string" }, ops: PATCH_OPS_SCHEMA },
+      properties: { reply: { type: "string", description: "Required. One to three plain sentences." }, ops: PATCH_OPS_SCHEMA },
     },
     messages: [...turns, { role: "user", text: `CURRENT CASE JSON (includes any edits made so far):\n${compactCase(p, { variants: true })}\n\nREQUEST FROM FACULTY:\n${last.text}` }],
   });
   const proposed = Array.isArray(raw.ops) ? raw.ops : [];
   const ops = validOps(p, proposed);
-  return { reply: String(raw.reply || ""), ops, dropped: proposed.length - ops.length };
+  const reply = String(raw.reply || "").trim() || (ops.length ? `Here is a proposed change (${ops.length} edit${ops.length === 1 ? "" : "s"}). Review it below.` : "I could not turn that into a change. Try saying which part of the patient it concerns.");
+  return { reply, ops, dropped: proposed.length - ops.length };
 }
 
 // ---------- Variants for repeat practice ----------

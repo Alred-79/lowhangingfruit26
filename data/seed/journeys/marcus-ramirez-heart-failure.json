@@ -3,7 +3,7 @@
   "title": "Marcus Ramirez: heart failure, new diabetes and weight loss across four professions",
   "caseId": "seed_sample-marcus-ramirez",
   "spec": {
-    "summary": "Marcus Ramirez, 59, has heart failure, newly diagnosed and poorly controlled type 2 diabetes, early satiety and unintended weight loss. He is seen in turn by emergency medicine, cardiology, clinical pharmacy and dietetics. Each professional starts from what the others recorded, adds their own findings, and hands off with an SBAR. Join as any one of them; the AI plays the rest.",
+    "summary": "Marcus Ramirez, 59, has heart failure and newly diagnosed, poorly controlled type 2 diabetes. He is seen in turn by emergency medicine, cardiology, clinical pharmacy and dietetics. Each professional starts from what the others recorded, adds their own findings, and hands off with an SBAR. Join as any one of them; the AI plays the rest.",
     "stages": [
       {
         "id": "s1",
@@ -11,7 +11,7 @@
         "professionId": "emergency_medicine",
         "roleTitle": "Emergency medicine attending",
         "clinicianId": "brian_lee",
-        "focus": "First contact for the team. Triage his current symptoms (fatigue, ankle swelling, feeling full quickly, weight loss), review vital signs, rule out anything that needs urgent care, and identify what cardiology, pharmacy and nutrition each need to look at.",
+        "focus": "First contact for the team. Find out how he is right now and what is troubling him most, review his vital signs, check for anything that needs urgent attention, and identify what cardiology, pharmacy and nutrition each need to look at.",
         "simTime": "Week 1, Mon 10:30",
         "visitLabel": "urgent video triage"
       },
@@ -21,7 +21,7 @@
         "professionId": "cardiology",
         "roleTitle": "Cardiologist",
         "clinicianId": "david_bennet",
-        "focus": "Review his heart failure: swelling, palpitations, how far he can walk, and the cardiac medicines on his list. Follow up on what the triage visit flagged and say what is and is not explained by his heart.",
+        "focus": "Review his heart failure: current symptoms, what limits him day to day, and the cardiac medicines on his list. Follow up on what the triage visit flagged and say what is and is not explained by his heart.",
         "simTime": "Week 1, Wed 14:00",
         "visitLabel": "cardiology video follow-up"
       },
@@ -41,7 +41,7 @@
         "professionId": "dietetics",
         "roleTitle": "Registered dietitian",
         "clinicianId": "tasha_dunbar",
-        "focus": "Nutrition assessment. Explore his eating pattern, early satiety and weight loss, fluids, food access and beliefs about food, and agree realistic changes that fit both his heart failure and his diabetes and what he wants for himself.",
+        "focus": "Nutrition assessment. Explore his eating pattern, appetite and weight, fluids, food access and beliefs about food, and agree realistic changes that fit both his heart failure and his diabetes and what he wants for himself.",
         "simTime": "Week 2, Tue 11:00",
         "visitLabel": "telehealth nutrition visit"
       }

@@ -27,16 +27,17 @@ function ageWords(age: number): string {
   if (age < 2) return "a toddler";
   if (age < 13) return `a ${age}-year-old child`;
   if (age < 20) return `a ${age}-year-old teenager`;
-  return `a ${age}-year-old`;
+  // Stated ages come out about a decade too old, so ask for younger than the chart says.
+  return `a ${age >= 76 ? age - 6 : age >= 40 ? age - 10 : age}-year-old`;
 }
 
 /** The model draws people much older than the stated age unless told otherwise. */
 function ageHint(age: number): { text: string; negative: string } {
   if (age < 13) return { text: "", negative: "" };
   if (age < 30) return { text: "Youthful face, smooth skin.", negative: "middle-aged, elderly, wrinkles, grey hair, " };
-  if (age < 45) return { text: `Looks ${age}, not older: smooth skin, no grey hair.`, negative: "elderly, old, wrinkles, grey hair, white hair, " };
-  if (age < 62) return { text: `Looks ${age}, not older: middle-aged, healthy skin with only faint lines, hair mostly its natural colour.`, negative: "elderly, very old, deep wrinkles, white hair, frail, " };
-  if (age < 76) return { text: `Looks ${age}, not older: an active person in later middle age, moderate lines only.`, negative: "very old, ninety years old, deep wrinkles, frail, gaunt, " };
+  if (age < 45) return { text: `Looks young for their age: smooth skin, no grey hair.`, negative: "elderly, old, wrinkles, grey hair, white hair, " };
+  if (age < 62) return { text: `Looks young for their age: middle-aged, healthy skin with only faint lines, hair mostly its natural colour.`, negative: "elderly, very old, deep wrinkles, white hair, frail, " };
+  if (age < 76) return { text: `Looks young for their age: an active person in later middle age, moderate lines only.`, negative: "very old, ninety years old, deep wrinkles, frail, gaunt, " };
   return { text: "", negative: "" };
 }
 
@@ -48,14 +49,14 @@ export function promptFor(c: CaseProfile): string {
   // Keep only the first two sentences of the description: later ones tend to describe behaviour, not looks.
   const looks = p.appearance.split(/(?<=[.!?])\s+/).slice(0, 2).join(" ");
   return [
-    `Front-facing head-and-shoulders portrait photograph of ${subject}, centred, eyes looking straight into the lens, neutral calm expression, mouth closed.`,
+    `Front-facing head-and-shoulders portrait photograph of ${subject}, centred, tightly framed from the chest up, eyes looking straight into the lens, neutral calm expression, mouth closed.`,
     ageHint(p.age).text,
     looks,
     "Seen exactly as the other person on a video visit would see them: the camera itself, any laptop, phone or screen is out of frame. Ordinary everyday clothing, real skin texture, soft natural window light, plain lived-in home interior softly out of focus behind. Photorealistic, 50mm lens, documentary style, unposed.",
   ].join(" ");
 }
 
-const NEGATIVE = "laptop, computer, phone, screen, brand logo, side view, profile view, looking away, text, caption, watermark, logo, user interface, video call overlay, frame, border, cartoon, illustration, 3d render, painting, airbrushed skin, glamour, studio lighting, hospital, medical equipment, stethoscope, white coat, blood, wound, injury, bandage, distorted face, extra fingers, deformed hands, multiple people, nudity";
+const NEGATIVE = "full body, wide shot, lettering, book titles, laptop, computer, phone, screen, brand logo, side view, profile view, looking away, text, caption, watermark, logo, user interface, video call overlay, frame, border, cartoon, illustration, 3d render, painting, airbrushed skin, glamour, studio lighting, hospital, medical equipment, stethoscope, white coat, blood, wound, injury, bandage, distorted face, extra fingers, deformed hands, multiple people, nudity";
 
 async function one(file: string): Promise<string> {
   const full = path.join(caseDir, file);
