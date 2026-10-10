@@ -230,7 +230,7 @@ const addMessage = (encId: string, turn: number, speaker: MessageRow["speaker"],
 
 export type TurnEvent =
   | { type: "delta"; text: string }
-  | { type: "done"; text: string; chart: ChartView; newFactIds: string[]; deflected: boolean; rapportDelta: number }
+  | { type: "done"; text: string; messageId: number; chart: ChartView; newFactIds: string[]; deflected: boolean; rapportDelta: number }
   | { type: "error"; message: string };
 
 /** One student utterance -> gatekeeper -> deterministic disclosure -> streamed patient reply. */
@@ -286,7 +286,7 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
     return void (yield { type: "error", message: "The patient connection dropped. Please send that again. (" + (e as Error).message + ")" });
   }
   reply = reply.trim() || "...";
-  addMessage(encId, state.turn, "patient", reply, {
+  const inserted = addMessage(encId, state.turn, "patient", reply, {
     revealed: d.reveal.map((f) => f.id),
     deflected: d.deflect.map((f) => f.id),
     questionType: gate.question_type,
@@ -299,6 +299,7 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
   yield {
     type: "done",
     text: reply,
+    messageId: Number(inserted.lastInsertRowid),
     chart: chartView(c, cfg, state),
     newFactIds: d.reveal.map((f) => f.id),
     deflected: d.deflect.length > 0,

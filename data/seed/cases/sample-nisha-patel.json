@@ -1,0 +1,978 @@
+{
+ "origin": "sample",
+ "reviewed": true,
+ "profile": {
+  "version": 1,
+  "actions": [
+   {
+    "id": "a1",
+    "kind": "vitals",
+    "name": "Review vital signs from recent visit",
+    "result": "BP 120/85 mmHg, HR 76 bpm, RR 12/min, Temp 98.6°F, SpO2 99% on room air (recorded at hospital discharge follow-up)",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a2",
+    "kind": "assessment",
+    "name": "Obtain height, weight, calculate BMI",
+    "result": "Height 5'2\" (157 cm), Weight 145 lbs (65.8 kg), BMI 26.1 kg/m² (overweight range)",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a3",
+    "kind": "lab",
+    "name": "Review HbA1c",
+    "result": "HbA1c 8.8% (target <7.0%) — drawn during recent hospitalization",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a4",
+    "kind": "lab",
+    "name": "Review fasting blood glucose",
+    "result": "Fasting glucose 185 mg/dL (target <126 mg/dL)",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a5",
+    "kind": "lab",
+    "name": "Review lipid panel",
+    "result": "Total cholesterol 210 mg/dL (H), HDL 38 mg/dL (L), Triglycerides 190 mg/dL (H)",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a6",
+    "kind": "lab",
+    "name": "Review renal function (BUN/creatinine)",
+    "result": "Urea nitrogen 17 mg/dL (normal), Creatinine 0.9 mg/dL (normal) — no current evidence of nephropathy",
+    "importance": "minor",
+    "artifactIds": []
+   },
+   {
+    "id": "a7",
+    "kind": "lab",
+    "name": "Review liver function (bilirubin)",
+    "result": "Total bilirubin 1.2 mg/dL (upper normal/borderline) — no other LFTs abnormal reported",
+    "importance": "minor",
+    "artifactIds": []
+   },
+   {
+    "id": "a8",
+    "kind": "record",
+    "name": "Review medication list from chart",
+    "result": "Metformin 500 mg PO BID with meals; Insulin glargine 10 units SC qHS; OTC multivitamin daily; magnesium gummies daily",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a9",
+    "kind": "record",
+    "name": "Review hospitalization discharge summary",
+    "result": "Admitted for symptomatic hyperglycemia (polyuria, polydipsia, blurred vision, 8 lb unintentional weight loss over 3 months); started on insulin glargine at discharge in addition to metformin; referred to outpatient diabetes education and nutrition follow-up",
+    "importance": "important",
+    "artifactIds": [
+     "d6"
+    ]
+   },
+   {
+    "id": "a10",
+    "kind": "assessment",
+    "name": "Conduct 24-hour dietary recall",
+    "result": "Patient reports: skips breakfast most days; coffee with 2 tsp sugar x2-3/day; large lunch (white rice, dal, vegetable curry); late dinner after 8pm often with chapati and curry; evening snacking on cookies or mithai 3-4x/week when stressed; minimal fruit/vegetable variety beyond curries; no regular water tracking",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a11",
+    "kind": "assessment",
+    "name": "Assess physical activity level",
+    "result": "Sedentary desk job 10+ hours/day; reports wanting to walk but no current structured activity; occasional short walks on weekends",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a12",
+    "kind": "assessment",
+    "name": "Screen readiness to change (stage of change)",
+    "result": "Patient endorses understanding need for change but voices uncertainty about how to start and fear of failure — consistent with contemplation stage",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a13",
+    "kind": "assessment",
+    "name": "Assess medication-nutrition interaction knowledge",
+    "result": "Patient unclear on timing of insulin relative to meals; reports occasional insulin omission due to fear of hypoglycemia if meal timing is unpredictable",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a14",
+    "kind": "assessment",
+    "name": "Screen for hypoglycemia symptoms/episodes",
+    "result": "Patient denies prior documented hypoglycemic episodes but reports significant fear of occurrence; no glucometer readings <70 mg/dL reported to date",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a15",
+    "kind": "assessment",
+    "name": "Assess home glucose monitoring practice",
+    "result": "Patient checks fasting glucose most mornings via home glucometer; inconsistent post-meal checks; log not brought to visit",
+    "importance": "minor",
+    "artifactIds": []
+   },
+   {
+    "id": "a16",
+    "kind": "assessment",
+    "name": "Explore cultural/family food context",
+    "result": "Mother-in-law prepares traditional Gujarati meals most evenings; family gatherings/festivals involve sweets (mithai); patient feels pressure to participate in family meals as prepared",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a17",
+    "kind": "assessment",
+    "name": "Screen psychosocial/anxiety impact on self-care",
+    "result": "Patient reports feeling overwhelmed, racing thoughts about health, and difficulty sleeping due to worry; denies current suicidal ideation; has not sought counseling",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a18",
+    "kind": "record",
+    "name": "Review allergy and supplement list",
+    "result": "Penicillin: no reaction documented; no food allergies; OTC multivitamin daily, magnesium gummies daily; no herbal/alternative supplements documented in chart",
+    "importance": "minor",
+    "artifactIds": []
+   }
+  ],
+  "artifacts": [
+   {
+    "id": "d1",
+    "type": "note",
+    "title": "Hospital Discharge Summary",
+    "author": "Hospital Medicine Service",
+    "date": "2 weeks ago",
+    "release": {
+     "when": "start"
+    },
+    "body": "29-year-old female presented with 2-month history of polyuria, polydipsia, blurred vision, and unintentional weight loss (8 lb over 3 months). Found to have severe hyperglycemia on admission. Diagnosed with Type 2 Diabetes Mellitus. Treated with IV fluids and insulin per hyperglycemia protocol; transitioned to subcutaneous insulin glargine 10 units at bedtime plus metformin 500 mg BID at discharge. Education provided on diabetes self-management, though patient reported feeling overwhelmed during teaching session. Referred to outpatient nutrition counseling and diabetes education within 2 weeks of discharge. No evidence of diabetic ketoacidosis on admission labs. Follow-up with PCP and endocrinology arranged."
+   },
+   {
+    "id": "d2",
+    "type": "lab_report",
+    "title": "Metabolic and Diabetes Panel",
+    "author": "Outpatient Lab Services",
+    "date": "1 week ago",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Test",
+      "Result",
+      "Reference Range",
+      "Flag"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "HbA1c",
+        "8.8 %",
+        "<7.0% (goal)",
+        "H"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Fasting Blood Glucose",
+        "185 mg/dL",
+        "70-126 mg/dL (goal <126)",
+        "H"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Total Cholesterol",
+        "210 mg/dL",
+        "<200 mg/dL",
+        "H"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "HDL Cholesterol",
+        "38 mg/dL",
+        ">50 mg/dL (female)",
+        "L"
+       ],
+       "flag": "L"
+      },
+      {
+       "cells": [
+        "Triglycerides",
+        "190 mg/dL",
+        "<150 mg/dL",
+        "H"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Urea Nitrogen (BUN)",
+        "17 mg/dL",
+        "7-20 mg/dL",
+        ""
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Creatinine",
+        "0.9 mg/dL",
+        "0.6-1.1 mg/dL",
+        ""
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Total Bilirubin",
+        "1.2 mg/dL",
+        "0.1-1.2 mg/dL",
+        ""
+       ],
+       "flag": ""
+      }
+     ]
+    }
+   },
+   {
+    "id": "d3",
+    "type": "medication_list",
+    "title": "Current Medication List",
+    "author": "Primary Care Chart",
+    "date": "current",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Medication",
+      "Dose",
+      "Frequency",
+      "Purpose",
+      "Adherence Notes"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Metformin",
+        "500 mg",
+        "Twice daily with meals",
+        "Improve insulin sensitivity, lower glucose",
+        "Reports frequently forgetting due to long work hours"
+       ]
+      },
+      {
+       "cells": [
+        "Insulin Glargine",
+        "10 units",
+        "Once daily at bedtime (subcutaneous)",
+        "Basal glucose control, lower HbA1c",
+        "Inconsistent; fear of hypoglycemia, feels overwhelmed by injections"
+       ]
+      },
+      {
+       "cells": [
+        "Multivitamin",
+        "1 tablet",
+        "Once daily",
+        "General supplementation",
+        "Taken regularly"
+       ]
+      },
+      {
+       "cells": [
+        "Magnesium gummies",
+        "OTC dose",
+        "Once daily",
+        "Self-selected, unclear indication",
+        "Taken regularly"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d4",
+    "type": "flowsheet",
+    "title": "Vital Signs and Anthropometrics",
+    "author": "Clinic Nursing Staff",
+    "date": "current visit",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Measure",
+      "Value"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Blood Pressure",
+        "120/85 mmHg"
+       ]
+      },
+      {
+       "cells": [
+        "Heart Rate",
+        "76 bpm"
+       ]
+      },
+      {
+       "cells": [
+        "Respiratory Rate",
+        "12 breaths/min"
+       ]
+      },
+      {
+       "cells": [
+        "Temperature",
+        "98.6 °F"
+       ]
+      },
+      {
+       "cells": [
+        "SpO2",
+        "99% room air"
+       ]
+      },
+      {
+       "cells": [
+        "Height",
+        "5'2\" (157 cm)"
+       ]
+      },
+      {
+       "cells": [
+        "Weight",
+        "145 lb (65.8 kg)"
+       ]
+      },
+      {
+       "cells": [
+        "BMI",
+        "26.1 kg/m²"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d5",
+    "type": "chart",
+    "title": "Weight Trend (Prior 3 Months)",
+    "author": "Clinic Records",
+    "date": "current",
+    "release": {
+     "when": "start"
+    },
+    "chart": {
+     "kind": "line",
+     "xLabel": "Time",
+     "yLabel": "Weight (lbs)",
+     "series": [
+      {
+       "name": "Weight",
+       "points": [
+        {
+         "x": "3 months ago",
+         "y": 153
+        },
+        {
+         "x": "2 months ago",
+         "y": 150
+        },
+        {
+         "x": "1 month ago",
+         "y": 147
+        },
+        {
+         "x": "Today",
+         "y": 145
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d6",
+    "type": "note",
+    "title": "Diabetes Education Referral Note",
+    "author": "Endocrinology Clinic",
+    "date": "1 week ago",
+    "release": {
+     "when": "action",
+     "ref": "a9"
+    },
+    "body": "Patient referred for comprehensive diabetes self-management education and medical nutrition therapy following first hospitalization for symptomatic hyperglycemia. Endocrinology recommends close titration of insulin glargine based on fasting glucose trends and reinforcement of carbohydrate-consistent meal planning. Patient reports high anxiety related to diagnosis; consider involving behavioral health if anxiety symptoms persist or worsen. Follow-up HbA1c recommended in 3 months."
+   }
+  ],
+  "chartAtStart": [
+   {
+    "label": "Reason for visit",
+    "value": "Outpatient nutrition counseling follow-up after first hospitalization for uncontrolled Type 2 Diabetes Mellitus"
+   },
+   {
+    "label": "Problem list",
+    "value": "Type 2 Diabetes Mellitus (new diagnosis); Metabolic Syndrome; Anxiety Disorder"
+   },
+   {
+    "label": "Medications",
+    "value": "Metformin 500 mg PO BID; Insulin Glargine 10 units SC qHS; Multivitamin daily; Magnesium gummies daily"
+   },
+   {
+    "label": "Allergies",
+    "value": "Penicillin - no reaction; No known food allergies"
+   },
+   {
+    "label": "Last vitals",
+    "value": "BP 120/85 mmHg, HR 76 bpm, RR 12/min, Temp 98.6°F, SpO2 99% RA"
+   },
+   {
+    "label": "Care team",
+    "value": "Primary Care Physician; Endocrinology; Dietetics (referral pending)"
+   },
+   {
+    "label": "Code status",
+    "value": "Full code"
+   }
+  ],
+  "difficulty": 3,
+  "encounterType": "Initial nutrition assessment and counseling (telehealth follow-up after hospitalization)",
+  "facts": [
+   {
+    "id": "f1",
+    "category": "chief_complaint",
+    "topic": "diabetes diagnosis",
+    "chart": "Reports new diagnosis of T2DM and recent first hospitalization for hyperglycemia",
+    "says": "I've been diagnosed with type 2 diabetes and was recently hospitalized for my first time. It's been a lot.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f2",
+    "category": "adherence",
+    "topic": "metformin routine",
+    "chart": "Reports frequently forgetting metformin doses due to long work hours",
+    "says": "I keep forgetting to take my metformin because I work long hours and it's confusing with meals.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f3",
+    "category": "adherence",
+    "topic": "insulin use",
+    "chart": "Reports inconsistent insulin glargine use due to fear of hypoglycemia",
+    "says": "I take insulin sometimes, but I'm really scared of getting hypoglycemia and passing out.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f4",
+    "category": "hpi",
+    "topic": "blood sugar control",
+    "chart": "Reports fatigue and unexplained glucose spikes despite trying to manage diet",
+    "says": "I'm so tired and my blood sugar keeps spiking. I just don't understand why.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f5",
+    "category": "hpi",
+    "topic": "hospitalization symptoms",
+    "chart": "2-month history of polyuria and polydipsia preceding hospitalization",
+    "says": "For like two months before I ended up in the hospital, I was so thirsty all the time and running to the bathroom constantly.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f6",
+    "category": "hpi",
+    "topic": "weight changes",
+    "chart": "Unintentional 8 lb weight loss over 3 months",
+    "says": "I lost like 8 pounds without even trying, which honestly scared me more than anything.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f7",
+    "category": "hpi",
+    "topic": "vision changes",
+    "chart": "Reports blurred vision that has improved somewhat since starting treatment",
+    "says": "My vision got blurry before I was diagnosed, it's a little better now but still worries me.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f8",
+    "category": "nutrition",
+    "topic": "breakfast habits",
+    "chart": "Skips breakfast most mornings due to work schedule",
+    "says": "Honestly? I almost never eat breakfast. I just grab coffee and go straight into meetings.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f9",
+    "category": "nutrition",
+    "topic": "carbohydrate intake",
+    "chart": "High intake of refined carbohydrates: white rice, chapati, sugary beverages",
+    "says": "We eat a lot of rice and roti at home, that's just how we grew up eating.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f10",
+    "category": "nutrition",
+    "topic": "beverage choices",
+    "chart": "Drinks coffee with 2 tsp sugar, 2-3 times daily",
+    "says": "I drink coffee with sugar, like two or three cups a day, I need it to function at work.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f11",
+    "category": "psychosocial",
+    "topic": "emotional state",
+    "chart": "History of anxiety; reports feeling overwhelmed since diagnosis",
+    "says": "I've always been a bit of an anxious person, but this diagnosis has made it so much worse.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f12",
+    "category": "nutrition",
+    "topic": "meal timing",
+    "chart": "Eats large lunch and often eats dinner late (after 8 PM) due to work",
+    "says": "Lunch is usually my biggest meal, and dinner is whenever I finish work, sometimes 8 or 9pm.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f13",
+    "category": "nutrition",
+    "topic": "evening snacking",
+    "chart": "Snacks on sugary foods in the evening, especially when stressed",
+    "says": "Sometimes at night I'll have cookies or something sweet if I'm stressed, it just happens.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "family",
+    "category": "family",
+    "topic": "family diabetes history",
+    "chart": "Family history of T2DM in mother and maternal grandmother",
+    "says": "My mom has diabetes too, and so did my grandmother on her side. I guess I always knew this was coming.",
+    "tier": "discoverable",
+    "importance": "important",
+    "id2": "f14"
+   },
+   {
+    "id": "f14",
+    "category": "family",
+    "topic": "family diabetes history",
+    "chart": "Family history of T2DM in mother and maternal grandmother",
+    "says": "My mom has diabetes too, and so did my grandmother on her side. I guess I always knew this was coming.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f15",
+    "category": "social",
+    "topic": "work demands",
+    "chart": "Works 10+ hour days as senior software engineer; sedentary job",
+    "says": "My job is intense, I'm at my desk coding for ten, eleven hours sometimes. There's just no time to move.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f16",
+    "category": "function",
+    "topic": "physical activity",
+    "chart": "Wants to exercise but reports lack of time and motivation",
+    "says": "I know I should exercise, I want to, but between work and everything I just... don't.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f17",
+    "category": "sexual",
+    "topic": "not applicable",
+    "chart": "Not relevant to this visit; no sexual health concerns raised",
+    "says": "That's not really something that's come up for me.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f18",
+    "category": "psychosocial",
+    "topic": "sugar guilt",
+    "chart": "Reports embarrassment and guilt about sugar/sweet consumption",
+    "says": "I feel so guilty every time I eat something sweet now, like I'm failing myself.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f19",
+    "category": "psychosocial",
+    "topic": "asking questions",
+    "chart": "Admits embarrassment about asking questions in clinical settings for fear of appearing uninformed",
+    "says": "I feel embarrassed asking basic questions, like I should already know this stuff since I'm smart.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f20",
+    "category": "psychosocial",
+    "topic": "anxiety symptoms",
+    "chart": "Reports racing heart and disrupted sleep related to health worry",
+    "says": "At night my heart races and I can't sleep, I just lie there thinking about what could go wrong.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f21",
+    "category": "adherence",
+    "topic": "carb counting attempts",
+    "chart": "Has attempted carbohydrate counting independently but finds it mentally exhausting",
+    "says": "I tried counting carbs on my own using an app, but it's exhausting, I can't keep it up with my job.",
+    "tier": "hidden",
+    "importance": "important"
+   },
+   {
+    "id": "f22",
+    "category": "psychosocial",
+    "topic": "fear of restrictive advice",
+    "chart": "Fears provider will impose overly restrictive diet or dismiss her cultural food concerns",
+    "says": "I'm scared you're going to tell me I can never eat rice or roti again, that feels impossible.",
+    "tier": "hidden",
+    "importance": "critical"
+   },
+   {
+    "id": "f23",
+    "category": "other",
+    "topic": "online research",
+    "chart": "Has been researching supplements/alternative treatments online without disclosing to providers",
+    "says": "I've been looking stuff up online, like supplements that are supposed to help with blood sugar, I haven't told anyone that.",
+    "tier": "hidden",
+    "importance": "important"
+   },
+   {
+    "id": "f24",
+    "category": "family",
+    "topic": "husband support",
+    "chart": "Reports strong emotional and financial support from husband",
+    "says": "My husband has been amazing through this, he's trying to learn about it too.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f25",
+    "category": "family",
+    "topic": "mother-in-law meals",
+    "chart": "Mother-in-law prepares traditional meals most evenings, limiting patient's control over dinner content",
+    "says": "My mother-in-law cooks dinner most nights, it's traditional food, lots of love in it but also lots of carbs.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f26",
+    "category": "psychosocial",
+    "topic": "beliefs about diabetes",
+    "chart": "Believes diabetes is primarily a failure of willpower",
+    "says": "Part of me thinks I just didn't have enough willpower, like I did this to myself.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f27",
+    "category": "psychosocial",
+    "topic": "beliefs about diet strictness",
+    "chart": "Believes strict elimination diets are necessary to succeed",
+    "says": "I figure I probably need to just cut out all carbs completely to fix this, right?",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f28",
+    "category": "goals",
+    "topic": "health goals",
+    "chart": "Wants to avoid future hospitalizations and understand underlying physiology of her condition",
+    "says": "I never want to end up in the hospital again. I need to understand why this is happening to my body.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f29",
+    "category": "psychosocial",
+    "topic": "fear of complications",
+    "chart": "Fears severe complications such as blindness or kidney failure",
+    "says": "I keep thinking about going blind or needing dialysis, is that going to happen to me?",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f30",
+    "category": "psychosocial",
+    "topic": "burden concerns",
+    "chart": "Worries about becoming a burden on her husband",
+    "says": "I don't want to become a burden on my husband, he already works so hard.",
+    "tier": "reluctant",
+    "importance": "minor"
+   },
+   {
+    "id": "f31",
+    "category": "function",
+    "topic": "cognitive concerns",
+    "chart": "Fears losing cognitive sharpness or job performance due to illness",
+    "says": "My job depends on my brain working well, what if this diabetes messes with my thinking?",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f32",
+    "category": "nutrition",
+    "topic": "hydration habits",
+    "chart": "Primarily drinks sugary beverages and coffee rather than water",
+    "says": "I probably don't drink enough plain water, mostly it's coffee or like a soda sometimes.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f33",
+    "category": "ros",
+    "topic": "cuticle healing",
+    "chart": "Reports slowly healing cuticles/minor cuts, consistent with hyperglycemia",
+    "says": "I noticed a small cut on my finger took forever to heal, that was weird for me.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f34",
+    "category": "ros",
+    "topic": "sleep quality",
+    "chart": "Poor sleep quality attributed to anxiety and evening snacking habits",
+    "says": "My sleep has been pretty bad lately, between the worry and eating late I think it's all connected.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f35",
+    "category": "other",
+    "topic": "festival food pressure",
+    "chart": "Reports social pressure to eat sweets during cultural festivals and family gatherings",
+    "says": "During festivals everyone expects you to eat the sweets, it feels rude to refuse, you know?",
+    "tier": "discoverable",
+    "importance": "important"
+   }
+  ],
+  "objectives": [
+   {
+    "id": "o1",
+    "text": "Develop an appropriate PES (Problem, Etiology, Signs/Symptoms) statement reflecting medication non-adherence, high refined carbohydrate intake, and irregular meal timing in the context of newly diagnosed T2DM.",
+    "factIds": [
+     "f2",
+     "f3",
+     "f8",
+     "f9",
+     "f12",
+     "f21"
+    ],
+    "actionIds": [
+     "a3",
+     "a4",
+     "a8",
+     "a10",
+     "a13"
+    ]
+   },
+   {
+    "id": "o2",
+    "text": "Apply motivational interviewing techniques to explore the patient's ambivalence about lifestyle change, affirming her strengths while eliciting her own motivation for behavior change.",
+    "factIds": [
+     "f18",
+     "f19",
+     "f26",
+     "f27",
+     "f28",
+     "f29"
+    ],
+    "actionIds": [
+     "a12",
+     "a17"
+    ]
+   },
+   {
+    "id": "o3",
+    "text": "Identify and address lifestyle and behavioral barriers to nutrition therapy, including work schedule constraints, cultural food traditions, and family meal preparation dynamics.",
+    "factIds": [
+     "f12",
+     "f15",
+     "f16",
+     "f25",
+     "f35"
+    ],
+    "actionIds": [
+     "a11",
+     "a16"
+    ]
+   },
+   {
+    "id": "o4",
+    "text": "Integrate medication management considerations (metformin timing with meals, insulin glargine and hypoglycemia risk) into nutrition counseling and meal timing recommendations.",
+    "factIds": [
+     "f2",
+     "f3",
+     "f21"
+    ],
+    "actionIds": [
+     "a8",
+     "a13",
+     "a14",
+     "a15"
+    ]
+   },
+   {
+    "id": "o5",
+    "text": "Elicit sensitive psychosocial information (guilt, embarrassment, fear of restrictive diets, undisclosed supplement research) using rapport-building and non-judgmental, open-ended questioning.",
+    "factIds": [
+     "f18",
+     "f19",
+     "f22",
+     "f23",
+     "f30"
+    ],
+    "actionIds": [
+     "a17"
+    ]
+   }
+  ],
+  "patient": {
+   "name": "Nisha Patel",
+   "age": 29,
+   "sex": "Female",
+   "pronouns": "she/her",
+   "ethnicity": "Indian-American",
+   "occupation": "Senior Software Engineer",
+   "language": "English (fluent), Gujarati (home language)",
+   "appearance": "Appears well-groomed and professionally dressed, calling from a home office with a laptop and dual monitors visible in the background. Sits upright but fidgets with a pen, speaks quickly, and often glances away as if thinking through details. Dark circles under her eyes suggest poor sleep.",
+   "portrait": "/portraits/nisha-patel.jpg"
+  },
+  "persona": {
+   "personality": "Intelligent, analytical, detail-oriented, prone to overthinking; seeks control and certainty, which makes medical uncertainty distressing.",
+   "communicationStyle": "Asks many detailed questions, may interrupt, challenges recommendations by asking for justification, becomes overwhelmed if given too much information at once.",
+   "healthLiteracy": "low",
+   "emotionalState": "Anxious and overwhelmed, fearful about her diagnosis and its implications for her future, but motivated to understand and regain control.",
+   "background": "Nisha immigrated with her family as a child and grew up in a suburban Indian-American household. She holds a Master's in Computer Science and works as a senior software engineer, a demanding job she loves. She is married; her husband works long hours too, and her mother-in-law lives nearby and often cooks traditional meals for the family. She enjoys solving complex problems at work and tends to approach her health the same analytical way, which sometimes backfires when the body doesn't behave like a system she can debug.",
+   "speechExamples": [
+    "Okay wait, can you explain that in a different way? I want to actually understand the mechanism.",
+    "So if I just cut out all carbs, wouldn't that fix the problem fastest?",
+    "I'm sorry, I know this is probably a basic question, but...",
+    "I just don't want to mess this up and end up back in the hospital.",
+    "Is this... is this because I didn't take care of myself enough?"
+   ],
+   "concerns": [
+    "Fear of developing severe complications like blindness or kidney failure",
+    "Worry about burdening her husband",
+    "Anxiety about medication side effects",
+    "Fear that strict dietary rules will be impossible given her cultural food traditions"
+   ]
+  },
+  "scenario": {
+   "studentBrief": "You are the dietetics student conducting a telehealth nutrition assessment visit with Nisha Patel, a 29-year-old woman recently discharged from her first hospitalization for uncontrolled Type 2 Diabetes Mellitus. She has been referred for outpatient medical nutrition therapy. Review her chart before the visit; your goals are to complete a nutrition assessment, identify a nutrition diagnosis, and begin patient-centered counseling.",
+   "chiefComplaint": "Follow-up nutrition counseling visit after first hospitalization for uncontrolled Type 2 Diabetes Mellitus",
+   "openingLine": "Hi... thank you for seeing me. I've been diagnosed with type 2 diabetes and was just hospitalized for the first time, and honestly I'm still trying to wrap my head around all of it.",
+   "tasks": [
+    "Complete a comprehensive nutrition assessment including diet history, anthropometrics, relevant labs, and medication-related barriers",
+    "Identify at least one appropriate nutrition diagnosis (PES statement) based on assessment findings",
+    "Use motivational interviewing techniques to explore the patient's readiness for change and address her ambivalence",
+    "Identify cultural, occupational, and psychosocial barriers to nutrition therapy and collaboratively generate at least one realistic, patient-centered goal",
+    "Document the encounter using the ADIME format"
+   ],
+   "timeLimitMin": 30
+  },
+  "setting": "Telehealth video visit; patient at home in her home office, recently discharged from hospital, following up with dietetics for outpatient nutrition counseling",
+  "summary": "A 29-year-old Indian-American software engineer presents for her first outpatient nutrition counseling visit after a hospitalization for uncontrolled Type 2 Diabetes Mellitus with HbA1c 8.8%. The case teaches nutrition assessment, PES statement formulation, motivational interviewing with an anxious high-health-literacy-seeking-but-overwhelmed patient, and culturally sensitive, barrier-focused counseling around medication adherence and irregular eating patterns.",
+  "answerKey": {
+   "primaryProblem": "Excessive carbohydrate intake and irregular meal pattern related to work schedule demands and lack of nutrition-related knowledge, as evidenced by HbA1c 8.8%, fasting glucose 185 mg/dL, skipped breakfasts, large late dinners, and frequent refined carbohydrate/sugary beverage intake.",
+   "differential": [
+    "Food- and nutrition-related knowledge deficit regarding carbohydrate-medication timing",
+    "Inconsistent medication adherence related to fear of hypoglycemia and complexity of regimen",
+    "Undesirable food choices (high refined carbohydrate/added sugar intake) related to psychological stress and cultural food availability",
+    "Altered nutrition-related laboratory values (elevated HbA1c, fasting glucose, dyslipidemia) related to uncontrolled T2DM"
+   ],
+   "keyFindings": [
+    "HbA1c 8.8% (goal <7.0%), fasting glucose 185 mg/dL",
+    "Dyslipidemia: total cholesterol 210, HDL 38 (L), triglycerides 190 (H)",
+    "BMI 26.1 kg/m2 (overweight), recent unintentional 8 lb weight loss over 3 months prior to diagnosis",
+    "Skips breakfast; large lunch; late dinner after 8-9pm; frequent coffee with sugar; evening sugary snacking under stress",
+    "Inconsistent metformin and insulin glargine adherence due to work schedule and fear of hypoglycemia",
+    "High anxiety, guilt around sugar intake, belief that diabetes reflects personal willpower failure",
+    "Fear that nutrition therapy will mean complete elimination of culturally important foods (rice, roti)",
+    "Strong family support (husband) but limited control over dinner content due to mother-in-law's traditional cooking",
+    "Hidden barrier: has attempted self-directed carb counting but found it unsustainable; has not disclosed independent supplement research"
+   ],
+   "plan": [
+    "Establish rapport and normalize her anxiety and guilt using reflective listening before introducing education",
+    "Provide brief, lay-language explanation of glucose/insulin physiology tailored to her analytical style, checking understanding frequently",
+    "Collaboratively identify one or two small, specific behavior changes (e.g., adding a small protein/fiber-containing breakfast, moving largest meal earlier) rather than prescribing elimination diets",
+    "Discuss carbohydrate-consistent eating approach aligned with culturally familiar foods (portion-based rice/chapati guidance, not elimination)",
+    "Clarify metformin timing with meals to reduce GI side effects and link insulin glargine timing/dose with evening meal pattern to reduce hypoglycemia fear",
+    "Address evening/stress-related snacking with alternative coping strategies and collaborative problem-solving",
+    "Explore and validate cultural food traditions and festival pressures; identify small modifications rather than avoidance",
+    "Screen anxiety symptoms and consider referral to behavioral health if symptoms persist or worsen",
+    "Ask directly and non-judgmentally about use of online research/supplements to open disclosure and provide guidance on safety/efficacy",
+    "Document assessment and plan using ADIME format; schedule follow-up visit in 2-4 weeks to reassess adherence and readiness for change",
+    "Coordinate with endocrinology regarding insulin titration and medication adherence barriers"
+   ],
+   "redFlags": [
+    "Severe/worsening hyperglycemia symptoms (recurrent polyuria/polydipsia, confusion) warranting urgent re-evaluation",
+    "Signs or reported episodes of hypoglycemia (shakiness, diaphoresis, altered mental status) requiring immediate medication adjustment review",
+    "Significant unintentional weight loss continuing despite treatment, which could suggest inadequate glycemic control or other pathology",
+    "Escalating anxiety symptoms (panic attacks, inability to function) warranting behavioral health referral",
+    "Use of unverified supplements that could interact with metformin or insulin"
+   ],
+   "educationPoints": [
+    "Diabetes is a chronic metabolic condition influenced by genetics, physiology, and environment — not simply a result of personal willpower",
+    "Carbohydrate-consistent eating (balanced portions and timing) is generally more sustainable and effective than complete elimination diets",
+    "Traditional foods like rice and roti can remain part of her diet through portion awareness and pairing with protein/fiber, not elimination",
+    "Regular meal timing, including not skipping breakfast, helps stabilize blood glucose and may reduce evening overeating",
+    "Taking metformin with meals as prescribed reduces GI side effects; consistent meal timing supports more predictable insulin glargine action and reduces hypoglycemia risk",
+    "Mild anxiety and guilt around food choices are common after a new diabetes diagnosis and do not reflect personal failure",
+    "Open communication about outside research (supplements, online information) with her care team helps ensure safety and avoid interactions",
+    "Small, specific, achievable behavior changes are more sustainable than large overhauls, especially given her demanding work schedule"
+   ]
+  },
+  "title": "Newly Hospitalized, Overwhelmed, and Overthinking: Nutrition Counseling for a 29-Year-Old with Uncontrolled Type 2 Diabetes",
+  "specialty": "Dietetics / Clinical Nutrition",
+  "professions": [
+   "dietetics"
+  ],
+  "knowledge": [],
+  "rubricId": "default",
+  "variants": []
+ }
+}

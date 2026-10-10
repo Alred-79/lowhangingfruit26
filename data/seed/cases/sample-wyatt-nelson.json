@@ -1,0 +1,969 @@
+{
+ "origin": "sample",
+ "reviewed": true,
+ "profile": {
+  "version": 1,
+  "actions": [
+   {
+    "id": "a1",
+    "kind": "vitals",
+    "name": "Review vital signs (from recent in-clinic check)",
+    "result": "HR 78 bpm, BP 128/84 mmHg, RR 16/min, Temp 98.4°F, SpO2 99%",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a2",
+    "kind": "assessment",
+    "name": "Review anthropometrics",
+    "result": "Height 5'10\" (178 cm), Weight 210 lb (95.3 kg), BMI 32.1 kg/m2, Waist circumference 38 in",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a3",
+    "kind": "lab",
+    "name": "Review HbA1c",
+    "result": "HbA1c 8.9% (goal <7%) — uncontrolled",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a4",
+    "kind": "lab",
+    "name": "Review lipid panel",
+    "result": "Total cholesterol 235 mg/dL (H), LDL 145 mg/dL (H), HDL 38 mg/dL (L), Triglycerides 180 mg/dL (H)",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a5",
+    "kind": "lab",
+    "name": "Review fasting glucose",
+    "result": "Fasting glucose 142 mg/dL (H)",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a6",
+    "kind": "record",
+    "name": "Review medication list",
+    "result": "Metformin 1000 mg PO BID with meals (inconsistent adherence); Glipizide 5 mg PO once daily with dinner (good adherence)",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a7",
+    "kind": "record",
+    "name": "Review problem list / diagnoses",
+    "result": "Type 2 Diabetes Mellitus (uncontrolled), Obesity Class I, Dyslipidemia, Constipation",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a8",
+    "kind": "assessment",
+    "name": "24-hour dietary recall",
+    "result": "Patient reports: skipped breakfast; lunch was 2 slices pizza + regular soda; after-school snack of chips; dinner was fast-food burger, fries, and a large soda; minimal water intake; no fruit or vegetable intake reported for the day.",
+    "importance": "critical",
+    "artifactIds": [
+     "d7"
+    ]
+   },
+   {
+    "id": "a9",
+    "kind": "assessment",
+    "name": "Usual meal pattern and timing assessment",
+    "result": "Irregular pattern: frequently skips breakfast, snacks on processed foods between classes/practice, largest meal is dinner, often eaten late after soccer practice.",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a10",
+    "kind": "assessment",
+    "name": "Fluid/hydration intake assessment",
+    "result": "Reports drinking 2-3 regular sodas per day including during soccer practice; water intake estimated at less than 16 oz/day.",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a11",
+    "kind": "assessment",
+    "name": "Fiber intake and GI symptom assessment",
+    "result": "Reports very low fruit/vegetable and whole grain intake; endorses constipation (hard stools, straining) when asked directly, with mild embarrassment.",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a12",
+    "kind": "assessment",
+    "name": "Medication adherence and side-effect screen",
+    "result": "Patient reports frequently forgetting midday metformin dose due to school schedule and skipping doses after nausea/stomach upset; glipizide taken consistently with dinner.",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a13",
+    "kind": "assessment",
+    "name": "Physical activity assessment",
+    "result": "Plays soccer with school team twice weekly (practice/games); otherwise sedentary most of day, several hours of homework/gaming/screen time.",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a14",
+    "kind": "assessment",
+    "name": "Readiness-to-change / stage of change assessment",
+    "result": "Patient expresses ambivalence; motivated by desire to improve soccer performance and energy, but resistant to being told to 'diet' or give up favorite foods; rates importance of change moderate, confidence low-moderate.",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a15",
+    "kind": "record",
+    "name": "Review growth/weight trend in chart",
+    "result": "Weight has increased steadily since diagnosis at age 15; no prior documented weight-loss intervention in record.",
+    "importance": "minor",
+    "artifactIds": []
+   },
+   {
+    "id": "a16",
+    "kind": "assessment",
+    "name": "Social/food access and food resource assessment",
+    "result": "Family relies on public insurance; patient reports fast food and packaged snacks are 'easier and cheaper' than cooking; limited cooking skills; parents supportive but busy.",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a17",
+    "kind": "record",
+    "name": "Review school/attendance notes in chart",
+    "result": "Chart notes from school nurse (if released) describe several absences this semester and reports of declining energy/attention in class.",
+    "importance": "minor",
+    "artifactIds": [
+     "d6"
+    ]
+   },
+   {
+    "id": "a18",
+    "kind": "assessment",
+    "name": "Blurred vision and symptom screen",
+    "result": "Patient reports occasional blurred vision and fatigue, consistent with hyperglycemia; denies chest pain, denies vision loss, denies numbness/tingling in feet today.",
+    "importance": "important",
+    "artifactIds": []
+   }
+  ],
+  "answerKey": {
+   "primaryProblem": "Altered nutrition-related laboratory values (uncontrolled T2DM, dyslipidemia) related to excessive intake of refined carbohydrates/sugar-sweetened beverages and inadequate fiber intake, as evidenced by HbA1c 8.9%, LDL 145 mg/dL, HDL 38 mg/dL, and self-reported diet low in fruits/vegetables/fiber and high in fast food and sugary drinks.",
+   "differential": [
+    "Nutrition diagnosis 1: Excessive carbohydrate/sugar intake (NI-5.8.2) related to habitual sugary beverage and processed food consumption",
+    "Nutrition diagnosis 2: Inadequate fiber intake (NI-5.8.5) related to avoidance of fruits/vegetables, contributing to constipation",
+    "Nutrition diagnosis 3: Overweight/obesity (NI-1.5/NC-3.3) related to excess energy intake relative to needs and sedentary screen time",
+    "Medication-food interaction knowledge deficit affecting metformin adherence (NB-1.1/NB-2.6)"
+   ],
+   "keyFindings": [
+    "BMI 32.1 kg/m2 (Class I obesity), waist circumference 38 in",
+    "HbA1c 8.9% (uncontrolled), fasting glucose 142 mg/dL",
+    "Lipid panel: TC 235, LDL 145, HDL 38, TG 180 (all abnormal)",
+    "Diet recall: no fruits/vegetables, high refined carbs/sugar, sugary soda intake 2-3/day, skipped breakfast, large late dinner",
+    "Constipation reported on direct questioning, likely multifactorial (low fiber, low fluid, possibly medication-related)",
+    "Inconsistent metformin adherence due to GI side effects and school schedule; good glipizide adherence",
+    "Ambivalent readiness to change; strong motivation tied to soccer performance and appearance, not disease avoidance per se",
+    "Barriers: limited cooking skills, cost perceptions, peer/social eating pressure, busy schedule"
+   ],
+   "plan": [
+    "Nutrition diagnosis/PES statement(s) addressing excessive sugar/refined carb intake and inadequate fiber intake linked to labs and GI symptoms",
+    "Collaborative, non-judgmental goal-setting using motivational interviewing — elicit his own reasons tied to soccer performance/energy",
+    "Practical, low-barrier substitutions: swap 1 sugary soda/day for water or a diet/zero-sugar option as a first step; add one fruit or vegetable per day with strategies to improve palatability (smoothies, dips, texture modification)",
+    "Address constipation with gradual fiber increase (soluble fiber sources less likely to cause bloating) plus increased water intake, paired with reassurance and normalization to reduce embarrassment",
+    "Coordinate with prescriber regarding metformin GI side effects — consider extended-release formulation or dose timing adjustment; counsel to take with full meal to reduce nausea rather than skipping doses",
+    "Provide budget-friendly, quick-prep meal/snack ideas suitable for a teen with limited cooking skills and time (e.g., batch-prepared items, affordable produce options, pairing protein+fiber for satiety and glycemic control)",
+    "Address breakfast skipping and irregular meal timing to support more stable glucose control and reduce large late-night dinners",
+    "Discuss sports nutrition specifically — appropriate pre/post-practice fueling without relying on sugary sports drinks/soda",
+    "Identify and leverage support system: parents for shopping/meal prep, consider school nutrition services, consider referral to school nurse/counselor given reported absences/declining attention",
+    "Schedule follow-up visit to reassess adherence, labs trend (repeat HbA1c in 3 months), and readiness to change; use SMART, patient-generated goals",
+    "Screen for and address psychosocial stress and weight-related self-consciousness with empathetic, weight-neutral language focused on performance/health rather than appearance"
+   ],
+   "redFlags": [
+    "HbA1c 8.9% with symptoms of polyuria/polydipsia and blurred vision suggests ongoing hyperglycemia and risk for progression to insulin requirement/complications if unaddressed",
+    "LDL 145 / HDL 38 / TG 180 in an 18-year-old indicate significant cardiovascular risk requiring timely lifestyle intervention",
+    "Reported medication non-adherence (metformin) can worsen glycemic control and should be communicated to the prescribing provider",
+    "Reported frequent school absences and declining energy/attention (if obtained) warrant interprofessional communication with school nurse and PCP",
+    "Chronic constipation with abdominal discomfort should be monitored; rule out red flags (no blood in stool, no severe pain, no weight loss beyond expected) and escalate if it worsens or doesn't improve with dietary measures"
+   ],
+   "educationPoints": [
+    "Explain in lay terms how refined carbs and sugary drinks drive blood sugar spikes and relate this directly to his soccer performance (crashes/energy dips) to motivate change",
+    "Teach practical fiber sources and gradual introduction (to avoid bloating) along with adequate fluid intake to relieve constipation",
+    "Clarify that healthy eating does not have to be expensive or require advanced cooking skills; offer concrete low-cost, low-prep examples",
+    "Discuss how consistent metformin timing with food can reduce GI side effects, and the importance of not skipping doses without talking to the care team first",
+    "Reframe nutrition goals around performance, energy, and control rather than appearance or 'dieting' to reduce defensiveness and support autonomy",
+    "Normalize discussing bowel habits as a routine, non-judgmental part of care to reduce his embarrassment"
+   ]
+  },
+  "artifacts": [
+   {
+    "id": "d1",
+    "type": "lab_report",
+    "title": "Comprehensive Metabolic & Lipid Panel",
+    "author": "Suburban Family Health Lab",
+    "date": "2 days prior to visit",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Test",
+      "Result",
+      "Reference Range",
+      "Flag"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "HbA1c",
+        "8.9",
+        "4.0-5.6 %"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Fasting Glucose",
+        "142",
+        "70-99 mg/dL"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Total Cholesterol",
+        "235",
+        "<200 mg/dL"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "LDL Cholesterol",
+        "145",
+        "<100 mg/dL"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "HDL Cholesterol",
+        "38",
+        ">40 mg/dL (male)"
+       ],
+       "flag": "L"
+      },
+      {
+       "cells": [
+        "Triglycerides",
+        "180",
+        "<150 mg/dL"
+       ],
+       "flag": "H"
+      }
+     ]
+    }
+   },
+   {
+    "id": "d2",
+    "type": "medication_list",
+    "title": "Current Medication List",
+    "author": "Primary Care Clinic",
+    "date": "Current",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Medication",
+      "Dose",
+      "Frequency",
+      "Purpose",
+      "Adherence Notes"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Metformin",
+        "1000 mg",
+        "Twice daily with meals",
+        "Lower blood glucose",
+        "Inconsistent; patient reports forgetting midday dose and skipping due to nausea"
+       ]
+      },
+      {
+       "cells": [
+        "Glipizide",
+        "5 mg",
+        "Once daily with dinner",
+        "Regulate blood glucose",
+        "Good adherence per patient report"
+       ]
+      },
+      {
+       "cells": [
+        "Magnesium glycinate (OTC)",
+        "Unspecified",
+        "As needed",
+        "Patient-reported use, reason unclear",
+        "Not prescribed; patient self-selected"
+       ]
+      },
+      {
+       "cells": [
+        "Ibbotronix (OTC)",
+        "Unspecified",
+        "As needed",
+        "Patient-reported supplement, purpose unclear",
+        "Not prescribed; patient self-selected"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d3",
+    "type": "flowsheet",
+    "title": "Vitals and Anthropometrics Flowsheet",
+    "author": "Primary Care Clinic",
+    "date": "Most recent in-person visit, 1 week prior",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Measure",
+      "Value"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Heart Rate",
+        "78 bpm"
+       ]
+      },
+      {
+       "cells": [
+        "Blood Pressure",
+        "128/84 mmHg"
+       ]
+      },
+      {
+       "cells": [
+        "Respiratory Rate",
+        "16/min"
+       ]
+      },
+      {
+       "cells": [
+        "Temperature",
+        "98.4 F"
+       ]
+      },
+      {
+       "cells": [
+        "O2 Saturation",
+        "99%"
+       ]
+      },
+      {
+       "cells": [
+        "Height",
+        "5'10\" (178 cm)"
+       ]
+      },
+      {
+       "cells": [
+        "Weight",
+        "210 lb (95.3 kg)"
+       ]
+      },
+      {
+       "cells": [
+        "BMI",
+        "32.1 kg/m2"
+       ]
+      },
+      {
+       "cells": [
+        "Waist Circumference",
+        "38 in"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d4",
+    "type": "chart",
+    "title": "Weight Trend Since Diagnosis",
+    "author": "Primary Care Clinic growth/weight chart",
+    "date": "Age 15 to present",
+    "release": {
+     "when": "start"
+    },
+    "chart": {
+     "kind": "line",
+     "xLabel": "Age (years)",
+     "yLabel": "Weight (lb)",
+     "series": [
+      {
+       "name": "Weight",
+       "points": [
+        {
+         "x": "15",
+         "y": 175
+        },
+        {
+         "x": "16",
+         "y": 188
+        },
+        {
+         "x": "17",
+         "y": 199
+        },
+        {
+         "x": "18",
+         "y": 210
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d5",
+    "type": "note",
+    "title": "Endocrinology Follow-up Note (3 months ago)",
+    "author": "Dr. R. Alvarez, Endocrinology",
+    "date": "3 months ago",
+    "release": {
+     "when": "start"
+    },
+    "body": "18 yo male with T2DM dx age 15, obesity, dyslipidemia. Presents with persistently elevated HbA1c despite metformin/glipizide. Reports inconsistent metformin adherence, attributes to school schedule and GI upset. Discussed importance of adherence and lifestyle modification. Referral placed for outpatient nutrition counseling. Will recheck HbA1c in 3 months. Continue current regimen; consider insulin if no improvement at next visit."
+   },
+   {
+    "id": "d6",
+    "type": "note",
+    "title": "School Nurse Communication (released on request)",
+    "author": "Lincoln High School Health Office",
+    "date": "3 weeks ago",
+    "release": {
+     "when": "action",
+     "ref": "a17"
+    },
+    "body": "Note from school nurse to PCP office: Wyatt has visited the health office several times this semester with fatigue and reports of feeling 'off.' Attendance records show 6 absences this semester, more than his usual pattern. Teachers have informally noted some difficulty with attention/energy in afternoon classes. Recommend medical follow-up to evaluate possible impact of chronic condition on school performance."
+   },
+   {
+    "id": "d7",
+    "type": "form",
+    "title": "24-Hour Diet Recall Worksheet (completed during visit)",
+    "author": "Dietetics Student (self-entered during interview)",
+    "date": "Today",
+    "release": {
+     "when": "action",
+     "ref": "a8"
+    },
+    "body": "Breakfast: none (skipped). Mid-morning: none. Lunch (school cafeteria): 2 slices pepperoni pizza, 1 regular soda (~20 oz). Afternoon snack: 1 bag chips (~ 1.5 oz), occasionally a candy bar. Dinner: fast-food cheeseburger, medium fries, large regular soda (~ 24-32 oz) eaten after soccer practice, around 8:30-9 PM. Fluids across day: estimated 2-3 regular sodas, less than 16 oz water. No fruit or vegetable servings identified in recall."
+   }
+  ],
+  "chartAtStart": [
+   {
+    "label": "Reason for visit",
+    "value": "Outpatient telehealth nutrition counseling referral for uncontrolled Type 2 Diabetes Mellitus, obesity, and dyslipidemia"
+   },
+   {
+    "label": "Problem list",
+    "value": "Type 2 Diabetes Mellitus (uncontrolled); Obesity Class I; Dyslipidemia; Constipation"
+   },
+   {
+    "label": "Medications",
+    "value": "Metformin 1000 mg PO BID with meals; Glipizide 5 mg PO daily with dinner"
+   },
+   {
+    "label": "Allergies",
+    "value": "No known drug allergies"
+   },
+   {
+    "label": "Last vitals",
+    "value": "HR 78, BP 128/84, RR 16, Temp 98.4F, SpO2 99%; Weight 210 lb; BMI 32.1"
+   },
+   {
+    "label": "Care team",
+    "value": "Primary Care Physician; Endocrinology (Dr. R. Alvarez); Dietetics referral (today's visit)"
+   },
+   {
+    "label": "Code status",
+    "value": "Full code (N/A - outpatient pediatric/young adult)"
+   }
+  ],
+  "encounterType": "Initial outpatient nutrition assessment and counseling (telehealth)",
+  "difficulty": 3,
+  "facts": [
+   {
+    "id": "f1",
+    "category": "chief_complaint",
+    "topic": "reason for referral",
+    "chart": "Referred for uncontrolled T2DM, obesity, dyslipidemia for medical nutrition therapy",
+    "says": "My doctor said I need to talk to a dietitian because my blood sugar isn't doing good.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f2",
+    "category": "hpi",
+    "topic": "thirst and fatigue",
+    "chart": "Reports frequent thirst, urination, and fatigue/low energy",
+    "says": "I'm thirsty like all the time and I'm tired a lot, even after sleeping.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f3",
+    "category": "hpi",
+    "topic": "blood sugar control",
+    "chart": "States blood sugar has been running high per home monitoring/last labs",
+    "says": "My numbers have been high, my doctor wasn't happy about it last time.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f4",
+    "category": "ros",
+    "topic": "vision changes",
+    "chart": "Reports occasional blurred vision",
+    "says": "Sometimes my eyes get kind of blurry, especially if I haven't eaten.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f5",
+    "category": "ros",
+    "topic": "fruit and vegetable intake",
+    "chart": "States dislike of fruits and vegetables",
+    "says": "I'm just not really a fruits and veggies guy, never have been.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f6",
+    "category": "hpi",
+    "topic": "bowel habits",
+    "chart": "Reports constipation when directly asked, with mild embarrassment",
+    "says": "Yeah... I guess I don't go that often, it's kind of uncomfortable actually.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f7",
+    "category": "hpi",
+    "topic": "diet composition",
+    "chart": "Diet consists primarily of fast food, pizza, chips, and sugary soda",
+    "says": "I mean, I eat pizza, burgers, that kind of stuff. Normal food.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f8",
+    "category": "hpi",
+    "topic": "beverage choices",
+    "chart": "Drinks 2-3 regular sodas daily, including during sports practice; minimal water intake",
+    "says": "I drink soda pretty much all day, it helps me get through practice.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f9",
+    "category": "adherence",
+    "topic": "medication routine",
+    "chart": "Admits to inconsistent metformin adherence, often forgetting midday dose at school",
+    "says": "Honestly I forget the middle one a lot, school's just busy.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f10",
+    "category": "adherence",
+    "topic": "medication side effects",
+    "chart": "Skips metformin doses due to nausea/stomach upset",
+    "says": "Sometimes it makes my stomach feel gross so I just don't take it that time.",
+    "tier": "reluctant",
+    "importance": "critical"
+   },
+   {
+    "id": "f11",
+    "category": "adherence",
+    "topic": "glipizide routine",
+    "chart": "Takes glipizide consistently with dinner",
+    "says": "The dinner one I always take, that's easy to remember.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f12",
+    "category": "goals",
+    "topic": "soccer performance",
+    "chart": "Motivated to improve energy and performance for soccer",
+    "says": "I just want to feel less dead during soccer, that's really why I'm here.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f13",
+    "category": "psychosocial",
+    "topic": "weight self-consciousness",
+    "chart": "Self-conscious about weight; sensitive to comments about body size",
+    "says": "I know I'm bigger than most of the guys on my team, I don't really want to talk about that part.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f14",
+    "category": "nutrition",
+    "topic": "meal timing",
+    "chart": "Skips breakfast most days, eats large dinner late after practice",
+    "says": "I don't really eat breakfast, I'm not hungry that early. Dinner's my big meal, usually after practice.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f15",
+    "category": "nutrition",
+    "topic": "snacking pattern",
+    "chart": "Snacks on chips and processed foods during study sessions",
+    "says": "When I'm doing homework I just grab chips or whatever's around.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f16",
+    "category": "social",
+    "topic": "peer eating habits",
+    "chart": "Reports social pressure to eat fast food with teammates/peers",
+    "says": "After games everyone goes to get food together, it's just what we do.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f17",
+    "category": "nutrition",
+    "topic": "texture preferences",
+    "chart": "Dislikes texture/taste of most fruits and vegetables",
+    "says": "Veggies are just mushy or weird-tasting to me, I never liked them.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f18",
+    "category": "nutrition",
+    "topic": "cooking skills",
+    "chart": "Limited cooking skills; rarely prepares own meals",
+    "says": "I don't really know how to cook anything, my mom usually does that or we just get takeout.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f19",
+    "category": "social",
+    "topic": "food cost beliefs",
+    "chart": "Believes healthy food is expensive and inconvenient",
+    "says": "Healthy stuff is way more expensive, and it's not like it's quick either.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f20",
+    "category": "function",
+    "topic": "physical activity",
+    "chart": "Plays soccer twice weekly; otherwise sedentary with high screen time",
+    "says": "I play soccer twice a week, but other than that I'm mostly just sitting around doing homework or gaming.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f21",
+    "category": "other",
+    "topic": "sleep pattern",
+    "chart": "Sleeps about 7 hours nightly, with inconsistent schedule due to homework and screens",
+    "says": "I get like 7 hours maybe, but it's never really the same time every night.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f22",
+    "category": "psychosocial",
+    "topic": "fear of weight loss talk",
+    "chart": "Fears being perceived as weak if he loses weight for health reasons related to sports",
+    "says": "I don't want people thinking I'm trying to lose weight because I'm weak or something.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f23",
+    "category": "psychosocial",
+    "topic": "beliefs about sugar and energy",
+    "chart": "Believes sugar helps him perform better during sports",
+    "says": "Sugar kind of gives me a boost before and during games, so I figured that was good.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f24",
+    "category": "family",
+    "topic": "family history",
+    "chart": "Family history of metabolic syndrome",
+    "says": "My dad has the sugar problem too, and I think my grandma does something with her heart.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f25",
+    "category": "family",
+    "topic": "parental support",
+    "chart": "Parents supportive of healthy eating but face time/preparation barriers",
+    "says": "My parents want me to eat better, they just don't always have time to cook different stuff.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f26",
+    "category": "psychosocial",
+    "topic": "readiness to change",
+    "chart": "Expresses ambivalence about making significant dietary changes",
+    "says": "I know I probably should change some stuff, but it's hard, you know?",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f27",
+    "category": "adherence",
+    "topic": "insulin history",
+    "chart": "Medical record indicates previous non-adherence with insulin therapy (not currently on insulin)",
+    "says": "I used to be on the shots for a bit, I didn't really keep up with those either.",
+    "tier": "hidden",
+    "importance": "important"
+   },
+   {
+    "id": "f28",
+    "category": "function",
+    "topic": "school attendance",
+    "chart": "Parent/school report of frequent school absences this semester related to health issues (not independently volunteered by patient)",
+    "says": "I guess I've missed some school, I just haven't felt that great some days.",
+    "tier": "hidden",
+    "importance": "important"
+   },
+   {
+    "id": "f29",
+    "category": "function",
+    "topic": "school performance",
+    "chart": "School nurse notes declining energy/attention during classes",
+    "says": "Teachers have said I seem kind of out of it in the afternoons, yeah.",
+    "tier": "hidden",
+    "importance": "minor"
+   },
+   {
+    "id": "f30",
+    "category": "social",
+    "topic": "peer pressure specifics",
+    "chart": "Reveals specific pressure to consume sugary foods during group activities with peers",
+    "says": "If I don't get what everyone else is getting, it's kind of awkward, so I just go with it.",
+    "tier": "hidden",
+    "importance": "minor"
+   },
+   {
+    "id": "f31",
+    "category": "other",
+    "topic": "supplement use",
+    "chart": "Takes OTC magnesium glycinate and an unspecified product called Ibbotronix; reason/purpose unclear to patient",
+    "says": "My buddy told me to try this magnesium thing and some other supplement, not totally sure what it does.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f32",
+    "category": "other",
+    "topic": "insurance/access",
+    "chart": "Family has public insurance via parents; may affect access to resources/referrals",
+    "says": "We have state insurance through my parents, I think.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f33",
+    "category": "hpi",
+    "topic": "abdominal discomfort",
+    "chart": "Reports mild abdominal discomfort associated with constipation",
+    "says": "My stomach feels kind of full and crampy sometimes, probably from the not going.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f34",
+    "category": "ros",
+    "topic": "neuropathy screen",
+    "chart": "Denies numbness or tingling in feet",
+    "says": "No, my feet feel fine, no weird tingling or anything.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f35",
+    "category": "ros",
+    "topic": "chest pain screen",
+    "chart": "Denies chest pain or shortness of breath",
+    "says": "No chest pain or trouble breathing, nothing like that.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f36",
+    "category": "goals",
+    "topic": "appearance concerns",
+    "chart": "Wants to improve appearance in addition to performance goals",
+    "says": "I mean, looking better wouldn't hurt either, if I'm honest.",
+    "tier": "reluctant",
+    "importance": "minor"
+   }
+  ],
+  "objectives": [
+   {
+    "id": "o1",
+    "text": "Apply the Nutrition Care Process to complete a nutrition assessment and formulate an appropriate PES statement reflecting excessive sugar/refined carbohydrate intake and inadequate fiber intake in the context of uncontrolled T2DM and dyslipidemia.",
+    "factIds": [
+     "f5",
+     "f7",
+     "f8",
+     "f14",
+     "f15",
+     "f17"
+    ],
+    "actionIds": [
+     "a2",
+     "a3",
+     "a4",
+     "a8",
+     "a9",
+     "a11"
+    ]
+   },
+   {
+    "id": "o2",
+    "text": "Develop practical, evidence-based nutrition interventions addressing fiber intake, sugar-sweetened beverage reduction, and meal pattern regularity that are feasible given cost, cooking skill, and social barriers.",
+    "factIds": [
+     "f16",
+     "f18",
+     "f19",
+     "f25"
+    ],
+    "actionIds": [
+     "a10",
+     "a16"
+    ]
+   },
+   {
+    "id": "o3",
+    "text": "Integrate medication management considerations into nutrition counseling, including strategies to reduce GI side effects of metformin and support more consistent adherence.",
+    "factIds": [
+     "f9",
+     "f10",
+     "f11"
+    ],
+    "actionIds": [
+     "a6",
+     "a12"
+    ]
+   },
+   {
+    "id": "o4",
+    "text": "Apply motivational interviewing techniques to explore ambivalence, elicit the patient's own motivations (sports performance, energy), and respond empathetically to sensitive topics (weight, bowel habits) without triggering defensiveness.",
+    "factIds": [
+     "f12",
+     "f13",
+     "f22",
+     "f23",
+     "f26",
+     "f6",
+     "f33"
+    ],
+    "actionIds": [
+     "a14"
+    ]
+   },
+   {
+    "id": "o5",
+    "text": "Identify opportunities for interprofessional collaboration and community/school resources to support this adolescent's nutrition and medical care.",
+    "factIds": [
+     "f24",
+     "f28",
+     "f29",
+     "f32"
+    ],
+    "actionIds": [
+     "a17"
+    ]
+   }
+  ],
+  "patient": {
+   "name": "Wyatt Nelson",
+   "age": 18,
+   "sex": "Male",
+   "pronouns": "he/him",
+   "ethnicity": "White American",
+   "occupation": "High school student (senior)",
+   "language": "English",
+   "appearance": "Appears his stated age, sitting in what looks like his bedroom with soccer posters visible on the wall behind him; wearing a school athletics hoodie; posture slightly hunched, avoids direct eye contact with the camera, gives short answers and glances away when sensitive topics come up.",
+   "portrait": "/portraits/wyatt-nelson.jpg"
+  },
+  "persona": {
+   "personality": "Shy, sensitive, somewhat guarded; cares about fitting in with teammates and not appearing 'weak' or different",
+   "communicationStyle": "Concise and short-answered; avoids eye contact especially on sensitive topics; deflects with humor or vague answers when uncomfortable; opens up more with empathetic, non-judgmental, performance-framed questions",
+   "healthLiteracy": "low",
+   "emotionalState": "Mildly anxious and self-conscious; a bit defensive about diet and weight; relieved when questions are framed around sports/energy rather than appearance or 'dieting'",
+   "background": "Wyatt is a senior at a suburban public high school, lives at home with both parents, and plays on the varsity soccer team. He spends a lot of free time gaming online with friends and doing homework. His parents work full-time and are supportive but busy, often relying on takeout or quick meals on weeknights. He was diagnosed with Type 2 Diabetes at 15 after a routine physical, and has been followed by his pediatrician and more recently an endocrinologist.",
+   "speechExamples": [
+    "I mean, it's fine, I guess.",
+    "I don't really think about food that much, I just eat what's around.",
+    "Can we not really get into the bathroom stuff? It's kind of embarrassing.",
+    "If it helps me not feel so dead at practice, I guess I'd try it.",
+    "My mom's the one who really worries about this stuff more than me."
+   ],
+   "concerns": [
+    "Worried that making dietary changes will make him seem weak or different from teammates",
+    "Concerned that healthy food costs more and takes more time than his family has",
+    "Anxious about medication side effects and being told to take more medication",
+    "Embarrassed to discuss constipation/bowel habits in detail",
+    "Wants reassurance that changes won't mean giving up everything he enjoys"
+   ]
+  },
+  "scenario": {
+   "studentBrief": "You are a dietetics student conducting an initial telehealth nutrition assessment for Wyatt Nelson, an 18-year-old male referred by his endocrinologist for medical nutrition therapy related to uncontrolled Type 2 Diabetes Mellitus, obesity, and dyslipidemia. Review the available chart information before the visit. Conduct a nutrition-focused history (diet, meal pattern, hydration, activity, medication adherence, GI symptoms), identify barriers to change, and use motivational interviewing to engage this ambivalent, self-conscious adolescent. Document your findings using the ADIME format.",
+   "chiefComplaint": "Uncontrolled Type 2 Diabetes, obesity, and dyslipidemia referred for nutrition counseling",
+   "openingLine": "Hey... yeah, my doctor said I had to talk to you guys because my blood sugar's not doing great.",
+   "tasks": [
+    "Complete a nutrition-focused assessment including diet history, meal pattern, hydration, physical activity, and anthropometric/lab review",
+    "Explore medication adherence barriers (especially metformin GI side effects) and their nutrition implications",
+    "Use motivational interviewing to explore the patient's ambivalence and elicit his own motivations (sports performance, energy) for change",
+    "Sensitively assess and address constipation/fiber intake without increasing his embarrassment",
+    "Formulate a nutrition diagnosis (PES statement) and propose 2-3 realistic, patient-centered interventions, documented in ADIME format"
+   ],
+   "timeLimitMin": 30
+  },
+  "setting": "Telehealth video visit; patient at home in his bedroom, calling from a laptop or phone propped on a desk",
+  "specialty": "Dietetics / Clinical Nutrition",
+  "summary": "An 18-year-old male with uncontrolled Type 2 Diabetes (HbA1c 8.9%), Class I obesity, dyslipidemia, and constipation presents for an initial telehealth nutrition counseling visit. The case teaches learners to conduct a nutrition-focused assessment, formulate a PES statement, and apply motivational interviewing with a shy, ambivalent adolescent who is sensitive about his weight and bowel habits but motivated by sports performance.",
+  "title": "Uncontrolled Type 2 Diabetes and Dyslipidemia in an Ambivalent 18-Year-Old Soccer Player",
+  "professions": [
+   "dietetics"
+  ],
+  "knowledge": [],
+  "rubricId": "default",
+  "variants": []
+ }
+}

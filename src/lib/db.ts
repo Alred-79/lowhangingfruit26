@@ -2,6 +2,9 @@ import Database from "better-sqlite3";
 import fs from "node:fs";
 import path from "node:path";
 import { nanoid } from "nanoid";
+import * as studio from "./schema/studio";
+import * as courses from "./schema/courses";
+import * as journeys from "./schema/journeys";
 
 const DB_PATH = process.env.DB_PATH || path.join(process.cwd(), "data", "app.db");
 
@@ -226,6 +229,16 @@ export function db(): Database.Database {
     d.pragma("journal_mode = WAL");
     d.pragma("busy_timeout = 5000");
     d.exec(SCHEMA);
+    for (const area of [studio, courses, journeys]) {
+      if (area.tables.trim()) d.exec(area.tables);
+      for (const sql of area.alters) {
+        try {
+          d.exec(sql);
+        } catch {
+          // already applied
+        }
+      }
+    }
     g.__db = d;
   }
   return g.__db;
