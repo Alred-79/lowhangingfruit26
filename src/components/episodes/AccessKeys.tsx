@@ -32,7 +32,7 @@ export default function AccessKeys({ origin }: { origin: string }) {
     await fetch("/api/keys", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id }) });
     load();
   }
-  const cfg = JSON.stringify({ mcpServers: { rounds: { type: "http", url: `${origin}/api/mcp`, headers: { Authorization: `Bearer ${fresh || "<your key>"}` } } } }, null, 2);
+  const cfg = JSON.stringify({ mcpServers: { poscere: { type: "http", url: `${origin}/api/mcp`, headers: { Authorization: `Bearer ${fresh || "<your key>"}` } } } }, null, 2);
   return (
     <div className="space-y-3 text-sm">
       <p className="text-slate-600">

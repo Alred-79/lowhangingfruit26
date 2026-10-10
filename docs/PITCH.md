@@ -1,4 +1,4 @@
-# Rounds: pitch and demo plan
+# Poscere: pitch and demo plan
 
 RU Health Hack 2026, School of Health Professions track. One pitch covers both entries: Challenge 1
 (Virtual Patient Encounter System) and Challenge 2 (Connected Care Journey).
@@ -6,7 +6,7 @@ RU Health Hack 2026, School of Health Professions track. One pitch covers both e
 Contents: (1) the four-minute script, (2) what each brief asks the pitch to explain and where the
 script covers it, (3) demo run-of-show, (4) likely questions with honest answers.
 
-Live URL: https://d3k6ssmfceay1x.cloudfront.net. Demo accounts share the password `rounds-demo`.
+Live URL: https://d3k6ssmfceay1x.cloudfront.net. Demo accounts share the password `poscere-demo`.
 
 ## 1. Four-minute script
 
@@ -14,10 +14,10 @@ About 595 spoken words, which is four minutes at about 150 words a minute. There
 paragraph any more: if a rehearsal runs over, drop the last sentence of the 1:20 section (episodes
 and MCP) first. Rehearse with a timer; the section times are targets.
 
-### 0:00 to 0:20. The problem and what Rounds is
+### 0:00 to 0:20. The problem and what Poscere is
 
 > Standardized-patient sessions are expensive and hard to schedule, so students get few
-> repetitions. Rounds is a telehealth simulator. The student talks with a virtual patient on the
+> repetitions. Poscere is a telehealth simulator. The student talks with a virtual patient on the
 > left, a chart fills in on the right, and feedback follows. One engine serves both challenges.
 
 ### 0:20 to 1:20. Challenge 1: solution, architecture, technical approach
@@ -114,13 +114,13 @@ seconds), so the Challenge 2 demo uses a run completed beforehand plus a short l
 1. Use Chrome. Open https://d3k6ssmfceay1x.cloudfront.net/api/health and confirm it returns
    `"ok": true`. Do not push to `main` from now until the session is over: a deploy restarts the
    server, and although the restart takes about two seconds it drops any reply that is streaming.
-2. **Window A, faculty.** Sign in as `faculty@rounds.demo`. Two tabs:
+2. **Window A, faculty.** Sign in as `faculty@poscere.demo`. Two tabs:
    - A1: **Patient Studio**, the library.
    - A2: open the seed patient **Helen Kowalczyk** ("Progressive Fatigue and Exertional Dyspnea in
      a 67-Year-Old on Chronic NSAIDs") in the editor and click **Check consistency** once, so the
      Consistency check section has results to show. This tab is what you talk over during drafting.
 3. **Window B, student.** A separate browser profile or a private window, because the session is a
-   cookie. Sign in as `student@rounds.demo`. Three tabs:
+   cookie. Sign in as `student@poscere.demo`. Three tabs:
    - B1: a **finished care journey run**. Do this at least 20 minutes ahead: **Care Journeys** >
      Walter Greene > **Choose your role** > **Join as hospitalist (internal medicine)**, then
      complete your visit, the SBAR, the huddle and the care plan. Leave the tab on the journey page.
@@ -133,10 +133,10 @@ seconds), so the Challenge 2 demo uses a run completed beforehand plus a short l
 6. **For Part 1b, a class-shared patient.** In Window A: **Courses**, create a course, **New
    assignment** (homework or practice), choose one patient, turn on **One shared patient for the
    class**, **Create assignment**, and note the join code. In a third browser profile sign in as
-   `dietetics@rounds.demo` (the account is named Riley), join the course from the student home
+   `dietetics@poscere.demo` (the account is named Riley), join the course from the student home
    page, and complete and submit one visit on that assignment in which Riley gives the patient one
    clear, specific piece of advice. Wait for it to be scored. Then sign in there as
-   `nursing@rounds.demo`, join the same course, and leave the tab on the assignment (tab C1). Run
+   `nursing@poscere.demo`, join the same course, and leave the tab on the assignment (tab C1). Run
    this once in rehearsal to choose a piece of advice the patient reliably repeats.
 7. **For Part 1b, episodes.** In Window A open **Episodes** (tab A3) and search for a word you
    know was said in Riley's visit, so the result is on screen.

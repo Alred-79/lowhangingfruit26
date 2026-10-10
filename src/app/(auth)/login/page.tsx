@@ -14,9 +14,9 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
       <AuthForm mode="login" next={next} />
       <div className="mt-6 rounded-md border border-slate-200 bg-white p-3 text-xs text-slate-600">
         <div className="mb-1 font-medium text-slate-800">Demo accounts</div>
-        Faculty: faculty@rounds.demo / rounds-demo
+        Faculty: faculty@poscere.demo / poscere-demo
         <br />
-        Student: student@rounds.demo / rounds-demo
+        Student: student@poscere.demo / poscere-demo
       </div>
     </>
   );

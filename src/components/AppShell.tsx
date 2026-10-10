@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { logout } from "@/app/(auth)/actions";
+import { Logo } from "@/components/Brand";
 import { isFaculty } from "@/lib/auth";
 import { profession } from "@/lib/professions";
 import type { User } from "@/lib/types";
@@ -20,15 +21,6 @@ const STUDENT_NAV = [
   { href: "/student/progress", label: "Progress" },
   { href: "/episodes", label: "My visits" },
 ];
-
-export function Logo() {
-  return (
-    <span className="flex items-center gap-2 font-semibold text-brand-700">
-      <span className="grid h-7 w-7 place-items-center rounded-md bg-brand-600 text-sm text-white">R</span>
-      Rounds
-    </span>
-  );
-}
 
 export default function AppShell({ user, children, wide }: { user: User; children: ReactNode; wide?: boolean }) {
   const faculty = isFaculty(user);

@@ -102,7 +102,7 @@ function CaseCard({ c, professionNames }: { c: PracticeCase; professionNames: Re
         </div>
         {c.attempts > 0 && (
           <label className="mt-2 flex cursor-pointer items-start gap-2 text-xs text-slate-600">
-            <input type="checkbox" className="mt-0.5 h-3.5 w-3.5 accent-[#0f6f66]" checked={vary} onChange={(e) => setVary(e.target.checked)} />
+            <input type="checkbox" className="mt-0.5 h-3.5 w-3.5 accent-[#2563eb]" checked={vary} onChange={(e) => setVary(e.target.checked)} />
             <span>Vary the patient this time. Their mood and delivery change; the clinical facts do not.</span>
           </label>
         )}

@@ -1,13 +1,11 @@
 import type { ReactNode } from "react";
-import { Logo } from "@/components/AppShell";
+import { Logo } from "@/components/Brand";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <div className="grid min-h-full lg:grid-cols-2">
       <div className="hidden flex-col justify-between bg-brand-900 p-10 text-white lg:flex">
-        <div className="flex items-center gap-2 text-lg font-semibold">
-          <span className="grid h-8 w-8 place-items-center rounded-md bg-white text-brand-700">R</span>Rounds
-        </div>
+        <Logo inverse />
         <div>
           <h1 className="text-3xl font-semibold leading-tight">Practise the visit before the visit.</h1>
           <p className="mt-4 max-w-md text-brand-100">

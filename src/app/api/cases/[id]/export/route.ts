@@ -7,6 +7,6 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   const profile = profileOf(r.row);
   const name = (profile.patient.name || profile.title || "patient").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "patient";
   return new Response(JSON.stringify({ origin: r.row.origin, reviewed: !!r.row.reviewed, profile }, null, 1), {
-    headers: { "Content-Type": "application/json; charset=utf-8", "Content-Disposition": `attachment; filename="rounds-${name}.json"`, "Cache-Control": "no-store" },
+    headers: { "Content-Type": "application/json; charset=utf-8", "Content-Disposition": `attachment; filename="poscere-${name}.json"`, "Cache-Control": "no-store" },
   });
 }

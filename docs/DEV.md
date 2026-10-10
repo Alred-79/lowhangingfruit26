@@ -1,6 +1,6 @@
 # Developer notes
 
-Rounds is a telehealth simulator for health-professions education. Students hold a video-style
+Poscere is a telehealth simulator for health-professions education. Students hold a video-style
 visit with a virtual patient (left) beside a live electronic chart (right), then get rubric
 feedback tied to transcript evidence. Faculty build patients, courses and multi-clinician care
 journeys. Product framing: every encounter is a telehealth video visit.
@@ -59,8 +59,8 @@ cp .env.example .env.local   # AWS credentials with Bedrock + Polly access, SESS
 npm run dev
 ```
 
-Demo accounts (password `rounds-demo`): `faculty@rounds.demo`, `student@rounds.demo`,
-`dietetics@rounds.demo`, `nursing@rounds.demo`. Seed cases load from `data/seed/cases/*.json`
+Demo accounts (password `poscere-demo`): `faculty@poscere.demo`, `student@poscere.demo`,
+`dietetics@poscere.demo`, `nursing@poscere.demo`. Seed cases load from `data/seed/cases/*.json`
 on boot (`src/lib/seed.ts`).
 
 Several dev servers can share the checkout:

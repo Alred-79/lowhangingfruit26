@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Logo } from "@/components/Brand";
 import JourneyChartTab from "@/components/journey/JourneyChartTab";
 import type { ChartView } from "@/lib/engine/encounter";
 import ChartPanel from "./ChartPanel";
@@ -405,10 +406,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
 
       {/* Top bar */}
       <header className="flex h-12 shrink-0 items-center gap-3 border-b border-slate-300 bg-white px-4 text-sm">
-        <a href="/" className="flex items-center gap-2 font-semibold text-brand-700">
-          <span className="grid h-6 w-6 place-items-center rounded bg-brand-600 text-xs text-white">R</span>
-          Rounds
-        </a>
+        <a href="/"><Logo compact /></a>
         <span className="text-slate-300">|</span>
         <span className="truncate text-slate-700">
           Video visit with <span className="font-medium text-slate-900">{p.name}</span>
