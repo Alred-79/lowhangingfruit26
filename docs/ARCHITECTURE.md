@@ -512,8 +512,9 @@ strings; the JSON columns map to `jsonb`.
 - `DB_PATH` and `UPLOAD_DIR` let the database and uploaded files live outside the per-commit
   release directories, so a new release does not replace them.
 
-Not in the repository: the systemd units, the instance role and the CloudFront distribution. They
-exist on the hackathon AWS account, which is temporary.
+The commands and config used to create all of this (instance role, security group, instance
+bootstrap with the systemd units, CloudFront distribution) are in `infra/`. They are plain AWS CLI
+scripts, not a template, and the hackathon AWS account they were run on is temporary.
 
 ## 17. Extensibility
 
