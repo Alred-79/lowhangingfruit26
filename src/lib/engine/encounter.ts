@@ -98,6 +98,8 @@ export interface CreateInput {
   perturb?: boolean | string;
   variantId?: string | null;
   liveAssist?: boolean;
+  /** Fact ids already on record from earlier encounters in a care journey. */
+  initialDisclosed?: string[];
 }
 
 export function createEncounter(input: CreateInput): string {
@@ -129,6 +131,8 @@ export function createEncounter(input: CreateInput): string {
     professionId: input.professionId,
     journey: input.journey || null,
   };
+  const state = freshState(c, knobs);
+  for (const fid of input.initialDisclosed || []) if (c.facts.some((f) => f.id === fid)) state.disclosed[fid] = { turn: 0, how: "record" };
   const id = newId("e_");
   run(
     "INSERT INTO encounters (id, user_id, case_id, assignment_id, journey_run_id, attempt, config, state, case_snapshot) VALUES (?,?,?,?,?,?,?,?,?)",
@@ -139,7 +143,7 @@ export function createEncounter(input: CreateInput): string {
     input.journeyRunId || null,
     attempt,
     JSON.stringify(cfg),
-    JSON.stringify(freshState(c, knobs)),
+    JSON.stringify(state),
     JSON.stringify(c),
   );
   return id;
