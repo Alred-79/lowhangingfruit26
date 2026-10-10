@@ -9,10 +9,10 @@ export function RetryButtons({ caseId, level, assignmentId, allowVariation }: { 
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  async function start(perturb: boolean, lvl = level) {
+  async function start(perturb: boolean, lvl = level, followUp = false) {
     setBusy(true);
     setError(null);
-    const res = await fetch("/api/encounters", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ caseId, level: lvl, perturb, assignmentId, mode: "practice" }) });
+    const res = await fetch("/api/encounters", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ caseId, level: lvl, perturb, assignmentId, mode: "practice", followUp }) });
     const j = await res.json();
     if (j.id) router.push(`/encounter/${j.id}`);
     else {
@@ -24,11 +24,16 @@ export function RetryButtons({ caseId, level, assignmentId, allowVariation }: { 
     <div>
       <div className="flex flex-wrap gap-2">
         <Button disabled={busy} onClick={() => start(false)}>
-          Try this patient again
+          Start over with this patient
         </Button>
         {allowVariation && (
           <Button disabled={busy} variant="secondary" onClick={() => start(true)}>
             Again, with the patient in a different mood
+          </Button>
+        )}
+        {!assignmentId && (
+          <Button disabled={busy} variant="secondary" onClick={() => start(false, level, true)} title="The patient remembers this visit, what they told you and how much they trust you">
+            Book a follow-up visit
           </Button>
         )}
         {!assignmentId && level < 5 && (

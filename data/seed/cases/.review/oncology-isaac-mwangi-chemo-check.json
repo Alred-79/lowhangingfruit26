@@ -49,5 +49,16 @@
    "where": "chartAtStart Problem list vs d1",
    "problem": "Chart lists 'ECOG 0' at diagnosis in d1, and current assessment a15 finds ECOG 1 - this is a reasonable disease-course change, not an inconsistency; no action needed."
   }
+ ],
+ "revised": [
+  "a8: corrected ANC 1.3 x10^9/L grading from implied grade 3 to CTCAE grade 2 neutropenia (grade 2 = 1.0-<1.5 x10^9/L)",
+  "o3: updated objective text from 'grade 3 neutropenia' to 'grade 2 neutropenia' to match corrected CTCAE grading",
+  "answerKey.primaryProblem: changed 'grade 3 neutropenia' to 'grade 2 neutropenia'",
+  "answerKey.keyFindings: corrected ANC 1.3 description from 'grade 3 neutropenia by some scales, at minimum grade 2-3' to 'CTCAE grade 2 neutropenia'",
+  "answerKey.plan: updated reference to ANC 1.3 grading to 'grade 2 neutropenia'",
+  "answerKey.redFlags: updated ANC 1.3 reference to specify 'grade 2 neutropenia'",
+  "summary: updated 'grade 3 neutropenia' to 'grade 2 neutropenia'",
+  "title: unchanged (did not reference neutropenia grade specifically, no edit needed)",
+  "Reviewer items 4, 5, and 6 confirmed as non-issues per reviewer's own retraction/completeness notes; no changes made to a7, a16, d7, a12, a13, or d9 for those points"
  ]
 }

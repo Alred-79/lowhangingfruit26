@@ -17,6 +17,8 @@ interface VisitData {
   status: "active" | "paused" | "submitted" | "scored" | "abandoned";
   mode: string;
   attempt: number;
+  visitNumber: number;
+  recorded: boolean;
   level: number;
   hints: boolean;
   canRewind: boolean;
@@ -409,7 +411,8 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
         </span>
         <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[11px] font-medium text-slate-600">{MODE_LABEL[data.mode] || data.mode}</span>
         <span className="hidden rounded bg-slate-100 px-1.5 py-0.5 text-[11px] text-slate-600 sm:inline">Level {data.level}</span>
-        {data.attempt > 1 && <span className="hidden rounded bg-slate-100 px-1.5 py-0.5 text-[11px] text-slate-600 sm:inline">Attempt {data.attempt}</span>}
+        {data.visitNumber > 1 ? <span className="hidden rounded bg-sky-100 px-1.5 py-0.5 text-[11px] font-medium text-sky-800 sm:inline">Follow-up · visit {data.visitNumber}</span> : data.attempt > 1 && <span className="hidden rounded bg-slate-100 px-1.5 py-0.5 text-[11px] text-slate-600 sm:inline">Attempt {data.attempt}</span>}
+        <span className={`hidden rounded px-1.5 py-0.5 text-[11px] font-medium md:inline ${data.recorded ? "bg-violet-100 text-violet-800" : "bg-slate-100 text-slate-600"}`}>{data.recorded ? "Recorded for instructor" : "Private practice"}</span>
         {data.liveAssist && <span className="hidden rounded bg-violet-100 px-1.5 py-0.5 text-[11px] font-medium text-violet-800 md:inline">Instructor can join</span>}
         <div className="flex-1" />
         <span className={`tabular-nums ${remaining !== null && remaining < 120 ? "font-semibold text-rose-600" : "text-slate-600"}`}>{remaining !== null ? `${fmt(remaining)} left` : fmt(elapsed)}</span>
@@ -568,6 +571,9 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
               {data.mode === "exam" && " This is an exam: no hints, and the comfort meter is hidden."}
               {data.liveAssist && " Your instructor may watch this visit, pause it, or send you a note."}
             </div>
+            <p className={`mt-3 text-[13px] ${data.recorded ? "text-violet-800" : "text-slate-600"}`}>
+              {data.recorded ? "Recorded: your instructor can see this visit, its transcript and its score." : "Private practice: only you see this visit and its feedback. It still updates your own progress."}
+            </p>
             <div className="mt-5 flex flex-wrap items-center gap-3">
               <button
                 onClick={() => {

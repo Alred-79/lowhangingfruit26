@@ -73,6 +73,8 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
           <Badge tone="teal">{assignment ? assignment.title : cfg.mode === "adaptive" ? "Adaptive practice" : "Practice"}</Badge>
           <Badge>Level {cfg.knobs.level} · {LEVEL_NAMES[cfg.knobs.level]}</Badge>
           <Badge>Attempt {row.attempt}</Badge>
+          {(cfg.visitNumber || 1) > 1 && <Badge tone="blue">Follow-up · visit {cfg.visitNumber}</Badge>}
+          <Badge tone={row.assignment_id || row.journey_run_id ? "violet" : "slate"}>{row.assignment_id || row.journey_run_id ? "Recorded for instructor" : "Private practice"}</Badge>
           {cfg.perturbation && <Badge tone="violet">Patient variation: {cfg.perturbation.label}</Badge>}
           {row.parent_id && <Badge tone="blue">Rewound branch</Badge>}
         </div>
@@ -180,7 +182,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
 
       {own && (
         <Card className="mt-4">
-          <CardHeader title="For your next attempt" subtitle="Reps are where this sticks. Each repeat can put the patient in a different mood, so you have to listen rather than replay." />
+          <CardHeader title="For your next attempt" subtitle="Start over to practise the same visit again (optionally with the patient in a different mood), or book a follow-up where the patient remembers you and this conversation." />
           <div className="p-4">
             <ol className="mb-4 list-decimal space-y-1.5 pl-5 text-sm text-slate-800">
               {f.nextAttempt.map((n, i) => (

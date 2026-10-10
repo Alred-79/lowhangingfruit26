@@ -4,7 +4,7 @@ import { createEncounter } from "@/lib/engine/encounter";
 import { bad } from "@/lib/http";
 import type { Knobs } from "@/lib/types";
 
-/** Start a visit. Body: { caseId, level?, mode?, perturb?, variantId?, assignmentId?, knobs? } */
+/** Start a visit. Body: { caseId, level?, mode?, perturb?, variantId?, assignmentId?, knobs?, followUp? } */
 export async function POST(req: Request) {
   const user = await apiUser();
   if (user instanceof Response) return user;
@@ -38,6 +38,6 @@ export async function POST(req: Request) {
   }
   const professions = parse<string[]>(c.professions, []);
   const professionId = user.profession_id && professions.includes(user.profession_id) ? user.profession_id : professions[0] || user.profession_id || "medicine";
-  const id = createEncounter({ userId: user.id, caseId: c.id, professionId, mode, level, knobs, assignmentId: b.assignmentId || null, perturb, variantId: b.variantId || null, liveAssist });
+  const id = createEncounter({ userId: user.id, caseId: c.id, professionId, mode, level, knobs, assignmentId: b.assignmentId || null, perturb, variantId: b.variantId || null, liveAssist, followUp: !!b.followUp && !b.assignmentId });
   return Response.json({ id });
 }

@@ -62,6 +62,7 @@ Baseline mood: ${per.emotionalState}. Right now you feel: ${gate.patient_emotion
 ${rapportLine(state.rapport)}
 ${VAGUE[k.vagueness]} ${EMOTION[k.emotion]}
 ${cfg.perturbation ? `TODAY IN PARTICULAR: ${cfg.perturbation.directive}` : ""}
+${cfg.memory ? `YOU HAVE MET THIS STUDENT BEFORE. This is visit number ${cfg.visitNumber || 2} with them. What you remember:\n${cfg.memory}\nGreet them as someone you know. Do not repeat your whole story unprompted; you expect them to remember it or to have it in the chart.` : ""}
 ${cfg.journey?.patientMemory ? `WHAT HAS ALREADY HAPPENED IN YOUR CARE (you remember this):\n${cfg.journey.patientMemory}` : ""}
 
 WHAT YOU HAVE ALREADY TOLD THIS STUDENT (stay consistent with it)

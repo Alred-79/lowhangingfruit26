@@ -209,6 +209,20 @@ CREATE TABLE IF NOT EXISTS team_messages (
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
+-- One row per student x patient: what this patient remembers of this student across visits.
+CREATE TABLE IF NOT EXISTS patient_relationships (
+  user_id TEXT NOT NULL,
+  case_id TEXT NOT NULL,
+  visits INTEGER NOT NULL DEFAULT 0,
+  rapport INTEGER NOT NULL DEFAULT 50,
+  disclosed TEXT NOT NULL DEFAULT '[]',
+  actions TEXT NOT NULL DEFAULT '[]',
+  memory TEXT NOT NULL DEFAULT '',
+  last_encounter_id TEXT,
+  updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+  PRIMARY KEY (user_id, case_id)
+);
+
 CREATE TABLE IF NOT EXISTS uploads (
   id TEXT PRIMARY KEY,
   owner_id TEXT,

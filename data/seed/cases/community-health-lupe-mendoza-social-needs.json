@@ -62,8 +62,8 @@
    {
     "id": "a7",
     "kind": "assessment",
-    "name": "Screen for diabetic foot/neuropathy symptoms",
-    "result": "Patient reports nightly burning/tingling in both feet for several months, worse at night; no open sores, no color change, denies foot injury. CHW advises visual inspection and reporting to care team; this is outside CHW scope to assess clinically.",
+    "name": "Ask about foot sensation symptoms",
+    "result": "Patient reports nightly burning/tingling in both feet for several months, worse at night; denies foot injury, open sores, or color change.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -147,7 +147,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Type 2 diabetes mellitus; Hypertension; Peripheral neuropathy (not yet documented - pending)"
+    "value": "Type 2 diabetes mellitus; Hypertension"
    },
    {
     "label": "Medications",
@@ -242,7 +242,7 @@
     "topic": "insulin routine description",
     "chart": "Patient states she takes insulin as prescribed because she does not want to be scolded by the clinic.",
     "says": "I tell them I take it just like the doctor said, I don't want them getting on me about it.",
-    "tier": "discoverable",
+    "tier": "reluctant",
     "importance": "critical"
    },
    {

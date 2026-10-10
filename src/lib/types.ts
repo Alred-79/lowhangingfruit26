@@ -301,6 +301,9 @@ export interface EncounterConfig {
   liveAssist?: boolean;
   /** Profession the student is acting as. */
   professionId: string;
+  /** Follow-up visits: which visit this is with this patient, and what the patient remembers of the student. */
+  visitNumber?: number;
+  memory?: string | null;
   /** Extra context injected for journey encounters (prior shared state). */
   journey?: { runId: string; stageId: string; priorContext: string; patientMemory: string } | null;
 }

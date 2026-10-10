@@ -14,19 +14,26 @@ export function seed() {
     for (const file of fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort()) {
       const id = "seed_" + file.replace(/\.json$/, "");
       if (get("SELECT 1 FROM cases WHERE id = ?", id)) continue;
-      const { origin, reviewed, profile } = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8")) as { origin: string; reviewed: boolean; profile: CaseProfile };
-      run(
-        "INSERT INTO cases (id, status, origin, reviewed, title, specialty, professions, difficulty, profile) VALUES (?,?,?,?,?,?,?,?,?)",
-        id,
-        "published",
-        origin || "ai_draft",
-        reviewed ? 1 : 0,
-        profile.title,
-        profile.specialty || "",
-        JSON.stringify(profile.professions || []),
-        profile.difficulty || 3,
-        JSON.stringify(profile),
-      );
+      // A bad or half-written seed file must never stop the server from starting.
+      try {
+        const { origin, reviewed, profile } = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8")) as { origin: string; reviewed: boolean; profile: CaseProfile };
+        if (!profile?.title || !profile.facts?.length || !profile.patient?.name) throw new Error("incomplete case");
+        run(
+          "INSERT INTO cases (id, status, origin, reviewed, title, specialty, professions, difficulty, profile) VALUES (?,?,?,?,?,?,?,?,?)",
+          id,
+          "published",
+          origin || "ai_draft",
+          reviewed ? 1 : 0,
+          profile.title,
+          profile.specialty || "",
+          JSON.stringify(profile.professions || []),
+          profile.difficulty || 3,
+          JSON.stringify(profile),
+        );
+      } catch (e) {
+        console.error(`[seed] skipped ${file}: ${(e as Error).message}`);
+        continue;
+      }
       added++;
     }
   }

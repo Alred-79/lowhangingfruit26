@@ -100,11 +100,11 @@
     "id": "a12",
     "kind": "record",
     "name": "Review medication list/history",
-    "result": "No chronic medications listed. No prior allergy documented. Review reveals mother gave one 2 mg dose of adult loperamide (Imodium) yesterday after reading the bottle, prior to today's call.",
+    "result": "No chronic medications listed. No prior allergy documented. No standing prescriptions on file; chart does not reflect any OTC or home remedies - ask caregiver directly about any medications or over-the-counter products given during this illness.",
     "artifactIds": [
      "d3"
     ],
-    "importance": "critical"
+    "importance": "important"
    },
    {
     "id": "a13",
@@ -118,7 +118,7 @@
     "id": "a14",
     "kind": "lab",
     "name": "Stool studies (if sent)",
-    "result": "Not indicated/not performed; course is consistent with typical viral gastroenteritis, no blood or mucus in stool reported, symptoms improving.",
+    "result": "Not sent at this visit - caregiver reports no blood or mucus in stool and symptoms are trending better; routine stool culture/PCR is not required when exam and history are reassuring and course is short.",
     "importance": "minor",
     "artifactIds": []
    }
@@ -280,17 +280,6 @@
         "-",
         "-",
         "No standing prescriptions"
-       ],
-       "flag": ""
-      },
-      {
-       "cells": [
-        "Loperamide (adult OTC, from home medicine cabinet)",
-        "2 mg",
-        "Oral",
-        "Single dose, given once yesterday",
-        "Yesterday",
-        "Given by mother for diarrhea; not prescribed for child; not recommended at this age"
        ]
       }
      ]
@@ -379,6 +368,36 @@
      "when": "start"
     },
     "body": "14-month well-child check. Weight 10.4 kg (50th percentile), length 76 cm (55th percentile). Development on track - walking independently, says 3-5 words, points to objects, feeds self with fingers. Diet: whole milk, table foods, daycare 4 days/week. No concerns raised by mother. Plan: routine vaccines deferred to catch-up schedule per family preference discussion; recheck growth at next visit."
+   },
+   {
+    "id": "d6",
+    "type": "other",
+    "title": "Pharmacy Purchase/Refill History",
+    "date": "Yesterday",
+    "release": {
+     "when": "fact",
+     "ref": "f14"
+    },
+    "table": {
+     "columns": [
+      "Date",
+      "Item",
+      "Quantity",
+      "Pharmacy/Source",
+      "Notes"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Yesterday",
+        "Loperamide HCl 2mg tablets (adult OTC)",
+        "1 package (12 tablets)",
+        "Purchased at mother's workplace pharmacy",
+        "Over-the-counter purchase, no prescription associated; recorded via loyalty/purchase history, not a pediatric prescription"
+       ]
+      }
+     ]
+    }
    }
   ],
   "chartAtStart": [
@@ -392,7 +411,7 @@
    },
    {
     "label": "Medications",
-    "value": "None prescribed (see note: OTC medication given at home, disclosed on history)"
+    "value": "None prescribed"
    },
    {
     "label": "Allergies",
@@ -705,9 +724,9 @@
    {
     "id": "m1",
     "factId": "f14",
-    "artifactId": "d3",
+    "artifactId": "d6",
     "patientClaim": "Mother says she gave only 'a little bit' of the adult Imodium, downplaying the dose",
-    "recordEvidence": "Medication list documents a full 2 mg adult-strength loperamide dose given as a single dose yesterday - a full adult dose for a 10 kg toddler, not a small amount",
+    "recordEvidence": "Pharmacy purchase history shows she bought a full package of adult-strength 2mg loperamide tablets the day before the visit, consistent with giving a full adult-strength tablet (2mg) rather than a small or partial amount to a 10 kg toddler",
     "teachingPoint": "Caregivers may underestimate the significance of giving adult-formulated medication to a young child; always clarify exact product, strength, and dose given, and correct the record and counsel clearly on risk (antimotility agents can cause ileus or CNS depression in toddlers)."
    },
    {
@@ -755,7 +774,7 @@
    },
    {
     "id": "o3",
-    "text": "Identify and correct an unsafe home medication practice (adult loperamide given to a toddler) through sensitive, non-judgmental questioning and clear counseling",
+    "text": "Elicit, through sensitive and non-judgmental direct questioning, an unsafe home medication practice (adult loperamide given to a toddler) that is not reflected in the chart, and provide clear counseling to correct it",
     "factIds": [
      "f14"
     ],

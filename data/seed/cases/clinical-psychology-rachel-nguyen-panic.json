@@ -1,0 +1,787 @@
+{
+ "origin": "ai_draft",
+ "reviewed": false,
+ "profile": {
+  "version": 1,
+  "actions": [],
+  "answerKey": {
+   "primaryProblem": "Panic Disorder with mild agoraphobic avoidance (likely precipitated by acute workplace trauma exposure), with comorbid mild depressive symptoms and problematic caffeine intake and non-prescribed intermittent benzodiazepine use",
+   "differential": [
+    "Panic Disorder with agoraphobia (primary)",
+    "Acute stress reaction / subsyndromal PTSD symptoms following witnessed death at work (index trigger)",
+    "Generalized Anxiety Disorder (comorbid worry pattern)",
+    "Caffeine-induced anxiety/panic-like symptoms (contributing/exacerbating factor, not sole cause)",
+    "Cardiac etiology (chest pain, tachycardia) - ruled out by three negative ED workups (ECG, troponin, TSH, CXR); outside psychology scope, already appropriately evaluated medically",
+    "Substance-related panic from unsupervised benzodiazepine use - monitor, not primary diagnosis"
+   ],
+   "keyFindings": [
+    "PDSS 17 (moderate-severe panic severity with avoidance)",
+    "PHQ-9 8 (mild depressive symptoms, no SI)",
+    "GAD-7 11 (moderate generalized worry)",
+    "Three ED visits in 2 months with consistently normal cardiac/thyroid workup",
+    "Attacks peak within ~10 minutes, unpredictable, with catastrophic misinterpretation of bodily sensations as cardiac emergency",
+    "Index attack 2 weeks after witnessing sudden death of a same-age coworker/patient at work",
+    "Agoraphobic avoidance of freeways, gym, being home alone",
+    "Non-prescribed intermittent lorazepam use (~6 times/2 months) - mismatch with initial minimization of benzodiazepine use",
+    "High caffeine intake (5 cups/day) plausibly exacerbating physiological arousal",
+    "Denies suicidal ideation; low acute risk on structured screen"
+   ],
+   "plan": [
+    "Share formulation of the panic cycle (bodily sensation -> catastrophic misinterpretation -> fear/avoidance -> reinforcement) using her own attack as the worked example",
+    "Psychoeducation normalizing panic physiology and explicitly validating that medical workup was thorough and reassuring, without dismissing her fear",
+    "Begin CBT for panic disorder: cognitive restructuring targeting catastrophic cardiac misattribution",
+    "Introduce interoceptive exposure hierarchy building on today's brief hyperventilation demonstration",
+    "Plan graded in-vivo exposure to avoided situations (freeway driving, gym, being home alone)",
+    "Discuss caffeine reduction as behavioral experiment given its sympathomimetic contribution to symptoms",
+    "Address non-prescribed lorazepam use collaboratively; do not shame; discuss risks of reinforcing avoidance/dependence, and since psychology does not prescribe, coordinate with her PCP or psychiatry if medication discussion is wanted",
+    "Screen-negative for acute risk today but set up safety planning language and re-screen at each session",
+    "Consider brief trauma-focused work addressing the witnessed death as the precipitating event, within session planning",
+    "Schedule weekly CBT sessions and set measurement-based care with repeat PDSS/PHQ-9/GAD-7 at intervals"
+   ],
+   "redFlags": [
+    "Any emergence of active suicidal ideation, intent or plan on reassessment",
+    "Escalating or regular (vs. intermittent) benzodiazepine use suggesting developing dependence - would warrant referral to prescribing provider",
+    "New focal neurological symptoms or cardiac findings that would require re-referral to medical care despite prior reassuring workups"
+   ],
+   "educationPoints": [
+    "Panic attacks typically peak within 10 minutes and involve a surge of real physiological symptoms, not actual cardiac events, which is why repeated ED workups can be normal",
+    "Catastrophic misinterpretation of bodily sensations is a core maintaining mechanism in panic disorder and a primary CBT target",
+    "Avoidance (agoraphobia) temporarily reduces anxiety but reinforces the fear cycle long-term",
+    "Caffeine and non-prescribed benzodiazepine use can both exacerbate and mask panic symptoms respectively, and both are reasonable behavioral targets",
+    "Witnessing a sudden death can precipitate panic disorder even without full PTSD; the temporal link to the index attack is clinically meaningful for formulation",
+    "Psychologists assess risk and treat with psychotherapy; medication questions and benzodiazepine management should be coordinated with the prescribing/primary care team"
+   ]
+  },
+  "artifacts": [
+   {
+    "id": "d1",
+    "type": "note",
+    "title": "ED Visit Summary #1 - Chest tightness, palpitations",
+    "date": "8 weeks ago",
+    "author": "San Jose General ED, Dr. A. Reyes",
+    "body": "33F presents with acute onset chest tightness, palpitations, and bilateral hand tingling that began abruptly while at home. Symptoms peaked within 10 minutes. Denies prior cardiac history. Vitals: HR 128, BP 142/88, RR 22, SpO2 99%. ECG: normal sinus rhythm, no ST changes. Troponin I <0.01 ng/mL (negative) at presentation and repeat 3h later. TSH 2.1 mIU/L (normal). CXR unremarkable. Symptoms resolved spontaneously over 30 minutes. Discharged with reassurance; advised outpatient follow-up with PCP and consider anxiety evaluation. Patient appeared unconvinced of benign etiology at discharge.",
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d2",
+    "type": "note",
+    "title": "ED Visit Summary #2 - Recurrent chest tightness, tachycardia",
+    "date": "5 weeks ago",
+    "author": "San Jose General ED, Dr. M. Patel",
+    "body": "Return visit, similar presentation: chest tightness, tachycardia, paresthesias, fear of dying. Symptoms began while driving on US-101. HR 134, BP 138/90. ECG normal sinus rhythm. Troponin negative x2. Repeat TSH 1.9 mIU/L (normal). No focal neuro deficits. Discharged after 2 hours observation once symptoms resolved. Strongly recommended psychiatric/psychological evaluation given recurrent presentations with consistently negative cardiac workup; patient reluctant, states 'something is still wrong with my heart.'",
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d3",
+    "type": "note",
+    "title": "ED Visit Summary #3 - Third presentation, referral placed",
+    "date": "2 weeks ago",
+    "author": "San Jose General ED, Dr. A. Reyes",
+    "body": "Third ED visit in two months with identical symptom pattern: chest tightness, racing heart, hand tingling, sense of impending doom, resolving within 15 minutes. HR 121 on arrival, down to 78 by discharge. ECG normal. Troponin negative. Basic metabolic panel and CBC unremarkable (not repeated here, see prior visits). Diagnosis: likely panic attacks given recurrent pattern and uniformly negative cardiac workup across three visits. Formal referral placed to outpatient behavioral health for diagnostic evaluation. Discussed with patient that cardiac causes have been thoroughly excluded.",
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d4",
+    "type": "lab_report",
+    "title": "Laboratory Results - Most Recent ED Visit",
+    "date": "2 weeks ago",
+    "author": "San Jose General ED Lab",
+    "table": {
+     "columns": [
+      "Test",
+      "Result",
+      "Units",
+      "Reference range"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Troponin I",
+        "<0.01",
+        "ng/mL",
+        "0.00-0.04"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "TSH",
+        "1.8",
+        "mIU/L",
+        "0.4-4.0"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Free T4",
+        "1.2",
+        "ng/dL",
+        "0.8-1.8"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Hemoglobin",
+        "13.4",
+        "g/dL",
+        "12.0-15.5"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Potassium",
+        "4.1",
+        "mEq/L",
+        "3.5-5.0"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Glucose, random",
+        "92",
+        "mg/dL",
+        "70-140"
+       ],
+       "flag": ""
+      }
+     ]
+    },
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d5",
+    "type": "medication_list",
+    "title": "Current Medication List",
+    "date": "Today",
+    "author": "Behavioral Health Intake",
+    "table": {
+     "columns": [
+      "Medication",
+      "Dose",
+      "Frequency",
+      "Prescriber",
+      "Notes"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "None - no scheduled psychiatric medications",
+        "-",
+        "-",
+        "-",
+        "Patient reports no current prescriptions for anxiety or depression"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Lorazepam 0.5mg (not her prescription)",
+        "0.5 mg",
+        "As needed, non-prescribed, ~6 times in past 2 months",
+        "Prescribed to partner, not patient",
+        "Taken during severe panic episodes; patient initially described this as 'barely ever' before disclosing frequency"
+       ],
+       "flag": "H"
+      }
+     ]
+    },
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d6",
+    "type": "chart",
+    "title": "Self-Reported Panic Attack Frequency, Past 8 Weeks",
+    "date": "Today",
+    "author": "Patient self-report / app log",
+    "chart": {
+     "kind": "line",
+     "xLabel": "Week",
+     "yLabel": "Number of panic attacks",
+     "series": [
+      {
+       "name": "Panic attacks per week",
+       "points": [
+        {
+         "x": "Wk1",
+         "y": 1
+        },
+        {
+         "x": "Wk2",
+         "y": 1
+        },
+        {
+         "x": "Wk3",
+         "y": 2
+        },
+        {
+         "x": "Wk4",
+         "y": 2
+        },
+        {
+         "x": "Wk5",
+         "y": 3
+        },
+        {
+         "x": "Wk6",
+         "y": 2
+        },
+        {
+         "x": "Wk7",
+         "y": 3
+        },
+        {
+         "x": "Wk8",
+         "y": 3
+        }
+       ]
+      }
+     ]
+    },
+    "release": {
+     "when": "start"
+    }
+   },
+   {
+    "id": "d7",
+    "type": "flowsheet",
+    "title": "Standardized Measures - Intake",
+    "date": "Today",
+    "author": "Behavioral Health Intake",
+    "table": {
+     "columns": [
+      "Measure",
+      "Score",
+      "Range",
+      "Interpretation"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "PDSS",
+        "17",
+        "0-28",
+        "Moderate-severe panic disorder severity"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "PHQ-9",
+        "8",
+        "0-27",
+        "Mild depressive symptoms, item 9 = 0"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "GAD-7",
+        "11",
+        "0-21",
+        "Moderate generalized anxiety"
+       ],
+       "flag": "H"
+      }
+     ]
+    },
+    "release": {
+     "when": "start"
+    }
+   }
+  ],
+  "chartAtStart": [
+   {
+    "label": "Reason for visit",
+    "value": "Diagnostic intake - referred from ED for recurrent chest tightness/palpitations x3 visits, all cardiac workups negative; rule out panic disorder"
+   },
+   {
+    "label": "Problem list",
+    "value": "Recurrent chest tightness and palpitations, etiology unclear (medical workup negative x3); anxiety, unspecified (new)"
+   },
+   {
+    "label": "Medications",
+    "value": "None scheduled (see medication list artifact)"
+   },
+   {
+    "label": "Allergies",
+    "value": "No known drug allergies"
+   },
+   {
+    "label": "Last vitals",
+    "value": "BP 124/80, HR 82, RR 16, Temp 98.2F - stable at today's visit"
+   },
+   {
+    "label": "Immunizations",
+    "value": "Up to date per PCP record"
+   },
+   {
+    "label": "Care team",
+    "value": "PCP: Dr. L. Tran; Referring ED physicians: Dr. A. Reyes, Dr. M. Patel; Behavioral Health: trainee (self), supervised by Dr. K. Osei, PsyD"
+   },
+   {
+    "label": "Code status",
+    "value": "Full code (N/A - outpatient behavioral health)"
+   }
+  ],
+  "difficulty": 3,
+  "encounterType": "diagnostic intake interview",
+  "facts": [
+   {
+    "id": "f1",
+    "category": "chief_complaint",
+    "topic": "reason for referral",
+    "chart": "Patient referred from ED after 3 visits in 2 months for chest tightness, racing heart, and tingling hands, with normal cardiac workup each time; here for behavioral health evaluation.",
+    "says": "The ER doctors keep telling me it's panic attacks, but I'm not so sure - something feels really wrong with my heart.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f2",
+    "category": "hpi",
+    "topic": "attack description",
+    "chart": "Describes episodes of chest tightness, racing heart, and bilateral hand tingling peaking within about 10 minutes, with a feeling of impending doom or dying.",
+    "says": "My heart just takes off, my chest gets tight, my hands go tingly, and for a few minutes I'm sure I'm going to die right there.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f3",
+    "category": "hpi",
+    "topic": "attack timing",
+    "chart": "Attacks occur unpredictably, 'out of the blue,' not consistently linked to a specific activity or trigger.",
+    "says": "They just hit me out of nowhere. One minute I'm fine, next minute it's happening.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f4",
+    "category": "hpi",
+    "topic": "attack frequency",
+    "chart": "Reports panic attacks increasing from about 1 per week two months ago to 2-3 per week currently.",
+    "says": "It's gotten more frequent - it was like once a week, now it's happening two or three times most weeks.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f5",
+    "category": "hpi",
+    "topic": "ER visits",
+    "chart": "Three ED visits in the past two months for the same symptom cluster; all cardiac and thyroid workups negative.",
+    "says": "I've been to the ER three times now. Every time they say my heart looks fine, but it doesn't feel fine when it's happening.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f6",
+    "category": "hpi",
+    "topic": "index event timing",
+    "chart": "First panic attack occurred approximately two weeks after witnessing the sudden death of a patient close to her own age at work.",
+    "says": "The first time it happened was maybe two weeks after... there was a patient at work, about my age, who died right in front of me. I don't know if that's connected.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f7",
+    "category": "hpi",
+    "topic": "index event details",
+    "chart": "Reports the death at work was sudden and unexpected (cardiac arrest in the ED); has not discussed this event with anyone before today.",
+    "says": "It was so sudden. One minute he was talking, then he just coded. I had to call it in. I haven't really talked about it with anyone.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f8",
+    "category": "hpi",
+    "topic": "avoidance - driving",
+    "chart": "Avoids driving on freeways/motorways since symptom onset; takes longer surface-street routes to avoid panic triggers.",
+    "says": "I don't take the highway anymore. I take back roads even though it adds twenty minutes, because if I panic on the freeway I don't know what I'd do.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f9",
+    "category": "hpi",
+    "topic": "avoidance - gym",
+    "chart": "Has stopped attending the gym due to fear that elevated heart rate from exercise will trigger or mimic a panic attack.",
+    "says": "I used to go to the gym three times a week. I stopped because when my heart rate goes up from exercise it feels just like when I'm panicking, and that scares me.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f10",
+    "category": "hpi",
+    "topic": "avoidance - being alone",
+    "chart": "Avoids being home alone due to fear of having an attack with no one present to help.",
+    "says": "I try not to be home by myself anymore. What if something happens and nobody's there?",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f11",
+    "category": "medications",
+    "topic": "as-needed medication use",
+    "chart": "Initially minimizes use of partner's lorazepam, later discloses using it approximately 6 times over 2 months during severe attacks.",
+    "says": "I mean... I've maybe taken one of my partner's pills, like, barely ever, just when it got really bad.",
+    "tier": "reluctant",
+    "importance": "critical"
+   },
+   {
+    "id": "f12",
+    "category": "medications",
+    "topic": "as-needed medication use",
+    "chart": "On direct, specific questioning, confirms taking partner's lorazepam 0.5mg approximately 6 separate times in the past 2 months.",
+    "says": "Okay, honestly, probably about six times total. I know it's not mine. I just didn't know what else to do when it felt that bad.",
+    "tier": "hidden",
+    "importance": "critical"
+   },
+   {
+    "id": "f13",
+    "category": "substance",
+    "topic": "caffeine intake",
+    "chart": "Drinks approximately 5 cups of coffee per day, mostly during ER shifts.",
+    "says": "I probably drink like five cups of coffee a day at work, sometimes more on a bad shift.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f14",
+    "category": "substance",
+    "topic": "alcohol use",
+    "chart": "Denies regular alcohol use; drinks socially less than once a month.",
+    "says": "I barely drink. Maybe a glass of wine at a birthday party, that's it.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f15",
+    "category": "substance",
+    "topic": "other substance use",
+    "chart": "Denies use of tobacco, cannabis, or illicit drugs.",
+    "says": "No, I don't smoke or do any of that.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f16",
+    "category": "ros",
+    "topic": "cardiac symptom belief",
+    "chart": "Holds strong belief that an undiagnosed heart condition is being missed despite three negative cardiac workups.",
+    "says": "I work in the ER, I see real heart problems every day. I feel like they're missing something with me.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f17",
+    "category": "ros",
+    "topic": "depressive symptoms",
+    "chart": "Reports low energy and decreased enjoyment of previously pleasurable activities over the past month, with preserved interest in some hobbies.",
+    "says": "I've just been more tired lately, less into things I used to like doing, like painting.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f18",
+    "category": "ros",
+    "topic": "suicidal ideation",
+    "chart": "Denies any current or past suicidal ideation, intent, plan, or self-harm history.",
+    "says": "No, never. As scared as I get, I've never wanted to hurt myself.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f19",
+    "category": "ros",
+    "topic": "sleep pattern",
+    "chart": "Reports difficulty falling asleep several nights per week due to anticipatory anxiety about having an attack during sleep.",
+    "says": "Some nights I lie there worrying I'll have an attack in my sleep, and I just can't fall asleep.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f20",
+    "category": "ros",
+    "topic": "appetite changes",
+    "chart": "Denies significant appetite or weight changes over past 2 months.",
+    "says": "My eating's pretty much the same as always.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f21",
+    "category": "family",
+    "topic": "family mental health history",
+    "chart": "Reports mother has longstanding anxiety ('nerves') that was never formally diagnosed or treated.",
+    "says": "My mom's always been really nervous, 'yếu tim' she calls it, but she never saw anyone for it.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f22",
+    "category": "family",
+    "topic": "family cardiac history",
+    "chart": "Denies family history of early cardiac death or diagnosed heart disease.",
+    "says": "No one in my family has had heart problems that I know of, no early heart attacks or anything.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f23",
+    "category": "social",
+    "topic": "occupation",
+    "chart": "Works as a unit clerk in a San Jose emergency department.",
+    "says": "I work the front desk in the ER, checking patients in, that kind of thing.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f24",
+    "category": "social",
+    "topic": "living situation",
+    "chart": "Lives with her partner; partner works variable hours leaving patient alone at times.",
+    "says": "I live with my partner, but he works odd hours so I'm by myself a fair amount.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f25",
+    "category": "social",
+    "topic": "support system",
+    "chart": "Reports close relationship with younger sister who lives nearby and is a source of support.",
+    "says": "My younger sister lives close by, we talk almost every day, she's been really supportive.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f26",
+    "category": "psychosocial",
+    "topic": "beliefs about therapy",
+    "chart": "Expresses skepticism that talk therapy will address what she believes is a physical medical problem.",
+    "says": "I don't really see how talking about my feelings is going to fix a heart problem, if that's what this is.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f27",
+    "category": "psychosocial",
+    "topic": "work-related distractor",
+    "chart": "Reports ongoing conflict with a difficult coworker over scheduling, unrelated to panic symptoms.",
+    "says": "Honestly my coworker Denise and I don't get along, she's always messing with the schedule, it's so stressful.",
+    "tier": "initial",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f28",
+    "category": "pmh",
+    "topic": "general medical history distractor",
+    "chart": "Reports a tonsillectomy at age 9 with no complications; no other surgical or chronic medical history.",
+    "says": "I had my tonsils out when I was a kid, nothing since then really.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f29",
+    "category": "goals",
+    "topic": "treatment goals",
+    "chart": "States primary goal is to stop having attacks and be able to drive on the freeway and be home alone without fear.",
+    "says": "I just want this to stop. I want to be able to drive on the highway again and not be scared to be home by myself.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f30",
+    "category": "hpi",
+    "topic": "physical sensation interpretation",
+    "chart": "Reports monitoring own pulse and researching cardiac symptoms online between attacks, reinforcing worry.",
+    "says": "Between attacks I check my pulse a lot, and I've looked up heart attack symptoms online more times than I'd like to admit.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f31",
+    "category": "function",
+    "topic": "work attendance",
+    "chart": "Has not missed any work shifts due to symptoms but reports decreased concentration and job satisfaction while at work.",
+    "says": "I haven't called out of work because of this, but I'm definitely more distracted and on edge during my shifts.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f32",
+    "category": "sexual",
+    "topic": "sexual health screening negative",
+    "chart": "No concerns raised regarding sexual health or intimate relationship functioning; not clinically relevant to presenting problem.",
+    "says": "That part of my life is fine, no issues there.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f33",
+    "category": "adherence",
+    "topic": "follow-up with PCP",
+    "chart": "Has not yet scheduled recommended follow-up with primary care physician as advised at third ED visit.",
+    "says": "They told me to follow up with my regular doctor but I haven't gotten around to it yet.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f34",
+    "category": "hpi",
+    "topic": "onset duration",
+    "chart": "Symptoms have been present for approximately 8 weeks since the first attack.",
+    "says": "This has all been going on for about two months now.",
+    "tier": "initial",
+    "importance": "important"
+   }
+  ],
+  "mismatches": [
+   {
+    "id": "m1",
+    "factId": "f11",
+    "artifactId": "d5",
+    "patientClaim": "Patient initially states she has 'barely ever' taken her partner's lorazepam, implying rare or minimal use.",
+    "recordEvidence": "Medication list documents approximately 6 separate uses of non-prescribed lorazepam 0.5mg over the past 2 months, flagged as notable given it is not her prescription and used fairly regularly during that window.",
+    "teachingPoint": "Patients often minimize use of borrowed or non-prescribed controlled substances due to shame or fear of judgment; direct, nonjudgmental follow-up questioning (and corroborating documentation) is needed to get an accurate substance use history, which is essential for safe treatment planning."
+   },
+   {
+    "id": "m2",
+    "factId": "f16",
+    "artifactId": "d4",
+    "patientClaim": "Patient firmly believes an undiagnosed cardiac condition is being missed by her doctors.",
+    "recordEvidence": "Laboratory results from the most recent ED visit show troponin, TSH, free T4, hemoglobin, potassium, and glucose all within normal reference ranges, consistent with two prior ED workups that were also uniformly normal.",
+    "teachingPoint": "When objective medical findings are repeatedly normal despite a patient's strong subjective conviction of physical illness, this discrepancy itself is clinically significant and should be gently explored as part of the panic/health-anxiety formulation rather than dismissed or confirmed outright."
+   }
+  ],
+  "objectives": [
+   {
+    "id": "o1",
+    "text": "Elicit a complete panic attack history including symptom cluster, time course, frequency trend, and triggers versus unpredictable onset.",
+    "factIds": [
+     "f2",
+     "f3",
+     "f4",
+     "f34"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o2",
+    "text": "Identify the precipitating traumatic workplace event and its temporal link to symptom onset, using sensitive, rapport-building questioning to access reluctant-tier disclosure.",
+    "factIds": [
+     "f6",
+     "f7"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o3",
+    "text": "Conduct a thorough and nonjudgmental substance use assessment, uncovering the discrepancy between initial minimization and actual frequency of non-prescribed benzodiazepine use, and reviewing caffeine intake as a contributing factor.",
+    "factIds": [
+     "f11",
+     "f12",
+     "f13"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o4",
+    "text": "Perform and interpret standardized measures (PDSS, PHQ-9, GAD-7) and a structured suicide risk screen to quantify severity and rule out acute risk.",
+    "factIds": [
+     "f17",
+     "f18"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o5",
+    "text": "Build and communicate a panic cycle formulation that integrates catastrophic cardiac misinterpretation, avoidance behaviors, and the index trauma, while respectfully addressing the patient's skepticism that psychotherapy can help given her belief in an undiagnosed cardiac cause.",
+    "factIds": [
+     "f16",
+     "f26",
+     "f8",
+     "f9",
+     "f10"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o6",
+    "text": "Introduce evidence-based CBT treatment plan elements for panic disorder, including interoceptive exposure rationale and demonstration, within the scope of psychology practice (no medication prescribing), and identify when referral/coordination with a prescriber is appropriate.",
+    "factIds": [
+     "f29",
+     "f30"
+    ],
+    "actionIds": []
+   }
+  ],
+  "patient": {
+   "name": "Rachel Nguyen",
+   "age": 33,
+   "sex": "female",
+   "pronouns": "she/her",
+   "ethnicity": "Vietnamese-American",
+   "occupation": "Emergency department unit clerk",
+   "language": "English (fluent; some Vietnamese phrases from family)",
+   "appearance": "A woman in her early thirties with shoulder-length dark hair pulled into a low ponytail, wearing dark blue scrubs as if just off or about to start a shift. She sits upright at a kitchen table with a water bottle and phone visible nearby, posture tense, arms occasionally crossed, with a worried, watchful expression and brief flashes of frustration when discussing the ER visits."
+  },
+  "persona": {
+   "personality": "Practical, detail-oriented, and used to being the competent one who helps others in a crisis; proud and a little guarded about needing help herself.",
+   "communicationStyle": "Direct and organized when describing physical symptoms and timelines (influenced by her ER work), but becomes clipped or deflective when asked about emotions or the index traumatic event.",
+   "healthLiteracy": "high",
+   "emotionalState": "Anxious and on edge, with underlying frustration at not having a clear medical answer; defensiveness softens if she feels heard rather than corrected.",
+   "background": "Grew up in San Jose in a Vietnamese immigrant family; has worked as an ED unit clerk for six years and takes pride in knowing 'how hospitals really work.' Lives with her partner of four years; close with her younger sister; enjoys painting in her limited free time, though she's done less of it lately.",
+   "speechExamples": [
+    "I've literally watched doctors call codes. I know what a real emergency looks like.",
+    "I'm not trying to be difficult, I just don't think 'it's anxiety' explains all of this.",
+    "Sorry, can we go back to the physical stuff? I don't really like talking about the one patient.",
+    "If you can just help me figure out what's actually wrong, I'd feel so much better.",
+    "I know this probably sounds dramatic coming from someone who works in an ER."
+   ],
+   "concerns": [
+    "Fear that doctors are missing a real cardiac diagnosis",
+    "Fear of having an attack while driving or alone with no one to help",
+    "Worry that admitting to using her partner's medication will make her look irresponsible",
+    "Skepticism about whether therapy can address what feels like a physical problem",
+    "Concern about losing more time at work or in daily life to avoidance"
+   ]
+  },
+  "scenario": {
+   "studentBrief": "You are conducting a diagnostic intake interview via telehealth video with Rachel Nguyen, a 33-year-old ED unit clerk referred by her emergency department after three visits in two months for chest tightness, racing heart, and tingling hands, with consistently normal cardiac and thyroid workups. Your tasks are to assess her presenting symptoms, screen for risk, administer relevant standardized measures, and begin a cognitive-behavioral formulation and treatment plan within your scope as a psychology trainee.",
+   "chiefComplaint": "Recurrent episodes of chest tightness, racing heart, and tingling hands, with normal ED workups, referred for behavioral health evaluation.",
+   "openingLine": "Hi, thanks for seeing me. I guess I'm here because the ER keeps telling me these episodes are panic attacks, but three visits later I still don't feel sure that's really what's going on.",
+   "tasks": [
+    "Conduct a diagnostic interview covering panic attack history, triggers, frequency, and avoidance behaviors",
+    "Administer and interpret standardized measures (PDSS, PHQ-9, GAD-7) and complete a structured suicide risk screen",
+    "Develop and share a panic cycle formulation that addresses her belief in an undiagnosed cardiac cause",
+    "Introduce CBT treatment plan including interoceptive exposure, while respectfully addressing her skepticism about therapy",
+    "Appropriately explore and document her non-prescribed benzodiazepine use and caffeine intake without judgment"
+   ],
+   "timeLimitMin": 30
+  },
+  "summary": "\"This case portrays a 33-year-old emergency department unit clerk with new-onset Panic Disorder with mild agoraphobia, precipitated by witnessing a sudden death at work, who has had three negative ED cardiac workups and remains convinced she has an undiagnosed heart condition. It teaches trainees to conduct a thorough panic/risk assessment, uncover reluctantly-disclosed non-prescribed benzodiazepine use through sensitive questioning, and deliver an initial CBT formulation and interoceptive exposure rationale despite patient skepticism, all within psychology's non-prescribing scope of practice.\"",
+  "title": "\"Recurrent 'Cardiac' Episodes with Normal Workups: Panic Disorder Intake in an ED Unit Clerk\"",
+  "specialty": "\"Clinical Psychology\"",
+  "setting": "\"Telehealth video visit; patient at home in San Jose, CA, seated at her kitchen table, between work shifts\"",
+  "professions": [
+   "clinical-psychology"
+  ],
+  "knowledge": [],
+  "rubricId": "default",
+  "variants": []
+ }
+}

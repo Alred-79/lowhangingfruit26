@@ -100,6 +100,26 @@ export interface CreateInput {
   liveAssist?: boolean;
   /** Fact ids already on record from earlier encounters in a care journey. */
   initialDisclosed?: string[];
+  /** Continue the relationship: the patient remembers this student's earlier visits. */
+  followUp?: boolean;
+}
+
+export interface Relationship {
+  visits: number;
+  rapport: number;
+  disclosed: string[];
+  actions: string[];
+  memory: string;
+  last_encounter_id: string | null;
+  updated_at: string;
+}
+export function relationship(userId: string, caseId: string): Relationship | null {
+  const r = get<{ visits: number; rapport: number; disclosed: string; actions: string; memory: string; last_encounter_id: string | null; updated_at: string }>(
+    "SELECT * FROM patient_relationships WHERE user_id = ? AND case_id = ?",
+    userId,
+    caseId,
+  );
+  return r ? { ...r, disclosed: parse<string[]>(r.disclosed, []), actions: parse<string[]>(r.actions, []) } : null;
 }
 
 export function createEncounter(input: CreateInput): string {
@@ -121,6 +141,9 @@ export function createEncounter(input: CreateInput): string {
   let knobs = { ...knobsForLevel(input.level ?? c.difficulty, c.scenario.timeLimitMin), ...(input.knobs || {}) };
   knobs = applyPerturbation(knobs, perturbation);
   if (input.mode === "exam") knobs.hints = false;
+  const rel = input.followUp ? relationship(input.userId, input.caseId) : null;
+  // Trust carries over between visits, good or bad.
+  if (rel) knobs.rapportStart = Math.max(15, Math.min(85, rel.rapport));
 
   const cfg: EncounterConfig = {
     mode: input.mode,
@@ -130,9 +153,13 @@ export function createEncounter(input: CreateInput): string {
     liveAssist: !!input.liveAssist,
     professionId: input.professionId,
     journey: input.journey || null,
+    visitNumber: rel ? rel.visits + 1 : 1,
+    memory: rel?.memory || null,
   };
   const state = freshState(c, knobs);
-  for (const fid of input.initialDisclosed || []) if (c.facts.some((f) => f.id === fid)) state.disclosed[fid] = { turn: 0, how: "record" };
+  for (const aid of rel?.actions || []) if (c.actions.some((a) => a.id === aid)) state.actions[aid] = { turn: 0, request: "Earlier visit" };
+  if (rel) releaseArtifacts(c, state);
+  for (const fid of [...(input.initialDisclosed || []), ...(rel?.disclosed || [])]) if (c.facts.some((f) => f.id === fid)) state.disclosed[fid] = { turn: 0, how: "record" };
   const id = newId("e_");
   run(
     "INSERT INTO encounters (id, user_id, case_id, assignment_id, journey_run_id, attempt, config, state, case_snapshot) VALUES (?,?,?,?,?,?,?,?,?)",
@@ -199,7 +226,7 @@ export function chartView(c: CaseProfile, cfg: EncounterConfig, state: Encounter
   return {
     patient: { name: c.patient.name, age: c.patient.age, sex: c.patient.sex, pronouns: c.patient.pronouns, portrait: c.patient.portrait, appearance: c.patient.appearance },
     setting: c.setting,
-    brief: c.scenario.studentBrief,
+    brief: (cfg.visitNumber || 1) > 1 ? `Follow-up visit (visit ${cfg.visitNumber}). You have seen ${c.patient.name} before; what you documented is in the chart, and the patient remembers you. Pick up where you left off: review progress, cover what is still missing, and agree next steps.\n\nOriginal brief: ${c.scenario.studentBrief}` : c.scenario.studentBrief,
     chiefComplaint: c.scenario.chiefComplaint,
     tasks: c.scenario.tasks,
     atStart: c.chartAtStart,

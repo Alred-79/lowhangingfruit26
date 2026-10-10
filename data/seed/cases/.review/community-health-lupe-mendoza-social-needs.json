@@ -38,5 +38,14 @@
    "where": "d7 Prior Clinic Visit Note date vs a3 result",
    "problem": "a3 result states last in-clinic visit was '7 months ago' matching d7, and HbA1c values match; this is fine, no actual issue — but worth noting weight 192 lb at 7 months is never followed up with a current weight, leaving percent weight change objective implied by chart but never actually assessed in this role, which is appropriate for CHW scope, not an issue per se."
   }
+ ],
+ "revised": [
+  "chartAtStart: removed leaked 'Peripheral neuropathy (not yet documented - pending)' entry from Problem list, replaced with just the two known diagnoses so the hidden/reluctant foot symptom finding (f13) is not disclosed before the patient reports it.",
+  "a7: renamed from 'Screen for diabetic foot/neuropathy symptoms' to 'Ask about foot sensation symptoms' (neutral, non-diagnostic wording) and reworded result to report the screening observation without the earlier scope-editorializing sentence (moved scope commentary to a8/a13 only).",
+  "a7: trimmed result text to remove redundant CHW scope commentary that duplicated a8/a13, now simply reports the symptom finding and denial of wounds/color change.",
+  "objectives o3: updated actionIds reference unchanged (still a7, a13) but no id change needed since a7 id retained; text unchanged as it already describes it generically as 'new neuropathy symptoms' without using action name.",
+  "f8: retiered from 'discoverable' to 'reluctant' to match the sensitivity level of the closely related disclosures f9/f10, and importance kept 'critical'.",
+  "objectives o1 and o6: unchanged in structure since they already list f8 under sensitive disclosure/mismatch objectives, consistent with new 'reluctant' tier.",
+  "mismatch m1: unchanged mapping (f8/d7) remains valid evidence-based teaching point; verified d7 prior note still only reflects what was told to the clinic, not the hidden CHW disclosure, so no leakage after retiering."
  ]
 }

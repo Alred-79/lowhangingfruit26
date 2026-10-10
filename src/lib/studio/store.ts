@@ -1,7 +1,8 @@
 // Server-side access to the cases table for the Patient Studio.
 import { apiUser } from "@/lib/auth";
 import { all, get, newId, parse, run } from "@/lib/db";
-import type { CaseProfile, User } from "@/lib/types";
+import { listRubrics } from "@/lib/rubrics";
+import type { CaseProfile, Rubric, User } from "@/lib/types";
 import type { ConsistencyResult } from "./checks";
 import { hashProfile, sanitizeProfile } from "./profile";
 
@@ -128,4 +129,11 @@ export async function caseFor(id: string, opts: { write?: boolean } = {}): Promi
   if (user.role !== "admin" && row.owner_id && row.owner_id !== user.id) return Response.json({ error: "This patient belongs to another faculty member. Duplicate it to make your own copy." }, { status: 403 });
   if (opts.write && !canEdit(user, row)) return Response.json({ error: "You cannot edit this patient" }, { status: 403 });
   return { user, row };
+}
+
+
+/** Built-in and custom rubrics, with flags for the ones the user created. */
+export function rubricsFor(u: User): (Rubric & { custom: boolean; mine: boolean })[] {
+  const owners = new Map(all<{ id: string; owner_id: string | null }>("SELECT id, owner_id FROM rubrics").map((r) => [r.id, r.owner_id]));
+  return listRubrics().map((r) => ({ ...r, custom: owners.has(r.id), mine: owners.get(r.id) === u.id }));
 }

@@ -1,6 +1,6 @@
 import { recordSkill } from "../adaptive";
 import { all, parse, run } from "../db";
-import { chatJSON, MODELS } from "../llm";
+import { chatJSON, chatText, MODELS } from "../llm";
 import { profession } from "../professions";
 import { getRubric } from "../rubrics";
 import type { DomainScore, EncounterConfig, Feedback, Rubric } from "../types";
@@ -239,9 +239,47 @@ ${role.wrapUp.map((f) => `${f.label}:\n${wrap[f.id] || "(left blank)"}`).join("\
   };
 
   run("UPDATE encounters SET feedback = ?, score = ?, status = 'scored', ended_at = COALESCE(ended_at, datetime('now')) WHERE id = ?", JSON.stringify(feedback), percent, encId);
+  if (!row.parent_id && cfg.mode !== "journey") await rememberVisit(encId).catch((e) => console.error("rememberVisit", e));
   // Rewound branches and journey stages do not move the adaptive rating twice.
   if (!row.parent_id) recordSkill(row.user_id, cfg.professionId, encId, cfg.knobs.level, rubric.type === "domain4" ? domains : []);
   return feedback;
+}
+
+/**
+ * Updates what this patient remembers of this student, so a later follow-up visit continues the
+ * relationship: facts already shared, tests already done, trust level and a short memory.
+ */
+async function rememberVisit(encId: string) {
+  const enc = loadEncounter(encId);
+  if (!enc) return;
+  const { c, cfg, state, row } = enc;
+  const prev = parse<{ memory?: string }>(JSON.stringify({ memory: cfg.memory || "" }), {});
+  const talk = messagesOf(encId)
+    .filter((m) => m.speaker === "student" || m.speaker === "patient")
+    .map((m) => `${m.speaker === "student" ? "STUDENT" : "ME"}: ${m.text}`)
+    .join("\n");
+  if (!talk) return;
+  const memory = await chatText({
+    model: MODELS.fast,
+    maxTokens: 350,
+    temperature: 0.3,
+    system: `You are ${c.patient.name}, a patient. Write what you would remember of this visit a few weeks later, in first person, in 3-5 plain sentences: what the student was like, what you told them, what they advised or agreed with you, and how you felt leaving. Only use what was actually said. No medical details that are not in the conversation.`,
+    messages: [{ role: "user", text: talk.slice(-9000) }],
+  });
+  const visit = cfg.visitNumber || 1;
+  const merged = [prev.memory, `Visit ${visit}: ${memory.trim()}`].filter(Boolean).join("\n").slice(-3500);
+  run(
+    `INSERT INTO patient_relationships (user_id, case_id, visits, rapport, disclosed, actions, memory, last_encounter_id, updated_at) VALUES (?,?,?,?,?,?,?,?,datetime('now'))
+     ON CONFLICT(user_id, case_id) DO UPDATE SET visits = excluded.visits, rapport = excluded.rapport, disclosed = excluded.disclosed, actions = excluded.actions, memory = excluded.memory, last_encounter_id = excluded.last_encounter_id, updated_at = excluded.updated_at`,
+    row.user_id,
+    row.case_id,
+    visit,
+    Math.round(state.rapport),
+    JSON.stringify(Object.keys(state.disclosed)),
+    JSON.stringify(Object.keys(state.actions)),
+    merged,
+    encId,
+  );
 }
 
 export interface AttemptSummary {

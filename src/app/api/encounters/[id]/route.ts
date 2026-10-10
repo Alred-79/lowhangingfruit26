@@ -12,6 +12,8 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
     status: row.status,
     mode: cfg.mode,
     attempt: row.attempt,
+    visitNumber: cfg.visitNumber || 1,
+    recorded: !!row.assignment_id || !!row.journey_run_id,
     level: cfg.knobs.level,
     hints: cfg.knobs.hints,
     canRewind: cfg.mode !== "exam" && cfg.mode !== "journey",
