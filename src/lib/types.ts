@@ -307,7 +307,23 @@ export interface EncounterConfig {
   /** Set when the patient is shared by a class: the memory holds visits with several different students. */
   team?: { scope: string; studentName: string } | null;
   /** Extra context injected for journey encounters (prior shared state). */
-  journey?: { runId: string; stageId: string; priorContext: string; patientMemory: string; /** How the patient should think of the clinician in this stage, e.g. "cardiologist". */ roleTitle?: string } | null;
+  journey?: {
+    runId: string;
+    stageId: string;
+    priorContext: string;
+    patientMemory: string;
+    /** How the patient should think of the clinician in this stage, e.g. "cardiologist". */
+    roleTitle?: string;
+    /** Shown to the student in the waiting room instead of the case's own brief and tasks. */
+    brief?: string;
+    tasks?: string[];
+    /** Why the patient is seeing this clinician today, in the patient's words. Replaces the case's opening line. */
+    patientReason?: string;
+    /** Booked reason for this stage's visit, shown in the chart header. */
+    reason?: string;
+    /** True when an AI clinician, not the student, is conducting this stage. */
+    ai?: boolean;
+  } | null;
 }
 
 export interface DomainScore {

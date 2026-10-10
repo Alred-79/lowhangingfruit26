@@ -51,7 +51,9 @@ EnvironmentFile=/opt/rounds/env
 EnvironmentFile=-/opt/rounds/release.env
 ExecStart=/usr/local/bin/npm run start
 Restart=always
-RestartSec=3
+RestartSec=1
+TimeoutStopSec=4
+KillMode=mixed
 [Install]
 WantedBy=multi-user.target
 UNIT

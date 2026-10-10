@@ -261,9 +261,13 @@ export function chartView(c: CaseProfile, cfg: EncounterConfig, state: Encounter
   return {
     patient: { name: c.patient.name, age: c.patient.age, sex: c.patient.sex, pronouns: c.patient.pronouns, portrait: c.patient.portrait, appearance: c.patient.appearance },
     setting: c.setting,
-    brief: (cfg.visitNumber || 1) > 1 ? `Follow-up visit (visit ${cfg.visitNumber}). You have seen ${c.patient.name} before; what you documented is in the chart, and the patient remembers you. Pick up where you left off: review progress, cover what is still missing, and agree next steps.\n\nOriginal brief: ${c.scenario.studentBrief}` : c.scenario.studentBrief,
-    chiefComplaint: c.scenario.chiefComplaint,
-    tasks: c.scenario.tasks,
+    brief: cfg.journey?.brief
+      ? cfg.journey.brief
+      : (cfg.visitNumber || 1) > 1
+        ? `Follow-up visit (visit ${cfg.visitNumber}). You have seen ${c.patient.name} before; what you documented is in the chart, and the patient remembers you. Pick up where you left off: review progress, cover what is still missing, and agree next steps.\n\nOriginal brief: ${c.scenario.studentBrief}`
+        : c.scenario.studentBrief,
+    chiefComplaint: cfg.journey?.reason || c.scenario.chiefComplaint,
+    tasks: cfg.journey?.tasks?.length ? cfg.journey.tasks : cfg.journey?.brief ? [] : c.scenario.tasks,
     atStart: c.chartAtStart,
     sections,
     results,
@@ -362,8 +366,8 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
     known,
     reveal: d.reveal,
     locked: stillLocked,
-    background: `${c.persona.background}\nConcerns: ${c.persona.concerns.join("; ")}`,
-    openingLine: c.scenario.openingLine,
+    background: `${c.persona.background}\nConcerns: ${c.persona.concerns.join("; ")}\nTypical lines: ${c.persona.speechExamples.join(" / ")}\nOn the patient's record, which the patient also knows: ${c.chartAtStart.map((x) => `${x.label}: ${x.value}`).join("; ")}`,
+    openingLine: cfg.journey?.patientReason || c.scenario.openingLine,
     context: [cfg.memory, cfg.journey?.patientMemory, `Student just said: ${text}`].filter(Boolean).join("\n"),
   });
   const unsupported = audit.unsupported;
@@ -390,7 +394,7 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
     rapportDelta: d.rapportDelta,
     state, // snapshot: lets a student rewind to this point
   });
-  const notice = unsupported.length ? `Outside the case record: ${unsupported.map((u) => `"${u}"`).join("; ")}. The simulated patient went beyond the approved case here. Treat it as unverified; it is not filed in the chart and is not scored.` : null;
+  const notice = unsupported.length ? `Outside the case record: ${unsupported.map((u) => `"${u}"`).join("; ")}. The simulated patient went beyond the approved case here. Treat it as unverified; it is not filed in the chart.` : null;
   if (notice) addMessage(encId, state.turn, "system", notice, { kind: "unsupported" });
   save(encId, state);
   yield {
