@@ -100,7 +100,8 @@ function CaseCard({ c, professionNames }: { c: PracticeCase; professionNames: Re
               ))}
             </Select>
           </div>
-          <StartVisit body={{ caseId: c.id, mode: "practice", level, perturb: c.attempts > 0 && vary }} label={c.attempts > 0 ? "Practise again" : "Start visit"} />
+          {c.attempts > 0 && <StartVisit body={{ caseId: c.id, mode: "practice", level, followUp: true }} label="Follow-up visit" variant="secondary" />}
+          <StartVisit body={{ caseId: c.id, mode: "practice", level, perturb: c.attempts > 0 && vary }} label={c.attempts > 0 ? "Start over" : "Start visit"} />
         </div>
         {c.attempts > 0 && (
           <label className="mt-2 flex cursor-pointer items-start gap-2 text-xs text-slate-600">

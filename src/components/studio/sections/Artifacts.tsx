@@ -74,7 +74,7 @@ function TableEditor({ table, onChange }: { table: ArtifactTable; onChange: (t: 
                   </td>
                 ))}
                 <td className="p-0.5">
-                  <select className={cx(cell, "min-w-0")} value={r.flag || ""} aria-label={`Row ${i + 1} flag`} onChange={(e) => setRow(i, { ...r, flag: e.target.value as "H" | "L" | "A" | "" })}>
+                  <select className={cx(cell, "!min-w-[3.25rem]")} value={r.flag || ""} aria-label={`Row ${i + 1} flag`} onChange={(e) => setRow(i, { ...r, flag: e.target.value as "H" | "L" | "A" | "" })}>
                     <option value="">-</option>
                     <option value="H">H</option>
                     <option value="L">L</option>
@@ -82,8 +82,8 @@ function TableEditor({ table, onChange }: { table: ArtifactTable; onChange: (t: 
                   </select>
                 </td>
                 <td className="p-0.5">
-                  <button type="button" aria-label={`Delete row ${i + 1}`} className="px-1 text-xs text-slate-400 hover:text-rose-700" onClick={() => onChange({ ...table, rows: table.rows.filter((_, j) => j !== i) })}>
-                    Delete
+                  <button type="button" title="Delete this row" aria-label={`Delete row ${i + 1}`} className="px-1 text-xs text-slate-400 hover:text-rose-700" onClick={() => onChange({ ...table, rows: table.rows.filter((_, j) => j !== i) })}>
+                    x
                   </button>
                 </td>
               </tr>
@@ -265,7 +265,7 @@ export function ArtifactsSection({ p, set }: SectionProps) {
               </option>
             ))}
           </Select>
-          <Button size="sm" onClick={add}>
+          <Button size="sm" className="whitespace-nowrap" onClick={add}>
             Add document
           </Button>
         </div>

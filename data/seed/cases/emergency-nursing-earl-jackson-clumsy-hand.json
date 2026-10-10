@@ -1,0 +1,899 @@
+{
+ "origin": "ai_draft",
+ "reviewed": false,
+ "profile": {
+  "version": 1,
+  "actions": [
+   {
+    "id": "a1",
+    "kind": "assessment",
+    "name": "FAST stroke screen (Face-Arm-Speech-Time) via video",
+    "result": "Face: right-sided facial droop visible on camera. Arm: right arm drifts downward within 10 seconds when patient holds both arms out with eyes closed. Speech: slurred, mildly difficult to understand but words make sense. Time: symptom onset approximately 40 minutes ago. FAST screen POSITIVE in all three domains.",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a2",
+    "kind": "assessment",
+    "name": "Determine last known well time",
+    "result": "Patient and wife agree he was normal when he finished breakfast; symptoms noticed about 40 minutes ago when he dropped his coffee cup. Last known well time established as approximately 40 minutes prior to call.",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a3",
+    "kind": "vitals",
+    "name": "Home blood pressure reading (patient's cuff)",
+    "result": "178/102 mmHg, right arm, seated, taken 5 minutes ago.",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": [
+     "d3",
+     "d5"
+    ]
+   },
+   {
+    "id": "a4",
+    "kind": "vitals",
+    "name": "Heart rate / pulse check (patient reports from home pulse oximeter)",
+    "result": "Heart rate 96 bpm, irregular rhythm reported by device; SpO2 97% on room air.",
+    "importance": "important",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a5",
+    "kind": "exam",
+    "name": "Camera inspection of face at rest and with smile",
+    "result": "Right nasolabial fold flattened; right corner of mouth droops when asked to smile; forehead wrinkles symmetrically (not consistent with isolated peripheral facial palsy pattern).",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a6",
+    "kind": "exam",
+    "name": "Arm drift test (patient performs on camera, eyes closed, arms extended)",
+    "result": "Right arm drifts downward and pronates within 10 seconds; left arm holds steady.",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a7",
+    "kind": "exam",
+    "name": "Speech sample / repeat a sentence on camera",
+    "result": "Speech is slurred (dysarthric) but patient is able to follow commands and answer questions appropriately; no obvious word-finding difficulty.",
+    "importance": "important",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a8",
+    "kind": "exam",
+    "name": "Grip strength / hand function check (ask patient to squeeze wife's hand or a towel with each hand)",
+    "result": "Right hand grip notably weaker than left; patient reports he 'can't feel it right' and dropped the cup without warning.",
+    "importance": "important",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a9",
+    "kind": "record",
+    "name": "Review current medication list in chart",
+    "result": "Apixaban (Eliquis) 5 mg twice daily for atrial fibrillation - last fill noted but patient reports he ran out; lisinopril 20 mg daily for hypertension.",
+    "importance": "critical",
+    "abnormal": true,
+    "artifactIds": []
+   },
+   {
+    "id": "a10",
+    "kind": "record",
+    "name": "Review allergy list",
+    "result": "No known drug allergies documented.",
+    "importance": "minor",
+    "abnormal": false,
+    "artifactIds": []
+   },
+   {
+    "id": "a11",
+    "kind": "record",
+    "name": "Review problem list",
+    "result": "Atrial fibrillation, hypertension. No diabetes, no prior stroke/TIA documented.",
+    "importance": "important",
+    "abnormal": false,
+    "artifactIds": []
+   },
+   {
+    "id": "a12",
+    "kind": "assessment",
+    "name": "Ask about chest pain, shortness of breath, headache",
+    "result": "Patient denies chest pain, shortness of breath, and headache.",
+    "importance": "minor",
+    "abnormal": false,
+    "artifactIds": []
+   },
+   {
+    "id": "a13",
+    "kind": "assessment",
+    "name": "Ask about recent trauma or fall",
+    "result": "No recent fall, head injury, or trauma reported.",
+    "importance": "minor",
+    "abnormal": false,
+    "artifactIds": []
+   },
+   {
+    "id": "a14",
+    "kind": "assessment",
+    "name": "Blood glucose check (home glucometer, if available)",
+    "result": "Patient does not own a glucometer; no diabetes history; unable to obtain reading remotely.",
+    "importance": "minor",
+    "abnormal": false,
+    "artifactIds": []
+   }
+  ],
+  "answerKey": {
+   "primaryProblem": "Suspected acute ischemic stroke (right-sided facial droop, right arm weakness/drift, dysarthria, symptom onset ~40 minutes ago) in a patient with atrial fibrillation and subtherapeutic anticoagulation due to a missed week of apixaban - a time-critical emergency requiring immediate EMS activation.",
+   "differential": [
+    "Acute ischemic stroke (cardioembolic, given AFib and missed anticoagulation) - most likely given FAST-positive exam",
+    "Hemorrhagic stroke (uncontrolled hypertension 178/102 is a risk factor) - cannot be distinguished without CT, reinforces not giving aspirin",
+    "Transient ischemic attack - cannot be assumed; must be treated as stroke until proven otherwise while symptoms are present",
+    "Hypoglycemia (distractor - no diabetes history, no glucometer, unlikely but worth a quick mental check)",
+    "Peripheral (Bell's) palsy (distractor - ruled against by symmetric forehead wrinkling and associated arm drift/speech change, pattern is central not peripheral)"
+   ],
+   "keyFindings": [
+    "FAST screen positive: facial droop, arm drift, slurred speech",
+    "Symptom onset / last known well approximately 40 minutes ago - within thrombolysis/thrombectomy window",
+    "Known atrial fibrillation with 1 week of missed apixaban doses - elevated embolic stroke risk and uncertain anticoagulation status (relevant to bleeding risk if thrombolysis considered, and to not giving aspirin)",
+    "Home BP 178/102 - uncontrolled hypertension, do not treat BP at home, let receiving ED manage",
+    "Nearest hospital is 35 minutes away - supports EMS transport with pre-notification rather than private vehicle, and stroke-center routing if available",
+    "Patient and family minimizing symptoms and preferring to wait for Monday appointment - key barrier to address with calm, direct communication"
+   ],
+   "plan": [
+    "Assign highest acuity level (Level 1 / Emergent per ESI or equivalent) - this is a time-critical stroke alert",
+    "Activate EMS (call 911) immediately; do not allow patient to drive himself or wait for family to drive him",
+    "Instruct patient to remain NPO (nothing by mouth) - no food, water, or medications - due to aspiration risk and possible need for imaging/intervention",
+    "Explicitly instruct NOT to give aspirin or any other medication at home given uncertain stroke type (ischemic vs hemorrhagic) and anticoagulation history",
+    "Document and communicate exact last known well time to EMS and receiving facility - this determines treatment eligibility window",
+    "Stay on the line with patient/wife until EMS arrives; keep patient seated/lying safely, do not leave him alone",
+    "Give an SBAR handoff to EMS/receiving ED: Situation (acute stroke symptoms, FAST positive), Background (AFib, HTN, apixaban non-adherence x1 week), Assessment (facial droop, arm drift, dysarthria, BP 178/102, onset 40 min), Recommendation (urgent stroke-protocol transport, pre-notify receiving ED, consider stroke center if available)",
+    "Reassure patient and wife this is a true emergency, not something that can wait until Monday, using calm and respectful language that honors his wish to avoid 'a fuss' while being firm about urgency",
+    "Hand off clinical decision-making about thrombolysis/thrombectomy and anticoagulation management entirely to the emergency physician/stroke team - this is outside triage nursing scope"
+   ],
+   "redFlags": [
+    "New focal neurologic deficit with onset under 4.5 hours - thrombolysis window still open, every minute counts",
+    "Atrial fibrillation with lapsed anticoagulation - high risk cardioembolic source",
+    "Severely elevated blood pressure (178/102) in the setting of acute neuro deficit",
+    "Patient/family desire to delay care ('wait until Monday') despite emergent findings - requires clear, firm redirection"
+   ],
+   "educationPoints": [
+    "FAST (Face, Arm, Speech, Time) is a validated rapid remote screen; any single positive finding plus a plausible time window warrants treating as stroke until proven otherwise",
+    "'Last known well' time, not 'time symptoms were noticed by someone else,' is the critical data point to hand off to EMS and the receiving team",
+    "Aspirin and other oral medications must be withheld in suspected stroke until imaging rules out hemorrhage - a common unsafe home remedy to proactively prevent",
+    "Telephone/video triage nurses do not diagnose stroke subtype or prescribe treatment; the role is rapid recognition, highest-acuity triage, EMS activation, and safe handoff via SBAR",
+    "Medication non-adherence (missed anticoagulant doses) is a modifiable risk factor worth gentle, non-judgmental exploration once the emergency is addressed - but must never delay EMS activation",
+    "Family members' observations (e.g., 'his face looks crooked') are valid and important triage data, even when the patient minimizes his own symptoms"
+   ]
+  },
+  "artifacts": [
+   {
+    "id": "d1",
+    "type": "medication_list",
+    "title": "Current Medications - Earl Jackson",
+    "date": "Prior to this visit",
+    "release": {
+     "when": "start"
+    },
+    "author": "Primary Care Clinic - Family Medicine",
+    "table": {
+     "columns": [
+      "Medication",
+      "Dose",
+      "Route",
+      "Frequency",
+      "Last documented fill"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Apixaban (Eliquis)",
+        "5 mg",
+        "Oral",
+        "Twice daily",
+        "6 weeks ago"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Lisinopril",
+        "20 mg",
+        "Oral",
+        "Once daily",
+        "3 weeks ago"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Atorvastatin",
+        "40 mg",
+        "Oral",
+        "Once daily at bedtime",
+        "3 weeks ago"
+       ],
+       "flag": ""
+      }
+     ]
+    }
+   },
+   {
+    "id": "d2",
+    "type": "note",
+    "title": "Cardiology Follow-up Note (3 months ago)",
+    "date": "3 months ago",
+    "release": {
+     "when": "start"
+    },
+    "author": "Dr. R. Nguyen, Cardiology",
+    "body": "Mr. Jackson is a 71-year-old man with persistent atrial fibrillation, rate-controlled, on apixaban 5 mg BID for stroke prophylaxis (CHA2DS2-VASc score 4). Hypertension is present and partially controlled. Discussed strict adherence to anticoagulation given elevated stroke risk; patient verbalized understanding. Plan: continue current regimen, recheck in 6 months, home BP log reviewed - running high (150s-170s/90s), lisinopril dose increased at that visit."
+   },
+   {
+    "id": "d3",
+    "type": "flowsheet",
+    "title": "Home Blood Pressure Log (patient-reported, last 2 weeks)",
+    "date": "Last 2 weeks",
+    "release": {
+     "when": "action",
+     "ref": "a3"
+    },
+    "author": "Patient self-report",
+    "table": {
+     "columns": [
+      "Date",
+      "Time",
+      "BP (mmHg)",
+      "Heart rate (bpm)"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "12 days ago",
+        "Morning",
+        "162/94",
+        "88"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "9 days ago",
+        "Morning",
+        "168/96",
+        "84"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "5 days ago",
+        "Evening",
+        "171/98",
+        "90"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "2 days ago",
+        "Morning",
+        "174/100",
+        "92"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Today",
+        "During call",
+        "178/102",
+        "96"
+       ],
+       "flag": "H"
+      }
+     ]
+    },
+    "chart": {
+     "kind": "line",
+     "xLabel": "Date",
+     "yLabel": "Systolic BP (mmHg)",
+     "refHigh": 130,
+     "series": [
+      {
+       "name": "Systolic BP",
+       "points": [
+        {
+         "x": "12 days ago",
+         "y": 162
+        },
+        {
+         "x": "9 days ago",
+         "y": 168
+        },
+        {
+         "x": "5 days ago",
+         "y": 171
+        },
+        {
+         "x": "2 days ago",
+         "y": 174
+        },
+        {
+         "x": "Today",
+         "y": 178
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d4",
+    "type": "note",
+    "title": "Pharmacy Refill History - Apixaban",
+    "date": "Updated today",
+    "release": {
+     "when": "fact",
+     "ref": "f10"
+    },
+    "author": "Community Pharmacy, rural Kansas",
+    "body": "Last apixaban 5 mg fill: 30-day supply dispensed 5 weeks ago (60 tablets, take 1 twice daily). Based on fill date and quantity, supply would have been exhausted approximately 1 week ago. No refill request or pickup recorded since. Patient has not contacted pharmacy for early refill or reported running out."
+   },
+   {
+    "id": "d5",
+    "type": "flowsheet",
+    "title": "Telephone Triage Vital Signs - This Call",
+    "date": "Today",
+    "release": {
+     "when": "action",
+     "ref": "a3"
+    },
+    "author": "Tele-triage nursing documentation",
+    "table": {
+     "columns": [
+      "Parameter",
+      "Value",
+      "Method"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Blood pressure",
+        "178/102 mmHg",
+        "Patient's home automatic cuff, right arm, seated"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Heart rate",
+        "96 bpm, irregular",
+        "Home pulse oximeter"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "SpO2",
+        "97%",
+        "Home pulse oximeter, room air"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Reported temperature",
+        "Not taken, patient afebrile by report, no chills"
+       ],
+       "flag": ""
+      }
+     ]
+    }
+   },
+   {
+    "id": "d6",
+    "type": "note",
+    "title": "Last Primary Care Visit Summary (6 weeks ago)",
+    "date": "6 weeks ago",
+    "release": {
+     "when": "start"
+    },
+    "author": "Dr. S. Patterson, Family Medicine",
+    "body": "71-year-old man presenting for routine follow-up of atrial fibrillation and hypertension. No new complaints. Reports good adherence to apixaban and lisinopril. Blood pressure in clinic 148/88. No focal neurologic deficits on exam. Advised continued home BP monitoring and strict medication adherence given high stroke risk from atrial fibrillation. Reinforced importance of not missing anticoagulant doses even briefly."
+   }
+  ],
+  "chartAtStart": [
+   {
+    "label": "Reason for visit",
+    "value": "Patient calling tele-triage line reporting right hand clumsiness and dropped a cup; family reports facial asymmetry"
+   },
+   {
+    "label": "Problem list",
+    "value": "Atrial fibrillation (on anticoagulation); Essential hypertension"
+   },
+   {
+    "label": "Medications",
+    "value": "Apixaban 5 mg PO BID; Lisinopril 20 mg PO daily; Atorvastatin 40 mg PO qHS"
+   },
+   {
+    "label": "Allergies",
+    "value": "No known drug allergies"
+   },
+   {
+    "label": "Last vitals (6 weeks ago, in clinic)",
+    "value": "BP 148/88, HR 78 regular, Temp 98.4F, SpO2 98%"
+   },
+   {
+    "label": "Immunizations",
+    "value": "Influenza vaccine - up to date; Pneumococcal vaccine - up to date"
+   },
+   {
+    "label": "Care team",
+    "value": "Dr. S. Patterson - Family Medicine (PCP); Dr. R. Nguyen - Cardiology"
+   },
+   {
+    "label": "Code status",
+    "value": "Full code"
+   }
+  ],
+  "difficulty": 3,
+  "encounterType": "tele-triage call",
+  "facts": [
+   {
+    "id": "f1",
+    "category": "chief_complaint",
+    "topic": "reason for calling",
+    "chart": "Patient reports right hand went clumsy and he dropped his coffee cup about 40 minutes ago; thinks he slept on his arm wrong.",
+    "says": "My right hand just went clumsy on me about forty minutes ago and I dropped my coffee cup. Probably just slept on it funny.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f2",
+    "category": "hpi",
+    "topic": "facial appearance",
+    "chart": "Wife reports in background that patient's face looks crooked/asymmetric.",
+    "says": "My wife Loretta's over there saying my face looks crooked, but I don't feel nothin' wrong with my face.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f3",
+    "category": "hpi",
+    "topic": "speech change",
+    "chart": "Patient's speech is slurred during the call; he is aware his words sound different.",
+    "says": "I guess my words are comin' out a little funny too, now that you mention it.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f4",
+    "category": "hpi",
+    "topic": "timing of onset",
+    "chart": "Symptoms began approximately 40 minutes before the call, noticed when he dropped the coffee cup after breakfast.",
+    "says": "It was right after breakfast, so maybe forty minutes now, when the cup just slipped out of my hand.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f5",
+    "category": "hpi",
+    "topic": "desire to wait",
+    "chart": "Patient wants to know if this can wait until his regular doctor appointment on Monday.",
+    "says": "Can't I just wait and see my own doctor Monday? I don't want to make a big fuss over nothing.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f6",
+    "category": "hpi",
+    "topic": "hand sensation",
+    "chart": "Patient reports decreased feeling in right hand, did not realize he was dropping the cup until it fell.",
+    "says": "I didn't even feel it slip out of my hand. Just heard it hit the floor.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f7",
+    "category": "hpi",
+    "topic": "associated weakness",
+    "chart": "Patient reports his right leg feels 'a little heavy' when he tried to stand up a few minutes ago.",
+    "says": "Now that I think on it, when I stood up my right leg felt kind of heavy, like it wasn't quite listening to me.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f8",
+    "category": "ros",
+    "topic": "headache or pain",
+    "chart": "Denies headache, denies chest pain.",
+    "says": "No, my head don't hurt and there ain't no pain in my chest.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f9",
+    "category": "ros",
+    "topic": "breathing symptoms",
+    "chart": "Denies shortness of breath or difficulty breathing.",
+    "says": "Breathing's fine, no trouble there.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f10",
+    "category": "medications",
+    "topic": "anticoagulant supply",
+    "chart": "Patient ran out of apixaban approximately 1 week ago and has not refilled.",
+    "says": "Well, since you're askin'... I did run out of that blood thinner, the Eliquis, about a week ago. Figured I'd pick it up when I went to town but just didn't get around to it.",
+    "tier": "reluctant",
+    "importance": "critical"
+   },
+   {
+    "id": "f11",
+    "category": "medications",
+    "topic": "other daily medications",
+    "chart": "Reports taking lisinopril and atorvastatin as prescribed, no missed doses of those.",
+    "says": "The blood pressure pill and the cholesterol one, I'm still takin' those regular.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f12",
+    "category": "pmh",
+    "topic": "heart rhythm history",
+    "chart": "History of atrial fibrillation, diagnosed approximately 2 years ago, followed by cardiology.",
+    "says": "I got that irregular heartbeat thing, atrial fib they call it. Been dealin' with it a couple years now.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f13",
+    "category": "pmh",
+    "topic": "blood pressure history",
+    "chart": "History of hypertension, previously on lisinopril 20 mg daily, blood pressure has been running higher than usual at home over the past two weeks.",
+    "says": "I got high blood pressure too. It's been runnin' a little high at home the last couple weeks if I'm honest.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f14",
+    "category": "pmh",
+    "topic": "diabetes status",
+    "chart": "No history of diabetes.",
+    "says": "No, I don't have the sugar diabetes, never have.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f15",
+    "category": "pmh",
+    "topic": "prior stroke or TIA",
+    "chart": "No prior history of stroke or transient ischemic attack.",
+    "says": "No, nothin' like this has ever happened before.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f16",
+    "category": "hpi",
+    "topic": "vision changes",
+    "chart": "Denies vision changes, double vision, or loss of vision.",
+    "says": "My eyes seem fine, seein' okay.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f17",
+    "category": "hpi",
+    "topic": "dizziness or balance",
+    "chart": "Reports feeling slightly off-balance when he stood up but attributes it to his leg, not room-spinning dizziness.",
+    "says": "I felt a little unsteady gettin' up, but I figured that was just my leg actin' up.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f18",
+    "category": "hpi",
+    "topic": "recent injury",
+    "chart": "Denies recent falls, head trauma, or injury to the arm or neck.",
+    "says": "No, I didn't fall or hit my head or nothin' like that.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f19",
+    "category": "family",
+    "topic": "support at home",
+    "chart": "Wife Loretta is present in the home and able to assist and drive if needed, though patient wants to avoid alarming her.",
+    "says": "Loretta's right here with me. I don't want to scare her more than she already is.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f20",
+    "category": "social",
+    "topic": "distance to hospital",
+    "chart": "Nearest hospital with emergency services is approximately 35 minutes away by car from the patient's rural home.",
+    "says": "We're pretty far out here, hospital's about 35 minutes away normally.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f21",
+    "category": "social",
+    "topic": "living situation",
+    "chart": "Lives with wife on a small rural property outside town; retired grain elevator operator.",
+    "says": "We're out here on our little place outside town. I worked the grain elevator for near 40 years before I retired.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f22",
+    "category": "psychosocial",
+    "topic": "attitude toward illness",
+    "chart": "Patient describes himself as not wanting to be a bother and prefers to tough things out.",
+    "says": "I've never been one to make a fuss. Figured this'd pass on its own.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f23",
+    "category": "substance",
+    "topic": "alcohol use",
+    "chart": "Drinks alcohol rarely, approximately 1-2 beers on special occasions.",
+    "says": "I might have a beer at a holiday or somethin', but that's about it.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f24",
+    "category": "substance",
+    "topic": "tobacco use",
+    "chart": "Former smoker, quit 15 years ago, smoked for about 20 years prior.",
+    "says": "I used to smoke but I quit that about 15 years back.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f25",
+    "category": "nutrition",
+    "topic": "breakfast today",
+    "chart": "Ate a normal breakfast of eggs and toast this morning with no choking or swallowing difficulty before symptom onset.",
+    "says": "Had my usual eggs and toast this mornin', went down fine.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f26",
+    "category": "hpi",
+    "topic": "ability to swallow now",
+    "chart": "Patient reports some difficulty with saliva pooling on the right side of his mouth since symptoms began, has not attempted to eat or drink since.",
+    "says": "I notice some spit sittin' on the right side of my mouth I can't seem to swallow right. Haven't tried eatin' or drinkin' nothin' since this started.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f27",
+    "category": "adherence",
+    "topic": "reason for missed anticoagulant",
+    "chart": "Patient reports the pharmacy is a 25-minute drive and he has been managing farm chores, which delayed getting the refill.",
+    "says": "The drugstore's a good 25 minutes from here, and I've been busy with chores around the place. Just kept puttin' it off.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f28",
+    "category": "goals",
+    "topic": "what he wants from this call",
+    "chart": "Patient's stated goal is reassurance that this is minor and permission to wait until Monday's appointment.",
+    "says": "I just want you to tell me this'll pass and I can wait for Monday.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f29",
+    "category": "psychosocial",
+    "topic": "trust in wife's observation",
+    "chart": "Patient initially dismisses wife's observation about his face but becomes more concerned when the nurse validates it.",
+    "says": "Loretta's always been the worryin' type, but... I guess if you're sayin' it matters, maybe I should listen.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f30",
+    "category": "ros",
+    "topic": "nausea or vomiting",
+    "chart": "Denies nausea or vomiting.",
+    "says": "No, my stomach's fine, not sick to it or nothin'.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f31",
+    "category": "hpi",
+    "topic": "seizure activity",
+    "chart": "Denies any shaking, jerking movements, or loss of consciousness.",
+    "says": "No, I didn't shake or black out or nothin'. Just the hand and now I guess my face and leg.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f32",
+    "category": "other",
+    "topic": "identifying himself and wife on call",
+    "chart": "Confirms his name, date of birth, and that his wife Loretta is present and listening.",
+    "says": "This is Earl Jackson, born in '53. My wife Loretta's right here with me.",
+    "tier": "initial",
+    "importance": "minor"
+   }
+  ],
+  "mismatches": [
+   {
+    "id": "m1",
+    "factId": "f10",
+    "artifactId": "d4",
+    "patientClaim": "Patient says he ran out of his apixaban (blood thinner) about a week ago and simply hasn't gotten around to refilling it.",
+    "recordEvidence": "Pharmacy refill history (d4) confirms the last 30-day supply was dispensed 5 weeks ago with no refill request since, consistent with the medication being exhausted roughly 1 week ago - record corroborates the patient's self-report rather than contradicting it, reinforcing that this is a real adherence gap, not a misremembering.",
+    "teachingPoint": "When a patient's admission matches objective pharmacy data, the triage nurse should trust and document it clearly - this corroborated non-adherence is clinically important to relay to EMS/ED (bleeding risk status, embolic risk) and should not be softened or omitted in the handoff."
+   },
+   {
+    "id": "m2",
+    "factId": "f11",
+    "artifactId": "d1",
+    "patientClaim": "Patient states he has been taking his lisinopril and atorvastatin regularly as prescribed, with no missed doses.",
+    "recordEvidence": "Medication list (d1) shows last documented fill for lisinopril and atorvastatin was 3 weeks ago for what should be a 30-day supply, and the home BP log (d3) shows a clear upward trend over the last 2 weeks despite reported adherence, raising a quieter possibility of inconsistent dosing or a dose that needs adjustment rather than confirming perfect control.",
+    "teachingPoint": "A patient's confident report of adherence does not always match the clinical trend; rising home BP despite reported adherence is worth noting in the handoff for the receiving team to reassess the antihypertensive regimen, without the triage nurse making assumptions or confronting the patient during an emergent call."
+   }
+  ],
+  "objectives": [
+   {
+    "id": "o1",
+    "text": "Perform a rapid remote FAST stroke screen via video and correctly identify a positive result requiring emergent action.",
+    "factIds": [
+     "f2",
+     "f3",
+     "f7"
+    ],
+    "actionIds": [
+     "a1",
+     "a5",
+     "a6",
+     "a7"
+    ]
+   },
+   {
+    "id": "o2",
+    "text": "Establish and accurately document the last known well time as distinct from the time symptoms were reported by a family member.",
+    "factIds": [
+     "f1",
+     "f4"
+    ],
+    "actionIds": [
+     "a2"
+    ]
+   },
+   {
+    "id": "o3",
+    "text": "Recognize and incorporate relevant risk factors (atrial fibrillation with lapsed anticoagulation, uncontrolled hypertension) into acuity decision-making.",
+    "factIds": [
+     "f10",
+     "f12",
+     "f13",
+     "f27"
+    ],
+    "actionIds": [
+     "a3",
+     "a9"
+    ]
+   },
+   {
+    "id": "o4",
+    "text": "Assign the correct (highest) triage acuity level and activate EMS rather than deferring care to a scheduled outpatient visit, despite patient and family preference to wait.",
+    "factIds": [
+     "f5",
+     "f20",
+     "f28"
+    ],
+    "actionIds": [
+     "a1",
+     "a2",
+     "a3"
+    ]
+   },
+   {
+    "id": "o5",
+    "text": "Provide correct protocol-based safety instructions: NPO status, withholding aspirin/medications, and staying on the line until EMS arrives.",
+    "factIds": [
+     "f26",
+     "f31"
+    ],
+    "actionIds": [
+     "a1",
+     "a9"
+    ]
+   },
+   {
+    "id": "o6",
+    "text": "Produce an accurate SBAR handoff and triage note that includes acuity level, key findings, risk factors, and last known well time for the receiving EMS/ED team.",
+    "factIds": [
+     "f4",
+     "f10",
+     "f20"
+    ],
+    "actionIds": [
+     "a1",
+     "a2",
+     "a9"
+    ]
+   }
+  ],
+  "patient": {
+   "name": "Earl Jackson",
+   "age": 71,
+   "sex": "male",
+   "pronouns": "he/him",
+   "ethnicity": "Black",
+   "occupation": "Retired grain-elevator operator",
+   "language": "English",
+   "appearance": "An older man with closely cropped gray hair sits in a worn recliner in a dim living room, wearing a flannel shirt. The right corner of his mouth droops slightly and his face looks mildly asymmetric on camera; he appears calm and a little puzzled rather than distressed, occasionally glancing off-screen toward his wife's voice."
+  },
+  "persona": {
+   "personality": "Calm, stoic, and stubbornly self-reliant; downplays symptoms and dislikes being fussed over.",
+   "communicationStyle": "Speaks slowly and plainly, in short sentences, with occasional folksy phrasing; needs gentle but direct redirection to stay focused on urgent questions.",
+   "healthLiteracy": "moderate",
+   "emotionalState": "Mildly puzzled and mildly annoyed at the inconvenience, not yet alarmed; becomes slightly more concerned only when the nurse clearly names the urgency.",
+   "background": "Worked at the local grain elevator for nearly 40 years before retiring; has lived on the same rural property with his wife Loretta for over 30 years; enjoys woodworking and tending a small vegetable garden; active in his church community.",
+   "speechExamples": [
+    "I've never been one to make a fuss.",
+    "Loretta's always been the worryin' type.",
+    "Can't this wait till Monday? I got my regular doctor then.",
+    "Didn't even feel the cup slip right out of my hand.",
+    "We're pretty far out here, hospital's a good ways off."
+   ],
+   "concerns": [
+    "Does not want to overreact or be seen as making a big deal out of nothing",
+    "Worried about alarming his wife Loretta unnecessarily",
+    "Concerned about the cost and hassle of an ambulance ride and ER visit",
+    "Wants to know if this can simply wait until his Monday appointment with his regular doctor"
+   ]
+  },
+  "scenario": {
+   "studentBrief": "You are an emergency nursing student staffing a 24-hour nurse triage line. Earl Jackson, 71, has called in reporting that his right hand went clumsy and he dropped his coffee cup about 40 minutes ago. His wife Loretta is in the background and can be heard commenting on his appearance. Conduct a focused telephone/video triage assessment, assign an acuity level, and give appropriate protocol-based instructions.",
+   "chiefComplaint": "Right hand clumsiness and dropped cup approximately 40 minutes ago, with family-reported facial asymmetry and new slurred speech.",
+   "openingLine": "Hey there, this is Earl Jackson. My right hand just went clumsy on me about forty minutes ago and I dropped my coffee cup. Probably just slept on it funny, but my wife wanted me to call.",
+   "tasks": [
+    "Conduct a rapid focused history and remote neurological screen (FAST) via video.",
+    "Determine and document the last known well time accurately.",
+    "Identify atrial fibrillation with lapsed anticoagulation and uncontrolled home blood pressure as critical risk factors.",
+    "Assign the correct triage acuity level and activate emergency medical services without delay.",
+    "Deliver clear, calm patient/family education and an accurate SBAR handoff including NPO status and withholding aspirin."
+   ],
+   "timeLimitMin": 20
+  },
+  "summary": "A 71-year-old man with atrial fibrillation and a lapsed anticoagulant supply calls a nurse triage line reporting right hand clumsiness, downplaying new facial droop and slurred speech that his wife notices in the background. The case trains rapid remote FAST screening, accurate last-known-well determination, and immediate EMS activation despite patient minimization and preference to wait for a scheduled visit.",
+  "setting": "Telehealth video visit; patient at home in a rural Kansas living room, calling the regional nurse triage line, with his wife Loretta present off-camera.",
+  "specialty": "Emergency / Triage Nursing",
+  "title": "Acute Stroke Recognition on a Rural Nurse Triage Call: 71-Year-Old Man with Atrial Fibrillation and Lapsed Anticoagulation",
+  "professions": [
+   "emergency-nursing"
+  ],
+  "knowledge": [],
+  "rubricId": "default",
+  "variants": []
+ }
+}

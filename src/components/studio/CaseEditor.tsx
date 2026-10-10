@@ -61,7 +61,7 @@ export default function CaseEditor({
   const [saveState, setSaveState] = useState<SaveState>("saved");
   const [saveError, setSaveError] = useState("");
   const [section, setSection] = useState<SectionId>("overview");
-  const [guideOpen, setGuideOpen] = useState(true);
+  const [guideOpen, setGuideOpen] = useState(false);
   const [rubrics, setRubrics] = useState(initialRubrics);
   const [check, setCheck] = useState<{ running: boolean; seconds: number; error: string | null }>({ running: false, seconds: 0, error: null });
   const [gate, setGate] = useState<Gate | null>(null);
@@ -154,6 +154,10 @@ export default function CaseEditor({
     window.scrollTo({ top: 0 });
   }, []);
 
+  // The guide is a column on wide screens and starts open there; on narrower screens it is a drawer and starts closed.
+  useEffect(() => {
+    if (window.innerWidth >= 1280) setGuideOpen(true);
+  }, []);
   // Warn on a hard unload with unsaved edits; flush on in-app navigation.
   useEffect(() => {
     const warn = (e: BeforeUnloadEvent) => {
@@ -420,7 +424,7 @@ export default function CaseEditor({
         </Notice>
       )}
 
-      <div className={cx("grid items-start gap-4", guideOpen ? "lg:grid-cols-[13rem_minmax(0,1fr)] 2xl:grid-cols-[13rem_minmax(0,1fr)_25rem]" : "lg:grid-cols-[13rem_minmax(0,1fr)]")}>
+      <div className={cx("grid items-start gap-4", guideOpen ? "lg:grid-cols-[13rem_minmax(0,1fr)] xl:grid-cols-[13rem_minmax(0,1fr)_22rem]" : "lg:grid-cols-[13rem_minmax(0,1fr)]")}>
         {/* Section navigation */}
         <nav aria-label="Sections" className="rounded-lg border border-slate-200 bg-white p-2 shadow-sm lg:sticky lg:top-[4.75rem]">
           <p className="px-2.5 pb-1 pt-1 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Patient profile</p>
@@ -455,7 +459,7 @@ export default function CaseEditor({
 
         {/* Guide: a column on very wide screens, a drawer otherwise */}
         {guideOpen && (
-          <div className="fixed inset-y-0 right-0 z-40 w-[25rem] max-w-[92vw] p-2 shadow-2xl 2xl:sticky 2xl:inset-auto 2xl:top-[4.75rem] 2xl:z-auto 2xl:h-[calc(100vh-5.75rem)] 2xl:w-auto 2xl:max-w-none 2xl:p-0 2xl:shadow-none">
+          <div className="fixed inset-y-0 right-0 z-40 w-[25rem] max-w-[92vw] p-2 xl:sticky xl:inset-auto xl:top-[4.75rem] xl:z-auto xl:h-[calc(100vh-5.75rem)] xl:w-auto xl:max-w-none xl:p-0">
             <GuidePanel caseId={id} profileNow={profileNow} onAccept={acceptOps} onClose={() => setGuideOpen(false)} />
           </div>
         )}

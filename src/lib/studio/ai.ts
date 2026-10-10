@@ -105,6 +105,8 @@ Severity:
 - medium: the same detail differs between two places (dose, unit, date, number) or a key finding in the answer key is not supported anywhere
 - low: minor wording or plausibility polish
 
+Write for a faculty member who has never seen the JSON: in "where", "title", "why" and "fixSummary" name things the way the editor does ("Fact f7 (water pill timing)", "the Medication list document", "Chart at start: Last vitals", "the answer key's red flags"), never by JSON key or path such as chartAtStart, answerKey.redFlags or artifactId.
+
 Report only real problems you can point to in the data; quote the conflicting values in "why". Do not pad the list. If the case is consistent, return no issues. At most 12 issues, most serious first.
 
 For each issue give a fix as a patch when editing specific fields resolves it. Choose the reading that agrees with the answer key and the majority of the case, and patch every field needed. When the right answer is a faculty judgment call, leave ops empty and say in fixSummary what they need to decide.
@@ -135,8 +137,20 @@ ${PATCH_DOC}`,
     },
     messages: [{ role: "user", text: `Review this case for internal contradictions.\n\nCASE JSON:\n${compactCase(p)}` }],
   });
+  // The model sometimes returns the list JSON-encoded as a string, or leaves it out. A missing list must not
+  // read as "no problems found".
+  let list: unknown = raw.issues;
+  if (typeof list === "string") {
+    try {
+      list = JSON.parse(list);
+    } catch {
+      list = undefined;
+    }
+  }
+  console.log("[studio] clinical review returned", { keys: Object.keys(raw || {}), issuesType: Array.isArray(raw.issues) ? "array" : typeof raw.issues, n: Array.isArray(list) ? list.length : null });
+  if (!Array.isArray(list)) throw new Error("the review came back without a findings list");
   const issues: Issue[] = [];
-  for (const it of Array.isArray(raw.issues) ? raw.issues : []) {
+  for (const it of list as NonNullable<typeof raw.issues>) {
     if (!it || !it.title) continue;
     const ops = validOps(p, it.ops);
     const section = (SECTION_IDS as readonly string[]).includes(it.section) ? (it.section as Issue["section"]) : ops[0] ? sectionForPath(ops[0].path) : "overview";

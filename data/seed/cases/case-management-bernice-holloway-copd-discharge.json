@@ -1,0 +1,766 @@
+{
+ "origin": "ai_draft",
+ "reviewed": false,
+ "profile": {
+  "version": 1,
+  "actions": [],
+  "answerKey": {
+   "primaryProblem": "High-risk COPD transition-of-care breakdown: multiple unmet discharge needs (medication cost barrier, incomplete DME delivery, missed home health contact window, transportation gap for follow-up, prednisone non-adherence) placing patient at high risk for a 4th readmission.",
+   "differential": [
+    "Early re-exacerbation (less likely given stable SpO2/RR/weight and no fever, but must monitor)",
+    "Medication-related adverse effect from erratic prednisone dosing (insomnia reported, taper being self-rationed)",
+    "Untreated/undertreated depressive symptoms related to isolation and functional limitation",
+    "Simple logistic/access barriers without new clinical decompensation (most consistent with current data)"
+   ],
+   "keyFindings": [
+    "New triple inhaler (Trelegy) never picked up due to $95 copay; patient using only old albuterol",
+    "Home oxygen concentrator delivered but portable tanks on backorder; patient has not left apartment since discharge",
+    "Home health referral sent but not yet triaged by agency; 4 days elapsed with no visit, exceeding expected 48-hour contact window",
+    "Patient self-rationing prednisone taper because it 'keeps her awake,' risking inadequate anti-inflammatory treatment and rebound exacerbation",
+    "Pulmonology follow-up in 3 days is across town, not on a direct bus route, no transportation arranged, and patient no longer drives",
+    "No Medicare Part D or drug supplement, leaving her exposed to full-price copays for new medications",
+    "Vitals/home readings currently reassuring (SpO2 93%, RR 20, HR 88, stable weight) - no acute decompensation at this time",
+    "Mismatch: patient initially says she is 'fine' and taking everything as prescribed, but pharmacy fill history and camera inspection show the new inhaler was never picked up"
+   ],
+   "plan": [
+    "Escalate oxygen DME backorder urgently to supplier/DME company and discharging facility's respiratory therapy or case management liaison to expedite portable tank delivery or provide a loaner tank",
+    "Contact home health agency directly to confirm referral receipt and request expedited intake/visit within 24 hours; document escalation if agency cannot commit to a visit date",
+    "Connect patient with hospital financial assistance program, pharmacy copay assistance program, or manufacturer patient-assistance program for Trelegy; explore switching to a formulary-covered alternative with prescriber if cost barrier persists",
+    "Arrange non-emergency medical transportation (NEMT) benefit through Medicare Advantage if applicable, or local senior transportation/paratransit service for the pulmonology visit; if transport cannot be arranged in time, contact pulmonology office to discuss telehealth follow-up or rescheduling",
+    "Advise patient not to self-adjust prednisone taper without discussing with prescriber; relay insomnia side effect and rationing behavior to the discharging physician or pulmonology office for guidance (not within case manager scope to adjust steroid dose)",
+    "Reinforce current albuterol use and clarify it is a rescue/bridge medication, not a substitute for the maintenance triple inhaler, pending resolution of cost barrier",
+    "Document and report mild depressive symptoms/isolation; offer referral to social work or behavioral health if symptoms escalate; screen again at next contact",
+    "Set explicit escalation/red-flag instructions: call 911 or seek emergency care for worsening shortness of breath at rest, SpO2 sustained below 88% on current oxygen setting, chest pain, confusion, or inability to speak in full sentences",
+    "Schedule a follow-up case management call within 48-72 hours to confirm home health contact was made, DME resolved, and medication access secured before the pulmonology visit",
+    "Document all gaps and interventions in case management assessment and care plan; communicate medication cost barrier and transportation gap back to the interdisciplinary discharge team as a systems feedback item"
+   ],
+   "redFlags": [
+    "Worsening dyspnea at rest or inability to complete sentences",
+    "Sustained SpO2 below 88% on prescribed oxygen flow",
+    "New or worsening chest pain, confusion, or lethargy",
+    "Fever or significantly increased sputum purulence/volume suggesting new infection",
+    "Any fall attempting stairs or mobility outside the apartment"
+   ],
+   "educationPoints": [
+    "A discharge plan is only as good as its execution; each ordered service (medication, DME, home health, follow-up) must be verified as actually received by the patient, not assumed complete because it was 'ordered'",
+    "Cost-related non-adherence is common and often hidden; patients may minimize problems ('fine, baby') out of pride or not wanting to burden family, especially on an initial trust-building call",
+    "Oxygen-dependent patients without portable tanks become functionally homebound, which can delay specialist follow-up and worsen outcomes independent of lung disease severity",
+    "Steroid tapers should not be self-adjusted for side effects like insomnia; patients need a clear channel back to the prescriber rather than silently rationing doses",
+    "Case managers coordinate and escalate; they do not alter medication doses or diagnose exacerbations - clinical concerns go back to the prescribing clinician or urgent/emergency care as appropriate",
+    "Transportation and financial barriers are leading causes of 30-day COPD readmission and are within case management scope to identify and address through system navigation"
+   ]
+  },
+  "artifacts": [
+   {
+    "id": "d1",
+    "type": "note",
+    "title": "Hospital Discharge Summary",
+    "author": "Dr. Patricia Nguyen, Hospitalist",
+    "date": "4 days ago",
+    "release": {
+     "when": "start"
+    },
+    "body": "76 y/o F with COPD (GOLD stage not specified in record), admitted for acute exacerbation, 3rd admission in past 12 months. Treated with IV steroids, nebulized bronchodilators, and supplemental O2 with good response. Discharged home in stable condition.\n\nDISCHARGE MEDICATIONS:\n- Trelegy Ellipta (fluticasone furoate/umeclidinium/vilanterol) 100/62.5/25mcg, 1 inhalation daily - NEW, replaces prior maintenance regimen\n- Albuterol HFA 90mcg, 2 puffs q4-6h PRN - continue\n- Prednisone taper: 40mg x3 days, 30mg x3 days, 20mg x3 days, 10mg x3 days, then stop\n\nDISCHARGE ORDERS:\n- Home oxygen 2L/min via nasal cannula continuous, portable tank for ambulation/appointments\n- Home health nursing referral for medication reconciliation and respiratory assessment, expected contact within 48 hours\n- Pulmonology follow-up appointment in 1 week\n- Pulse oximeter provided for home monitoring\n\nPatient verbalized understanding of discharge instructions at bedside. Daughter (out of state) updated by phone per patient request."
+   },
+   {
+    "id": "d2",
+    "type": "medication_list",
+    "title": "Current Medication List",
+    "author": "EHR Medication Reconciliation",
+    "date": "Today",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Medication",
+      "Dose",
+      "Route",
+      "Frequency",
+      "Status"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Trelegy Ellipta 100/62.5/25mcg",
+        "1 inhalation",
+        "Inhaled",
+        "Once daily",
+        "Ordered - not yet picked up"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Albuterol HFA 90mcg",
+        "2 puffs",
+        "Inhaled",
+        "Every 4-6h PRN",
+        "Active - old inhaler in use"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Prednisone 40/30/20/10mg taper",
+        "Varies",
+        "Oral",
+        "Daily per taper schedule",
+        "Active - patient reports rationing"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Lisinopril 10mg",
+        "10mg",
+        "Oral",
+        "Once daily",
+        "Active, unrelated to COPD"
+       ],
+       "flag": ""
+      }
+     ]
+    }
+   },
+   {
+    "id": "d3",
+    "type": "flowsheet",
+    "title": "Home Monitoring Flowsheet (Patient-Reported, via Pulse Oximeter and Scale)",
+    "author": "Case Management Call Documentation",
+    "date": "Day 1-4 post-discharge",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Day",
+      "SpO2 (%)",
+      "Heart Rate (bpm)",
+      "Weight (lb)",
+      "Reported Symptoms"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Day 1 (discharge day)",
+        "94",
+        "84",
+        "164",
+        "Mild fatigue"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Day 2",
+        "94",
+        "86",
+        "163",
+        "No change"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Day 3",
+        "93",
+        "90",
+        "162",
+        "Mild fatigue, trouble sleeping"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Day 4 (today)",
+        "93",
+        "88",
+        "163",
+        "Mild fatigue, trouble sleeping, feeling 'stuck'"
+       ],
+       "flag": ""
+      }
+     ]
+    },
+    "chart": {
+     "kind": "line",
+     "xLabel": "Day post-discharge",
+     "yLabel": "SpO2 (%)",
+     "refLow": 88,
+     "series": [
+      {
+       "name": "SpO2 (%)",
+       "points": [
+        {
+         "x": "Day 1",
+         "y": 94
+        },
+        {
+         "x": "Day 2",
+         "y": 94
+        },
+        {
+         "x": "Day 3",
+         "y": 93
+        },
+        {
+         "x": "Day 4",
+         "y": 93
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d4",
+    "type": "other",
+    "title": "DME (Durable Medical Equipment) Delivery Log",
+    "author": "HomeCare Oxygen Supply Co.",
+    "date": "4 days ago - today",
+    "release": {
+     "when": "start"
+    },
+    "body": "Order received: Stationary oxygen concentrator, 2L continuous flow, plus portable tank system (2 tanks + regulator) for ambulatory use.\n\nDelivery Day 0 (discharge day): Stationary concentrator delivered and set up in patient's living room. Tubing extended to bedroom, bathroom, kitchen (approx. 40 ft total).\n\nPortable tank system: Marked 'BACKORDER - regional shortage of portable regulators.' No delivery date confirmed as of today. Patient not contacted proactively by supplier regarding delay; status discovered only when case manager called supplier directly today."
+   },
+   {
+    "id": "d5",
+    "type": "other",
+    "title": "Home Health Agency Referral Intake Log",
+    "author": "Gateway Home Health Services",
+    "date": "Referral received day of discharge",
+    "release": {
+     "when": "start"
+    },
+    "body": "Referral received via fax from hospital discharge planning on day of discharge. Referral logged in intake queue. Status as of today: 'Pending triage - awaiting nurse assignment due to census volume.' No nursing visit has been scheduled. No documented outreach call to patient yet. Agency contact line: reports current average time-to-first-visit of 3-5 days during high census periods, exceeding internal 48-hour target."
+   },
+   {
+    "id": "d6",
+    "type": "other",
+    "title": "Pharmacy Fill History",
+    "author": "Community Pharmacy, St. Louis",
+    "date": "Last 90 days",
+    "release": {
+     "when": "start"
+    },
+    "body": "Albuterol HFA 90mcg inhaler: last filled 6 weeks prior to current admission; 1 refill remaining on file.\n\nTrelegy Ellipta 100/62.5/25mcg: new prescription sent electronically by hospital on discharge date. Status: ON HOLD AT PHARMACY, awaiting patient pickup. Copay calculated at $95.00 (brand-tier copay, no supplemental drug coverage on file). Pharmacy records note one automated refill-reminder call placed to patient's home number 2 days ago; no response/pickup logged since."
+   },
+   {
+    "id": "d7",
+    "type": "form",
+    "title": "Payer and Benefits Summary",
+    "author": "Medicare Benefits Verification",
+    "date": "Verified today",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Coverage Type",
+      "Status",
+      "Notes"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Medicare Part A",
+        "Active",
+        "Hospital coverage"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Medicare Part B",
+        "Active",
+        "Outpatient/DME coverage, includes home oxygen"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Medicare Part D (drug plan)",
+        "Not enrolled",
+        "No supplemental drug coverage on file"
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Medicaid or other supplement",
+        "None on file",
+        "Patient has not applied for Extra Help/LIS program"
+       ],
+       "flag": ""
+      }
+     ]
+    }
+   }
+  ],
+  "facts": [
+   {
+    "id": "f1",
+    "category": "chief_complaint",
+    "topic": "reason for call",
+    "chart": "Patient is a 76-year-old woman called for scheduled transition-of-care follow-up 4 days after discharge for her third COPD exacerbation admission this year.",
+    "says": "Oh, hi there. I was discharged from the hospital a few days ago - this is about my breathing, I think? I'm doing fine, baby, don't you worry about me.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f2",
+    "category": "hpi",
+    "topic": "general wellbeing",
+    "chart": "Initially reports doing well with no concerns.",
+    "says": "I'm managing just fine here at home, really. No need to fuss.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f3",
+    "category": "hpi",
+    "topic": "breathing status",
+    "chart": "Denies acute worsening shortness of breath; reports breathing similar to baseline since discharge.",
+    "says": "My breathing's about the same as when I left the hospital. Not worse, not really better either.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f4",
+    "category": "medications",
+    "topic": "new inhaler pickup",
+    "chart": "Has not picked up the new triple-combination inhaler due to $95 copay; using old albuterol only.",
+    "says": "They told me about a new inhaler but when I went to pick it up they said it was $95 and... I just didn't have it that day. I've just been using my old blue one.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f5",
+    "category": "medications",
+    "topic": "albuterol supply",
+    "chart": "Using old albuterol inhaler as primary treatment; aware it is getting low.",
+    "says": "I've just got the one albuterol inhaler, the old one. I think it's getting pretty low on puffs if I'm honest.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f6",
+    "category": "medications",
+    "topic": "steroid taper adherence",
+    "chart": "Self-rationing prednisone taper because it causes insomnia; not taking full prescribed dose.",
+    "says": "That prednisone keeps me wide awake all night, so I've been... taking a little less than what they wrote down. Just so I can sleep some.",
+    "tier": "reluctant",
+    "importance": "critical"
+   },
+   {
+    "id": "f7",
+    "category": "medications",
+    "topic": "steroid side effect",
+    "chart": "Reports insomnia as side effect of prednisone.",
+    "says": "I lay there staring at the ceiling half the night when I take the full dose. It's exhausting.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f8",
+    "category": "medications",
+    "topic": "blood pressure medication",
+    "chart": "Continues taking lisinopril 10mg daily as before, no issues reported.",
+    "says": "My blood pressure pill, I take that every morning like always, no trouble with that one.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f9",
+    "category": "hpi",
+    "topic": "oxygen equipment at home",
+    "chart": "Oxygen concentrator delivered and in use; portable tank for outside use never arrived.",
+    "says": "They brought the big machine for the house, that part's fine. But the little tank I'm supposed to carry around, that never showed up.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f10",
+    "category": "function",
+    "topic": "leaving the apartment",
+    "chart": "Has not left apartment since discharge due to lack of portable oxygen.",
+    "says": "Truth is, baby, I haven't been outside this door since I got home. Can't carry that big machine, and the little one never came.",
+    "tier": "reluctant",
+    "importance": "critical"
+   },
+   {
+    "id": "f11",
+    "category": "hpi",
+    "topic": "home health contact",
+    "chart": "No contact from home health nursing agency since discharge.",
+    "says": "Nobody's called me about any home nurse. I've just been waiting.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f12",
+    "category": "other",
+    "topic": "upcoming specialist visit",
+    "chart": "Pulmonology follow-up scheduled in 3 days; patient has no transportation and no longer drives.",
+    "says": "I've got that lung doctor appointment coming up but it's clear on the other side of town and I don't drive anymore. I don't know how I'm getting there.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f13",
+    "category": "social",
+    "topic": "living situation",
+    "chart": "Lives alone in a second-floor walk-up apartment, no elevator.",
+    "says": "I'm up on the second floor, no elevator, just the stairs.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f14",
+    "category": "social",
+    "topic": "stair mobility",
+    "chart": "Has not attempted stairs since discharge given breathing concerns and oxygen tubing limits.",
+    "says": "I haven't tried those stairs since I got back. Scares me a little, honestly.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f15",
+    "category": "family",
+    "topic": "daughter contact",
+    "chart": "Daughter lives in Texas, calls daily by phone, cannot visit on short notice.",
+    "says": "My daughter calls me every single day, bless her heart, but she's way down in Texas, can't just pop over.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f16",
+    "category": "social",
+    "topic": "local support",
+    "chart": "No other local family; neighbor checks in occasionally but is not a reliable caregiver.",
+    "says": "I don't have other family close by. Ms. Odell next door looks in on me sometimes, when she can.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f17",
+    "category": "other",
+    "topic": "insurance coverage",
+    "chart": "Has Medicare Parts A and B; no Part D drug plan or supplemental coverage; has never applied for Extra Help/Low Income Subsidy.",
+    "says": "I just have the regular Medicare. Never signed up for any of that drug plan business, didn't know I needed to.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f18",
+    "category": "other",
+    "topic": "income situation",
+    "chart": "Lives on fixed income from Social Security and small pension after retiring as a cafeteria worker.",
+    "says": "I'm on my Social Security and a little pension from the school district. It stretches, mostly.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f19",
+    "category": "psychosocial",
+    "topic": "mood since discharge",
+    "chart": "Reports low energy and feeling 'down' related to isolation, denies anhedonia or hopelessness.",
+    "says": "I get a little low some days, being stuck in here. But I still enjoy my shows and talking to my daughter.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f20",
+    "category": "psychosocial",
+    "topic": "safety concerns",
+    "chart": "Denies any thoughts of self-harm or hopelessness.",
+    "says": "Oh no, nothing like that. I'm just tired of these walls, that's all.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f21",
+    "category": "ros",
+    "topic": "fever or infection symptoms",
+    "chart": "Denies fever, chills, or change in sputum color/amount since discharge.",
+    "says": "No fever, no chills. My phlegm looks about the same as always.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f22",
+    "category": "ros",
+    "topic": "chest pain",
+    "chart": "Denies chest pain since discharge.",
+    "says": "No pain in my chest, no.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f23",
+    "category": "ros",
+    "topic": "swelling in legs",
+    "chart": "Denies leg swelling.",
+    "says": "My legs look normal, no puffiness that I've noticed.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f24",
+    "category": "nutrition",
+    "topic": "eating and appetite",
+    "chart": "Appetite stable, eating regular meals, neighbor sometimes brings groceries.",
+    "says": "I'm eating fine. Ms. Odell picks up a few groceries for me when she goes to the store.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f25",
+    "category": "function",
+    "topic": "daily activities at home",
+    "chart": "Able to perform basic self-care and light household tasks within apartment; limited by oxygen tubing reach.",
+    "says": "I can take care of myself here, cook a little, do my dishes. Just can't go far with this tubing.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f26",
+    "category": "other",
+    "topic": "past hospitalizations",
+    "chart": "Has had three COPD-related hospital admissions in the past year.",
+    "says": "This is the third time this year I've ended up in that hospital. It's getting to be a lot.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f27",
+    "category": "other",
+    "topic": "smoking history",
+    "chart": "Former smoker, quit 15 years ago, no current tobacco or vaping use.",
+    "says": "I smoked for a long time but I quit, oh, must be 15 years now.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f28",
+    "category": "other",
+    "topic": "arthritis in hands",
+    "chart": "Reports mild arthritis in hands, does not significantly limit inhaler use.",
+    "says": "I've got a little arthritis in my fingers but I can still manage my inhaler just fine.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f29",
+    "category": "other",
+    "topic": "hearing changes",
+    "chart": "Reports no hearing difficulty; mentions she wears reading glasses for close vision.",
+    "says": "My hearing's fine, I just need my glasses for reading the small print on these pill bottles.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f30",
+    "category": "other",
+    "topic": "pet at home",
+    "chart": "Has a pet cat for companionship, no pet-related respiratory concerns reported.",
+    "says": "I've got my cat, Mittens, keeps me company. She doesn't bother my breathing none.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f31",
+    "category": "other",
+    "topic": "advance care planning",
+    "chart": "Has not completed an advance directive; states she has not thought about it recently.",
+    "says": "I haven't really sat down and done any of that paperwork for if something happens to me. Haven't gotten around to it.",
+    "tier": "reluctant",
+    "importance": "minor"
+   },
+   {
+    "id": "f32",
+    "category": "other",
+    "topic": "faith community",
+    "chart": "Member of a local church community; church members have offered occasional help but she hesitates to ask.",
+    "says": "My church folks would help if I asked, but I don't like to be a bother to anybody.",
+    "tier": "reluctant",
+    "importance": "minor"
+   }
+  ],
+  "objectives": [
+   {
+    "id": "o1",
+    "text": "Elicit, beyond initial reassurance, the concrete gaps between the discharge plan and the patient's actual home situation (medication access, oxygen equipment, home health contact, transportation) using progressive, trust-building questioning.",
+    "factIds": [
+     "f4",
+     "f9",
+     "f10",
+     "f11",
+     "f12"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o2",
+    "text": "Identify and reconcile a mismatch between the patient's statement that she is managing fine/taking her medications and objective record/camera evidence showing the new inhaler was never picked up.",
+    "factIds": [
+     "f1",
+     "f2",
+     "f4"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o3",
+    "text": "Recognize unsafe self-adjustment of the prednisone taper due to a side effect and determine the appropriate scope-of-practice response (relay to prescriber rather than adjust dose independently).",
+    "factIds": [
+     "f6",
+     "f7"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o4",
+    "text": "Assess psychosocial and safety status (mood, isolation, support system, fall/mobility risk) using remote screening techniques appropriate to a telehealth case management call.",
+    "factIds": [
+     "f15",
+     "f16",
+     "f19",
+     "f20",
+     "f14"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o5",
+    "text": "Prioritize identified gaps by urgency and formulate a case management care plan with specific referrals/escalations (DME supplier, home health agency, pharmacy assistance program, transportation service, prescriber communication) that stays within case manager scope of practice.",
+    "factIds": [
+     "f9",
+     "f11",
+     "f12",
+     "f17"
+    ],
+    "actionIds": []
+   },
+   {
+    "id": "o6",
+    "text": "Establish clear, specific red-flag/escalation criteria for the patient to use before the next scheduled contact, given her high-risk readmission history.",
+    "factIds": [
+     "f26",
+     "f21"
+    ],
+    "actionIds": []
+   }
+  ],
+  "mismatches": [
+   {
+    "id": "m1",
+    "factId": "f2",
+    "artifactId": "d6",
+    "patientClaim": "Patient states early in the call that she is 'managing just fine' and gives no indication of medication problems.",
+    "recordEvidence": "Pharmacy fill history (d6) shows the new Trelegy Ellipta prescription has been sitting on hold at the pharmacy since discharge day, never picked up, with an unresolved $95 copay.",
+    "teachingPoint": "Patients, especially those managing pride or not wanting to worry family/providers, may initially minimize problems. Case managers should gently probe specific, concrete details (ask to see the actual inhalers on camera, ask about pickup/copay) rather than accept global reassurance at face value."
+   },
+   {
+    "id": "m2",
+    "factId": "f9",
+    "artifactId": "d4",
+    "patientClaim": "Patient reports the oxygen 'machine for the house' arrived fine, framing the oxygen situation as basically resolved.",
+    "recordEvidence": "DME delivery log (d4) shows the portable tank system needed for ambulation and appointments is on indefinite backorder, and the supplier never proactively notified the patient of the delay.",
+    "teachingPoint": "A partially fulfilled DME order can appear complete to the patient and even to a cursory record review; confirming full functional equipment (not just that 'something was delivered') is essential to prevent a patient from becoming unintentionally homebound."
+   }
+  ],
+  "chartAtStart": [
+   {
+    "label": "Reason for visit",
+    "value": "Scheduled transition-of-care call, post-discharge day 4, following 3rd COPD exacerbation admission this year"
+   },
+   {
+    "label": "Problem list",
+    "value": "COPD (recurrent exacerbations); Hypertension"
+   },
+   {
+    "label": "Medications",
+    "value": "Trelegy Ellipta 100/62.5/25mcg daily (new, status pending pickup); Albuterol HFA 90mcg 2 puffs q4-6h PRN; Prednisone taper 40/30/20/10mg (in progress); Lisinopril 10mg daily"
+   },
+   {
+    "label": "Allergies",
+    "value": "No known drug allergies"
+   },
+   {
+    "label": "Last vitals",
+    "value": "At discharge: BP 128/76, HR 84, RR 18, SpO2 94% on 2L NC, Temp 98.2F, Weight 164 lb"
+   },
+   {
+    "label": "Immunizations",
+    "value": "Influenza vaccine current; Pneumococcal (PCV20) up to date; COVID-19 booster current"
+   },
+   {
+    "label": "Care team",
+    "value": "PCP: Dr. Angela Ruiz; Pulmonology: Dr. Marcus Webb; Discharging hospitalist: Dr. Patricia Nguyen; Home health agency: Gateway Home Health Services (referral pending)"
+   },
+   {
+    "label": "Code status",
+    "value": "Full code (per hospital discharge documentation; not revisited since discharge)"
+   }
+  ],
+  "patient": {
+   "name": "Bernice Holloway",
+   "age": 76,
+   "sex": "female",
+   "pronouns": "she/her",
+   "ethnicity": "Black",
+   "occupation": "Retired school cafeteria worker",
+   "language": "English",
+   "appearance": "An older woman with silver-streaked hair pulled back neatly, seated in a worn armchair in a modestly furnished living room with family photos visible on the wall behind her. Nasal cannula tubing is visible running to an oxygen concentrator just out of frame; she holds a cordless phone in her lap and speaks warmly but with occasional pauses to catch her breath."
+  },
+  "persona": {
+   "personality": "Warm, proud, and protective of her independence; does not want to be seen as a burden to her daughter or to the healthcare system.",
+   "communicationStyle": "Friendly and talkative about everyday life, but deflects direct questions about struggles with reassurance and gentle humor; opens up more once she senses genuine, patient listening.",
+   "healthLiteracy": "moderate",
+   "emotionalState": "Outwardly cheerful and composed, with underlying fatigue, mild low mood, and some anxiety about her breathing and finances that surface only with gentle probing.",
+   "background": "Worked over 30 years as a cafeteria worker in the St. Louis public school system before retiring. Widowed eight years ago. Raised her daughter mostly as a single parent after her husband passed. Active for years in her church choir until her breathing made singing difficult. Enjoys watching game shows and doing word puzzles.",
+   "speechExamples": [
+    "I'm doing fine, baby, don't you worry about me.",
+    "This is the third time this year I've ended up in that hospital. It's getting to be a lot.",
+    "I don't like to be a bother to anybody, you know.",
+    "My daughter calls me every single day, bless her heart, but she's way down in Texas.",
+    "Oh, I'll manage, I always do."
+   ],
+   "concerns": [
+    "Worried about becoming a burden to her daughter",
+    "Anxious about going back to the hospital a fourth time",
+    "Embarrassed about not being able to afford the new inhaler",
+    "Worried about missing the pulmonology appointment and what that might mean"
+   ]
+  },
+  "scenario": {
+   "studentBrief": "You are a nurse case manager making a scheduled transition-of-care follow-up call to Bernice Holloway, 76, four days after discharge from her third hospitalization this year for a COPD exacerbation. Her discharge plan included a new triple-combination inhaler, a prednisone taper, home oxygen with portable tanks, home health nursing, and a pulmonology follow-up in one week. Review the chart before the call, then speak with Mrs. Holloway to identify any gaps between the plan and her actual situation at home.",
+   "chiefComplaint": "Scheduled post-discharge transition-of-care check-in after COPD exacerbation hospitalization",
+   "openingLine": "Oh, hi there. I was discharged from the hospital a few days ago - this is about my breathing, I think? I'm doing fine, baby, don't you worry about me.",
+   "tasks": [
+    "Build rapport and uncover the gaps between the discharge plan and what has actually happened at home (medications, oxygen equipment, home health contact, transportation)",
+    "Identify the patient-vs-chart mismatches regarding medication pickup and oxygen equipment completeness",
+    "Screen for safety concerns including steroid self-rationing, mood/isolation, and fall/mobility risk",
+    "Prioritize the identified gaps and arrange appropriate services or escalations within case management scope",
+    "Set clear escalation/red-flag criteria and schedule a follow-up contact before ending the call"
+   ],
+   "timeLimitMin": 25
+  },
+  "summary": "\"This case places a nurse case manager on a day-4 post-discharge transition-of-care call with a 76-year-old woman recently hospitalized for her third COPD exacerbation this year, whose discharge plan has quietly failed on multiple fronts: an unaffordable new inhaler never picked up, a portable oxygen tank on indefinite backorder leaving her homebound, an unresponsive home health referral, and an inaccessible pulmonology follow-up. The case teaches learners to move past a patient's initial reassurance to uncover real-world barriers, reconcile what the record shows against what the patient reports, and build a prioritized, scope-appropriate care plan with clear escalation triggers.\"",
+  "title": "\"Falling Through the Cracks: Post-COPD Discharge Transition-of-Care Call\"",
+  "specialty": "\"Nurse Case Management / Care Coordination\"",
+  "setting": "\"Telehealth video visit; patient at home in her second-floor walk-up apartment in St. Louis, Missouri\"",
+  "encounterType": "\"Transition-of-care call\"",
+  "difficulty": 3,
+  "professions": [
+   "case-management"
+  ],
+  "knowledge": [],
+  "rubricId": "default",
+  "variants": []
+ }
+}

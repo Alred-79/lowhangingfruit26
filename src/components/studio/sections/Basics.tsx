@@ -28,8 +28,8 @@ export function OverviewSection({ p, set, roles }: SectionProps & { roles: Role[
             ))}
           </Select>
         </Field>
-        <Field label="Learner roles" hint="Students in these professions can be given this patient. The first role is used for test visits.">
-          <div className="flex flex-wrap gap-x-4 gap-y-1.5 pt-1">
+        <Field className="sm:col-span-2" label={`Learner roles (${p.professions.length} selected)`} hint="Students in these professions can be given this patient. The case was written for the scope of the first role selected.">
+          <div className="grid max-h-52 gap-x-4 gap-y-1.5 overflow-y-auto rounded-md border border-slate-200 p-2.5 sm:grid-cols-2 xl:grid-cols-3">
             {roles.map((r) => (
               <label key={r.id} className="flex items-center gap-1.5 text-sm text-slate-800">
                 <input
