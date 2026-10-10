@@ -1,0 +1,963 @@
+{
+ "origin": "sample",
+ "reviewed": true,
+ "profile": {
+  "version": 1,
+  "actions": [
+   {
+    "id": "a1",
+    "kind": "vitals",
+    "name": "Blood pressure (home cuff reading, reported)",
+    "result": "BP 155/110 mmHg (seated, repeat reading confirms), HR 78 bpm, RR 18, Temp 98.6°F, SpO2 99% on room air",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a2",
+    "kind": "assessment",
+    "name": "Weight/height/BMI (patient self-report with home scale, confirmed against chart)",
+    "result": "Height 5'2\" (157.5 cm); Weight 178 lb (80.7 kg); BMI 34.0 kg/m2; weight up 8 lb over past 6 months",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a3",
+    "kind": "record",
+    "name": "Review current medication list from chart",
+    "result": "Amlodipine 5 mg PO once daily (HTN); Metformin 500 mg PO BID with meals (T2DM); Multivitamin daily; Tylenol PRN for headache. Documented adherence per chart: 'variable.'",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a4",
+    "kind": "lab",
+    "name": "HbA1c",
+    "result": "8.5% (goal <7% per ADA for this patient) — H",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a5",
+    "kind": "lab",
+    "name": "Fasting glucose",
+    "result": "145 mg/dL (ref 70-99 mg/dL) — H",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a6",
+    "kind": "lab",
+    "name": "Lipid panel",
+    "result": "Total cholesterol 230 mg/dL (H); LDL 115 mg/dL (H, goal <100 for diabetic); Triglycerides 190 mg/dL (H)",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a7",
+    "kind": "lab",
+    "name": "Basic metabolic panel (Na, K, BUN, Cr)",
+    "result": "Sodium 138 mEq/L (normal); Potassium 4.5 mEq/L (normal, upper range - relevant given amlodipine/ACE-type interactions); BUN 16 mg/dL (normal); Creatinine 1.1 mg/dL (normal); eGFR not flagged as abnormal",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a8",
+    "kind": "record",
+    "name": "Review vitals flowsheet trend",
+    "result": "BP has trended from 142/92 (3 months ago) to 155/110 (today); weight up 8 lb over 6 months",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a9",
+    "kind": "assessment",
+    "name": "24-hour diet recall / typical day",
+    "result": "Breakfast often skipped or coffee only; lunch packed or convenience/fast food; dinner is largest meal, family-style, frequently includes processed/cured meats, canned soup, pickled vegetables, breaded dishes; frequent salty snacking between meals",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a10",
+    "kind": "assessment",
+    "name": "Fluid intake assessment",
+    "result": "Reports drinking mostly tap water and occasional tea; limits water intake at work due to fear of frequent bathroom trips; denies sugary drink intake",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a11",
+    "kind": "assessment",
+    "name": "Physical activity assessment",
+    "result": "Sedentary desk job; walks only to car/bus; no structured exercise; cites joint/back pain and time constraints as barriers",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a12",
+    "kind": "assessment",
+    "name": "Health literacy / nutrition knowledge screen (sodium vs. salt, carbohydrate counting)",
+    "result": "Patient unable to distinguish sodium from salt; unfamiliar with reading nutrition facts labels for sodium content; limited understanding of carbohydrate effect on blood glucose",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a13",
+    "kind": "assessment",
+    "name": "Readiness-to-change / stage-of-change exploration",
+    "result": "Patient endorses moderate motivation, consistent with Preparation stage; expresses willingness for 'small steps' but feels overwhelmed by scope of recommended changes",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a14",
+    "kind": "record",
+    "name": "Review allergy list",
+    "result": "Penicillin — rash. No food allergies documented.",
+    "importance": "minor",
+    "artifactIds": []
+   },
+   {
+    "id": "a15",
+    "kind": "assessment",
+    "name": "Edema / fluid status screen (self-exam guided via camera)",
+    "result": "Patient reports and shows on camera bilateral pitting edema at ankles; mild visible lower leg vein distension noted; no shortness of breath or chest pain reported",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a16",
+    "kind": "assessment",
+    "name": "Sleep pattern assessment",
+    "result": "Sleeps 6-7 hours/night; wakes 1-2 times for urination; reports daytime fatigue",
+    "importance": "minor",
+    "artifactIds": []
+   },
+   {
+    "id": "a17",
+    "kind": "assessment",
+    "name": "Food access / financial barrier screen",
+    "result": "Reports tight grocery budget on Medicaid income; relies on canned/processed foods for cost and shelf life; interested in low-cost resources if available",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a18",
+    "kind": "assessment",
+    "name": "Social/family support assessment",
+    "result": "Husband supportive, helps with cooking/driving; adult children and grandchild visit regularly; family gatherings center on traditional high-sodium foods and create pressure to maintain old eating patterns",
+    "importance": "important",
+    "artifactIds": []
+   }
+  ],
+  "answerKey": {
+   "primaryProblem": "Excessive sodium intake and inconsistent carbohydrate intake related to limited food/nutrition-related knowledge, financial constraints, and cultural food patterns, as evidenced by uncontrolled HbA1c (8.5%), Stage II hypertension (155/110), BMI 34, and reported reliance on processed/cured/canned foods.",
+   "differential": [
+    "Excessive sodium intake (NI-5.10.2) related to food/nutrition-related knowledge deficit and cultural food preferences",
+    "Inconsistent carbohydrate intake (NI-5.8.4) related to irregular meal pattern (skipped breakfast, convenience lunch) and limited diabetes self-management knowledge",
+    "Overweight/obesity (NC-3.3) related to excessive energy intake relative to needs and sedentary lifestyle",
+    "Self-monitoring deficit / medication-food interaction knowledge deficit related to self-adjustment of metformin dosing without provider input"
+   ],
+   "keyFindings": [
+    "HbA1c 8.5% and fasting glucose 145 mg/dL indicate poorly controlled T2DM",
+    "BP 155/110 mmHg confirms Stage II hypertension, uncontrolled",
+    "BMI 34.0 kg/m2 with 8 lb weight gain over 6 months",
+    "Lipid panel shows elevated total cholesterol, LDL, and triglycerides consistent with metabolic syndrome picture",
+    "Patient cannot distinguish sodium from salt and does not read nutrition labels",
+    "Diet pattern: skipped breakfast, convenience lunch, large sodium-dense family dinner, frequent salty snacking",
+    "Self-reported medication non-adherence: skips amlodipine due to leg swelling fear, self-reduced metformin dose due to GI upset without consulting provider",
+    "Fluid restriction behavior at work due to urinary frequency, risking dehydration",
+    "Financial and time barriers limit access to fresh/lower-sodium foods",
+    "Strong cultural attachment to traditional Eastern European foods high in sodium/processed meats/cheese",
+    "Bilateral pitting edema and venous distension noted - possible amlodipine side effect vs. fluid status, warrants medical follow-up communication"
+   ],
+   "plan": [
+    "Educate on sodium vs. salt in simple, concrete terms (e.g., label reading demonstration, teaspoon-to-mg conversion)",
+    "Collaboratively identify 1-2 small, sustainable swaps in traditional recipes (e.g., reduce added salt in brining, rinse canned/pickled items, use herbs/spices) rather than eliminating cultural foods",
+    "Introduce consistent carbohydrate intake pattern across 3 meals + snacks to support glucose stability; address skipped breakfast",
+    "Discuss affordable lower-sodium options (frozen vegetables, no-salt-added canned goods, bulk cooking/batch freezing to address time barrier)",
+    "Communicate medication adherence concerns and self-adjusted metformin dose to prescribing provider/PCP for follow-up; do not independently change medication",
+    "Provide simple hydration guidance addressing her fear of urinary frequency vs. need for adequate fluid intake",
+    "Use motivational interviewing: explore personal motivation (grandchild, energy, avoiding complications), set one SMART small-step goal before next visit",
+    "Refer to community resources: Medicaid-covered RD follow-up, local food assistance/SNAP education, diabetes self-management education program, possible social work/financial counseling referral",
+    "Schedule follow-up visit to reassess diet log, label-reading skill, and weight/BP trend",
+    "Encourage communication with PCP regarding edema and leg swelling possibly related to amlodipine"
+   ],
+   "redFlags": [
+    "BP 155/110 mmHg meets criteria for Stage II/urgent-range hypertension - needs prompt medical follow-up, not solely nutrition management",
+    "HbA1c 8.5% indicates significant hyperglycemia with risk for microvascular complications",
+    "Self-adjustment of metformin dose without medical guidance",
+    "Medication non-adherence (skipping amlodipine) due to side effect fear",
+    "Bilateral pitting edema and venous distension - possible amlodipine-related edema vs. cardiovascular/renal concern requiring medical evaluation",
+    "Fluid restriction behavior at work could worsen dehydration and urinary concentration",
+    "Visual disturbance (occasional blurred vision) reported - should be flagged to PCP for diabetic eye screening"
+   ],
+   "educationPoints": [
+    "Clarify that 'sodium' is the specific nutrient on labels; 'salt' (sodium chloride) is the table seasoning - both contribute, but sodium content on nutrition facts panel is the number to track (goal typically <2300 mg/day, ideally closer to 1500 mg for her BP level)",
+    "Reducing sodium does not mean giving up traditional foods entirely - portion, frequency, and preparation modifications can preserve cultural connection",
+    "Consistent, moderate carbohydrate intake at regular meal times helps stabilize blood glucose better than skipping meals and overeating later",
+    "Hydration is important for kidney and blood sugar management; avoiding water due to bathroom concerns can worsen dehydration and urine concentration",
+    "Medication side effects should be reported to the prescriber rather than self-adjusting dose, since this can affect both safety and effectiveness",
+    "Small, gradual changes (one swap at a time) are more sustainable than an all-or-nothing approach to weight loss"
+   ]
+  },
+  "artifacts": [
+   {
+    "id": "d1",
+    "type": "lab_report",
+    "title": "Comprehensive Metabolic Panel & Lipid Panel",
+    "author": "Reference Lab Services",
+    "date": "1 week prior to visit",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Test",
+      "Result",
+      "Reference Range",
+      "Flag"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Sodium",
+        "138",
+        "mEq/L (135-145)",
+        ""
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Potassium",
+        "4.5",
+        "mEq/L (3.5-5.0)",
+        ""
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "BUN",
+        "16",
+        "mg/dL (7-20)",
+        ""
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Creatinine",
+        "1.1",
+        "mg/dL (0.6-1.2)",
+        ""
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "Fasting Glucose",
+        "145",
+        "mg/dL (70-99)",
+        ""
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Hemoglobin A1c",
+        "8.5",
+        "% (<5.7 normal, <7.0 goal for pt)",
+        ""
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Total Cholesterol",
+        "230",
+        "mg/dL (<200)",
+        ""
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "LDL Cholesterol",
+        "115",
+        "mg/dL (<100 diabetic goal)",
+        ""
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Triglycerides",
+        "190",
+        "mg/dL (<150)",
+        ""
+       ],
+       "flag": "H"
+      }
+     ]
+    }
+   },
+   {
+    "id": "d2",
+    "type": "medication_list",
+    "title": "Current Medication List",
+    "author": "Primary Care Clinic",
+    "date": "Updated at last PCP visit",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Medication",
+      "Dose",
+      "Frequency",
+      "Indication",
+      "Documented Adherence"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Amlodipine",
+        "5 mg",
+        "Once daily",
+        "Hypertension",
+        "Variable - patient reports occasional skipped doses"
+       ]
+      },
+      {
+       "cells": [
+        "Metformin",
+        "500 mg",
+        "Twice daily with meals",
+        "Type 2 Diabetes",
+        "Variable - GI upset reported"
+       ]
+      },
+      {
+       "cells": [
+        "Multivitamin",
+        "1 tablet",
+        "Once daily",
+        "Supplement",
+        ""
+       ]
+      },
+      {
+       "cells": [
+        "Acetaminophen (Tylenol)",
+        "650 mg",
+        "As needed",
+        "Headache",
+        ""
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d3",
+    "type": "flowsheet",
+    "title": "Vital Signs & Weight Flowsheet",
+    "author": "Primary Care Clinic",
+    "date": "Past 6 months",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Date",
+      "BP (mmHg)",
+      "Weight (lb)",
+      "HR (bpm)"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "6 months ago",
+        "142/92",
+        "170",
+        "80"
+       ]
+      },
+      {
+       "cells": [
+        "3 months ago",
+        "148/98",
+        "174",
+        "79"
+       ]
+      },
+      {
+       "cells": [
+        "Today",
+        "155/110",
+        "178",
+        "78"
+       ]
+      }
+     ]
+    },
+    "chart": {
+     "kind": "line",
+     "xLabel": "Visit",
+     "yLabel": "Weight (lb)",
+     "series": [
+      {
+       "name": "Weight",
+       "points": [
+        {
+         "x": "6 months ago",
+         "y": 170
+        },
+        {
+         "x": "3 months ago",
+         "y": 174
+        },
+        {
+         "x": "Today",
+         "y": 178
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d4",
+    "type": "note",
+    "title": "Endocrinology/PCP Referral Note - New Diagnosis Summary",
+    "author": "Dr. R. Castellano, MD (Primary Care)",
+    "date": "3 weeks ago",
+    "release": {
+     "when": "start"
+    },
+    "body": "64 y/o F presents with new diagnosis of Stage II hypertension (BP 155/110 on two separate readings) and poorly controlled Type 2 Diabetes Mellitus (diagnosed 2 years ago, HbA1c 8.5%). Patient reports fatigue, polyuria, polydipsia, intermittent blurred vision, and bilateral ankle swelling. Exam notable for BMI 34, bilateral pitting edema 1+ at ankles, mild venous distension, skin tags at neck/elbow consistent with insulin resistance. Started amlodipine 5mg daily; continuing metformin 500mg BID. Referred to registered dietitian for medical nutrition therapy given new diagnoses and health literacy concerns. Recommend diabetes self-management education referral. Follow-up in 4 weeks to reassess BP and glucose control; will reassess need for additional antihypertensive or antidiabetic agents based on response to lifestyle intervention."
+   },
+   {
+    "id": "d5",
+    "type": "form",
+    "title": "Patient Intake - Diet History Questionnaire (self-reported, partially completed)",
+    "author": "Patient-completed intake form",
+    "date": "Day of visit",
+    "release": {
+     "when": "start"
+    },
+    "body": "Typical Breakfast: 'Coffee, sometimes nothing, I'm rushing.' Typical Lunch: 'Whatever is quick at work - sometimes a sandwich from the cafeteria, or leftovers.' Typical Dinner: 'Family meal, usually biggest meal of day - pierogis, kielbasa, soup, bread.' Snacks: 'Pretzels, chips, pickles - I like salty things.' Beverages: 'Water, tea in the evening. Try not to drink too much at work.' Who cooks: 'Me, sometimes my husband helps.' Eating out: '1-2 times per week, usually something quick and cheap.'"
+   }
+  ],
+  "chartAtStart": [
+   {
+    "label": "Reason for visit",
+    "value": "Telehealth nutrition assessment and counseling - new diagnoses of Stage II hypertension and uncontrolled Type 2 Diabetes, referred by PCP for medical nutrition therapy"
+   },
+   {
+    "label": "Problem list",
+    "value": "1. Hypertension, Stage II (new) 2. Type 2 Diabetes Mellitus, uncontrolled (dx 2 years ago) 3. Obesity (BMI 34) 4. Occasional headaches 5. Chronic low back pain"
+   },
+   {
+    "label": "Medications",
+    "value": "Amlodipine 5 mg PO daily; Metformin 500 mg PO BID with meals; Multivitamin daily; Acetaminophen PRN"
+   },
+   {
+    "label": "Allergies",
+    "value": "Penicillin - rash"
+   },
+   {
+    "label": "Last vitals",
+    "value": "BP 155/110 mmHg; HR 78; RR 18; Temp 98.6°F; SpO2 99%; Weight 178 lb; BMI 34.0 kg/m2"
+   },
+   {
+    "label": "Care team",
+    "value": "PCP: Dr. R. Castellano, MD; Referral to Registered Dietitian (this visit); Diabetes self-management education referral pending"
+   },
+   {
+    "label": "Code status",
+    "value": "Full code (outpatient, not applicable)"
+   }
+  ],
+  "difficulty": 3,
+  "encounterType": "Initial nutrition assessment and counseling (telehealth)",
+  "facts": [
+   {
+    "id": "f1",
+    "category": "chief_complaint",
+    "topic": "reason for referral",
+    "chart": "Referred by PCP for new HTN and uncontrolled T2DM nutrition counseling",
+    "says": "My doctor said I need to talk to a dietitian because of my blood pressure and my sugar.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f2",
+    "category": "ros",
+    "topic": "energy and urination",
+    "chart": "Reports fatigue, frequent urination, increased thirst",
+    "says": "I'm tired all the time, and I'm running to the bathroom constantly - even at night.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f3",
+    "category": "ros",
+    "topic": "headaches",
+    "chart": "Reports mild intermittent headaches",
+    "says": "I get these dull headaches sometimes, not terrible, but annoying.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f4",
+    "category": "hpi",
+    "topic": "sodium vs salt confusion",
+    "chart": "Patient reports confusion distinguishing sodium from salt",
+    "says": "Honestly, isn't salt and sodium the same thing? Nobody's ever really explained the difference to me.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f5",
+    "category": "social",
+    "topic": "work schedule",
+    "chart": "Full-time state employee, limited time for meal prep",
+    "says": "I work full-time at a desk job, so by the time I get home I just don't have energy to cook something fancy.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f6",
+    "category": "hpi",
+    "topic": "understanding diagnosis",
+    "chart": "Wants explanation for why diet/medication changes are necessary",
+    "says": "I just want to understand - why do I suddenly need to change everything about how I eat?",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f7",
+    "category": "nutrition",
+    "topic": "general diet pattern",
+    "chart": "Diet is mix of traditional Eastern European dishes and convenience foods",
+    "says": "We eat a lot of the foods my grandmother made - pierogis, kielbasa - mixed in with whatever's fast on busy nights.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f8",
+    "category": "medications",
+    "topic": "medication adherence",
+    "chart": "Reports occasionally forgetting doses; sometimes skips amlodipine intentionally",
+    "says": "I take my pills most days, but sometimes I forget. And honestly sometimes I skip the blood pressure one on purpose.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f9",
+    "category": "medications",
+    "topic": "medication side effects",
+    "chart": "Reports leg swelling she attributes to amlodipine; fear of worsening swelling",
+    "says": "My ankles got puffy after I started that pressure pill, so sometimes I skip it hoping the swelling will go down.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f10",
+    "category": "medications",
+    "topic": "metformin tolerance",
+    "chart": "Reports GI upset with metformin; self-reduced dose without consulting provider",
+    "says": "That diabetes pill upsets my stomach, so I started just taking half sometimes - I didn't tell the doctor.",
+    "tier": "reluctant",
+    "importance": "critical"
+   },
+   {
+    "id": "f11",
+    "category": "nutrition",
+    "topic": "meal timing",
+    "chart": "Often skips breakfast or has only coffee; grabs quick lunch",
+    "says": "Breakfast? Ha, usually just coffee. Lunch is whatever's fast - a sandwich from the cafeteria, maybe.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f12",
+    "category": "nutrition",
+    "topic": "dinner pattern",
+    "chart": "Dinner is the largest family meal, often sodium-dense traditional dishes",
+    "says": "Dinner's the big one - that's family time, so it's usually something hearty like soup, kielbasa, bread.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f13",
+    "category": "nutrition",
+    "topic": "snacking habits",
+    "chart": "Frequent snacking on salty snacks (pretzels, chips, pickled vegetables)",
+    "says": "I love salty snacks - pretzels, chips, I really love pickles too.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f14",
+    "category": "nutrition",
+    "topic": "fluid intake behavior",
+    "chart": "Limits water intake at work due to fear of frequent urination",
+    "says": "I try not to drink too much water at work because I don't want to be running to the bathroom every ten minutes.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f15",
+    "category": "function",
+    "topic": "physical activity barriers",
+    "chart": "Sedentary job; cites joint and back pain limiting activity",
+    "says": "I sit at a desk all day, and my back and knees bother me too much to really exercise.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f16",
+    "category": "social",
+    "topic": "financial constraints",
+    "chart": "Reports grocery budget constraints; relies on cheaper processed foods",
+    "says": "Fresh vegetables and lean meat cost so much more - the canned soup and processed stuff is just cheaper.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f17",
+    "category": "social",
+    "topic": "spouse involvement",
+    "chart": "Husband is supportive, helps with cooking and driving to appointments",
+    "says": "My husband's great - he drives me everywhere and helps in the kitchen when he can.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f18",
+    "category": "psychosocial",
+    "topic": "emotional stress level",
+    "chart": "Reports stress from balancing work and family responsibilities",
+    "says": "Between work and my grandchild and everything else, I feel stretched pretty thin.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f19",
+    "category": "family",
+    "topic": "family food pressure",
+    "chart": "Family gatherings center on traditional high-sodium foods; feels pressure to maintain patterns",
+    "says": "My kids and husband expect the same foods at every gathering - it's just what we do.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f20",
+    "category": "psychosocial",
+    "topic": "weight and body image feelings",
+    "chart": "Expresses embarrassment about weight and lifestyle choices",
+    "says": "I know I've gained weight, and honestly it's embarrassing to even talk about it with you.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f21",
+    "category": "psychosocial",
+    "topic": "fear of judgment about culture",
+    "chart": "Fears being judged for eating traditional foods",
+    "says": "I worry you're going to tell me to just stop eating the foods my family's always made.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f22",
+    "category": "social",
+    "topic": "budget-driven food choices",
+    "chart": "Admits buying cheap, high-sodium foods specifically due to budget, feels some shame about it",
+    "says": "Sometimes I buy the cheap canned stuff because it's what we can afford, even though I know it's salty - I don't love admitting that.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f23",
+    "category": "function",
+    "topic": "daytime rest pattern",
+    "chart": "Admits lying down mid-day due to fatigue, feels this is a sign of weakness",
+    "says": "Some days I have to lie down for a bit in the afternoon - I don't really tell people that.",
+    "tier": "reluctant",
+    "importance": "minor"
+   },
+   {
+    "id": "f24",
+    "category": "psychosocial",
+    "topic": "cultural identity and food change",
+    "chart": "Feels guilt about wanting to change traditional eating patterns, as if betraying heritage",
+    "says": "Part of me doesn't even want to change the family recipes - it feels like giving up where I come from.",
+    "tier": "hidden",
+    "importance": "important"
+   },
+   {
+    "id": "f25",
+    "category": "psychosocial",
+    "topic": "motivation for change",
+    "chart": "Primary motivation is being present/healthy for grandchild",
+    "says": "More than anything, I want to be around and healthy for my grandbaby growing up.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f26",
+    "category": "psychosocial",
+    "topic": "beliefs about healthy eating cost",
+    "chart": "Believes healthy food is inherently expensive",
+    "says": "Everybody says eat healthy, but healthy food costs an arm and a leg.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f27",
+    "category": "psychosocial",
+    "topic": "beliefs about weight loss",
+    "chart": "Believes weight loss requires starvation/extreme restriction",
+    "says": "Isn't losing weight basically just starving yourself? That sounds miserable.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f28",
+    "category": "psychosocial",
+    "topic": "trust in healthcare providers",
+    "chart": "Feels doctors focus only on numbers, not how she feels day-to-day",
+    "says": "Sometimes I feel like the doctor just looks at numbers and doesn't care how I actually feel.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f29",
+    "category": "substance",
+    "topic": "alcohol use",
+    "chart": "Drinks 1-2 glasses of wine on weekends; denies other substance use",
+    "says": "I'll have a glass or two of wine on the weekend, that's about it. No smoking, nothing like that.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f30",
+    "category": "ros",
+    "topic": "vision changes",
+    "chart": "Reports occasional blurred vision",
+    "says": "Every now and then my vision gets a little blurry, especially if my sugar's been high.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f31",
+    "category": "social",
+    "topic": "neighborhood walkability",
+    "chart": "Lives in urban/suburban area with limited green space, affecting ability to walk for exercise",
+    "says": "There's not really anywhere nice to walk around here, no parks close by.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f32",
+    "category": "social",
+    "topic": "gardening hobby",
+    "chart": "Has a small home garden she enjoys tending",
+    "says": "I do have a little garden out back, I like growing a few tomatoes and herbs when I can.",
+    "tier": "initial",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f33",
+    "category": "social",
+    "topic": "pet ownership",
+    "chart": "Has a pet dog",
+    "says": "Oh, and I've got my dog, Max - he keeps me company.",
+    "tier": "initial",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f34",
+    "category": "allergies",
+    "topic": "medication allergy",
+    "chart": "Penicillin allergy (rash)",
+    "says": "I'm allergic to penicillin, it gives me a rash.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f35",
+    "category": "sleep",
+    "topic": "sleep quality",
+    "chart": "Sleeps 6-7 hours per night, interrupted by nocturia",
+    "says": "I sleep maybe 6, 7 hours, but I'm up once or twice to pee.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f36",
+    "category": "nutrition",
+    "topic": "eating out frequency",
+    "chart": "Eats out 1-2 times per week, usually quick/cheap options",
+    "says": "We'll grab fast food maybe once or twice a week when things are hectic.",
+    "tier": "discoverable",
+    "importance": "minor"
+   }
+  ],
+  "objectives": [
+   {
+    "id": "o1",
+    "text": "Gather a complete nutrition-focused health history, including assessment of the patient's health literacy and understanding of sodium vs. salt and her chronic conditions.",
+    "factIds": [
+     "f4",
+     "f6",
+     "f7",
+     "f28"
+    ],
+    "actionIds": [
+     "a9",
+     "a12"
+    ]
+   },
+   {
+    "id": "o2",
+    "text": "Perform anthropometric, vital sign, and laboratory assessment and correctly interpret findings in the context of nutrition diagnosis.",
+    "factIds": [
+     "f2",
+     "f30"
+    ],
+    "actionIds": [
+     "a1",
+     "a2",
+     "a4",
+     "a5",
+     "a6",
+     "a7",
+     "a8"
+    ]
+   },
+   {
+    "id": "o3",
+    "text": "Formulate an accurate PES (Problem, Etiology, Signs/Symptoms) statement reflecting excessive sodium intake and inconsistent carbohydrate intake linked to knowledge, cultural, and financial barriers.",
+    "factIds": [
+     "f7",
+     "f11",
+     "f12",
+     "f13",
+     "f16"
+    ],
+    "actionIds": [
+     "a9",
+     "a17"
+    ]
+   },
+   {
+    "id": "o4",
+    "text": "Explore medication adherence and self-adjustment behaviors and integrate medication-nutrition interactions into the care plan, escalating concerns to the medical team as appropriate.",
+    "factIds": [
+     "f8",
+     "f9",
+     "f10"
+    ],
+    "actionIds": [
+     "a3"
+    ]
+   },
+   {
+    "id": "o5",
+    "text": "Apply motivational interviewing techniques to explore the patient's ambivalence, cultural attachment to traditional foods, and intrinsic motivations for change.",
+    "factIds": [
+     "f19",
+     "f20",
+     "f21",
+     "f24",
+     "f25",
+     "f26",
+     "f27"
+    ],
+    "actionIds": [
+     "a13"
+    ]
+   },
+   {
+    "id": "o6",
+    "text": "Identify and problem-solve psychosocial and systemic barriers (financial, time, cultural, health literacy) and connect the patient with appropriate interprofessional/community resources.",
+    "factIds": [
+     "f5",
+     "f16",
+     "f17",
+     "f18",
+     "f22",
+     "f23"
+    ],
+    "actionIds": [
+     "a17",
+     "a18"
+    ]
+   }
+  ],
+  "patient": {
+   "name": "Yvette Armstrong",
+   "age": 64,
+   "sex": "Female",
+   "pronouns": "she/her",
+   "ethnicity": "Eastern European American",
+   "occupation": "State employee (full-time, administrative role)",
+   "language": "English",
+   "appearance": "Seated at her kitchen table on a laptop camera, wearing work-casual clothing with a cardigan; appears mildly tired with slight under-eye circles; has a cup of tea nearby; occasionally glances off-screen when her phone buzzes, mentioning she's expecting a call from her daughter",
+   "portrait": "/portraits/yvette-armstrong.jpg"
+  },
+  "persona": {
+   "personality": "Curious, earnest, and eager to learn but easily overwhelmed by technical jargon and lengthy explanations. Values honesty and direct communication. Tries hard to comply but becomes frustrated when changes feel too difficult or unsustainable.",
+   "communicationStyle": "Asks clarifying questions when confused; may hesitate to ask follow-up questions if she feels she's burdening the provider; responds well to patient, respectful, non-judgmental communication; uses lay terms and needs concepts explained simply with concrete examples.",
+   "healthLiteracy": "low",
+   "emotionalState": "Anxious and somewhat overwhelmed about new diagnoses, but hopeful and motivated when she feels heard rather than lectured",
+   "background": "Grew up in a tight-knit Eastern European American family where food was the centerpiece of every gathering - holidays meant pierogis, kielbasa, cabbage rolls, pickled everything. Earned an associate's degree in political science and has worked for the state government for over 20 years in an administrative role. Married with a supportive husband; two adult children live locally and she recently became a grandmother, which she describes as the best thing that's happened to her in years. Involved in local community/political groups in her younger years. Enjoys a small backyard garden and has a dog named Max.",
+   "speechExamples": [
+    "Wait, so sodium and salt aren't the same thing? Nobody ever told me that.",
+    "I just don't have an hour to cook every night, you know?",
+    "My family's going to think I've gone crazy if I show up to dinner without the kielbasa.",
+    "I'm not trying to be difficult, I just don't know where to even start.",
+    "Is losing weight really just about starving myself? Because I don't think I can do that."
+   ],
+   "concerns": [
+    "Fear of complications from diabetes and hypertension like stroke or heart attack",
+    "Worry about medication side effects, especially leg swelling and stomach upset",
+    "Frustration with not understanding the difference between sodium and salt",
+    "Concern about the cost of healthy food on a tight budget",
+    "Anxiety about disappointing or alienating her family by changing traditional eating habits"
+   ]
+  },
+  "scenario": {
+   "studentBrief": "You are a dietetics student conducting an initial telehealth nutrition assessment for Yvette Armstrong, a 64-year-old woman recently diagnosed with Stage II hypertension and poorly controlled Type 2 Diabetes (diagnosed 2 years ago), referred by her PCP for medical nutrition therapy. Review the chart before the call. Conduct a nutrition-focused history and assessment, identify barriers to behavior change, and provide patient-centered counseling using motivational interviewing. Document your encounter in ADIME format.",
+   "chiefComplaint": "New diagnosis of Stage II hypertension and uncontrolled Type 2 Diabetes; referred for nutrition counseling",
+   "openingLine": "Hi, thanks for seeing me - my doctor said I really need to talk to someone about my eating because of my blood pressure and my sugar being high. Honestly, I'm not even sure where to start.",
+   "tasks": [
+    "Conduct a nutrition-focused history including 24-hour recall/typical day, meal pattern, fluid intake, and physical activity",
+    "Assess the patient's health literacy and understanding of her conditions, including her confusion about sodium vs. salt",
+    "Review labs, vitals, anthropometrics, and medications relevant to nutrition diagnosis",
+    "Identify financial, cultural, time, and emotional barriers to dietary change using open-ended, non-judgmental questioning",
+    "Formulate a nutrition diagnosis (PES statement) and deliver culturally sensitive, motivational-interviewing-based counseling with a concrete small-step plan",
+    "Document the encounter using the ADIME format"
+   ],
+   "timeLimitMin": 30
+  },
+  "setting": "Telehealth video visit; patient at home, seated at her kitchen table",
+  "specialty": "Dietetics / Clinical Nutrition",
+  "summary": "A 64-year-old woman with new Stage II hypertension and poorly controlled Type 2 Diabetes presents for an initial telehealth nutrition assessment. The case teaches history-taking around health literacy gaps (sodium vs. salt confusion), identification of cultural/financial/time barriers to dietary change, recognition of medication non-adherence and self-adjustment, and application of motivational interviewing to build a culturally sensitive, sustainable nutrition care plan documented in ADIME format.",
+  "title": "Nutrition Assessment and Counseling for New Stage II Hypertension and Uncontrolled Type 2 Diabetes in a Health-Literacy-Limited Patient",
+  "professions": [
+   "dietetics"
+  ],
+  "knowledge": [],
+  "rubricId": "default",
+  "variants": []
+ }
+}

@@ -1,0 +1,995 @@
+{
+ "origin": "sample",
+ "reviewed": true,
+ "profile": {
+  "version": 1,
+  "actions": [
+   {
+    "id": "a1",
+    "kind": "vitals",
+    "name": "Review vital signs flowsheet",
+    "result": "BP 148/92 mmHg, HR 82 bpm, Temp 98.4°F, RR 16, SpO2 97% (from today's intake)",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a2",
+    "kind": "assessment",
+    "name": "Measure/confirm anthropometrics (height, weight, BMI, waist circumference)",
+    "result": "Height 5'10\" (178 cm), Weight 228 lb (103.4 kg), BMI 29.2 kg/m², Waist circumference 43 in, estimated body fat 28%",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a3",
+    "kind": "lab",
+    "name": "Review lipid panel",
+    "result": "Total cholesterol 260 mg/dL (H), LDL 195 mg/dL (H), HDL 30 mg/dL (L), Triglycerides 180 mg/dL (H)",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a4",
+    "kind": "lab",
+    "name": "Review glycemic labs (HbA1c, fasting glucose)",
+    "result": "HbA1c 5.8% (prediabetes range), fasting glucose 110 mg/dL (H, impaired fasting glucose)",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a5",
+    "kind": "record",
+    "name": "Review current medication list",
+    "result": "Atorvastatin 40 mg once daily (adherence inconsistent per chart note), Lisinopril 20 mg once daily (adherence consistent), OTC: fish oil, vitamin D3, multivitamin",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a6",
+    "kind": "record",
+    "name": "Review problem list / diagnoses",
+    "result": "Dyslipidemia, Prediabetes, Essential hypertension; family history of early coronary artery disease; no prior cardiac events",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a7",
+    "kind": "record",
+    "name": "Review allergy list",
+    "result": "No known food or medication allergies documented",
+    "importance": "minor",
+    "artifactIds": []
+   },
+   {
+    "id": "a8",
+    "kind": "assessment",
+    "name": "Obtain 24-hour dietary recall / typical intake pattern",
+    "result": "Patient reports skipping breakfast most days, large/heavy dinner, frequent fast food (burgers, pizza) during work shifts, soda as primary beverage, minimal fruit/vegetable intake, processed meats several times/week",
+    "importance": "critical",
+    "artifactIds": [
+     "d6"
+    ]
+   },
+   {
+    "id": "a9",
+    "kind": "assessment",
+    "name": "Assess fluid/beverage intake pattern",
+    "result": "Reports 2-3 cans of regular soda daily, minimal plain water intake, occasional sweet tea",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a10",
+    "kind": "assessment",
+    "name": "Assess alcohol intake pattern",
+    "result": "Reports drinking beer most evenings after shift, roughly 3-4 beers 5-6 nights/week when probed further with trust established",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a11",
+    "kind": "assessment",
+    "name": "Assess physical activity level",
+    "result": "Sedentary most of the week; standing/walking during 10-12 hour mechanic shifts but no structured exercise; too tired on days off",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a12",
+    "kind": "assessment",
+    "name": "Assess sleep pattern",
+    "result": "Irregular sleep schedule due to rotating shift work, averages 5-6 hours/night, often fragmented",
+    "importance": "minor",
+    "artifactIds": []
+   },
+   {
+    "id": "a13",
+    "kind": "assessment",
+    "name": "Assess readiness to change (diet vs. medication)",
+    "result": "Contemplation stage for dietary change; precontemplation stage for medication adherence, citing side effects and distrust",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a14",
+    "kind": "assessment",
+    "name": "Assess cholesterol/health literacy and beliefs",
+    "result": "Patient believes his cholesterol numbers are 'not that bad' and that statins cause muscle/joint pain; limited understanding of LDL vs HDL vs triglycerides",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a15",
+    "kind": "assessment",
+    "name": "Assess food access and budget barriers",
+    "result": "Reports fresh produce feels expensive and inconvenient given rotating shift schedule; relies on vending machines and fast food near work site",
+    "importance": "important",
+    "artifactIds": []
+   },
+   {
+    "id": "a16",
+    "kind": "record",
+    "name": "Review family/social history in chart",
+    "result": "Married, lives with spouse and young children; spouse supportive of healthier eating but limited involvement in meal prep due to her own work schedule",
+    "importance": "minor",
+    "artifactIds": []
+   },
+   {
+    "id": "a17",
+    "kind": "assessment",
+    "name": "Screen for medication side effects affecting adherence",
+    "result": "Reports occasional dizziness after atorvastatin dose and persistent dry cough attributed to lisinopril; has not reported these symptoms to PCP",
+    "importance": "critical",
+    "artifactIds": []
+   },
+   {
+    "id": "a18",
+    "kind": "record",
+    "name": "Review most recent PCP visit note",
+    "result": "PCP note confirms new diagnosis of dyslipidemia and prediabetes 2 months ago, atorvastatin and lisinopril started at that visit, referral placed for dietitian counseling",
+    "importance": "important",
+    "artifactIds": []
+   }
+  ],
+  "answerKey": {
+   "primaryProblem": "Excessive saturated fat and simple carbohydrate intake with inadequate fruit/vegetable and fiber intake related to irregular shift-work meal pattern, reliance on convenience foods, and limited nutrition knowledge, as evidenced by LDL 195 mg/dL, HDL 30 mg/dL, triglycerides 180 mg/dL, total cholesterol 260 mg/dL, BMI 29.2, and waist circumference 43 inches.",
+   "differential": [
+    "Primary (familial) hyperlipidemia given strong family history of early CAD - warrants consideration though diet/lifestyle factors are clearly contributory",
+    "Medication non-adherence as independent driver of poor lipid control (statin taken inconsistently)",
+    "Metabolic syndrome / insulin resistance component (elevated fasting glucose, HbA1c 5.8%, central adiposity, hypertension, low HDL, elevated triglycerides) amplifying cardiovascular risk",
+    "Secondary dyslipidemia contributors to rule out via PCP: hypothyroidism, excess alcohol intake (patient reports regular beer consumption which can raise triglycerides)"
+   ],
+   "keyFindings": [
+    "LDL 195 mg/dL and HDL 30 mg/dL indicate high atherogenic risk out of proportion to total cholesterol alone",
+    "Triglycerides 180 mg/dL and fasting glucose 110 mg/dL with HbA1c 5.8% show early insulin resistance pattern consistent with prediabetes",
+    "BMI 29.2 with waist circumference 43 inches indicates central adiposity, a modifiable CV risk factor",
+    "BP 148/92 mmHg confirms uncontrolled hypertension compounding risk despite reported consistent lisinopril use",
+    "Dietary pattern: skipped breakfast, heavy dinner, frequent fast food, minimal produce, regular soda, and nightly beer intake are the key modifiable nutrition-related behaviors",
+    "Statin adherence is inconsistent due to perceived dizziness; patient has not disclosed this to prescriber",
+    "Patient is in precontemplation for medication change but contemplation for dietary change - counseling should prioritize diet-focused goals first to build engagement"
+   ],
+   "plan": [
+    "Document findings using ADIME format with PES statement, e.g.: 'Excessive saturated fat and inadequate fiber intake related to irregular shift-work schedule and reliance on convenience/fast foods as evidenced by LDL 195 mg/dL, HDL 30 mg/dL, triglycerides 180 mg/dL, and waist circumference 43 inches.'",
+    "Negotiate 1-2 small, specific, achievable goals aligned with patient's stated motivations (grandkids, returning to full work) rather than a full diet overhaul",
+    "Introduce practical substitutions compatible with shift work: packable high-fiber snacks, swapping 1 soda/day for water or unsweetened beverage, adding one fruit or vegetable at each meal",
+    "Discuss sources of soluble fiber (oats, beans, fruit) and plant sterols to support LDL reduction alongside, not instead of, statin therapy",
+    "Address alcohol intake nonjudgmentally and its contribution to elevated triglycerides; explore readiness to reduce frequency/amount",
+    "Coordinate with PCP/pharmacy regarding reported statin-related dizziness and lisinopril-related cough rather than patient unilaterally stopping medication - encourage patient to report these symptoms rather than self-discontinue",
+    "Clarify misconceptions about cholesterol numbers and statin mechanism in plain language, using the 'ask-tell-ask' approach",
+    "Provide referral/follow-up plan: repeat lipid panel and HbA1c in 3 months, follow-up nutrition visit in 2-4 weeks to assess progress and barriers",
+    "Involve spouse in meal planning conversation if patient is open to it, leveraging existing support system",
+    "Discuss hydration goal and reducing sugar-sweetened beverage intake as a concrete first step"
+   ],
+   "redFlags": [
+    "Uncontrolled BP (148/92) in setting of newly diagnosed dyslipidemia and prediabetes raises near-term cardiovascular risk - warrants timely PCP follow-up, not just nutrition counseling alone",
+    "Unreported medication side effects (statin-associated dizziness, ACE-inhibitor cough) risking unsupervised discontinuation of cardioprotective medications",
+    "Strong family history of early coronary artery disease combined with current risk factor clustering (metabolic syndrome pattern) elevates urgency of risk-factor modification",
+    "Low HDL (30 mg/dL) is an independent CV risk factor often under-recognized by patients who focus only on total/LDL cholesterol"
+   ],
+   "educationPoints": [
+    "Explain LDL, HDL, and triglycerides in plain, practical terms (e.g., LDL as 'extra buildup' risk, HDL as 'the one you want higher') tailored to his health literacy level",
+    "Clarify that statin-associated muscle aches are a known but manageable side effect, and that abruptly stopping is riskier than reporting symptoms to the prescriber",
+    "Reinforce that dietary change and medication work together, not as alternatives, to lower cardiovascular risk",
+    "Normalize shift-work challenges and tailor recommendations to be realistic for his schedule (grab-and-go, batch prep on days off)",
+    "Use motivational interviewing: reflect his stated motivations (grandkids, staying on the job) to build intrinsic motivation for both diet and medication adherence",
+    "Emphasize that small, sustainable changes (one swap at a time) are more realistic than an all-or-nothing approach given his skepticism and busy schedule"
+   ]
+  },
+  "artifacts": [
+   {
+    "id": "d1",
+    "type": "lab_report",
+    "title": "Lipid Panel and Metabolic Labs",
+    "author": "Quest Diagnostics via PCP order",
+    "date": "8 days ago",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Test",
+      "Result",
+      "Reference Range",
+      "Flag"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Total Cholesterol",
+        "260 mg/dL",
+        "<200 mg/dL"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "LDL Cholesterol",
+        "195 mg/dL",
+        "<100 mg/dL (optimal), <130 borderline high-risk"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "HDL Cholesterol",
+        "30 mg/dL",
+        ">40 mg/dL (men)"
+       ],
+       "flag": "L"
+      },
+      {
+       "cells": [
+        "Triglycerides",
+        "180 mg/dL",
+        "<150 mg/dL"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "HbA1c",
+        "5.8 %",
+        "<5.7% normal; 5.7-6.4% prediabetes"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Fasting Glucose",
+        "110 mg/dL",
+        "70-99 mg/dL"
+       ],
+       "flag": "H"
+      }
+     ]
+    }
+   },
+   {
+    "id": "d2",
+    "type": "medication_list",
+    "title": "Active Medications",
+    "author": "EHR Medication Reconciliation",
+    "date": "Today",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Medication",
+      "Dose",
+      "Frequency",
+      "Purpose",
+      "Adherence Note"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Atorvastatin",
+        "40 mg",
+        "Once daily, evening",
+        "Lower LDL cholesterol / reduce CV risk",
+        "Patient-reported inconsistent use"
+       ]
+      },
+      {
+       "cells": [
+        "Lisinopril",
+        "20 mg",
+        "Once daily, morning",
+        "Blood pressure control",
+        "Patient-reported consistent use"
+       ]
+      },
+      {
+       "cells": [
+        "Fish Oil (OTC)",
+        "1000 mg",
+        "Once daily",
+        "Supplement, patient self-initiated",
+        "N/A"
+       ]
+      },
+      {
+       "cells": [
+        "Vitamin D3 (OTC)",
+        "2000 IU",
+        "Once daily",
+        "Supplement",
+        "N/A"
+       ]
+      },
+      {
+       "cells": [
+        "Multivitamin (OTC)",
+        "1 tablet",
+        "Once daily",
+        "Supplement",
+        "N/A"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d3",
+    "type": "flowsheet",
+    "title": "Vitals and Anthropometrics - Today's Visit",
+    "author": "Telehealth intake / self-reported home device",
+    "date": "Today",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Measure",
+      "Value"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Blood Pressure",
+        "148/92 mmHg"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Heart Rate",
+        "82 bpm"
+       ]
+      },
+      {
+       "cells": [
+        "Temperature",
+        "98.4°F"
+       ]
+      },
+      {
+       "cells": [
+        "Respiratory Rate",
+        "16 breaths/min"
+       ]
+      },
+      {
+       "cells": [
+        "SpO2",
+        "97%"
+       ]
+      },
+      {
+       "cells": [
+        "Height",
+        "5'10\" (178 cm)"
+       ]
+      },
+      {
+       "cells": [
+        "Weight",
+        "228 lb (103.4 kg)"
+       ]
+      },
+      {
+       "cells": [
+        "BMI",
+        "29.2 kg/m²"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Waist Circumference",
+        "43 in"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Estimated Body Fat %",
+        "28%"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d4",
+    "type": "note",
+    "title": "PCP Visit Note (2 months ago)",
+    "author": "Dr. Patel, Internal Medicine",
+    "date": "2 months ago",
+    "release": {
+     "when": "start"
+    },
+    "body": "45-year-old male presents for routine physical. Found to have elevated BP 146/90, labs significant for LDL 190 mg/dL, HDL 32 mg/dL, triglycerides 175 mg/dL, fasting glucose 108 mg/dL, HbA1c 5.7%. New diagnoses: dyslipidemia, essential hypertension, prediabetes. Started atorvastatin 40mg daily and lisinopril 20mg daily. Counseled on diet and exercise at visit; patient reports he 'already eats fine.' Referral placed to outpatient dietitian for medical nutrition therapy. Family history notable for father with MI at age 52. Plan: recheck lipid panel and HbA1c in 3 months, f/u with dietitian, continue current medications."
+   },
+   {
+    "id": "d5",
+    "type": "chart",
+    "title": "Weight Trend - Past 12 Months",
+    "author": "EHR Vitals History",
+    "date": "Today",
+    "release": {
+     "when": "start"
+    },
+    "chart": {
+     "kind": "line",
+     "xLabel": "Month",
+     "yLabel": "Weight (lb)",
+     "series": [
+      {
+       "name": "Weight",
+       "points": [
+        {
+         "x": "12 mo ago",
+         "y": 212
+        },
+        {
+         "x": "9 mo ago",
+         "y": 216
+        },
+        {
+         "x": "6 mo ago",
+         "y": 220
+        },
+        {
+         "x": "3 mo ago",
+         "y": 224
+        },
+        {
+         "x": "Today",
+         "y": 228
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "d6",
+    "type": "form",
+    "title": "24-Hour Dietary Recall (Patient-Reported, Today's Visit)",
+    "author": "Dietetics Student Documentation",
+    "date": "Today",
+    "release": {
+     "when": "action",
+     "ref": "a8"
+    },
+    "body": "Breakfast: skipped (black coffee only). Lunch: fast food - double cheeseburger, large fries, 20oz regular soda (eaten in truck during shift). Snack: vending machine chips. Dinner: large portion grilled or fried meat (varies - burgers, sausage, or fried chicken on grill nights), white rice or mashed potatoes, small side of canned vegetables, 2-3 cans of beer. Minimal fresh fruit or vegetable intake noted across the day. Fluid intake dominated by soda and beer; minimal plain water."
+   }
+  ],
+  "chartAtStart": [
+   {
+    "label": "Reason for visit",
+    "value": "Nutrition assessment and counseling for dyslipidemia, referred by PCP"
+   },
+   {
+    "label": "Problem list",
+    "value": "Dyslipidemia; Prediabetes; Essential hypertension"
+   },
+   {
+    "label": "Medications",
+    "value": "Atorvastatin 40 mg daily; Lisinopril 20 mg daily; Fish oil, Vitamin D3, Multivitamin (OTC)"
+   },
+   {
+    "label": "Allergies",
+    "value": "No known food or medication allergies"
+   },
+   {
+    "label": "Last vitals",
+    "value": "BP 148/92 mmHg, HR 82 bpm, Weight 228 lb, BMI 29.2"
+   },
+   {
+    "label": "Care team",
+    "value": "PCP: Dr. Patel, Internal Medicine; Referral to Dietitian (today's visit)"
+   },
+   {
+    "label": "Code status",
+    "value": "Full code (outpatient, not applicable)"
+   }
+  ],
+  "difficulty": 3,
+  "encounterType": "Nutrition assessment and counseling (initial dietitian visit, telehealth)",
+  "facts": [
+   {
+    "id": "f1",
+    "category": "chief_complaint",
+    "topic": "reason for referral",
+    "chart": "Patient referred by PCP for medical nutrition therapy for new dyslipidemia diagnosis",
+    "says": "My doctor said my cholesterol's high and sent me to talk to you. I don't really see what the big deal is, honestly.",
+    "tier": "initial",
+    "importance": "critical"
+   },
+   {
+    "id": "f2",
+    "category": "other",
+    "topic": "occupation",
+    "chart": "Works as aircraft mechanic, long rotating shifts",
+    "says": "I'm an aircraft mechanic. Been doing it twenty years. Shifts can run ten, twelve hours sometimes.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f3",
+    "category": "other",
+    "topic": "basic demographics",
+    "chart": "45-year-old male, married",
+    "says": "I'm 45, married, got a couple kids at home.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f4",
+    "category": "social",
+    "topic": "household",
+    "chart": "Lives with spouse and young children",
+    "says": "Yeah, it's me, my wife, and our two kids at home.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f5",
+    "category": "nutrition",
+    "topic": "meal frequency",
+    "chart": "Reports eating approximately 3 meals a day when directly asked, though recall reveals skipped breakfast",
+    "says": "I eat pretty regular, three meals a day I'd say.",
+    "tier": "discoverable",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f6",
+    "category": "nutrition",
+    "topic": "breakfast habits",
+    "chart": "Skips breakfast most days, coffee only",
+    "says": "I mean, most mornings I just grab a coffee. Breakfast feels like a waste of time when I'm trying to get to the shop.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f7",
+    "category": "nutrition",
+    "topic": "typical lunch",
+    "chart": "Eats fast food during work shifts most days - burgers, fries, soda",
+    "says": "Lunch is whatever's fastest - there's a burger place right by the hangar, I probably hit it four or five times a week.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f8",
+    "category": "nutrition",
+    "topic": "dinner pattern",
+    "chart": "Heavy dinner, often grilled meats, starchy sides, minimal vegetables",
+    "says": "Dinner's the big meal. My wife cooks, or I'll throw something on the grill - burgers, sausage, whatever. We don't do a lot of vegetables, I'll be honest.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f9",
+    "category": "nutrition",
+    "topic": "produce intake",
+    "chart": "Low fruit and vegetable intake, cites cost and inconvenience",
+    "says": "Fruits and vegetables? Man, that stuff's expensive and it goes bad before you can eat it all. We just don't keep much of it around.",
+    "tier": "hidden",
+    "importance": "critical"
+   },
+   {
+    "id": "f10",
+    "category": "nutrition",
+    "topic": "beverage choices",
+    "chart": "Drinks 2-3 cans of regular soda daily; minimal water intake",
+    "says": "I drink soda, probably two, three cans a day. Water's just... boring, I don't really think to grab it.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f11",
+    "category": "substance",
+    "topic": "alcohol use",
+    "chart": "Drinks 2-3 beers 5-6 nights/week, more on weekends while grilling",
+    "says": "I'll have a couple beers most nights after my shift, it helps me wind down. Weekends when I'm grilling it might be a few more.",
+    "tier": "hidden",
+    "importance": "critical"
+   },
+   {
+    "id": "f12",
+    "category": "function",
+    "topic": "activity level",
+    "chart": "Sedentary outside of work; no structured exercise; fatigue limits activity on days off",
+    "says": "I'm on my feet at work but it's not like exercise. On my days off I'm honestly just tired, I don't do much.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f13",
+    "category": "other",
+    "topic": "sleep pattern",
+    "chart": "Irregular sleep due to rotating shift schedule, averages 5-6 hours",
+    "says": "My sleep's all over the place with the shifts. Some nights I get five, six hours if I'm lucky.",
+    "tier": "hidden",
+    "importance": "minor"
+   },
+   {
+    "id": "f14",
+    "category": "medications",
+    "topic": "statin side effects",
+    "chart": "Reports dizziness after taking atorvastatin; has not reported to PCP",
+    "says": "Sometimes after I take that cholesterol pill I feel kind of dizzy, lightheaded. I didn't tell the doctor, I just started skipping it some days.",
+    "tier": "reluctant",
+    "importance": "critical"
+   },
+   {
+    "id": "f15",
+    "category": "medications",
+    "topic": "statin adherence pattern",
+    "chart": "Inconsistent atorvastatin adherence, misses several doses per week",
+    "says": "I'd say I probably miss it two, three times a week. If I'm not feeling right I just don't take it.",
+    "tier": "reluctant",
+    "importance": "critical"
+   },
+   {
+    "id": "f16",
+    "category": "medications",
+    "topic": "ACE inhibitor side effect",
+    "chart": "Persistent dry cough attributed to lisinopril, takes medication consistently despite this",
+    "says": "The blood pressure pill gives me this cough that won't quit, but I still take that one every day, that one scares me less.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f17",
+    "category": "medications",
+    "topic": "statin beliefs",
+    "chart": "Believes statins cause muscle pain and are generally harmful long-term",
+    "says": "Everybody at work says those statin pills mess up your muscles and your liver. I don't love putting that stuff in my body.",
+    "tier": "reluctant",
+    "importance": "critical"
+   },
+   {
+    "id": "f18",
+    "category": "other",
+    "topic": "cholesterol understanding",
+    "chart": "Limited understanding of cholesterol numbers; believes his levels are not concerning",
+    "says": "260, 195, whatever - nobody's really explained what those numbers actually mean. I feel fine, so I figured it can't be that bad.",
+    "tier": "hidden",
+    "importance": "critical"
+   },
+   {
+    "id": "f19",
+    "category": "psychosocial",
+    "topic": "attitude toward diet changes",
+    "chart": "Perceives recommended dietary changes as too restrictive and expensive",
+    "says": "I don't want somebody telling me I gotta eat salad every day. That's not realistic with my schedule or my wallet.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f20",
+    "category": "psychosocial",
+    "topic": "motivation - family",
+    "chart": "Motivated by desire to stay healthy for grandchildren and avoid heart attack",
+    "says": "My dad had a heart attack at 52 and it scared the hell out of me. I want to be around to see my grandkids someday.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f21",
+    "category": "psychosocial",
+    "topic": "motivation - work",
+    "chart": "Motivated to return to/maintain full work shifts without fatigue",
+    "says": "I need to be able to work full shifts without feeling wiped out. That's non-negotiable, I've got a family to support.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f22",
+    "category": "psychosocial",
+    "topic": "job security concern",
+    "chart": "Fears health problems could jeopardize his job",
+    "says": "If I can't keep up at work, that's a real problem for us financially. I can't afford to be out sick all the time.",
+    "tier": "reluctant",
+    "importance": "important"
+   },
+   {
+    "id": "f23",
+    "category": "family",
+    "topic": "family cardiac history",
+    "chart": "Father had myocardial infarction at age 52; strong family history of early coronary artery disease",
+    "says": "My dad had his heart attack at 52. That's part of why this whole cholesterol thing worries me more than I let on.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f24",
+    "category": "pmh",
+    "topic": "migraine history",
+    "chart": "History of severe migraines, not currently active, unrelated to current visit",
+    "says": "I used to get these awful migraines a few years back, knock-you-out kind. Haven't had one in a while though.",
+    "tier": "initial",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f25",
+    "category": "pmh",
+    "topic": "cardiac event history",
+    "chart": "No prior cardiac events (no MI, no stents, no angina)",
+    "says": "No, I've never had a heart attack or anything like that myself, thank God.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f26",
+    "category": "allergies",
+    "topic": "food and medication allergies",
+    "chart": "No known food or medication allergies",
+    "says": "No allergies that I know of, never had a reaction to food or medicine.",
+    "tier": "initial",
+    "importance": "minor"
+   },
+   {
+    "id": "f27",
+    "category": "social",
+    "topic": "spousal support",
+    "chart": "Spouse supportive of healthier eating but limited involvement in meal prep due to her own work schedule",
+    "says": "My wife's on board with eating healthier, she just works a lot too so it's not like she's got time to cook some fancy meal plan.",
+    "tier": "discoverable",
+    "importance": "important"
+   },
+   {
+    "id": "f28",
+    "category": "psychosocial",
+    "topic": "trust in healthcare advice",
+    "chart": "Expresses skepticism toward being told what to do by healthcare providers, prefers practical over lecturing approach",
+    "says": "I don't love being lectured at. Just give me something practical I can actually use, not some pamphlet.",
+    "tier": "initial",
+    "importance": "important"
+   },
+   {
+    "id": "f29",
+    "category": "other",
+    "topic": "weekend habits",
+    "chart": "Enjoys grilling on weekends and watching football with neighbors, often with beer and snacks",
+    "says": "Weekends I like to grill out, watch some football with the neighbors. That's my downtime.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f30",
+    "category": "other",
+    "topic": "recent weight change",
+    "chart": "Reports approximately 16 lb weight gain over the past year, attributes to long shifts and fatigue",
+    "says": "I've put on some weight this past year, maybe fifteen, sixteen pounds. The shift work just wears you down and you eat whatever's fast.",
+    "tier": "hidden",
+    "importance": "important"
+   },
+   {
+    "id": "f31",
+    "category": "adherence",
+    "topic": "supplement use",
+    "chart": "Takes fish oil, vitamin D3, and a multivitamin daily, self-initiated",
+    "says": "I take fish oil, vitamin D, and a multivitamin every day. Figured that couldn't hurt.",
+    "tier": "discoverable",
+    "importance": "minor"
+   },
+   {
+    "id": "f32",
+    "category": "psychosocial",
+    "topic": "readiness for dietary change",
+    "chart": "Open to considering dietary changes if framed as practical and specific; more resistant to medication changes",
+    "says": "I guess I could maybe look at eating different if it's something simple. The pills, though, I'm still not sure about those.",
+    "tier": "discoverable",
+    "importance": "critical"
+   },
+   {
+    "id": "f33",
+    "category": "insurance",
+    "topic": "insurance coverage",
+    "chart": "Has employment-based insurance through aircraft mechanic job",
+    "says": "I've got insurance through my job, so visits are usually covered okay.",
+    "tier": "initial",
+    "importance": "minor",
+    "distractor": true
+   },
+   {
+    "id": "f34",
+    "category": "nutrition",
+    "topic": "processed meat intake",
+    "chart": "Frequent processed/cured meat intake (sausage, bacon, deli meats) several times weekly",
+    "says": "We go through a lot of sausage and bacon in this house, and I'll grab deli meat sandwiches sometimes too.",
+    "tier": "discoverable",
+    "importance": "important"
+   }
+  ],
+  "objectives": [
+   {
+    "id": "o1",
+    "text": "Apply the Nutrition Care Process (assessment, diagnosis, intervention, monitoring/evaluation) to synthesize anthropometric, biochemical, and dietary data into an ADIME note",
+    "factIds": [
+     "f5",
+     "f6",
+     "f7",
+     "f8",
+     "f9",
+     "f10",
+     "f11",
+     "f34"
+    ],
+    "actionIds": [
+     "a2",
+     "a3",
+     "a4",
+     "a8",
+     "a9",
+     "a10"
+    ]
+   },
+   {
+    "id": "o2",
+    "text": "Develop an accurate PES (Problem, Etiology, Signs/Symptoms) statement reflecting the link between dietary pattern and lipid abnormalities",
+    "factIds": [
+     "f7",
+     "f8",
+     "f9",
+     "f10"
+    ],
+    "actionIds": [
+     "a3",
+     "a8"
+    ]
+   },
+   {
+    "id": "o3",
+    "text": "Design evidence-based, realistic nutrition interventions tailored to shift-work schedule and food access barriers",
+    "factIds": [
+     "f6",
+     "f7",
+     "f9",
+     "f15",
+     "f19",
+     "f34"
+    ],
+    "actionIds": [
+     "a8",
+     "a15"
+    ]
+   },
+   {
+    "id": "o4",
+    "text": "Integrate medication adherence and side-effect concerns into nutrition counseling, including appropriate referral back to prescriber rather than independent medication advice",
+    "factIds": [
+     "f14",
+     "f15",
+     "f16",
+     "f17"
+    ],
+    "actionIds": [
+     "a5",
+     "a17"
+    ]
+   },
+   {
+    "id": "o5",
+    "text": "Use motivational interviewing techniques to explore the patient's values, readiness to change, and ambivalence about diet versus medication",
+    "factIds": [
+     "f20",
+     "f21",
+     "f22",
+     "f23",
+     "f28",
+     "f32"
+    ],
+    "actionIds": [
+     "a13",
+     "a14"
+    ]
+   },
+   {
+    "id": "o6",
+    "text": "Identify lifestyle and behavioral barriers (alcohol use, sedentary pattern, sleep, food cost/access) and collaboratively develop realistic, patient-centered solutions",
+    "factIds": [
+     "f9",
+     "f11",
+     "f12",
+     "f13",
+     "f27",
+     "f30"
+    ],
+    "actionIds": [
+     "a9",
+     "a10",
+     "a11",
+     "a12",
+     "a15"
+    ]
+   },
+   {
+    "id": "o7",
+    "text": "Recognize when interprofessional referral (PCP follow-up for medication side effects, repeat labs) is indicated and communicate this to the patient without overstepping scope",
+    "factIds": [
+     "f14",
+     "f16",
+     "f23"
+    ],
+    "actionIds": [
+     "a17",
+     "a18"
+    ]
+   }
+  ],
+  "patient": {
+   "name": "Omar Sinclair",
+   "age": 45,
+   "sex": "Male",
+   "pronouns": "he/him",
+   "ethnicity": "African-American",
+   "occupation": "Aircraft mechanic",
+   "language": "English",
+   "appearance": "Joining the video call from his home garage during a break between chores, still in a work polo shirt with the company logo, sitting on a folding chair with tools visible in the background; posture is relaxed but arms occasionally crossed, expression guarded but not hostile",
+   "portrait": "/portraits/omar-sinclair.jpg"
+  },
+  "persona": {
+   "personality": "Independent, skeptical, practical, resistant to being told what to do, values straightforward conversation over lectures",
+   "communicationStyle": "Direct and concise; answers questions briefly at first, opens up more with practical, non-judgmental questions; dislikes jargon and pamphlet-style advice",
+   "healthLiteracy": "low",
+   "emotionalState": "Guarded and mildly defensive at first, especially about medications; softens when conversation turns to family and practical solutions; underlying worry about his father's heart attack history that he doesn't volunteer easily",
+   "background": "Omar has worked as an aircraft mechanic for 20 years, often pulling long rotating shifts. He's married with two young kids, values being able to provide for his family, and sees himself as the reliable, self-sufficient one who doesn't need much hand-holding from doctors. On weekends he likes grilling out and watching football with his neighbors. He takes pride in being practical and getting things done efficiently, which shapes how he approaches his health - he wants solutions that fit his real life, not idealized advice.",
+   "speechExamples": [
+    "I don't really see what the big deal is, honestly.",
+    "Just give me something practical I can actually use, not some pamphlet.",
+    "Fruits and vegetables? Man, that stuff's expensive and it goes bad before you can eat it all.",
+    "My dad had his heart attack at 52. That's part of why this whole cholesterol thing worries me more than I let on.",
+    "I guess I could maybe look at eating different if it's something simple. The pills, though, I'm still not sure about those."
+   ],
+   "concerns": [
+    "Worried statin medication is causing dizziness and could be harmful long-term",
+    "Thinks healthy eating is too expensive and inconvenient for his schedule",
+    "Doesn't fully understand what his cholesterol numbers mean or why they matter",
+    "Afraid that health problems could threaten his ability to keep working full shifts",
+    "Doesn't want to be lectured or given generic advice that doesn't fit his life"
+   ]
+  },
+  "scenario": {
+   "studentBrief": "You are a dietetics student conducting an initial telehealth nutrition assessment and counseling visit with Omar Sinclair, a 45-year-old aircraft mechanic referred by his PCP for medical nutrition therapy following a new diagnosis of dyslipidemia, prediabetes, and hypertension. Review the chart before the call. Your goals are to complete a nutrition assessment, identify a nutrition diagnosis (PES statement), and begin patient-centered counseling using motivational interviewing. Omar is pragmatic and somewhat skeptical of being told what to do - build rapport before pressing on sensitive topics like alcohol use or medication adherence.",
+   "chiefComplaint": "Referral for medical nutrition therapy due to newly diagnosed dyslipidemia (elevated LDL cholesterol), with secondary diagnoses of prediabetes and hypertension.",
+   "openingLine": "Hey, yeah, I'm Omar. My doctor said my cholesterol's high and sent me to talk to you. I don't really see what the big deal is, honestly, but figured I'd hear you out.",
+   "tasks": [
+    "Conduct a thorough nutrition-focused history including meal pattern, food choices, beverages, alcohol use, and physical activity",
+    "Review and interpret relevant anthropometric and laboratory data (BMI, waist circumference, lipid panel, HbA1c, fasting glucose) in context of the diagnosis",
+    "Identify key barriers (medication side effects/adherence, cost/access, shift-work schedule, low health literacy) through patient-centered, non-judgmental questioning",
+    "Formulate a nutrition diagnosis (PES statement) and negotiate 1-2 realistic, specific dietary goals using motivational interviewing techniques",
+    "Document the encounter in ADIME format and identify when interprofessional referral back to the PCP is warranted"
+   ],
+   "timeLimitMin": 30
+  },
+  "specialty": "Dietetics / Clinical Nutrition",
+  "setting": "Telehealth video visit; patient calling from his home garage during a break, PCP referral for outpatient medical nutrition therapy",
+  "summary": "Omar Sinclair is a 45-year-old aircraft mechanic with new dyslipidemia (LDL 195, HDL 30, triglycerides 180), prediabetes, and hypertension, referred for medical nutrition therapy. He is pragmatic, skeptical of statins due to perceived dizziness, has low health literacy about cholesterol, and faces real barriers from shift-work scheduling, food access/cost, and undisclosed heavier alcohol intake. The case teaches learners to apply the Nutrition Care Process, build an accurate PES statement, use motivational interviewing to navigate ambivalence about diet versus medication, and recognize when to loop in the PCP about medication side effects rather than advising independently.",
+  "title": "Dyslipidemia and Precontemplative Medication Adherence in a 45-Year-Old Shift-Working Mechanic",
+  "professions": [
+   "dietetics"
+  ],
+  "knowledge": [],
+  "rubricId": "default",
+  "variants": []
+ }
+}

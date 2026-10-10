@@ -1,0 +1,50 @@
+[
+  {
+    "id": "medicine",
+    "name": "Medicine (MD/DO student)",
+    "group": "Physician",
+    "roleTitle": "medical student",
+    "scope": "Takes a focused or complete history, performs a physical examination, orders and interprets investigations, forms a differential diagnosis and a management plan under supervision.",
+    "encounterTypes": ["diagnostic interview", "follow-up visit", "breaking difficult news", "counseling"],
+    "actionKinds": ["exam", "vitals", "lab", "imaging", "test", "record"],
+    "noteFormat": "SOAP",
+    "wrapUp": [
+      { "id": "summary", "label": "One-line summary of the patient", "placeholder": "e.g. 59M with HFrEF presenting with early satiety and weight loss..." },
+      { "id": "assessment", "label": "Assessment and differential diagnosis (most likely first, with reasoning)" },
+      { "id": "plan", "label": "Plan: investigations, treatment, patient education, follow-up" }
+    ],
+    "rubricEmphasis": "History taking, clinical reasoning, differential diagnosis, safe management, shared decision making."
+  },
+  {
+    "id": "dietetics",
+    "name": "Dietetics / Clinical Nutrition",
+    "group": "Nutrition",
+    "roleTitle": "dietetics student",
+    "scope": "Conducts nutrition assessment (diet history, anthropometrics, labs, barriers), makes a nutrition diagnosis, and delivers patient-centred nutrition education and counselling using motivational interviewing.",
+    "encounterTypes": ["nutrition assessment", "nutrition counseling", "follow-up"],
+    "actionKinds": ["assessment", "vitals", "record", "lab"],
+    "noteFormat": "ADIME",
+    "wrapUp": [
+      { "id": "assessment", "label": "Nutrition assessment: key findings" },
+      { "id": "diagnosis", "label": "Nutrition diagnosis (PES statement)" },
+      { "id": "plan", "label": "Intervention, patient goals agreed, monitoring and evaluation" }
+    ],
+    "rubricEmphasis": "Motivational interviewing, cultural humility, plain-language education, realistic goal setting."
+  },
+  {
+    "id": "nursing",
+    "name": "Nursing (RN)",
+    "group": "Nursing",
+    "roleTitle": "nursing student",
+    "scope": "Performs a nursing assessment, monitors and interprets vital signs, identifies safety risks, provides patient education, and escalates concerns to the provider using SBAR.",
+    "encounterTypes": ["admission assessment", "focused assessment", "discharge teaching"],
+    "actionKinds": ["assessment", "vitals", "exam", "record"],
+    "noteFormat": "Nursing note + SBAR",
+    "wrapUp": [
+      { "id": "assessment", "label": "Nursing assessment: priority findings and risks" },
+      { "id": "plan", "label": "Nursing interventions and patient education provided" },
+      { "id": "sbar", "label": "SBAR to the provider (if escalation is needed)" }
+    ],
+    "rubricEmphasis": "Systematic assessment, patient safety, recognition of deterioration, therapeutic communication, escalation."
+  }
+]

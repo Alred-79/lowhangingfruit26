@@ -1,0 +1,1145 @@
+{
+ "origin": "sample",
+ "reviewed": true,
+ "profile": {
+  "version": 1,
+  "actions": [
+   {
+    "abnormal": true,
+    "aliases": [
+     "weight",
+     "current weight"
+    ],
+    "id": "a1",
+    "importance": "critical",
+    "kind": "vitals",
+    "name": "Current weight and recent change",
+    "result": "Weight 198 lbs (89.8 kg), down from 208 lbs one month ago (10 lb unintentional loss). Height 5'8\". BMI 31.2 kg/m². Waist circumference 43 in.",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "blood pressure",
+     "heart rate",
+     "vitals"
+    ],
+    "id": "a2",
+    "importance": "important",
+    "kind": "vitals",
+    "name": "Vital signs",
+    "result": "BP 158/92 mmHg, HR 78 bpm, RR 18/min, Temp 98.6°F, SpO2 96% room air.",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "a1c",
+     "diabetes labs"
+    ],
+    "id": "a3",
+    "importance": "critical",
+    "kind": "lab",
+    "name": "HbA1c",
+    "result": "8.7% (High; goal <7%).",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "glucose",
+     "blood sugar"
+    ],
+    "id": "a4",
+    "importance": "important",
+    "kind": "lab",
+    "name": "Fasting glucose",
+    "result": "165 mg/dL (High).",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "kidney function",
+     "renal panel",
+     "BUN/creatinine"
+    ],
+    "id": "a5",
+    "importance": "critical",
+    "kind": "lab",
+    "name": "Renal function panel",
+    "result": "BUN 28 mg/dL (High), Creatinine 1.6 mg/dL (High) — consistent with CKD stage 3.",
+    "artifactIds": []
+   },
+   {
+    "abnormal": false,
+    "aliases": [
+     "electrolytes",
+     "sodium potassium"
+    ],
+    "id": "a6",
+    "importance": "important",
+    "kind": "lab",
+    "name": "Electrolyte panel",
+    "result": "Sodium 136 mEq/L (low-normal), Potassium 4.1 mEq/L (normal).",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "cholesterol",
+     "lipid panel"
+    ],
+    "id": "a7",
+    "importance": "minor",
+    "kind": "lab",
+    "name": "LDL cholesterol",
+    "result": "LDL 125 mg/dL (above goal for CAD/diabetes, goal <100 mg/dL).",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "edema check",
+     "leg swelling",
+     "self exam legs"
+    ],
+    "id": "a8",
+    "importance": "important",
+    "kind": "exam",
+    "name": "Guided self-exam: lower extremity edema",
+    "result": "Patient presses on shin on camera; reports indentation stays for several seconds. Documented in chart as 2+ bilateral pitting pedal edema.",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "lung sounds",
+     "breathing exam"
+    ],
+    "id": "a9",
+    "importance": "important",
+    "kind": "record",
+    "name": "Review most recent clinic exam findings",
+    "result": "Prior note documents bilateral lung crackles at bases and heart murmur at apex; chart reviewed with patient to correlate symptoms.",
+    "artifactIds": []
+   },
+   {
+    "abnormal": false,
+    "aliases": [
+     "food diary",
+     "24 hour recall",
+     "diet history"
+    ],
+    "id": "a10",
+    "importance": "critical",
+    "kind": "assessment",
+    "name": "24-hour dietary recall / diet history",
+    "result": "Patient reports: skips breakfast most days; large lunch (often fried chicken, mac and cheese, canned soup); evening snack; soda or fruit punch with meals; eats out twice weekly with dinner club (fried, salty entrees); minimal fruit/vegetable intake; low fiber; irregular meal timing.",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "sodium intake estimate",
+     "salt intake"
+    ],
+    "id": "a11",
+    "importance": "important",
+    "kind": "assessment",
+    "name": "Estimated sodium intake pattern",
+    "result": "Based on recall, estimated intake >3000-4000 mg sodium/day from canned soups, restaurant 'special order' entrees, and processed convenience foods — well above recommended <2000 mg/day for HF/CKD.",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "fluid intake",
+     "hydration habits"
+    ],
+    "id": "a12",
+    "importance": "important",
+    "kind": "assessment",
+    "name": "Fluid intake pattern",
+    "result": "Patient reports drinking mostly soda/fruit punch at lunch, minimal water throughout day, worsened by polyuria/polydipsia from uncontrolled glucose; limited fluid tracking for HF.",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "activity level",
+     "exercise habits"
+    ],
+    "id": "a13",
+    "importance": "minor",
+    "kind": "assessment",
+    "name": "Physical activity assessment",
+    "result": "Reports sedentary pattern, mostly seated at computer; walks only short distances in home; limited by dyspnea and fatigue; previously much more active.",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "medication list review",
+     "med reconciliation"
+    ],
+    "id": "a14",
+    "importance": "critical",
+    "kind": "record",
+    "name": "Medication list review",
+    "result": "Metformin 500 mg BID with meals (inconsistent adherence, GI upset); Lisinopril 20 mg daily (adherent); Eplerenone 25 mg daily (sometimes missed, fears hypotension); OTC Ibuprofen 400 mg 2-3x/week for back pain; Melatonin 5 mg nightly; sugar-free gum. Allergies: penicillin (hives), shellfish (anaphylaxis), sulfa.",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "weight trend",
+     "weight history"
+    ],
+    "id": "a15",
+    "importance": "important",
+    "kind": "record",
+    "name": "Weight trend over past 3 months",
+    "result": "Weight trend shows gradual unintentional decline from 212 lbs to 198 lbs over 3 months despite patient's attempts to 'eat less.'",
+    "artifactIds": []
+   },
+   {
+    "abnormal": false,
+    "aliases": [
+     "skin check",
+     "hydration status exam"
+    ],
+    "id": "a16",
+    "importance": "minor",
+    "kind": "exam",
+    "name": "Guided self-exam: skin/hydration check",
+    "result": "Patient reports skin feels warm and dry; capillary refill on fingertip described as slightly slow per patient description on camera.",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "readiness to change",
+     "stage of change"
+    ],
+    "id": "a17",
+    "importance": "critical",
+    "kind": "assessment",
+    "name": "Readiness-to-change assessment",
+    "result": "Patient rates readiness to change eating habits as 3-4/10 initially; expresses ambivalence consistent with precontemplation/early contemplation stage.",
+    "artifactIds": []
+   },
+   {
+    "abnormal": true,
+    "aliases": [
+     "health literacy screen",
+     "understanding of diagnosis"
+    ],
+    "id": "a18",
+    "importance": "important",
+    "kind": "assessment",
+    "name": "Health literacy / disease understanding check",
+    "result": "Patient unable to explain the relationship between his diabetes and heart failure; refers to both as 'my sick thing'; limited understanding of how sodium affects fluid retention or how Ibuprofen affects kidneys/BP.",
+    "artifactIds": []
+   }
+  ],
+  "answerKey": {
+   "primaryProblem": "Uncontrolled Type 2 Diabetes Mellitus and Heart Failure (HFrEF, EF 40%) complicated by excessive sodium/low-fiber dietary pattern, inconsistent medication adherence, and low health literacy regarding diet-disease connections.",
+   "differential": [
+    "Nutrition diagnosis: Excessive sodium intake (NI-5.10.2) related to food preferences, limited cooking resources, and frequent restaurant/dinner-club meals, as evidenced by diet recall and labs/exam consistent with fluid overload (edema, crackles) despite low-normal serum sodium.",
+    "Nutrition diagnosis: Inadequate fiber intake (NI-5.8.5) related to reliance on processed/refined convenience foods, as evidenced by diet recall lacking fruits/vegetables/whole grains.",
+    "Nutrition diagnosis: Unintended weight loss (NC-3.2) related to chronic disease burden (HF/DM), anorexia-fatigue cycle, and possibly inadequate intake, as evidenced by 10 lb loss in 1 month and patient report of poor appetite/early satiety from fatigue.",
+    "Nutrition diagnosis: Food- and nutrition-related knowledge deficit (NB-1.1) related to limited education on the diabetes-heart failure connection and sodium/fluid management, as evidenced by patient statements conflating both conditions as 'my sick thing.'",
+    "Possible comorbidity consideration: medication-related GI upset (metformin) contributing to erratic intake and adherence, not a primary nutrition diagnosis but relevant intervention target."
+   ],
+   "keyFindings": [
+    "HbA1c 8.7% and fasting glucose 165 mg/dL indicate uncontrolled T2DM",
+    "BP 158/92 with 2+ pitting edema and crackles suggest volume overload consistent with HF decompensation risk",
+    "Unintentional 10 lb weight loss in 1 month despite perceived 'eating less' — red flag for cardiac cachexia/sarcopenia risk, not a dieting success",
+    "Creatinine 1.6 / BUN 28 reflect CKD stage 3, narrowing safe potassium/protein/fluid parameters and raising concern about NSAID (ibuprofen) use",
+    "Diet history reveals high sodium (canned soups, restaurant 'specials'), high refined carbohydrate, low fiber/fruit-vegetable intake, soda-based hydration, and irregular meal pattern (skips breakfast)",
+    "Low health literacy: patient does not understand the physiologic link between diabetes and heart failure, or why sodium/NSAIDs matter",
+    "Precontemplation/early contemplation stage of change with ambivalence ('I know I should eat better, but who cares') alongside stated fear of dying on the couch",
+    "Significant psychosocial barriers: social isolation, fixed income, dinner-club social eating pattern, fear of burdening sister, fear of hospitalization/loss of independence"
+   ],
+   "plan": [
+    "Document full ADIME note: Assessment (diet history, anthropometrics, labs, meds, psychosocial), Diagnosis (PES statements above), Intervention, Monitoring/Evaluation plan",
+    "Use motivational interviewing: open-ended questions, reflective listening, readiness-to-change scaling (1-10), explore ambivalence without confrontation",
+    "Negotiate one or two achievable, patient-chosen changes rather than prescribing a full diet overhaul (e.g., swapping one soda/day for water or diluted juice; choosing one lower-sodium 'special order' at dinner club)",
+    "Provide practical, culturally relevant lower-sodium swaps for favorite foods (seasoning blends instead of salt, rinsing canned soup, smaller portion fried chicken paired with vegetable side)",
+    "Address breakfast skipping and irregular meal timing to support glucose control and prevent large unopposed lunch intake",
+    "Discuss fluid/sodium balance in lay terms connecting swelling, breathing, and salty food without overwhelming jargon",
+    "Flag ibuprofen use to the medical team given CKD stage 3 and HF — recommend discussion of safer analgesic alternatives (e.g., topical agents, acetaminophen per renal dosing) with PCP/cardiology",
+    "Flag metformin GI side effects and inconsistent adherence to prescriber for possible dose/formulation adjustment (e.g., extended release) to improve tolerability and adherence",
+    "Recommend interprofessional referrals: diabetes educator, social worker (food resources/financial barriers), cardiology/nephrology follow-up, physical therapy for deconditioning/back pain",
+    "Set a realistic monitoring plan: follow-up telehealth visit in 2-4 weeks to reassess weight trend, readiness to change, and self-selected goal adherence",
+    "Address unintentional weight loss directly — clarify this is not a positive outcome of 'eating less,' explore appetite, energy, and intake patterns further, consider malnutrition risk screening"
+   ],
+   "redFlags": [
+    "Unintentional weight loss of 10 lbs in 1 month in a patient with HF/CKD/DM — concern for cardiac cachexia, malnutrition, or impending decompensation requiring prompt communication with medical team",
+    "2+ bilateral pitting edema plus crackles plus elevated BP — possible early heart failure decompensation; coordinate with cardiology/PCP, not solely a dietary issue",
+    "Chronic NSAID (ibuprofen) use in a patient with CKD stage 3 and HF — nephrotoxic and can worsen fluid retention/BP; needs prompt provider communication",
+    "Inconsistent adherence to metformin and eplerenone with uncontrolled glucose and hypertension — adherence/safety issue needing interprofessional follow-up",
+    "Expressed hopelessness/fatalism ('who cares') combined with fear of dying — screen for depression/psychosocial distress and consider social work/behavioral health referral"
+   ],
+   "educationPoints": [
+    "Explain in plain language how diabetes and heart failure interact: high blood sugar damages blood vessels and strains the heart, while a weakened heart struggles to manage fluid, which excess salt makes worse",
+    "Clarify that recent weight loss is not a sign of successful dieting but a warning sign given his chronic illnesses, and encourage reporting unintentional weight loss to his medical team",
+    "Teach practical lower-sodium flavoring strategies (herbs/spices, acid like lemon/vinegar, rinsing canned goods) that preserve the taste and comfort he values",
+    "Discuss simple fluid choices (water, unsweetened options) to manage thirst from high glucose without added sugar or sodium from soda/fruit punch",
+    "Normalize occasional dinner-club meals by teaching one or two lower-sodium menu strategies instead of demanding total avoidance of social eating",
+    "Educate on why NSAIDs like ibuprofen can be risky for his kidneys and heart, and that there may be safer options to discuss with his doctor",
+    "Reinforce that small, patient-chosen changes (one swap at a time) are more sustainable and respectful of autonomy than an all-or-nothing overhaul",
+    "Validate his fears about hospitalization and independence, and frame nutrition changes as tools to support his stated goals (staying out of the hospital, keeping independence, seeing family)"
+   ]
+  },
+  "artifacts": [
+   {
+    "author": "Primary Care Clinic",
+    "body": "72-year-old male with 15-year history of T2DM and HFrEF (EF 40% on last echo), referred to outpatient nutrition clinic for medical nutrition therapy due to uncontrolled HbA1c and recurrent HF-related hospitalizations. Patient has history of CABG 5 years ago, CAD, HTN, CKD stage 3. Multiple admissions in past 18 months for HF exacerbation attributed in part to dietary sodium indiscretion and medication non-adherence. Please assess diet, provide counseling, and coordinate with cardiology/endocrinology as needed.",
+    "date": "3 weeks ago",
+    "id": "d1",
+    "release": {
+     "when": "start"
+    },
+    "title": "Referral Note from Primary Care Physician",
+    "type": "note"
+   },
+   {
+    "author": "Clinic Lab Services",
+    "columns": null,
+    "date": "1 week ago",
+    "id": "d2",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Test",
+      "Result",
+      "Reference Range",
+      "Flag"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "HbA1c",
+        "8.7",
+        "<7.0 %",
+        "H"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Fasting Glucose",
+        "165",
+        "70-99 mg/dL",
+        "H"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "BUN",
+        "28",
+        "7-20 mg/dL",
+        "H"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Creatinine",
+        "1.6",
+        "0.7-1.3 mg/dL",
+        "H"
+       ],
+       "flag": "H"
+      },
+      {
+       "cells": [
+        "Sodium",
+        "136",
+        "136-145 mEq/L",
+        "L"
+       ],
+       "flag": "L"
+      },
+      {
+       "cells": [
+        "Potassium",
+        "4.1",
+        "3.5-5.0 mEq/L",
+        ""
+       ],
+       "flag": ""
+      },
+      {
+       "cells": [
+        "LDL Cholesterol",
+        "125",
+        "<100 mg/dL (CAD/DM goal)",
+        "H"
+       ],
+       "flag": "H"
+      }
+     ]
+    },
+    "title": "Laboratory Report",
+    "type": "lab_report"
+   },
+   {
+    "author": "Clinic Pharmacy",
+    "columns": null,
+    "date": "Current",
+    "id": "d3",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Medication",
+      "Dose",
+      "Frequency",
+      "Indication",
+      "Notes"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Metformin",
+        "500 mg",
+        "Twice daily with meals",
+        "Type 2 Diabetes",
+        "Patient reports nausea/upset stomach; inconsistent adherence"
+       ]
+      },
+      {
+       "cells": [
+        "Lisinopril",
+        "20 mg",
+        "Once daily, morning",
+        "Hypertension / Heart Failure",
+        "Adherent; believes it is only for blood pressure"
+       ]
+      },
+      {
+       "cells": [
+        "Eplerenone",
+        "25 mg",
+        "Once daily",
+        "Heart Failure (aldosterone antagonist)",
+        "Sometimes forgets; fears dizziness/low BP"
+       ]
+      },
+      {
+       "cells": [
+        "Ibuprofen (OTC)",
+        "400 mg",
+        "PRN, 2-3x/week",
+        "Back pain",
+        "Patient unaware of renal/cardiac risk"
+       ]
+      },
+      {
+       "cells": [
+        "Melatonin (OTC)",
+        "5 mg",
+        "Nightly",
+        "Sleep aid",
+        ""
+       ]
+      },
+      {
+       "cells": [
+        "Sugar-free gum",
+        "N/A",
+        "PRN",
+        "Oral comfort",
+        ""
+       ]
+      }
+     ]
+    },
+    "title": "Current Medication List",
+    "type": "medication_list"
+   },
+   {
+    "author": "Clinic Nursing",
+    "columns": null,
+    "date": "Today",
+    "id": "d4",
+    "release": {
+     "when": "start"
+    },
+    "table": {
+     "columns": [
+      "Vital Sign",
+      "Value"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "Blood Pressure",
+        "158/92 mmHg"
+       ]
+      },
+      {
+       "cells": [
+        "Heart Rate",
+        "78 bpm"
+       ]
+      },
+      {
+       "cells": [
+        "Respiratory Rate",
+        "18/min"
+       ]
+      },
+      {
+       "cells": [
+        "Temperature",
+        "98.6°F (37.0°C)"
+       ]
+      },
+      {
+       "cells": [
+        "SpO2",
+        "96% room air"
+       ]
+      },
+      {
+       "cells": [
+        "Weight",
+        "198 lbs"
+       ]
+      },
+      {
+       "cells": [
+        "Height",
+        "5'8\""
+       ]
+      },
+      {
+       "cells": [
+        "BMI",
+        "31.2 kg/m²"
+       ]
+      },
+      {
+       "cells": [
+        "Waist Circumference",
+        "43 in"
+       ]
+      }
+     ]
+    },
+    "title": "Vitals and Anthropometrics Flowsheet",
+    "type": "flowsheet"
+   },
+   {
+    "author": "Clinic Records",
+    "chart": {
+     "invertY": false,
+     "kind": "line",
+     "refHigh": null,
+     "refLow": null,
+     "series": [
+      {
+       "name": "Weight (lbs)",
+       "points": [
+        {
+         "x": "3 months ago",
+         "y": 212
+        },
+        {
+         "x": "2 months ago",
+         "y": 210
+        },
+        {
+         "x": "1 month ago",
+         "y": 208
+        },
+        {
+         "x": "Today",
+         "y": 198
+        }
+       ]
+      }
+     ],
+     "xLabel": "Time",
+     "yLabel": "Weight (lbs)"
+    },
+    "date": "Today",
+    "id": "d5",
+    "release": {
+     "when": "start"
+    },
+    "title": "Weight Trend (Past 3 Months)",
+    "type": "chart"
+   },
+   {
+    "author": "Cardiology Clinic",
+    "body": "Echocardiogram performed 2 months ago shows left ventricular ejection fraction 40%, consistent with HFrEF. Mild-moderate mitral regurgitation noted (correlates with apical murmur on exam). No significant change from prior study. Clinical exam at that visit noted bilateral basilar crackles and 2+ bilateral pitting pedal edema. Continue current heart failure regimen; reinforce sodium and fluid education.",
+    "date": "2 months ago",
+    "id": "d6",
+    "release": {
+     "when": "start"
+    },
+    "title": "Cardiology Follow-up Note",
+    "type": "note"
+   }
+  ],
+  "chartAtStart": [
+   {
+    "label": "Reason for visit",
+    "value": "Outpatient nutrition assessment and counseling for uncontrolled Type 2 Diabetes and Heart Failure, referred by PCP"
+   },
+   {
+    "label": "Problem list",
+    "value": "Type 2 Diabetes Mellitus (uncontrolled); Heart Failure with reduced ejection fraction (EF 40%); Hypertension; Chronic Kidney Disease Stage 3; Coronary Artery Disease (post-CABG)"
+   },
+   {
+    "label": "Medications",
+    "value": "Metformin 500 mg BID; Lisinopril 20 mg daily; Eplerenone 25 mg daily; Ibuprofen 400 mg PRN; Melatonin 5 mg nightly"
+   },
+   {
+    "label": "Allergies",
+    "value": "Penicillin (hives); Shellfish (anaphylaxis); Sulfa drugs"
+   },
+   {
+    "label": "Last vitals",
+    "value": "BP 158/92 mmHg, HR 78 bpm, Weight 198 lbs, BMI 31.2 kg/m²"
+   },
+   {
+    "label": "Care team",
+    "value": "PCP, Cardiology, Nutrition (referral in progress for Endocrinology, Nephrology, Social Work)"
+   },
+   {
+    "label": "Code status",
+    "value": "Full code"
+   }
+  ],
+  "difficulty": 4,
+  "encounterType": "Nutrition assessment and counseling (initial outpatient telehealth visit)",
+  "facts": [
+   {
+    "category": "chief_complaint",
+    "chart": "Patient states he was referred by his PCP for diet counseling related to diabetes and heart failure; expresses skepticism about need for visit.",
+    "distractor": false,
+    "id": "f1",
+    "importance": "important",
+    "says": "Doc sent me here. Says I need to talk about my diet. I don't know what you kids are gonna tell me I don't already know.",
+    "tier": "initial",
+    "topic": "reason for referral"
+   },
+   {
+    "category": "medications",
+    "chart": "Reports metformin causes nausea and GI upset, leading to inconsistent adherence.",
+    "distractor": false,
+    "id": "f2",
+    "importance": "critical",
+    "says": "Those metformin pills make me feel like I'm gonna throw up half the time. I skip 'em when I feel bad.",
+    "tier": "initial",
+    "topic": "medication side effects"
+   },
+   {
+    "category": "psychosocial",
+    "chart": "Patient expresses frustration about being treated as incapable due to age; sensitive to feeling patronized.",
+    "distractor": false,
+    "id": "f3",
+    "importance": "important",
+    "says": "You look like a kid. Do I need to fill out some form for this diet thing, or are you gonna actually talk to me?",
+    "tier": "initial",
+    "topic": "attitude toward visit"
+   },
+   {
+    "category": "hpi",
+    "chart": "Reports chronic fatigue and shortness of breath with minimal exertion.",
+    "distractor": false,
+    "id": "f4",
+    "importance": "important",
+    "says": "I get tired just walking to the mailbox. Can't hardly breathe some days.",
+    "tier": "initial",
+    "topic": "energy and breathing"
+   },
+   {
+    "category": "hpi",
+    "chart": "Reports bilateral leg swelling, worse by end of day.",
+    "distractor": false,
+    "id": "f5",
+    "importance": "important",
+    "says": "My legs puff up like balloons by the time I go to bed.",
+    "tier": "discoverable",
+    "topic": "leg swelling"
+   },
+   {
+    "category": "hpi",
+    "chart": "Reports polyuria and polydipsia with frequent nighttime urination disrupting sleep.",
+    "distractor": false,
+    "id": "f6",
+    "importance": "important",
+    "says": "I'm up three, four times a night going to the bathroom. Can't get a good night's sleep.",
+    "tier": "discoverable",
+    "topic": "nighttime urination"
+   },
+   {
+    "category": "nutrition",
+    "chart": "Reports skipping breakfast most days and eating largest meal at lunch.",
+    "distractor": false,
+    "id": "f7",
+    "importance": "important",
+    "says": "I don't really do breakfast unless there's bread around. Lunch is my big meal.",
+    "tier": "discoverable",
+    "topic": "meal timing"
+   },
+   {
+    "category": "nutrition",
+    "chart": "Reports eating out twice weekly with a social 'dinner club' at a local chain restaurant known for fried, salty food.",
+    "distractor": false,
+    "id": "f8",
+    "importance": "critical",
+    "says": "Me and my buddies go out Tuesdays and Fridays. It's the one thing I look forward to all week.",
+    "tier": "discoverable",
+    "topic": "eating out habits"
+   },
+   {
+    "category": "nutrition",
+    "chart": "Reports ordering 'special' versions of menu items that end up higher in sodium (extra sauce, gravy, etc.).",
+    "distractor": false,
+    "id": "f9",
+    "importance": "important",
+    "says": "I always get it my way - extra gravy, extra sauce. That's how I like it.",
+    "tier": "discoverable",
+    "topic": "restaurant ordering habits"
+   },
+   {
+    "category": "nutrition",
+    "chart": "Relies on canned soups, instant mac and cheese, and leftovers at home due to lack of cooking support.",
+    "distractor": false,
+    "id": "f10",
+    "importance": "critical",
+    "says": "I live alone. Nobody's cooking for me. I open a can of soup or make the instant mac and cheese most nights.",
+    "tier": "discoverable",
+    "topic": "home meal preparation"
+   },
+   {
+    "category": "nutrition",
+    "chart": "Drinks soda or fruit punch with meals, avoids plain water, despite excessive thirst from hyperglycemia.",
+    "distractor": false,
+    "id": "f11",
+    "importance": "critical",
+    "says": "Water's boring. I like my soda or some fruit punch with my food.",
+    "tier": "discoverable",
+    "topic": "beverage choices"
+   },
+   {
+    "category": "nutrition",
+    "chart": "States preference for fried foods, heavy sauces, mac and cheese, and fried chicken; dislikes bitter vegetables.",
+    "distractor": false,
+    "id": "f12",
+    "importance": "important",
+    "says": "Give me fried chicken and some good mac and cheese and I'm happy. Can't stand them bitter greens though.",
+    "tier": "initial",
+    "topic": "food preferences"
+   },
+   {
+    "category": "function",
+    "chart": "Reports difficulty getting up in the morning and getting to the grocery store due to fatigue.",
+    "distractor": false,
+    "id": "f13",
+    "importance": "important",
+    "says": "Some mornings I just can't get myself moving to go to the store. By the time I feel okay, it's afternoon.",
+    "tier": "discoverable",
+    "topic": "grocery shopping difficulty"
+   },
+   {
+    "category": "function",
+    "chart": "Reports sedentary lifestyle, limited to walking around the house, due to shortness of breath and fatigue; feels frustrated about decreased activity compared to his past.",
+    "distractor": false,
+    "id": "f14",
+    "importance": "minor",
+    "says": "I used to be on my feet all day at work. Now I can barely make it around my own living room without getting winded.",
+    "tier": "discoverable",
+    "topic": "physical activity"
+   },
+   {
+    "category": "psychosocial",
+    "chart": "Patient believes healthy eating guidelines are for 'young, healthy, rich' people and that food is about comfort, not calories.",
+    "distractor": false,
+    "id": "f15",
+    "importance": "important",
+    "says": "That healthy eating stuff is for young folks with money. Food's supposed to make you feel good, not count numbers.",
+    "tier": "discoverable",
+    "topic": "beliefs about healthy eating"
+   },
+   {
+    "category": "psychosocial",
+    "chart": "Patient conflates his diabetes and heart failure as a single condition, lacking understanding of the distinct disease processes and their interaction.",
+    "distractor": false,
+    "id": "f16",
+    "importance": "critical",
+    "says": "It's all the same sick thing to me. Sugar, heart, whatever - it's all just my condition.",
+    "tier": "discoverable",
+    "topic": "understanding of diagnoses"
+   },
+   {
+    "category": "psychosocial",
+    "chart": "Patient expresses distrust that medical recommendations are financially motivated.",
+    "distractor": false,
+    "id": "f17",
+    "importance": "minor",
+    "says": "Half the time I think the doctors just want to keep sending me back so they can bill somebody.",
+    "tier": "discoverable",
+    "topic": "trust in healthcare system"
+   },
+   {
+    "category": "medications",
+    "chart": "Believes lisinopril is only for blood pressure, not aware of its role in heart failure management.",
+    "distractor": false,
+    "id": "f18",
+    "importance": "important",
+    "says": "That lisinopril one, that's just for my pressure, right? Got nothing to do with my sugar or my heart failure.",
+    "tier": "discoverable",
+    "topic": "medication purpose understanding"
+   },
+   {
+    "category": "medications",
+    "chart": "Sometimes forgets eplerenone; worries about dizziness and fainting from blood pressure medications.",
+    "distractor": false,
+    "id": "f19",
+    "importance": "important",
+    "says": "That water pill, I forget it sometimes. Makes me scared I'll get dizzy and fall.",
+    "tier": "discoverable",
+    "topic": "diuretic adherence"
+   },
+   {
+    "category": "medications",
+    "chart": "Takes OTC ibuprofen 400mg 2-3 times weekly for chronic back/joint pain; unaware of renal and cardiac risks.",
+    "distractor": false,
+    "id": "f20",
+    "importance": "critical",
+    "says": "I take Advil for my back, maybe two three times a week. Why, is that bad?",
+    "tier": "discoverable",
+    "topic": "back pain management"
+   },
+   {
+    "category": "ros",
+    "chart": "Reports joint soreness and stiffness, uses OTC ibuprofen for relief.",
+    "distractor": true,
+    "id": "f21",
+    "importance": "minor",
+    "says": "My knees and back get real stiff, especially in the morning.",
+    "tier": "initial",
+    "topic": "joint pain"
+   },
+   {
+    "category": "substance",
+    "chart": "Drinks 1-2 small cups of beer nightly while watching TV; never smoked.",
+    "distractor": false,
+    "id": "f22",
+    "importance": "minor",
+    "says": "I'll have a cup or two of beer at night with my shows. Never smoked a day in my life though.",
+    "tier": "discoverable",
+    "topic": "alcohol use"
+   },
+   {
+    "category": "hpi",
+    "chart": "Reports unintentional 10 lb weight loss over the past month despite attempts to 'eat less.'",
+    "distractor": false,
+    "id": "f23",
+    "importance": "critical",
+    "says": "I been trying to eat less like they tell me, and I lost ten pounds this month. Guess that's good, right?",
+    "tier": "initial",
+    "topic": "recent weight change"
+   },
+   {
+    "category": "psychosocial",
+    "chart": "Patient's primary goals are avoiding hospitalization, maintaining independence, and continuing to enjoy favorite foods without getting sick.",
+    "distractor": false,
+    "id": "f24",
+    "importance": "critical",
+    "says": "I just don't want to end up back in that hospital bed. And I don't want somebody telling me I can't eat what I like no more.",
+    "tier": "initial",
+    "topic": "personal goals"
+   },
+   {
+    "category": "psychosocial",
+    "chart": "Reveals fear of dying and of being a burden on his sister, who lives across the country.",
+    "distractor": false,
+    "id": "f25",
+    "importance": "critical",
+    "says": "My sister's way across the country. I don't want her flying out here every time something goes wrong with me. I don't want to be a burden. And... I don't want to die, either.",
+    "tier": "reluctant",
+    "topic": "fears about future"
+   },
+   {
+    "category": "psychosocial",
+    "chart": "Feels guilty about not taking better care of himself, worries he has disappointed his late wife and children's memory of him.",
+    "distractor": false,
+    "id": "f26",
+    "importance": "important",
+    "says": "My wife, rest her soul, she always kept after me about my eating. I feel like I let her down. Let my kids down too, I guess.",
+    "tier": "reluctant",
+    "topic": "feelings about family"
+   },
+   {
+    "category": "social",
+    "chart": "Lives alone in a two-bedroom apartment; limited in-person social contact aside from online friend group and twice-weekly dinner club.",
+    "distractor": false,
+    "id": "f27",
+    "importance": "important",
+    "says": "It's just me in this apartment. I talk to my old work buddies online sometimes, but it's not the same as having somebody here.",
+    "tier": "discoverable",
+    "topic": "living situation and support"
+   },
+   {
+    "category": "other",
+    "chart": "Has significant savings in checking account but is reluctant to spend it on food or care, fearing financial waste or needing it later.",
+    "distractor": false,
+    "id": "f28",
+    "importance": "minor",
+    "says": "I got some money put away. Just... I don't like spending it. Never know what you might need it for.",
+    "tier": "hidden",
+    "topic": "financial resources"
+   },
+   {
+    "category": "other",
+    "chart": "Worked as a janitor for over 30 years before retiring; reflects on identity and fears about his future health limiting him further.",
+    "distractor": true,
+    "id": "f29",
+    "importance": "minor",
+    "says": "Thirty-some years I mopped them floors. Kept that building spotless. Now I can't even keep my own place up the way I'd like.",
+    "tier": "hidden",
+    "topic": "work history and identity"
+   },
+   {
+    "category": "goals",
+    "chart": "Patient rates importance of changing eating habits as moderate but expresses ambivalence characteristic of early contemplation stage.",
+    "distractor": false,
+    "id": "f30",
+    "importance": "critical",
+    "says": "I know I probably should eat better. But some days I think, who cares? Then other days I think, I don't want to die on the couch either.",
+    "tier": "discoverable",
+    "topic": "motivation to change"
+   },
+   {
+    "category": "allergies",
+    "chart": "Allergic to penicillin (hives), shellfish (anaphylaxis), and sulfa drugs.",
+    "distractor": true,
+    "id": "f31",
+    "importance": "minor",
+    "says": "I can't have penicillin, shellfish, or them sulfa drugs - learned that the hard way.",
+    "tier": "initial",
+    "topic": "allergies"
+   },
+   {
+    "category": "adherence",
+    "chart": "Expresses general resistance to formal 'care plans,' preferring to manage things himself.",
+    "distractor": false,
+    "id": "f32",
+    "importance": "important",
+    "says": "I don't need some fancy care plan. I just need to eat less, that's all there is to it.",
+    "tier": "initial",
+    "topic": "attitude toward care planning"
+   },
+   {
+    "category": "nutrition",
+    "chart": "Uses sugar-free gum occasionally; not a significant nutrition factor but patient mentions it when discussing habits.",
+    "distractor": true,
+    "id": "f33",
+    "importance": "minor",
+    "says": "I chew that sugar-free gum sometimes, helps with my mouth being dry.",
+    "tier": "initial",
+    "topic": "oral habits"
+   },
+   {
+    "category": "function",
+    "chart": "Reports joint stiffness worsens his reluctance to prepare meals or shop, compounding dietary barriers.",
+    "distractor": false,
+    "id": "f34",
+    "importance": "minor",
+    "says": "Between my back and my breathing, cooking just feels like too much some days.",
+    "tier": "discoverable",
+    "topic": "barriers to meal preparation"
+   },
+   {
+    "category": "nutrition",
+    "chart": "Reports no known food allergies affecting diet pattern aside from shellfish avoidance already noted; eats variety of meats otherwise.",
+    "distractor": true,
+    "id": "f35",
+    "importance": "minor",
+    "says": "Outside of the shellfish thing, I'll eat just about any meat you put in front of me.",
+    "tier": "discoverable",
+    "topic": "food variety"
+   }
+  ],
+  "objectives": [
+   {
+    "actionIds": [
+     "a1",
+     "a2",
+     "a3",
+     "a4",
+     "a5",
+     "a6",
+     "a7",
+     "a10",
+     "a14"
+    ],
+    "factIds": [
+     "f2",
+     "f8",
+     "f10",
+     "f11",
+     "f20",
+     "f23"
+    ],
+    "id": "o1",
+    "text": "Apply the Nutrition Care Process by systematically gathering anthropometric, biochemical, clinical, and dietary data to identify the patient's nutrition-related problems."
+   },
+   {
+    "actionIds": [
+     "a3",
+     "a5",
+     "a10",
+     "a11",
+     "a17"
+    ],
+    "factIds": [
+     "f8",
+     "f9",
+     "f10",
+     "f11",
+     "f23"
+    ],
+    "id": "o2",
+    "text": "Develop at least one accurate PES statement linking the nutrition diagnosis, etiology, and signs/symptoms using lab, anthropometric, and dietary recall evidence."
+   },
+   {
+    "actionIds": [
+     "a10",
+     "a11",
+     "a12",
+     "a13"
+    ],
+    "factIds": [
+     "f7",
+     "f8",
+     "f9",
+     "f10",
+     "f11",
+     "f12",
+     "f13",
+     "f34"
+    ],
+    "id": "o3",
+    "text": "Design patient-centered, evidence-based nutrition interventions addressing sodium reduction, fiber intake, hydration choices, and meal timing while respecting the patient's food preferences and social eating patterns."
+   },
+   {
+    "actionIds": [
+     "a14",
+     "a5"
+    ],
+    "factIds": [
+     "f2",
+     "f18",
+     "f19",
+     "f20"
+    ],
+    "id": "o4",
+    "text": "Integrate medication management considerations into nutrition counseling, including recognizing GI side effects of metformin, misunderstanding of lisinopril's role, diuretic adherence fears, and the renal/cardiac risk of frequent OTC ibuprofen use."
+   },
+   {
+    "actionIds": [
+     "a17",
+     "a18"
+    ],
+    "factIds": [
+     "f24",
+     "f25",
+     "f26",
+     "f30",
+     "f32"
+    ],
+    "id": "o5",
+    "text": "Apply motivational interviewing techniques (open-ended questions, reflective listening, readiness-to-change scaling) to explore the patient's ambivalence, uncover underlying fears, and support autonomy without confrontation."
+   },
+   {
+    "actionIds": [
+     "a10",
+     "a13",
+     "a18"
+    ],
+    "factIds": [
+     "f8",
+     "f13",
+     "f15",
+     "f16",
+     "f17",
+     "f27",
+     "f28"
+    ],
+    "id": "o6",
+    "text": "Identify lifestyle, financial, social, and health-literacy barriers to dietary change and propose appropriate interprofessional referrals (social work, diabetes education, PT, cardiology/nephrology coordination)."
+   }
+  ],
+  "patient": {
+   "name": "Walter Greene",
+   "age": 72,
+   "sex": "Male",
+   "pronouns": "he/him",
+   "ethnicity": "African-American",
+   "occupation": "Retired janitor",
+   "language": "English",
+   "appearance": "Seated in a recliner in a modestly furnished living room, visible on a tablet propped on a side table. Wears a loose t-shirt; bilateral ankle swelling visible when he shifts in the chair. Appears tired but alert, with an expressive face that shifts quickly between sarcastic smirks and moments of guarded seriousness.",
+   "portrait": "/portraits/walter-greene.jpg"
+  },
+  "persona": {
+   "personality": "Cynical, sarcastic, and fiercely independent. Uses humor and grumpiness to mask anxiety and fear. Dislikes being pitied or treated as incapable because of his age.",
+   "communicationStyle": "Direct, dismissive, and talkative at first, often testing the student with jabs about their age or inexperience. Dominates conversation with 'shop talk' and tangents, but softens and opens up when he feels genuinely heard and respected.",
+   "healthLiteracy": "low",
+   "emotionalState": "Guarded and defensive on the surface, with underlying fear and sadness about his declining health, loss of independence, and isolation from family.",
+   "background": "Worked as a janitor for over 30 years, took pride in keeping his building spotless. Widowed; his wife used to manage his diet and health reminders. Lives alone in a two-bedroom apartment. Has an online friend group of retired coworkers and a twice-weekly 'dinner club' with local friends that is his main source of joy and social connection.",
+   "speechExamples": [
+    "You look like a kid. Do I need to fill out some form for this diet thing?",
+    "I take all these pills, they make me feel dumb and nauseous.",
+    "I don't need some fancy care plan. I just need to eat less, that's all there is to it.",
+    "Everyone I know eats out at my dinner club. How am I supposed to eat on some low-salt diet there?",
+    "I don't want to die on the couch, but some days... who cares?"
+   ],
+   "concerns": [
+    "Going back to the hospital",
+    "Being a burden on his sister",
+    "Losing his independence",
+    "Medication side effects like nausea and dizziness",
+    "Losing weight when he thought he was doing the 'right thing'",
+    "Not being able to enjoy food or go out with friends anymore"
+   ]
+  },
+  "scenario": {
+   "studentBrief": "You are a dietetics student conducting a telehealth nutrition assessment for Walter Greene, a 72-year-old man with uncontrolled Type 2 Diabetes and heart failure (EF 40%), referred by his PCP for medical nutrition therapy. He is known to be a 'frequent flier' with prior hospitalizations and has a history of nonadherence to dietary recommendations. He may be guarded or sarcastic at first. Your task is to complete a nutrition assessment, identify nutrition diagnoses, and begin patient-centered counseling using motivational interviewing.",
+   "chiefComplaint": "Referral for medical nutrition therapy due to uncontrolled Type 2 Diabetes and recurrent heart failure exacerbations related to dietary nonadherence.",
+   "openingLine": "Doc sent me here, says I gotta talk about my diet. I take all these pills already, they make me feel dumb and nauseous half the time. So what, you got a form for me to fill out or something?",
+   "tasks": [
+    "Conduct a complete nutrition-focused assessment including diet history, anthropometrics, relevant labs, and medication-nutrition interactions.",
+    "Identify and articulate at least one accurate PES (Problem, Etiology, Signs/Symptoms) statement based on gathered data.",
+    "Use motivational interviewing techniques to explore the patient's readiness to change and uncover underlying fears or barriers.",
+    "Develop a patient-centered, culturally sensitive nutrition intervention plan that respects the patient's food preferences and social eating patterns.",
+    "Identify at least two appropriate interprofessional referrals and discuss care coordination needs."
+   ],
+   "timeLimitMin": 30
+  },
+  "setting": "Telehealth video visit; patient at home in his two-bedroom apartment, seated in his recliner using a tablet",
+  "specialty": "Dietetics / Clinical Nutrition",
+  "summary": "A 72-year-old retired janitor with 15-year history of uncontrolled Type 2 Diabetes, heart failure (HFrEF, EF 40%), CKD stage 3, and recurrent hospitalizations presents for outpatient telehealth nutrition counseling after PCP referral. The case challenges students to perform a complete nutrition assessment, formulate accurate PES statements, and apply motivational interviewing with a guarded, sarcastic but ultimately engageable patient who has significant social, financial, and health-literacy barriers to dietary change.",
+  "title": "Uncontrolled Diabetes and Heart Failure: Nutrition Counseling for a Reluctant 'Frequent Flier'",
+  "professions": [
+   "dietetics"
+  ],
+  "knowledge": [],
+  "rubricId": "default",
+  "variants": []
+ }
+}
