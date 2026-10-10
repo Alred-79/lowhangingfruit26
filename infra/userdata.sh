@@ -28,7 +28,7 @@ CUR=$(cat /opt/rounds/current.sha 2>/dev/null || true)
 echo "=== $(date -u) deploying $SHA"
 DIR=/opt/rounds/releases/$SHA
 rm -rf $DIR && git clone -q --depth 1 $REPO $DIR && cd $DIR
-if npm ci --no-audit --no-fund && GIT_SHA=$SHA npm run build; then
+if nice -n 19 npm ci --no-audit --no-fund && GIT_SHA=$SHA nice -n 19 npm run build; then
   echo "GIT_SHA=$SHA" > /opt/rounds/release.env
   ln -sfn $DIR /opt/rounds/current
   systemctl restart rounds
