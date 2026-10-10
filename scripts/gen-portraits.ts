@@ -30,19 +30,32 @@ function ageWords(age: number): string {
   return `a ${age}-year-old`;
 }
 
+/** The model draws people much older than the stated age unless told otherwise. */
+function ageHint(age: number): { text: string; negative: string } {
+  if (age < 13) return { text: "", negative: "" };
+  if (age < 30) return { text: "Youthful face, smooth skin.", negative: "middle-aged, elderly, wrinkles, grey hair, " };
+  if (age < 45) return { text: `Looks ${age}, not older: smooth skin, no grey hair.`, negative: "elderly, old, wrinkles, grey hair, white hair, " };
+  if (age < 62) return { text: `Looks ${age}, not older: middle-aged, healthy skin with only faint lines, hair mostly its natural colour.`, negative: "elderly, very old, deep wrinkles, white hair, frail, " };
+  if (age < 76) return { text: `Looks ${age}, not older: an active person in later middle age, moderate lines only.`, negative: "very old, ninety years old, deep wrinkles, frail, gaunt, " };
+  return { text: "", negative: "" };
+}
+
 /** Cases where a parent speaks for a small child: show the parent with the child. */
-function promptFor(c: CaseProfile): string {
+export function promptFor(c: CaseProfile): string {
   const p = c.patient;
   const sex = /^f|woman|girl/i.test(p.sex) ? (p.age < 18 ? "girl" : "woman") : /^m|man|boy/i.test(p.sex) ? (p.age < 18 ? "boy" : "man") : "person";
   const subject = p.age < 10 ? `a parent sitting with ${ageWords(p.age)} ${sex} (${p.ethnicity})` : `${ageWords(p.age)} ${p.ethnicity} ${sex}`;
+  // Keep only the first two sentences of the description: later ones tend to describe behaviour, not looks.
+  const looks = p.appearance.split(/(?<=[.!?])\s+/).slice(0, 2).join(" ");
   return [
-    `Candid photograph, laptop webcam view of ${subject} on a video call at home, head and shoulders, facing the camera, neutral calm expression.`,
-    p.appearance,
-    "Ordinary everyday clothing, real skin texture, natural window light, slightly soft webcam focus, plain lived-in home background. Photorealistic, documentary style, unposed.",
+    `Front-facing head-and-shoulders portrait photograph of ${subject}, centred, eyes looking straight into the lens, neutral calm expression, mouth closed.`,
+    ageHint(p.age).text,
+    looks,
+    "Seen exactly as the other person on a video visit would see them: the camera itself, any laptop, phone or screen is out of frame. Ordinary everyday clothing, real skin texture, soft natural window light, plain lived-in home interior softly out of focus behind. Photorealistic, 50mm lens, documentary style, unposed.",
   ].join(" ");
 }
 
-const NEGATIVE = "text, caption, watermark, logo, user interface, video call overlay, frame, border, cartoon, illustration, 3d render, painting, airbrushed skin, glamour, studio lighting, hospital, medical equipment, stethoscope, white coat, blood, wound, injury, bandage, distorted face, extra fingers, deformed hands, multiple people, nudity";
+const NEGATIVE = "laptop, computer, phone, screen, brand logo, side view, profile view, looking away, text, caption, watermark, logo, user interface, video call overlay, frame, border, cartoon, illustration, 3d render, painting, airbrushed skin, glamour, studio lighting, hospital, medical equipment, stethoscope, white coat, blood, wound, injury, bandage, distorted face, extra fingers, deformed hands, multiple people, nudity";
 
 async function one(file: string): Promise<string> {
   const full = path.join(caseDir, file);
@@ -60,7 +73,7 @@ async function one(file: string): Promise<string> {
         modelId: MODEL,
         contentType: "application/json",
         accept: "application/json",
-        body: JSON.stringify({ prompt, negative_prompt: NEGATIVE, mode: "text-to-image", aspect_ratio: "1:1", output_format: "png" }),
+        body: JSON.stringify({ prompt, negative_prompt: ageHint(data.profile.patient.age).negative + NEGATIVE, mode: "text-to-image", aspect_ratio: "2:3", output_format: "png" }),
       }),
     );
     const out = JSON.parse(new TextDecoder().decode(res.body)) as { images?: string[]; finish_reasons?: (string | null)[] };

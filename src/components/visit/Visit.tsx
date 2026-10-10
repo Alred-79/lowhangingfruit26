@@ -140,6 +140,12 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
   const elapsed = data ? Math.floor((now - new Date(data.startedAt.replace(" ", "T") + "Z").getTime()) / 1000) : 0;
   const remaining = data?.timeLimitMin ? data.timeLimitMin * 60 - elapsed : null;
 
+  // When the clock runs out, open the write-up; the student can still go back for a closing sentence.
+  const timeUp = remaining !== null && remaining <= 0;
+  useEffect(() => {
+    if (timeUp && joined && !ended) setWrapOpen(true);
+  }, [timeUp, joined, ended]);
+
   // Speech is synthesised sentence by sentence so the patient starts talking while the reply is still arriving.
   const voice = useRef<{ gen: number; queue: Promise<string | null>[]; playing: boolean }>({ gen: 0, queue: [], playing: false });
   function stopVoice() {
@@ -609,7 +615,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
               </div>
             ) : (
               <>
-                <h2 className="text-lg font-semibold text-slate-900">End the visit and write up</h2>
+                <h2 className="text-lg font-semibold text-slate-900">{timeUp ? "Time is up. Write up the visit" : "End the visit and write up"}</h2>
                 <p className="mt-1 text-sm text-slate-600">
                   {data.role.noteFormat} for {p.name}. Your write-up is assessed along with the conversation. Before you leave: did you summarise, check understanding and agree next steps with {firstName}?
                 </p>

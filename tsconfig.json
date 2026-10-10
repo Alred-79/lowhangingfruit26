@@ -40,7 +40,11 @@
     ".next-studio/types/**/*.ts",
     ".next-studio/dev/types/**/*.ts",
     ".next-buildcheck/types/**/*.ts",
-    ".next-buildcheck/dev/types/**/*.ts"
+    ".next-buildcheck/dev/types/**/*.ts",
+    ".next-courses/types/**/*.ts",
+    ".next-courses/dev/types/**/*.ts",
+    ".next-journeys/types/**/*.ts",
+    ".next-journeys/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

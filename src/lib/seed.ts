@@ -49,5 +49,16 @@ export function seed() {
     if (get("SELECT 1 FROM users WHERE email = ?", d.email)) continue;
     run("INSERT INTO users (id, email, password_hash, name, role, profession_id) VALUES (?,?,?,?,?,?)", newId("u_"), d.email, bcrypt.hashSync(DEMO_PASSWORD, 10), d.name, d.role, d.profession);
   }
+  // ===== Care Journeys (Challenge 2): ready-made published journeys. Idempotent. =====
+  try {
+    const n = seedJourneys();
+    if (n) console.log(`[seed] loaded ${n} care journeys`);
+  } catch (e) {
+    console.error("[seed] care journeys skipped", e);
+  }
+  // ===== end Care Journeys =====
   return added;
 }
+
+// Care Journeys seed loader (import kept beside its block; ES imports are hoisted).
+import { seedJourneys } from "./journey/seedJourneys";

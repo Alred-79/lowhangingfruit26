@@ -289,3 +289,52 @@ ${compactCase(p)}`,
   if (!v.persona && !v.factOverrides && !v.actionOverrides) throw new Error("The draft came back empty. Try again, or add a note saying what should differ.");
   return v;
 }
+
+// ---------- Header repair ----------
+
+/**
+ * The large generation call occasionally returns the lists but omits the short header fields
+ * (title, summary, specialty, setting, encounter type). This writes any that are missing from the
+ * finished case, so a draft never arrives untitled. Fields that are present are left alone.
+ */
+export async function fillHeader(p: CaseProfile, level?: number): Promise<CaseProfile> {
+  const missing = (["title", "summary", "specialty", "setting", "encounterType"] as const).filter((k) => !String(p[k] || "").trim());
+  if (!missing.length) return p;
+  const role = profession(p.professions[0]);
+  try {
+    const raw = await chatJSON<Record<string, string | number>>({
+      model: MODELS.chat,
+      maxTokens: 700,
+      temperature: 0.2,
+      system: "You label simulated patient cases for a faculty case library. Be specific and plain. Do not use the patient's name in the title.",
+      schema: {
+        type: "object",
+        required: ["title", "summary", "specialty", "setting", "encounterType", "difficulty"],
+        properties: {
+          title: { type: "string", description: "Faculty-facing title, e.g. 'New-onset exertional chest pain in a 58-year-old smoker'" },
+          summary: { type: "string", description: "2-3 sentence faculty-facing summary of the case and what it teaches" },
+          specialty: { type: "string" },
+          setting: { type: "string", description: "Always a telehealth video visit; say where the patient is calling from" },
+          encounterType: { type: "string", description: `One of: ${role.encounterTypes.join(", ")}, or a similar short phrase` },
+          difficulty: { type: "integer", minimum: 1, maximum: 5 },
+        },
+      },
+      messages: [
+        {
+          role: "user",
+          text: `LEARNER ROLE: ${role.name}\nPATIENT: ${JSON.stringify(p.patient)}\nSCENARIO: ${JSON.stringify(p.scenario)}\nANSWER KEY: ${JSON.stringify(p.answerKey)}\nOBJECTIVES: ${p.objectives.map((o) => o.text).join("; ")}\nSENSITIVE FACTS: ${p.facts.filter((f) => f.tier === "reluctant" || f.tier === "hidden").map((f) => f.chart).join("; ")}`,
+        },
+      ],
+    });
+    const out = { ...p };
+    for (const k of missing) if (typeof raw[k] === "string" && raw[k]) out[k] = raw[k] as string;
+    if (!level && Number(raw.difficulty) >= 1) out.difficulty = Math.max(1, Math.min(5, Math.round(Number(raw.difficulty))));
+    return out;
+  } catch (e) {
+    console.error("[studio] header repair failed", e);
+    const out = { ...p };
+    if (!out.title.trim()) out.title = `${p.scenario.chiefComplaint || "New patient"} - ${p.patient.name}, ${p.patient.age}`;
+    if (!out.setting.trim()) out.setting = "Telehealth video visit";
+    return out;
+  }
+}

@@ -44,7 +44,7 @@ const schema = {
     liveAssist: { type: "boolean" },
     feedbackRelease: { type: "string", enum: ["immediate", "manual"] },
     settingsReason: { type: "string", description: "1-2 sentences covering the time limit, hints, attempts, patient variation, live assist and feedback release choices" },
-    gaps: { type: "string", description: "What the instructor asked for that the listed patients do not cover, or an empty string" },
+    gaps: { type: "string", description: "Only when something the instructor asked for cannot be met by the listed patients: one or two sentences naming what is missing. Otherwise an empty string. Do not restate your choices here." },
   },
 };
 

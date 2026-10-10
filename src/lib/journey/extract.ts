@@ -82,7 +82,7 @@ export interface StageExtraction {
  * disclosure ledger; clinician contributions are model-extracted and each quote is checked against
  * the transcript or note before the entry is kept.
  */
-export async function extractStage(run: LoadedRun, stage: Stage, encounterId: string, note: string, declaredUses: { turn: number; entryIds: string[]; quote: string }[] = []): Promise<StageExtraction> {
+export async function extractStage(run: LoadedRun, stage: Stage, encounterId: string, note: string, declaredUses: { turn: number; entryIds: string[]; quote: string }[] = [], opts: { ledgerOnly?: boolean } = {}): Promise<StageExtraction> {
   const enc = loadEncounter(encounterId);
   if (!enc) throw new Error("Stage encounter not found");
   const runId = run.row.id;
@@ -139,9 +139,10 @@ export async function extractStage(run: LoadedRun, stage: Stage, encounterId: st
     stats.deterministic++;
   }
 
+  if (opts.ledgerOnly) return stats;
+
   // ----- Model-extracted clinician contributions, evidence-checked -----
-  const links0 = undefined;
-  const all = entriesOf(runId, links0);
+  const all = entriesOf(runId);
   const visible = all.filter((e) => e.stageOrder <= stage.order);
   const { toAlias, resolve } = aliasing(visible);
   const prior = visible.filter((e) => e.stageOrder < stage.order);

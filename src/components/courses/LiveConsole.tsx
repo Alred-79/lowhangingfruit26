@@ -197,8 +197,8 @@ export default function LiveConsole() {
           <Card className="p-6 text-sm text-slate-500">Loading the visit…</Card>
         ) : (
           <Card>
-            <div className="flex flex-wrap items-start justify-between gap-3 border-b border-slate-100 px-4 py-3">
-              <div>
+            <div className="flex items-start justify-between gap-3 border-b border-slate-100 px-4 py-3">
+              <div className="min-w-0">
                 <h2 className="text-sm font-semibold text-slate-900">
                   {info?.student || "Student"} with {current.chart.patient.name}
                   <span className="font-normal text-slate-500">
@@ -211,7 +211,7 @@ export default function LiveConsole() {
                   {current.timeLimitMin ? ` · ${mins(current.startedAt, now)} of ${current.timeLimitMin} min` : ` · ${mins(current.startedAt, now)} min in`}
                 </p>
               </div>
-              {ended ? <Badge tone="slate">Visit ended</Badge> : paused ? <Badge tone="amber">Paused by instructor</Badge> : <Badge tone="green">Live</Badge>}
+              <span className="shrink-0">{ended ? <Badge tone="slate">Visit ended</Badge> : paused ? <Badge tone="amber">Paused by instructor</Badge> : <Badge tone="green">Live</Badge>}</span>
             </div>
 
             <div className="grid lg:grid-cols-[1fr_18rem]">
