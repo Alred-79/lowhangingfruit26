@@ -17,6 +17,11 @@ export interface AssignmentSettings {
   /** Repeat attempts get a change in the patient's mood and delivery. */
   perturb: boolean;
   feedbackRelease: "immediate" | "manual";
+  /**
+   * One continuing patient for the whole class: each student's visit follows on from the others',
+   * the patient remembers who said what, and earlier students' notes are in the chart.
+   */
+  sharedPatient?: boolean;
 }
 
 export const TYPE_LABEL: Record<AssignmentType, string> = { homework: "Homework", exam: "Exam", practice: "Practice set" };
@@ -44,6 +49,7 @@ export function normalizeSettings(type: AssignmentType, raw: Record<string, unkn
     perturb: typeof r.perturb === "boolean" ? r.perturb : d.perturb,
     feedbackRelease: r.feedbackRelease === "manual" || r.feedbackRelease === "immediate" ? r.feedbackRelease : d.feedbackRelease,
   };
+  if (r.sharedPatient === true && type !== "exam") out.sharedPatient = true;
   if (r.level === null && type !== "exam") out.level = null;
   if (r.timeLimitMin !== null && r.timeLimitMin !== undefined && r.timeLimitMin !== "") out.timeLimitMin = int(r.timeLimitMin, 0, 180, 20);
   else if (d.timeLimitMin !== undefined && type === "exam") out.timeLimitMin = d.timeLimitMin;
@@ -63,6 +69,7 @@ export function describeSettings(s: AssignmentSettings): string {
   parts.push(s.maxAttempts ? `${s.maxAttempts} attempt${s.maxAttempts === 1 ? "" : "s"}` : "unlimited attempts");
   if (s.perturb) parts.push("patient varies on repeats");
   if (s.liveAssist) parts.push("live assist on");
+  if (s.sharedPatient) parts.push("one shared patient for the class");
   return parts.join(" · ");
 }
 

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { TrendChart } from "@/components/chart/ArtifactView";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Badge, Button, Card, Empty, Textarea, cx } from "@/components/ui";
 import { feedbackUrl, toDate } from "@/lib/courses/settings";
@@ -280,6 +281,28 @@ export default function LiveConsole() {
               <div className="max-h-[38rem] space-y-4 overflow-y-auto px-4 py-3 text-xs">
                 {info && <ComfortMeter value={info.rapport} />}
                 <div className="text-slate-600">Patient mood: {current.chart.emotion}</div>
+                {(() => {
+                  const tl = (current as unknown as { timeline?: { turn: number; score: number; coverage: number; communication: number; comfort: number }[] }).timeline || [];
+                  if (tl.length < 2) return null;
+                  const pct = (v: number) => Math.round(v * 100);
+                  return (
+                    <div>
+                      <div className="mb-1 font-medium text-slate-900">Running score: {pct(tl[tl.length - 1].score)} / 100</div>
+                      <TrendChart
+                        chart={{
+                          kind: "line",
+                          xLabel: "Turn",
+                          yLabel: "0 to 100",
+                          series: [
+                            { name: "Running score", points: tl.map((p) => ({ x: `T${p.turn}`, y: pct(p.score) })) },
+                            { name: "Findings covered", points: tl.map((p) => ({ x: `T${p.turn}`, y: pct(p.coverage) })) },
+                            { name: "Communication", points: tl.map((p) => ({ x: `T${p.turn}`, y: pct(p.communication) })) },
+                          ],
+                        }}
+                      />
+                    </div>
+                  );
+                })()}
                 {info && info.flags.length > 0 && (
                   <div>
                     <div className="mb-1 font-medium text-slate-900">At-risk signals</div>

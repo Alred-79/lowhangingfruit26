@@ -127,7 +127,7 @@ export function TrendChart({ chart }: { chart: ArtifactChart }) {
           </g>
         ))}
         {xs.map((x, i) =>
-          xs.length <= 10 || i % Math.ceil(xs.length / 10) === 0 ? (
+          xs.length <= 12 || i % Math.ceil(xs.length / 12) === 0 ? (
             <text key={x + i} x={px(i)} y={H - B + 14} textAnchor="middle" fontSize={10} fill="#64748b">
               {x.length > 12 ? x.slice(0, 11) + "…" : x}
             </text>

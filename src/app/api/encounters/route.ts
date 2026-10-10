@@ -18,12 +18,13 @@ export async function POST(req: Request) {
   let knobs: Partial<Knobs> | undefined = b.mode === "adaptive" ? b.knobs : undefined;
   let liveAssist = false;
   let perturb: boolean | string = b.perturb ?? false;
+  let teamScope: string | undefined;
   // Assignment settings always win over anything the client sends.
   if (b.assignmentId) {
     const a = get<{ id: string; type: string; settings: string; case_ids: string; course_id: string }>("SELECT * FROM assignments WHERE id = ?", b.assignmentId);
     if (!a || !parse<string[]>(a.case_ids, []).includes(c.id)) return bad("Assignment not found", 404);
     if (user.role === "student" && !get("SELECT 1 FROM enrollments WHERE course_id = ? AND user_id = ?", a.course_id, user.id)) return bad("You are not enrolled in that course", 403);
-    const s = parse<{ level?: number; knobs?: Partial<Knobs>; timeLimitMin?: number; hints?: boolean; maxAttempts?: number; liveAssist?: boolean; perturb?: boolean }>(a.settings, {});
+    const s = parse<{ level?: number; knobs?: Partial<Knobs>; timeLimitMin?: number; hints?: boolean; maxAttempts?: number; liveAssist?: boolean; perturb?: boolean; sharedPatient?: boolean }>(a.settings, {});
     if (s.maxAttempts) {
       const used = get<{ n: number }>("SELECT COUNT(*) AS n FROM encounters WHERE user_id = ? AND assignment_id = ? AND case_id = ? AND parent_id IS NULL AND status != 'abandoned'", user.id, a.id, c.id)!.n;
       if (used >= s.maxAttempts && user.role === "student") return bad(`You have used all ${s.maxAttempts} attempt${s.maxAttempts === 1 ? "" : "s"} for this assignment.`, 403);
@@ -35,9 +36,11 @@ export async function POST(req: Request) {
     if (s.hints !== undefined) knobs.hints = s.hints;
     liveAssist = !!s.liveAssist;
     perturb = !!s.perturb;
+    if (s.sharedPatient) teamScope = `team:${a.id}`;
   }
   const professions = parse<string[]>(c.professions, []);
-  const professionId = user.profession_id && professions.includes(user.profession_id) ? user.profession_id : professions[0] || user.profession_id || "medicine";
-  const id = createEncounter({ userId: user.id, caseId: c.id, professionId, mode, level, knobs, assignmentId: b.assignmentId || null, perturb, variantId: b.variantId || null, liveAssist, followUp: !!b.followUp && !b.assignmentId });
+  // On a class-shared patient each student acts in their own profession, whatever the case was written for.
+  const professionId = (teamScope && user.profession_id) || (user.profession_id && professions.includes(user.profession_id) ? user.profession_id : professions[0] || user.profession_id || "medicine");
+  const id = createEncounter({ userId: user.id, caseId: c.id, professionId, mode, level, knobs, assignmentId: b.assignmentId || null, perturb, variantId: b.variantId || null, liveAssist, followUp: !!b.followUp && !b.assignmentId, teamScope });
   return Response.json({ id });
 }

@@ -434,6 +434,7 @@ export default function AssignmentBuilder({
               <Toggle id="as-hints" checked={s.hints} disabled={exam} onChange={(v) => set({ hints: v })} label="Coach hints" help={exam ? "Always off in exams." : "Students can ask for a nudge that never reveals a finding."} />
               <Toggle id="as-perturb" checked={s.perturb} onChange={(v) => set({ perturb: v })} label="Vary the patient on repeat attempts" help="From the second attempt the patient's mood and delivery change (rushed, anxious, withdrawn). The facts stay the same." />
               <Toggle id="as-live" checked={s.liveAssist} onChange={(v) => set({ liveAssist: v })} label="Live assist" help="You can watch these visits as they happen on Live Visits, pause one and send the student a note. Students are told when it is on." />
+              {type !== "exam" && <Toggle id="as-shared" checked={!!s.sharedPatient} onChange={(v) => set({ sharedPatient: v })} label="One shared patient for the class" help="Students see the same continuing patient rather than each getting a fresh copy. The patient remembers earlier students by name and may repeat what they were told; earlier students' visit notes appear in the chart. Use it for a team of different professions seeing one patient in turn." />}
               <Toggle
                 id="as-hold"
                 checked={s.feedbackRelease === "manual"}

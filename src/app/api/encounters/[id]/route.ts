@@ -1,13 +1,18 @@
 import { encounterFor } from "@/lib/access";
 import { chartView, messagesOf } from "@/lib/engine/encounter";
+import { timeline } from "@/lib/engine/timeline";
 import { profession } from "@/lib/professions";
+import { isFaculty } from "@/lib/auth";
 
 export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const r = await encounterFor((await ctx.params).id, { faculty: "also" });
   if (r instanceof Response) return r;
   const { row, c, cfg, state } = r.enc;
   const role = profession(cfg.professionId);
+  const msgs = messagesOf(row.id);
   return Response.json({
+    // The running score is for instructors watching live; students see it afterwards in feedback.
+    timeline: isFaculty(r.user) ? timeline(c, cfg, msgs) : undefined,
     id: row.id,
     status: row.status,
     mode: cfg.mode,
@@ -25,6 +30,6 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
     journeyRunId: row.journey_run_id,
     priorContext: cfg.journey?.priorContext || null,
     chart: chartView(c, cfg, state),
-    messages: messagesOf(row.id).map((m) => ({ id: m.id, turn: m.turn, speaker: m.speaker, text: m.text })),
+    messages: msgs.map((m) => ({ id: m.id, turn: m.turn, speaker: m.speaker, text: m.text })),
   });
 }

@@ -1,5 +1,6 @@
 import { all, get, newId, parse, run } from "../db";
 import { chatStream, MODELS, type Turn } from "../llm";
+import { profession } from "../professions";
 import { FACT_CATEGORIES } from "../types";
 import type { Artifact, CaseProfile, EncounterConfig, EncounterState, Fact, Knobs, Perturbation } from "../types";
 import { applyPerturbation, knobsForLevel, PERTURBATIONS } from "./difficulty";
@@ -84,6 +85,35 @@ function withVariant(c: CaseProfile, variantId?: string | null): CaseProfile {
   return out;
 }
 
+/**
+ * For a class-shared patient: earlier students' write-ups are added to this visit's copy of the
+ * chart as prior notes, so each professional can read what the others documented.
+ */
+function addTeamNotes(c: CaseProfile, scope: string, caseId: string) {
+  const assignmentId = scope.replace(/^team:/, "");
+  const rows = all<{ id: string; wrapup: string | null; ended_at: string | null; config: string; name: string }>(
+    `SELECT e.id, e.wrapup, e.ended_at, e.config, u.name FROM encounters e JOIN users u ON u.id = e.user_id
+     WHERE e.assignment_id = ? AND e.case_id = ? AND e.status = 'scored' AND e.parent_id IS NULL ORDER BY e.ended_at`,
+    assignmentId,
+    caseId,
+  );
+  rows.forEach((r, i) => {
+    const cfg = parse<EncounterConfig>(r.config, {} as EncounterConfig);
+    const role = profession(cfg.professionId);
+    const wrap = parse<Record<string, string>>(r.wrapup, {});
+    const body = role.wrapUp.map((f) => `${f.label}\n${wrap[f.id]?.trim() || "(not documented)"}`).join("\n\n");
+    c.artifacts.push({
+      id: `team_${r.id}`,
+      type: "note",
+      title: `Visit ${i + 1} note: ${role.name}`,
+      author: `${r.name}, ${role.roleTitle}`,
+      date: r.ended_at ? r.ended_at.slice(0, 16) + " UTC" : undefined,
+      body,
+      release: { when: "start" },
+    });
+  });
+}
+
 export interface CreateInput {
   userId: string;
   caseId: string;
@@ -102,6 +132,8 @@ export interface CreateInput {
   initialDisclosed?: string[];
   /** Continue the relationship: the patient remembers this student's earlier visits. */
   followUp?: boolean;
+  /** Share one continuing patient across a group (e.g. "team:<assignmentId>") instead of per student. */
+  teamScope?: string;
 }
 
 export interface Relationship {
@@ -127,6 +159,7 @@ export function createEncounter(input: CreateInput): string {
   if (!row) throw new Error("Case not found");
   const base = parse<CaseProfile>(row.profile, {} as CaseProfile);
   const c = withVariant(base, input.variantId);
+  if (input.teamScope) addTeamNotes(c, input.teamScope, input.caseId);
   const prior = get<{ n: number }>(
     "SELECT COUNT(*) AS n FROM encounters WHERE user_id = ? AND case_id = ? AND status IN ('submitted','scored') AND parent_id IS NULL",
     input.userId,
@@ -141,7 +174,7 @@ export function createEncounter(input: CreateInput): string {
   let knobs = { ...knobsForLevel(input.level ?? c.difficulty, c.scenario.timeLimitMin), ...(input.knobs || {}) };
   knobs = applyPerturbation(knobs, perturbation);
   if (input.mode === "exam") knobs.hints = false;
-  const rel = input.followUp ? relationship(input.userId, input.caseId) : null;
+  const rel = input.teamScope ? relationship(input.teamScope, input.caseId) : input.followUp ? relationship(input.userId, input.caseId) : null;
   // Trust carries over between visits, good or bad.
   if (rel) knobs.rapportStart = Math.max(15, Math.min(85, rel.rapport));
 
@@ -155,6 +188,7 @@ export function createEncounter(input: CreateInput): string {
     journey: input.journey || null,
     visitNumber: rel ? rel.visits + 1 : 1,
     memory: rel?.memory || null,
+    team: input.teamScope ? { scope: input.teamScope, studentName: get<{ name: string }>("SELECT name FROM users WHERE id = ?", input.userId)?.name || "a student" } : null,
   };
   const state = freshState(c, knobs);
   for (const aid of rel?.actions || []) if (c.actions.some((a) => a.id === aid)) state.actions[aid] = { turn: 0, request: "Earlier visit" };
@@ -321,7 +355,7 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
   reply = reply.replace(/\*[^*\n]{1,80}\*/g, (m) => (d.deflect.length && cues++ === 0 ? m : ""));
   reply = reply.replace(/[ \t]+\n/g, "\n").replace(/\n{2,}/g, "\n").replace(/ {2,}/g, " ").trim() || "...";
   // Grounding audit: anything clinical the patient said beyond the approved facts is flagged, never filed.
-  const audit = await auditReply(reply, known, d.reveal, c.persona.background, c.scenario.openingLine);
+  const audit = await auditReply(reply, known, d.reveal, c.persona.background, c.scenario.openingLine, [cfg.memory, cfg.journey?.patientMemory, `Student just said: ${text}`].filter(Boolean).join("\n"));
   const unsupported = audit.unsupported;
   // The ledger records only what the patient actually said; anything skipped stays locked.
   if (audit.notConveyed.length) {

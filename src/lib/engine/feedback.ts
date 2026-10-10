@@ -263,15 +263,18 @@ async function rememberVisit(encId: string) {
     model: MODELS.fast,
     maxTokens: 350,
     temperature: 0.3,
-    system: `You are ${c.patient.name}, a patient. Write what you would remember of this visit a few weeks later, in first person, in 3-5 plain sentences: what the student was like, what you told them, what they advised or agreed with you, and how you felt leaving. Only use what was actually said. No medical details that are not in the conversation.`,
+    system: `You are ${c.patient.name}, a patient. Write what you would remember of this visit a few weeks later, in first person, in 3-5 plain sentences${cfg.team ? `, referring to the clinician as ${cfg.team.studentName}` : ""}: what the student was like, what you told them, what they advised or agreed with you, and how you felt leaving. Only use what was actually said. No medical details that are not in the conversation.`,
     messages: [{ role: "user", text: talk.slice(-9000) }],
   });
   const visit = cfg.visitNumber || 1;
-  const merged = [prev.memory, `Visit ${visit}: ${memory.trim()}`].filter(Boolean).join("\n").slice(-3500);
+  // A class-shared patient remembers each visit by who it was with.
+  const who = cfg.team ? ` with ${cfg.team.studentName} (${profession(cfg.professionId).roleTitle})` : "";
+  const merged = [prev.memory, `Visit ${visit}${who}: ${memory.trim()}`].filter(Boolean).join("\n").slice(-4500);
+  const key = cfg.team?.scope || row.user_id;
   run(
     `INSERT INTO patient_relationships (user_id, case_id, visits, rapport, disclosed, actions, memory, last_encounter_id, updated_at) VALUES (?,?,?,?,?,?,?,?,datetime('now'))
      ON CONFLICT(user_id, case_id) DO UPDATE SET visits = excluded.visits, rapport = excluded.rapport, disclosed = excluded.disclosed, actions = excluded.actions, memory = excluded.memory, last_encounter_id = excluded.last_encounter_id, updated_at = excluded.updated_at`,
-    row.user_id,
+    key,
     row.case_id,
     visit,
     Math.round(state.rapport),

@@ -2,7 +2,7 @@ import { encounterFor } from "@/lib/access";
 import { get } from "@/lib/db";
 import { spoken } from "@/lib/engine/patient";
 import { bad } from "@/lib/http";
-import { synth, voiceFor } from "@/lib/tts";
+import { speak } from "@/lib/tts";
 
 /** GET /api/tts?e=<encounterId>&m=<messageId> -> mp3 of that patient message. */
 export async function GET(req: Request) {
@@ -15,7 +15,7 @@ export async function GET(req: Request) {
   if (!text) return new Response(null, { status: 204 });
   try {
     const p = r.enc.c.patient;
-    const audio = await synth(text, voiceFor(p.sex, p.name));
+    const audio = await speak(text, { name: p.name, sex: p.sex, age: p.age });
     return new Response(Buffer.from(audio), { headers: { "Content-Type": "audio/mpeg", "Cache-Control": "private, max-age=3600" } });
   } catch (e) {
     console.error(e);
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
   if (!text) return new Response(null, { status: 204 });
   try {
     const p = r.enc.c.patient;
-    const audio = await synth(text, voiceFor(p.sex, p.name));
+    const audio = await speak(text, { name: p.name, sex: p.sex, age: p.age });
     return new Response(Buffer.from(audio), { headers: { "Content-Type": "audio/mpeg", "Cache-Control": "no-store" } });
   } catch (e) {
     console.error(e);

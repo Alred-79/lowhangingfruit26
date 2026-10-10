@@ -228,7 +228,7 @@ export interface Audit {
  * (2) any fact released this turn that the patient did not actually say is reported so the
  *     ledger only records what was really disclosed.
  */
-export async function auditReply(reply: string, known: Fact[], reveal: Fact[], background: string, openingLine: string): Promise<Audit> {
+export async function auditReply(reply: string, known: Fact[], reveal: Fact[], background: string, openingLine: string, memory = ""): Promise<Audit> {
   try {
     const res = await chatJSON<{ unsupported: string[]; not_conveyed: string[] }>({
       model: MODELS.fast,
@@ -236,11 +236,11 @@ export async function auditReply(reply: string, known: Fact[], reveal: Fact[], b
       maxTokens: 400,
       schema: AUDIT_SCHEMA,
       system:
-        "You audit a simulated patient's reply for a medical education simulator. You are given the only clinical facts the patient was approved to state, plus their non-medical background.\n1. unsupported: list clinical details the reply ASSERTS AS TRUE that are not supported by that material: new symptoms, diagnoses, medications or doses, test results, numbers, dates of medical events, or family members' health. Do not list denials, 'I don't know', vague non-answers, feelings and opinions, everyday non-medical life details, or reasonable rewording of an approved fact. Be strict about real additions and silent about everything else.\n2. not_conveyed: for each fact under NEW THIS TURN, decide whether the reply communicated its substance (paraphrase counts). List the ids that were not communicated at all.",
+        "You audit a simulated patient's reply for a medical education simulator. You are given the only clinical facts the patient was approved to state, plus their non-medical background.\n1. unsupported: list clinical details the reply ASSERTS AS TRUE that are not supported by that material: new symptoms, diagnoses, medications or doses, test results, numbers, dates of medical events, or family members' health. Do not list denials, 'I don't know', vague non-answers, feelings and opinions, everyday non-medical life details, reasonable rewording of an approved fact, or the patient repeating back what a clinician told them. Be strict about real additions and silent about everything else.\n2. not_conveyed: for each fact under NEW THIS TURN, decide whether the reply communicated its substance (paraphrase counts). List the ids that were not communicated at all.",
       messages: [
         {
           role: "user",
-          text: `ALREADY SHARED EARLIER:\n${known.map((f) => `- ${f.chart} (patient wording: ${f.says})`).join("\n") || "(none)"}\n- Reason for visit, in the patient's words: ${openingLine}\n\nNEW THIS TURN:\n${reveal.map((f) => `${f.id}: ${f.chart} (patient wording: ${f.says})`).join("\n") || "(none)"}\n\nNON-MEDICAL BACKGROUND:\n${background}\n\nPATIENT REPLY TO AUDIT:\n${reply}`,
+          text: `ALREADY SHARED EARLIER:\n${known.map((f) => `- ${f.chart} (patient wording: ${f.says})`).join("\n") || "(none)"}\n- Reason for visit, in the patient's words: ${openingLine}\n\nNEW THIS TURN:\n${reveal.map((f) => `${f.id}: ${f.chart} (patient wording: ${f.says})`).join("\n") || "(none)"}\n\nNON-MEDICAL BACKGROUND:\n${background}${memory ? `\n\nWHAT THE PATIENT REMEMBERS FROM EARLIER VISITS (repeating what a clinician said or advised then is allowed, and so is anything the student has just said in this conversation):\n${memory}` : ""}\n\nPATIENT REPLY TO AUDIT:\n${reply}`,
         },
       ],
     });

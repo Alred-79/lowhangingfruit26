@@ -8,7 +8,9 @@ import { isFaculty, requireUser } from "@/lib/auth";
 import { get, parse } from "@/lib/db";
 import { LEVEL_NAMES } from "@/lib/engine/difficulty";
 import { loadEncounter, messagesOf } from "@/lib/engine/encounter";
+import { TrendChart } from "@/components/chart/ArtifactView";
 import { attemptHistory } from "@/lib/engine/feedback";
+import { timeline, timelineChart } from "@/lib/engine/timeline";
 import { profession } from "@/lib/professions";
 import type { Feedback } from "@/lib/types";
 
@@ -114,6 +116,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
     );
   }
 
+  const tl = timeline(c, cfg, msgs);
   const critMissed = f.missed.filter((m) => m.importance === "critical");
   const meta = (m: (typeof msgs)[number]) => parse<{ revealed?: string[]; deflected?: string[]; rapportDelta?: number; questionType?: string }>(m.meta, {});
   const factText = (fid: string) => c.facts.find((x) => x.id === fid);
@@ -190,6 +193,24 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
               ))}
             </ol>
             {cfg.mode !== "exam" && cfg.mode !== "journey" && <RetryButtons caseId={row.case_id} level={cfg.knobs.level} assignmentId={row.assignment_id} allowVariation />}
+          </div>
+        </Card>
+      )}
+
+      {tl.length > 1 && (
+        <Card className="mt-4">
+          <CardHeader title="The visit, turn by turn" subtitle="Calculated live from each turn as it happened: findings covered against a steady pace, how you communicated, and how comfortable the patient was. Hover to read a turn; the turn numbers match the transcript below." />
+          <div className="grid gap-4 p-4 lg:grid-cols-[1fr_18rem]">
+            <TrendChart chart={timelineChart(tl)} />
+            <ul className="max-h-64 space-y-1 overflow-y-auto text-[12px] text-slate-700">
+              {tl.map((p) => (
+                <li key={p.turn} className="flex gap-2">
+                  <a href={`#t${p.turn}`} className="w-7 shrink-0 rounded bg-slate-100 text-center text-[10px] font-medium leading-5 text-slate-600 hover:bg-brand-100">T{p.turn}</a>
+                  <span className="w-8 shrink-0 tabular-nums font-medium text-slate-900">{Math.round(p.score * 100)}</span>
+                  <span className="text-slate-600">{p.note || "no notable signals"}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </Card>
       )}
