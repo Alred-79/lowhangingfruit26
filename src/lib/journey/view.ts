@@ -59,7 +59,9 @@ export function buildChains(entries: StateEntry[], links: StateLink[], handoffs:
       const cross = e.stageOrder > prev.stageOrder;
       const fromPatient = e.source === "patient" || e.kind === "result";
       if (l.evidence?.quote && (fromPatient || e.kind === "follow_up") && l.evidence.speaker === "clinician") {
-        steps.push({ kind: "asked", label: cross ? "Reviewed it and asked about it" : "Asked about it", detail: l.evidence.quote, quote: l.evidence.quote, who: `${e.contributorName}, ${e.contributorRole}${l.evidence.turn ? `, turn ${l.evidence.turn}` : ""}`, stageOrder: e.stageOrder, entryId: e.kind === "follow_up" ? e.id : undefined });
+        // The quoted words are a question only when they contain one; a statement that draws on the entry is called what it is.
+        const asks = l.evidence.quote.includes("?");
+        steps.push({ kind: "asked", label: asks ? (cross ? "Reviewed it and asked about it" : "Asked about it") : cross ? "Reviewed it and referred to it" : "Referred to it", detail: l.evidence.quote, quote: l.evidence.quote, who: `${e.contributorName}, ${e.contributorRole}${l.evidence.turn ? `, turn ${l.evidence.turn}` : ""}`, stageOrder: e.stageOrder, entryId: e.kind === "follow_up" ? e.id : undefined });
         if (fromPatient) steps.push({ kind: "new_information", label: e.kind === "result" ? "New result" : "New information from the patient", detail: e.text, who: whoOf(e), stageOrder: e.stageOrder, entryId: e.id });
       } else {
         const verb = { uses: "Built on it", confirms: "Confirmed it", contradicts: "Disagreed with it", updates: "Updated it", answers: "Answered it", resolves: "Resolved it" }[l.relation];

@@ -3,7 +3,7 @@
   "title": "Walter Greene: uncontrolled diabetes, heart failure and kidney disease across three professions",
   "caseId": "seed_sample-walter-greene",
   "spec": {
-    "summary": "Walter Greene, 72, has long-standing diabetes, heart failure and stage 3 kidney disease. He is seen by emergency medicine, hospital medicine and dietetics. What one professional learns about his medicines, his eating and his fears changes what the next one asks. Join as any one of them; the AI plays the rest.",
+    "summary": "Walter Greene, 72, is seen in turn by emergency medicine, hospital medicine and dietetics. What one professional learns changes what the next one asks. Join as any one of them; the AI plays the rest.",
     "stages": [
       {
         "id": "s1",
@@ -13,7 +13,16 @@
         "clinicianId": "brian_lee",
         "focus": "First contact for the team. Find out how he is right now and what is troubling him most, review his vital signs, check for anything that needs urgent attention, and identify what hospital medicine and nutrition need to pick up.",
         "simTime": "Week 1, Tue 08:40",
-        "visitLabel": "urgent video triage"
+        "visitLabel": "urgent video triage",
+        "brief": "You are the emergency medicine attending making first contact for the care team, in an urgent video triage call with Walter Greene, 72. Find out how he is right now and what troubles him most, review his vital signs and the record, decide whether anything needs urgent attention, and work out what the hospitalist and the dietitian need to pick up. This is a telehealth video visit and he is at home: you cannot admit him or change his treatment from here. You assess, advise, and make recommendations to the team.",
+        "tasks": [
+          "Review the existing record and the documents on file before you start (Care team tab)",
+          "Find out how he is right now and what worries him most, and screen for anything that needs urgent attention",
+          "Review his vital signs and any results that matter for triage",
+          "Write an SBAR handoff to the hospitalist: what you found, what you are unsure of, and what you need them to look at"
+        ],
+        "patientReason": "The clinic set up this call. Said a doctor wanted to check on me before I see the eating person my regular doc is sending me to. I don't really see the point, but here I am.",
+        "reason": "Urgent video triage: first contact for the care team"
       },
       {
         "id": "s2",
@@ -23,7 +32,16 @@
         "clinicianId": "priya_narang",
         "focus": "Medical review across his diabetes, heart failure and kidney disease: current symptoms, the medicines he actually takes including over-the-counter ones, what he understands about his conditions, and what worries him. Coordinate what the team does next.",
         "simTime": "Week 1, Thu 13:30",
-        "visitLabel": "internal medicine video review"
+        "visitLabel": "internal medicine video review",
+        "brief": "You are the hospitalist (internal medicine) reviewing Walter Greene, 72, by video two days after the emergency medicine attending's triage call. Start from the shared record and the handoff you received. Review his long-term conditions together: current symptoms, the medicines he actually takes including over-the-counter ones, what he understands about his health and what worries him, and coordinate what the team does next. This is a telehealth video visit and he is at home: you cannot admit him or change his treatment from here. You assess, advise, and make recommendations to the team.",
+        "tasks": [
+          "Read the handoff from emergency medicine and the shared patient state (Care team tab)",
+          "Review his symptoms and the medicines he actually takes, including anything bought over the counter",
+          "Explore what he understands about his conditions and what worries him",
+          "Write an SBAR handoff to the dietitian: findings, your interpretation, what is uncertain, and what you need from them"
+        ],
+        "patientReason": "They told me another doctor wanted to go over everything with me after that first call, before the eating appointment. Seems like a lot of talking, but all right.",
+        "reason": "Internal medicine video review after the triage call"
       },
       {
         "id": "s3",
@@ -33,7 +51,16 @@
         "clinicianId": "tasha_dunbar",
         "focus": "Nutrition assessment. Explore what and where he eats and drinks, cooking and shopping, what he believes about food and his conditions, and his readiness to change, and agree realistic steps that respect his independence.",
         "simTime": "Week 2, Mon 10:00",
-        "visitLabel": "telehealth nutrition visit"
+        "visitLabel": "telehealth nutrition visit",
+        "brief": "You are the registered dietitian seeing Walter Greene, 72, for a telehealth nutrition visit, after emergency medicine and hospital medicine have each seen him. Start from the shared record and the handoff you received. Explore what and where he eats and drinks, cooking and shopping, what he believes about food and his health, and how ready he is to change anything, and agree realistic steps that respect his independence. Do not assume he will be receptive straight away. You are the last professional before the team huddle. This is a telehealth video visit and he is at home: you cannot admit him or change his treatment from here. You assess, advise, and make recommendations to the team.",
+        "tasks": [
+          "Read the handoff from the hospitalist and the shared patient state, and note what earlier colleagues left open (Care team tab)",
+          "Take a diet history: meals, drinks, eating out, cooking, shopping and what gets in the way",
+          "Explore his beliefs about food and his health and his readiness to change, without judgement",
+          "Agree one or two small steps he chooses, then write an SBAR handoff to the whole team ahead of the huddle"
+        ],
+        "patientReason": "Doc sent me here. Said I need to talk to somebody about my eating. I don't really see the point, but here I am.",
+        "reason": "Telehealth nutrition assessment"
       }
     ]
   }

@@ -9,7 +9,7 @@ const bricolage = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: [
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Rounds — virtual patient telehealth simulation",
+  title: "Poscere — virtual patient telehealth simulation",
   description: "Telehealth simulations with virtual patients for every health profession.",
 };
 

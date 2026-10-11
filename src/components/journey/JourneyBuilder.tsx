@@ -13,6 +13,7 @@ interface Props {
   initial?: { id: string; title: string; summary: string; caseId: string; status: string; stages: Stage[] };
 }
 
+const GENERIC = ["Jordan Ellis", "Morgan Reyes", "Casey Whitfield", "Avery Okafor", "Riley Sandoval", "Quinn Abernathy"];
 const blank = (i: number, clinicianId: string): Stage => ({ id: `s${i + 1}`, order: i + 1, professionId: "", roleTitle: "", clinicianId, focus: "", simTime: `Week 1, day ${i + 1}`, visitLabel: "" });
 
 /** Faculty builder: pick a published case, let the AI guide propose encounters, edit them, save or publish. */
@@ -26,6 +27,9 @@ export default function JourneyBuilder({ cases, clinicians, professions, initial
   const [busy, setBusy] = useState("");
   const [err, setErr] = useState("");
   const [saved, setSaved] = useState("");
+  const [guideErr, setGuideErr] = useState("");
+  // Anything that is not a sentence written for people (a stack message, a provider error) is replaced by one that is.
+  const readable = (e?: string) => (e && /^[A-Z][^{}()<>=]*[.!?]$/.test(e.trim()) && !/is not a function|undefined|null|token|exception|ECONN|credential/i.test(e) ? e : "The guide could not propose encounters this time. Try again in a moment, or add the encounters by hand.");
 
   const set = (i: number, patch: Partial<Stage>) => setStages((s) => s.map((x, k) => (k === i ? { ...x, ...patch } : x)));
   const move = (i: number, d: number) =>
@@ -40,10 +44,11 @@ export default function JourneyBuilder({ cases, clinicians, professions, initial
   async function propose() {
     setBusy("propose");
     setErr("");
+    setGuideErr("");
     const r = await post<{ title: string; summary: string; stages: Stage[] }>("/api/journeys/propose", { caseId, brief });
     setBusy("");
-    if (r.error) return setErr(r.error);
-    setStages(r.stages || []);
+    if (r.error || !Array.isArray(r.stages) || !r.stages.length) return setGuideErr(readable(r.error));
+    setStages(r.stages);
     if (!title) setTitle(r.title || "");
     if (!summary) setSummary(r.summary || "");
   }
@@ -85,14 +90,15 @@ export default function JourneyBuilder({ cases, clinicians, professions, initial
           </div>
           <div className="flex items-center gap-3 md:col-span-2">
             <Button variant="secondary" onClick={propose} disabled={!caseId || !!busy}>{stages.length ? "Ask the guide for a new proposal" : "Ask the guide to propose encounters"}</Button>
-            {busy === "propose" && <Spinner label="Reading the case and the clinician personas" />}
+            {busy === "propose" && <Spinner label="Reading the case and the clinician personas, then writing each encounter's brief" hint="Usually 30 to 60 seconds" />}
+            {guideErr && busy !== "propose" && <span role="alert" className="text-sm text-rose-700">{guideErr}</span>}
             <button onClick={() => setStages((s) => [...s, blank(s.length, clinicians[0]?.id || "")])} className="text-sm font-medium text-brand-700 hover:underline">Add an encounter by hand</button>
           </div>
         </div>
       </Card>
 
       <Card>
-        <CardHeader title="2. Encounters, in order" subtitle="At least three. A student joins as one of these professionals; the AI plays the persona you choose for every other one. The focus is shown to the student and steers the AI colleague, so do not put findings in it that the patient has not disclosed." />
+        <CardHeader title="2. Encounters, in order" subtitle="At least three. A student joins as one of these professionals; the AI plays the persona you choose for every other one. Every encounter is a telehealth visit with the patient at home. The focus steers the AI colleague; students see the brief and tasks instead." />
         <div className="space-y-3 p-4">
           {!stages.length && <p className="text-sm text-slate-500">No encounters yet. Ask the guide for a proposal or add one by hand.</p>}
           {stages.map((s, i) => (
@@ -121,6 +127,8 @@ export default function JourneyBuilder({ cases, clinicians, professions, initial
                   <Label>AI persona when no student takes it</Label>
                   <Select value={s.clinicianId} onChange={(e) => set(i, { clinicianId: e.target.value })}>
                     {clinicians.map((c) => <option key={c.id} value={c.id}>{c.name}, {c.role}</option>)}
+                    {s.clinicianId.startsWith("generic:") && <option value={s.clinicianId}>{s.clinicianId.slice(8).split("|")[0]} (no provided persona of this profession; a plain clinician)</option>}
+                    {!s.clinicianId.startsWith("generic:") && <option value={`generic:${GENERIC[i % GENERIC.length]}|${s.roleTitle || "Clinician"}`}>A plain clinician of this profession (no provided persona fits)</option>}
                   </Select>
                 </div>
                 <div>
@@ -134,6 +142,27 @@ export default function JourneyBuilder({ cases, clinicians, professions, initial
                 <div>
                   <Label>Kind of contact</Label>
                   <Input value={s.visitLabel || ""} onChange={(e) => set(i, { visitLabel: e.target.value })} placeholder="video follow-up" />
+                </div>
+                <div className="md:col-span-4 mt-1 border-t border-slate-100 pt-3">
+                  <p className="mb-2 text-xs text-slate-500">What a student who takes this role, and the patient, are told. Topics only: none of this may give away a finding the patient has not yet disclosed. Left empty, a neutral default built from the role is used (never the source case&apos;s own brief).</p>
+                  <div className="grid gap-3 md:grid-cols-2">
+                    <div>
+                      <Label>Brief shown to the student in the waiting room</Label>
+                      <Textarea rows={4} value={s.brief || ""} onChange={(e) => set(i, { brief: e.target.value })} placeholder="You are the ... seeing ... by video. Explore ... and hand off with an SBAR." />
+                    </div>
+                    <div>
+                      <Label>Student tasks, one per line</Label>
+                      <Textarea rows={4} value={(s.tasks || []).join("\n")} onChange={(e) => set(i, { tasks: e.target.value.split("\n") })} placeholder={"Read the handoff and the shared state\nExplore ...\nWrite an SBAR handoff to ..."} />
+                    </div>
+                    <div>
+                      <Label>Why the patient is on this call, in the patient&apos;s own words</Label>
+                      <Textarea rows={2} value={s.patientReason || ""} onChange={(e) => set(i, { patientReason: e.target.value })} placeholder="They told me the heart doctor wanted to follow up with me." />
+                    </div>
+                    <div>
+                      <Label>Booked reason shown in the chart header</Label>
+                      <Input value={s.reason || ""} onChange={(e) => set(i, { reason: e.target.value })} placeholder="Cardiology video follow-up" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

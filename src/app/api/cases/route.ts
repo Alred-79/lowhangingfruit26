@@ -30,7 +30,7 @@ export async function POST(req: Request) {
   if (!src || typeof src !== "object") return bad("That file does not contain a patient profile.");
   const wrapped = src.profile && typeof src.profile === "object";
   const raw = wrapped ? src.profile : src;
-  if (!Array.isArray(raw.facts) || !raw.patient || !raw.scenario) return bad("That file is not a Rounds patient profile: it needs at least patient, scenario and facts.");
+  if (!Array.isArray(raw.facts) || !raw.patient || !raw.scenario) return bad("That file is not a Poscere patient profile: it needs at least patient, scenario and facts.");
   try {
     const profile = tidyTables(sanitizeProfile(normalizeCase(sanitizeProfile(raw))));
     if (!profile.title) profile.title = `${profile.patient.name || "Imported patient"}`;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { STATUS_LABEL, type EntryStatus, type Relation, type RunView, type StateEntry } from "@/lib/journey/types";
+import { STATUS_LABEL, statusBoard, type EntryStatus, type Relation, type RunView, type StateEntry } from "@/lib/journey/types";
 import { STATUS_COLOR, STATUS_ORDER } from "./shared";
 
 // The shared patient state as a graph: one column per encounter (the existing record first, the
@@ -61,7 +61,8 @@ export default function JourneyGraph({ view, onOpen }: { view: RunView; onOpen: 
   const active = hover ? new Set([hover, ...links.filter((l) => l.from === hover || l.to === hover).flatMap((l) => [l.from, l.to])]) : null;
   const hovered = hover ? pos.get(hover)?.e : null;
   const counts = links.reduce<Record<string, number>>((m, l) => ((m[l.relation] = (m[l.relation] || 0) + 1), m), {});
-  const statusCounts = view.entries.reduce<Record<string, number>>((m, e) => ((m[e.effectiveStatus] = (m[e.effectiveStatus] || 0) + 1), m), {});
+  // Same counting as the run header and the status board (restated open items counted once).
+  const statusCounts: Record<string, number> = statusBoard(view.entries, view.links).counts;
 
   return (
     <div>

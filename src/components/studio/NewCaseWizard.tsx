@@ -288,7 +288,7 @@ export default function NewCaseWizard({ groups, defaultRole }: { groups: { group
   const ways: { id: Way; title: string; text: string }[] = [
     { id: "describe", title: "Describe the patient", text: "Write a paragraph or paste your notes. The guide asks what is missing, then drafts the full case." },
     { id: "form", title: "Fill in a form", text: "Enter the core clinical details field by field. The guide expands them into the full case." },
-    { id: "import", title: "Import a file", text: "Load a patient profile exported from Rounds (JSON)." },
+    { id: "import", title: "Import a file", text: "Load a patient profile exported from Poscere (JSON)." },
   ];
 
   return (
@@ -393,7 +393,7 @@ export default function NewCaseWizard({ groups, defaultRole }: { groups: { group
       )}
 
       {way === "import" && (
-        <Panel title="Import a patient profile" subtitle="Use a JSON file exported from the editor (Export JSON), or any file that follows the Rounds case format. The import is saved as a draft you own.">
+        <Panel title="Import a patient profile" subtitle="Use a JSON file exported from the editor (Export JSON), or any file that follows the Poscere case format. The import is saved as a draft you own.">
           <Input type="file" accept=".json,application/json" disabled={importing} onChange={(e) => e.target.files?.[0] && importFile(e.target.files[0])} />
           {importing && <p className="mt-2 text-sm text-slate-500">Importing...</p>}
           <div className="mt-5 border-t border-slate-100 pt-4">

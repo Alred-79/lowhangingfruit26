@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Mark } from "@/components/Brand";
+import { Logo } from "@/components/Brand";
 import OrbStage from "@/components/landing/OrbStage";
 
 const PROOF = [
@@ -12,11 +12,10 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <div className="grid min-h-full lg:grid-cols-[minmax(0,1.15fr)_minmax(26rem,1fr)]">
       {/* The one brand moment: the disclosure orb. */}
-      <section className="relative hidden overflow-hidden bg-stage text-white lg:flex lg:flex-col" aria-label="About Rounds">
+      <section className="relative hidden overflow-hidden bg-stage text-white lg:flex lg:flex-col" aria-label="About Poscere">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_42%,oklch(0.3_0.05_186/0.55),transparent_70%)]" />
         <div className="relative flex items-center gap-2 px-10 pt-9">
-          <Mark className="h-8 w-8" />
-          <span className="font-display text-xl font-semibold tracking-tight">Rounds</span>
+          <Logo inverse />
         </div>
         <div className="relative grid flex-1 grid-cols-[minmax(0,1fr)] items-center gap-6 px-10 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)]">
           <div className="max-w-md py-8">
@@ -41,10 +40,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       <div className="flex flex-col">
         {/* Phones and narrow windows: a compact brand band instead of the panel. */}
         <div className="bg-stage px-6 pb-6 pt-5 text-white lg:hidden">
-          <div className="flex items-center gap-2">
-            <Mark className="h-7 w-7" />
-            <span className="font-display text-lg font-semibold">Rounds</span>
-          </div>
+          <Logo inverse compact />
           <p className="mt-4 font-display text-[26px] font-semibold leading-tight tracking-[-0.02em]">Practise the visit before the visit.</p>
           <p className="mt-2 text-[14px] leading-relaxed text-white/70">Code decides what the patient reveals; trust unlocks the rest.</p>
         </div>

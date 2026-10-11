@@ -177,13 +177,19 @@ export async function extractStage(run: LoadedRun, stage: Stage, encounterId: st
     addEntry({ ...base, kind: "record", category: "Documents on file", text: `Document reviewed: ${documentHead(d)}${content ? `. ${content}` : ""}`, status: "established", source: "record", evidence: { where: "record", ref: d.id, quote: content || d.title, verified: true } });
     stats.deterministic++;
   }
-  // Faculty-authored patient-versus-record conflicts become disputes the moment the patient's claim is on record.
+  // Faculty-authored patient-versus-record conflicts become disputes once BOTH sides are in the shared
+  // state: the patient's claim (disclosed in this or an earlier encounter) and the record that
+  // contradicts it (on file at the start, or pulled by a check in this or an earlier encounter).
+  // Nobody is credited with noticing a conflict against a record that no one has opened.
   for (const m of enc.c.mismatches || []) {
-    const d = m.factId ? enc.state.disclosed[m.factId] : undefined;
-    if (!d || d.how === "record") continue;
+    if (!m.factId || !enc.state.disclosed[m.factId]) continue;
     const text = `Patient's account ("${m.patientClaim}") does not match the record: ${m.recordEvidence}`;
-    if (already.some((e) => e.text === text)) continue;
-    const target = entriesOf(runId).find((e) => e.factId === m.factId);
+    const state = entriesOf(runId);
+    if (state.some((e) => e.text === text)) continue;
+    const art = m.artifactId ? enc.c.artifacts.find((a) => a.id === m.artifactId) : undefined;
+    const onFile = !art || art.release.when === "start" || enc.state.artifacts[art.id] !== undefined || state.some((e) => e.evidence?.where === "record" && e.evidence.ref === art.id);
+    if (!onFile) continue;
+    const target = state.find((e) => e.factId === m.factId);
     addEntry({ ...base, kind: "disagreement", category: "Patient versus record", text, status: "disputed", source: "record", evidence: { where: "record", ref: m.artifactId || m.id, quote: m.recordEvidence, verified: true }, relatesTo: target?.id, relation: target ? "contradicts" : null });
     stats.deterministic++;
   }
@@ -231,7 +237,8 @@ ${note.trim() || "(none)"}`,
 
   const corpus = approvedCorpus(enc.c, all);
   const byTurn = (turn: number) => spoken.filter((m) => m.turn === turn);
-  const clinicianAt = (turn: number) => spoken.find((m) => m.turn === turn && m.speaker === "student")?.text || "";
+  // The clinician's line that the patient answered: if a turn was sent twice (a dropped connection), the last one counts.
+  const clinicianAt = (turn: number) => spoken.filter((m) => m.turn === turn && m.speaker === "student").pop()?.text || "";
   const locate = (where: string, turn: number | undefined, quote: string, clinicianOnly = false): Evidence | null => {
     if (where === "note") return quoteIn(quote, note) ? { where: "note", quote, verified: true } : null;
     const ok = (m: MessageRow) => (!clinicianOnly || m.speaker === "student") && m.speaker !== "system" && quoteIn(quote, m.text);
@@ -252,7 +259,13 @@ ${note.trim() || "(none)"}`,
     const key = norm(r.text);
     if (seen.has(key)) continue;
     const kind = r.kind as EntryKind;
-    let ev = locate(r.where, r.turn, r.quote || "");
+    // A judgement must rest on the clinician's own words (in the visit or the note). If the quoted words
+    // are the patient's, it is a patient statement in disguise, and those only enter through the ledger.
+    let ev = locate(r.where, r.turn, r.quote || "", kind !== "goal");
+    if (!ev && kind !== "goal" && locate(r.where, r.turn, r.quote || "")) {
+      stats.dropped++;
+      continue;
+    }
     let status: EntryStatus = kind === "open_question" ? "open_question" : kind === "disagreement" ? "disputed" : kind === "uncertainty" ? "uncertain" : kind === "goal" ? "patient_reported" : r.status === "uncertain" ? "uncertain" : "established";
     if (!ev) {
       // No verifiable evidence: claims about what happened are dropped, judgements are kept as uncertain and marked.
@@ -370,12 +383,16 @@ ${note.trim() || "(none)"}`,
     stats.uses++;
   }
   const now = entriesOf(runId).filter((e) => e.stageId === stage.id);
-  for (const c of useCands.filter((x) => !x.learned && keep.has(x.cand))) {
-    if (linkedTurns.has(`${c.turn}:${c.target}`)) continue;
+  // One follow-up per earlier entry per encounter, and only where nothing else in this encounter is already linked to it.
+  const followed = new Set<string>([...linkedTurns].map((k) => k.split(":")[1]));
+  for (const c of useCands.filter((x) => !x.learned && keep.has(x.cand)).sort((x, y) => x.turn - y.turn)) {
+    if (followed.has(c.target)) continue;
     const target = prior.find((e) => e.id === c.target)!;
     if (target.stageOrder <= 0 || created.some((x) => x.relatesTo === target.id) || now.some((e) => e.kind === "follow_up" && e.text.includes(target.text.slice(0, 60)))) continue;
+    followed.add(c.target);
     const ev: Evidence = { where: "visit", turn: c.turn, speaker: "clinician", quote: bestSentence(clinicianAt(c.turn), target.text), verified: true };
-    addEntry({ ...base, kind: "follow_up", text: `Asked about earlier information ("${target.text.slice(0, 160)}"). No new approved finding was recorded from the reply.`, status: "established", source: "clinician", evidence: ev, relatesTo: target.id, relation: "uses" });
+    const asked = (ev.quote || "").includes("?");
+    addEntry({ ...base, kind: "follow_up", text: `${asked ? "Asked about" : "Referred to"} earlier information ("${target.text.slice(0, 160)}"). No new approved finding was recorded from ${asked ? "the reply" : "this exchange"}.`, status: "established", source: "clinician", evidence: ev, relatesTo: target.id, relation: "uses" });
     linkedTurns.add(`${c.turn}:${c.target}`);
     stats.uses++;
   }
@@ -384,7 +401,7 @@ ${note.trim() || "(none)"}`,
 
 // ---------- Checking proposed relations ----------
 
-interface LinkCandidate {
+export interface LinkCandidate {
   type: "uses" | "builds" | "answers" | "contradicts";
   /** The earlier entry. */
   a: string;
@@ -394,8 +411,8 @@ interface LinkCandidate {
   q?: string;
 }
 
-const STOP = new Set("about after again also been being both from have having into just like more most much only other over same some such than that their them then there these they this those very what when where which while with would your patient reports report states stated visit earlier information".split(" "));
-const stems = (t: string) => new Set(norm(t).split(" ").filter((w) => w.length >= 4 && !STOP.has(w)).map((w) => w.slice(0, 5)));
+const STOP = new Set("about after again also been being both from have having into just like more most much only other over same some such than that their them then there these they this those very what when where which while with would your patient patients reports report reported states stated visit earlier information past month months week weeks days daily times year years most something sometimes taking takes take does doing make makes made tell told well really going want need needs help today right about thing things because before".split(" "));
+const stems = (t: string) => new Set(norm(t).split(" ").filter((w) => w.length >= 4 && !STOP.has(w)).map((w) => w.slice(0, 6)));
 const overlap = (x: string, y: string) => {
   const a = stems(x);
   let n = 0;
@@ -405,7 +422,13 @@ const overlap = (x: string, y: string) => {
 
 /** The sentence of a clinician's turn that refers to the given subject, so a quoted link shows the relevant words. */
 export function bestSentence(text: string, about: string): string {
-  const parts = (text || "").split(/(?<=[.?!])\s+/).map((x) => x.trim()).filter(Boolean);
+  // Sentences, without breaking after titles and common abbreviations ("Dr. Lee noticed ...").
+  const parts: string[] = [];
+  for (const piece of (text || "").split(/(?<=[.?!])\s+/).map((x) => x.trim()).filter(Boolean)) {
+    const last = parts[parts.length - 1];
+    if (last && /(?:^|[\s(])(?:Dr|Mr|Mrs|Ms|Prof|St|vs|approx|e\.g|i\.e)\.$/.test(last)) parts[parts.length - 1] = `${last} ${piece}`;
+    else parts.push(piece);
+  }
   if (parts.length <= 1) return (text || "").slice(0, 320);
   let best = -1;
   let score = 0;
@@ -428,27 +451,55 @@ export function bestSentence(text: string, about: string): string {
  * whole encounter. If the check itself fails, a relation is kept only on plain word overlap, and
  * "answers" / "contradicts" are not kept at all: a missing link is better than a false one.
  */
-async function verifyLinks(cands: LinkCandidate[]): Promise<Set<number>> {
+export async function verifyLinks(cands: LinkCandidate[]): Promise<Set<number>> {
   const keep = new Set<number>();
   if (!cands.length) return keep;
   try {
-    const out = await chatJSON<{ results: { id: number; keep: boolean }[] }>({
-      model: MODELS.fast,
-      maxTokens: 1500,
+    const out = await chatJSON<{ results: { id: number; subject_earlier: string; subject_new: string; match: string; words_refer: boolean }[] }>({
+      model: MODELS.chat,
+      maxTokens: 4000,
       temperature: 0,
-      schema: { type: "object", required: ["results"], properties: { results: { type: "array", items: { type: "object", required: ["id", "keep"], properties: { id: { type: "integer" }, keep: { type: "boolean" } } } } } },
-      system: `You check proposed links between entries in a patient's shared clinical record. Be strict: a wrong link is worse than a missing one. Return one result per candidate id.
+      schema: {
+        type: "object",
+        required: ["results"],
+        properties: {
+          results: {
+            type: "array",
+            items: {
+              type: "object",
+              required: ["id", "subject_earlier", "subject_new", "match", "words_refer"],
+              properties: {
+                id: { type: "integer" },
+                subject_earlier: { type: "string", description: "The specific subject of EARLIER in 2-5 words, e.g. 'weight loss', 'metformin adherence', 'ankle swelling'" },
+                subject_new: { type: "string", description: "The specific subject of NEW in 2-5 words ('none' when there is no NEW)" },
+                match: { type: "string", enum: ["same", "related", "different"], description: "same = the test for this candidate's type is clearly met; related = only loosely connected (same body system, same general theme such as 'eating' or 'medicines', cause and possible effect); different = unconnected" },
+                words_refer: { type: "boolean", description: "USES only: the clinician's WORDS name or unmistakably point at the subject of EARLIER. true for other types." },
+              },
+            },
+          },
+        },
+      },
+      system: `You check proposed links between entries in a patient's shared clinical record. Be strict: a wrong link is worse than a missing one, and "related" is not "same". Return one result per candidate id. First name the subject of each side, then judge.
 
-USES (a clinician's words drew on an EARLIER entry): keep = true only if the clinician's WORDS are specifically about the subject of the EARLIER entry (the same medicine, symptom, measurement, test, habit or document). When a NEW entry is given, it must also be about that same subject and be what those words asked for. A general opener ("how have you been?"), a question on another topic, or a result that concerns something else is false. Being about the same patient or the same visit is not enough.
+USES (a clinician's WORDS drew on an EARLIER entry, and NEW is what the patient or the chart gave back):
+- words_refer: true only if WORDS name the subject of EARLIER or unmistakably point at it (the same medicine, symptom, measurement, test, habit or document, by name or plain synonym). A general opener ("how have you been?", "what worries you most?") or a question on another topic ("what does a typical day of eating look like?" for an entry about weight loss) is false, even when the topics are clinically connected.
+- match: "same" only if NEW is information about that SAME specific subject. Judge NEW against EARLIER, ignoring WORDS. If WORDS covered two topics and NEW answers the other one: "different". When EARLIER is a document or list with several items (a medication list, a lab panel), NEW is "same" only if it concerns an item that document actually contains.
+  Examples: EARLIER weight trend / NEW how often he misses his pills = different. EARLIER medication list / NEW nausea from metformin = same. EARLIER medication list / NEW pharmacy refill record for those medicines = same. EARLIER lab panel with HbA1c / NEW pharmacy refill record = different. EARLIER nausea from metformin / NEW skips breakfast, relies on canned soup = related. EARLIER ankle swelling noted in a clinic letter / NEW ankle swelling by evening = same. EARLIER patient's goal / NEW a lab result = different.
+- When there is no NEW, only words_refer matters: it is true when any sentence of WORDS mentions the subject of EARLIER (for example "I understand you've been dealing with some weight loss" for an entry about weight loss), even if the question that follows is broader.
 
-BUILDS (NEW is a clinician's judgement, recommendation or question that rests on EARLIER): keep = true only if NEW is clearly about the same subject as EARLIER (the same medicine, symptom, result, habit or concern). False if they merely concern the same patient.
+BUILDS (NEW is a clinician's judgement, recommendation or question resting on EARLIER): "same" only if NEW is clearly about the subject of EARLIER. words_refer = true.
 
-ANSWERS (NEW supplies what EARLIER says is missing): keep = true only if NEW itself states the missing information. A recommendation, referral, plan or intention to find out, or a restatement of the question, is false.
+ANSWERS (NEW supplies what EARLIER says is missing): "same" only if NEW itself states the missing information. A recommendation, referral, plan or intention to find out, or a restatement of the question, is "different". words_refer = true.
 
-CONTRADICTS: keep = true only if EARLIER and NEW make incompatible factual claims about the same specific thing (for example: takes it every day / refill record shows long gaps). A remark that something is unusual, a different emphasis, an added concern or an interpretation is false.`,
-      messages: [{ role: "user", text: cands.map((c, i) => `#${i} ${c.type.toUpperCase()}\nEARLIER: ${c.a.slice(0, 400)}\n${c.q ? `WORDS: ${c.q.slice(0, 500)}\n` : ""}NEW: ${c.b ? c.b.slice(0, 400) : "(none: only check that the words are about the earlier entry)"}`).join("\n\n") }],
+CONTRADICTS: "same" only if EARLIER and NEW make incompatible factual claims about the same specific thing (takes it every day / refill record shows long gaps). A remark that something is unusual, a different emphasis, an added concern or an interpretation is "different". words_refer = true.`,
+      messages: [{ role: "user", text: cands.map((c, i) => `#${i} ${c.type.toUpperCase()}\nEARLIER: ${c.a.slice(0, 500)}\n${c.q ? `WORDS: ${c.q.slice(0, 600)}\n` : ""}NEW: ${c.b ? c.b.slice(0, 500) : "(none)"}`).join("\n\n") }],
     });
-    for (const r of arr<{ id: number; keep: boolean }>(out.results)) if (r.keep === true && cands[r.id]) keep.add(r.id);
+    for (const r of arr<{ id: number; match: string; words_refer: boolean }>(out.results)) {
+      const c = cands[r.id];
+      if (!c) continue;
+      // With nothing new to compare, the only question is whether the clinician's words point at the earlier entry.
+      if (c.type === "uses" && !c.b ? r.words_refer === true : r.match === "same" && r.words_refer !== false) keep.add(r.id);
+    }
   } catch (e) {
     console.error("[journey] link check failed; falling back to word overlap", e);
     cands.forEach((c, i) => {

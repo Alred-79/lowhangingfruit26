@@ -64,7 +64,7 @@ function handle(user: User, m: Rpc): object | null {
   if (m.id === undefined) return null; // notification
   switch (m.method) {
     case "initialize":
-      return ok({ protocolVersion: (m.params?.protocolVersion as string) || "2025-06-18", capabilities: { tools: {} }, serverInfo: { name: "rounds-episodes", version: "1.0.0" }, instructions: "Search and read simulation episodes and patient records from Rounds. Results respect the key owner's permissions." });
+      return ok({ protocolVersion: (m.params?.protocolVersion as string) || "2025-06-18", capabilities: { tools: {} }, serverInfo: { name: "poscere-episodes", version: "1.0.0" }, instructions: "Search and read simulation episodes and patient records from Poscere. Results respect the key owner's permissions." });
     case "ping":
       return ok({});
     case "tools/list":

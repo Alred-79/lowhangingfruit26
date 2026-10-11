@@ -4,7 +4,7 @@ import path from "node:path";
 import { get, newId, run } from "./db";
 import type { CaseProfile } from "./types";
 
-const DEMO_PASSWORD = "rounds-demo";
+const DEMO_PASSWORD = "poscere-demo";
 
 /** Idempotent: loads seed cases, clinician personas and demo accounts that are not yet in the DB. */
 export function seed() {
@@ -61,13 +61,18 @@ export function seed() {
     }
   }
   const demo = [
-    { email: "faculty@rounds.demo", name: "Dr. Dana Faculty", role: "faculty", profession: "medicine" },
-    { email: "student@rounds.demo", name: "Sam Student", role: "student", profession: "medicine" },
-    { email: "dietetics@rounds.demo", name: "Riley Dietetics", role: "student", profession: "dietetics" },
-    { email: "nursing@rounds.demo", name: "Noor Nursing", role: "student", profession: "nursing" },
+    { email: "faculty@poscere.demo", legacyEmail: "faculty@rounds.demo", name: "Dr. Dana Faculty", role: "faculty", profession: "medicine" },
+    { email: "student@poscere.demo", legacyEmail: "student@rounds.demo", name: "Sam Student", role: "student", profession: "medicine" },
+    { email: "dietetics@poscere.demo", legacyEmail: "dietetics@rounds.demo", name: "Riley Dietetics", role: "student", profession: "dietetics" },
+    { email: "nursing@poscere.demo", legacyEmail: "nursing@rounds.demo", name: "Noor Nursing", role: "student", profession: "nursing" },
   ];
   for (const d of demo) {
     if (get("SELECT 1 FROM users WHERE email = ?", d.email)) continue;
+    const legacy = get<{ id: string }>("SELECT id FROM users WHERE email = ?", d.legacyEmail);
+    if (legacy) {
+      run("UPDATE users SET email = ?, password_hash = ? WHERE id = ?", d.email, bcrypt.hashSync(DEMO_PASSWORD, 10), legacy.id);
+      continue;
+    }
     run("INSERT INTO users (id, email, password_hash, name, role, profession_id) VALUES (?,?,?,?,?,?)", newId("u_"), d.email, bcrypt.hashSync(DEMO_PASSWORD, 10), d.name, d.role, d.profession);
   }
   // ===== Care Journeys (Challenge 2): ready-made published journeys. Idempotent. =====

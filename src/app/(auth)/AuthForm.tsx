@@ -125,7 +125,7 @@ export default function AuthForm({ mode, groups, next, demo }: { mode: "login" |
         <div className="mt-8 rounded-xl border border-line bg-surface-2 p-3">
           <div className="mb-2 flex items-baseline justify-between px-1">
             <span className="text-[13px] font-semibold text-ink">Demo accounts</span>
-            <span className="text-[12px] text-ink-3">password rounds-demo</span>
+            <span className="text-[12px] text-ink-3">password poscere-demo</span>
           </div>
           <ul className="space-y-1.5">
             {demo.map((d) => (

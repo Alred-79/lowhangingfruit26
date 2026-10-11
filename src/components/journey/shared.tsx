@@ -171,7 +171,7 @@ export function EntryRow({ entry, onOpen, showWho = true, dense }: { entry: Stat
     <button type="button" onClick={() => onOpen?.(entry.id)} className={cx("flex w-full items-start gap-2.5 rounded-lg px-2.5 text-left transition-colors hover:bg-slate-50", dense ? "py-1.5" : "py-2")}>
       <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: STATUS_COLOR[entry.effectiveStatus] }} title={STATUS_LABEL[entry.effectiveStatus]} />
       <span className="min-w-0 flex-1">
-        <span className="text-sm text-slate-800">{entry.text}</span>
+        <span className={cx("text-sm text-slate-800", entry.text.length > 260 && "line-clamp-3")} title={entry.text.length > 260 ? "Select to read the whole entry" : undefined}>{entry.text}</span>
         <span className="mt-0.5 flex flex-wrap items-center gap-x-2 text-[11px] text-slate-500">
           <span>{KIND_LABEL[entry.kind] || entry.kind}</span>
           <span>{STATUS_LABEL[entry.effectiveStatus]}</span>
@@ -223,7 +223,7 @@ export function ProvenancePanel({ view, entryId, onOpen, onClose }: { view: RunV
           <h2 className="text-[13px] font-semibold text-brand-700">Where this came from</h2>
           <button onClick={onClose} className="press min-h-9 rounded-lg px-2.5 text-[13.5px] text-ink-3 hover:bg-slate-100 hover:text-ink">Close</button>
         </div>
-        <p className="mt-2 font-display text-[19px] font-semibold leading-snug text-ink">{e.text}</p>
+        <p className={cx("mt-2 font-display font-semibold text-ink", e.text.length > 260 ? "text-[15px] leading-relaxed" : "text-[19px] leading-snug")}>{e.text}</p>
         <dl className="mt-4 divide-y divide-slate-100 text-sm">
           {rows.map(([k, v]) => (
             <div key={k} className="grid grid-cols-[8.5rem_1fr] gap-2 py-1.5">
@@ -236,7 +236,7 @@ export function ProvenancePanel({ view, entryId, onOpen, onClose }: { view: RunV
           <div className="mt-4">
             <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500">Evidence</h3>
             <p className="mt-1 text-xs text-slate-500">{evidenceWhere(e)}{e.evidence.verified === false ? " · the cited words could not be found, so this entry was downgraded" : e.evidence.quote ? " · quote verified against the source" : ""}</p>
-            {e.evidence.quote && <blockquote className="mt-1.5 rounded-xl bg-brand-50 px-3.5 py-2.5 text-[14px] italic leading-relaxed text-ink ring-1 ring-inset ring-brand-200">&ldquo;{e.evidence.quote}&rdquo;</blockquote>}
+            {e.evidence.quote && !(e.evidence.where === "record" && e.text.includes(e.evidence.quote)) && <blockquote className="mt-1.5 rounded-xl bg-brand-50 px-3.5 py-2.5 text-[14px] italic leading-relaxed text-ink ring-1 ring-inset ring-brand-200">&ldquo;{e.evidence.quote}&rdquo;</blockquote>}
           </div>
         )}
         {(e.meta?.unverifiedValues?.length || e.meta?.flags?.length || e.meta?.owner) && (
@@ -351,11 +351,19 @@ export function TraceTable({ evaluation, compact }: { evaluation: TraceEvaluatio
   );
 }
 
-export function Spinner({ label }: { label: string }) {
+/** A spinner with a label. With `hint` it also says roughly how long the step takes and counts the seconds so far. */
+export function Spinner({ label, hint }: { label: string; hint?: string }) {
+  const [secs, setSecs] = useState(0);
+  useEffect(() => {
+    if (!hint) return;
+    const t = setInterval(() => setSecs((x) => x + 1), 1000);
+    return () => clearInterval(t);
+  }, [hint]);
   return (
-    <span className="inline-flex items-center gap-2 text-sm text-slate-600">
-      <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-slate-300 border-t-brand-600" />
+    <span className="inline-flex flex-wrap items-center gap-2 text-sm text-slate-600">
+      <span className="h-3.5 w-3.5 shrink-0 animate-spin rounded-full border-2 border-slate-300 border-t-brand-600" />
       {label}
+      {hint && <span className="text-xs text-slate-500">{hint} · {secs < 60 ? `${secs} s` : `${Math.floor(secs / 60)} min ${secs % 60} s`} so far</span>}
     </span>
   );
 }

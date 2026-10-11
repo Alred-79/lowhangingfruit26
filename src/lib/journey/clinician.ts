@@ -2,7 +2,7 @@ import { run as sql } from "../db";
 import { createEncounter, loadEncounter, messagesOf, runAction, runTurn } from "../engine/encounter";
 import { chatJSON, MODELS } from "../llm";
 import { aliasing, approvedCorpus, arr, clean, handoffTo, inboxFor, patientMemory, renderSbar, renderState, unverifiedValues } from "./context";
-import { clinician, entriesOf, handoffsOf, learnerLine, personaBrief, resolveProfession, studentNameOf, type LoadedRun } from "./store";
+import { clinician, entriesOf, firstNameOf, handoffsOf, learnerLine, personaBrief, resolveProfession, studentNameOf, type LoadedRun } from "./store";
 import { stageBrief, stagePatientReason, stageReason, stageTasks, type Sbar, type Stage, type StateEntry } from "./types";
 
 export type StageEvent =
@@ -70,11 +70,15 @@ const SETTING_RULES = `THE SETTING (fixed)
 - In this visit you can talk with the patient and review the checks listed for you. That is all. You cannot admit the patient, send them to hospital, start, stop or change a medicine, or order any test that is not in the list of available checks.
 - Anything beyond that is a RECOMMENDATION to the team or to the responsible prescriber ("I recommend the prescriber reviews...", "I suggest an in-person assessment if..."), never something you have done, decided or arranged. Never write or say "I am admitting", "admit for", "I have ordered", "I started", "I stopped".
 - The shared record is authoritative. Never contradict it, and never correct the patient's medication list from your own assumptions. If the patient uses an everyday name ("my water pill"), find the medicine on the medication list on file before you comment; if you cannot match it, ask, do not tell the patient they are wrong.
-- Your assessment must not go beyond the evidence in the shared record and the confirmed findings of this visit. Do not escalate on the strength of something unconfirmed.`;
+- Your assessment must not go beyond the evidence in the shared record and the confirmed findings of this visit. Do not escalate on the strength of something unconfirmed.
+- State as fact only what the record or a confirmed finding says. Your explanation of it is a hypothesis: word it as possible ("may be a duplication; needs clarifying with the prescriber"), never as settled ("is an error"), and say what would confirm it.`;
 
 function clinicianSystem(run: LoadedRun, stage: Stage, turns: number) {
   const cl = clinician(stage.clinicianId);
   const p = run.c.patient;
+  const student = studentNameOf(run.row.user_id);
+  const studentStage = run.stages.find((s) => s.id === run.row.student_stage_id);
+  const first = firstNameOf(student);
   return `You are ${cl.name}, conducting a telehealth visit with a patient as part of an interprofessional care team in a clinical training simulation. A learner is watching to see how a good colleague works. Stay in role.
 
 WHO YOU ARE
@@ -85,6 +89,9 @@ The patient: ${p.name}, ${p.age}, ${p.sex}. Encounter ${stage.order} of ${run.st
 Your purpose: ${stage.focus}
 
 ${SETTING_RULES}
+
+YOUR COLLEAGUES
+${run.stages.filter((s) => s.id !== stage.id).map((s) => (s.id === studentStage?.id ? `- ${student}, the ${s.roleTitle.toLowerCase()} in this journey, is a student. To the patient, call them "my colleague ${first}" or "the ${s.roleTitle.toLowerCase()}". Never "Dr. ${student.split(" ").pop()}", never "Dr." at all, and never treat any part of their name as a profession.` : `- ${clinician(s.clinicianId).name}, the ${s.roleTitle.toLowerCase()}.`)).join("\n")}
 
 HOW TO WORK
 - You have ${turns} exchanges. Use them: open by introducing yourself and your role, then go where your profession adds something the team does not have yet.

@@ -89,7 +89,7 @@ export default function ShellNav({ faculty, name, roleLabel }: { faculty: boolea
       {/* Desktop sidebar */}
       <aside className="hidden border-r border-line bg-surface-2 lg:sticky lg:top-0 lg:flex lg:h-dvh lg:flex-col">
         <div className="px-4 pb-4 pt-5">
-          <Link href={faculty ? "/faculty" : "/student"} aria-label="Rounds home">
+          <Link href={faculty ? "/faculty" : "/student"} aria-label="Poscere home">
             <Logo />
           </Link>
         </div>
@@ -117,7 +117,7 @@ export default function ShellNav({ faculty, name, roleLabel }: { faculty: boolea
 
       {/* Small screens: top bar + menu sheet */}
       <header className="flex h-14 items-center justify-between border-b border-line bg-surface px-4 lg:hidden">
-        <Link href={faculty ? "/faculty" : "/student"} aria-label="Rounds home">
+        <Link href={faculty ? "/faculty" : "/student"} aria-label="Poscere home">
           <Logo />
         </Link>
         <button onClick={() => setOpen(true)} className="press grid h-11 w-11 place-items-center rounded-lg text-ink-2 hover:bg-slate-100" aria-label="Open menu" aria-expanded={open}>

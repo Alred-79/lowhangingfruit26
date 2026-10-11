@@ -62,7 +62,7 @@ function GuideNote({ children }: { children: React.ReactNode }) {
 function Toggle({ id, checked, onChange, disabled, label, help }: { id: string; checked: boolean; onChange: (v: boolean) => void; disabled?: boolean; label: string; help: string }) {
   return (
     <label htmlFor={id} className={cx("flex items-start gap-2.5 rounded-md border border-slate-200 p-3", disabled ? "bg-slate-50 text-slate-400" : "cursor-pointer hover:bg-slate-50")}>
-      <input id={id} type="checkbox" className="mt-0.5 h-4 w-4 accent-[#0f6f66]" checked={checked} disabled={disabled} onChange={(e) => onChange(e.target.checked)} />
+      <input id={id} type="checkbox" className="mt-0.5 h-4 w-4 accent-[#2563eb]" checked={checked} disabled={disabled} onChange={(e) => onChange(e.target.checked)} />
       <span>
         <span className={cx("block text-sm font-medium", disabled ? "text-slate-500" : "text-slate-800")}>{label}</span>
         <span className="block text-xs text-slate-500">{help}</span>
@@ -342,7 +342,7 @@ export default function AssignmentBuilder({
                           <input
                             id={`case-${c.id}`}
                             type="checkbox"
-                            className="mt-1 h-4 w-4 accent-[#0f6f66]"
+                            className="mt-1 h-4 w-4 accent-[#2563eb]"
                             checked={on}
                             onChange={(e) => setCaseIds((ids) => (e.target.checked ? [...ids, c.id] : ids.filter((x) => x !== c.id)))}
                           />

@@ -6,7 +6,7 @@ import { bad, longJson } from "@/lib/http";
 import { chatJSON, MODELS } from "@/lib/llm";
 import { profession } from "@/lib/professions";
 
-const SYSTEM = `You help a health-professions instructor set up an assignment in Rounds, a simulator where students hold a telehealth visit with a virtual patient and then get rubric feedback.
+const SYSTEM = `You help a health-professions instructor set up an assignment in Poscere, a simulator where students hold a telehealth visit with a virtual patient and then get rubric feedback.
 
 You propose a setup; the instructor reviews and edits every part before saving. Choose only from the patients and care journeys listed. If nothing listed fits what the instructor asked for, pick the closest and say plainly in "gaps" what is missing; never invent a patient.
 

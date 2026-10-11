@@ -536,7 +536,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
 
       {/* Top bar */}
       <header className="flex min-h-14 shrink-0 flex-wrap items-center gap-x-3 gap-y-1.5 border-b border-line bg-surface px-3 py-2 sm:px-4">
-        <Link href="/" aria-label="Rounds home" className="shrink-0">
+        <Link href="/" aria-label="Poscere home" className="shrink-0">
           <Mark className="h-7 w-7" />
         </Link>
         <div className="min-w-0 flex-1">

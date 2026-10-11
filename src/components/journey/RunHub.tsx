@@ -2,15 +2,24 @@
 
 import { Check, GitBranch } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { Badge, Button, Card, CardHeader, LinkButton, Textarea, cx } from "@/components/ui";
-import { SBAR_FIELDS, STATUS_LABEL, type HuddleItem, type RunView, type Sbar, type StageView, type TraceEvaluation } from "@/lib/journey/types";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Badge, Button, Card, CardHeader, Textarea, cx } from "@/components/ui";
+import { SBAR_FIELDS, STATUS_LABEL, statusBoard, type HuddleItem, type RunView, type Sbar, type StageView, type TraceEvaluation } from "@/lib/journey/types";
 import ConsultPanel from "./ConsultPanel";
 import FinalView from "./FinalView";
 import JourneyGraph from "./JourneyGraph";
 import { EntryRow, post, ProvenancePanel, SbarCard, Spinner, StatusBadge, TraceTable, Transcript, useRun, type Live } from "./shared";
 
 type Step = string; // stage id | "huddle" | "final"
+
+/** A plain link styled as a button. Starting or continuing the visit must never wait on a request or on client routing. */
+function VisitLink({ href, small, children }: { href: string; small?: boolean; children: React.ReactNode }) {
+  return (
+    <a href={href} className={cx("inline-flex items-center justify-center gap-1.5 rounded-md bg-brand-600 font-medium text-white transition-colors hover:bg-brand-700", small ? "px-3 py-1.5 text-sm" : "px-4 py-2 text-sm")}>
+      {children}
+    </a>
+  );
+}
 
 function StepDot({ state }: { state: "done" | "now" | "todo" | "error" }) {
   return (
@@ -52,7 +61,7 @@ function AiStage({ view, s, live, onOpen }: { view: RunView; s: StageView; live:
           action={lines.length > 0 ? <Button size="sm" variant="secondary" onClick={() => setShowTalk((v) => !v)}>{showTalk ? "Hide the conversation" : "Show the conversation"}</Button> : undefined}
         />
         <div className="p-4">
-          {s.status === "pending" && <Spinner label="Waiting for the earlier encounter to finish" />}
+          {s.status === "pending" && <p className="text-sm text-slate-500">This visit starts when the encounter before it has finished and handed off.</p>}
           {showTalk && lines.length > 0 && (
             <div ref={box} className="max-h-[26rem] overflow-y-auto pr-1">
               <Transcript lines={lines} clinician={s.clinicianName} patient={view.patient.name} />
@@ -60,7 +69,7 @@ function AiStage({ view, s, live, onOpen }: { view: RunView; s: StageView; live:
           )}
           {running && s.status !== "pending" && (
             <div className="mt-3 flex flex-wrap items-center gap-3">
-              <Spinner label={live.stageId === s.stage.id && live.phase ? live.phase : lines.length ? "The visit is in progress" : `${s.clinicianName} is reading the record and the handoff`} />
+              <Spinner label={live.stageId === s.stage.id && live.phase ? live.phase : lines.length ? "The visit is in progress" : `${s.clinicianName} is reading the record and the handoff`} hint="A colleague's visit, note and handoff take about two minutes" />
               <span className="text-xs text-slate-500">You can read along or wait: the visit continues on its own and the handoff appears here when it is done.</span>
             </div>
           )}
@@ -100,14 +109,20 @@ function AiStage({ view, s, live, onOpen }: { view: RunView; s: StageView; live:
 
 // ---------- The learner's own encounter ----------
 
-function SbarForm({ view, s, refresh }: { view: RunView; s: StageView; refresh: () => void }) {
+function SbarForm({ view, s, refresh, onSent }: { view: RunView; s: StageView; refresh: () => void; onSent: () => void }) {
   const [sbar, setSbar] = useState<Sbar>({ situation: "", background: "", assessment: "", recommendation: "" });
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
+  const [confirm, setConfirm] = useState(false);
   const next = view.stages.find((x) => x.stage.order === s.stage.order + 1);
-  async function submit() {
+  const empty = SBAR_FIELDS.filter((f) => !sbar[f.key].trim()).map((f) => f.label);
+  async function submit(force = false) {
+    // An SBAR with a blank section still goes out if the learner insists, but never by accident.
+    if (empty.length && !force) return setConfirm(true);
+    setConfirm(false);
     setBusy(true);
     setErr("");
+    onSent(); // stay on this page so the review of the handoff is seen before the next encounter
     const r = await post<{ evaluation: TraceEvaluation }>(`/api/journeys/runs/${view.id}/handoff`, sbar);
     setBusy(false);
     if (r.error) return setErr(r.error);
@@ -120,12 +135,21 @@ function SbarForm({ view, s, refresh }: { view: RunView; s: StageView; refresh: 
         {SBAR_FIELDS.map((f) => (
           <div key={f.key}>
             <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-600">{f.label}</label>
-            <Textarea rows={3} value={sbar[f.key]} onChange={(e) => setSbar({ ...sbar, [f.key]: e.target.value })} placeholder={f.prompt} />
+            <Textarea rows={3} value={sbar[f.key]} onChange={(e) => { setSbar({ ...sbar, [f.key]: e.target.value }); setConfirm(false); }} placeholder={f.prompt} />
           </div>
         ))}
+        {confirm && empty.length > 0 && (
+          <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+            <p><span className="font-semibold">{empty.join(" and ")} {empty.length === 1 ? "is" : "are"} empty.</span> {empty.includes("Recommendation") ? `Without a Recommendation ${next ? next.clinicianName : "the team"} will not know what you need from them. ` : ""}Send the handoff like this?</p>
+            <div className="mt-2 flex gap-2">
+              <Button size="sm" variant="secondary" onClick={() => setConfirm(false)}>Keep writing</Button>
+              <Button size="sm" onClick={() => submit(true)}>Send with {empty.length === 1 ? "that section" : "those sections"} empty</Button>
+            </div>
+          </div>
+        )}
         <div className="flex flex-wrap items-center gap-3">
-          <Button onClick={submit} disabled={busy || !Object.values(sbar).some((v) => v.trim())}>Send handoff</Button>
-          {busy && <Spinner label="Sending and reviewing your handoff" />}
+          <Button onClick={() => submit()} disabled={busy || confirm || !Object.values(sbar).some((v) => v.trim())}>Send handoff</Button>
+          {busy && <Spinner label="Sending your handoff and reviewing it against the communication behaviours" hint="Usually 20 to 40 seconds" />}
           {err && <span className="text-sm text-rose-700">{err}</span>}
         </div>
       </div>
@@ -133,7 +157,7 @@ function SbarForm({ view, s, refresh }: { view: RunView; s: StageView; refresh: 
   );
 }
 
-function StudentStage({ view, s, onOpen, refresh }: { view: RunView; s: StageView; onOpen: (id: string) => void; refresh: () => void }) {
+function StudentStage({ view, s, onOpen, refresh, onSent, onContinue, phase }: { view: RunView; s: StageView; onOpen: (id: string) => void; refresh: () => void; onSent: () => void; onContinue: (() => void) | null; phase: string }) {
   const received = view.handoffs.filter((h) => h.toStage === s.stage.id).pop();
   const mine = view.entries.filter((e) => e.stageId === s.stage.id);
   const handoff = view.handoffs.find((h) => h.fromStage === s.stage.id);
@@ -150,11 +174,11 @@ function StudentStage({ view, s, onOpen, refresh }: { view: RunView; s: StageVie
           {s.status === "pending" && <p className="text-sm text-slate-500">{owner ? "Your visit opens when the colleagues before you have finished and handed off." : "Not started yet."}</p>}
           {s.status === "ready" && !scored && s.encounterStatus !== "submitted" && owner && (
             <div className="flex flex-wrap items-center gap-3">
-              <LinkButton href={`/encounter/${s.encounterId}`}>{s.transcript.length ? "Continue your visit" : `Start your visit with ${view.patient.name}`}</LinkButton>
+              <VisitLink href={`/encounter/${s.encounterId}`}>{s.transcript.length ? "Continue your visit" : `Start your visit with ${view.patient.name}`}</VisitLink>
               <span className="text-xs text-slate-500">The chart has a Care team tab with everything below, and you can page a colleague from there.</span>
             </div>
           )}
-          {s.status === "ready" && (scored || s.encounterStatus === "submitted") && (s.error ? <p className="text-sm text-rose-700">Updating the shared state failed: {s.error}</p> : <Spinner label="Adding what you found to the shared patient state" />)}
+          {s.status === "ready" && (scored || s.encounterStatus === "submitted") && (s.error ? <p className="text-sm text-rose-700">Updating the shared state failed: {s.error}. Use &ldquo;Try this stage again&rdquo; above.</p> : <Spinner label={phase || (s.encounterStatus === "submitted" ? "Your visit is being scored; then what you found is added to the shared patient state" : "Reading your visit and note, and adding what you found to the shared patient state")} hint="Usually 30 to 60 seconds" />)}
           {scored && s.encounterId && owner && <Link href={`/encounter/${s.encounterId}/feedback`} className="text-sm font-medium text-brand-700 hover:underline">See the feedback on your visit with the patient</Link>}
         </div>
       </Card>
@@ -171,7 +195,7 @@ function StudentStage({ view, s, onOpen, refresh }: { view: RunView; s: StageVie
         </>
       )}
 
-      {s.status === "awaiting_handoff" && owner && <SbarForm view={view} s={s} refresh={refresh} />}
+      {s.status === "awaiting_handoff" && owner && <SbarForm view={view} s={s} refresh={refresh} onSent={onSent} />}
 
       {mine.length > 0 && (
         <Card>
@@ -187,7 +211,14 @@ function StudentStage({ view, s, onOpen, refresh }: { view: RunView; s: StageVie
       )}
       {handoff && (
         <div className="space-y-3">
+          {onContinue && (
+            <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-brand-200 bg-brand-50 px-4 py-2.5 text-sm text-brand-900">
+              <span><span className="font-semibold">Your handoff was sent.</span> {handoff.evaluation ? "The review of your SBAR is below. " : "The review of your SBAR appears below in a moment. "}The journey is already continuing in the background.</span>
+              <Button size="sm" onClick={onContinue}>Continue to what happens next</Button>
+            </div>
+          )}
           <SbarCard handoff={handoff} title={owner ? "Your SBAR handoff" : `SBAR handoff from ${handoff.authorName}`} />
+          {!handoff.evaluation && owner && <Spinner label="Reviewing your handoff against the communication behaviours" hint="Usually 20 to 40 seconds" />}
           {handoff.evaluation && (
             <Card>
               <CardHeader title="Review of the handoff" subtitle="Each communication behaviour, whether it was observed, where, and what to do next time." />
@@ -256,7 +287,7 @@ function HuddleItemCard({ view, item, onOpen, refresh }: { view: RunView; item: 
             <Textarea rows={2} value={text} onChange={(e) => setText(e.target.value)} placeholder="How would you settle this? Say what you think, what it rests on, and who should own any follow-up. If it cannot be settled yet, say what is missing." />
             <div className="flex items-center gap-3">
               <Button size="sm" onClick={send} disabled={busy || !text.trim()}>Put it to the team</Button>
-              {busy && <Spinner label="The team is responding" />}
+              {busy && <Spinner label="The colleague best placed to answer is responding, and the outcome is being recorded" hint="Usually 10 to 20 seconds" />}
               {err && <span className="text-xs text-rose-700">{err}</span>}
             </div>
           </div>
@@ -268,7 +299,7 @@ function HuddleItemCard({ view, item, onOpen, refresh }: { view: RunView; item: 
   );
 }
 
-function HuddlePanel({ view, onOpen, refresh }: { view: RunView; onOpen: (id: string) => void; refresh: () => void }) {
+function HuddlePanel({ view, onOpen, refresh, phase }: { view: RunView; onOpen: (id: string) => void; refresh: () => void; phase: string }) {
   const [busy, setBusy] = useState("");
   const [err, setErr] = useState("");
   const ready = view.stages.every((s) => s.status === "complete");
@@ -277,9 +308,9 @@ function HuddlePanel({ view, onOpen, refresh }: { view: RunView; onOpen: (id: st
     setBusy(action);
     setErr("");
     const r = await post(`/api/journeys/runs/${view.id}/huddle`, { action });
-    setBusy("");
     if (r.error) setErr(r.error);
-    refresh();
+    await refresh();
+    setBusy("");
   }
   if (!ready) return <Card className="p-4 text-sm text-slate-500">The huddle opens after the last encounter. The team will reconcile whatever is still disputed, uncertain or unanswered.</Card>;
   if (!h)
@@ -287,11 +318,11 @@ function HuddlePanel({ view, onOpen, refresh }: { view: RunView; onOpen: (id: st
       <Card>
         <CardHeader title="Team huddle" subtitle="Everyone who saw the patient, together, outside the handoff order." />
         <div className="space-y-3 p-4 text-sm text-slate-700">
-          <p>The agenda is every entry in the shared state that is still disputed, unanswered or uncertain. Each colleague gives a position; you propose how to settle each item; the outcome is recorded as a new entry linked to the original, so the trail is kept.</p>
+          <p>The agenda is drawn from the entries in the shared state that are still disputed, unanswered or uncertain, the most important for the patient&apos;s safety first. Each colleague gives a position; you propose how to settle each item; the outcome is recorded as a new entry linked to the original, so the trail is kept.</p>
           {view.viewerIsOwner && (
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <Button onClick={() => act("start")} disabled={!!busy}>Open the huddle</Button>
-              {busy && <Spinner label="Colleagues are preparing their positions" />}
+              {busy && <Spinner label="Choosing the agenda by clinical importance; each colleague is preparing a position from the shared record" hint="Usually 30 to 60 seconds" />}
               {err && <span className="text-rose-700">{err}</span>}
             </div>
           )}
@@ -299,6 +330,7 @@ function HuddlePanel({ view, onOpen, refresh }: { view: RunView; onOpen: (id: st
       </Card>
     );
   const done = h.items.filter((i) => i.outcome).length;
+  const writing = h.status === "closed" && view.status !== "complete" && !view.error;
   return (
     <div className="space-y-4">
       <Card>
@@ -308,15 +340,20 @@ function HuddlePanel({ view, onOpen, refresh }: { view: RunView; onOpen: (id: st
           {h.status === "open" && view.viewerIsOwner && (
             <div className="flex flex-wrap items-center gap-3">
               <Button onClick={() => act("close")} disabled={!!busy}>{done < h.items.length ? "Close the huddle with items left open" : "Close the huddle and write the care plan"}</Button>
-              {busy === "close" && <Spinner label="Writing the integrated care plan and your evaluation (about a minute)" />}
+              {busy === "close" && <Spinner label="Closing the huddle" />}
               {err && <span className="text-sm text-rose-700">{err}</span>}
             </div>
           )}
-          {h.status === "closed" && view.status !== "complete" && view.viewerIsOwner && (
-            <div className="flex flex-wrap items-center gap-3">
-              <Button onClick={() => act("close")} disabled={!!busy}>Finish writing the care plan</Button>
-              {busy && <Spinner label="Writing the integrated care plan and your evaluation" />}
-              {err && <span className="text-sm text-rose-700">{err}</span>}
+          {writing && (
+            <div className="space-y-1">
+              <Spinner label={phase || "Writing the integrated care plan and your teamwork evaluation"} hint="Usually 60 to 90 seconds" />
+              <p className="text-xs text-slate-500">The plan is written from the shared state and each action is checked against it; your evaluation is written from your visit, note, SBAR, messages and huddle contributions. This continues on the server if you leave the page.</p>
+            </div>
+          )}
+          {h.status === "closed" && view.error && view.viewerIsOwner && (
+            <div className="flex flex-wrap items-center gap-3 rounded-md border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-900">
+              <span>Writing the care plan and evaluation did not finish ({view.error}). Nothing you did is lost.</span>
+              <Button size="sm" variant="secondary" onClick={() => act("close")} disabled={!!busy}>Try again</Button>
             </div>
           )}
         </div>
@@ -336,15 +373,19 @@ const TABS = [
 ] as const;
 
 export default function RunHub({ runId }: { runId: string }) {
-  const { view, error, live, refresh } = useRun(runId);
+  const { view, error, live, refresh: reload } = useRun(runId);
+  // After the learner does something the run is fetched straight away (still one request at a time).
+  const refresh = useCallback(() => reload(true), [reload]);
   const [tab, setTab] = useState<(typeof TABS)[number]["key"]>("journey");
   const [step, setStep] = useState<Step | null>(null);
   const [open, setOpen] = useState<string | null>(null);
   const [retrying, setRetrying] = useState(false);
-  const follow = view ? (view.next.stageId ? view.next.stageId : view.next.kind === "huddle" ? "huddle" : "final") : null;
+  // Set when the learner sends their SBAR: the hub stays on their encounter so the review is seen.
+  const [held, setHeld] = useState(false);
+  const follow = view ? (view.next.stageId ? view.next.stageId : view.next.kind === "done" ? "final" : "huddle") : null;
   const lastFollow = useRef<string | null>(null);
   useEffect(() => {
-    if (!follow || follow === lastFollow.current) return;
+    if (!follow || follow === lastFollow.current || held) return;
     // Move the learner to whatever needs their attention next, after the current render.
     const t = setTimeout(() => {
       lastFollow.current = follow;
@@ -352,16 +393,23 @@ export default function RunHub({ runId }: { runId: string }) {
       if (follow === "final") setTab("state");
     }, 0);
     return () => clearTimeout(t);
-  }, [follow]);
+  }, [follow, held]);
+
+  // The learner chose where to look: do not pull them elsewhere until the run moves on again.
+  const go = (to: Step) => {
+    setHeld(false);
+    lastFollow.current = follow;
+    setStep(to);
+  };
 
   if (error && !view) return <p className="text-sm text-rose-700">{error}</p>;
   if (!view) return <Spinner label="Loading the care journey" />;
   const current = step || follow || view.stages[0].stage.id;
   const sv = view.stages.find((s) => s.stage.id === current);
   const me = view.stages.find((s) => s.isStudent);
-  const superseded = new Set(view.links.filter((l) => l.relation === "updates").map((l) => l.to));
-  const unresolved = view.entries.filter((e) => ["uncertain", "disputed", "open_question"].includes(e.effectiveStatus) && !superseded.has(e.id)).length;
+  const unresolved = statusBoard(view.entries, view.links).unresolved;
   const n = view.next;
+  const spinning = n.kind === "wait" || n.kind === "finish";
 
   return (
     <div>
@@ -381,16 +429,16 @@ export default function RunHub({ runId }: { runId: string }) {
 
       <div className={cx("mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border px-4 py-3 text-[14px]", n.kind === "error" ? "border-rose-200 bg-rose-50 text-rose-950" : "border-brand-200 bg-brand-50 text-brand-950")}>
         <span className="flex items-center gap-2">
-          {n.kind === "wait" && <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-brand-200 border-t-brand-600" />}
+          {spinning && <span className="h-3.5 w-3.5 shrink-0 animate-spin rounded-full border-2 border-brand-200 border-t-brand-600" />}
           <span><span className="font-semibold">{n.kind === "done" ? "Complete. " : n.kind === "error" ? "Stopped. " : "Now: "}</span>{n.label}</span>
         </span>
         {view.viewerIsOwner && (
           <span className="flex gap-2">
-            {(n.kind === "start_visit" || n.kind === "continue_visit") && me?.encounterId && <LinkButton size="sm" href={`/encounter/${me.encounterId}`}>{n.kind === "start_visit" ? "Start your visit" : "Continue your visit"}</LinkButton>}
+            {(n.kind === "start_visit" || n.kind === "continue_visit") && me?.encounterId && <VisitLink small href={`/encounter/${me.encounterId}`}>{n.kind === "start_visit" ? "Start your visit" : "Continue your visit"}</VisitLink>}
             {n.kind === "error" && (
-              <Button size="sm" variant="secondary" disabled={retrying} onClick={async () => { setRetrying(true); await post(`/api/journeys/runs/${view.id}/retry`, {}); await refresh(); setRetrying(false); }}>Try this stage again</Button>
+              <Button size="sm" variant="secondary" disabled={retrying} onClick={async () => { setRetrying(true); await post(`/api/journeys/runs/${view.id}/retry`, {}); await refresh(); setRetrying(false); }}>{n.stageId ? "Try this stage again" : "Try again"}</Button>
             )}
-            {(n.kind === "write_handoff" || n.kind === "huddle") && <Button size="sm" onClick={() => { setTab("journey"); setStep(n.kind === "huddle" ? "huddle" : n.stageId!); }}>{n.kind === "huddle" ? "Go to the huddle" : "Write the handoff"}</Button>}
+            {(n.kind === "write_handoff" || n.kind === "huddle") && <Button size="sm" onClick={() => { setTab("journey"); go(n.kind === "huddle" ? "huddle" : n.stageId!); }}>{n.kind === "huddle" ? "Go to the huddle" : "Write the handoff"}</Button>}
             {n.kind === "done" && <Button size="sm" onClick={() => setTab("state")}>Open the integrated patient view</Button>}
           </span>
         )}
@@ -430,7 +478,7 @@ export default function RunHub({ runId }: { runId: string }) {
                 const state = s.status === "complete" ? "done" : s.status === "error" ? "error" : s.status === "pending" ? "todo" : "now";
                 return (
                   <li key={s.stage.id}>
-                    <button onClick={() => setStep(s.stage.id)} className={cx("flex w-full items-start gap-2.5 rounded-lg border px-3 py-2 text-left", current === s.stage.id ? "border-brand-500 bg-white shadow-sm" : "border-transparent hover:bg-white")}>
+                    <button onClick={() => go(s.stage.id)} className={cx("flex w-full items-start gap-2.5 rounded-lg border px-3 py-2 text-left", current === s.stage.id ? "border-brand-500 bg-white shadow-sm" : "border-transparent hover:bg-white")}>
                       <span className="mt-0.5"><StepDot state={state} /></span>
                       <span className="min-w-0">
                         <span className="block text-sm font-medium text-slate-900">{s.stage.order}. {s.stage.roleTitle}</span>
@@ -446,7 +494,7 @@ export default function RunHub({ runId }: { runId: string }) {
                 { key: "final", label: "Integrated patient view", sub: "Care plan and provenance", state: view.status === "complete" ? "done" : "todo" },
               ].map((x) => (
                 <li key={x.key}>
-                  <button onClick={() => (x.key === "final" ? setTab("state") : setStep(x.key))} className={cx("flex w-full items-start gap-2.5 rounded-lg border px-3 py-2 text-left", current === x.key ? "border-brand-500 bg-white shadow-sm" : "border-transparent hover:bg-white")}>
+                  <button onClick={() => (x.key === "final" ? setTab("state") : go(x.key))} className={cx("flex w-full items-start gap-2.5 rounded-lg border px-3 py-2 text-left", current === x.key ? "border-brand-500 bg-white shadow-sm" : "border-transparent hover:bg-white")}>
                     <span className="mt-0.5"><StepDot state={x.state as "done" | "now" | "todo"} /></span>
                     <span>
                       <span className="block text-sm font-medium text-slate-900">{x.label}</span>
@@ -459,8 +507,8 @@ export default function RunHub({ runId }: { runId: string }) {
             <p className="mt-3 px-3 text-[11px] leading-relaxed text-slate-400">Each encounter starts from the shared patient state, adds to it, and hands off with an SBAR. Nothing in the state is ever overwritten.</p>
           </nav>
           <div className="min-w-0">
-            {sv && (sv.isStudent ? <StudentStage view={view} s={sv} onOpen={setOpen} refresh={refresh} /> : <AiStage key={sv.stage.id} view={view} s={sv} live={live} onOpen={setOpen} />)}
-            {current === "huddle" && <HuddlePanel view={view} onOpen={setOpen} refresh={refresh} />}
+            {sv && (sv.isStudent ? <StudentStage view={view} s={sv} onOpen={setOpen} refresh={refresh} onSent={() => setHeld(true)} onContinue={held && follow ? () => { setHeld(false); lastFollow.current = follow; setStep(follow); if (follow === "final") setTab("state"); } : null} phase={live.stageId === sv.stage.id ? live.phase : ""} /> : <AiStage key={sv.stage.id} view={view} s={sv} live={live} onOpen={setOpen} />)}
+            {current === "huddle" && <HuddlePanel view={view} onOpen={setOpen} refresh={refresh} phase={live.stageId === "huddle" ? live.phase : ""} />}
             {current === "final" && <FinalView view={view} onOpen={setOpen} refresh={refresh} />}
           </div>
         </div>
@@ -471,7 +519,7 @@ export default function RunHub({ runId }: { runId: string }) {
       {tab === "team" && (
         <div className="grid gap-5 lg:grid-cols-2">
           <Card>
-            <CardHeader title="Page a colleague" subtitle="Reach back for clarification, reach forward with a heads-up, ask for a consult, or call something out to everyone. Replies come from the shared record and that colleague's own visit only." />
+            <CardHeader title={view.viewerIsOwner ? "Page a colleague" : `${view.studentName}'s messages with colleagues`} subtitle={view.viewerIsOwner ? "Reach back for clarification, reach forward with a heads-up, ask for a consult, or call something out to everyone. Replies come from the shared record and that colleague's own visit only." : "Read-only. Threads the student opened outside the handoff order; replies came from the shared record and that colleague's own visit only."} />
             <div className="p-4"><ConsultPanel view={view} refresh={refresh} /></div>
           </Card>
           <Card>

@@ -3,10 +3,10 @@ import { getUser, safeNextPath } from "@/lib/auth";
 import AuthForm from "../AuthForm";
 
 const DEMO = [
-  { label: "Faculty", email: "faculty@rounds.demo", password: "rounds-demo" },
-  { label: "Student, Medicine", email: "student@rounds.demo", password: "rounds-demo" },
-  { label: "Student, Dietetics (Riley)", email: "dietetics@rounds.demo", password: "rounds-demo" },
-  { label: "Student, Nursing", email: "nursing@rounds.demo", password: "rounds-demo" },
+  { label: "Faculty", email: "faculty@poscere.demo", password: "poscere-demo" },
+  { label: "Student, Medicine", email: "student@poscere.demo", password: "poscere-demo" },
+  { label: "Student, Dietetics (Riley)", email: "dietetics@poscere.demo", password: "poscere-demo" },
+  { label: "Student, Nursing", email: "nursing@poscere.demo", password: "poscere-demo" },
 ];
 
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string | string[] }> }) {

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Rounds design tokens. See ui-overhaul-plan/03-design-system.md.
+/* Poscere design tokens. See ui-overhaul-plan/03-design-system.md.
    Tailwind's slate and brand scales are remapped here so every page inherits the tinted neutrals
    and the refined teal, whether or not it has been rebuilt yet. */
 

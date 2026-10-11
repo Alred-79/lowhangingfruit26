@@ -1,6 +1,6 @@
-# Rounds
+# Poscere
 
-Rounds is a telehealth virtual-patient simulator for health-professions education. A student holds a
+Poscere is a telehealth virtual-patient simulator for health-professions education. A student holds a
 video-style visit with an AI patient on the left of the screen while an electronic chart on the right
 fills in as they learn things, then receives rubric feedback tied to quotes from the transcript.
 Faculty build the patients as data in a Patient Studio, and can chain one patient through several
@@ -26,14 +26,14 @@ challenges:
 
 ## Demo accounts
 
-Password for all four: `rounds-demo`
+Password for all four: `poscere-demo`
 
 | Email | Role | Profession |
 |---|---|---|
-| `faculty@rounds.demo` | Faculty | Medicine |
-| `student@rounds.demo` | Student | Medicine |
-| `dietetics@rounds.demo` | Student | Dietetics |
-| `nursing@rounds.demo` | Student | Nursing |
+| `faculty@poscere.demo` | Faculty | Medicine |
+| `student@poscere.demo` | Student | Medicine |
+| `dietetics@poscere.demo` | Student | Dietetics |
+| `nursing@poscere.demo` | Student | Nursing |
 
 These accounts are shared, so you may see patients, visits and journey runs left by other people.
 Use Chrome, Edge or Safari if you want to talk by microphone; typing works in any browser.
@@ -94,7 +94,7 @@ Wall-clock time is about 8 minutes, of which about 80 seconds is the model draft
 about 1 minute is scoring. To skip the drafting wait, open any existing patient in Patient Studio and
 start at step 5.
 
-1. Open the live URL and sign in as `faculty@rounds.demo`.
+1. Open the live URL and sign in as `faculty@poscere.demo`.
 2. Top bar: **Patient Studio**, then **New patient**.
 3. The **Describe the patient** tab is selected. Either type a paragraph about your own patient, or
    click the example chip **Chest pain, smoker** under the description box (it fills in the
@@ -119,7 +119,7 @@ start at step 5.
    you have actually reviewed the clinical content; otherwise the patient is published with the
    label "AI-drafted, not faculty-reviewed". Click **Publish**.
 8. Click **Test visit** (top bar) to run the visit exactly as a student would. Alternatively sign in
-   as `student@rounds.demo`, open **Practice**, find the patient and click **Start visit**.
+   as `student@poscere.demo`, open **Practice**, find the patient and click **Start visit**.
 9. In the waiting room, tick **Use my microphone** if you want voice, then **Join visit**.
 10. Interview the patient. The clock starts when you join, and a reply starts in about 3 to 5
     seconds. Things to try:
@@ -145,7 +145,7 @@ start at step 5.
 
 ### More to try (a few minutes each)
 
-- **Make your own practice patient.** As `student@rounds.demo`: **Practice**, the card **Make your
+- **Make your own practice patient.** As `student@poscere.demo`: **Practice**, the card **Make your
   own practice patient**. Type a sentence or click a suggestion, pick a level, **Create and
   start**. After about 80 seconds the visit opens. The patient is private to that student and is
   not reviewed by anyone.
@@ -154,8 +154,8 @@ start at step 5.
   listed; students' self-started practice is not.
 - **One shared patient for a class.** As faculty: **Courses**, create a course, **New assignment**
   (homework or practice), choose a patient and turn on **One shared patient for the class**. Give
-  the join code to two student accounts of different professions (`dietetics@rounds.demo` and
-  `nursing@rounds.demo`). The first student completes and submits a visit. When the second student
+  the join code to two student accounts of different professions (`dietetics@poscere.demo` and
+  `nursing@poscere.demo`). The first student completes and submits a visit. When the second student
   starts theirs, the first student's write-up is in **Chart review** as "Visit 1 note", the
   findings are on record, and the patient remembers the first student by name. Tell the patient
   something that conflicts with what the first student advised and the patient may say so. The
@@ -178,11 +178,11 @@ start at step 5.
 A full run does not fit in five minutes. Each AI colleague's encounter takes roughly 80 to 100
 seconds, and the run also includes your own visit, scoring, and writing the care plan; allow about
 15 minutes for the three-encounter journey below. If you only have five minutes, do steps 1 to 5 to
-see continuity and provenance, then sign in as `faculty@rounds.demo`, open **Care Journeys**, open
+see continuity and provenance, then sign in as `faculty@poscere.demo`, open **Care Journeys**, open
 the journey and click **Open run** on any finished student run to see the huddle, the integrated
 view and the teamwork trace.
 
-1. Sign in as `student@rounds.demo` (any student account works).
+1. Sign in as `student@poscere.demo` (any student account works).
 2. Top bar: **Care Journeys**. On "Walter Greene: uncontrolled diabetes, heart failure and kidney
    disease across three professions" click **Choose your role**.
 3. Click **Join as hospitalist (internal medicine)**. This is the middle encounter, so you both

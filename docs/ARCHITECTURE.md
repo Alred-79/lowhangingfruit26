@@ -1,4 +1,4 @@
-# Rounds: architecture
+# Poscere: architecture
 
 This document covers Challenge 1, "The Virtual Patient Encounter System", and the system as a whole.
 The multi-encounter layer built for Challenge 2 has its own document,
@@ -19,7 +19,7 @@ A chatbot with a long system prompt containing the whole case fails three of tho
 reveal anything at any time, the chart has to be reconstructed by asking a model what was said, and
 feedback on "what did the student find out" becomes a model's impression of a transcript.
 
-Rounds separates the two jobs:
+Poscere separates the two jobs:
 
 - **Deciding what is true and what is released is done by code, from case data.**
 - **Deciding how it sounds is done by a language model that is only shown what has been released.**
@@ -803,7 +803,7 @@ full-text or semantic index.
 - **Integration.** What exists: the MCP endpoint and the episode REST endpoint with personal access
   keys (section 17), case export and import as JSON (`GET /api/cases/:id/export`), and gradebook
   export as CSV (`GET /api/assignments/:id/csv`). What does not: an LMS connector. A Canvas
-  integration would add an LTI 1.3 launch that maps to a Rounds user and assignment, and grade
+  integration would add an LTI 1.3 launch that maps to a Poscere user and assignment, and grade
   passback from `encounters.score`; neither is built, and the access keys are read-only.
 - **A new voice provider** is a function in `lib/tts.ts` beside `eleven()` and `polly()`.
 
