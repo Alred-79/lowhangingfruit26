@@ -17,11 +17,13 @@ export default function ErrorNote({ message, title, kept, className }: { message
   const t = (title || "").replace(/\.$/, "");
   const body = !service && t && message.startsWith(t) ? message.slice(t.length).replace(/^[.:]\s*/, "") : message;
   return (
-    <div role="alert" className={cx("rounded-xl border border-rose-200 bg-rose-50 px-3.5 py-3 text-[14px] text-rose-950", className)}>
-      <div className="flex gap-2.5">
-        {service ? <CloudOff className="mt-0.5 h-4 w-4 shrink-0 text-rose-600" aria-hidden /> : <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-rose-600" aria-hidden />}
+    <div role="alert" className={cx("shake rounded-2xl bg-rose-50 px-3.5 py-3 text-[14px] text-rose-950 ring-2 ring-inset ring-rose-200", className)}>
+      <div className="flex gap-3">
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-rose-600 text-white shadow-[0_6px_14px_-6px_rgb(225_29_72/0.7)]">
+          {service ? <CloudOff className="h-[18px] w-[18px]" aria-hidden /> : <TriangleAlert className="h-[18px] w-[18px]" aria-hidden />}
+        </span>
         <div className="min-w-0">
-          <p className="font-semibold">{title || (service ? "The AI service did not answer." : "That did not work.")}</p>
+          <p className="font-display text-[15px] font-extrabold">{title || (service ? "The AI service did not answer." : "That did not work.")}</p>
           <p className="mt-0.5 leading-relaxed text-rose-900">
             {service ? "This is a problem with the model service, not with what you entered." : body} {kept}
           </p>

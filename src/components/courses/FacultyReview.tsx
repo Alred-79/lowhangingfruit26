@@ -35,9 +35,9 @@ export default function FacultyReview({ encounterId, note, score }: { encounterI
   }
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-      <h2 className="text-sm font-semibold text-slate-900">Faculty review</h2>
-      <p className="mt-0.5 text-xs text-slate-500">Your note is shown to the student with their feedback. An adjusted score replaces the rubric score in the gradebook.</p>
+    <div className="rounded-[22px] bg-[var(--color-mastery-soft)] p-5 ring-1 ring-inset ring-violet-200">
+      <h2 className="font-display text-[17px] font-extrabold text-ink">Faculty review</h2>
+      <p className="mt-0.5 text-[12.5px] text-[var(--color-mastery-ink)]">Your note is shown to the student with their feedback. An adjusted score replaces the rubric score in the gradebook.</p>
       <div className="mt-3 grid gap-3 sm:grid-cols-[1fr_9rem]">
         <div>
           <Label htmlFor={`fr-note-${encounterId}`}>Note to the student</Label>
@@ -46,7 +46,7 @@ export default function FacultyReview({ encounterId, note, score }: { encounterI
         <div>
           <Label htmlFor={`fr-score-${encounterId}`}>Adjusted score (%)</Label>
           <Input id={`fr-score-${encounterId}`} type="number" min={0} max={100} step={1} inputMode="decimal" value={adj} onChange={(e) => setAdj(e.target.value)} placeholder="Leave blank" aria-invalid={invalid} />
-          <p className="mt-1 text-[11px] text-slate-500">{invalid ? "Enter a number from 0 to 100." : "Blank keeps the rubric score."}</p>
+          <p className="mt-1 text-[11.5px] text-ink-3">{invalid ? "Enter a number from 0 to 100." : "Blank keeps the rubric score."}</p>
         </div>
       </div>
       <div className="mt-3 flex items-center gap-3">
