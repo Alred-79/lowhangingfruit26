@@ -249,10 +249,11 @@ access key and limited to what that account can see; gradebook export as CSV; an
 import as JSON. The endpoints are read-only.
 
 **Is the avatar a video?**
-No. It is a still portrait in a call frame with a speaking state and captions. Most portraits were
-generated with Stable Diffusion 3.5 Large. The voice is ElevenLabs when a key is configured, chosen
-by the patient's age and sex, with Amazon Polly generative voices as the fallback. There is no
-lip-sync.
+No. It is a portrait in a call frame with captions; the jaw and head move in time with the voice,
+using the character timings ElevenLabs returns with the audio. It is an animated photo, not a
+rendered talking head. Most portraits were generated with Stable Diffusion 3.5 Large. The voice is
+ElevenLabs when a key is configured, chosen by the patient's age and sex, with Amazon Polly
+generative voices as the fallback.
 
 **Does voice work everywhere?**
 Speech input uses the browser's speech recognition, so Chrome, Edge and Safari. In other browsers

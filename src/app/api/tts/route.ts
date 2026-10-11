@@ -4,6 +4,10 @@ import { spoken } from "@/lib/engine/patient";
 import { bad } from "@/lib/http";
 import { speak } from "@/lib/tts";
 
+// X-Mouth carries the lip-sync timeline (when the voice provided alignment) so the audio body stays plain mp3.
+// A long clip's timeline is left out to stay under proxy header limits; the browser then uses the clip's loudness.
+const audioHeaders = (cache: string, mouth?: string): Record<string, string> => ({ "Content-Type": "audio/mpeg", "Cache-Control": cache, ...(mouth && mouth.length < 4000 ? { "X-Mouth": mouth } : {}) });
+
 /** GET /api/tts?e=<encounterId>&m=<messageId> -> mp3 of that patient message. */
 export async function GET(req: Request) {
   const u = new URL(req.url);
@@ -15,8 +19,8 @@ export async function GET(req: Request) {
   if (!text) return new Response(null, { status: 204 });
   try {
     const p = r.enc.c.patient;
-    const audio = await speak(text, { name: p.name, sex: p.sex, age: p.age });
-    return new Response(Buffer.from(audio), { headers: { "Content-Type": "audio/mpeg", "Cache-Control": "private, max-age=3600" } });
+    const sp = await speak(text, { name: p.name, sex: p.sex, age: p.age });
+    return new Response(Buffer.from(sp.audio), { headers: audioHeaders("private, max-age=3600", sp.mouth) });
   } catch (e) {
     console.error(e);
     return bad("Voice is unavailable", 503);
@@ -32,8 +36,8 @@ export async function POST(req: Request) {
   if (!text) return new Response(null, { status: 204 });
   try {
     const p = r.enc.c.patient;
-    const audio = await speak(text, { name: p.name, sex: p.sex, age: p.age });
-    return new Response(Buffer.from(audio), { headers: { "Content-Type": "audio/mpeg", "Cache-Control": "no-store" } });
+    const sp = await speak(text, { name: p.name, sex: p.sex, age: p.age });
+    return new Response(Buffer.from(sp.audio), { headers: audioHeaders("no-store", sp.mouth) });
   } catch (e) {
     console.error(e);
     return bad("Voice is unavailable", 503);

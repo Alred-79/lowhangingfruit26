@@ -16,7 +16,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "Calculate BMI from height/weight",
-    "result": "Height 70 in (177.8 cm), Weight 210 lb (95.3 kg) → BMI 32.1 kg/m², consistent with Obesity Class I.",
+    "result": "Height 70 in (177.8 cm), Weight 210 lb (95.3 kg) → BMI 30.1 kg/m², consistent with Obesity Class I.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -48,7 +48,7 @@
     "id": "a6",
     "kind": "lab",
     "name": "Review lipid panel",
-    "result": "Total cholesterol 235 mg/dL (H), LDL 145 mg/dL (H), HDL 38 mg/dL (L), Triglycerides 180 mg/dL (H) — consistent with dyslipidemia.",
+    "result": "Total cholesterol 219 mg/dL (H), LDL 145 mg/dL (H), HDL 38 mg/dL (L), Triglycerides 180 mg/dL (H) — consistent with dyslipidemia.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -158,7 +158,7 @@
       {
        "cells": [
         "Total Cholesterol",
-        "235",
+        "219",
         "mg/dL",
         "<200"
        ],
@@ -293,7 +293,7 @@
         "Today",
         "210",
         "70",
-        "32.1",
+        "30.1",
         "38",
         "128/84",
         "78"
@@ -468,7 +468,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "BP 128/84 mmHg, HR 78 bpm, RR 16/min, Temp 98.4°F, SpO2 99%, Weight 210 lb, Height 70 in, BMI 32.1 kg/m2"
+    "value": "BP 128/84 mmHg, HR 78 bpm, RR 16/min, Temp 98.4°F, SpO2 99%, Weight 210 lb, Height 70 in, BMI 30.1 kg/m2"
    },
    {
     "label": "Immunizations",
@@ -860,7 +860,7 @@
    "timeLimitMin": 30
   },
   "answerKey": {
-   "primaryProblem": "Excessive carbohydrate and saturated fat intake with inadequate fiber intake related to limited nutrition-related knowledge, food preferences, and psychosocial/environmental barriers, as evidenced by elevated HbA1c (8.9%), elevated LDL (145 mg/dL) and triglycerides (180 mg/dL), low HDL (38 mg/dL), BMI 32.1 kg/m2, 24-hour recall showing high intake of refined carbohydrate/high-fat fast food and sugar-sweetened beverages, and minimal fruit/vegetable and fiber intake.",
+   "primaryProblem": "Excessive carbohydrate and saturated fat intake with inadequate fiber intake related to limited nutrition-related knowledge, food preferences, and psychosocial/environmental barriers, as evidenced by elevated HbA1c (8.9%), elevated LDL (145 mg/dL) and triglycerides (180 mg/dL), low HDL (38 mg/dL), BMI 30.1 kg/m2, 24-hour recall showing high intake of refined carbohydrate/high-fat fast food and sugar-sweetened beverages, and minimal fruit/vegetable and fiber intake.",
    "differential": [
     "Inadequate fiber intake related to food preferences and limited variety, as evidenced by constipation symptoms (BM 2-3x/week, straining, hard stools) and self-reported avoidance of fruits/vegetables",
     "Medication nonadherence (self-management) related to GI side effects of metformin and school schedule barriers, as evidenced by pharmacy refill gaps and patient admission of skipped doses",
@@ -868,8 +868,8 @@
    ],
    "keyFindings": [
     "HbA1c 8.9% indicating uncontrolled T2DM (goal <7%)",
-    "Dyslipidemia: LDL 145 mg/dL, HDL 38 mg/dL, triglycerides 180 mg/dL, total cholesterol 235 mg/dL",
-    "BMI 32.1 kg/m2 (Obesity Class I) with weight trending up 15 lb over 10 months",
+    "Dyslipidemia: LDL 145 mg/dL, HDL 38 mg/dL, triglycerides 180 mg/dL, total cholesterol 219 mg/dL",
+    "BMI 30.1 kg/m2 (Obesity Class I) with weight trending up 15 lb over 10 months",
     "Waist circumference 38 inches, elevated cardiometabolic risk",
     "Diet low in fiber, fruits, and vegetables; high in refined carbohydrates, saturated fat, and added sugar",
     "Irregular meal pattern (skipped breakfast, large dinner) and primary beverage is sugar-sweetened soda",

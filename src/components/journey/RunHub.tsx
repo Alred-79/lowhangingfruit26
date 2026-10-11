@@ -405,7 +405,8 @@ export default function RunHub({ runId }: { runId: string }) {
   const current = step || follow || view.stages[0].stage.id;
   const sv = view.stages.find((s) => s.stage.id === current);
   const me = view.stages.find((s) => s.isStudent);
-  const unresolved = statusBoard(view.entries, view.links).unresolved;
+  const board = statusBoard(view.entries, view.links);
+  const unresolved = board.unresolved;
   const n = view.next;
   const spinning = n.kind === "wait" || n.kind === "finish";
 
@@ -420,7 +421,7 @@ export default function RunHub({ runId }: { runId: string }) {
           </p>
         </div>
         <div className="flex gap-2 text-center text-xs text-slate-500">
-          <div className="rounded-md border border-slate-200 bg-white px-3 py-1.5"><div className="text-base font-semibold tabular-nums text-slate-900">{view.entries.length}</div>entries in shared state</div>
+          <div className="rounded-md border border-slate-200 bg-white px-3 py-1.5"><div className="text-base font-semibold tabular-nums text-slate-900">{board.total}</div>items in shared state</div>
           <div className="rounded-md border border-slate-200 bg-white px-3 py-1.5"><div className="text-base font-semibold tabular-nums text-slate-900">{unresolved}</div>uncertain or open</div>
         </div>
       </div>

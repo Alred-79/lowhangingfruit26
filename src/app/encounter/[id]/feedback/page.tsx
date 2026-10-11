@@ -22,7 +22,7 @@ const IMP = { critical: "red", important: "amber", minor: "slate" } as const;
 const MET = { met: ["green", "Met"], partial: ["amber", "Partly met"], not_met: ["red", "Not met"] } as const;
 
 function TurnLink({ turn }: { turn?: number }) {
-  if (turn === undefined || turn === null) return null;
+  if (turn === undefined || turn === null || turn < 1) return null;
   return (
     <a href={`#t${turn}`} className="ml-1.5 whitespace-nowrap rounded bg-slate-100 px-1 text-[10px] font-medium tabular-nums text-slate-600 hover:bg-brand-100 hover:text-brand-700">
       T{turn}
@@ -76,7 +76,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
       <div>
         <div className="mb-1 flex flex-wrap items-center gap-1.5">
           <Badge tone="teal">{assignment ? assignment.title : cfg.mode === "adaptive" ? "Adaptive practice" : "Practice"}</Badge>
-          <Badge>Level {cfg.knobs.level} · {LEVEL_NAMES[cfg.knobs.level]}</Badge>
+          <Badge>Difficulty: Level {cfg.knobs.level} ({LEVEL_NAMES[cfg.knobs.level]})</Badge>
           <Badge>Attempt {row.attempt}</Badge>
           {(cfg.visitNumber || 1) > 1 && <Badge tone="blue">Follow-up · visit {cfg.visitNumber}</Badge>}
           <Badge tone={row.assignment_id || row.journey_run_id ? "violet" : "slate"}>{row.assignment_id || row.journey_run_id ? "Recorded for instructor" : "Private practice"}</Badge>
@@ -88,7 +88,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
           {!own && student ? ` · ${student.name}` : ""}
         </h1>
         <p className="mt-0.5 text-sm text-slate-600">
-          {role.name} · {state.turn} turns · <When at={row.ended_at} />
+          {cfg.journey?.roleTitle || role.name} · {state.turn} turns · <When at={row.ended_at} />
         </p>
       </div>
       <LinkButton href={faculty && !own ? "/faculty/courses" : "/student"} variant="secondary">
@@ -122,6 +122,10 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
   const tl = timeline(c, cfg, msgs);
   const critMissed = f.missed.filter((m) => m.importance === "critical");
   const meta = (m: (typeof msgs)[number]) => parse<{ revealed?: string[]; deflected?: string[]; rapportDelta?: number; questionType?: string }>(m.meta, {});
+  const addedByPatient = msgs
+    .filter((m) => m.speaker === "patient")
+    .flatMap((m) => (parse<{ unsupported?: string[] }>(m.meta, {}).unsupported || []).map((u) => ({ turn: m.turn, claim: u })));
+  const unaudited = msgs.filter((m) => m.speaker === "patient" && parse<{ audited?: boolean }>(m.meta, {}).audited === false).length;
   const factText = (fid: string) => c.facts.find((x) => x.id === fid);
 
   return (
@@ -153,7 +157,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
             {prev && (
               <span className={`ml-auto text-sm font-medium ${f.percent >= prev.percent ? "text-emerald-700" : "text-rose-700"}`}>
                 {f.percent >= prev.percent ? "+" : ""}
-                {f.percent - prev.percent} pts vs attempt {prev.attempt}
+                {f.percent - prev.percent} percentage points vs attempt {prev.attempt}
               </span>
             )}
           </div>
@@ -466,6 +470,22 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
           </div>
         </Card>
       </div>
+
+      <Card className="mt-4">
+        <CardHeader title="Details the patient added that are not in the case file" subtitle="Flagged automatically by a second check on each reply. It can miss some and flag harmless ones, so treat it as a prompt to look, not a verdict." />
+        <div className="p-4 text-sm text-slate-800">
+          {addedByPatient.length === 0 ? (
+            <p className="text-slate-500">None flagged.</p>
+          ) : (
+            <ul className="list-disc space-y-1 pl-5">
+              {addedByPatient.map((a, i) => (
+                <li key={i}>“{a.claim}”<TurnLink turn={a.turn} /></li>
+              ))}
+            </ul>
+          )}
+          {unaudited > 0 && <p className="mt-2 text-xs text-amber-800">The check could not run on {unaudited} reply(ies), so those were not checked.</p>}
+        </div>
+      </Card>
 
       <Card className="mt-4">
         <CardHeader title="Transcript" subtitle="Annotated with what each question unlocked and how the patient's comfort moved." />

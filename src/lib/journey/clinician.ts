@@ -103,7 +103,8 @@ HOW TO WORK
 - Do not announce a diagnosis, an admission, a test order or a medication change to the patient. Your interpretation and your recommendations go in your note to the team.
 - Never tell the patient a test value, dose or diagnosis that is not in the shared record or the results of this visit.
 - You may review or perform checks relevant to your role by naming one in "order" (at most three in the visit). Results come from the case file. Only tell the patient you are going to look at, check, measure or examine something if you name the matching check in "order" in the same reply; never announce a check that is not in AVAILABLE CHECKS (you cannot listen to a heart or take a rhythm strip over video).
-- In your final exchange, summarise what you heard, say what you will pass on to the team as recommendations, and close. Do not request a check in the final exchange.`;
+- Attribute something to a colleague's note, handoff or entry ("Noor's note says...") ONLY if that exact information is in the handoff or shared record supplied to you. If it is not there, do not say a colleague wrote or said it: ask the patient directly instead.
+- In your final exchange, FIRST answer any question or concern the patient raised in their last message (briefly, within the record), then summarise what you heard, say what you will pass on to the team as recommendations, and close. Never end on an unanswered patient question. Do not request a check in the final exchange.`;
 }
 
 /** Words that announce an action the visit does not allow. */
@@ -264,6 +265,8 @@ Rules:
 - Write the handoff from the whole journey, not only your visit. Before you ask for anything, check EARLIER ENCOUNTERS and EARLIER HANDOFFS: do not ask anyone to do what an earlier professional has already done or arranged, and do not ask a professional who has already seen the patient to repeat their review.
 - STILL OPEN lists what the team has not settled. Your Assessment or Recommendation must name the most important of those that are still open after your visit (patient safety first: possible medication errors or duplications, medicines not being taken, anything dangerous), whoever raised them, and say who should settle each.
 - The Recommendation asks the receiving professional for specific things within THEIR role that have not been done yet. Everything in it is a recommendation or a request, not an action you took.
+- Record that the patient agreed to, accepted or committed to something ONLY if the patient said so in the visit and it appears in your encounter's entries. Otherwise write that you proposed or suggested it and that the patient's response is not known. Never attribute to a colleague's note something that is not in the handoff or record above.
+- Refer to every clinician by professional role or name; never "the student" or "the learner".
 - Write in your own voice. SBAR fields are 1-3 sentences each.${next?.isStudent && studentStage ? `\n- ${learnerLine(student, studentStage.roleTitle)}` : ""}`,
       messages: [
         {

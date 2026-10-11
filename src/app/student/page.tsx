@@ -198,7 +198,7 @@ export default async function StudentHome() {
                   return (
                     <li key={e.id} className="flex items-center justify-between gap-3 px-4 py-2.5">
                       <div className="min-w-0">
-                        <div className="truncate text-sm font-medium text-slate-900">{labels.get(e.case_id) || "Visit"}</div>
+                        <div className="truncate text-sm font-medium text-slate-900">{cfg.journey?.roleTitle ? `${(labels.get(e.case_id) || "Visit").split(" · ")[0]} · ${cfg.journey.roleTitle}` : labels.get(e.case_id) || "Visit"}</div>
                         <div className="text-xs text-slate-500">
                           {(e.assignment && decodeEntities(e.assignment)) || MODE_LABEL[cfg.mode || "practice"]} · turn {st.turn ?? 0} · started <When at={e.started_at} />
                           {e.status === "paused" && " · paused by your instructor"}
@@ -226,7 +226,7 @@ export default async function StudentHome() {
                   const body = (
                     <>
                       <div className="min-w-0">
-                        <div className="truncate text-sm font-medium text-slate-900">{labels.get(e.case_id) || "Visit"}</div>
+                        <div className="truncate text-sm font-medium text-slate-900">{cfg.journey?.roleTitle ? `${(labels.get(e.case_id) || "Visit").split(" · ")[0]} · ${cfg.journey.roleTitle}` : labels.get(e.case_id) || "Visit"}</div>
                         <div className="text-xs text-slate-500">
                           {(e.assignment && decodeEntities(e.assignment)) || MODE_LABEL[cfg.mode || "practice"]} · attempt {e.attempt} · level {cfg.knobs?.level ?? "?"} · <When at={e.ended_at} />
                           {!hidden && e.faculty_note && " · instructor note"}

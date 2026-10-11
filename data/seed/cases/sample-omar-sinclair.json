@@ -16,7 +16,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "Measure/confirm anthropometrics (height, weight, BMI)",
-    "result": "Height 5'10\" (178 cm), Weight 228 lb (103.4 kg), BMI 29.2 kg/m² (overweight/obesity class I)",
+    "result": "Height 5'10\" (178 cm), Weight 228 lb (103.4 kg), BMI 32.7 kg/m² (obesity class I)",
     "importance": "critical",
     "artifactIds": []
    },
@@ -921,7 +921,7 @@
    ],
    "keyFindings": [
     "LDL 195 mg/dL, HDL 30 mg/dL, Total cholesterol 260 mg/dL, Triglycerides 180 mg/dL - atherogenic dyslipidemia",
-    "BMI 29.2 and waist circumference 43 in - increased cardiometabolic risk, central adiposity",
+    "BMI 32.7 (obesity class I) and waist circumference 43 in - increased cardiometabolic risk, central adiposity",
     "HbA1c 5.8% and fasting glucose 110 mg/dL - prediabetes",
     "BP 148/92 mmHg - uncontrolled hypertension",
     "~16 lb weight gain over past year tied to shift-work eating pattern",

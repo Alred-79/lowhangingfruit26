@@ -938,19 +938,19 @@
    ],
    "timeLimitMin": 20
   },
-  "summary": "A 31-year-old G2P1 at 33 weeks presents by telehealth with a 2-day headache, new hand/foot edema, and severe-range home blood pressure readings, with discoverable visual symptoms and right upper quadrant pain. The case teaches recognition of preeclampsia with severe features in a remote setting and the obligation to arrange urgent in-person evaluation despite the patient's hope for home rest and real logistical barriers to transport.\"",
+  "summary": "A 31-year-old G2P1 at 33 weeks presents by telehealth with a 2-day headache, new hand/foot edema, and hypertensive-range home blood pressure readings, with discoverable visual symptoms and right upper quadrant pain. The case teaches recognition of preeclampsia with severe features in a remote setting and the obligation to arrange urgent in-person evaluation despite the patient's hope for home rest and real logistical barriers to transport.\"",
   "answerKey": {
    "primaryProblem": "Preeclampsia with severe features (suspected) at 33 weeks gestation",
    "differential": [
     "Preeclampsia with severe features",
     "Chronic hypertension with superimposed preeclampsia",
     "Gestational hypertension without severe features",
-    "Normal late-pregnancy dependent edema (less likely given facial edema, rapid weight gain, severe-range BP)",
+    "Normal late-pregnancy dependent edema (less likely given facial edema, rapid weight gain, hypertensive-range BP)",
     "HELLP syndrome (to be ruled out with labs)",
     "Tension or migraine headache (less likely given BP and visual symptoms)"
    ],
    "keyFindings": [
-    "Severe-range home and repeat BP (152-158/98-102 mmHg) against a booking BP of 112/70",
+    "Hypertensive-range home BPs (152-158/98-102 mmHg) with headache, visual disturbance and RUQ discomfort meeting severe-feature criteria, against a booking BP of 112/70",
     "Persistent headache poorly responsive to acetaminophen",
     "New visual disturbance (sparkly spots)",
     "Right upper quadrant/epigastric discomfort",
@@ -966,7 +966,7 @@
     "Order continuous fetal monitoring (non-stress test) and growth/AFI ultrasound on arrival",
     "Communicate findings and plan to on-call OB attending/triage team prior to patient arrival",
     "Counsel on warning signs requiring immediate 911 call en route: worsening headache, visual loss, seizure, chest pain, shortness of breath, decreased fetal movement",
-    "Do not prescribe antihypertensives or discharge home; this exceeds safe outpatient telehealth management given severe-range BP and symptoms"
+    "Do not prescribe antihypertensives or discharge home; this exceeds safe outpatient telehealth management given hypertensive-range BP with severe features and symptoms"
    ],
    "redFlags": [
     "Severe-range blood pressure (>=160/110 at any point should prompt even greater urgency)",

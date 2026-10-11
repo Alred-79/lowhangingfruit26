@@ -6,6 +6,8 @@ import { Logo } from "@/components/Brand";
 import JourneyChartTab from "@/components/journey/JourneyChartTab";
 import type { ChartView } from "@/lib/engine/encounter";
 import ChartPanel from "./ChartPanel";
+import { envelopeMouth, levelAt, parseMouth, type MouthTimeline } from "./mouth";
+import TalkingPortrait from "./TalkingPortrait";
 
 interface Msg {
   id: number;
@@ -155,11 +157,14 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
 
   // Speech is synthesised sentence by sentence so the patient starts talking while the reply is still arriving.
   const voice = useRef<{ gen: number; queue: Promise<string | null>[]; playing: boolean }>({ gen: 0, queue: [], playing: false });
+  // Lip-sync timelines by clip URL; filled when the clip arrives (from the server's alignment, or decoded loudness).
+  const mouths = useRef(new Map<string, MouthTimeline | null>());
   function stopVoice() {
     voice.current.gen += 1;
     voice.current.queue = [];
     voice.current.playing = false;
     audioRef.current?.pause();
+    mouths.current.clear();
     setSpeaking(false);
   }
   function pump() {
@@ -189,13 +194,24 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
     const gen = voice.current.gen;
     voice.current.queue.push(
       fetch("/api/tts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ e: id, text }) })
-        .then((r) => (r.ok && r.status !== 204 ? r.blob() : null))
-        .then((b) => (b && gen === voice.current.gen ? URL.createObjectURL(b) : null))
+        .then(async (r) => {
+          if (!r.ok || r.status === 204) return null;
+          const b = await r.blob();
+          if (gen !== voice.current.gen) return null;
+          const url = URL.createObjectURL(b);
+          const tl = parseMouth(r.headers.get("X-Mouth"));
+          mouths.current.set(url, tl);
+          // No alignment (fallback voice): derive the mouth from the audio's loudness without delaying playback.
+          if (!tl) envelopeMouth(b).then((e) => mouths.current.has(url) && mouths.current.set(url, e));
+          return url;
+        })
         .catch(() => null),
     );
     pump();
   }
   function onAudioDone() {
+    const src = audioRef.current?.src;
+    if (src) mouths.current.delete(src);
     voice.current.playing = false;
     pump();
   }
@@ -396,6 +412,12 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
   }
 
   const p = chart.patient;
+  // Mouth openness for the clip that is playing right now, read from the audio clock.
+  const mouthLevel = () => {
+    const a = audioRef.current;
+    const tl = a && !a.paused ? mouths.current.get(a.src) : null;
+    return tl ? levelAt(tl, a!.currentTime) : 0;
+  };
   const caption = pending !== null ? pending : speaking ? [...messages].reverse().find((m) => m.speaker === "patient")?.text || "" : "";
   const patientTalking = speaking || (pending !== null && pending.length > 0);
   const firstName = p.name.split(" ")[0];
@@ -412,7 +434,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
           Video visit with <span className="font-medium text-slate-900">{p.name}</span>
         </span>
         <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[11px] font-medium text-slate-600">{MODE_LABEL[data.mode] || data.mode}</span>
-        <span className="hidden rounded bg-slate-100 px-1.5 py-0.5 text-[11px] text-slate-600 sm:inline">Level {data.level}</span>
+        <span className="hidden rounded bg-slate-100 px-1.5 py-0.5 text-[11px] text-slate-600 sm:inline">Difficulty: Level {data.level}</span>
         {data.visitNumber > 1 ? <span className="hidden rounded bg-sky-100 px-1.5 py-0.5 text-[11px] font-medium text-sky-800 sm:inline">Follow-up · visit {data.visitNumber}</span> : data.attempt > 1 && <span className="hidden rounded bg-slate-100 px-1.5 py-0.5 text-[11px] text-slate-600 sm:inline">Attempt {data.attempt}</span>}
         <span className={`hidden rounded px-1.5 py-0.5 text-[11px] font-medium md:inline ${data.recorded ? "bg-violet-100 text-violet-800" : "bg-slate-100 text-slate-600"}`}>{data.recorded ? "Recorded for instructor" : "Private practice"}</span>
         {data.liveAssist && <span className="hidden rounded bg-violet-100 px-1.5 py-0.5 text-[11px] font-medium text-violet-800 md:inline">Instructor can join</span>}
@@ -433,8 +455,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
         <div className="flex min-h-0 flex-col gap-3">
           <div className="relative h-[44%] min-h-[220px] shrink-0 overflow-hidden rounded-lg bg-slate-900">
             {p.portrait ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={p.portrait} alt={p.name} className={`h-full w-full object-cover object-[50%_30%] transition-transform duration-700 ${patientTalking ? "scale-[1.02]" : ""}`} />
+              <TalkingPortrait src={p.portrait} alt={p.name} talking={speaking} enabled={speakerOn} level={mouthLevel} />
             ) : (
               <div className="grid h-full place-items-center bg-gradient-to-br from-slate-700 to-slate-900">
                 <div className={`grid h-28 w-28 place-items-center rounded-full bg-brand-600 text-4xl font-semibold text-white ${patientTalking ? "ring-4 ring-emerald-400/70" : ""}`}>{initials(p.name)}</div>

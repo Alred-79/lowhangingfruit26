@@ -16,7 +16,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "Measure/confirm height and weight (self-reported via home scale, camera-guided)",
-    "result": "Height 5'2\" (157 cm), Weight 145 lb (65.8 kg), BMI 26.1 kg/m² (overweight range).",
+    "result": "Height 5'2\" (157 cm), Weight 145 lb (65.8 kg), BMI 26.5 kg/m² (overweight range).",
     "importance": "important",
     "artifactIds": []
    },
@@ -869,7 +869,7 @@
    ],
    "keyFindings": [
     "HbA1c 8.8% and fasting glucose 185 mg/dL, both above goal",
-    "BMI 26.1 kg/m2 (overweight), recent unintentional weight loss of 8 lb over 3 months pre-hospitalization",
+    "BMI 26.5 kg/m2 (overweight), recent unintentional weight loss of 8 lb over 3 months pre-hospitalization",
     "Dyslipidemia pattern consistent with metabolic syndrome (TC 210, HDL 38, TG 190)",
     "Skips breakfast, large late dinner, high refined-carbohydrate and sugar-sweetened beverage intake, evening snacking",
     "Pharmacy refill pattern suggests greater medication non-adherence (both metformin and insulin) than patient reports",

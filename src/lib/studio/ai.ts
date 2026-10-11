@@ -160,6 +160,11 @@ ${PATCH_DOC}`,
     if (!it || !it.title) continue;
     // A finding that concludes nothing is wrong is not a finding.
     if (/\b(is|are|remains?) (internally )?consistent\b|not a (real )?(contradiction|conflict)|no (contradiction|conflict)|otherwise (match|agree)/i.test(`${it.title} ${String(it.why || "").slice(-200)}`)) continue;
+    // The model's own aside ("not reportable per instructions... Skipping") or a finding with no concrete location is not a finding.
+    const whole = `${it.title} ${it.where || ""} ${it.why || ""} ${it.fixSummary || ""}`;
+    // Kept narrow: cases are full of skipped meals and doses, so "skipping" alone must not match.
+    if (/\b(not reportable|non-?reportable|not reportable per|nothing to report|not an? (real )?(issue|problem|finding)|skipping\s*(this)?\.?\s*$)/i.test(whole.trim())) continue;
+    if (!String(it.where || "").trim()) continue;
     const ops = validOps(p, it.ops);
     const section = (SECTION_IDS as readonly string[]).includes(it.section) ? (it.section as Issue["section"]) : ops[0] ? sectionForPath(ops[0].path) : "overview";
     issues.push({

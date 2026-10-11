@@ -1,6 +1,7 @@
 import { get, newId, parse, run as sql } from "../db";
 import { messagesOf } from "../engine/encounter";
 import { chatJSON, MODELS } from "../llm";
+import { bestOverlap } from "./support";
 import { arr, handoffTo, renderSbar, renderState } from "./context";
 import { entriesOf, handoffsOf, linksOf, messagesOfRun, quoteIn, stageRun, studentNameOf, who, type LoadedRun } from "./store";
 import { BEHAVIOURS, SBAR_FIELDS, type BehaviourResult, type Handoff, type Observed, type Sbar, type Stage, type TraceEvaluation } from "./types";
@@ -55,6 +56,7 @@ Rules:
 - For "no", name the location where it should have appeared and say exactly what was missing.
 - Use "na", not "no", when nothing in the encounter called for the behaviour (for example, no safety concern arose, so there was nothing to escalate).
 - Quote one continuous passage. Do not stitch separate sentences together and do not paraphrase.
+- Your "observed" value must agree with your feedback: if the feedback says the behaviour was done, even incompletely, use "yes" and describe the gap; use "no" only when the feedback says it was not done. Search the whole text, not only the part you first looked at, before answering "no", and give the turn where it actually happened.
 - Feedback is concrete and kind: what the receiver could or could not do with what was written, and example wording.
 - Judge against what was actually known in this encounter (listed for you). Do not expect things that were never found.
 - A blank SBAR section cannot show any behaviour. If Recommendation is blank, "next action requested" is "no".`;
@@ -62,23 +64,31 @@ Rules:
 /** Evaluation accepts a shorter verbatim run than state extraction: the judgement is the evaluator's, the words must still be the author's. */
 const said = (quote: string, text: string) => quoteIn(quote, text, 4);
 
-function check(observed: Observed, quote: string, located: boolean, feedback: string): Pick<BehaviourResult, "observed" | "verified" | "feedback"> {
-  // "Observed" needs the author's own words. With no quote at all the evaluator's comment stands as a plain "not observed".
-  if (observed === "yes" && !(quote || "").trim()) return { observed: "no", verified: false, feedback };
-  if (observed === "yes" && !located) return { observed: "no", verified: false, feedback: `Not credited: the words the evaluator quoted for this could not be found in what was written or said. The evaluator's comment: ${feedback}` };
+/**
+ * Combines the evaluator's judgement with whether its quote was found. Never contradicts itself:
+ * - observed, quote found: credited and verified;
+ * - observed, quote not found but it paraphrases something that was said (or no quote was given): credited on the
+ *   evaluator's description, marked unverified;
+ * - observed, quote not found and it matches nothing anywhere: not credited (nothing supports it).
+ * `paraphrase` says whether the quote's content words are found together in some text of the encounter.
+ */
+function check(observed: Observed, quote: string, located: boolean, feedback: string, paraphrase = false): Pick<BehaviourResult, "observed" | "verified" | "feedback"> {
+  const noQuote = !(quote || "").trim();
+  if (observed === "yes" && (noQuote || (!located && paraphrase))) return { observed: "yes", verified: false, feedback: `Credited on the evaluator's description; exact words not located. ${feedback}`.trim() };
+  if (observed === "yes" && !located) return { observed: "no", verified: false, feedback: `Not credited: nothing the evaluator quoted for this appears in what was written or said, so it cannot be shown. (Evaluator's unsupported comment: ${feedback})` };
   return { observed, verified: observed === "yes" ? true : !!quote && located, feedback };
 }
 
 /** The summary is written last, from the checked results, so it cannot praise something that was not credited. */
 async function summarise(subject: string, what: string, behaviours: BehaviourResult[], voice: string, fallback: string): Promise<string> {
-  const lines = behaviours.map((b) => `- ${BEHAVIOURS.find((x) => x.key === b.key)?.label}: ${b.observed === "yes" ? "OBSERVED" : b.observed === "na" ? "no opportunity" : "NOT OBSERVED"}. ${b.feedback.replace(/^Not credited:[^.]*\.\s*The evaluator's comment:\s*/, "(not credited; quoted words not found) ")}`).join("\n");
+  const lines = behaviours.map((b) => `- ${BEHAVIOURS.find((x) => x.key === b.key)?.label}: ${b.observed === "yes" ? (b.verified ? "OBSERVED" : "OBSERVED (credited on the evaluator's description; exact words not located)") : b.observed === "na" ? "no opportunity" : b.quote ? "PARTLY OBSERVED (some supporting words quoted, judged incomplete)" : "NOT OBSERVED"}. ${b.feedback.replace(/^Not credited:[\s\S]*$/, "(not credited: nothing supports it)")}`).join("\n");
   try {
     const out = await chatJSON<{ summary: string }>({
       model: MODELS.fast,
       maxTokens: 400,
       temperature: 0.2,
       schema: { type: "object", required: ["summary"], properties: { summary: { type: "string" } } },
-      system: `Write a 2-4 sentence summary of ${what} for a clinical training simulation. Use ONLY the per-behaviour results given. Never praise a behaviour marked NOT OBSERVED, and never say something is missing when it is marked OBSERVED. Name the one or two most useful things to do differently. ${voice} No scores, no lists.`,
+      system: `Write a 2-4 sentence summary of ${what} for a clinical training simulation. Use ONLY the per-behaviour results given. Never praise a behaviour marked NOT OBSERVED, never say something is missing when it is marked OBSERVED, and describe PARTLY OBSERVED behaviours as partly done. Name the one or two most useful things to do differently. ${voice} No scores, no lists.`,
       messages: [{ role: "user", text: `SUBJECT: ${subject}\n\nRESULTS\n${lines}` }],
     });
     if (out.summary?.trim()) return out.summary.trim();
@@ -149,7 +159,7 @@ ${defs.map((b) => `${b.key}: ${b.label}. ${b.question}`).join("\n")}`,
         located = true;
       }
     }
-    const c = check(r.observed, r.quote, located, r.feedback || "");
+    const c = check(r.observed, r.quote, located, r.feedback || "", bestOverlap(r.quote || "", SBAR_FIELDS.map((f) => h.sbar[f.key])) >= 0.6);
     return { key: b.key, ...c, location: section ? `SBAR -> ${section.label}` : "SBAR", quote: located ? r.quote : "" };
   });
   const blank = SBAR_FIELDS.filter((f) => !h.sbar[f.key].trim()).map((f) => f.label);
@@ -270,16 +280,20 @@ ${defs.map((b) => `${b.key}: [${b.domain}] ${b.label}. ${b.question}`).join("\n"
     { key: "consult", label: () => "Messages with colleagues", texts: () => consults.filter((m) => !m.fromIsAi).map((m) => m.text) },
     { key: "huddle", label: () => "Team huddle", texts: () => huddle.filter((m) => !m.fromIsAi).map((m) => m.text) },
   ];
+  // Quotes are searched in the cited place first, then in every turn of the visit (the learner's AND the patient's,
+  // since the evaluator sometimes cites a reply or the wrong turn), the note, SBAR, messages and huddle.
   const locate = (source: string, turn: number | undefined, quote: string): string | null => {
     const s = sources.find((x) => x.key === source);
     if (s && s.texts(turn).some((t) => said(quote, t))) return detail(s.key, turn, quote);
-    if (s?.key === "visit") {
-      const m = msgs.find((x) => x.speaker === "student" && said(quote, x.text));
-      if (m) return detail("visit", m.turn, quote);
-    }
-    for (const o of sources) if (o.texts(undefined).some((t) => said(quote, t))) return detail(o.key, o.key === "visit" ? msgs.find((x) => x.speaker === "student" && said(quote, x.text))?.turn : undefined, quote);
+    const m = msgs.find((x) => x.speaker !== "system" && said(quote, x.text));
+    if (m && s?.key === "visit") return detail("visit", m.turn, quote);
+    for (const o of sources) if (o.key !== "visit" && o.texts(undefined).some((t) => said(quote, t))) return detail(o.key, undefined, quote);
+    if (m) return detail("visit", m.turn, quote);
+    const other = consults.concat(huddle).find((x) => said(quote, x.text));
+    if (other) return other.thread === "huddle" ? "Team huddle" : "Messages with colleagues";
     return null;
   };
+  const everything = [...msgs.filter((m) => m.speaker !== "system").map((m) => m.text), note, ...(mineH ? Object.values(mineH.sbar) : []), ...consults.map((m) => m.text), ...huddle.map((m) => m.text)];
   function detail(key: string, turn: number | undefined, quote: string): string {
     if (key === "sbar" && mineH) {
       const f = SBAR_FIELDS.find((x) => said(quote, mineH.sbar[x.key]));
@@ -297,7 +311,7 @@ ${defs.map((b) => `${b.key}: [${b.domain}] ${b.label}. ${b.question}`).join("\n"
     const r = results.find((x) => x.key === b.key);
     if (!r) return { key: b.key, observed: "no", location: "", quote: "", verified: false, feedback: "Not evaluated." };
     const loc = r.quote ? locate(r.source, r.turn, r.quote) : null;
-    const c = check(r.observed, r.quote, !!loc, r.feedback || "");
+    const c = check(r.observed, r.quote, !!loc, r.feedback || "", bestOverlap(r.quote || "", everything) >= 0.6);
     const fallback = sources.find((s) => s.key === r.source)?.label(r.source === "visit" ? r.turn : undefined) || "";
     return { key: b.key, ...c, location: loc || fallback, quote: loc ? r.quote : "" };
   });

@@ -239,7 +239,7 @@ Paths under `src/` unless they start with `data/`, `docs/` or `scripts/`.
 | Requirement | Status | Where |
 |---|---|---|
 | Real-time voice interaction | Built. Microphone input through the browser's speech recognition. Patient speech through ElevenLabs (flash model, voice chosen by the patient's age and sex) when `ELEVENLABS_API_KEY` is set, with Amazon Polly generative voices as the fallback; synthesised sentence by sentence while the reply streams. | `components/visit/Visit.tsx`, `lib/tts.ts`, `app/api/tts` |
-| Avatar-based interaction | Partial. A still portrait in a video-call frame with a speaking state and captions. No lip-sync or animated avatar. | `components/visit/Visit.tsx`, `public/portraits/` |
+| Avatar-based interaction | Partial. A portrait in a video-call frame with captions. While the patient speaks, the jaw and head move in time with the voice, driven by ElevenLabs character timings (or the clip's loudness with the Polly fallback). It is an animated photo, not a rendered talking head. | `components/visit/TalkingPortrait.tsx`, `components/visit/mouth.ts`, `public/portraits/` |
 | Multimodal interaction | Partial. Voice and text in; voice, text, tables, plotted charts, images and PDFs out. The student's camera is a local self-view only; nothing is analysed. | `components/chart/ArtifactView.tsx` |
 | Adaptive patient behavior | Built. Five difficulty levels, seven persona variations for repeat attempts, faculty-approved variants, rapport-dependent disclosure, and an Elo-style learner model that sets the next level. | `lib/engine/difficulty.ts`, `lib/adaptive.ts`, `app/student/progress` |
 | Advanced memory/state | Built. Per-turn state snapshots (rewind to an earlier turn and branch). Follow-up visits: facts already shared, tests done, trust and a first-person memory carry over. One shared patient for a class: the patient remembers each student by name, and earlier students' write-ups are chart notes. | `rewind()`, `createEncounter()` and `addTeamNotes()` in `lib/engine/encounter.ts`, `rememberVisit()` in `lib/engine/feedback.ts`, `sharedPatient` in `lib/courses/settings.ts` |
@@ -377,8 +377,10 @@ src/
   connection to Epic or any other record system, and no real patient data.
 - **Voice input depends on the browser.** It uses the browser's speech recognition (Chrome, Edge,
   Safari). Elsewhere the microphone button is disabled and the student types.
-- **The "avatar" is a still portrait** with a speaking state and captions, not lip-synced video.
-  Seed patients without a portrait show initials. Most portraits are AI-generated images.
+- **The "avatar" is an animated photo, not video.** The jaw and head move in time with the voice;
+  the lips do not form real mouth shapes. The mouth is located with a face detector loaded from a
+  CDN, and without it only the head moves. Seed patients without a portrait show initials. Most
+  portraits are AI-generated images.
 - **Knowledge sources are not retrieved during the conversation.** They are given to the case
   drafter, the consistency review and the feedback scorer (truncated). The patient does not read them.
 - **No LMS connector.** There is no LTI launch, Canvas integration or grade passback. The MCP and

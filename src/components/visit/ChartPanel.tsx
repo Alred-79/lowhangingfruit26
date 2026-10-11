@@ -161,7 +161,7 @@ export default function ChartPanel({
                     <span className="text-[13px] font-semibold text-slate-900">{r.name}</span>
                     <span className="flex items-center gap-1.5 text-[11px] text-slate-500">
                       {r.abnormal && <span className="rounded bg-amber-200 px-1.5 font-medium text-amber-900">Abnormal</span>}
-                      {KIND_LABEL[r.kind] || r.kind} · T{r.turn}
+                      {KIND_LABEL[r.kind] || r.kind} · {r.turn > 0 ? `after T${r.turn}` : "earlier visit"}
                     </span>
                   </div>
                   <p className="mt-1 whitespace-pre-wrap text-[13px] leading-relaxed text-slate-800">{r.result}</p>
@@ -207,7 +207,7 @@ export default function ChartPanel({
             <ol className="space-y-1">
               {chart.log.map((l, i) => (
                 <li key={i} className="flex items-start gap-2 text-[13px]">
-                  <span className="mt-0.5 w-8 shrink-0 rounded bg-slate-100 px-1 text-center text-[10px] tabular-nums text-slate-500">T{l.turn}</span>
+                  <span className="mt-0.5 w-14 shrink-0 whitespace-nowrap rounded bg-slate-100 px-1 text-center text-[10px] tabular-nums text-slate-500">{l.turn <= 0 ? "earlier" : l.kind === "result" ? `after T${l.turn}` : `T${l.turn}`}</span>
                   <span className={`mt-0.5 w-16 shrink-0 text-[10px] font-medium uppercase tracking-wide ${l.kind === "fact" ? "text-brand-600" : l.kind === "result" ? "text-amber-700" : "text-violet-700"}`}>{l.kind === "fact" ? "History" : l.kind === "result" ? "Result" : "Document"}</span>
                   <span className="text-slate-800">{l.text}</span>
                 </li>

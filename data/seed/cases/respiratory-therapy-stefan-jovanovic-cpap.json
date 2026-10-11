@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "record",
     "name": "Review CPAP device download/compliance report",
-    "result": "Download for the past 30 nights: used 12 of 30 nights (40%), average use on nights used 2 h 10 min, average leak 38 L/min (large), residual AHI 14/hr, median pressure 10 cmH2O on auto-CPAP range 6-14 cmH2O. (Detailed nightly chart available for the most recent 14 nights shows a similar intermittent pattern, with usage on roughly half of nights.)",
+    "result": "Download for the past 30 nights: used 12 of 30 nights (40%), average use on nights used 2 h 18 min, average leak 38 L/min (large), residual AHI 14/hr, median pressure 10 cmH2O on auto-CPAP range 6-14 cmH2O. (Detailed nightly chart available for the most recent 14 nights shows a similar intermittent pattern, with usage on roughly half of nights.)",
     "importance": "critical",
     "artifactIds": [
      "d1"
@@ -18,7 +18,7 @@
     "id": "a2",
     "kind": "vitals",
     "name": "Review clinic vitals from today's visit (reported by patient/home cuff)",
-    "result": "BP 146/90 mmHg, HR 82 bpm, home pulse oximetry on room air 95%, weight 258 lb, height 5'10\", BMI 36.",
+    "result": "BP 146/90 mmHg, HR 82 bpm, home pulse oximetry on room air 95%, weight 258 lb, height 5'10\", BMI 37.",
     "importance": "important",
     "artifactIds": [
      "d2"
@@ -295,7 +295,7 @@
       {
        "cells": [
         "BMI",
-        "36.0 kg/m2",
+        "37.0 kg/m2",
         "18.5-24.9 (normal)"
        ],
        "flag": "H"
@@ -373,7 +373,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Severe obstructive sleep apnea (AHI 38/hr at diagnosis); Obesity (BMI 36); Hypertension, newly elevated readings"
+    "value": "Severe obstructive sleep apnea (AHI 38/hr at diagnosis); Obesity (BMI 37); Hypertension, newly elevated readings"
    },
    {
     "label": "Medications",
@@ -687,7 +687,7 @@
     "factId": "f2",
     "artifactId": "d1",
     "patientClaim": "Patient states he wears the CPAP 'pretty much all night' every night.",
-    "recordEvidence": "CPAP download report shows use on only 12 of 30 nights (40%), averaging 2 hours 10 minutes per night used, with the detailed 14-night chart confirming an intermittent, far-from-nightly pattern.",
+    "recordEvidence": "CPAP download report shows use on only 12 of 30 nights (40%), averaging 2 hours 18 minutes per night used, with the detailed 14-night chart confirming an intermittent, far-from-nightly pattern.",
     "teachingPoint": "Self-reported adherence is often overestimated; always verify with objective device download data before coaching plans, and explore reasons for the gap non-judgmentally."
    },
    {
@@ -774,7 +774,7 @@
    }
   ],
   "answerKey": {
-   "primaryProblem": "Suboptimal CPAP adherence (40% nights used, average 2h10min/night) with large mask leak and elevated residual AHI (14/hr) in a patient with severe OSA, driven by identifiable, modifiable barriers: full-face mask leak related to facial hair, unused humidifier causing dryness, and mask-related claustrophobia; complicated by an undisclosed safety-relevant sleepiness episode at work.",
+   "primaryProblem": "Suboptimal CPAP adherence (40% nights used, average 2h18min/night) with large mask leak and elevated residual AHI (14/hr) in a patient with severe OSA, driven by identifiable, modifiable barriers: full-face mask leak related to facial hair, unused humidifier causing dryness, and mask-related claustrophobia; complicated by an undisclosed safety-relevant sleepiness episode at work.",
    "differential": [
     "Inadequate CPAP therapy due to poor adherence/leak (most likely explanation for persistent daytime sleepiness)",
     "Residual OSA requiring pressure/mode or mask reassessment by sleep medicine if adherence barriers are corrected and symptoms persist",
@@ -783,13 +783,13 @@
     "Simple fatigue from shift work or lifestyle factors (less likely given clear device data)"
    ],
    "keyFindings": [
-    "CPAP download: 40% nights used, average 2h10min/night, large leak (38 L/min), residual AHI 14/hr",
+    "CPAP download: 40% nights used, average 2h18min/night, large leak (38 L/min), residual AHI 14/hr",
     "Patient self-report of near-full nightly use conflicts with objective download data",
     "Humidifier chamber visibly dry/never filled; heat setting off",
     "Mask leak toward eyes attributed to beard interfering with full-face mask seal",
     "Reported claustrophobic/panic sensation in first 15-20 minutes of use",
     "Near-miss drowsy episode while operating a forklift at work, previously undisclosed due to fear of job loss",
-    "BP 146/90 and BMI 36 at today's visit, consistent with ongoing cardiometabolic risk"
+    "BP 146/90 and BMI 37 at today's visit, consistent with ongoing cardiometabolic risk"
    ],
    "plan": [
     "Review and discuss CPAP download data transparently with patient to align objective adherence with his perception",

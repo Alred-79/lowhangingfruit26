@@ -8,7 +8,7 @@
     "id": "a1",
     "kind": "vitals",
     "name": "Review home weight trend / weigh-in",
-    "result": "Current weight 145 lbs (65.8 kg), height 5'11\" (180 cm), BMI 19.0 kg/m^2. Weight down from 155 lbs 6 months ago (-6.5%, >5% unintentional weight loss in 6 months).",
+    "result": "Current weight 136 lbs (61.7 kg), height 5'11\" (180 cm), BMI 19.0 kg/m^2. Weight down from 146 lbs 6 months ago (-6.8%, >5% unintentional weight loss in 6 months).",
     "importance": "critical",
     "artifactIds": []
    },
@@ -40,7 +40,7 @@
     "id": "a5",
     "kind": "lab",
     "name": "Review lipid panel",
-    "result": "Total cholesterol 210 mg/dL, HDL 38 mg/dL (L), LDL 110 mg/dL, Triglycerides 155 mg/dL.",
+    "result": "Total cholesterol 210 mg/dL, HDL 38 mg/dL (L), LDL 141 mg/dL (H), Triglycerides 155 mg/dL.",
     "importance": "minor",
     "artifactIds": []
    },
@@ -48,7 +48,7 @@
     "id": "a6",
     "kind": "lab",
     "name": "Review renal function panel",
-    "result": "eGFR 67 mL/min/1.73m2, Creatinine 1.3 mg/dL (H) — mildly reduced kidney function, relevant for metformin dosing and sodium/potassium counseling.",
+    "result": "eGFR 67 mL/min/1.73m2, Creatinine 1.3 mg/dL (upper limit of normal) — mildly reduced kidney function, relevant for metformin dosing and sodium/potassium counseling.",
     "importance": "important",
     "artifactIds": []
    },
@@ -64,7 +64,7 @@
     "id": "a8",
     "kind": "lab",
     "name": "Review CBC",
-    "result": "Hemoglobin 12.5 g/dL (low-normal), no significant anemia flagged.",
+    "result": "Hemoglobin 12.5 g/dL (L): mild anemia",
     "importance": "minor",
     "artifactIds": []
    },
@@ -72,7 +72,7 @@
     "id": "a9",
     "kind": "record",
     "name": "Review medication list and refill history",
-    "result": "Lisinopril 10mg qAM, Metoprolol succinate 25mg qAM, Carvedilol 8mg BID all show consistent on-time refills. Metformin 500mg daily with dinner shows refill gaps consistent with inconsistent use (last fill 45 days overdue).",
+    "result": "Lisinopril 10mg qAM, Metoprolol succinate 25mg qAM, Carvedilol 8mg BID all show consistent on-time refills. Metformin 500mg daily with dinner shows refill gaps consistent with inconsistent use (last fill 38 days overdue).",
     "importance": "critical",
     "artifactIds": []
    },
@@ -80,7 +80,7 @@
     "id": "a10",
     "kind": "record",
     "name": "Review cardiology/HF clinic note",
-    "result": "NYHA Class C heart failure (structural heart disease with current or prior symptoms), stable on guideline-directed medical therapy, prior CABG 10 years ago. No current recommendation for fluid restriction documented.",
+    "result": "ACC/AHA Stage C heart failure (structural heart disease with current or prior symptoms), NYHA class III, stable on guideline-directed medical therapy, prior CABG 10 years ago. No current recommendation for fluid restriction documented.",
     "importance": "important",
     "artifactIds": []
    },
@@ -128,7 +128,7 @@
     "id": "a16",
     "kind": "assessment",
     "name": "Estimate energy and protein needs",
-    "result": "Estimated needs approximately 1850-2000 kcal/day and 70-80 g protein/day (about 1.1-1.2 g/kg) based on 65.8 kg body weight, adjusted for underweight status and need to preserve lean mass without excess sodium/fluid load.",
+    "result": "Estimated needs approximately 1850-2000 kcal/day and 70-80 g protein/day (about 1.1-1.3 g/kg) based on 61.7 kg body weight, adjusted for underweight status and need to preserve lean mass without excess sodium/fluid load.",
     "importance": "important",
     "artifactIds": []
    },
@@ -198,7 +198,7 @@
         "Once daily with dinner",
         "Blood sugar control",
         "68 days ago",
-        "Overdue refill ~45 days; pattern of gaps over past 6 months"
+        "Overdue refill ~38 days; pattern of gaps over past 6 months"
        ]
       }
      ]
@@ -260,7 +260,7 @@
       {
        "cells": [
         "LDL Cholesterol",
-        "110",
+        "141",
         "mg/dL",
         "<100"
        ],
@@ -390,31 +390,31 @@
        "points": [
         {
          "x": "6 months ago",
-         "y": 155
-        },
-        {
-         "x": "5 months ago",
-         "y": 153
-        },
-        {
-         "x": "4 months ago",
-         "y": 151
-        },
-        {
-         "x": "3 months ago",
-         "y": 149
-        },
-        {
-         "x": "2 months ago",
-         "y": 147
-        },
-        {
-         "x": "1 month ago",
          "y": 146
         },
         {
+         "x": "5 months ago",
+         "y": 144
+        },
+        {
+         "x": "4 months ago",
+         "y": 142
+        },
+        {
+         "x": "3 months ago",
+         "y": 140
+        },
+        {
+         "x": "2 months ago",
+         "y": 138
+        },
+        {
+         "x": "1 month ago",
+         "y": 137
+        },
+        {
          "x": "Today",
-         "y": 145
+         "y": 136
         }
        ]
       }
@@ -430,7 +430,7 @@
     "release": {
      "when": "start"
     },
-    "body": "Mr. Ramirez seen for routine HF follow-up. NYHA Class C heart failure, structural heart disease with prior symptomatic episodes, now stable on guideline-directed medical therapy (ACE-inhibitor, beta-blockers). Prior CABG x3 vessels 10 years ago, no recurrent angina. Mild lower extremity edema noted, stable from prior visit. Continue current regimen. No fluid restriction ordered at this time. Diabetes newly diagnosed, referred to nutrition and PCP for management."
+    "body": "Mr. Ramirez seen for routine HF follow-up. ACC/AHA Stage C heart failure, structural heart disease with prior symptomatic episodes, NYHA class III, now stable on guideline-directed medical therapy (ACE-inhibitor, beta-blockers). Prior CABG x3 vessels 10 years ago, no recurrent angina. Mild lower extremity edema noted, stable from prior visit. Continue current regimen. No fluid restriction ordered at this time. Diabetes newly diagnosed, referred to nutrition and PCP for management."
    },
    {
     "id": "d6",
@@ -533,7 +533,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Heart failure NYHA Class C; Type 2 Diabetes Mellitus (new, 6 months); Essential Hypertension; Metabolic Syndrome; s/p CABG x3 vessels (10 years ago)"
+    "value": "Heart failure ACC/AHA Stage C, NYHA class III; Type 2 Diabetes Mellitus (new, 6 months); Essential Hypertension; Metabolic Syndrome; s/p CABG x3 vessels (10 years ago)"
    },
    {
     "label": "Medications",
@@ -545,7 +545,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "BP 132/84, HR 88 irregular, Temp 98.6F, RR 18, SpO2 97% RA, Weight 145 lb, Height 5'11\""
+    "value": "BP 132/84, HR 88 irregular, Temp 98.6F, RR 18, SpO2 97% RA, Weight 136 lb, Height 5'11\""
    },
    {
     "label": "Care team",
@@ -573,7 +573,7 @@
    "communicationStyle": "Direct, literal, concise. Uses short sentences and factual statements. Rarely asks clarifying questions unless prompted. May lapse into Spanish phrases when discussing food or family.",
    "healthLiteracy": "low",
    "emotionalState": "Guarded and mildly anxious beneath a calm exterior; worried about losing independence but doesn't volunteer this easily.",
-   "background": "Born and raised in the city, works in radio ad sales, divorced about 8 years ago, lives alone in an apartment. Has one adult son nearby who helps occasionally with groceries and rides. Enjoys watching soccer, used to cook big family meals on weekends before his energy declined. Quit a 30-pack-year smoking habit 15 years ago after his bypass surgery.",
+   "background": "Born and raised in the city, works in radio ad sales, divorced about 8 years ago, lives alone in an apartment. Has one adult son nearby who helps occasionally with groceries and rides. Enjoys watching soccer, used to cook big family meals on weekends before his energy declined. Quit a 30-pack-year smoking habit 10 years ago after his bypass surgery.",
    "speechExamples": [
     "I eat when I remember to. Mostly dinner.",
     "Doc says sugar's high. I don't really get what that has to do with my heart.",
@@ -831,7 +831,7 @@
     "id": "f26",
     "category": "psychosocial",
     "topic": "burden to family",
-    "chart": "Fears becoming a burden to his son or daughters if health worsens",
+    "chart": "Fears becoming a burden to his son if health worsens",
     "says": "I don't want to end up a burden on my son. That's the big thing for me.",
     "tier": "reluctant",
     "importance": "important"
@@ -894,8 +894,8 @@
     "id": "f33",
     "category": "substance",
     "topic": "smoking history",
-    "chart": "30 pack-year smoking history, quit 15 years ago after CABG",
-    "says": "I used to smoke, quit that after my heart surgery, must be 15 years now.",
+    "chart": "30 pack-year smoking history, quit 10 years ago after CABG",
+    "says": "I used to smoke, quit that after my heart surgery, must be 10 years now.",
     "tier": "discoverable",
     "importance": "minor",
     "distractor": true
@@ -950,15 +950,15 @@
    }
   ],
   "answerKey": {
-   "primaryProblem": "Poorly controlled Type 2 Diabetes with unintentional weight loss and inadequate oral intake related to early satiety, in the context of NYHA Class C heart failure",
+   "primaryProblem": "Poorly controlled Type 2 Diabetes with unintentional weight loss and inadequate oral intake related to early satiety, in the context of ACC/AHA Stage C heart failure, NYHA class III",
    "differential": [
-    "Inadequate oral intake (NI-2.1) related to early satiety and irregular/skipped meals as evidenced by 6.5% unintentional weight loss over 6 months and BMI 19.0",
+    "Inadequate oral intake (NI-2.1) related to early satiety and irregular/skipped meals as evidenced by 6.8% unintentional weight loss over 6 months and BMI 19.0",
     "Food- and nutrition-related knowledge deficit (NB-1.1) related to lack of understanding of the relationship between dietary pattern, heart failure, and glycemic control as evidenced by patient statements that heart and sugar problems are unrelated",
-    "Inconsistent carbohydrate intake / disordered meal pattern (NI-5.8.2 or NB-1.5) related to large, late evening meals and skipped breakfast as evidenced by diet history and post-meal palpitation reports",
+    "Inconsistent carbohydrate intake / disordered meal pattern (NI-5.8.4 or NB-1.5) related to large, late evening meals and skipped breakfast as evidenced by diet history and post-meal palpitation reports",
     "Altered nutrition-related laboratory values (NC-2.2) related to uncontrolled diabetes as evidenced by HbA1c 9.2% and random glucose 245 mg/dL"
    ],
    "keyFindings": [
-    "BMI 19.0 kg/m^2 with unintentional weight loss of 10 lbs (6.5%) over 6 months - nutritionally significant",
+    "BMI 19.0 kg/m^2 with unintentional weight loss of 10 lbs (6.8%) over 6 months - nutritionally significant",
     "HbA1c 9.2% and random glucose 245 mg/dL indicating poorly controlled diabetes despite inconsistent metformin use",
     "Irregular meal pattern: skipped breakfast, small lunch, large late dinner (8-9 PM) associated with early satiety, fullness, and post-meal palpitations",
     "Fruit and dairy avoidance based on misconceptions, narrowing nutrient variety (fiber, potassium, calcium, vitamin C)",
@@ -970,7 +970,7 @@
     "Normal multiple EGD findings ruling out structural GI cause for early satiety, supporting a functional/meal-pattern-related or cardiac-related etiology"
    ],
    "plan": [
-    "Formulate and document PES statement: 'Inadequate oral intake related to early satiety and irregular meal pattern as evidenced by 6.5% unintentional weight loss over 6 months and BMI 19.0 kg/m^2'",
+    "Formulate and document PES statement: 'Inadequate oral intake related to early satiety and irregular meal pattern as evidenced by 6.8% unintentional weight loss over 6 months and BMI 19.0 kg/m^2'",
     "Recommend smaller, more frequent meals (5-6 small meals/day) distributing intake earlier in the day to reduce single-meal volume and post-dinner symptoms, while preserving total caloric/protein adequacy (~1850-2000 kcal, 70-80g protein/day)",
     "Provide simple education connecting diet, blood glucose, and heart failure symptoms using plain language and the patient's preferred level of detail; correct misconception that fruit must be avoided entirely (recommend whole fruit in moderate, consistent portions as part of carbohydrate counting)",
     "Address metformin adherence barriers collaboratively using motivational interviewing (explore GI side effect concerns and perceived lack of benefit) and recommend patient discuss timing/formulation (e.g., extended release) with prescribing provider rather than dietitian independently adjusting medication",
@@ -984,7 +984,7 @@
     "Unintentional weight loss >5% in 6 months with BMI near underweight threshold in setting of chronic heart failure - risk for cardiac cachexia if trend continues",
     "Irregular heart rate (88 bpm, irregular) with post-meal palpitations - warrants communication to medical team, not solely a nutrition issue",
     "HbA1c 9.2% indicating significantly uncontrolled diabetes with inconsistent medication adherence - risk for progression/complications",
-    "Elevated creatinine (1.3) with reduced eGFR (67) - relevant to future medication dosing and electrolyte monitoring, flag for medical team awareness"
+    "Creatinine at upper limit of normal (1.3) with reduced eGFR (67) - relevant to future medication dosing and electrolyte monitoring, flag for medical team awareness"
    ],
    "educationPoints": [
     "Diabetes and heart failure are interconnected: dietary patterns (meal timing, portion size, carbohydrate distribution) affect both blood sugar control and cardiac symptom burden, they are not separate systems to manage independently",
@@ -995,7 +995,7 @@
     "Simple, concrete, stepwise changes are more sustainable than complex overhauls, particularly given this patient's stated preferences and barriers (fatigue, low health literacy, cost)"
    ]
   },
-  "summary": "A 59-year-old man with NYHA Class C heart failure and newly diagnosed type 2 diabetes presents for telehealth nutrition assessment with early satiety, fatigue, and unintentional weight loss, while holding the belief that his heart and diabetes conditions are unrelated and manageable through medication alone. The case teaches application of the Nutrition Care Process to a complex cardiometabolic patient, including recognition of a medication adherence mismatch (reported vs. refill-confirmed metformin use) and use of motivational interviewing to address low health literacy, financial barriers, and competing fears about weight gain versus frailty.",
+  "summary": "A 59-year-old man with ACC/AHA Stage C heart failure, NYHA class III, and newly diagnosed type 2 diabetes presents for telehealth nutrition assessment with early satiety, fatigue, and unintentional weight loss, while holding the belief that his heart and diabetes conditions are unrelated and manageable through medication alone. The case teaches application of the Nutrition Care Process to a complex cardiometabolic patient, including recognition of a medication adherence mismatch (reported vs. refill-confirmed metformin use) and use of motivational interviewing to address low health literacy, financial barriers, and competing fears about weight gain versus frailty.",
   "title": "Early Satiety and Unintentional Weight Loss in a 59-Year-Old Man with Heart Failure and New Type 2 Diabetes",
   "specialty": "Dietetics / Clinical Nutrition",
   "setting": "Telehealth video visit, patient at home in his urban apartment",

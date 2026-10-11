@@ -22,7 +22,7 @@
     "id": "a2",
     "kind": "record",
     "name": "Review CPAP download/compliance report",
-    "result": "CPAP compliance download: 0% usage in past 90 days. Prior to that, sporadic use averaging 1-2 nights/week over past year. Machine last data upload 7 months ago.",
+    "result": "CPAP compliance download: 0% usage in past 90 days. Prior to that, sporadic use averaging 1-2 nights/week over past year. Machine data last uploaded/downloaded this week.",
     "importance": "critical",
     "aliases": [
      "CPAP data",
@@ -77,7 +77,7 @@
     "id": "a6",
     "kind": "vitals",
     "name": "Review last recorded vitals/home BP log",
-    "result": "Clinic vitals 2 weeks ago: BP 148/92 mmHg, HR 82, SpO2 96% on room air, weight 143 kg, height 178 cm, BMI 44. Home BP log (past 2 weeks, self-reported): readings ranging 142-156 systolic / 88-96 diastolic.",
+    "result": "Clinic vitals 2 weeks ago: BP 148/92 mmHg, HR 82, SpO2 96% on room air, weight 143 kg, height 178 cm, BMI 45. Home BP log (past 2 weeks, self-reported): readings ranging 142-156 systolic / 88-96 diastolic.",
     "importance": "important",
     "aliases": [
      "blood pressure",
@@ -199,14 +199,14 @@
     "Reduced functional capacity (<4 METs) raising perioperative cardiac risk per ACC/AHA framework"
    ],
    "keyFindings": [
-    "BMI 44 kg/m2, severe OSA with AHI 42 on prior sleep study",
+    "BMI 45 kg/m2, severe OSA with AHI 42 on prior sleep study",
     "CPAP compliance download shows 0% use in last 90 days despite patient believing he uses it regularly",
     "STOP-BANG score 8/8 (maximal, very high risk)",
     "Prior anesthesia record documents grade 3 Cormack-Lehane view and difficult intubation requiring bougie",
     "Camera airway exam: Mallampati III, short thick neck, reduced neck extension",
     "Functional capacity <4 METs (breathless climbing one flight of stairs)",
     "Home/clinic BP consistently elevated (142-156/88-96) despite amlodipine and lisinopril",
-    "HbA1c 7.9%, above the generally recommended <8% but not optimally controlled; discuss timing of surgery with surgical/endocrine team if further optimization is feasible",
+    "HbA1c 7.9%: below the <8% commonly used pre-operative threshold but above the <7% general target; discuss timing of surgery with surgical/endocrine team if further optimization is feasible",
     "ECG shows LVH without acute changes",
     "Reflux symptoms most nights with incomplete control, raising aspiration risk"
    ],
@@ -621,7 +621,7 @@
     "release": {
      "when": "start"
     },
-    "body": "54-year-old male with BMI 44 kg/m2, hypertension, type 2 diabetes, severe OSA on CPAP (per patient report; adherence not recently verified), GERD, cleared from nutrition and psychology for laparoscopic sleeve gastrectomy. Scheduled for surgery in 2 weeks. Referred to anesthesia for pre-operative evaluation given multiple comorbidities and reported history of difficult intubation. Plan: general anesthesia, standard bariatric perioperative pathway, 23-hour observation anticipated."
+    "body": "54-year-old male with BMI 45 kg/m2, hypertension, type 2 diabetes, severe OSA on CPAP (per patient report; adherence not recently verified), GERD, cleared from nutrition and psychology for laparoscopic sleeve gastrectomy. Scheduled for surgery in 2 weeks. Referred to anesthesia for pre-operative evaluation given multiple comorbidities and reported history of difficult intubation. Plan: general anesthesia, standard bariatric perioperative pathway, 23-hour observation anticipated."
    }
   ],
   "chartAtStart": [
@@ -631,7 +631,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Obesity (BMI 44), Hypertension, Type 2 diabetes mellitus, Obstructive sleep apnea (severe, CPAP prescribed; adherence not recently verified), Gastroesophageal reflux disease, History of difficult intubation"
+    "value": "Obesity (BMI 45), Hypertension, Type 2 diabetes mellitus, Obstructive sleep apnea (severe, CPAP prescribed; adherence not recently verified), Gastroesophageal reflux disease, History of difficult intubation"
    },
    {
     "label": "Medications",
@@ -643,7 +643,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "BP 148/92 mmHg, HR 82 bpm, SpO2 96% RA, Weight 143 kg, Height 178 cm, BMI 44 kg/m2 (2 weeks ago)"
+    "value": "BP 148/92 mmHg, HR 82 bpm, SpO2 96% RA, Weight 143 kg, Height 178 cm, BMI 45 kg/m2 (2 weeks ago)"
    },
    {
     "label": "Care team",
@@ -913,7 +913,7 @@
     "id": "f29",
     "category": "other",
     "topic": "recent dental work",
-    "chart": "Had a dental filling replaced 2 months ago, no complications, distractor unrelated to airway risk.",
+    "chart": "Had a dental filling replaced 2 months ago, no complications.",
     "says": "Oh, I got a filling redone a couple months back, that's about it for my teeth.",
     "tier": "discoverable",
     "importance": "minor",

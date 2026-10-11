@@ -174,7 +174,7 @@ export function EntryRow({ entry, onOpen, showWho = true, dense }: { entry: Stat
         <span className={cx("text-sm text-slate-800", entry.text.length > 260 && "line-clamp-3")} title={entry.text.length > 260 ? "Select to read the whole entry" : undefined}>{entry.text}</span>
         <span className="mt-0.5 flex flex-wrap items-center gap-x-2 text-[11px] text-slate-500">
           <span>{KIND_LABEL[entry.kind] || entry.kind}</span>
-          <span>{STATUS_LABEL[entry.effectiveStatus]}</span>
+          {STATUS_LABEL[entry.effectiveStatus] !== (KIND_LABEL[entry.kind] || entry.kind) && <span>{STATUS_LABEL[entry.effectiveStatus]}</span>}
           {showWho && entry.stageId !== "record" && <span>{entry.contributorName}</span>}
           {entry.meta?.unverifiedValues?.length ? <span className="text-amber-700">value not in case file</span> : null}
           {entry.evidence && entry.evidence.verified === false ? <span className="text-amber-700">evidence not verified</span> : null}
@@ -329,7 +329,10 @@ export function TraceTable({ evaluation, compact }: { evaluation: TraceEvaluatio
                 <li key={def.key} className="grid gap-x-4 gap-y-1 px-3 py-2.5 md:grid-cols-[13rem_1fr]">
                   <div>
                     <div className="text-sm font-medium text-slate-800">{def.label}</div>
-                    <span className={cx("mt-1 inline-block rounded px-1.5 py-0.5 text-[11px] font-semibold", OBS[r!.observed].cls)}>{OBS[r!.observed].label}</span>
+                    {(() => {
+                      const o = r!.observed === "yes" && !r!.verified ? { label: "Observed, unverified", cls: "bg-amber-100 text-amber-800" } : r!.observed === "no" && r!.quote ? { label: "Partly observed", cls: "bg-amber-100 text-amber-800" } : OBS[r!.observed];
+                      return <span className={cx("mt-1 inline-block rounded px-1.5 py-0.5 text-[11px] font-semibold", o.cls)}>{o.label}</span>;
+                    })()}
                   </div>
                   <div className="min-w-0 text-sm">
                     {r!.location && <div className="text-xs text-slate-500">Evidence: <span className="font-medium text-slate-700">{r!.location.replace("->", "→")}</span></div>}

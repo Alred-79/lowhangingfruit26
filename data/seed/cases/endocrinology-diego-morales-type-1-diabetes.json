@@ -49,7 +49,7 @@
     "id": "a5",
     "kind": "lab",
     "name": "Order/review comprehensive metabolic panel",
-    "result": "Glucose 238 mg/dL (H), Na 139 mmol/L, K 4.1 mmol/L, Cl 101 mmol/L, CO2 23 mmol/L, BUN 14 mg/dL, Cr 0.9 mg/dL, eGFR >90, AST 48 U/L (H), ALT 55 U/L (H), total bilirubin 0.6 mg/dL.",
+    "result": "Glucose 238 mg/dL (H), Na 139 mmol/L, K 4.1 mmol/L, Cl 101 mmol/L, CO2 23 mmol/L, BUN 14 mg/dL, Cr 0.9 mg/dL, eGFR >90, AST 48 U/L (H), ALT 55 U/L, total bilirubin 0.6 mg/dL.",
     "abnormal": true,
     "importance": "important",
     "artifactIds": [
@@ -432,7 +432,7 @@
         "U/L",
         "7-56"
        ],
-       "flag": "H"
+       "flag": ""
       },
       {
        "cells": [

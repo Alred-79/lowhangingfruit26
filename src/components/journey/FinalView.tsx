@@ -260,7 +260,7 @@ export default function FinalView({ view, onOpen, refresh }: { view: RunView; on
           </div>
           <div className="grid grid-cols-4 gap-2 self-start text-center lg:w-[22rem]">
             {[
-              [view.entries.length, "entries in the shared state"],
+              [statusBoard(view.entries, view.links).total, "items in the shared state"],
               [view.links.length, "recorded relations"],
               [view.chains.length, "cross-encounter chains"],
               [unresolved, "uncertain, disputed or unanswered"],

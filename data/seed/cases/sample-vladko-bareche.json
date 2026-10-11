@@ -46,7 +46,7 @@
     "id": "a5",
     "kind": "lab",
     "name": "Review lipid panel",
-    "result": "Total cholesterol 210 mg/dL (H), LDL 130 mg/dL (H), HDL 68 mg/dL, Triglycerides 110 mg/dL - HDL high, otherwise mixed",
+    "result": "Total cholesterol 210 mg/dL (H), LDL 120 mg/dL (H), HDL 68 mg/dL, Triglycerides 110 mg/dL - HDL high, otherwise mixed",
     "importance": "minor",
     "abnormal": true,
     "artifactIds": []
@@ -181,7 +181,7 @@
       {
        "cells": [
         "LDL",
-        "130",
+        "120",
         "mg/dL",
         "<100"
        ],

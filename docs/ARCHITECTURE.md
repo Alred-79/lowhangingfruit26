@@ -13,7 +13,8 @@ of writing.
 
 The brief asks for virtual patients that faculty can create without anyone writing patient-specific
 code, a split screen with a chart that fills in as the student asks, a patient that does not invent
-clinical facts, and feedback that can be explained.
+clinical facts (the aim; section 6 states what is enforced and what is only flagged afterwards), and
+feedback that can be explained.
 
 A chatbot with a long system prompt containing the whole case fails three of those. The model can
 reveal anything at any time, the chart has to be reconstructed by asking a model what was said, and
@@ -642,9 +643,13 @@ a time limit.
 - **Sentence by sentence.** The visit screen (`components/visit/Visit.tsx`) sends each finished
   sentence to `POST /api/tts` as the reply streams and plays the clips in order, so the patient
   starts talking before the reply is complete.
-- **The patient on screen** is a still portrait in a call frame with a speaking state, captions and
-  the comfort meter. It is not lip-synced or animated. The student's camera, if turned on, is a
-  local self-view only.
+- **The patient on screen** is a portrait in a call frame with captions and the comfort meter.
+  `lib/tts.ts` asks ElevenLabs for character timings with the audio and sends them as a compact
+  mouth-openness timeline in the `X-Mouth` response header; `components/visit/TalkingPortrait.tsx`
+  moves the jaw and head from that timeline at the audio clock. With the Polly fallback (no
+  timings) the browser uses the clip's loudness instead. The mouth is found per portrait with
+  MediaPipe BlazeFace loaded from a CDN; if that fails only the head moves. It is an animated
+  photo, not a rendered talking head. The student's camera, if turned on, is a local self-view only.
 
 ## 14. How Care Journeys reuse the engine
 

@@ -847,7 +847,7 @@
    "timeLimitMin": 25
   },
   "answerKey": {
-   "primaryProblem": "Panic Disorder (DSM-5 300.01), moderate-severe (PDSS 17/28), with agoraphobic avoidance of driving on freeways, the gym, and being home alone, precipitated in the context of witnessing a sudden death at work",
+   "primaryProblem": "Panic Disorder (DSM-5-TR F41.0), moderate-severe (PDSS 17/28), with agoraphobic avoidance of driving on freeways, the gym, and being home alone, precipitated in the context of witnessing a sudden death at work",
    "differential": [
     "Panic Disorder with mild agoraphobic avoidance (primary)",
     "Acute Stress Disorder / evolving PTSD given temporal link to witnessed death and intrusive memories (f6, f7) - warrants further trauma-focused assessment",

@@ -16,7 +16,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "Measure/record anthropometrics (height, weight, BMI, waist circumference)",
-    "result": "Height 5'8\" (173 cm), Weight 198 lb (89.8 kg), BMI 31.2 kg/m², waist circumference 43 in. Weight down 10 lb (unintentional) over past month per patient report.",
+    "result": "Height 5'8\" (173 cm), Weight 198 lb (89.8 kg), BMI 30.1 kg/m², waist circumference 43 in. Weight down 10 lb (unintentional) over past month per patient report.",
     "importance": "critical",
     "artifactIds": []
    },
@@ -157,7 +157,7 @@
    ],
    "redFlags": [
     "Unintentional weight loss of 4.8% body weight in 1 month warrants prompt communication with the medical team",
-    "Low-normal sodium (136) combined with HF and possible medication nonadherence requires monitoring for worsening heart failure/hyponatremia",
+    "Sodium 136 mEq/L (normal, bottom of range) combined with HF and possible medication nonadherence requires monitoring for worsening heart failure",
     "Frequent NSAID use in a patient with CKD stage 3 and HF is a safety concern requiring provider follow-up",
     "Pattern of nonadherence to metformin/eplerenone noted in refill history should be communicated to the care team, not just addressed with diet"
    ],

@@ -126,7 +126,7 @@ export function FactsSection({ p, set }: SectionProps) {
                 <span className="text-sm font-semibold text-slate-900">
                   {i + 1}. {t.label}
                 </span>
-                <span className="text-xs text-slate-600">{counts[t.id]} facts</span>
+                <span className="text-xs text-slate-600">{counts[t.id]} {counts[t.id] === 1 ? "fact" : "facts"}</span>
               </div>
               <p className="mt-1 text-xs leading-relaxed text-slate-700">{t.rule}</p>
             </button>

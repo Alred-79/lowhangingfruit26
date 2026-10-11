@@ -125,7 +125,7 @@
     "id": "a13",
     "kind": "assessment",
     "name": "Calculate Wells score for pulmonary embolism based on history and exam",
-    "result": "Wells score 7.5, calculated only after clinical signs of DVT are established on exam (left calf swelling/tenderness/redness from a7, confirmed by circumference asymmetry on a8): clinical signs of DVT +3, PE more likely than alternative diagnosis +3, HR>100 +1.5 = high probability of PE. If calf exam (a7) has not yet been performed, DVT-signs points cannot be scored and this item should be run after a7/a8.",
+    "result": "Wells score 8.5, calculated only after clinical signs of DVT are established on exam (left calf swelling/tenderness/redness from a7, confirmed by circumference asymmetry on a8): clinical signs of DVT +3, PE more likely than alternative diagnosis +3, HR>100 +1.5, hemoptysis +1 = high probability of PE. If calf exam (a7) has not yet been performed, DVT-signs points cannot be scored and this item should be run after a7/a8.",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": [
@@ -152,7 +152,7 @@
    }
   ],
   "answerKey": {
-   "primaryProblem": "Suspected pulmonary embolism with concurrent left lower extremity DVT, high clinical probability (Wells score ~7.5)",
+   "primaryProblem": "Suspected pulmonary embolism with concurrent left lower extremity DVT, high clinical probability (Wells score ~8.5)",
    "differential": [
     "Pulmonary embolism (most likely given DVT signs, pleuritic pain, hypoxia, tachycardia, hemoptysis)",
     "Deep vein thrombosis with reactive pleurisy (less likely given hypoxia and tachycardia severity)",
@@ -326,7 +326,7 @@
      "when": "action",
      "ref": "a13"
     },
-    "body": "Prerequisite: clinical signs/symptoms of DVT must be confirmed on exam (see guided calf inspection/palpation) before this item can be scored.\nClinical signs/symptoms of DVT (leg swelling + pain on palpation of deep veins), confirmed on exam: +3\nPE is #1 diagnosis OR no alternative diagnosis as likely: +3\nHeart rate >100: +1.5\nImmobilization ≥3 days or surgery in previous 4 weeks: 0 — note: standard Wells wording requires bed rest/immobilization ≥3 days or surgery within 4 weeks; two days of prolonged car travel (9 hours each way) does not meet this threshold and is not equivalent to the ≥3 day immobilization criterion, so it is not scored, though it remains a relevant VTE risk factor clinically\nPrevious objectively diagnosed PE or DVT: 0\nMalignancy: 0\nHemoptysis: +1\nTotal (Wells, classic): 7.5 → High probability of PE (score >6)"
+    "body": "Prerequisite: clinical signs/symptoms of DVT must be confirmed on exam (see guided calf inspection/palpation) before this item can be scored.\nClinical signs/symptoms of DVT (leg swelling + pain on palpation of deep veins), confirmed on exam: +3\nPE is #1 diagnosis OR no alternative diagnosis as likely: +3\nHeart rate >100: +1.5\nImmobilization ≥3 days or surgery in previous 4 weeks: 0 — note: standard Wells wording requires bed rest/immobilization ≥3 days or surgery within 4 weeks; two days of prolonged car travel (9 hours each way) does not meet this threshold and is not equivalent to the ≥3 day immobilization criterion, so it is not scored, though it remains a relevant VTE risk factor clinically\nPrevious objectively diagnosed PE or DVT: 0\nMalignancy: 0\nHemoptysis: +1\nTotal (Wells, classic): 8.5 → High probability of PE (score >6)"
    },
    {
     "id": "d6",
@@ -683,7 +683,7 @@
     "factId": "f31",
     "artifactId": "d5",
     "patientClaim": "Patient requests an antibiotic and hopes to avoid in-person or emergency evaluation",
-    "recordEvidence": "Wells Criteria Scoring Worksheet documents a score of 7.5, indicating high probability of PE requiring emergent CT pulmonary angiogram, not an antibiotic or outpatient management",
+    "recordEvidence": "Wells Criteria Scoring Worksheet documents a score of 8.5, indicating high probability of PE requiring emergent CT pulmonary angiogram, not an antibiotic or outpatient management",
     "teachingPoint": "Patient treatment preferences and cost concerns, while important to acknowledge empathetically, cannot override objective clinical risk stratification indicating a life-threatening diagnosis requiring emergency care"
    }
   ],

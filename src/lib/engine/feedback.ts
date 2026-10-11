@@ -3,7 +3,7 @@ import { all, parse, run } from "../db";
 import { chatJSON, chatText, MODELS } from "../llm";
 import { profession } from "../professions";
 import { getRubric } from "../rubrics";
-import type { DomainScore, EncounterConfig, Feedback, Rubric } from "../types";
+import type { DomainScore, EncounterConfig, Fact, Feedback, Rubric } from "../types";
 import { loadEncounter, messagesOf, type MessageRow } from "./encounter";
 import { caseFacts } from "./gatekeeper";
 
@@ -111,7 +111,25 @@ export async function scoreEncounter(encId: string): Promise<Feedback> {
   // ----- Deterministic part: what was and was not elicited comes from the disclosure ledger -----
   const facts = caseFacts(c, cfg.knobs).filter((f) => !f.distractor);
   const elicited = facts.filter((f) => state.disclosed[f.id]).map((f) => ({ id: f.id, chart: f.chart, importance: f.importance, turn: state.disclosed[f.id].turn }));
-  const missed = facts.filter((f) => !state.disclosed[f.id]).map((f) => ({ id: f.id, topic: f.topic, chart: f.chart, importance: f.importance }));
+  // Near-identical fact wording within one case counts as one finding: elicited if either was, missed once.
+  const toks = (t: string) => new Set(t.toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter((w) => w.length > 2));
+  const same = (a: Fact, b: Fact) => {
+    const x = toks(a.chart), y = toks(b.chart);
+    if (x.size < 3 || y.size < 3) return a.chart.trim().toLowerCase() === b.chart.trim().toLowerCase();
+    let n = 0;
+    for (const w of x) if (y.has(w)) n++;
+    return n / (x.size + y.size - n) >= 0.8;
+  };
+  const dupSeen: Fact[] = [];
+  const missed = facts
+    .filter((f) => {
+      if (state.disclosed[f.id]) return false;
+      if (facts.some((g) => g.id !== f.id && state.disclosed[g.id] && same(f, g))) return false;
+      if (dupSeen.some((g) => same(f, g))) return false;
+      dupSeen.push(f);
+      return true;
+    })
+    .map((f) => ({ id: f.id, topic: f.topic, chart: f.chart, importance: f.importance }));
   const rank = { critical: 0, important: 1, minor: 2 };
   missed.sort((a, b) => rank[a.importance] - rank[b.importance]);
   const actionsDone = c.actions.filter((a) => state.actions[a.id]).map((a) => ({ id: a.id, name: a.name, importance: a.importance }));
@@ -310,6 +328,8 @@ export interface AttemptSummary {
   level: number;
   mode: string;
   variation: string | null;
+  /** Role the student played in a care-journey visit (differs from the case's own profession). */
+  roleTitle: string | null;
   domains: { key: string; name: string; score: number | null; max: number }[];
   elicitedIds: string[];
   missedCritical: number;
@@ -337,6 +357,7 @@ export function attemptHistory(userId: string, caseId: string): AttemptSummary[]
       level: cfg.knobs?.level ?? 0,
       mode: cfg.mode,
       variation: cfg.perturbation?.label || null,
+      roleTitle: cfg.journey?.roleTitle || null,
       domains: (f.domains || []).map((d) => ({ key: d.key, name: d.name, score: d.score, max: d.max })),
       elicitedIds: (f.elicited || []).map((e) => e.id),
       missedCritical: (f.missed || []).filter((m) => m.importance === "critical").length,
