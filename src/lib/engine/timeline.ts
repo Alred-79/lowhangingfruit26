@@ -2,6 +2,7 @@ import { parse } from "../db";
 import type { ArtifactChart, CaseProfile, EncounterConfig, EncounterState } from "../types";
 import type { MessageRow } from "./encounter";
 import { caseFacts } from "./gatekeeper";
+import { startVisible } from "./startVisible";
 
 export interface TimelinePoint {
   turn: number;
@@ -29,8 +30,10 @@ const W = { critical: 3, important: 2, minor: 1 };
  *   score         = 0.45 * pace + 0.35 * communication + 0.20 * comfort
  */
 export function timeline(c: CaseProfile, cfg: EncounterConfig, msgs: MessageRow[]): TimelinePoint[] {
-  const facts = caseFacts(c, cfg.knobs).filter((f) => !f.distractor);
-  const acts = c.actions.filter((a) => a.importance !== "minor");
+  // What the chart shows from the start is not something to be found, so it is not in the total.
+  const sv = startVisible(c);
+  const facts = caseFacts(c, cfg.knobs).filter((f) => !f.distractor && !sv.factIds.has(f.id));
+  const acts = c.actions.filter((a) => a.importance !== "minor" && !sv.actionIds.has(a.id));
   const total = facts.reduce((s, f) => s + W[f.importance], 0) + acts.reduce((s, a) => s + W[a.importance], 0) || 1;
   const out: TimelinePoint[] = [];
   let comm = 0.6;

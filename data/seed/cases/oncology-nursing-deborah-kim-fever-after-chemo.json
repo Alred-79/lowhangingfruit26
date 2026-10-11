@@ -842,6 +842,11 @@
     "Discuss any concerns with the patient and agree on next steps",
     "Document findings using SBAR format for handoff to the oncology team"
    ],
+   "goals": [
+    "Check symptoms in order",
+    "Inspect and review current vitals",
+    "Agree next steps and hand over"
+   ],
    "timeLimitMin": 25
   },
   "answerKey": {

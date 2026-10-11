@@ -807,6 +807,11 @@
     "Explain in plain language why an urgent same-day recollection is necessary and arrange it with corrected technique instructions.",
     "Report the critical value to the ordering provider per protocol and document the call, while staying within laboratory scope (no medication advice)."
    ],
+   "goals": [
+    "Verify identity and ask about collection",
+    "Review medicines and diet",
+    "Explain the recollection and report"
+   ],
    "timeLimitMin": 20
   },
   "setting": "Telehealth video visit, patient seated in her parked car outside a client's home during a work break, Worcester, Massachusetts",

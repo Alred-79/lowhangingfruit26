@@ -387,6 +387,11 @@
     "Address the patient's concerns with clear communication",
     "Give clear instructions and confirm the plan before ending the call"
    ],
+   "goals": [
+    "Take a focused history",
+    "Assess remotely and choose a disposition",
+    "Give clear instructions before ending"
+   ],
    "timeLimitMin": 20
   },
   "facts": [

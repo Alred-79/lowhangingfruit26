@@ -921,6 +921,11 @@
     "Identify and address gaps in school nurse coordination and co-parent diabetes education and supply access.",
     "Assess caregiver coping, confidence, and support needs, and respond with supportive, non-judgmental teaching."
    ],
+   "goals": [
+    "Check insulin and monitoring skills",
+    "Review the glucose log together",
+    "Support the family and coordinate school"
+   ],
    "timeLimitMin": 25
   },
   "setting": "Telehealth video visit; caregiver and child at home in their kitchen in Providence, Rhode Island, three days after hospital discharge",

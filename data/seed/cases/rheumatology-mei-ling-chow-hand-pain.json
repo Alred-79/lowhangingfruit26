@@ -940,6 +940,11 @@
     "Explore reproductive health plans and use of over-the-counter or complementary medications",
     "Formulate an assessment and agree a management plan"
    ],
+   "goals": [
+    "Take a focused history",
+    "Guide a remote joint exam",
+    "Review results and agree a plan"
+   ],
    "timeLimitMin": 25
   },
   "summary": "A 41-year-old pastry chef with 3 months of symmetric hand/wrist swelling and morning stiffness, now with forefoot involvement, strongly positive RF and anti-CCP, elevated inflammatory markers, and non-erosive periarticular osteopenia consistent with early seropositive rheumatoid arthritis. The case teaches history-taking for inflammatory arthritis, interpretation of safety labs (notably hepatitis B core antibody positivity), and treatment planning complicated by active pregnancy intention and undisclosed herbal supplement use.",

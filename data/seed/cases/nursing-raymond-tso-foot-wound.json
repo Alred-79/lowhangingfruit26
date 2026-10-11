@@ -960,6 +960,11 @@
     "Determine urgency and formulate an SBAR escalation to the provider if indicated",
     "Provide patient-centered education on wound care and insulin administration"
    ],
+   "goals": [
+    "Assess the wound and vitals remotely",
+    "Review medicines and the discharge plan",
+    "Escalate and teach safe care"
+   ],
    "timeLimitMin": 20
   },
   "setting": "Telehealth video visit; patient at home in a rural property in northern Arizona, approximately 70 miles from the hospital.",

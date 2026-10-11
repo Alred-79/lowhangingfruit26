@@ -753,6 +753,11 @@
     "Counsel on genetic discrimination protections and limitations, and explore implications for relatives",
     "Support the patient in choosing a testing strategy and obtain informed consent"
    ],
+   "goals": [
+    "Build the family pedigree",
+    "Explain the testing options",
+    "Support an informed choice"
+   ],
    "timeLimitMin": 25
   },
   "setting": "Telehealth video visit, patient at home in her Brooklyn apartment home office",

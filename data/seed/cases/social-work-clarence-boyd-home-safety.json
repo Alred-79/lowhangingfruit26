@@ -739,6 +739,11 @@
     "Identify and discuss available veterans' benefits and community resources",
     "Document findings and determine appropriate follow-up actions"
    ],
+   "goals": [
+    "Build rapport and assess home life",
+    "Screen for safety and mood",
+    "Discuss resources and follow-up"
+   ],
    "timeLimitMin": 25
   },
   "chartAtStart": [

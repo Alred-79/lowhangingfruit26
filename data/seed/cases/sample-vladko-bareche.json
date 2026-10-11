@@ -457,6 +457,11 @@
     "Formulate a nutrition diagnosis (PES statement) using the Nutrition Care Process",
     "Use motivational interviewing techniques to explore readiness to change and negotiate an initial, culturally appropriate nutrition goal"
    ],
+   "goals": [
+    "Take a nutrition-focused history",
+    "Explore barriers to progress",
+    "Agree an initial goal"
+   ],
    "timeLimitMin": 30
   },
   "facts": [

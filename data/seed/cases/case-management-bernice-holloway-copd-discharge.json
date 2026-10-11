@@ -873,6 +873,11 @@
     "Prioritize and arrange services to close identified gaps (expedited portable oxygen, home health re-referral, pharmacy financial assistance, transportation)",
     "Document a case management assessment and care plan, and set clear escalation triggers with the patient and her daughter"
    ],
+   "goals": [
+    "Check the discharge plan at home",
+    "Uncover barriers to following it",
+    "Arrange services and escalation triggers"
+   ],
    "timeLimitMin": 25
   },
   "setting": "Telehealth video visit, patient at home in her second-floor walk-up apartment in St. Louis, Missouri",

@@ -192,7 +192,7 @@
      "when": "action",
      "ref": "a10"
     },
-    "body": "Oswestry Disability Index total score: 38% - Moderate disability. Highest-scored sections: lifting (3/5), sitting (3/5), standing (2/5), personal care (1/5), walking (1/5), social life (2/5), sleeping (1/5), pain intensity (3/5), travelling (2/5), employment/homemaking (1/5)."
+    "body": "Oswestry Disability Index total score: 38% - Moderate disability. Highest-scored sections: lifting (3/5), sitting (3/5), standing (2/5), personal care (1/5), walking (1/5), social life (2/5), sleeping (1/5), pain intensity (3/5), traveling (2/5), employment/homemaking (1/5)."
    },
    {
     "id": "d5",
@@ -676,6 +676,11 @@
     "Explore the patient's beliefs about his imaging findings and concerns about activity",
     "Review functional limitations and occupational demands with the patient",
     "Establish an initial PT diagnosis and agree a graded home exercise and return-to-work plan"
+   ],
+   "goals": [
+    "Take a focused history",
+    "Guide the movement tests",
+    "Agree a home exercise plan"
    ],
    "timeLimitMin": 25
   },

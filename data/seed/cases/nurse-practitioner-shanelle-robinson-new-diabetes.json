@@ -912,6 +912,11 @@
     "Review preventive care and screening recommendations",
     "Respond to the patient's questions and concerns, and agree on a follow-up plan"
    ],
+   "goals": [
+    "Take a focused history",
+    "Review the labs together",
+    "Agree goals and follow-up"
+   ],
    "timeLimitMin": 25
   },
   "chartAtStart": [

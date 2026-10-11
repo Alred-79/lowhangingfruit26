@@ -1,5 +1,5 @@
 import { chatJSON, MODELS } from "../llm";
-import type { CaseProfile, ClinicalAction, EncounterState, Fact, Knobs } from "../types";
+import type { CaseProfile, ClinicalAction, ComfortReason, EncounterState, Fact, Knobs } from "../types";
 
 export interface GateResult {
   question_type: "open" | "focused" | "closed" | "leading" | "multiple" | "statement" | "greeting" | "other";
@@ -14,6 +14,8 @@ export interface GateResult {
     dismissive: boolean;
     jargon: boolean;
     rushed: boolean;
+    /** The student clearly closed the visit (goodbye / wrapping up). Optional: older stored results lack it. */
+    closing?: boolean;
   };
   patient_emotion: string;
 }
@@ -38,7 +40,7 @@ const SCHEMA = {
     },
     signals: {
       type: "object",
-      required: ["introduced_self", "explained_purpose", "empathy", "validated_emotion", "sensitive_framing", "judgmental", "dismissive", "jargon", "rushed"],
+      required: ["introduced_self", "explained_purpose", "empathy", "validated_emotion", "sensitive_framing", "judgmental", "dismissive", "jargon", "rushed", "closing"],
       properties: {
         introduced_self: bool,
         explained_purpose: bool,
@@ -49,6 +51,7 @@ const SCHEMA = {
         dismissive: { ...bool, description: "ignored or brushed past something the patient just raised" },
         jargon: { ...bool, description: "used medical jargon without explaining it" },
         rushed: { ...bool, description: "curt, interrupting, or stacking questions" },
+        closing: { ...bool, description: "the student is clearly ending the visit: saying goodbye, wrapping up, 'that's everything', 'take care'. A mid-visit 'thanks' or 'okay' is NOT closing; a message that still asks the patient something is NOT closing." },
       },
     },
     patient_emotion: { type: "string", description: "1-3 words for how the patient feels after this message" },
@@ -90,7 +93,7 @@ export async function gatekeep(args: {
     return {
       question_type: "other",
       asks: [],
-      signals: { introduced_self: false, explained_purpose: false, empathy: false, validated_emotion: false, sensitive_framing: false, judgmental: false, dismissive: false, jargon: false, rushed: false },
+      signals: { introduced_self: false, explained_purpose: false, empathy: false, validated_emotion: false, sensitive_framing: false, judgmental: false, dismissive: false, jargon: false, rushed: false, closing: false },
       patient_emotion: "neutral",
     };
   }
@@ -101,6 +104,8 @@ export interface Decision {
   deflect: Fact[];
   rapport: number;
   rapportDelta: number;
+  /** Which signals moved the comfort meter this turn, in plain words (before the +/-12 cap). */
+  reasons: ComfortReason[];
   how: Record<string, "volunteered" | "asked">;
 }
 
@@ -111,18 +116,28 @@ export interface Decision {
 export function decide(gate: GateResult, facts: Fact[], state: EncounterState, knobs: Knobs, lowLiteracy: boolean): Decision {
   const s = gate.signals;
   let delta = 0;
-  if (s.introduced_self && state.turn <= 3) delta += 4;
-  if (s.explained_purpose && state.turn <= 4) delta += 3;
-  if (s.empathy) delta += 6;
-  if (s.validated_emotion) delta += 5;
-  if (s.sensitive_framing) delta += 5;
-  if (gate.question_type === "open") delta += 2;
-  if (s.judgmental) delta -= 10;
-  if (s.dismissive) delta -= 7;
-  if (s.jargon) delta -= lowLiteracy ? 5 : 2;
-  if (s.rushed) delta -= 4;
-  if (gate.question_type === "multiple") delta -= 2;
-  if (gate.question_type === "leading") delta -= 1;
+  const reasons: ComfortReason[] = [];
+  const add = (cond: unknown, label: string, d: number) => {
+    if (!cond) return;
+    delta += d;
+    reasons.push({ label, delta: d });
+  };
+  // The opening courtesies count once; a model that flags them again on a later message earns nothing.
+  const credited = (state.credited ||= {});
+  add(s.introduced_self && state.turn <= 3 && !credited.intro, "introduced yourself", 4);
+  add(s.explained_purpose && state.turn <= 4 && !credited.purpose, "explained why you are here", 3);
+  if (s.introduced_self && state.turn <= 3) credited.intro = true;
+  if (s.explained_purpose && state.turn <= 4) credited.purpose = true;
+  add(s.empathy, "showed empathy", 6);
+  add(s.validated_emotion, "named the feeling", 5);
+  add(s.sensitive_framing, "framed a sensitive question with care", 5);
+  add(gate.question_type === "open", "asked an open question", 2);
+  add(s.judgmental, "sounded judgmental", -10);
+  add(s.dismissive, "brushed past what the patient said", -7);
+  add(s.jargon, "used medical terms without explaining", lowLiteracy ? -5 : -2);
+  add(s.rushed, "sounded rushed", -4);
+  add(gate.question_type === "multiple", "asked several questions at once", -2);
+  add(gate.question_type === "leading", "asked a leading question", -1);
   delta = Math.max(-12, Math.min(12, delta));
   const rapport = Math.max(0, Math.min(100, state.rapport + delta));
 
@@ -166,7 +181,7 @@ export function decide(gate: GateResult, facts: Fact[], state: EncounterState, k
       }
     }
   }
-  return { reveal, deflect, rapport, rapportDelta: delta, how };
+  return { reveal, deflect, rapport, rapportDelta: delta, reasons, how };
 }
 
 // ---------- Orders and exams ----------

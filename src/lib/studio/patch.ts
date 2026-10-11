@@ -210,7 +210,7 @@ const FIELD_LABEL: Record<string, string> = {
   patient: "Patient", persona: "Persona", scenario: "Scenario", chartAtStart: "Chart at start", answerKey: "Answer key", rubricId: "Rubric",
   name: "Name", age: "Age", sex: "Sex", pronouns: "Pronouns", ethnicity: "Ethnicity", occupation: "Occupation", language: "Language", appearance: "Appearance on the call",
   personality: "Personality", communicationStyle: "Communication style", healthLiteracy: "Health literacy", emotionalState: "Emotional state", background: "Background",
-  speechExamples: "Speech examples", concerns: "Concerns", studentBrief: "Student brief", chiefComplaint: "Chief concern", openingLine: "Opening line", tasks: "Tasks",
+  speechExamples: "Speech examples", concerns: "Concerns", studentBrief: "Student brief", chiefComplaint: "Chief concern", openingLine: "Opening line", tasks: "Tasks", goals: "Session goals",
   timeLimitMin: "Time limit (min)", category: "Category", topic: "Topic", chart: "Chart wording", says: "Patient wording", tier: "Disclosure tier", importance: "Importance",
   distractor: "Distractor", kind: "Kind", aliases: "Also matches", result: "Result", abnormal: "Abnormal", artifactIds: "Linked documents", type: "Type", date: "Date",
   author: "Author", body: "Body", table: "Table", columns: "Columns", rows: "Rows", cells: "Cells", flag: "Flag", release: "Release rule", text: "Text", factIds: "Linked facts",

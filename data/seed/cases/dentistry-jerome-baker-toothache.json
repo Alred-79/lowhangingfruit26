@@ -749,7 +749,7 @@
    "ethnicity": "Black",
    "occupation": "Line cook at a restaurant",
    "language": "English",
-   "appearance": "A heavyset man with short greying hair, appearing fatigued and uncomfortable, sitting upright on a couch in a dimly lit living room. He periodically dabs at his mouth with a paper towel and holds a hand near his jaw. His voice has a muffled, thick quality, and he shifts position as if trying to find a more comfortable way to sit.",
+   "appearance": "A heavyset man with short graying hair, appearing fatigued and uncomfortable, sitting upright on a couch in a dimly lit living room. He periodically dabs at his mouth with a paper towel and holds a hand near his jaw. His voice has a muffled, thick quality, and he shifts position as if trying to find a more comfortable way to sit.",
    "portrait": "/portraits/dentistry-jerome-baker-toothache.jpg"
   },
   "persona": {
@@ -782,6 +782,11 @@
     "Perform a remote examination using camera inspection and guided patient maneuvers",
     "Determine and communicate the appropriate next steps for care",
     "Document findings and plan in a dental SOAP note"
+   ],
+   "goals": [
+    "Take a focused history",
+    "Guide the remote mouth exam",
+    "Explain next steps for care"
    ],
    "timeLimitMin": 20
   },

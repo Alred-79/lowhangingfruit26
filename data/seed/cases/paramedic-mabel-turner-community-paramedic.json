@@ -886,6 +886,11 @@
     "Consult the online supervising physician under the treat-in-place protocol and determine the appropriate care pathway",
     "Deliver a clear, structured handover (IMIST-AMBO) and document the patient care report"
    ],
+   "goals": [
+    "Take a structured history",
+    "Review home readings and medicines",
+    "Consult and hand over clearly"
+   ],
    "timeLimitMin": 25
   },
   "answerKey": {

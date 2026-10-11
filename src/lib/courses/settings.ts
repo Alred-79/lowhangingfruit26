@@ -22,7 +22,12 @@ export interface AssignmentSettings {
    * the patient remembers who said what, and earlier students' notes are in the chart.
    */
   sharedPatient?: boolean;
+  /** Show students the comfort meter and why it moved. Left out = on, except in exams (off). */
+  showComfort?: boolean;
 }
+
+/** Whether the comfort meter is shown for an assignment of this type with these settings. */
+export const comfortOn = (type: AssignmentType, s: Pick<AssignmentSettings, "showComfort">) => s.showComfort ?? type !== "exam";
 
 export const TYPE_LABEL: Record<AssignmentType, string> = { homework: "Homework", exam: "Exam", practice: "Practice set" };
 
@@ -50,6 +55,7 @@ export function normalizeSettings(type: AssignmentType, raw: Record<string, unkn
     feedbackRelease: r.feedbackRelease === "manual" || r.feedbackRelease === "immediate" ? r.feedbackRelease : d.feedbackRelease,
   };
   if (r.sharedPatient === true && type !== "exam") out.sharedPatient = true;
+  if (typeof r.showComfort === "boolean") out.showComfort = r.showComfort;
   if (r.level === null && type !== "exam") out.level = null;
   if (r.timeLimitMin !== null && r.timeLimitMin !== undefined && r.timeLimitMin !== "") out.timeLimitMin = int(r.timeLimitMin, 0, 180, 20);
   else if (d.timeLimitMin !== undefined && type === "exam") out.timeLimitMin = d.timeLimitMin;
@@ -70,6 +76,7 @@ export function describeSettings(s: AssignmentSettings): string {
   if (s.perturb) parts.push("patient varies on repeats");
   if (s.liveAssist) parts.push("live assist on");
   if (s.sharedPatient) parts.push("one shared patient for the class");
+  if (s.showComfort !== undefined) parts.push(s.showComfort ? "comfort meter on" : "comfort meter off");
   return parts.join(" · ");
 }
 

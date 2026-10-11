@@ -137,6 +137,12 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
           <span className="font-semibold">Flagged for instructor review:</span> {f.reviewReasons.join("; ")}. An instructor should look at this visit whatever the total score.
         </div>
       )}
+      {f.callEndedBy && (
+        <div className="mb-4 rounded-lg border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-800">
+          <span className="font-semibold">The patient ended this call:</span>{" "}
+          {{ closed: "the visit came to a natural close.", upset: "the patient chose to stop the visit.", time: "the patient had to go; the visit ran well past its time." }[f.callEndedBy.reason]}
+        </div>
+      )}
       {review.faculty_note && (
         <div className="mb-4 rounded-lg border border-violet-300 bg-violet-50 px-4 py-3 text-sm text-violet-900">
           <span className="font-semibold">From your instructor{review.faculty_score !== null ? ` (adjusted score ${Math.round(review.faculty_score)}%)` : ""}:</span> {review.faculty_note}
@@ -192,7 +198,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
 
       {own && assignment?.type !== "exam" && (
         <Card className="mt-4">
-          <CardHeader title="For your next attempt" subtitle="Start over to practise the same visit again (optionally with the patient in a different mood), or book a follow-up where the patient remembers you and this conversation." />
+          <CardHeader title="For your next attempt" subtitle="Start over to practice the same visit again (optionally with the patient in a different mood), or book a follow-up where the patient remembers you and this conversation." />
           <div className="p-4">
             <ol className="mb-4 list-decimal space-y-1.5 pl-5 text-sm text-slate-800">
               {f.nextAttempt.map((n, i) => (
@@ -349,6 +355,20 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
           </ul>
         </Card>
       </div>
+
+      {!!(f.inChart && f.inChart.facts.length + f.inChart.actions.length) && (
+        <div className="mt-3 text-sm text-slate-500">
+          <div className="font-medium text-slate-600">Already in the chart at the start (not counted as missed)</div>
+          <ul className="mt-1 list-disc space-y-0.5 pl-5">
+            {f.inChart!.actions.map((a) => (
+              <li key={a.id}>{a.name}</li>
+            ))}
+            {f.inChart!.facts.map((x) => (
+              <li key={x.id}>{x.chart}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {!!f.mismatches?.length && (
         <Card className="mt-4">

@@ -844,6 +844,11 @@
     "Develop and share a collaborative formulation with the patient",
     "Introduce the rationale for psychological treatment options"
    ],
+   "goals": [
+    "Interview about the episodes",
+    "Assess safety and risk",
+    "Share a plan for treatment"
+   ],
    "timeLimitMin": 25
   },
   "answerKey": {

@@ -755,6 +755,11 @@
     "Screen for cognitive-perceptual issues and compare findings with available documentation",
     "Identify any findings requiring referral or communication with the healthcare team and draft an initial OT evaluation note with goals and plan"
    ],
+   "goals": [
+    "Build an occupational profile",
+    "Observe function and home safety",
+    "Draft goals and a plan"
+   ],
    "timeLimitMin": 25
   },
   "answerKey": {

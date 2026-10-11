@@ -888,6 +888,11 @@
     "Screen for mood symptoms and psychosocial factors",
     "Formulate a rehabilitation plan and arrange appropriate follow-up"
    ],
+   "goals": [
+    "Take a focused history",
+    "Guide the remote exam",
+    "Plan rehabilitation and follow-up"
+   ],
    "timeLimitMin": 25
   },
   "chartAtStart": [

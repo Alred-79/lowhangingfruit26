@@ -911,6 +911,11 @@
     "Explore the patient's experience with and feelings about his current medication regimen",
     "Formulate and agree a management plan with appropriate follow-up"
    ],
+   "goals": [
+    "Take a focused symptom history",
+    "Review medicines and lab results",
+    "Agree a plan and follow-up"
+   ],
    "timeLimitMin": 25
   },
   "setting": "Telehealth video visit, patient at home in Providence, Rhode Island, calling from his bedroom before an evening shift",

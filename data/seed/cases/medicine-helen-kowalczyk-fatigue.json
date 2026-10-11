@@ -965,6 +965,11 @@
     "Review and interpret the laboratory results from the chart",
     "Formulate a differential diagnosis and initial management plan"
    ],
+   "goals": [
+    "Take a thorough history",
+    "Review medicines and chart results",
+    "Agree a plan and follow-up"
+   ],
    "timeLimitMin": 25
   },
   "answerKey": {

@@ -766,6 +766,11 @@
     "Determine appropriate next steps within your scope of practice",
     "Counsel the patient on your recommendations and agree on a plan"
    ],
+   "goals": [
+    "Explain the test results simply",
+    "Ask how it affects daily life",
+    "Agree on next steps"
+   ],
    "timeLimitMin": 25
   },
   "setting": "Telehealth video visit; patient at home at her kitchen table in Savannah, Georgia",

@@ -44,8 +44,8 @@ Use Chrome, Edge or Safari if you want to talk by microphone; typing works in an
   rehabilitation, nutrition, behavioral health, diagnostics, dental and vision, pre-hospital and
   community), defined as data in `data/professions.json`.
 - **81 seed patients**, loaded on boot from `data/seed/cases/`, at least one per role. 73 were
-  drafted by the model and are labelled "AI-drafted, not faculty-reviewed". 8 were expanded by the
-  same generator from the faculty-provided sample patient details and are labelled "Sample". All
+  drafted by the model and are labeled "AI-drafted, not faculty-reviewed". 8 were expanded by the
+  same generator from the faculty-provided sample patient details and are labeled "Sample". All
   81 are stored with `reviewed = false`: none has been reviewed by a clinician.
 - **71 portraits** in `public/portraits/`. 63 belong to AI-drafted patients and were generated
   with Stable Diffusion 3.5 Large on Amazon Bedrock (`scripts/gen-portraits.ts`); the other 8 are
@@ -55,7 +55,7 @@ Use Chrome, Edge or Safari if you want to talk by microphone; typing works in an
 - **One rubric by default**: the provided Patient Encounter Performance Rubric, 7 domains scored
   1 to 4. A second built-in rubric is a 12-item points checklist. Faculty can write their own in
   either format.
-- **19 teamwork behaviours** in 4 TeamSTEPPS areas for Care Journeys.
+- **19 teamwork behaviors** in 4 TeamSTEPPS areas for Care Journeys.
 
 Features, each described in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md):
 
@@ -67,7 +67,7 @@ Features, each described in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md):
   patient said with the case: a released fact that was not said goes back to locked, a true fact
   said early is filed, and anything outside the case is flagged "Outside the case record".
 - **Voice.** Browser speech recognition in; ElevenLabs out when a key is configured, Amazon Polly
-  generative voices otherwise, synthesised sentence by sentence while the reply streams.
+  generative voices otherwise, synthesized sentence by sentence while the reply streams.
 - **Feedback.** Rubric scores with quotes that code checks against the transcript, findings
   elicited and missed from the disclosure ledger, and a running score for every turn computed
   without a model.
@@ -77,7 +77,7 @@ Features, each described in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md):
 - **One shared patient for a class.** An assignment setting. Students of different professions see
   the same continuing patient in turn; the patient remembers each of them by name and can point out
   conflicting advice, and earlier students' write-ups are in the chart as notes.
-- **Make your own practice patient.** A student describes who or what they want to practise with
+- **Make your own practice patient.** A student describes who or what they want to practice with
   and gets a private, AI-drafted, unreviewed patient.
 - **Episodes.** Every stored visit, searchable by patient, participant, role and words said, on the
   `/episodes` page, through `GET /api/episodes`, and through an MCP endpoint at `/api/mcp` with
@@ -199,7 +199,7 @@ view and the teamwork trace.
 6. Interview the patient, click **End visit**, write the note, **Submit for feedback**. You return
    to the journey hub while your findings are added to the shared state.
 7. Click **Write the handoff**, fill in Situation, Background, Assessment and Recommendation, and
-   click **Send handoff**. The review lists each communication behaviour as observed or not, with
+   click **Send handoff**. The review lists each communication behavior as observed or not, with
    the SBAR section and quote it is based on and one piece of feedback.
 8. Encounter 3 runs: the AI dietitian reads your SBAR and the shared state before seeing the patient.
 9. Click **Go to the huddle**, then **Open the huddle**. The agenda is what is still disputed,
@@ -238,9 +238,9 @@ Paths under `src/` unless they start with `data/`, `docs/` or `scripts/`.
 
 | Requirement | Status | Where |
 |---|---|---|
-| Real-time voice interaction | Built. Microphone input through the browser's speech recognition. Patient speech through ElevenLabs (flash model, voice chosen by the patient's age and sex) when `ELEVENLABS_API_KEY` is set, with Amazon Polly generative voices as the fallback; synthesised sentence by sentence while the reply streams. | `components/visit/Visit.tsx`, `lib/tts.ts`, `app/api/tts` |
+| Real-time voice interaction | Built. Microphone input through the browser's speech recognition. Patient speech through ElevenLabs (flash model, voice chosen by the patient's age and sex) when `ELEVENLABS_API_KEY` is set, with Amazon Polly generative voices as the fallback; synthesized sentence by sentence while the reply streams. | `components/visit/Visit.tsx`, `lib/tts.ts`, `app/api/tts` |
 | Avatar-based interaction | Partial. A portrait in a video-call frame with captions. While the patient speaks, the jaw and head move in time with the voice, driven by ElevenLabs character timings (or the clip's loudness with the Polly fallback). It is an animated photo, not a rendered talking head. | `components/visit/TalkingPortrait.tsx`, `components/visit/mouth.ts`, `public/portraits/` |
-| Multimodal interaction | Partial. Voice and text in; voice, text, tables, plotted charts, images and PDFs out. The student's camera is a local self-view only; nothing is analysed. | `components/chart/ArtifactView.tsx` |
+| Multimodal interaction | Partial. Voice and text in; voice, text, tables, plotted charts, images and PDFs out. The student's camera is a local self-view only; nothing is analyzed. | `components/chart/ArtifactView.tsx` |
 | Adaptive patient behavior | Built. Five difficulty levels, seven persona variations for repeat attempts, faculty-approved variants, rapport-dependent disclosure, and an Elo-style learner model that sets the next level. | `lib/engine/difficulty.ts`, `lib/adaptive.ts`, `app/student/progress` |
 | Advanced memory/state | Built. Per-turn state snapshots (rewind to an earlier turn and branch). Follow-up visits: facts already shared, tests done, trust and a first-person memory carry over. One shared patient for a class: the patient remembers each student by name, and earlier students' write-ups are chart notes. | `rewind()`, `createEncounter()` and `addTeamNotes()` in `lib/engine/encounter.ts`, `rememberVisit()` in `lib/engine/feedback.ts`, `sharedPatient` in `lib/courses/settings.ts` |
 | Clinical artifact generation and interaction | Built. Generated lab tables with reference flags, trend charts, audiograms, notes; documents released by orders or disclosures; deliberate patient-versus-chart mismatches scored in feedback. | `lib/casegen.ts`, `components/chart/ArtifactView.tsx` |
@@ -271,7 +271,7 @@ All code paths are under `src/lib/journey/` unless stated.
 | Base | Established, uncertain, disagreement, unanswered distinguished | Status on every entry; status board in the integrated view | entry `status` and derived status in `store.ts` |
 | Base | Provenance: source, professional role, encounter, timing | Click any entry for the provenance panel | columns on `state_entries`; `ProvenancePanel` in `components/journey/shared.tsx` |
 | Base | Integrated patient representation and coherent care plan | Integrated patient view | `view.ts`, `synthesis.ts`, `components/journey/FinalView.tsx` |
-| Enhanced | SBAR handoffs and TeamSTEPPS-aligned evaluation with an explainable behavioural trace | Write the handoff; Review of the handoff; Teamwork evaluation tab | `handoff.ts`, `BEHAVIOURS` in `types.ts` |
+| Enhanced | SBAR handoffs and TeamSTEPPS-aligned evaluation with an explainable behavioral trace | Write the handoff; Review of the handoff; Teamwork evaluation tab | `handoff.ts`, `BEHAVIOURS` in `types.ts` |
 | Stretch | Reach forward and backward, consults, call-outs, check-backs, closed loops | Page a colleague; Team messages tab | `consult()` and `callOut()` in `collab.ts` |
 | Stretch | Huddle and reconciliation of conflicting interpretations | Team huddle | `startHuddle()`, `resolveHuddleItem()` in `collab.ts` |
 | Stretch | Collaborative modification of the care plan | "Propose a change to this item" on a care-plan action | `proposePlanChange()` in `collab.ts` |
@@ -350,7 +350,7 @@ src/
 ## Limitations
 
 - **Clinical content has not been checked by a clinician.** All 81 library patients are stored
-  as unreviewed. The 73 AI-drafted ones are labelled "AI-drafted, not faculty-reviewed". The 8
+  as unreviewed. The 73 AI-drafted ones are labeled "AI-drafted, not faculty-reviewed". The 8
   "Sample" patients start from the faculty-provided details but were expanded into full cases by
   the same generator. The consistency check finds contradictions inside a case; it does not
   establish that the case is clinically correct.

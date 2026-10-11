@@ -945,6 +945,11 @@
     "Use motivational interviewing to explore the patient's readiness to change",
     "Collaboratively set at least one small, feasible nutrition-related goal and provide education"
    ],
+   "goals": [
+    "Take a nutrition-focused history",
+    "Review labs and medicines together",
+    "Set one small goal"
+   ],
    "timeLimitMin": 30
   },
   "title": "First Nutrition Visit After Hospitalization for New, Uncontrolled Type 2 Diabetes",

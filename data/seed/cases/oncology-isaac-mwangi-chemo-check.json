@@ -1085,6 +1085,11 @@
     "Formulate a treatment plan for the upcoming cycle, specifying what requires attending co-sign",
     "Address the patient's concerns and agree on next steps with appropriate safety-netting"
    ],
+   "goals": [
+    "Take a thorough symptom history",
+    "Review results with the patient",
+    "Agree a plan for next cycle"
+   ],
    "timeLimitMin": 25
   },
   "setting": "Telehealth video visit; patient at home in Minneapolis, seated at his dining room table",

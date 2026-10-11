@@ -105,6 +105,10 @@ export function ScenarioSection({ p, set, go }: SectionProps) {
         <div className="sm:col-span-2">
           <StringList label="Tasks for the student" hint="Three to five things the student is expected to accomplish. Shown with the brief." items={p.scenario.tasks} onChange={(v) => sc({ tasks: v })} addLabel="Add a task" />
         </div>
+        <div className="sm:col-span-2">
+          <StringList label="Session goals (exactly three)" hint="A short version of the tasks for the waiting room: three goals of 3 to 7 words, plain verbs, no findings or diagnoses (for example, Take a focused history). Tasks are still what scoring uses." items={p.scenario.goals || []} onChange={(v) => sc({ goals: v.slice(0, 3) })} addLabel="Add a goal" />
+          {(p.scenario.goals || []).filter((g) => g.trim()).length !== 3 && <p className="mt-1 text-xs text-amber-700">Students see three goals; this case has {(p.scenario.goals || []).filter((g) => g.trim()).length}.</p>}
+        </div>
       </div>
     </Panel>
   );

@@ -770,7 +770,7 @@
    "ethnicity": "Ghanaian-American",
    "occupation": "High school mathematics teacher",
    "language": "English",
-   "appearance": "A well-built man with short greying hair, appearing fatigued and flushed, wearing a plain grey t-shirt. He is seated on a couch in a dimly lit living room, occasionally wiping his forehead, with a blanket nearby and a glass of water visible on a side table.",
+   "appearance": "A well-built man with short graying hair, appearing fatigued and flushed, wearing a plain gray t-shirt. He is seated on a couch in a dimly lit living room, occasionally wiping his forehead, with a blanket nearby and a glass of water visible on a side table.",
    "portrait": "/portraits/infectious-disease-kwame-asante-fever-after-travel.jpg"
   },
   "persona": {
@@ -803,6 +803,11 @@
     "Determine appropriate same-day diagnostic workup and explain the urgency",
     "Address the patient's questions and concerns about work and cost",
     "Formulate and clearly communicate an urgent disposition plan"
+   ],
+   "goals": [
+    "Take a travel and exposure history",
+    "Examine the patient remotely",
+    "Explain the urgent plan"
    ],
    "timeLimitMin": 20
   },

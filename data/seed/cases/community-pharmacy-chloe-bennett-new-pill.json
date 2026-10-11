@@ -767,6 +767,11 @@
     "Review baseline requirements for safe dispensing",
     "Make an appropriate, in-scope decision about dispensing, and document the encounter"
    ],
+   "goals": [
+    "Check what the patient understands",
+    "Reconcile all medications and supplements",
+    "Decide about dispensing safely"
+   ],
    "timeLimitMin": 20
   },
   "title": "New Online-Prescribed Combined Oral Contraceptive with Undetected Migraine Aura",

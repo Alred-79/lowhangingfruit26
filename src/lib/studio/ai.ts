@@ -91,7 +91,7 @@ Compare every pair of places where the same clinical information appears:
 - history facts (chart wording and patient wording) against each other, and against the persona and the opening line
 - medications, doses and frequencies across facts, Chart at start, medication-list documents and notes
 - vital signs across Chart at start, action results, flowsheets and notes
-- lab and test values, units, reference ranges and H/L flags across action results and documents; trend-chart points against the tables they summarise
+- lab and test values, units, reference ranges and H/L flags across action results and documents; trend-chart points against the tables they summarize
 - dates and durations (symptom onset, "3 weeks ago", ages, document dates) against each other
 - the answer key (primary problem, differential, key findings, plan, red flags) against what the facts, results and documents actually support
 - the student brief and Chart at start: they must not give away findings that are meant to be discovered
@@ -250,7 +250,7 @@ export async function draftVariant(p: CaseProfile, focus: VariantFocus, note: st
 A variant must keep: the same patient identity, the same primary problem and answer key, the same learning objectives, and every document in the chart exactly as written (documents cannot be overridden, so do not change any value that a document, Chart at start item or the answer key states).
 
 What a variant may change:
-- persona (focus "persona" or "both"): personality, communication style, health literacy, emotional state, speech examples and concerns. Make it a recognisably different interaction, e.g. more anxious and talkative, stoic and minimising, rushed and distracted, distrustful after a bad experience.
+- persona (focus "persona" or "both"): personality, communication style, health literacy, emotional state, speech examples and concerns. Make it a recognizably different interaction, e.g. more anxious and talkative, stoic and minimising, rushed and distracted, distrustful after a bad experience.
 - clinical detail (focus "clinical" or "both"): the wording, tier, or incidental details of facts (how a symptom is described, a different trigger, different social circumstances, a different pertinent negative, which sensitive fact is harder to elicit), and results of actions that no document reports. Three to eight fact overrides is typical. Every changed fact must still be consistent with every unchanged fact, document and the answer key.
 
 For each fact override give the fact id and the full new "chart" and "says" wording (and "tier" only if it changes). "says" must be in the variant persona's voice. Do not invent ids.

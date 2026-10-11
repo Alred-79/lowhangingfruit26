@@ -111,7 +111,7 @@
     "id": "a13",
     "kind": "test",
     "name": "Urine output/wet nappy count (caregiver report)",
-    "result": "3 wet nappies in last 24 hours (baseline is 5-6/day); nappies described as less full/concentrated than usual.",
+    "result": "3 wet diapers in last 24 hours (baseline is 5-6/day); diapers described as less full/concentrated than usual.",
     "importance": "important",
     "artifactIds": []
    },
@@ -137,7 +137,7 @@
     "2 days vomiting now resolving, 6 watery stools/day",
     "Low-grade fever 38.1C",
     "Weight down 10.4kg -> 10.1kg (~2.9% loss) in 1 week",
-    "Decreased wet nappies (3 vs usual 5-6/day)",
+    "Decreased wet diapers (3 vs usual 5-6/day)",
     "Alert, consolable, tears present with crying, brisk cap refill and skin turgor - reassuring against moderate/severe dehydration",
     "Dry/sticky mucous membranes - sign of mild dehydration",
     "Mother gave one dose of adult loperamide - inappropriate and should be stopped",
@@ -842,6 +842,11 @@
     "Take a complete history of all medications and fluids given at home",
     "Review the growth chart, recent vitals, and immunization record",
     "Formulate a diagnosis, create a management plan, provide education, and give clear return precautions"
+   ],
+   "goals": [
+    "Take a focused history",
+    "Guide the parent through checks",
+    "Explain the plan and return signs"
    ],
    "timeLimitMin": 20
   },

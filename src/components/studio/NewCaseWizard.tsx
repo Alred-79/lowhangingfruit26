@@ -16,13 +16,13 @@ const EXAMPLES: { label: string; role: string; text: string; goals: string }[] =
     label: "Chest pain, smoker",
     role: "medicine",
     text: "58-year-old long-haul truck driver with three weeks of chest tightness when he climbs stairs or loads the truck, easing after a few minutes of rest. Smokes a pack a day, father died of a heart attack at 60. He plays it down as heartburn and is mainly here because his wife booked the visit. He has not told anyone that he had an episode at rest two nights ago.",
-    goals: "Take a focused chest pain history; recognise unstable features; negotiate urgent in-person assessment with a reluctant patient.",
+    goals: "Take a focused chest pain history; recognize unstable features; negotiate urgent in-person assessment with a reluctant patient.",
   },
   {
     label: "Heart failure, missed diuretic",
     role: "nursing",
     text: "72-year-old retired school cook with heart failure calling her nurse care manager about three days of worsening leg swelling and a 6 lb weight gain. Lives alone, has been eating canned soup since her daughter moved away, and skips her evening water pill so she does not have to get up at night. She says she takes all her pills.",
-    goals: "Elicit non-adherence without judgment; recognise findings that need same-day escalation; teach daily weights and sodium limits.",
+    goals: "Elicit non-adherence without judgment; recognize findings that need same-day escalation; teach daily weights and sodium limits.",
   },
   {
     label: "New prediabetes, shift worker",

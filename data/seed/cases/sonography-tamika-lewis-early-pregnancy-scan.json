@@ -823,6 +823,11 @@
     "Explain the transvaginal ultrasound procedure and obtain informed consent including chaperone and partner-attendance policy",
     "Set honest, compassionate expectations about who will communicate the ultrasound results"
    ],
+   "goals": [
+    "Take a focused symptom history",
+    "Explain preparation and the procedure",
+    "Set honest expectations for results"
+   ],
    "timeLimitMin": 20
   },
   "title": "Pre-Scan History and Consent for Early Pregnancy Ultrasound After Prior Loss",

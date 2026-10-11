@@ -201,10 +201,10 @@ export const BEHAVIOURS: BehaviourDef[] = [
   { key: "com_uncertainty", domain: "Communication", label: "Uncertainty stated", question: "Named what remains uncertain or unverified.", sbar: true },
   { key: "com_next_action", domain: "Communication", label: "Next action requested", question: "Asked the receiving professional for a specific next action.", sbar: true },
   { key: "sm_prior", domain: "Situation monitoring", label: "Reviewed prior information", question: "Used relevant information from earlier encounters or the incoming handoff." },
-  { key: "sm_changes", domain: "Situation monitoring", label: "Recognised changes", question: "Recognised what has changed since the earlier encounters or the record." },
+  { key: "sm_changes", domain: "Situation monitoring", label: "Recognized changes", question: "Recognized what has changed since the earlier encounters or the record." },
   { key: "sm_contradictions", domain: "Situation monitoring", label: "Noticed contradictions", question: "Noticed where the patient's account, the record or a colleague's entry disagree." },
   { key: "sm_unresolved", domain: "Situation monitoring", label: "Identified unresolved concerns", question: "Picked up concerns left open by earlier professionals." },
-  { key: "sm_missing", domain: "Situation monitoring", label: "Recognised missing information", question: "Recognised information the team still does not have." },
+  { key: "sm_missing", domain: "Situation monitoring", label: "Recognized missing information", question: "Recognized information the team still does not have." },
   { key: "ms_clarify", domain: "Mutual support", label: "Asked for clarification", question: "Asked a colleague to clarify when something was unclear or incomplete." },
   { key: "ms_respond", domain: "Mutual support", label: "Responded to requests", question: "Responded to what a colleague asked for in a handoff or message." },
   { key: "ms_acknowledge", domain: "Mutual support", label: "Acknowledged a colleague's contribution", question: "Explicitly acknowledged or built on another professional's contribution." },
@@ -316,6 +316,8 @@ export interface HuddleItem {
   /** Why it is on the agenda. */
   reason: "disputed" | "open_question" | "uncertain";
   positions: { stageId: string; name: string; role: string; text: string; cites: string[] }[];
+  /** Other open entries about the same issue, folded into this item instead of getting their own. */
+  related?: string[];
   outcome?: { decision: "resolved" | "still_open"; text: string; entryId: string; owner?: string; teamResponse: string };
 }
 export interface Huddle {
@@ -415,7 +417,7 @@ export const SOURCE_LABEL: Record<string, string> = {
   patient: "Patient",
   exam: "Examination",
   test: "Test or measurement",
-  clinician: "Clinician's judgement",
+  clinician: "Clinician's judgment",
   consult: "Team consult",
   huddle: "Team huddle",
 };

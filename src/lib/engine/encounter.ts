@@ -2,8 +2,9 @@ import { all, get, newId, parse, run } from "../db";
 import { chatStream, MODELS, type Turn } from "../llm";
 import { profession } from "../professions";
 import { FACT_CATEGORIES } from "../types";
-import type { Artifact, CaseProfile, EncounterConfig, EncounterState, Fact, Knobs, Perturbation } from "../types";
+import type { Artifact, CaseProfile, ComfortReason, EncounterConfig, EncounterState, Fact, Knobs, PatientEnded, Perturbation } from "../types";
 import { applyPerturbation, knobsForLevel, PERTURBATIONS } from "./difficulty";
+import { decideEnd, nextHostileRun } from "./ending";
 import { auditReply, caseFacts, decide, gatekeep, matchActions } from "./gatekeeper";
 import { patientSystem } from "./patient";
 
@@ -128,6 +129,8 @@ export interface CreateInput {
   perturb?: boolean | string;
   variantId?: string | null;
   liveAssist?: boolean;
+  /** Show the comfort meter and why it moved. Default: on, except in exams. */
+  showComfort?: boolean;
   /** Fact ids already on record from earlier encounters in a care journey. */
   initialDisclosed?: string[];
   /** Continue the relationship: the patient remembers this student's earlier visits. */
@@ -185,6 +188,7 @@ export function createEncounter(input: CreateInput): string {
     perturbation,
     variantId: input.variantId || null,
     liveAssist: !!input.liveAssist,
+    showComfort: input.showComfort ?? input.mode !== "exam",
     professionId: input.professionId,
     journey: input.journey || null,
     visitNumber: rel ? rel.visits + 1 : 1,
@@ -219,15 +223,39 @@ export interface ChartView {
   brief: string;
   chiefComplaint: string;
   tasks: string[];
+  /** Three short session goals (3-7 words each). Empty for old cases without them. */
+  goals: string[];
   atStart: { label: string; value: string }[];
   sections: { category: string; label: string; items: { id: string; text: string; turn: number; how: string }[] }[];
   results: { id: string; kind: string; name: string; result: string; abnormal: boolean; turn: number }[];
   unmatched: { turn: number; request: string }[];
   artifacts: (Artifact & { turn: number })[];
   log: { turn: number; kind: "fact" | "result" | "document"; text: string }[];
+  /** Comfort meter 0-100, or null when the comfort meter is off for this visit (nothing about it leaks then). */
   rapport: number | null;
+  /** Whether the comfort meter is on for this visit. */
+  showComfort: boolean;
   emotion: string;
   turn: number;
+  /** Set once the patient has ended the call; null otherwise. */
+  endedBy: PatientEnded | null;
+}
+
+/** Whether the student sees the comfort meter: an explicit setting, or (older visits) on except in exams. */
+export const comfortShown = (cfg: EncounterConfig) => cfg.showComfort ?? cfg.mode !== "exam";
+
+const GOAL_TAIL = new Set("a an the of and to with for about on in at or".split(" "));
+/** Short form of a longer task, for journey stages that have tasks but no authored goals. */
+export function shortGoal(task: string): string {
+  const first = task.split(/[;:.,]|\s[-\u2013\u2014]\s/)[0].trim().replace(/\s+/g, " ");
+  let w = first.split(" ");
+  if (w.length > 7) {
+    // Prefer cutting before a qualifier ("...history of the chest pain" -> "...history").
+    const head = first.split(/\s(?:of|about|for|including|with|from|using|against|covering|in)\s/i)[0].split(" ");
+    w = head.length >= 3 && head.length <= 7 ? head : w.slice(0, 7);
+    while (w.length > 3 && GOAL_TAIL.has(w[w.length - 1].toLowerCase())) w.pop();
+  }
+  return w.join(" ");
 }
 
 export function chartView(c: CaseProfile, cfg: EncounterConfig, state: EncounterState): ChartView {
@@ -275,10 +303,13 @@ export function chartView(c: CaseProfile, cfg: EncounterConfig, state: Encounter
     unmatched: state.unmatchedOrders,
     artifacts,
     log,
-    // Exams hide the comfort meter; practice shows it so students can see cause and effect.
-    rapport: cfg.mode === "exam" ? null : state.rapport,
+    goals: cfg.journey?.tasks?.length ? cfg.journey.tasks.slice(0, 3).map(shortGoal) : cfg.journey?.brief ? [] : c.scenario.goals || [],
+    // Off means off: no number reaches the client. See comfortShown().
+    rapport: comfortShown(cfg) ? state.rapport : null,
+    showComfort: comfortShown(cfg),
     emotion: state.emotion.length > 28 ? "" : state.emotion,
     turn: state.turn,
+    endedBy: state.endedBy || null,
   };
 }
 
@@ -299,9 +330,16 @@ const save = (id: string, state: EncounterState) => run("UPDATE encounters SET s
 const addMessage = (encId: string, turn: number, speaker: MessageRow["speaker"], text: string, meta?: unknown) =>
   run("INSERT INTO messages (encounter_id, turn, speaker, text, meta) VALUES (?,?,?,?,?)", encId, turn, speaker, text, meta ? JSON.stringify(meta) : null);
 
+export const CALL_ENDED_MESSAGE = "The patient has ended the call. Add your note and finish the visit.";
+
 export type TurnEvent =
   | { type: "delta"; text: string }
-  | { type: "done"; text: string; notice: string | null; messageId: number; chart: ChartView; newFactIds: string[]; deflected: boolean; rapportDelta: number }
+  | { type: "done"; text: string; notice: string | null; messageId: number; chart: ChartView; newFactIds: string[]; deflected: boolean; rapportDelta: number;
+      /** Why the comfort meter moved (empty when the meter is off for this visit). */
+      comfortReasons: ComfortReason[];
+      /** Set on the turn the patient ended the call (the reply is their goodbye); also on every chart after. */
+      callEnded: PatientEnded | null;
+    }
   | { type: "error"; message: string };
 
 /** One student utterance -> gatekeeper -> deterministic disclosure -> streamed patient reply. */
@@ -311,6 +349,7 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
   if (enc.row.status === "paused") return void (yield { type: "error", message: "Your instructor has paused this visit." });
   if (enc.row.status !== "active") return void (yield { type: "error", message: "This visit has ended." });
   const { c, cfg, state } = enc;
+  if (state.endedBy) return void (yield { type: "error", message: CALL_ENDED_MESSAGE });
 
   state.turn += 1;
   addMessage(encId, state.turn, "student", text);
@@ -324,6 +363,29 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
     message: text,
   });
   const d = decide(gate, facts, state, cfg.knobs, c.persona.healthLiteracy === "low");
+  // The patient may end the call. Decided here from the signals above; the model only words the goodbye.
+  const hostileRun = nextHostileRun(state, gate);
+  const lastPatientText = [...history].reverse().find((m) => m.speaker === "patient")?.text;
+  const startedMs = new Date(enc.row.started_at.replace(" ", "T") + "Z").getTime();
+  const endReason = decideEnd({
+    cfg,
+    state,
+    gate,
+    message: text,
+    lastPatientText,
+    rapportAfter: d.rapport,
+    hostileRun,
+    answering: d.reveal.length > 0 || d.deflect.length > 0 || gate.asks.length > 0,
+    // A rewound branch inherits the original start time, so the clock says nothing about it.
+    elapsedMin: Number.isFinite(startedMs) && !enc.row.parent_id ? (Date.now() - startedMs) / 60000 : 0,
+  });
+  if (endReason) {
+    // The patient leaves instead of answering: nothing new is disclosed on this turn.
+    d.reveal = [];
+    d.deflect = [];
+    d.how = {};
+  }
+  state.hostileRun = hostileRun;
 
   const known: Fact[] = facts.filter((f) => state.disclosed[f.id]);
   state.rapport = d.rapport;
@@ -343,7 +405,7 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
   try {
     for await (const chunk of chatStream({
       model: MODELS.chat,
-      system: patientSystem({ c, cfg, state, known, reveal: d.reveal, deflect: d.deflect, gate, lockedTopics: locked.filter((f) => !d.reveal.includes(f)).map((f) => f.topic) }),
+      system: patientSystem({ c, cfg, state, known, reveal: d.reveal, deflect: d.deflect, gate, lockedTopics: locked.filter((f) => !d.reveal.includes(f)).map((f) => f.topic), endCall: endReason }),
       messages: turns,
       maxTokens: 500,
       temperature: 0.6,
@@ -385,6 +447,8 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
     d.reveal.push(f);
   }
   releaseArtifacts(c, state);
+  if (endReason) state.endedBy = { by: "patient", reason: endReason, turn: state.turn };
+  const showComfort = comfortShown(cfg);
   const inserted = addMessage(encId, state.turn, "patient", reply, {
     unsupported,
     audited: !audit.failed,
@@ -394,6 +458,8 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
     signals: gate.signals,
     rapport: state.rapport,
     rapportDelta: d.rapportDelta,
+    comfortReasons: d.reasons,
+    endedBy: state.endedBy || null,
     state, // snapshot: lets a student rewind to this point
   });
   const notice = unsupported.length ? `Outside the case record: ${unsupported.map((u) => `"${u}"`).join("; ")}. The simulated patient went beyond the approved case here. Treat it as unverified; it is not filed in the chart.` : null;
@@ -407,7 +473,9 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
     chart: chartView(c, cfg, state),
     newFactIds: d.reveal.map((f) => f.id),
     deflected: d.deflect.length > 0,
-    rapportDelta: d.rapportDelta,
+    rapportDelta: showComfort ? d.rapportDelta : 0, // nothing about comfort leaks when the meter is off
+    comfortReasons: showComfort ? d.reasons : [],
+    callEnded: state.endedBy || null,
   };
 }
 
@@ -456,7 +524,7 @@ export function hint(encId: string): string {
   if (state.turn >= 4 && st.empathy === 0) tips.push("You have not acknowledged how the patient is feeling yet.");
   const pending = c.actions.filter((a) => a.importance === "critical" && !state.actions[a.id]);
   if (!cats.length && pending.length) tips.push("Consider which examination or test would help you most at this point.");
-  if (!tips.length) tips.push("You have covered the key areas. Summarise back to the patient, check their understanding and agree next steps.");
+  if (!tips.length) tips.push("You have covered the key areas. Summarize back to the patient, check their understanding and agree next steps.");
   state.hintsUsed += 1;
   save(encId, state);
   const text = tips.slice(0, 2).join(" ");
@@ -477,6 +545,8 @@ export function rewind(encId: string, toTurn: number): string {
   for (const [aid, a] of Object.entries(enc.state.actions)) if (a.turn <= toTurn && !state.actions[aid]) state.actions[aid] = a;
   for (const [did, t] of Object.entries(enc.state.artifacts)) if (t <= toTurn && state.artifacts[did] === undefined) state.artifacts[did] = t;
   state.unmatchedOrders = enc.state.unmatchedOrders.filter((u) => u.turn <= toTurn);
+  // A rewind to before the patient ended the call reopens it; a rewind to the ending itself keeps it.
+  if (state.endedBy && state.endedBy.turn > toTurn) delete state.endedBy;
   const id = newId("e_");
   run(
     "INSERT INTO encounters (id, user_id, case_id, assignment_id, journey_run_id, parent_id, attempt, config, state, case_snapshot, started_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)",

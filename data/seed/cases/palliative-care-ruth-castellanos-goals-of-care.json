@@ -850,6 +850,11 @@
     "Review advance care planning status and discuss next steps",
     "Assess caregiver support and discuss options for family communication"
    ],
+   "goals": [
+    "Ask about symptoms and medicines",
+    "Explore understanding, goals and values",
+    "Review planning and family support"
+   ],
    "timeLimitMin": 30
   },
   "answerKey": {

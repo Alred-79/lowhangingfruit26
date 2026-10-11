@@ -882,6 +882,11 @@
     "Discuss next steps in staging and treatment planning, including appropriate referrals and investigations",
     "Assess psychosocial distress and social support, and connect her with appropriate supportive resources"
    ],
+   "goals": [
+    "Share the results with care",
+    "Answer questions and check wellbeing",
+    "Discuss next steps together"
+   ],
    "timeLimitMin": 25
   },
   "answerKey": {

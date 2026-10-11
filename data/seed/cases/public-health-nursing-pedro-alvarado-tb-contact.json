@@ -766,6 +766,11 @@
     "Screen for factors relevant to treatment safety and completion",
     "Agree a plan for next steps and follow-up"
    ],
+   "goals": [
+    "Check adherence and symptoms",
+    "Review the medication routine",
+    "Answer questions and plan follow-up"
+   ],
    "timeLimitMin": 25
   },
   "answerKey": {

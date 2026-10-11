@@ -521,6 +521,11 @@
     "Identify the patient's own goals and motivations using motivational interviewing techniques",
     "Formulate a PES statement and propose a culturally appropriate, practical nutrition intervention"
    ],
+   "goals": [
+    "Take a thorough diet history",
+    "Explore barriers and goals",
+    "Plan a practical intervention"
+   ],
    "timeLimitMin": 30
   },
   "chartAtStart": [

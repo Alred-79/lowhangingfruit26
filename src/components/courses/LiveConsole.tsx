@@ -46,7 +46,7 @@ const QUICK = [
   "Slow down and acknowledge how the patient is feeling before your next question.",
   "Try an open question, then let the patient finish.",
   "Explain why you are asking before you return to that topic.",
-  "You are running short on time. Summarise and agree next steps.",
+  "You are running short on time. Summarize and agree next steps.",
 ];
 const WHO: Record<string, string> = { student: "Student", patient: "Patient", system: "Chart", instructor: "Instructor", coach: "Coach hint", clinician: "Colleague" };
 

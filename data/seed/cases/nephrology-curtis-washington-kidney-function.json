@@ -1091,6 +1091,11 @@
     "Explore the patient's understanding and concerns about kidney disease progression",
     "Develop and clearly communicate a follow-up plan including appropriate referrals"
    ],
+   "goals": [
+    "Review the kidney tests together",
+    "Check medicines and supplements",
+    "Agree a plan and follow-up"
+   ],
    "timeLimitMin": 25
   },
   "setting": "Telehealth video visit; patient at a small back office inside his barbershop in Detroit, Michigan during a break between clients",

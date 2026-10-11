@@ -774,6 +774,11 @@
     "Discuss antiseizure medication options appropriate for a woman of reproductive potential and counsel on driving safety and seizure precautions",
     "Address the patient's concerns with sensitivity"
    ],
+   "goals": [
+    "Take a focused history",
+    "Review the test reports together",
+    "Discuss options and safety advice"
+   ],
    "timeLimitMin": 25
   },
   "summary": "A 27-year-old graduate student presents for neurology follow-up after a first generalized tonic-clonic seizure, with history-taking revealing longstanding unrecognized myoclonic jerks and a family history of epilepsy that, combined with EEG showing generalized polyspike-and-wave discharges, point to juvenile myoclonic epilepsy. The case teaches history-driven syndrome recognition, reproductive-safe antiseizure drug selection, driving safety counseling, and culturally sensitive communication about epilepsy stigma.",

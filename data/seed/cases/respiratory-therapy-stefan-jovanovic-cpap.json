@@ -857,6 +857,11 @@
     "Screen for daytime sleepiness and its impact on daily activities",
     "Provide education and agree a follow-up plan"
    ],
+   "goals": [
+    "Review the device data together",
+    "Check the mask and setup",
+    "Educate and agree follow-up"
+   ],
    "timeLimitMin": 20
   },
   "summary": "\"This case portrays a 51-year-old man six weeks into CPAP therapy for severe OSA who reports near-full adherence but whose device download reveals poor usage, large leak, and elevated residual AHI. It teaches respiratory therapy students to reconcile patient self-report with objective device data, troubleshoot common modifiable barriers (beard-related mask leak, unused humidifier, claustrophobia), and sensitively screen for and escalate a hidden occupational safety concern (near-miss drowsy episode on a forklift) within the bounds of RT scope of practice.\"",

@@ -1,5 +1,5 @@
 import { run as sql } from "../db";
-import { createEncounter, loadEncounter, messagesOf, runAction, runTurn } from "../engine/encounter";
+import { addMessage, createEncounter, loadEncounter, messagesOf, runAction, runTurn } from "../engine/encounter";
 import { chatJSON, MODELS } from "../llm";
 import { aliasing, approvedCorpus, arr, clean, handoffTo, inboxFor, patientMemory, renderSbar, renderState, unverifiedValues } from "./context";
 import { clinician, entriesOf, firstNameOf, handoffsOf, learnerLine, personaBrief, resolveProfession, studentNameOf, type LoadedRun } from "./store";
@@ -210,7 +210,79 @@ ${convo || "(not started. The patient has just joined the call.)"}${correction ?
       }
     }
   }
+
+  // The loop always ends on the patient's reply. If that reply asks something, the visit would end on an
+  // unanswered question, so the clinician gets one closing line. It is stored as the clinician's message on
+  // the next turn number and the patient does not reply to it (nothing runs the engine again).
+  try {
+    await closeOnPatientQuestion({ run, stage, encounterId, system, prior, handoff, inbox, toAlias, emit });
+  } catch (e) {
+    console.error("[journey] closing line failed; the visit ends as it stands", e);
+  }
   return { clinician: cl, declaredUses };
+}
+
+/** True when the patient's last reply asks something and nobody has answered it. */
+export function endsOnPatientQuestion(msgs: { speaker: string; text: string }[]): boolean {
+  const spoken = msgs.filter((m) => m.speaker === "student" || m.speaker === "patient");
+  const last = spoken[spoken.length - 1];
+  return !!last && last.speaker === "patient" && last.text.includes("?");
+}
+
+/** Why a draft closing line is not acceptable ("" when it is). Same guards as the visit, plus: no new question and no check. */
+export function closingProblem(say: string): string {
+  if (OVERREACH.test(say || "")) return "This is an outpatient telehealth visit. You cannot admit the patient or order, start, stop or change anything; you may only say what you will recommend to the team.";
+  if (ANNOUNCES_CHECK.test(say || "")) return "You announced that you would check or review something, but no check can be requested now. Do not announce one.";
+  if ((say || "").includes("?")) return "The patient cannot reply after this line. Do not ask the patient a question.";
+  return "";
+}
+
+export async function closeOnPatientQuestion(a: { run: LoadedRun; stage: Stage; encounterId: string; system: string; prior: StateEntry[]; handoff: ReturnType<typeof handoffTo>; inbox: string; toAlias: Map<string, string>; emit: (e: StageEvent) => void }) {
+  const enc = loadEncounter(a.encounterId)!;
+  const msgs = messagesOf(a.encounterId);
+  if (!endsOnPatientQuestion(msgs)) return;
+  const convo = msgs
+    .filter((m) => m.speaker === "student" || m.speaker === "patient" || m.speaker === "system")
+    .map((m) => `${m.speaker === "student" ? "YOU" : m.speaker === "patient" ? "PATIENT" : "CHART"}: ${m.text}`)
+    .join("\n");
+  const confirmed = [
+    ...enc.c.facts.filter((f) => enc.state.disclosed[f.id] && enc.state.disclosed[f.id].how !== "record").map((f) => `- Patient reported: ${f.chart}`),
+    ...enc.c.actions.filter((x) => enc.state.actions[x.id]).map((x) => `- ${x.name}: ${x.result}`),
+  ];
+  const ask = (correction = "") =>
+    chatJSON<{ say: string }>({
+      model: MODELS.chat,
+      system: a.system,
+      schema: { type: "object", required: ["say"], properties: { say: { type: "string", description: "Your closing reply to the patient: 2-3 sentences, plain language, no question." } } },
+      maxTokens: 400,
+      temperature: 0.5,
+      messages: [
+        {
+          role: "user",
+          text: `SHARED PATIENT RECORD SO FAR
+${renderState(a.prior, a.run.stages, { aliases: a.toAlias })}
+
+${a.handoff ? "HANDOFF YOU RECEIVED\n" + renderSbar(a.handoff) : "No handoff: you are the first professional in this journey."}
+${a.inbox ? "\nMESSAGES FROM COLLEAGUES\n" + a.inbox : ""}
+
+CONFIRMED IN THIS VISIT (from the case file)
+${confirmed.join("\n") || "(nothing yet)"}
+
+THIS VISIT SO FAR
+${convo}
+
+THE EXCHANGES ARE OVER, BUT THE PATIENT'S LAST MESSAGE ASKED SOMETHING. Write ONE closing reply that (1) answers that question briefly and in plain language, in at most two sentences, stating nothing about THIS patient beyond what the shared record and CONFIRMED IN THIS VISIT say and adding no value, dose or diagnosis (if they do not cover it, tell the patient honestly that you do not know and will ask the team), (2) says what you will pass on to the team as recommendations, and (3) closes the visit. No new question, no check, no admission, order or medicine change. The patient will not reply after this.${correction ? `\n\nYOUR DRAFT REPLY WAS NOT ACCEPTABLE: ${correction} Write the reply again.` : ""}`,
+        },
+      ],
+    });
+  let out = await ask();
+  const why = closingProblem(out.say);
+  if (why) out = await ask(why);
+  const say = clean(out.say);
+  if (!say || closingProblem(say)) return; // still not acceptable: end the visit as it stands rather than say something the setting does not allow
+  const turn = enc.state.turn + 1;
+  addMessage(a.encounterId, turn, "student", say, { kind: "closing" });
+  a.emit({ type: "clinician", stageId: a.stage.id, turn, text: say, uses: [] });
 }
 
 const WRAP_SCHEMA = {
@@ -250,7 +322,7 @@ export async function writeNoteAndHandoff(run: LoadedRun, stage: Stage, encounte
     chatJSON<Sbar & { note: string; cites: string[] }>({
       model: MODELS.chat,
       schema: WRAP_SCHEMA,
-      maxTokens: 1500,
+      maxTokens: 2500, // the note plus four SBAR fields has been cut off at 1500
       temperature: 0.4,
       system: `You are ${cl.name}. You have just finished a telehealth visit and now write (1) a brief visit note and (2) an SBAR handoff to ${next ? `${next.name}, ${next.role}, who sees the patient next` : "the whole care team ahead of the team huddle"}.
 

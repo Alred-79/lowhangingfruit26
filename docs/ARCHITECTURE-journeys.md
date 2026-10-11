@@ -51,7 +51,7 @@ dietetics) and Walter Greene (emergency medicine, hospital medicine, dietetics).
 | Base | Established / uncertain / disagreement / unanswered distinguished | entry `status`, derived `effectiveStatus` |
 | Base | Provenance: source, role, encounter, timing | columns on every `state_entries` row |
 | Base | Integrated representation and coherent care plan | `view.ts`, `synthesis.ts`, `FinalView.tsx` |
-| Enhanced | SBAR handoffs, TeamSTEPPS-aligned explainable behavioural trace | `handoff.ts` |
+| Enhanced | SBAR handoffs, TeamSTEPPS-aligned explainable behavioral trace | `handoff.ts` |
 | Stretch | Reach forward and backward, consults, call-outs, check-backs, closed loops, huddle, reconciliation, collaborative plan change | `collab.ts` |
 
 All paths below are under `src/lib/journey/` unless stated.
@@ -122,7 +122,7 @@ After each encounter `extractStage()` (`extract.ts`) runs two passes.
    which approved exam or test results were returned. Each disclosed fact becomes an entry with
    `source = patient`, `status = patient_reported`, its `fact_id`, and the patient's reply in that
    turn as evidence. Each result becomes an entry with `source = exam | test | record`,
-   `status = established`. (A judgement whose only quoted evidence is the patient's words is
+   `status = established`. (A judgment whose only quoted evidence is the patient's words is
    dropped in pass 2: patient statements enter through the ledger only.) The chart-at-start items and documents on file become `record` entries
    at stage 0 when the run is created (`seedRecord()`), **with their content**: each lab row with
    value, unit, reference range and flag, each medication row, plotted points of a trend, or the
@@ -141,7 +141,7 @@ After each encounter `extractStage()` (`extract.ts`) runs two passes.
    - the quote must occur in the stated turn or in the note (punctuation and case are ignored;
      a wrong turn number is repaired if the quote is found elsewhere);
    - a claim about something that happened (a disagreement, a follow-up, a patient goal) with no
-     verifiable quote is **dropped**; a judgement with no verifiable quote is kept but
+     verifiable quote is **dropped**; a judgment with no verifiable quote is kept but
      **downgraded to `uncertain`** and marked "evidence not verified";
    - a dose or lab-style value that appears nowhere in the case file, the record, the transcript
      or the note causes the entry to be dropped; a value that the clinician did say but that is
@@ -160,7 +160,7 @@ After each encounter `extractStage()` (`extract.ts`) runs two passes.
    One narrow call (temperature 0) receives all candidates for the encounter, names the subject of
    each side, and must agree, for each, that: a `uses` link is between the clinician's words, the earlier entry and the new
    information **on the same subject** (a result ordered in the same turn about something else is
-   rejected); a judgement that "builds on" an entry is about that entry's subject; an `answers`
+   rejected); a judgment that "builds on" an entry is about that entry's subject; an `answers`
    link supplies the missing information; a `contradicts` link is two incompatible factual claims
    about the same thing (otherwise the entry is kept as the clinician's interpretation and nothing
    is disputed). If this check fails to run, `uses` links survive only on plain word overlap and
@@ -332,24 +332,24 @@ to narrate how information flowed.
   ledger. Model-written text (clinician notes, SBARs, consult replies, huddle outcomes, plan items)
   is checked for dose and lab-style values that do not occur in approved content
   (`unverifiedValues()` in `context.ts`); such values are dropped or visibly flagged depending on
-  where they appear. Clinicians' assessments are stored with `source = clinician` and labelled as
-  judgement, never as findings.
+  where they appear. Clinicians' assessments are stored with `source = clinician` and labeled as
+  judgment, never as findings.
 
 ## 7. Communication evaluation design
 
-The output is a behavioural trace, not a score. The behaviours are data
+The output is a behavioral trace, not a score. The behaviors are data
 (`BEHAVIOURS` in `types.ts`), aligned to four TeamSTEPPS areas:
 
 - **Communication** (judged from an SBAR): situation; relevant background; important findings;
   findings distinguished from interpretation; uncertainty stated; next action requested.
-- **Situation monitoring:** reviewed prior information; recognised changes; noticed
-  contradictions; identified unresolved concerns; recognised missing information.
+- **Situation monitoring:** reviewed prior information; recognized changes; noticed
+  contradictions; identified unresolved concerns; recognized missing information.
 - **Mutual support:** asked for clarification; responded to requests; acknowledged a colleague's
   contribution; escalated appropriately.
 - **Leadership and coordination:** responsibilities; next steps; patient goals; coordinated
   recommendations.
 
-For each behaviour the trace stores `observed` (yes / no / no opportunity), the **evidence
+For each behavior the trace stores `observed` (yes / no / no opportunity), the **evidence
 location** in words ("SBAR → Recommendation", "Visit, turn 4", "Consult with Dr. Bennet", "Team
 huddle", "Written note"), the **quote**, and **actionable feedback**.
 
@@ -362,17 +362,17 @@ How it is produced (`handoff.ts`):
   safety-relevant open item costs "uncertainty stated". The student's SBAR is evaluated as soon as
   it is sent and shown before the journey moves on. The AI colleagues' SBARs are evaluated the same
   way and shown as worked examples, with feedback written in the third person.
-- `evaluateStudent()` runs when the huddle closes and covers the remaining thirteen behaviours
-  across five labelled sources: the student's visit, written note, SBAR, messages with colleagues
+- `evaluateStudent()` runs when the huddle closes and covers the remaining thirteen behaviors
+  across five labeled sources: the student's visit, written note, SBAR, messages with colleagues
   and huddle contributions. It is also given system-recorded facts: which turns were linked to
   earlier entries, the handoff the student received, and what was open when they started.
 - Every quote is verified by code against the stated source: case and punctuation are ignored and
   a run of at least four consecutive quoted words is enough, so a trimmed or re-punctuated quote
-  still verifies. If it is found in a different source the location is corrected. A behaviour
+  still verifies. If it is found in a different source the location is corrected. A behavior
   marked "observed" whose quote cannot be found is **not credited** and says so. Only the student's
   own words count as evidence.
-- The summary is written last, by a separate small call that sees only the checked per-behaviour
-  results, so it cannot praise a behaviour that was not credited.
+- The summary is written last, by a separate small call that sees only the checked per-behavior
+  results, so it cannot praise a behavior that was not credited.
 
 Closed-loop communication is detected structurally. Each consult message is classified as a
 request, information, question, check-back, confirmation, read-back or answer; a loop is marked
@@ -392,7 +392,7 @@ entries with relations.
   when their encounter runs, so a forward heads-up changes what they ask.
 - **Call-outs.** A message to the whole team; each colleague acknowledges with a read-back; it is
   shown to every later AI clinician.
-- **Check-backs and closed loops.** Detected as above and labelled in the thread.
+- **Check-backs and closed loops.** Detected as above and labeled in the thread.
 - **Huddle and reconciliation.** Candidates are the entries still `disputed`, `open_question` or
   `uncertain`. The model that writes the positions also chooses the agenda from those candidates
   (five by default), ranked by clinical importance with patient safety first (possible medication
@@ -425,7 +425,7 @@ entries with relations.
 
 The care plan (`synthesis.ts`) is model-written under constraints that are enforced by code:
 
-- it is organised by patient problem or goal with the patient's own goal stated, not by profession;
+- it is organized by patient problem or goal with the patient's own goal stated, not by profession;
 - each action names owner roles and must cite entries; citations that do not resolve to real
   entries are removed, and an action left with none, or containing a value not present in the
   state, is dropped (the page says how many were dropped);
@@ -446,14 +446,14 @@ The care plan (`synthesis.ts`) is model-written under constraints that are enfor
   and the patient's reason for the call), and faculty edit and publish. A persona is only cast in
   a role of its own profession; when none of the provided personas fits a role (nursing, for
   example) a plain named clinician of that profession plays it. Student-facing text that contains
-  a medicine or value not on the record at start is discarded in favour of a neutral default.
+  a medicine or value not on the record at start is discarded in favor of a neutral default.
   Seed journeys are refreshed from their files on boot unless faculty have edited them.
 - **A new profession** is an entry in `data/professions.json`. Stages reference roles by id and are
   resolved at runtime (`resolveProfession()`), with a fallback if an id is not in the catalog; the
   stage's own role title is what is displayed.
 - **A new clinician persona** is a JSON file in `data/clinicians/`; `personaBrief()` reads the
   provided profile structure.
-- **A new teamwork behaviour** is one line in `BEHAVIOURS`; evaluation and display iterate over it.
+- **A new teamwork behavior** is one line in `BEHAVIOURS`; evaluation and display iterate over it.
 - **A new kind of entry or relation** is a string; the store, view and provenance panel are
   generic over them.
 - **Any case** that runs in the single-encounter engine can be used in a journey unchanged,
@@ -490,11 +490,11 @@ API (`src/app/api/journeys/`): `GET/POST /api/journeys`, `POST /api/journeys/pro
   without the transcript, but a student can still read them in the conversation, and a clinician's
   in-visit remark built on one can be extracted as an `uncertain` interpretation.
 - **Clinician interpretations are model-generated.** Assessments and recommendations by AI
-  colleagues are labelled as judgement, value-checked and evidence-checked, but they are not
+  colleagues are labeled as judgment, value-checked and evidence-checked, but they are not
   faculty-reviewed clinical content.
 - **Extraction and evaluation depend on a model.** Quote verification removes fabricated evidence;
   it cannot guarantee that every contribution was captured or that a "not observed" is right.
-  "Uses" relations depend on a model recognising that a question drew on an earlier entry and on
+  "Uses" relations depend on a model recognizing that a question drew on an earlier entry and on
   a second model agreeing; the design errs towards under-linking.
 - **The setting rules for AI clinicians are prompts plus two pattern checks**, not a proof. A
   clinician can still phrase an over-reach in words the patterns do not catch.

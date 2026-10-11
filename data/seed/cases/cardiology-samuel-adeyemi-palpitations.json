@@ -974,7 +974,7 @@
    "ethnicity": "Nigerian-American",
    "occupation": "Accountant",
    "language": "English",
-   "appearance": "A trim, neatly dressed man in his early sixties with short greying hair, wearing a collared shirt, seated at a home office desk with a laptop and stacks of tax documents visible in the background. He appears alert and articulate, with an attentive but slightly tense expression, occasionally glancing at notes he has prepared for the visit.",
+   "appearance": "A trim, neatly dressed man in his early sixties with short graying hair, wearing a collared shirt, seated at a home office desk with a laptop and stacks of tax documents visible in the background. He appears alert and articulate, with an attentive but slightly tense expression, occasionally glancing at notes he has prepared for the visit.",
    "portrait": "/portraits/cardiology-samuel-adeyemi-palpitations.jpg"
   },
   "persona": {
@@ -1006,6 +1006,11 @@
     "Assess stroke risk and discuss management options",
     "Screen for potential contributing factors and review the home monitoring data with the patient",
     "Agree a management plan including any referrals and safety-net"
+   ],
+   "goals": [
+    "Take a focused history",
+    "Review the test results together",
+    "Agree a plan and safety net"
    ],
    "timeLimitMin": 25
   },

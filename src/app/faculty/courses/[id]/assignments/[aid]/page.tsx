@@ -120,7 +120,7 @@ export default async function AssignmentPage({ params }: { params: Promise<{ id:
             </div>
           </Card>
           <Card>
-            <CardHeader title="Findings most often missed" subtitle="Critical and important findings the patient never disclosed, by share of scored students. Taken from the disclosure record, not from a model's judgement." />
+            <CardHeader title="Findings most often missed" subtitle="Critical and important findings the patient never disclosed, by share of scored students. Taken from the disclosure record, not from a model's judgment." />
             <div className="p-2">
               {insights.missed.length === 0 ? (
                 <p className="px-2 py-4 text-sm text-slate-500">No critical or important finding was missed.</p>

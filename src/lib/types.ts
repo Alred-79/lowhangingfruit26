@@ -160,6 +160,8 @@ export interface CaseProfile {
     chiefComplaint: string;
     openingLine: string;
     tasks: string[];
+    /** Exactly three short (3-7 words) session goals shown to the student. Tasks remain what scoring uses. */
+    goals?: string[];
     timeLimitMin: number;
   };
   /** Record items visible in the chart before any question is asked. */
@@ -258,7 +260,7 @@ export interface Knobs {
   timeLimitMin: number | null;
 }
 
-/** Persona twist applied on repeat attempts so reps are not memorisable. */
+/** Persona twist applied on repeat attempts so reps are not memorizable. */
 export interface Perturbation {
   id: string;
   label: string;
@@ -291,6 +293,25 @@ export interface EncounterState {
   };
   rapportHistory: number[];
   hintsUsed: number;
+  /** Set when the patient ended the call. No further student messages are accepted. */
+  endedBy?: PatientEnded;
+  /** Comfort credit already given once for the opening courtesies. */
+  credited?: { intro?: boolean; purpose?: boolean };
+  /** Consecutive student messages judged judgmental or dismissive (drives the "upset" ending). */
+  hostileRun?: number;
+}
+
+/** The patient ended the call themselves. */
+export interface PatientEnded {
+  by: "patient";
+  reason: "closed" | "upset" | "time";
+  turn: number;
+}
+
+/** One reason the comfort meter moved on a turn, in plain student-facing words. */
+export interface ComfortReason {
+  label: string;
+  delta: number;
 }
 
 export interface EncounterConfig {
@@ -299,6 +320,8 @@ export interface EncounterConfig {
   perturbation?: Perturbation | null;
   variantId?: string | null;
   liveAssist?: boolean;
+  /** Show the comfort meter (and why it moved) to the student. Missing = legacy behavior (shown unless an exam). */
+  showComfort?: boolean;
   /** Profession the student is acting as. */
   professionId: string;
   /** Follow-up visits: which visit this is with this patient, and what the patient remembers of the student. */
@@ -349,6 +372,10 @@ export interface Feedback {
   actionsDone: { id: string; name: string; importance: Importance }[];
   actionsMissed: { id: string; name: string; importance: Importance }[];
   unnecessaryOrders: string[];
+  /** Items that were already visible in the chart from the start; not scored as missed. */
+  inChart?: { facts: { id: string; chart: string }[]; actions: { id: string; name: string }[] };
+  /** Set when the patient ended the call (and why); scoring did not change. */
+  callEndedBy?: PatientEnded;
   objectives: { id: string; text: string; met: "met" | "partial" | "not_met"; comment: string }[];
   interview: { structure: string; sequencing: string; questionMix: string };
   strengths: { text: string; turn?: number }[];

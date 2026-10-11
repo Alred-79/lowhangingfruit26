@@ -857,6 +857,11 @@
     "Use motivational interviewing techniques to explore the patient's readiness for change and identify at least one patient-centered, achievable nutrition goal",
     "Formulate a PES statement and brief ADIME note summarizing the encounter"
    ],
+   "goals": [
+    "Take a thorough diet history",
+    "Review labs and medicines together",
+    "Set a goal and document"
+   ],
    "timeLimitMin": 30
   },
   "answerKey": {

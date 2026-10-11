@@ -754,6 +754,11 @@
     "Review the patient's current medications and adherence",
     "Provide clear instructions and address the patient's and family's questions"
    ],
+   "goals": [
+    "Screen remotely using video",
+    "Establish when symptoms began",
+    "Set acuity and the next step"
+   ],
    "timeLimitMin": 20
   },
   "summary": "\"This case simulates a nurse tele-triage call for a 71-year-old man with atrial fibrillation and hypertension who develops sudden right-sided facial droop, arm drift, and slurred speech after a one-week lapse in anticoagulation, requiring immediate recognition of acute stroke, correct highest-acuity triage, and EMS activation despite the patient's minimization and preference to wait for a routine appointment. It teaches FAST-based remote stroke screening, time-last-known-well documentation, protocol-based safety instructions (NPO, no aspirin), and reconciling patient self-report with objective record evidence (pharmacy refill history, home BP trend).\"",

@@ -91,7 +91,7 @@ function AiStage({ view, s, live, onOpen }: { view: RunView; s: StageView; live:
               <SbarCard handoff={handoff} />
               {handoff.evaluation ? (
                 <details className="rounded-lg border border-slate-200 bg-white px-4 py-2.5">
-                  <summary className="cursor-pointer text-sm font-medium text-slate-800">Worked example: how this handoff measures up against the communication behaviours</summary>
+                  <summary className="cursor-pointer text-sm font-medium text-slate-800">Worked example: how this handoff measures up against the communication behaviors</summary>
                   <div className="mt-3"><TraceTable evaluation={handoff.evaluation} /></div>
                 </details>
               ) : (
@@ -147,7 +147,7 @@ function SbarForm({ view, s, refresh, onSent }: { view: RunView; s: StageView; r
         )}
         <div className="flex flex-wrap items-center gap-3">
           <Button onClick={() => submit()} disabled={busy || confirm || !Object.values(sbar).some((v) => v.trim())}>Send handoff</Button>
-          {busy && <Spinner label="Sending your handoff and reviewing it against the communication behaviours" hint="Usually 20 to 40 seconds" />}
+          {busy && <Spinner label="Sending your handoff and reviewing it against the communication behaviors" hint="Usually 20 to 40 seconds" />}
           {err && <span className="text-sm text-rose-700">{err}</span>}
         </div>
       </div>
@@ -216,10 +216,10 @@ function StudentStage({ view, s, onOpen, refresh, onSent, onContinue, phase }: {
             </div>
           )}
           <SbarCard handoff={handoff} title={owner ? "Your SBAR handoff" : `SBAR handoff from ${handoff.authorName}`} />
-          {!handoff.evaluation && owner && <Spinner label="Reviewing your handoff against the communication behaviours" hint="Usually 20 to 40 seconds" />}
+          {!handoff.evaluation && owner && <Spinner label="Reviewing your handoff against the communication behaviors" hint="Usually 20 to 40 seconds" />}
           {handoff.evaluation && (
             <Card>
-              <CardHeader title="Review of the handoff" subtitle="Each communication behaviour, whether it was observed, where, and what to do next time." />
+              <CardHeader title="Review of the handoff" subtitle="Each communication behavior, whether it was observed, where, and what to do next time." />
               <div className="p-4"><TraceTable evaluation={handoff.evaluation} /></div>
             </Card>
           )}
@@ -505,7 +505,7 @@ export default function RunHub({ runId }: { runId: string }) {
             <div className="p-4"><ConsultPanel view={view} refresh={refresh} /></div>
           </Card>
           <Card>
-            <CardHeader title="All messages outside the handoff order" subtitle="Requests, read-backs and check-backs are labelled; a closed loop is marked when the sender confirms the read-back." />
+            <CardHeader title="All messages outside the handoff order" subtitle="Requests, read-backs and check-backs are labeled; a closed loop is marked when the sender confirms the read-back." />
             <div className="space-y-2 p-4">
               {view.messages.filter((m) => m.thread !== "huddle" && m.thread !== "plan").map((m) => (
                 <div key={m.id} className={cx("rounded-md px-3 py-2 text-sm", m.fromIsAi ? "bg-slate-50" : "bg-brand-50")}>
@@ -528,7 +528,7 @@ export default function RunHub({ runId }: { runId: string }) {
         <div className="space-y-5">
           {view.evaluation ? (
             <Card>
-              <CardHeader title={`Teamwork trace: ${view.evaluation.subject}`} subtitle="TeamSTEPPS-aligned behaviours. Each line says whether the behaviour was observed, where the evidence is, the exact words, and what to do next time. A behaviour is only credited when the quoted words were found at the stated place." />
+              <CardHeader title={`Teamwork trace: ${view.evaluation.subject}`} subtitle="TeamSTEPPS-aligned behaviors. Each line says whether the behavior was observed, where the evidence is, the exact words, and what to do next time. A behavior is only credited when the quoted words were found at the stated place." />
               <div className="p-4"><TraceTable evaluation={view.evaluation} /></div>
             </Card>
           ) : (
@@ -541,11 +541,11 @@ export default function RunHub({ runId }: { runId: string }) {
             <Card key={h.id}><CardHeader title="Review of the SBAR handoff" /><div className="p-4"><TraceTable evaluation={h.evaluation!} /></div></Card>
           ))}
           <Card>
-            <CardHeader title="Colleagues' handoffs as worked examples" subtitle="The same communication behaviours applied to the AI colleagues' SBARs." />
+            <CardHeader title="Colleagues' handoffs as worked examples" subtitle="The same communication behaviors applied to the AI colleagues' SBARs." />
             <div className="space-y-3 p-4">
               {view.handoffs.filter((h) => h.authorIsAi).map((h) => (
                 <details key={h.id} className="rounded-lg border border-slate-200 px-3 py-2">
-                  <summary className="cursor-pointer text-sm font-medium text-slate-800">{h.authorName} to {h.toName}{h.evaluation ? ` · ${h.evaluation.behaviours.filter((b) => b.observed === "yes").length} of ${h.evaluation.behaviours.length} behaviours observed` : ""}</summary>
+                  <summary className="cursor-pointer text-sm font-medium text-slate-800">{h.authorName} to {h.toName}{h.evaluation ? ` · ${h.evaluation.behaviours.filter((b) => b.observed === "yes").length} of ${h.evaluation.behaviours.length} behaviors observed` : ""}</summary>
                   <div className="mt-3 space-y-3"><SbarCard handoff={h} />{h.evaluation && <TraceTable evaluation={h.evaluation} />}</div>
                 </details>
               ))}

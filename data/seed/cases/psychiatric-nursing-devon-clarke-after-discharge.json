@@ -728,6 +728,11 @@
     "Review the medication list with the patient",
     "Provide education and agree a plan with appropriate safety-netting"
    ],
+   "goals": [
+    "Check mental state and symptoms",
+    "Assess current safety",
+    "Review medicines and agree a plan"
+   ],
    "timeLimitMin": 25
   },
   "answerKey": {

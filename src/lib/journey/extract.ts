@@ -3,9 +3,9 @@ import { chatJSON, MODELS } from "../llm";
 import { get } from "../db";
 import type { Artifact } from "../types";
 import { aliasing, approvedCorpus, arr, clean, entryLine, unverifiedValues } from "./context";
-import { factSupported, isMedSafetyConcern } from "./support";
+import { bestOverlap, factSupported, isMedSafetyConcern, medSafetyRank, sameIssue, sentencesOf } from "./support";
 import { addEntry, addLink, entriesOf, norm, quoteIn, RECORD_STAGE, studentNameOf, who, type LoadedRun } from "./store";
-import type { EntryKind, EntrySource, EntryStatus, Evidence, Relation, Stage } from "./types";
+import type { EntryKind, EntrySource, EntryStatus, Evidence, Relation, Sbar, Stage } from "./types";
 
 /** A document's content as one line of text: table rows with their values and flags, plotted points, or the report text. */
 export function documentText(d: Artifact): string {
@@ -127,7 +127,7 @@ export interface StageExtraction {
  * disclosure ledger; clinician contributions are model-extracted and each quote is checked against
  * the transcript or note before the entry is kept.
  */
-export async function extractStage(run: LoadedRun, stage: Stage, encounterId: string, note: string, declaredUses: { turn: number; entryIds: string[]; quote: string }[] = [], opts: { ledgerOnly?: boolean } = {}): Promise<StageExtraction> {
+export async function extractStage(run: LoadedRun, stage: Stage, encounterId: string, note: string, declaredUses: { turn: number; entryIds: string[]; quote: string }[] = [], opts: { ledgerOnly?: boolean; sbar?: Sbar } = {}): Promise<StageExtraction> {
   const enc = loadEncounter(encounterId);
   if (!enc) throw new Error("Stage encounter not found");
   const runId = run.row.id;
@@ -219,8 +219,8 @@ export async function extractStage(run: LoadedRun, stage: Stage, encounterId: st
   type RawEntry = { kind: string; text: string; status: string; where: string; turn?: number; quote: string; relates_to?: string; relation?: string };
   type Raw = { entries: RawEntry[]; uses: { turn: number; entry: string; quote: string }[]; answered: { question: string; by: string }[] };
   let raw: Raw = { entries: [], uses: [], answered: [] };
-  if (spoken.length || note.trim()) {
-    raw = await chatJSON<Raw>({
+  const extractOnce = () =>
+    chatJSON<Raw>({
       model: MODELS.smart,
       system: SYSTEM,
       schema: SCHEMA,
@@ -244,6 +244,25 @@ ${note.trim() || "(none)"}`,
         },
       ],
     });
+  if (spoken.length || note.trim()) {
+    raw = await extractOnce();
+    // A visit with a written note always has something to record. An empty answer (or an array field that could
+    // not be read) is treated as a failed call and asked once more, and logged so it can be diagnosed.
+    if (note.trim().length > 200 && !arr(raw.entries).length) {
+      console.warn(`[journey] extraction for ${stage.id} returned no entries (fields: ${Object.keys(raw || {}).join(", ") || "none"}; entries is ${Array.isArray(raw.entries) ? "an empty array" : typeof raw.entries}); asking again`);
+      for (let attempt = 1; attempt <= 2; attempt++) {
+        try {
+          const again = await extractOnce();
+          if (arr(again.entries).length) {
+            raw = again;
+            break;
+          }
+          console.warn(`[journey] extraction retry ${attempt} for ${stage.id} also returned no entries (fields: ${Object.keys(again || {}).join(", ") || "none"})`);
+        } catch (e) {
+          console.error("[journey] extraction retry failed", e);
+        }
+      }
+    }
   }
 
   const corpus = approvedCorpus(enc.c, all);
@@ -416,7 +435,36 @@ ${note.trim() || "(none)"}`,
     linkedTurns.add(`${c.turn}:${c.target}`);
     stats.uses++;
   }
+  // Backstop: a medication-safety concern the clinician wrote down must not depend on the model proposing it.
+  stats.extracted += recordMedSafetyConcerns(run, stage, encounterId, [{ where: "note", text: note }, ...(opts.sbar ? [{ where: "sbar" as const, text: Object.values(opts.sbar).join(" ") }] : [])]);
   return stats;
+}
+
+/**
+ * Deterministic backstop for medication-safety concerns. Every sentence of the clinician's note or SBAR that
+ * states one (a duplication, interaction, wrong dose, contraindication, or "needs prescriber review") must be
+ * in the shared state. Any such sentence that no entry from this stage covers is added as an UNCERTAIN
+ * assessment with the sentence itself as its evidence: a concern stays a question until someone answers it.
+ * Idempotent (a sentence already recorded is covered), at most two per stage, safest first. Returns how many were added.
+ */
+export function recordMedSafetyConcerns(run: LoadedRun, stage: Stage, encounterId: string, sources: { where: "note" | "sbar"; text: string }[]): number {
+  const runId = run.row.id;
+  const w = who(run, stage, studentNameOf(run.row.user_id));
+  const base = { runId, contributorRole: w.role, contributorName: w.name, contributorIsAi: w.isAi, stageId: stage.id, stageOrder: stage.order, encounterId, simTime: stage.simTime };
+  const sentences: { where: "note" | "sbar"; text: string }[] = [];
+  for (const src of sources) for (const text of sentencesOf(src.text)) if (text.split(" ").length >= 4 && isMedSafetyConcern(text) && !sentences.some((x) => sameIssue(x.text, text))) sentences.push({ where: src.where, text });
+  sentences.sort((a, b) => medSafetyRank(a.text) - medSafetyRank(b.text));
+  const corpus = approvedCorpus(run.c, entriesOf(runId));
+  let added = 0;
+  for (const s of sentences) {
+    if (added >= 2) break;
+    const covered = entriesOf(runId).some((e) => e.stageId === stage.id && (e.source === "clinician" || e.source === "consult") && e.kind !== "follow_up" && (sameIssue(e.text, s.text) || bestOverlap(s.text, [e.text]) >= 0.6));
+    if (covered) continue;
+    const flagged = unverifiedValues(s.text, corpus);
+    addEntry({ ...base, kind: "assessment", category: "", text: clean(s.text), status: "uncertain", source: "clinician", evidence: { where: s.where, quote: s.text.slice(0, 400), verified: true }, meta: flagged.length ? { unverifiedValues: flagged } : null });
+    added++;
+  }
+  return added;
 }
 
 // ---------- Checking proposed relations ----------

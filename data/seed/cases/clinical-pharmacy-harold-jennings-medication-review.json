@@ -1055,10 +1055,10 @@
     "I'm not sure I'm taking everything right—the capsules all look the same to me."
    ],
    "personality": "Genial, unhurried and proud of having looked after himself all his life. Trusts his doctors completely and believes every pill he was ever given is still essential.",
-   "communicationStyle": "Chatty and good-humoured, drifts into stories about the machine shop. Hard of hearing: asks for things to be repeated and sometimes answers a slightly different question. Describes tablets by colour and shape rather than by name.",
+   "communicationStyle": "Chatty and good-humored, drifts into stories about the machine shop. Hard of hearing: asks for things to be repeated and sometimes answers a slightly different question. Describes tablets by color and shape rather than by name.",
    "healthLiteracy": "low",
    "emotionalState": "Cheerful on the surface, privately unsettled by the two falls and by evenings when he feels muddled; worried that his daughter wants to take his pills away.",
-   "background": "Worked 41 years as a machinist at a tool-and-die plant in Dayton and still keeps a lathe in the garage. Widowed four years ago; his daughter lives ten minutes away, visits most days and fills his weekly pill organiser on Sundays. Follows the Cincinnati Reds on the radio and does the newspaper crossword every morning."
+   "background": "Worked 41 years as a machinist at a tool-and-die plant in Dayton and still keeps a lathe in the garage. Widowed four years ago; his daughter lives ten minutes away, visits most days and fills his weekly pill organizer on Sundays. Follows the Cincinnati Reds on the radio and does the newspaper crossword every morning."
   },
   "scenario": {
    "studentBrief": "You are a pharmacy student on clinical rotation conducting a telehealth comprehensive medication review (MTM visit) for Harold Jennings, an 81-year-old man referred by his primary care physician after two falls in the past month and new reports of evening confusion. His daughter manages a weekly pill organizer but he also keeps extra bottles at his armchair. Review his history, medication list, labs, and vitals; interview him directly to complete a best possible medication history; and prepare recommendations for the referring prescriber.",
@@ -1070,6 +1070,11 @@
     "Take a focused history of the falls and confusion episodes",
     "Assess for potential drug therapy problems using available vitals and laboratory data",
     "Formulate recommendations to communicate to the referring prescriber"
+   ],
+   "goals": [
+    "Take a full medication history",
+    "Reconcile what is taken and filled",
+    "Make recommendations for the prescriber"
    ],
    "timeLimitMin": 25
   },

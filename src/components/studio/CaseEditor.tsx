@@ -454,7 +454,7 @@ export default function CaseEditor({
             <div>
               <p className="font-medium">The guide has drafted this patient. It is yours to correct.</p>
               <p className="mt-0.5 text-sm">
-                It stays labelled &ldquo;AI-drafted, not faculty-reviewed&rdquo; until you mark it reviewed. A sensible order: read Facts and Documents (what students can discover and when), run the consistency check, try a test visit, then publish. Type a request to the guide on the right
+                It stays labeled &ldquo;AI-drafted, not faculty-reviewed&rdquo; until you mark it reviewed. A sensible order: read Facts and Documents (what students can discover and when), run the consistency check, try a test visit, then publish. Type a request to the guide on the right
                 for any change you would rather describe than make by hand.
               </p>
             </div>

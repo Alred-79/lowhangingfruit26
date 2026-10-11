@@ -1044,6 +1044,11 @@
     "Formulate an assessment and plan, including disposition",
     "Communicate findings and next steps with the patient"
    ],
+   "goals": [
+    "Take a focused history",
+    "Reconcile medications and review results",
+    "Agree a plan and disposition"
+   ],
    "timeLimitMin": 20
   },
   "setting": "Telehealth video visit; patient at home in her son's living room in Daly City, California",

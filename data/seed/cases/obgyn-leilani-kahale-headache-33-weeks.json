@@ -936,6 +936,11 @@
     "Arrange appropriate investigations, monitoring, and logistics based on your clinical assessment",
     "Communicate clearly and compassionately, exploring and addressing the patient's concerns"
    ],
+   "goals": [
+    "Take a focused history",
+    "Review home readings and recheck",
+    "Explain urgency and next steps"
+   ],
    "timeLimitMin": 20
   },
   "summary": "A 31-year-old G2P1 at 33 weeks presents by telehealth with a 2-day headache, new hand/foot edema, and hypertensive-range home blood pressure readings, with discoverable visual symptoms and right upper quadrant pain. The case teaches recognition of preeclampsia with severe features in a remote setting and the obligation to arrange urgent in-person evaluation despite the patient's hope for home rest and real logistical barriers to transport.\"",

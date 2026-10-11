@@ -726,6 +726,11 @@
     "Discuss any relevant family history without overstepping into ordering tests or making management recommendations",
     "Appropriately hand back decisions about surveillance timing and any further referrals to her gastroenterologist"
    ],
+   "goals": [
+    "Explain the report in plain words",
+    "Say what is and isn't known",
+    "Hand decisions back to her doctor"
+   ],
    "timeLimitMin": 20
   },
   "answerKey": {
@@ -763,7 +768,7 @@
     "'Pedunculated' simply describes the polyp's shape - on a stalk, like a mushroom - which often makes complete snare removal easier",
     "A negative margin means the plane where the polyp was cut away from the bowel wall shows no dysplastic cells, supporting that the entire abnormal area was removed",
     "Routine surveillance colonoscopy is a precaution to check for new polyps, not evidence that something was missed or left behind; the specific interval is a gastroenterology management decision outside the pathology consult's scope",
-    "Pathology confirms what was found in the tissue sample; recommendations about future procedures, timing, and genetic counselling referrals belong to the treating gastroenterologist"
+    "Pathology confirms what was found in the tissue sample; recommendations about future procedures, timing, and genetic counseling referrals belong to the treating gastroenterologist"
    ]
   },
   "title": "Explaining 'High-Grade Dysplasia': A Patient-Requested Pathology Consult After Polypectomy",

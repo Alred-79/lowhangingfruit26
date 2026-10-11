@@ -875,6 +875,11 @@
     "Assess caregiver wellbeing and home safety",
     "Summarize your findings and formulate a plan including any referrals or escalation needed"
    ],
+   "goals": [
+    "Take a recovery history",
+    "Review medications and home safety",
+    "Summarize and decide on referrals"
+   ],
    "timeLimitMin": 25
   },
   "chartAtStart": [

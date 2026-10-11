@@ -49,7 +49,7 @@ journeys. Product framing: every encounter is a telehealth video visit.
   Select, Label, PageHeader, Empty) and wrap pages in `AppShell`. Light theme, `brand-*` teal
   accent, slate neutrals. Plain, specific UI copy; no emoji.
 - Clinical content shown to students must come from approved case data, never free model output.
-- AI-written cases are stored with `origin = 'ai_draft'`, `reviewed = 0` and labelled as such.
+- AI-written cases are stored with `origin = 'ai_draft'`, `reviewed = 0` and labeled as such.
 
 ## Running
 

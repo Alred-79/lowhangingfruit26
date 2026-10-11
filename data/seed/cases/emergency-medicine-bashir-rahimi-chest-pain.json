@@ -802,6 +802,11 @@
     "Communicate a clear disposition recommendation and address the patient's concerns",
     "Document a focused note including history, examination findings, clinical reasoning, and disposition"
    ],
+   "goals": [
+    "Take a focused history",
+    "Assess vitals and function remotely",
+    "Recommend a clear disposition"
+   ],
    "timeLimitMin": 20
   },
   "specialty": "Emergency Medicine",

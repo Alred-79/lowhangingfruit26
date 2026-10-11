@@ -1108,6 +1108,11 @@
     "Provide perioperative medication and fasting instructions",
     "Explain the anesthetic plan and associated risks, and agree on next steps"
    ],
+   "goals": [
+    "Take a focused pre-anesthesia history",
+    "Review current medications together",
+    "Explain the plan and fasting rules"
+   ],
    "timeLimitMin": 25
   },
   "setting": "Telehealth video visit, patient at home in Baltimore, Maryland, seated at his kitchen table",

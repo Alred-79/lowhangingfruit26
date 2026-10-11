@@ -36,11 +36,11 @@ interface Reasons {
 
 const LEVEL_HELP = [
   "",
-  "Forthcoming, calm patient who volunteers information. Hints available, no time limit.",
-  "Slightly vague patient who still volunteers some information. Hints available, no time limit.",
-  "Patient answers only what is asked and mentions some irrelevant details. Timed.",
-  "Guarded, vague, emotional patient who needs trust before sharing sensitive history. Timed.",
-  "Distressed, very vague patient with a tight time limit.",
+  "Forthcoming, calm patient who volunteers information. Hints available.",
+  "Slightly vague patient who still volunteers some information. Hints available.",
+  "Patient answers only what is asked and mentions some irrelevant details.",
+  "Guarded, vague, emotional patient who needs trust before sharing sensitive history.",
+  "Distressed, very vague patient.",
 ];
 const TYPE_HELP: Record<AssignmentType, string> = {
   homework: "Graded practice with a due date. Students usually get several attempts and see feedback straight away.",
@@ -125,10 +125,10 @@ export default function AssignmentBuilder({
     setType(t);
     if (t === "exam") {
       const d = defaultSettings("exam");
-      setS((old) => ({ ...old, hints: false, level: old.level ?? d.level, feedbackRelease: "manual", maxAttempts: 1, liveAssist: false, perturb: false, timeLimitMin: old.timeLimitMin ?? d.timeLimitMin }));
+      setS((old) => ({ ...old, hints: false, level: old.level ?? d.level, feedbackRelease: "manual", maxAttempts: 1, liveAssist: false, perturb: false, showComfort: false, timeLimitMin: old.timeLimitMin ?? d.timeLimitMin }));
     } else if (type === "exam") {
       const d = defaultSettings(t);
-      setS((old) => ({ ...old, hints: d.hints, feedbackRelease: d.feedbackRelease, maxAttempts: d.maxAttempts, perturb: d.perturb }));
+      setS((old) => ({ ...old, hints: d.hints, feedbackRelease: d.feedbackRelease, maxAttempts: d.maxAttempts, perturb: d.perturb, showComfort: true }));
     }
   }
 
@@ -205,10 +205,10 @@ export default function AssignmentBuilder({
       {/* ---------- Guide ---------- */}
       <div>
         <Card className="lg:sticky lg:top-4">
-          <CardHeader title="Assignment guide" subtitle="Describe what you want students to practise. The guide suggests patients and settings; you review and change anything before saving." />
+          <CardHeader title="Assignment guide" subtitle="Describe what you want students to practice. The guide suggests patients and settings; you review and change anything before saving." />
           <div className="space-y-3 p-4">
             <div>
-              <Label htmlFor="guide-request">What should students practise?</Label>
+              <Label htmlFor="guide-request">What should students practice?</Label>
               <Textarea
                 id="guide-request"
                 rows={5}
@@ -257,7 +257,7 @@ export default function AssignmentBuilder({
           <div className="space-y-4 p-4">
             <div>
               <Label htmlFor="as-title">Title</Label>
-              <Input id="as-title" value={title} onChange={(e) => setTitle(e.target.value)} maxLength={160} placeholder="e.g. Week 6: counselling a patient who is not ready to change" />
+              <Input id="as-title" value={title} onChange={(e) => setTitle(e.target.value)} maxLength={160} placeholder="e.g. Week 6: counseling a patient who is not ready to change" />
             </div>
             <div>
               <Label>Type</Label>
@@ -405,7 +405,7 @@ export default function AssignmentBuilder({
               <div>
                 <Label htmlFor="as-time">Time limit</Label>
                 <Select id="as-time" value={timeValue} onChange={(e) => set({ timeLimitMin: e.target.value === "default" ? undefined : Number(e.target.value) })}>
-                  <option value="default">Default for the level</option>
+                  <option value="default">The patient's natural length</option>
                   <option value="0">No limit</option>
                   {timeChoices.map((m) => (
                     <option key={m} value={m}>
@@ -433,6 +433,7 @@ export default function AssignmentBuilder({
             <div className="grid gap-3 sm:grid-cols-2">
               <Toggle id="as-hints" checked={s.hints} disabled={exam} onChange={(v) => set({ hints: v })} label="Coach hints" help={exam ? "Always off in exams." : "Students can ask for a nudge that never reveals a finding."} />
               <Toggle id="as-perturb" checked={s.perturb} onChange={(v) => set({ perturb: v })} label="Vary the patient on repeat attempts" help="From the second attempt the patient's mood and delivery change (rushed, anxious, withdrawn). The facts stay the same." />
+              <Toggle id="as-comfort" checked={s.showComfort ?? !exam} onChange={(v) => set({ showComfort: v })} label="Show the comfort meter" help="Shows students how comfortable the patient is and why it changed after each reply. Off by default for exams, on for practice." />
               <Toggle id="as-live" checked={s.liveAssist} onChange={(v) => set({ liveAssist: v })} label="Live assist" help="You can watch these visits as they happen on Live Visits, pause one and send the student a note. Students are told when it is on." />
               {type !== "exam" && <Toggle id="as-shared" checked={!!s.sharedPatient} onChange={(v) => set({ sharedPatient: v })} label="One shared patient for the class" help="Students see the same continuing patient rather than each getting a fresh copy. The patient remembers earlier students by name and may repeat what they were told; earlier students' visit notes appear in the chart. Use it for a team of different professions seeing one patient in turn." />}
               <Toggle

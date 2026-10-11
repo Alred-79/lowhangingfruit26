@@ -1,7 +1,7 @@
 import { get, newId, parse, run as sql } from "../db";
 import { AI_TURNS, closeAiEncounter, createStageEncounter, runAiVisit, writeNoteAndHandoff, type StageEvent } from "./clinician";
 import { closeHuddle } from "./collab";
-import { extractStage, seedRecord } from "./extract";
+import { extractStage, recordMedSafetyConcerns, seedRecord } from "./extract";
 import { evaluateSbar, evaluateStudent, saveHandoff } from "./handoff";
 import { clinician, handoffsOf, loadJourney, loadRun, setStage, stageRun, stageRuns, studentNameOf, who } from "./store";
 import { synthesise } from "./synthesis";
@@ -163,7 +163,7 @@ async function work(runId: string) {
       const wrap = await writeNoteAndHandoff(run, stage, encounterId, nextWho ? { name: nextWho.name, role: nextWho.role, isStudent: nextWho.isStudent } : null);
       setStage(runId, stage.id, { note: JSON.stringify({ declared, note: wrap.note }) });
       emit(runId, { type: "phase", stageId: stage.id, label: "Updating the shared patient state" });
-      await extractStage(run, stage, encounterId, wrap.note, declared);
+      await extractStage(run, stage, encounterId, wrap.note, declared, { sbar: wrap.sbar });
       if (!handoffsOf(runId).some((h) => h.fromStage === stage.id)) {
         const hid = saveHandoff(run, stage, wrap.sbar, { cites: wrap.cites, unverified: wrap.unverified });
         // Worked-example evaluation of the colleague's SBAR; does not hold up the journey.
@@ -217,6 +217,12 @@ export async function submitStudentHandoff(runId: string, sbar: Sbar): Promise<T
   if (!hid) {
     if (sr?.status !== "awaiting_handoff") throw new Error("Finish your visit before writing the handoff.");
     hid = saveHandoff(run, stage, sbar);
+    // A medication-safety concern in the learner's SBAR enters the shared state like one in an AI colleague's.
+    try {
+      if (sr.encounter_id) recordMedSafetyConcerns(run, stage, sr.encounter_id, [{ where: "sbar", text: Object.values(sbar).join(" ") }]);
+    } catch (e) {
+      console.error("[journey] could not record medication-safety concern from SBAR", e);
+    }
     setStage(runId, stage.id, { status: "complete", ended_at: new Date().toISOString() });
     ensureProgress(runId);
   }

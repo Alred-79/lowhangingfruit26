@@ -719,6 +719,11 @@
     "Identify whether the patient is eligible for lung cancer screening and arrange appropriate referral",
     "Address his concerns about reading the report before being contacted"
    ],
+   "goals": [
+    "Explain the scan in plain words",
+    "Explain the follow-up guidance",
+    "Address worries and next steps"
+   ],
    "timeLimitMin": 20
   },
   "chartAtStart": [

@@ -956,6 +956,11 @@
     "Review the prior primary care documentation",
     "Formulate an assessment and recommend appropriate next steps"
    ],
+   "goals": [
+    "Take a focused history",
+    "Review the chart results together",
+    "Recommend clear next steps"
+   ],
    "timeLimitMin": 25
   },
   "summary": "A 26-year-old law student presents by telehealth with 4 months of bloody, mucoid diarrhea, nocturnal stools, weight loss, and labs showing iron deficiency anemia, elevated inflammatory markers, and markedly elevated fecal calprotectin with negative infectious stool studies, consistent with new-onset ulcerative colitis. The case teaches fellows to actively screen for extraintestinal manifestations (erythema nodosum), recognize anchoring bias in a prior primary care note that labeled symptoms as stress-related IBS, and appropriately recommend colonoscopy with biopsies while addressing a patient's real-world timeline pressures.",

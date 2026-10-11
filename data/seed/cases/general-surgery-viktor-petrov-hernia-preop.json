@@ -795,6 +795,11 @@
     "Counsel on realistic timelines for return to driving and lifting given his occupation",
     "Teach warning signs to watch for in the preoperative period and discuss perioperative medication management"
    ],
+   "goals": [
+    "Take a focused history",
+    "Assess risks before surgery",
+    "Explain options and recovery"
+   ],
    "timeLimitMin": 20
   },
   "answerKey": {

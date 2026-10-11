@@ -1033,6 +1033,11 @@
     "Review complication screening status",
     "Formulate a collaborative management plan and arrange appropriate follow-up"
    ],
+   "goals": [
+    "Review the glucose data together",
+    "Explore what affects daily management",
+    "Agree a plan and follow-up"
+   ],
    "timeLimitMin": 25
   },
   "chartAtStart": [

@@ -908,6 +908,11 @@
     "Assess overall postpartum recovery",
     "Formulate a management plan and arrange appropriate follow-up"
    ],
+   "goals": [
+    "Take a focused history",
+    "Guide the remote exam",
+    "Plan care and follow-up"
+   ],
    "timeLimitMin": 25
   },
   "title": "Postpartum Mastitis with Unmasked Postpartum Depression at the 3-Week Lactation Visit",

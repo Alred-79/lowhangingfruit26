@@ -74,7 +74,7 @@
         "label": "Plan: investigations, treatment, health maintenance, safety-netting and follow-up"
       }
     ],
-    "rubricEmphasis": "Whole-person history, prioritising multiple problems, preventive care, shared decision making, safety-netting, continuity."
+    "rubricEmphasis": "Whole-person history, prioritizing multiple problems, preventive care, shared decision making, safety-netting, continuity."
   },
   {
     "id": "internal-medicine",
@@ -160,7 +160,7 @@
     "name": "Pediatrics",
     "group": "Physician",
     "roleTitle": "pediatrics resident",
-    "scope": "Cares for infants, children and adolescents by video with a parent or caregiver present: acute illness, growth and development, feeding, behaviour, immunisation and anticipatory guidance. Takes history from the caregiver and, where age-appropriate, the child; offers confidential time to adolescents.",
+    "scope": "Cares for infants, children and adolescents by video with a parent or caregiver present: acute illness, growth and development, feeding, behavior, immunization and anticipatory guidance. Takes history from the caregiver and, where age-appropriate, the child; offers confidential time to adolescents.",
     "encounterTypes": [
       "acute illness visit",
       "well-child / developmental concern",
@@ -198,7 +198,7 @@
     "name": "Cardiology",
     "group": "Physician",
     "roleTitle": "cardiology fellow",
-    "scope": "Assesses and follows patients with heart disease by video: chest pain and dyspnoea evaluation, heart failure, arrhythmia, hypertension, lipid and risk-factor management. Reviews ECGs, echocardiograms, device and home-monitoring data and titrates guideline-directed therapy.",
+    "scope": "Assesses and follows patients with heart disease by video: chest pain and dyspnea evaluation, heart failure, arrhythmia, hypertension, lipid and risk-factor management. Reviews ECGs, echocardiograms, device and home-monitoring data and titrates guideline-directed therapy.",
     "encounterTypes": [
       "new consultation",
       "heart failure follow-up",
@@ -229,7 +229,7 @@
         "label": "Plan: testing, medication titration, lifestyle advice, follow-up and warning signs"
       }
     ],
-    "rubricEmphasis": "Symptom characterisation, cardiovascular risk stratification, ECG/echo interpretation, guideline-directed therapy, adherence counselling."
+    "rubricEmphasis": "Symptom characterization, cardiovascular risk stratification, ECG/echo interpretation, guideline-directed therapy, adherence counseling."
   },
   {
     "id": "oncology",
@@ -267,14 +267,14 @@
         "label": "Plan: treatment decisions, supportive care, what the patient was told and understood, follow-up"
       }
     ],
-    "rubricEmphasis": "Delivering serious news (SPIKES), toxicity grading, recognising oncologic emergencies, eliciting values, shared decision making."
+    "rubricEmphasis": "Delivering serious news (SPIKES), toxicity grading, recognizing oncologic emergencies, eliciting values, shared decision making."
   },
   {
     "id": "hematology",
     "name": "Hematology",
     "group": "Physician",
     "roleTitle": "hematology fellow",
-    "scope": "Evaluates and manages blood disorders: anaemia, abnormal counts, bleeding and clotting disorders, anticoagulation, sickle cell disease and haematologic malignancy follow-up. By video the work is history, interpretation of blood counts and smears reported in the record, and treatment decisions.",
+    "scope": "Evaluates and manages blood disorders: anemia, abnormal counts, bleeding and clotting disorders, anticoagulation, sickle cell disease and hematologic malignancy follow-up. By video the work is history, interpretation of blood counts and smears reported in the record, and treatment decisions.",
     "encounterTypes": [
       "new consultation for abnormal blood count",
       "anticoagulation review",
@@ -311,7 +311,7 @@
     "name": "Neurology",
     "group": "Physician",
     "roleTitle": "neurology resident",
-    "scope": "Assesses headache, seizure, weakness, tremor, memory and sensory complaints. Localises the lesion from history and a camera-guided neurological examination, recognises emergencies such as stroke, and manages chronic conditions such as epilepsy, migraine, MS and Parkinson disease.",
+    "scope": "Assesses headache, seizure, weakness, tremor, memory and sensory complaints. Localizes the lesion from history and a camera-guided neurological examination, recognizes emergencies such as stroke, and manages chronic conditions such as epilepsy, migraine, MS and Parkinson disease.",
     "encounterTypes": [
       "new consultation",
       "seizure / headache follow-up",
@@ -327,7 +327,7 @@
       "record",
       "assessment"
     ],
-    "noteFormat": "Neurology consult note (history, exam, localisation, plan)",
+    "noteFormat": "Neurology consult note (history, exam, localization, plan)",
     "wrapUp": [
       {
         "id": "summary",
@@ -335,14 +335,14 @@
       },
       {
         "id": "assessment",
-        "label": "Localisation, differential diagnosis and reasoning"
+        "label": "Localization, differential diagnosis and reasoning"
       },
       {
         "id": "plan",
         "label": "Plan: investigations, treatment, driving/safety advice, follow-up"
       }
     ],
-    "rubricEmphasis": "Precise symptom timeline, remote neurological examination, localisation, recognising stroke and other emergencies, safety counselling."
+    "rubricEmphasis": "Precise symptom timeline, remote neurological examination, localization, recognizing stroke and other emergencies, safety counseling."
   },
   {
     "id": "psychiatry",
@@ -390,7 +390,7 @@
     "name": "Obstetrics and Gynecology",
     "group": "Physician",
     "roleTitle": "obstetrics and gynecology resident",
-    "scope": "Provides prenatal and postpartum care, contraception and preconception counselling, and evaluation of gynaecologic complaints such as abnormal bleeding, pelvic pain and menopausal symptoms. By video, identifies which concerns need same-day in-person assessment.",
+    "scope": "Provides prenatal and postpartum care, contraception and preconception counseling, and evaluation of gynecologic complaints such as abnormal bleeding, pelvic pain and menopausal symptoms. By video, identifies which concerns need same-day in-person assessment.",
     "encounterTypes": [
       "prenatal visit",
       "postpartum visit",
@@ -421,7 +421,7 @@
         "label": "Plan: investigations, treatment, patient education, follow-up"
       }
     ],
-    "rubricEmphasis": "Sensitive sexual and reproductive history, obstetric warning signs, trauma-informed and non-judgmental counselling, patient autonomy."
+    "rubricEmphasis": "Sensitive sexual and reproductive history, obstetric warning signs, trauma-informed and non-judgmental counseling, patient autonomy."
   },
   {
     "id": "general-surgery",
@@ -457,7 +457,7 @@
         "label": "Plan: operative or non-operative management, consent points discussed, wound care, follow-up"
       }
     ],
-    "rubricEmphasis": "Operative risk assessment, informed consent, recognising post-operative complications, camera-guided wound assessment, clear instructions."
+    "rubricEmphasis": "Operative risk assessment, informed consent, recognizing post-operative complications, camera-guided wound assessment, clear instructions."
   },
   {
     "id": "orthopedics",
@@ -501,7 +501,7 @@
     "name": "Anesthesiology",
     "group": "Physician",
     "roleTitle": "anesthesiology resident",
-    "scope": "Performs pre-anaesthesia assessment by video: medical and anaesthetic history, airway and cardiopulmonary risk, functional capacity, medication and fasting instructions, and discussion of the anaesthetic plan and its risks.",
+    "scope": "Performs pre-anesthesia assessment by video: medical and anesthetic history, airway and cardiopulmonary risk, functional capacity, medication and fasting instructions, and discussion of the anesthetic plan and its risks.",
     "encounterTypes": [
       "pre-anesthesia assessment",
       "anesthetic plan and consent discussion",
@@ -519,11 +519,11 @@
     "wrapUp": [
       {
         "id": "risk",
-        "label": "Risk assessment: ASA class, airway, cardiopulmonary and other anaesthetic risks"
+        "label": "Risk assessment: ASA class, airway, cardiopulmonary and other anesthetic risks"
       },
       {
         "id": "plan",
-        "label": "Anaesthetic plan and alternatives discussed"
+        "label": "Anesthetic plan and alternatives discussed"
       },
       {
         "id": "instructions",
@@ -604,7 +604,7 @@
     "name": "Dermatology",
     "group": "Physician",
     "roleTitle": "dermatology resident",
-    "scope": "Evaluates rashes, lesions, hair and nail disorders by video and submitted photographs: lesion history, camera-guided skin inspection, recognising lesions that need in-person dermoscopy or biopsy, and managing chronic conditions such as acne, eczema and psoriasis.",
+    "scope": "Evaluates rashes, lesions, hair and nail disorders by video and submitted photographs: lesion history, camera-guided skin inspection, recognizing lesions that need in-person dermoscopy or biopsy, and managing chronic conditions such as acne, eczema and psoriasis.",
     "encounterTypes": [
       "new rash or lesion evaluation",
       "chronic skin disease follow-up",
@@ -639,7 +639,7 @@
     "name": "Endocrinology",
     "group": "Physician",
     "roleTitle": "endocrinology fellow",
-    "scope": "Manages diabetes, thyroid, adrenal, pituitary, bone and other hormonal disorders. Tele-visits centre on reviewing glucose data and laboratory trends, adjusting insulin and other therapy, and counselling on self-management.",
+    "scope": "Manages diabetes, thyroid, adrenal, pituitary, bone and other hormonal disorders. Tele-visits center on reviewing glucose data and laboratory trends, adjusting insulin and other therapy, and counseling on self-management.",
     "encounterTypes": [
       "diabetes follow-up",
       "new endocrine consultation",
@@ -667,10 +667,10 @@
       },
       {
         "id": "plan",
-        "label": "Plan: therapy adjustment (with doses), monitoring, hypoglycaemia safety, follow-up"
+        "label": "Plan: therapy adjustment (with doses), monitoring, hypoglycemia safety, follow-up"
       }
     ],
-    "rubricEmphasis": "Interpreting glucose and hormone data, safe dose titration, hypoglycaemia awareness, self-management support."
+    "rubricEmphasis": "Interpreting glucose and hormone data, safe dose titration, hypoglycemia awareness, self-management support."
   },
   {
     "id": "gastroenterology",
@@ -752,7 +752,7 @@
     "name": "Pulmonology and Critical Care",
     "group": "Physician",
     "roleTitle": "pulmonary and critical care fellow",
-    "scope": "Evaluates cough, breathlessness, asthma, COPD, interstitial lung disease, sleep-disordered breathing and lung nodules, and follows patients after critical illness. Reviews spirometry, imaging and home oximetry, and optimises inhaled therapy.",
+    "scope": "Evaluates cough, breathlessness, asthma, COPD, interstitial lung disease, sleep-disordered breathing and lung nodules, and follows patients after critical illness. Reviews spirometry, imaging and home oximetry, and optimizes inhaled therapy.",
     "encounterTypes": [
       "new consultation",
       "asthma / COPD follow-up",
@@ -783,7 +783,7 @@
         "label": "Plan: investigations, treatment, patient education, follow-up"
       }
     ],
-    "rubricEmphasis": "Dyspnoea characterisation, exposure and smoking history, spirometry interpretation, inhaler technique, exacerbation action plans."
+    "rubricEmphasis": "Dyspnea characterization, exposure and smoking history, spirometry interpretation, inhaler technique, exacerbation action plans."
   },
   {
     "id": "infectious-disease",
@@ -865,7 +865,7 @@
     "name": "Geriatric Medicine",
     "group": "Physician",
     "roleTitle": "geriatrics fellow",
-    "scope": "Performs comprehensive geriatric assessment of older adults, often with a family caregiver on the call: cognition, mood, falls, function, continence, polypharmacy and goals of care. Prioritises what matters most to the patient.",
+    "scope": "Performs comprehensive geriatric assessment of older adults, often with a family caregiver on the call: cognition, mood, falls, function, continence, polypharmacy and goals of care. Prioritizes what matters most to the patient.",
     "encounterTypes": [
       "comprehensive geriatric assessment",
       "memory concern evaluation",
@@ -938,7 +938,7 @@
     "name": "Urology",
     "group": "Physician",
     "roleTitle": "urology resident",
-    "scope": "Evaluates urinary symptoms, haematuria, kidney stones, erectile and sexual dysfunction, prostate concerns including PSA results, and incontinence. By video: history, symptom scores, review of urinalysis and imaging, and counselling on options.",
+    "scope": "Evaluates urinary symptoms, hematuria, kidney stones, erectile and sexual dysfunction, prostate concerns including PSA results, and incontinence. By video: history, symptom scores, review of urinalysis and imaging, and counseling on options.",
     "encounterTypes": [
       "new consultation",
       "PSA / biopsy results discussion",
@@ -969,14 +969,14 @@
         "label": "Plan: investigations, treatment, patient education, follow-up"
       }
     ],
-    "rubricEmphasis": "Sensitive urinary and sexual history, haematuria red flags, validated symptom scores, shared decision making on screening and treatment."
+    "rubricEmphasis": "Sensitive urinary and sexual history, hematuria red flags, validated symptom scores, shared decision making on screening and treatment."
   },
   {
     "id": "ophthalmology",
     "name": "Ophthalmology",
     "group": "Physician",
     "roleTitle": "ophthalmology resident",
-    "scope": "Triages and follows eye disease by video: red eye, vision change, flashes and floaters, post-operative checks, glaucoma and diabetic eye disease follow-up. Recognises sight-threatening emergencies that need same-day in-person examination.",
+    "scope": "Triages and follows eye disease by video: red eye, vision change, flashes and floaters, post-operative checks, glaucoma and diabetic eye disease follow-up. Recognizes sight-threatening emergencies that need same-day in-person examination.",
     "encounterTypes": [
       "eye complaint triage",
       "post-operative check",
@@ -1040,7 +1040,7 @@
         "label": "Plan: investigations, treatment, patient education, follow-up"
       }
     ],
-    "rubricEmphasis": "Head and neck red flags, vertigo characterisation, audiogram interpretation, airway warning signs."
+    "rubricEmphasis": "Head and neck red flags, vertigo characterization, audiogram interpretation, airway warning signs."
   },
   {
     "id": "pmr",
@@ -1076,14 +1076,14 @@
         "label": "Rehabilitation plan: therapy prescriptions, medications, equipment, functional goals, follow-up"
       }
     ],
-    "rubricEmphasis": "Function-centred history, goal setting, interprofessional coordination, preventing secondary complications."
+    "rubricEmphasis": "Function-centered history, goal setting, interprofessional coordination, preventing secondary complications."
   },
   {
     "id": "physician-assistant",
     "name": "Physician Assistant / Associate",
     "group": "Advanced practice",
     "roleTitle": "physician assistant student",
-    "scope": "Takes histories, examines, orders and interprets tests, diagnoses and treats across primary, urgent and specialty care in collaboration with a physician. Recognises when a case needs escalation to the supervising physician.",
+    "scope": "Takes histories, examines, orders and interprets tests, diagnoses and treats across primary, urgent and specialty care in collaboration with a physician. Recognizes when a case needs escalation to the supervising physician.",
     "encounterTypes": [
       "acute complaint visit",
       "chronic disease follow-up",
@@ -1159,7 +1159,7 @@
     "name": "Certified Nurse-Midwife",
     "group": "Advanced practice",
     "roleTitle": "student nurse-midwife",
-    "scope": "Provides prenatal, postpartum, newborn-feeding, gynaecologic and family-planning care for low-risk patients, supports physiologic birth planning, screens for complications and perinatal mood disorders, and consults or refers when risk rises.",
+    "scope": "Provides prenatal, postpartum, newborn-feeding, gynecologic and family-planning care for low-risk patients, supports physiologic birth planning, screens for complications and perinatal mood disorders, and consults or refers when risk rises.",
     "encounterTypes": [
       "prenatal visit",
       "postpartum and lactation visit",
@@ -1189,14 +1189,14 @@
         "label": "Plan: testing, education and anticipatory guidance, warning signs, consultation or referral, next visit"
       }
     ],
-    "rubricEmphasis": "Woman-centred care, screening for warning signs and perinatal depression, informed choice, appropriate consultation and referral."
+    "rubricEmphasis": "Woman-centered care, screening for warning signs and perinatal depression, informed choice, appropriate consultation and referral."
   },
   {
     "id": "crna",
     "name": "Nurse Anesthetist (CRNA)",
     "group": "Advanced practice",
     "roleTitle": "student registered nurse anesthetist",
-    "scope": "Performs the pre-anaesthesia assessment and prepares patients for anaesthesia: airway, cardiopulmonary and sleep-apnoea risk, prior anaesthetic problems, medications, fasting instructions and the anaesthetic plan, in collaboration with the anaesthesia care team.",
+    "scope": "Performs the pre-anesthesia assessment and prepares patients for anesthesia: airway, cardiopulmonary and sleep-apnea risk, prior anesthetic problems, medications, fasting instructions and the anesthetic plan, in collaboration with the anesthesia care team.",
     "encounterTypes": [
       "pre-anesthesia assessment",
       "anesthesia education and consent",
@@ -1214,18 +1214,18 @@
     "wrapUp": [
       {
         "id": "risk",
-        "label": "Risk assessment: ASA class, airway, aspiration, cardiopulmonary and other anaesthetic risks"
+        "label": "Risk assessment: ASA class, airway, aspiration, cardiopulmonary and other anesthetic risks"
       },
       {
         "id": "plan",
-        "label": "Proposed anaesthetic plan and what was discussed with the patient"
+        "label": "Proposed anesthetic plan and what was discussed with the patient"
       },
       {
         "id": "instructions",
         "label": "Pre-operative instructions: fasting, medications to hold or continue, items needing team review"
       }
     ],
-    "rubricEmphasis": "Systematic pre-anaesthesia assessment, identifying risks that change the plan, clear pre-operative instructions."
+    "rubricEmphasis": "Systematic pre-anesthesia assessment, identifying risks that change the plan, clear pre-operative instructions."
   },
   {
     "id": "nursing",
@@ -1266,7 +1266,7 @@
     "name": "Critical Care Nursing",
     "group": "Nursing",
     "roleTitle": "critical care nursing student",
-    "scope": "Tele-ICU and post-ICU nursing: monitors trends in vital signs and device data, recognises early deterioration, supports family communication, and follows up patients recovering at home after critical illness (weakness, delirium, tracheostomy or oxygen needs).",
+    "scope": "Tele-ICU and post-ICU nursing: monitors trends in vital signs and device data, recognizes early deterioration, supports family communication, and follows up patients recovering at home after critical illness (weakness, delirium, tracheostomy or oxygen needs).",
     "encounterTypes": [
       "post-ICU follow-up",
       "remote monitoring assessment",
@@ -1294,7 +1294,7 @@
         "label": "SBAR to the provider (if escalation is needed)"
       }
     ],
-    "rubricEmphasis": "Trend recognition, early warning scores, prioritisation, structured escalation, family-centred communication."
+    "rubricEmphasis": "Trend recognition, early warning scores, prioritization, structured escalation, family-centered communication."
   },
   {
     "id": "emergency-nursing",
@@ -1328,7 +1328,7 @@
         "label": "SBAR handoff to the receiving provider"
       }
     ],
-    "rubricEmphasis": "Rapid prioritisation, red-flag recognition, safe disposition, calm clear instructions, concise handoff."
+    "rubricEmphasis": "Rapid prioritization, red-flag recognition, safe disposition, calm clear instructions, concise handoff."
   },
   {
     "id": "oncology-nursing",
@@ -1363,7 +1363,7 @@
         "label": "SBAR to the oncology provider (if escalation is needed)"
       }
     ],
-    "rubricEmphasis": "Toxicity grading, recognising oncologic emergencies, teach-back, emotional support, timely escalation."
+    "rubricEmphasis": "Toxicity grading, recognizing oncologic emergencies, teach-back, emotional support, timely escalation."
   },
   {
     "id": "pediatric-nursing",
@@ -1397,7 +1397,7 @@
         "label": "SBAR to the provider (if escalation is needed)"
       }
     ],
-    "rubricEmphasis": "Family-centred care, age-appropriate communication, recognising the sick child, weight-based medication safety, teach-back."
+    "rubricEmphasis": "Family-centered care, age-appropriate communication, recognizing the sick child, weight-based medication safety, teach-back."
   },
   {
     "id": "psychiatric-nursing",
@@ -1439,7 +1439,7 @@
     "name": "Community / Public Health Nursing",
     "group": "Nursing",
     "roleTitle": "public health nursing student",
-    "scope": "Works with individuals and families in the community: home-visit style assessment by video, immunisation and communicable-disease follow-up including contact tracing, maternal-child health, health education and connection to community resources.",
+    "scope": "Works with individuals and families in the community: home-visit style assessment by video, immunization and communicable-disease follow-up including contact tracing, maternal-child health, health education and connection to community resources.",
     "encounterTypes": [
       "home visit assessment",
       "communicable disease follow-up",
@@ -1527,7 +1527,7 @@
       },
       {
         "id": "dtp",
-        "label": "Drug therapy problems, prioritised (indication, effectiveness, safety, adherence)"
+        "label": "Drug therapy problems, prioritized (indication, effectiveness, safety, adherence)"
       },
       {
         "id": "plan",
@@ -1541,7 +1541,7 @@
     "name": "Community Pharmacy",
     "group": "Pharmacy",
     "roleTitle": "pharmacy student (community rotation)",
-    "scope": "Counsels patients on new and refill prescriptions, device technique, over-the-counter and self-care choices, and immunisations; screens for interactions and red flags that need referral to a prescriber; supports adherence and affordability.",
+    "scope": "Counsels patients on new and refill prescriptions, device technique, over-the-counter and self-care choices, and immunizations; screens for interactions and red flags that need referral to a prescriber; supports adherence and affordability.",
     "encounterTypes": [
       "new prescription counseling",
       "self-care / OTC consultation",
@@ -1561,7 +1561,7 @@
       },
       {
         "id": "counseling",
-        "label": "Counselling provided and how understanding was confirmed"
+        "label": "Counseling provided and how understanding was confirmed"
       },
       {
         "id": "plan",
@@ -1608,14 +1608,14 @@
         "label": "Plan of care: interventions, home exercise program, frequency and duration"
       }
     ],
-    "rubricEmphasis": "Red-flag screening, movement analysis, standardised outcome measures, functional goal writing, exercise dosing, patient education."
+    "rubricEmphasis": "Red-flag screening, movement analysis, standardized outcome measures, functional goal writing, exercise dosing, patient education."
   },
   {
     "id": "occupational-therapy",
     "name": "Occupational Therapy",
     "group": "Rehabilitation",
     "roleTitle": "occupational therapy student",
-    "scope": "Builds an occupational profile and analyses performance of daily activities (self-care, home management, work, school, leisure); assesses cognition, upper-limb function and the home environment by video; recommends adaptations, equipment and strategies.",
+    "scope": "Builds an occupational profile and analyzes performance of daily activities (self-care, home management, work, school, leisure); assesses cognition, upper-limb function and the home environment by video; recommends adaptations, equipment and strategies.",
     "encounterTypes": [
       "initial evaluation",
       "home safety assessment",
@@ -1640,21 +1640,21 @@
       },
       {
         "id": "goals",
-        "label": "Client-centred, measurable goals"
+        "label": "Client-centered, measurable goals"
       },
       {
         "id": "plan",
         "label": "Intervention plan: adaptations, equipment, strategies, caregiver training"
       }
     ],
-    "rubricEmphasis": "Client-centred goal setting, activity analysis, home safety, adaptive strategies, caregiver involvement."
+    "rubricEmphasis": "Client-centered goal setting, activity analysis, home safety, adaptive strategies, caregiver involvement."
   },
   {
     "id": "speech-language-pathology",
     "name": "Speech-Language Pathology",
     "group": "Rehabilitation",
     "roleTitle": "speech-language pathology student",
-    "scope": "Assesses and treats speech, language, cognitive-communication, voice, fluency and swallowing disorders in children and adults. By video: case history, screening and standardised tasks, swallowing history with caregiver-observed intake, and counselling on strategies.",
+    "scope": "Assesses and treats speech, language, cognitive-communication, voice, fluency and swallowing disorders in children and adults. By video: case history, screening and standardized tasks, swallowing history with caregiver-observed intake, and counseling on strategies.",
     "encounterTypes": [
       "communication evaluation",
       "swallowing (dysphagia) screening and counseling",
@@ -1716,14 +1716,14 @@
         "label": "Recommendations: amplification, communication strategies, medical referral, follow-up"
       }
     ],
-    "rubricEmphasis": "Audiogram interpretation, medical-referral red flags (asymmetry, sudden loss), counselling on stigma, communication-partner strategies."
+    "rubricEmphasis": "Audiogram interpretation, medical-referral red flags (asymmetry, sudden loss), counseling on stigma, communication-partner strategies."
   },
   {
     "id": "respiratory-therapy",
     "name": "Respiratory Therapy",
     "group": "Rehabilitation",
     "roleTitle": "respiratory therapy student",
-    "scope": "Assesses breathing and oxygenation, teaches inhaler, nebuliser and airway-clearance technique, manages home oxygen, CPAP/BiPAP and home ventilation equipment, supports pulmonary rehabilitation and action plans, and escalates respiratory deterioration.",
+    "scope": "Assesses breathing and oxygenation, teaches inhaler, nebulizer and airway-clearance technique, manages home oxygen, CPAP/BiPAP and home ventilation equipment, supports pulmonary rehabilitation and action plans, and escalates respiratory deterioration.",
     "encounterTypes": [
       "inhaler and device teaching",
       "home oxygen / CPAP follow-up",
@@ -1752,14 +1752,14 @@
         "label": "Findings to report to the prescriber and action-plan triggers"
       }
     ],
-    "rubricEmphasis": "Observed device technique with teach-back, oximetry interpretation, equipment troubleshooting, recognising exacerbation."
+    "rubricEmphasis": "Observed device technique with teach-back, oximetry interpretation, equipment troubleshooting, recognizing exacerbation."
   },
   {
     "id": "dietetics",
     "name": "Dietetics / Clinical Nutrition",
     "group": "Nutrition",
     "roleTitle": "dietetics student",
-    "scope": "Conducts nutrition assessment (diet history, anthropometrics, labs, barriers), makes a nutrition diagnosis, and delivers patient-centred nutrition education and counselling using motivational interviewing.",
+    "scope": "Conducts nutrition assessment (diet history, anthropometrics, labs, barriers), makes a nutrition diagnosis, and delivers patient-centered nutrition education and counseling using motivational interviewing.",
     "encounterTypes": [
       "nutrition assessment",
       "nutrition counseling",
@@ -1793,7 +1793,7 @@
     "name": "Clinical Psychology",
     "group": "Behavioral health",
     "roleTitle": "clinical psychology trainee",
-    "scope": "Conducts diagnostic clinical interviews, administers and interprets standardised measures, develops a case formulation, and delivers evidence-based psychotherapy such as CBT. Assesses risk and does not prescribe medication.",
+    "scope": "Conducts diagnostic clinical interviews, administers and interprets standardized measures, develops a case formulation, and delivers evidence-based psychotherapy such as CBT. Assesses risk and does not prescribe medication.",
     "encounterTypes": [
       "diagnostic intake interview",
       "psychotherapy session",
@@ -1831,7 +1831,7 @@
     "name": "Clinical Social Work",
     "group": "Behavioral health",
     "roleTitle": "social work student",
-    "scope": "Completes a biopsychosocial assessment, identifies social needs (housing, food, finances, caregiving, safety), provides supportive counselling and crisis intervention, plans discharges, links to resources, and fulfils safeguarding and mandated reporting duties.",
+    "scope": "Completes a biopsychosocial assessment, identifies social needs (housing, food, finances, caregiving, safety), provides supportive counseling and crisis intervention, plans discharges, links to resources, and fulfills safeguarding and mandated reporting duties.",
     "encounterTypes": [
       "psychosocial assessment",
       "discharge planning",
@@ -1854,7 +1854,7 @@
       },
       {
         "id": "plan",
-        "label": "Intervention plan: counselling, referrals, resources, follow-up"
+        "label": "Intervention plan: counseling, referrals, resources, follow-up"
       }
     ],
     "rubricEmphasis": "Person-in-environment perspective, strengths-based practice, safety screening, advocacy, self-determination."
@@ -1864,7 +1864,7 @@
     "name": "Mental Health Counseling",
     "group": "Behavioral health",
     "roleTitle": "counseling trainee",
-    "scope": "Provides talk therapy for mood, anxiety, grief, relationship, adjustment and life-transition concerns: intake assessment, goal setting, evidence-based counselling techniques, risk screening, and referral when needs exceed scope.",
+    "scope": "Provides talk therapy for mood, anxiety, grief, relationship, adjustment and life-transition concerns: intake assessment, goal setting, evidence-based counseling techniques, risk screening, and referral when needs exceed scope.",
     "encounterTypes": [
       "counseling intake",
       "ongoing counseling session",
@@ -1890,7 +1890,7 @@
         "label": "Plan: goals agreed, interventions, homework, next session"
       }
     ],
-    "rubricEmphasis": "Core counselling skills (reflection, open questions, validation), alliance, risk screening, culturally responsive practice."
+    "rubricEmphasis": "Core counseling skills (reflection, open questions, validation), alliance, risk screening, culturally responsive practice."
   },
   {
     "id": "addiction-counseling",
@@ -1924,7 +1924,7 @@
         "label": "Treatment plan: goals in the client's words, harm reduction, relapse prevention, referrals"
       }
     ],
-    "rubricEmphasis": "Motivational interviewing spirit, non-stigmatising language, withdrawal and overdose risk recognition, harm reduction."
+    "rubricEmphasis": "Motivational interviewing spirit, non-stigmatizing language, withdrawal and overdose risk recognition, harm reduction."
   },
   {
     "id": "medical-laboratory-science",
@@ -2059,7 +2059,7 @@
         "label": "Testing options discussed, the patient's decision, psychosocial issues, implications for relatives, follow-up"
       }
     ],
-    "rubricEmphasis": "Accurate pedigree, non-directive counselling, risk communication with numbers, informed consent, psychosocial support."
+    "rubricEmphasis": "Accurate pedigree, non-directive counseling, risk communication with numbers, informed consent, psychosocial support."
   },
   {
     "id": "dentistry",
@@ -2093,7 +2093,7 @@
         "label": "Plan: interim management, analgesia or antibiotics with justification, in-chair treatment needed, follow-up"
       }
     ],
-    "rubricEmphasis": "Recognising spreading infection and airway risk, antibiotic stewardship, medical-dental interactions, pain management, anxiety."
+    "rubricEmphasis": "Recognizing spreading infection and airway risk, antibiotic stewardship, medical-dental interactions, pain management, anxiety."
   },
   {
     "id": "dental-hygiene",
@@ -2127,14 +2127,14 @@
         "label": "Care plan: self-care instruction, preventive measures, referral to the dentist, recall interval"
       }
     ],
-    "rubricEmphasis": "Risk assessment, behaviour-change counselling, technique teaching with demonstration, oral-systemic links, appropriate referral."
+    "rubricEmphasis": "Risk assessment, behavior-change counseling, technique teaching with demonstration, oral-systemic links, appropriate referral."
   },
   {
     "id": "optometry",
     "name": "Optometry",
     "group": "Dental and vision",
     "roleTitle": "optometry student",
-    "scope": "Takes ocular and visual history, triages red eye and vision changes, manages refractive and contact-lens problems, dry eye, and follow-up of diabetic eye disease and glaucoma within scope. Recognises conditions needing urgent ophthalmology referral.",
+    "scope": "Takes ocular and visual history, triages red eye and vision changes, manages refractive and contact-lens problems, dry eye, and follow-up of diabetic eye disease and glaucoma within scope. Recognizes conditions needing urgent ophthalmology referral.",
     "encounterTypes": [
       "eye complaint triage",
       "contact lens follow-up",
@@ -2163,7 +2163,7 @@
         "label": "Plan: treatment, lens advice, urgency and destination of referral, follow-up"
       }
     ],
-    "rubricEmphasis": "Ocular red flags, contact-lens hygiene counselling, explaining findings, timely referral."
+    "rubricEmphasis": "Ocular red flags, contact-lens hygiene counseling, explaining findings, timely referral."
   },
   {
     "id": "paramedic",
@@ -2207,7 +2207,7 @@
     "name": "Athletic Training",
     "group": "Pre-hospital and community",
     "roleTitle": "athletic training student",
-    "scope": "Evaluates sports injuries and illness in athletes, manages concussion with graded return-to-sport and return-to-learn, designs rehabilitation and prevention programmes, and refers to a physician when red flags are present.",
+    "scope": "Evaluates sports injuries and illness in athletes, manages concussion with graded return-to-sport and return-to-learn, designs rehabilitation and prevention programs, and refers to a physician when red flags are present.",
     "encounterTypes": [
       "injury evaluation",
       "concussion follow-up",
@@ -2243,7 +2243,7 @@
     "name": "Health Coaching / Community Health Work",
     "group": "Pre-hospital and community",
     "roleTitle": "community health worker",
-    "scope": "Builds trust with patients in their own context, screens for social needs (food, housing, transport, cost of care), supports behaviour change with patient-chosen goals, navigates the health system and community resources, and relays concerns to the care team. Does not diagnose or give medication advice.",
+    "scope": "Builds trust with patients in their own context, screens for social needs (food, housing, transport, cost of care), supports behavior change with patient-chosen goals, navigates the health system and community resources, and relays concerns to the care team. Does not diagnose or give medication advice.",
     "encounterTypes": [
       "social needs screening",
       "health coaching session",

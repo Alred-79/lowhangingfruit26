@@ -733,6 +733,11 @@
     "Identify any concerns warranting referral for further assessment",
     "Discuss findings and recommendations, respecting the patient's autonomy and goals"
    ],
+   "goals": [
+    "Take a history from both people",
+    "Run the remote swallow and speech checks",
+    "Share recommendations and referrals"
+   ],
    "timeLimitMin": 25
   },
   "summary": "A 73-year-old man with 8-year history of Parkinson disease presents for telehealth swallow and communication evaluation after a recent aspiration pneumonia, with caregiver-reported coughing on liquids, prolonged meal times, and unintentional weight loss, despite the patient denying any swallowing difficulty. The case teaches recognition of silent aspiration risk, hypokinetic dysarthria/hypophonia, and appropriate in-scope referral for instrumental swallow evaluation and LSVT LOUD, while modeling respectful management of a proud patient who dislikes being discussed in the third person.",

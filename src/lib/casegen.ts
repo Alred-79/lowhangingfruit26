@@ -38,13 +38,14 @@ export const CASE_SCHEMA = {
     },
     scenario: {
       type: "object",
-      required: ["studentBrief", "chiefComplaint", "openingLine", "tasks", "timeLimitMin"],
+      required: ["studentBrief", "chiefComplaint", "openingLine", "tasks", "goals", "timeLimitMin"],
       properties: {
         studentBrief: { type: "string", description: "What the learner is told before joining the call: their role, the patient's name/age, reason for visit. Must not give away findings." },
         chiefComplaint: str,
         openingLine: { type: "string", description: "What the patient says when asked what brings them in. Must only contain 'initial' tier information." },
         tasks: { type: "array", items: str, description: "3-5 things the learner is expected to accomplish in this visit" },
-        timeLimitMin: { type: "integer" },
+        goals: { type: "array", items: str, description: "EXACTLY 3 short session goals for the waiting room, each 3-7 words, plain verbs, no findings or diagnoses (for example 'Take a focused history', 'Review the labs with her', 'Agree a plan and follow-up'). A short version of the tasks, in the same order." },
+        timeLimitMin: { type: "integer", description: "How long this case should naturally take, in minutes (10-45). Every difficulty level uses it as the visit's time limit." },
       },
     },
     chartAtStart: {
@@ -327,7 +328,7 @@ ${o.clinicalStory}`;
     stage<Pick<CaseProfile, "summary" | "persona" | "scenario" | "answerKey">>(
       "persona and scenario",
       PEOPLE_SCHEMA,
-      `Write the faculty summary, the patient's persona, the scenario the learner sees (brief, opening line, tasks, time limit) and the answer key for this case.\n\n${shared}`,
+      `Write the faculty summary, the patient's persona, the scenario the learner sees (brief, opening line, tasks, exactly three short goals, time limit) and the answer key for this case.\n\n${shared}`,
       4000,
       (x) => !!(x.persona?.personality && x.persona?.background && x.scenario?.studentBrief && x.scenario?.openingLine && x.answerKey?.primaryProblem),
     ),
@@ -433,6 +434,7 @@ export function normalizeCase(c: CaseProfile): CaseProfile {
   if (!c.facts.length) throw new Error("Generation returned no patient facts; please try again.");
   c.chartAtStart = asArray(c.chartAtStart);
   c.scenario.tasks = asArray(c.scenario.tasks);
+  c.scenario.goals = asArray<string>(c.scenario.goals).map((g) => String(g).trim()).filter(Boolean).slice(0, 3);
   c.persona.speechExamples = asArray(c.persona.speechExamples);
   c.persona.concerns = asArray(c.persona.concerns);
   for (const k of ["differential", "keyFindings", "plan", "redFlags", "educationPoints"] as const) c.answerKey[k] = asArray(c.answerKey[k]);

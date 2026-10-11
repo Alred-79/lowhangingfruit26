@@ -972,6 +972,11 @@
     "Interpret available investigation results",
     "Agree a plan and safety-net"
    ],
+   "goals": [
+    "Take a focused history",
+    "Review medicines and test results",
+    "Agree a plan and safety net"
+   ],
    "timeLimitMin": 25
   },
   "summary": "A 38-year-old man with an unprovoked proximal DVT 3 months ago and a strong family history of VTE requests to stop apixaban, but the visit uncovers inconsistent adherence despite reassuring pharmacy refill data and new, unreported bleeding symptoms including hematuria that need urology referral. The case teaches extended-anticoagulation decision-making for unprovoked proximal DVT, the limits of D-dimer and thrombophilia testing while on treatment, and the gap between refill-based adherence metrics and real patient behavior.",

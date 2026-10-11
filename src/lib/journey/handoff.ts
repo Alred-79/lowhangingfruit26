@@ -96,7 +96,7 @@ async function summarise(subject: string, what: string, behaviours: BehaviourRes
     console.error("[journey] summary failed", e);
   }
   const no = behaviours.filter((b) => b.observed === "no").map((b) => BEHAVIOURS.find((x) => x.key === b.key)?.label?.toLowerCase());
-  return `${behaviours.filter((b) => b.observed === "yes").length} of ${behaviours.filter((b) => b.observed !== "na").length} applicable behaviours were observed.${no.length ? ` Not observed: ${no.join(", ")}.` : ""} ${fallback}`.trim();
+  return `${behaviours.filter((b) => b.observed === "yes").length} of ${behaviours.filter((b) => b.observed !== "na").length} applicable behaviors were observed.${no.length ? ` Not observed: ${no.join(", ")}.` : ""} ${fallback}`.trim();
 }
 
 /** Communication behaviours judged from one SBAR. Used for every handoff, AI or student. */

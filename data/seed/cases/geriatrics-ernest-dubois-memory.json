@@ -977,6 +977,11 @@
     "Explore the patient's own goals and values ('What Matters') and address advance care planning",
     "Synthesize findings into a 4Ms-based geriatric assessment and plan appropriate for this role's scope, including appropriate referrals"
    ],
+   "goals": [
+    "Gather history from both people",
+    "Check medicines and fall risk",
+    "Explore goals and make a plan"
+   ],
    "timeLimitMin": 30
   },
   "summary": "\"This case portrays an 84-year-old retired Cajun shrimp-boat captain referred for comprehensive geriatric assessment after a low MoCA score, family-reported 18-month cognitive decline, and a recent lost-driving episode, while he insists his memory is fine. It teaches geriatrics fellows to synthesize caregiver collateral history against patient anosognosia, identify anticholinergic medication burden and falls risk through remote exam techniques, and center a patient's own goals when navigating emotionally charged topics like driving cessation and advance care planning, within the bounds of a geriatrics consultant's scope of practice.\"",

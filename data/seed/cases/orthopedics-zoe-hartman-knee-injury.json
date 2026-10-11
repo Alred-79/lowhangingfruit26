@@ -754,6 +754,11 @@
     "Discuss treatment options appropriate for the patient's presentation and goals",
     "Agree a management plan, set expectations for recovery timeline, and arrange appropriate follow-up"
    ],
+   "goals": [
+    "Take a focused history",
+    "Guide a remote knee exam",
+    "Agree a plan and recovery timeline"
+   ],
    "timeLimitMin": 20
   },
   "setting": "Telehealth video visit; patient at home in her bedroom in Colorado, seated with her right leg elevated and braced, mother present in an adjacent room and available to join",

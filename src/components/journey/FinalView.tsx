@@ -226,7 +226,7 @@ export default function FinalView({ view, onOpen, refresh }: { view: RunView; on
   const board: { key: string; title: string; hint: string; items: StateEntry[] }[] = [
     { key: "est", title: "Established", hint: "On the record, from an exam or test, or stated firmly by a clinician", items: sb.groups.established },
     { key: "pr", title: "Patient-reported", hint: "What the patient said; not independently verified", items: sb.groups.patient_reported },
-    { key: "unc", title: "Uncertain", hint: "Provisional judgements and unverified points", items: sb.groups.uncertain },
+    { key: "unc", title: "Uncertain", hint: "Provisional judgments and unverified points", items: sb.groups.uncertain },
     { key: "dis", title: "Disputed", hint: "Two accounts of the same thing that cannot both be right", items: sb.groups.disputed },
     { key: "open", title: "Still unanswered", hint: "Questions nobody on the team can answer yet; a plan to find out does not close one", items: sb.groups.open_question },
     { key: "res", title: "Resolved", hint: "Answered or settled by a later entry that supplies the information", items: sb.groups.resolved },
@@ -238,7 +238,7 @@ export default function FinalView({ view, onOpen, refresh }: { view: RunView; on
   return (
     <div className="space-y-5">
       <nav className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-brand-700">
-        {[["#plan", "Coordinated care plan"], ["#contrib", "Who contributed what"], ["#chains", "How information travelled"], ["#status", "Established, uncertain, disputed, unanswered"], ["#evolve", "How the state evolved"]].map(([h, l]) => (
+        {[["#plan", "Coordinated care plan"], ["#contrib", "Who contributed what"], ["#chains", "How information traveled"], ["#status", "Established, uncertain, disputed, unanswered"], ["#evolve", "How the state evolved"]].map(([h, l]) => (
           <a key={h} href={h} className="hover:underline">{l}</a>
         ))}
       </nav>
@@ -298,7 +298,7 @@ export default function FinalView({ view, onOpen, refresh }: { view: RunView; on
         </div>
       </Card>
 
-      <Section id="plan" title="Coordinated care plan" subtitle="Organised by the patient's problems and goals, not by profession. Every action names its owners and the entries it rests on.">
+      <Section id="plan" title="Coordinated care plan" subtitle="Organized by the patient's problems and goals, not by profession. Every action names its owners and the entries it rests on.">
         {!syn ? (
           <p className="text-sm text-slate-500">The plan is written when the team huddle closes.</p>
         ) : (

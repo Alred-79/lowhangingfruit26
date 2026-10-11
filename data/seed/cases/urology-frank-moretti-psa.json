@@ -859,6 +859,11 @@
     "Discuss investigation options and their purpose in guiding further workup",
     "Engage the patient in shared decision-making about next steps and agree a plan"
    ],
+   "goals": [
+    "Explain the test in plain words",
+    "Take a focused history",
+    "Agree next steps together"
+   ],
    "timeLimitMin": 25
   },
   "chartAtStart": [

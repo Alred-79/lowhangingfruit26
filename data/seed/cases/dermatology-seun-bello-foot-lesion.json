@@ -739,6 +739,11 @@
     "Formulate and communicate an appropriate management plan",
     "Address the patient's secondary concern about the neck bumps"
    ],
+   "goals": [
+    "Take a focused skin history",
+    "Guide the camera skin exam",
+    "Agree a plan and follow-up"
+   ],
    "timeLimitMin": 22
   },
   "answerKey": {

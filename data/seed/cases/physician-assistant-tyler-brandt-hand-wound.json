@@ -755,6 +755,11 @@
     "Assess the severity of the infection and determine whether phone-in antibiotics are appropriate",
     "Formulate a management plan and escalate to the supervising physician as needed"
    ],
+   "goals": [
+    "Take a focused history",
+    "Guide a remote hand exam",
+    "Agree a plan and escalate"
+   ],
    "timeLimitMin": 20
   },
   "summary": "A 26-year-old rural ranch hand presents by telehealth 3 days after a barbed-wire laceration to the palmar index finger, requesting a phone-in antibiotic prescription to avoid missing work during calving season. Guided remote examination reveals all four Kanavel signs, teaching PA students to recognize pyogenic flexor tenosynovitis as a surgical emergency requiring same-day in-person evaluation and escalation, despite the patient's minimization of symptoms and real logistical barriers.",

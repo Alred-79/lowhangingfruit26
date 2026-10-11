@@ -1048,6 +1048,11 @@
     "Review investigation results to guide secondary prevention recommendations",
     "Formulate and communicate a management plan and arrange appropriate follow-up"
    ],
+   "goals": [
+    "Take a focused interval history",
+    "Reconcile the medication list",
+    "Agree a plan and follow-up"
+   ],
    "timeLimitMin": 25
   },
   "setting": "Telehealth video visit; patient at a small office in the back of his restaurant in Chicago, Illinois",

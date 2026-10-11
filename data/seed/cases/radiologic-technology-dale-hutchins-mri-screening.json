@@ -839,6 +839,11 @@
     "Screen for prior MRI experience and scanner tolerance.",
     "Document findings and escalate appropriate concerns to the radiologist before the scheduled exam."
    ],
+   "goals": [
+    "Verify identity and the order",
+    "Complete the MRI safety interview",
+    "Document and escalate concerns"
+   ],
    "timeLimitMin": 20
   },
   "summary": "\"A 58-year-old welder completes a paper MRI safety form marked entirely 'no,' but a careful verbal screening interview by the radiologic technology student uncovers an undisclosed ocular metal injury with ongoing occupational exposure, known spinal and knee hardware, a metallic-backed fentanyl patch, mild renal impairment relevant to contrast, and a minimized history of claustrophobia with a prior aborted scan. The case teaches structured MRI safety screening, contrast-risk recognition, and appropriate escalation to the radiologist within the technologist's scope of practice.\"",

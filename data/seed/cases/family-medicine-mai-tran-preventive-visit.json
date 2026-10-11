@@ -970,6 +970,11 @@
     "Take a focused history of the reported hand skin changes in the context of her work",
     "Discuss findings, agree a prioritized management plan, and arrange follow-up"
    ],
+   "goals": [
+    "Take a focused history",
+    "Cover preventive care and screening",
+    "Agree priorities and follow-up"
+   ],
    "timeLimitMin": 20
   },
   "title": "Perimenopause and Overdue Preventive Screening in a Busy Nail Salon Owner",

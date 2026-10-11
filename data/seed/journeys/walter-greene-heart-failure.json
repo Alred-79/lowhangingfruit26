@@ -56,7 +56,7 @@
         "tasks": [
           "Read the handoff from the hospitalist and the shared patient state, and note what earlier colleagues left open (Care team tab)",
           "Take a diet history: meals, drinks, eating out, cooking, shopping and what gets in the way",
-          "Explore his beliefs about food and his health and his readiness to change, without judgement",
+          "Explore his beliefs about food and his health and his readiness to change, without judgment",
           "Agree one or two small steps he chooses, then write an SBAR handoff to the whole team ahead of the huddle"
         ],
         "patientReason": "Doc sent me here. Said I need to talk to somebody about my eating. I don't really see the point, but here I am.",

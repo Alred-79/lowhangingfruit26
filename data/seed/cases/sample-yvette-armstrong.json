@@ -1012,6 +1012,11 @@
     "Use motivational interviewing to deliver culturally respectful, literacy-appropriate education and develop a collaborative action plan",
     "Document the encounter using the ADIME format"
    ],
+   "goals": [
+    "Take a nutrition-focused history",
+    "Review results and medicines together",
+    "Agree a respectful action plan"
+   ],
    "timeLimitMin": 30
   },
   "summary": "This case presents a 64-year-old woman with newly diagnosed Stage II hypertension and poorly controlled type 2 diabetes referred for an initial outpatient nutrition assessment via telehealth. It teaches diet-focused history taking, interpretation of anthropometric and lab data, recognition of a patient-reported vs. pharmacy-record medication adherence mismatch, and culturally sensitive, health-literacy-appropriate motivational interviewing and goal-setting.",

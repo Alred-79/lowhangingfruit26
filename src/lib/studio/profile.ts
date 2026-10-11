@@ -217,6 +217,7 @@ export function sanitizeProfile(input: unknown): CaseProfile {
       chiefComplaint: str(sc.chiefComplaint),
       openingLine: str(sc.openingLine),
       tasks: strs(sc.tasks),
+      goals: strs(sc.goals).slice(0, 3),
       timeLimitMin: Math.max(5, Math.min(60, Math.round(num(sc.timeLimitMin, 20)))),
     },
     chartAtStart: list<unknown>(c.chartAtStart).map((x) => ({ label: str(obj(x).label), value: str(obj(x).value) })),

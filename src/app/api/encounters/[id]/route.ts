@@ -1,8 +1,10 @@
 import { encounterFor } from "@/lib/access";
-import { chartView, messagesOf } from "@/lib/engine/encounter";
+import { chartView, comfortShown, messagesOf } from "@/lib/engine/encounter";
 import { timeline } from "@/lib/engine/timeline";
 import { profession } from "@/lib/professions";
 import { isFaculty } from "@/lib/auth";
+import { parse } from "@/lib/db";
+import type { ComfortReason } from "@/lib/types";
 
 export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const r = await encounterFor((await ctx.params).id, { faculty: "also" });
@@ -31,6 +33,14 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
     journeyRunId: row.journey_run_id,
     priorContext: cfg.journey?.priorContext || null,
     chart: chartView(c, cfg, state),
-    messages: msgs.map((m) => ({ id: m.id, turn: m.turn, speaker: m.speaker, text: m.text })),
+    /** Set when the patient ended the call: the student goes straight to the wrap-up. */
+    endedBy: state.endedBy || null,
+    showComfort: comfortShown(cfg),
+    messages: msgs.map((m) => {
+      const base = { id: m.id, turn: m.turn, speaker: m.speaker, text: m.text };
+      if (m.speaker !== "patient" || !comfortShown(cfg)) return base;
+      const meta = parse<{ rapportDelta?: number; comfortReasons?: ComfortReason[] }>(m.meta, {});
+      return { ...base, comfort: { delta: meta.rapportDelta ?? 0, reasons: meta.comfortReasons || [] } };
+    }),
   });
 }

@@ -16,7 +16,7 @@
     "id": "a2",
     "kind": "imaging",
     "name": "Close-up photo of right cornea (patient-submitted)",
-    "result": "Photo shows a focal round white-grey opacity approximately 1-2mm on the central-paracentral cornea with surrounding haze and overlying injected conjunctiva, consistent with a corneal infiltrate/ulcer.",
+    "result": "Photo shows a focal round white-gray opacity approximately 1-2mm on the central-paracentral cornea with surrounding haze and overlying injected conjunctiva, consistent with a corneal infiltrate/ulcer.",
     "importance": "critical",
     "artifactIds": [
      "d1"
@@ -108,7 +108,7 @@
     "title": "Patient-submitted photo: right eye close-up",
     "date": "Today",
     "author": "Patient (self-taken)",
-    "body": "Close-up smartphone photo of the right eye showing diffuse conjunctival injection and a focal 1-2mm round white-grey corneal opacity with surrounding stromal haze, located just off-center on the cornea. Watery discharge visible at the lower lid margin. No photo available of left eye (asymptomatic).",
+    "body": "Close-up smartphone photo of the right eye showing diffuse conjunctival injection and a focal 1-2mm round white-gray corneal opacity with surrounding stromal haze, located just off-center on the cornea. Watery discharge visible at the lower lid margin. No photo available of left eye (asymptomatic).",
     "release": {
      "when": "action",
      "ref": "a2"
@@ -728,6 +728,11 @@
     "Perform feasible remote exam elements: camera inspection, request a close-up photo, check visual acuity at home, and assess light sensitivity",
     "Assess the severity of the presentation and determine the appropriate level and urgency of care",
     "Communicate your management plan to the patient, including advice on contact lens wear and next steps"
+   ],
+   "goals": [
+    "Take a thorough eye history",
+    "Ask about lens wear habits",
+    "Advise on care and urgency"
    ],
    "timeLimitMin": 20
   },

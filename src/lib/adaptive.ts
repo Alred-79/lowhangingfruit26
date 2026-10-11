@@ -89,8 +89,6 @@ export function skillProfile(userId: string, professionId: string): SkillProfile
       level = L;
     }
   }
-  // New students start gently rather than at the level the default rating implies.
-  if (sessions === 0) level = 2;
   const weakest = domains.length ? [...domains].sort((a, b) => a.rating - b.rating)[0].domain : null;
   return { domains, overall, sessions, weakest, level, expectedAtLevel: expectedScore(overall, level) };
 }
@@ -100,16 +98,17 @@ function focusKnobs(weakest: string | null): { knobs: Partial<Knobs>; why: strin
   switch (weakest) {
     case "rapport_respect_empathy":
     case "listening_and_response_to_cues":
-      return { knobs: { emotion: 2, reluctantAt: 70 }, why: "a more emotional, guarded patient to practise empathy and picking up cues" };
+      return { knobs: { emotion: 2, reluctantAt: 70 }, why: "a more emotional, guarded patient to practice empathy and picking up cues" };
     case "information_gathering":
       return { knobs: { vagueness: 2, volunteers: false, factsPerTurn: 2 }, why: "a vaguer patient who needs specific, well-sequenced questions" };
     case "explanation_and_shared_decisions":
       return { knobs: { vagueness: 1 }, why: "a patient who asks for explanations and needs plain language" };
     case "clinical_reasoning_and_synthesis":
-      return { knobs: { distractors: true }, why: "a case with red herrings to practise separating relevant from irrelevant findings" };
+      return { knobs: { distractors: true }, why: "a case with red herrings to practice separating relevant from irrelevant findings" };
     case "opening_and_purpose":
     case "professionalism_safety_closure":
-      return { knobs: { timeLimitMin: 15 }, why: "a time-boxed visit to practise a clear opening and a safe close" };
+      // No artificial time squeeze: every visit uses the case's own natural length.
+      return { knobs: {}, why: "a visit where a clear opening and a safe close earn the most credit" };
     default:
       return { knobs: {}, why: "a balanced patient" };
   }
@@ -146,7 +145,7 @@ export function recommend(userId: string, professionId: string): Recommendation 
   const pct = Math.round(profile.expectedAtLevel * 100);
   const reason =
     profile.sessions === 0
-      ? `No history yet, so this starts at level 2 and adjusts after each visit.`
+      ? `No history yet, so this starts at level ${profile.level} (from the default starting rating of ${START}) and adjusts after each visit.`
       : `Your rating is ${Math.round(profile.overall)} after ${profile.sessions} visit${profile.sessions === 1 ? "" : "s"}. Level ${profile.level} gives an expected score of about ${pct}%, the range where practice is most productive. Weakest area: ${(profile.weakest || "").replace(/_/g, " ")}, so you get ${focus.why}.`;
   return { caseId: pick?.id || null, label: pick ? studentCaseLabelFromJson(pick.profile) : null, level: profile.level, knobs: focus.knobs, reason, profile };
 }

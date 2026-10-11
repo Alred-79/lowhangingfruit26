@@ -820,6 +820,11 @@
     "Take a focused history of medication use and any concerns",
     "Collaborate with Omar using motivational interviewing to set one or two realistic, patient-centered nutrition goals"
    ],
+   "goals": [
+    "Take a nutrition-focused history",
+    "Review results and medicines",
+    "Set one or two goals"
+   ],
    "timeLimitMin": 30
   },
   "objectives": [

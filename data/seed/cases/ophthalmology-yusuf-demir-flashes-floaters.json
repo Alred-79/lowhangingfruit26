@@ -815,6 +815,11 @@
     "Formulate an assessment of urgency and clearly communicate the appropriate next steps, addressing the patient's concerns",
     "Document findings and plan in an ophthalmology SOAP note"
    ],
+   "goals": [
+    "Take a focused eye history",
+    "Run the remote vision tests",
+    "Explain urgency and next steps"
+   ],
    "timeLimitMin": 20
   },
   "setting": "Telehealth video visit; patient at his tailor shop office in Paterson, New Jersey, during a work break",

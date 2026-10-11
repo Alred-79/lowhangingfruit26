@@ -442,8 +442,8 @@
     "id": "f7",
     "category": "psychosocial",
     "topic": "advice from others",
-    "chart": "A neighbour advised her not to force the new knee, reinforcing avoidance of painful stretching",
-    "says": "My neighbour had her knee done years ago and she told me, 'don't you dare force that new knee, you'll ruin it.' So I figured I'd better not push it.",
+    "chart": "A neighbor advised her not to force the new knee, reinforcing avoidance of painful stretching",
+    "says": "My neighbor had her knee done years ago and she told me, 'don't you dare force that new knee, you'll ruin it.' So I figured I'd better not push it.",
     "tier": "discoverable",
     "importance": "critical"
    },
@@ -799,14 +799,14 @@
   },
   "persona": {
    "personality": "Talkative, warm, somewhat anxious, eager to please and to be seen as a 'good patient' who follows instructions.",
-   "communicationStyle": "Chatty and detailed, often goes on tangents about family or neighbours before circling back to the question; responds well to clear, logical explanations and reassurance.",
+   "communicationStyle": "Chatty and detailed, often goes on tangents about family or neighbors before circling back to the question; responds well to clear, logical explanations and reassurance.",
    "healthLiteracy": "moderate",
    "emotionalState": "Worried about falling behind schedule and about disappointing her family by using a walker at the wedding; mildly embarrassed when gently confronted with the exercise log discrepancy.",
    "background": "Worked over 30 years as a bookkeeper for a local hardware store before retiring. Widowed four years ago, lives alone in a two-story house in Buffalo where she raised three children. Active in her parish, enjoys baking for church fundraisers and keeping up with her six grandchildren, one of whom is getting married in two months.",
    "speechExamples": [
     "Oh honey, let me tell you about my knee.",
     "I do my exercises religiously, I promise you that.",
-    "My neighbour, bless her heart, told me not to force it.",
+    "My neighbor, bless her heart, told me not to force it.",
     "I just want to walk my granddaughter's wedding without that walker, is that so much to ask?",
     "You're going to think I'm a terrible patient, aren't you?"
    ],
@@ -829,6 +829,11 @@
     "Explore barriers to progress and reconcile self-report with available documentation",
     "Establish patient-centered goals and agree on an updated plan of care"
    ],
+   "goals": [
+    "Review function and home exercises",
+    "Guide the remote measures",
+    "Update the plan of care"
+   ],
    "timeLimitMin": 25
   },
   "summary": "Peggy O'Connell is a 74-year-old woman seen by telehealth for a 6-week progress re-evaluation after right total knee arthroplasty, presenting with flexion stuck at 85 degrees, a 10-degree extension lag, and a Timed Up and Go of 22 seconds while still using a walker. The case teaches learners to reconcile self-reported exercise adherence with objective log data, uncover fear-avoidance beliefs driving avoidance of painful flexion exercises, screen for postoperative red flags remotely, and build a patient-centered plan of care tied to meaningful functional goals (an upcoming wedding, kneeling in church).",
@@ -848,7 +853,7 @@
     "10-degree knee extension lag",
     "Timed Up and Go 22 seconds (elevated, fall risk and functional limitation)",
     "Objective exercise log shows adherence on only 9 of 28 days with no flexion exercises in 3 weeks, versus patient's report of daily religious adherence",
-    "Fear-avoidance belief reinforced by neighbour's advice not to 'force' the new knee",
+    "Fear-avoidance belief reinforced by neighbor's advice not to 'force' the new knee",
     "Nighttime pillow positioning under knee promoting extension contracture",
     "Pain medication taken after rather than before exercise, limiting exercise tolerance",
     "No signs of infection, DVT, or wound complication on remote screening"

@@ -725,6 +725,11 @@
     "Review available documentation and clarify any questions about the referral",
     "Draft the Assessment and Plan sections of a DAP note reflecting an appropriate within-scope plan"
    ],
+   "goals": [
+    "Build rapport and take an intake",
+    "Complete the screening questionnaires",
+    "Draft a within-scope plan"
+   ],
    "timeLimitMin": 25
   },
   "encounterType": "counseling intake",

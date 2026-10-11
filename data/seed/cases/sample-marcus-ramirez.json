@@ -599,6 +599,11 @@
     "Explore the patient's beliefs about diet, diabetes, and heart failure using open-ended, motivational interviewing techniques",
     "Formulate a PES statement and propose 2-3 simple, concrete, patient-centered next steps"
    ],
+   "goals": [
+    "Take a thorough diet history",
+    "Review labs and medicines together",
+    "Agree simple next steps"
+   ],
    "timeLimitMin": 30
   },
   "facts": [

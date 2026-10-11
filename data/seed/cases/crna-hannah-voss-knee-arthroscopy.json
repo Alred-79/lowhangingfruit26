@@ -935,6 +935,11 @@
     "Assess anesthesia-related risk factors and determine appropriate escalation or consultation",
     "Risk-stratify for postoperative nausea and vomiting and propose a prophylaxis approach"
    ],
+   "goals": [
+    "Take a pre-anesthesia history",
+    "Screen the airway and sleep risk",
+    "Review medications and fasting rules"
+   ],
    "timeLimitMin": 25
   },
   "setting": "Telehealth video visit; patient at home at her kitchen table in rural Wisconsin, 6 days before scheduled outpatient knee arthroscopy",

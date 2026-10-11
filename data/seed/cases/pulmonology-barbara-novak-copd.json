@@ -924,6 +924,11 @@
     "Explore smoking status and cessation support",
     "Formulate and discuss a COPD management plan, incorporating her goals and concerns"
    ],
+   "goals": [
+    "Take a focused breathing history",
+    "Review inhaler technique and results",
+    "Agree a plan together"
+   ],
    "timeLimitMin": 25
   },
   "summary": "\"This case portrays a 66-year-old retired textile mill worker with severe (GOLD 3, group E) COPD presenting for a telehealth follow-up after two exacerbations in 8 months. It teaches fellows to reconcile self-reported smoking cessation against biochemical evidence, directly observe inhaler technique via camera, integrate spirometry/eosinophil/exacerbation data to guide therapy escalation, and recognize when resting hypoxemia warrants formal oxygen assessment rather than immediate prescription.\"",

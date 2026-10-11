@@ -1,4 +1,4 @@
-import { isMedSafetyConcern, medSafetyRank } from "./support";
+import { dedupeBySubject, isMedSafetyConcern, medSafetyRank } from "./support";
 import { run as sql } from "../db";
 import { messagesOf } from "../engine/encounter";
 import { chatJSON, MODELS } from "../llm";
@@ -225,11 +225,17 @@ export async function startHuddle(runId: string): Promise<Huddle> {
   // disagreement entry carries the entry it contradicts.
   const board = statusBoard(entries, links);
   const openIds = new Set([...board.groups.disputed, ...board.groups.open_question, ...board.groups.uncertain].map((e) => e.id));
-  const candidates = rankHuddleCandidates(
-    entries.filter((e) => openIds.has(e.id) && OPEN.includes(e.status) && (e.kind !== "consult" || isMedSafetyConcern(e.text))),
-    rank,
-    high,
-  ).slice(0, 30);
+  // Entries about the same issue (the consult and the call-out about one duplication) are one agenda item:
+  // the higher-ranked one is kept and the others are noted on it as related.
+  const { kept: deduped, related } = dedupeBySubject(
+    rankHuddleCandidates(
+      entries.filter((e) => openIds.has(e.id) && OPEN.includes(e.status) && (e.kind !== "consult" || isMedSafetyConcern(e.text))),
+      rank,
+      high,
+    ),
+  );
+  const candidates = deduped.slice(0, 30);
+  const mkItem = (e: (typeof candidates)[number]): HuddleItem => ({ entryId: e.id, reason: e.effectiveStatus as HuddleItem["reason"], positions: [], ...(related.get(e)?.length ? { related: related.get(e)!.map((x) => x.id) } : {}) });
   const ai = run.stages.filter((s) => s.id !== run.row.student_stage_id);
   const { toAlias, resolve } = aliasing(entries);
   const student = studentNameOf(run.row.user_id);
@@ -277,14 +283,14 @@ ${learnerLine(student, studentStage(run).roleTitle)}`,
       messages: [
         {
           role: "user",
-          text: `TEAM MEMBERS (AI)\n${ai.map((s) => `S${s.order}: ${clinician(s.clinicianId).name}, ${s.roleTitle}. ${personaBrief(clinician(s.clinicianId)).split("\n").slice(2, 4).join(" ").slice(0, 300)}`).join("\n")}\n\nSHARED PATIENT RECORD\n${renderState(entries, run.stages, { aliases: toAlias })}\n\nCANDIDATES\n${candidates.map((e) => `${toAlias.get(e.id)} (${e.effectiveStatus}; raised by ${e.contributorRole}${e.meta?.importance ? `; ${e.meta.importance}` : ""}): ${e.text}`).join("\n")}`,
+          text: `TEAM MEMBERS (AI)\n${ai.map((s) => `S${s.order}: ${clinician(s.clinicianId).name}, ${s.roleTitle}. ${personaBrief(clinician(s.clinicianId)).split("\n").slice(2, 4).join(" ").slice(0, 300)}`).join("\n")}\n\nSHARED PATIENT RECORD\n${renderState(entries, run.stages, { aliases: toAlias })}\n\nCANDIDATES\n${candidates.map((e) => `${toAlias.get(e.id)} (${e.effectiveStatus}; raised by ${e.contributorRole}${e.meta?.importance ? `; ${e.meta.importance}` : ""}): ${e.text}${related.get(e)?.length ? ` (the same issue was also raised by ${related.get(e)!.map((x) => x.contributorRole).join(", ")}; treat as one item)` : ""}`).join("\n")}`,
         },
       ],
     });
     for (const it of arr<{ entry: string; why: string; positions: { stage: string; text: string; cites: string[] }[] }>(out.items)) {
       const e = candidates.find((c) => c.id === resolve(it.entry));
       if (!e || items.some((x) => x.entryId === e.id) || items.length >= size) continue;
-      const item: HuddleItem = { entryId: e.id, reason: e.effectiveStatus as HuddleItem["reason"], positions: [] };
+      const item = mkItem(e);
       for (const p of arr<{ stage: string; text: string; cites: string[] }>(it.positions)) {
         const s = ai.find((x) => `S${x.order}` === String(p.stage).toUpperCase().trim());
         if (!s || !p.text) continue;
@@ -304,14 +310,14 @@ ${learnerLine(student, studentStage(run).roleTitle)}`,
         if (drop < 0) break;
         items.splice(items.length - 1 - drop, 1);
       }
-      items.push({ entryId: e.id, reason: e.effectiveStatus as HuddleItem["reason"], positions: [] });
+      items.push(mkItem(e));
     }
     const sr = (id: string) => medSafetyRank(candidates.find((c) => c.id === id)?.text || "");
     items = items.map((x, i) => ({ x, i })).sort((a, b) => sr(a.x.entryId) - sr(b.x.entryId) || a.i - b.i).map((o) => o.x);
     // If the model returned too few, the remaining places go to the deterministic order.
     for (const e of candidates) {
       if (items.length >= Math.min(size, candidates.length)) break;
-      if (!items.some((x) => x.entryId === e.id)) items.push({ entryId: e.id, reason: e.effectiveStatus as HuddleItem["reason"], positions: [] });
+      if (!items.some((x) => x.entryId === e.id)) items.push(mkItem(e));
     }
   } else items = [];
   const h: Huddle = { status: "open", items, startedAt: new Date().toISOString() };

@@ -62,7 +62,7 @@ and MCP) first. Rehearse with a timer; the section times are targets.
 > Information moves forward three ways: disclosed facts are on record in the next encounter, the patient remembers who they have seen, and each clinician writes an SBAR to the next.
 >
 > We evaluate every SBAR, and the student's teamwork, against nineteen TeamSTEPPS-aligned
-> behaviours, each marked observed or not, with the quote it rests on.
+> behaviors, each marked observed or not, with the quote it rests on.
 >
 > We built all three levels. For Stretch, the student can page any colleague or call out to the
 > team, and the team holds a huddle over whatever is still disputed. The final view shows each
@@ -70,7 +70,7 @@ and MCP) first. Rehearse with a timer; the section times are targets.
 
 ### 3:25 to 3:50. Limitations
 
-> No clinician has reviewed the patients, and they are labelled that way. The
+> No clinician has reviewed the patients, and they are labeled that way. The
 > patient can still say something outside the case; we flag it afterwards, we do not prevent it.
 > The chart is an Epic-style layout, not an EHR integration, and there is no Canvas connector.
 > It runs on one server with SQLite, supports one human per
@@ -150,7 +150,7 @@ seconds), so the Challenge 2 demo uses a run completed beforehand plus a short l
 | 1:00 | Presenter, switch to tab A2 | Drafting is running (about 80 seconds; the progress page says one to two minutes). In Helen Kowalczyk's editor click **Facts and disclosure**. | "While that is being written, this is what will come back. Each fact has the patient's wording, the chart's wording and a tier: volunteered, when asked, needs trust, guarded. The generator first fixes the clinical story and every number, then writes these lists in parallel from it." |
 | 1:30 | Presenter | **Documents**, open a lab report. Point at "When does this document appear in the student's chart?" | "Documents are released from the start, by an order, or by a disclosure." |
 | 1:55 | Presenter | **Consistency check**. Open one issue and its proposed fix. | "Rules catch structure. A model review compares every place the same value appears and proposes a patch. Nothing is applied until the faculty member accepts it." |
-| 2:25 | Presenter, back to tab A1 | The new patient's editor has opened. Point at the "AI-drafted, not faculty-reviewed" notice. Click **Facts and disclosure** briefly, then **Check consistency**. If drafting is still running, show **Student preview** in tab A2 first. | "This is the judge's patient. No code was written or deployed for it." While the check runs: "It stays labelled as not reviewed until a faculty member says otherwise." |
+| 2:25 | Presenter, back to tab A1 | The new patient's editor has opened. Point at the "AI-drafted, not faculty-reviewed" notice. Click **Facts and disclosure** briefly, then **Check consistency**. If drafting is still running, show **Student preview** in tab A2 first. | "This is the judge's patient. No code was written or deployed for it." While the check runs: "It stays labeled as not reviewed until a faculty member says otherwise." |
 | 3:15 | Judge | **Publish**. Read the dialog. Leave the review box unticked unless the judge has actually reviewed it. **Publish**. | "Publishing is blocked on open high-severity issues unless you acknowledge them." |
 | 3:35 | Judge | **Test visit**. Tick **Use my microphone**. **Join visit**. | "Same visit screen a student gets. The clock starts now, not when the visit was created." |
 | 3:45 | Judge | Talk to the patient for about three minutes. Prompt them: an open question; a specific question; a sensitive question asked bluntly, then again with empathy; a closed question about a symptom they did not put in the case. | Point at the right side each time a fact is filed under **This visit**. On the deflection: "The comfort meter moved; that fact needs trust." On the made-up symptom: "The patient should say no. If the model does add something, a second model flags it as outside the case record, after the reply, and it is not filed." |
@@ -186,10 +186,10 @@ Use Window B (student).
 | 0:20 | **Join as cardiologist**. Encounter 1 starts; the AI emergency physician's conversation streams. Let it run for about 40 seconds. | "This is an AI clinician interviewing the same patient engine. Its questions go through the same gatekeeper and tier rules as a student's, so it only learns what the case allows." |
 | 1:00 | Switch to tab B1, the finished Walter Greene run. Open Encounter 1. Show "What this encounter added to the shared patient state" and the SBAR with its review. | "After each encounter the state is updated. Patient statements and results come straight from the engine's ledger. Clinicians' assessments are extracted by a model and kept only if their quote is found." |
 | 1:40 | Open your own encounter. Show "Earlier information this encounter drew on". Click one entry to open the provenance panel. | "Who said it, in which role, in which encounter, at what simulated time, with what status, and the words it rests on." |
-| 2:20 | Show **Your SBAR handoff** and **Review of the handoff**. | "Six communication behaviours per SBAR. Observed or not, the SBAR section, the quote, the feedback." |
+| 2:20 | Show **Your SBAR handoff** and **Review of the handoff**. | "Six communication behaviors per SBAR. Observed or not, the SBAR section, the quote, the feedback." |
 | 2:50 | Open the huddle section. | "The agenda is built by code from what is still disputed, uncertain or unanswered. The student proposes; a colleague agrees or pushes back; the outcome is a new entry linked to the old ones. The team is told never to settle a question by inventing a fact." |
-| 3:30 | **Integrated patient view** tab. Scroll: care plan ("Rests on", combines N professions), contributions by profession, influence chains, status board. | "The plan is organised by problem, not by profession. Every action cites entries; actions that cite nothing real are dropped." |
-| 4:20 | **Teamwork evaluation** tab. | "The remaining thirteen behaviours across the visit, the note, the messages and the huddle. Only the student's own words count as evidence." |
+| 3:30 | **Integrated patient view** tab. Scroll: care plan ("Rests on", combines N professions), contributions by profession, influence chains, status board. | "The plan is organized by problem, not by profession. Every action cites entries; actions that cite nothing real are dropped." |
+| 4:20 | **Teamwork evaluation** tab. | "The remaining thirteen behaviors across the visit, the note, the messages and the huddle. Only the student's own words count as evidence." |
 | 4:50 | Optional: in Window A (faculty), **Care Journeys** > the Walter Greene journey > **Open run**. | "Faculty see the same run and trace." |
 
 ### Lines to avoid
@@ -213,14 +213,14 @@ miss one, and if the audit call fails nothing is flagged. What we can promise is
 statement never reaches the chart, the feedback's findings or the shared patient state.
 
 **Has a clinician reviewed the patients?**
-No. All 81 library patients are stored as unreviewed. 73 are labelled "AI-drafted, not
+No. All 81 library patients are stored as unreviewed. 73 are labeled "AI-drafted, not
 faculty-reviewed". The other 8 start from the sample patient details we were given and were
 expanded by the same generator. A patient a student makes for their own practice is not reviewed
 either, and says so. The consistency check finds contradictions inside a case; it does not
 establish that the medicine is right.
 
 **How do you know the rubric scores are right?**
-We do not know yet. They are a model's judgement and have not been compared with faculty raters.
+We do not know yet. They are a model's judgment and have not been compared with faculty raters.
 What we did is limit how much depends on it: findings come from the ledger, an objective counts as
 met only when the ledger and the examiner agree, each score must quote the transcript and the quote
 is checked, a reply with no scores is retried and never stored as zero, low scores on two domains
@@ -293,7 +293,7 @@ imported as JSON. Neither needs code.
 Both are recorded separately. Facts already disclosed are on record in the next encounter's chart.
 When a later clinician's question draws on an earlier entry, that is stored as a "uses" link with
 the quoted words, and the influence chains in the final view are built only from those links.
-Linking depends on a model recognising the connection, so it can over- or under-link.
+Linking depends on a model recognizing the connection, so it can over- or under-link.
 
 **Can two students take two roles in the same journey?**
 Not yet. A run has one student and AI colleagues. Several real students can see one continuing
@@ -306,7 +306,7 @@ so a non-nutrition role can only uncover what that case contains.
 
 **What about privacy?**
 All patients are synthetic. Practice a student starts on their own is private: faculty cannot open
-it and it is not in the episode search. Assignment and care-journey visits are labelled "Recorded
+it and it is not in the episode search. Assignment and care-journey visits are labeled "Recorded
 for instructor". Students never see case titles, which often name the diagnosis. Transcripts are
 stored in the application database on the hackathon AWS account. Registration is open, there is no
 SSO, and access keys are stored unhashed, so this is not ready for real student data.

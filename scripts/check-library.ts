@@ -97,6 +97,9 @@ function check(file: string): Report {
   if (empty(sc.studentBrief)) E("student brief is empty");
   if (empty(sc.chiefComplaint)) E("chief complaint is empty");
   if ((sc.tasks || []).length < 2) E(`only ${(sc.tasks || []).length} scenario tasks`);
+  const goals = sc.goals || [];
+  if (goals.length !== 3) E(`${goals.length} session goals, expected exactly 3`);
+  for (const g of goals) if (!(g.trim().split(/\s+/).length >= 3 && g.trim().split(/\s+/).length <= 7)) E(`session goal "${g}" is not 3-7 words`);
   if (!(sc.timeLimitMin >= 10 && sc.timeLimitMin <= 45)) E(`time limit ${sc.timeLimitMin} min out of range 10-45`);
   if ((c.chartAtStart || []).length < 2) W(`only ${(c.chartAtStart || []).length} chartAtStart rows`);
   for (const r of c.chartAtStart || []) if (empty(r.label) || empty(r.value)) E("chartAtStart row with empty label or value");

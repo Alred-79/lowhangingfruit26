@@ -27,6 +27,16 @@ export default function StudentPreview({ p, roleTitle }: { p: CaseProfile; roleT
             </p>
             <p className="text-sm text-slate-600">{[p.patient.sex, p.patient.pronouns].filter(Boolean).join(" · ")}</p>
             <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-slate-800">{p.scenario.studentBrief || <span className="text-rose-700">The student brief is empty.</span>}</p>
+            {(p.scenario.goals || []).filter((g) => g.trim()).length > 0 && (
+              <>
+                <p className="mt-3 text-xs font-semibold text-slate-600">Your goals</p>
+                <ul className="mt-1 list-disc space-y-0.5 pl-5 text-sm text-slate-800">
+                  {(p.scenario.goals || []).filter((g) => g.trim()).map((g, i) => (
+                    <li key={i}>{g}</li>
+                  ))}
+                </ul>
+              </>
+            )}
             {p.scenario.tasks.filter((t) => t.trim()).length > 0 && (
               <>
                 <p className="mt-3 text-xs font-semibold text-slate-600">Your tasks</p>

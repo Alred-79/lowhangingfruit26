@@ -72,7 +72,7 @@ export function runRuleChecks(p: CaseProfile, rubricIds?: string[]): Issue[] {
   for (const f of p.facts) {
     if (!f.chart.trim() || !f.says.trim())
       add({ severity: "medium", section: "facts", where: `Fact ${f.id} (${f.topic || "no topic"})`, title: `Fact ${f.id} is missing ${!f.chart.trim() ? "its chart wording" : "its patient wording"}`, why: "Each fact needs both wordings: what the patient says and what is written to the chart." });
-    if (!f.topic.trim()) add({ severity: "medium", section: "facts", where: `Fact ${f.id}`, title: `Fact ${f.id} has no topic label`, why: "The topic is how the visit engine recognises that a student is asking about this fact." });
+    if (!f.topic.trim()) add({ severity: "medium", section: "facts", where: `Fact ${f.id}`, title: `Fact ${f.id} has no topic label`, why: "The topic is how the visit engine recognizes that a student is asking about this fact." });
   }
   for (const a of p.actions) {
     if (!a.result.trim()) add({ severity: "medium", section: "actions", where: `Action ${a.id} (${a.name})`, title: `"${a.name || a.id}" has no result`, why: "When a student performs this, nothing would be written to the chart." });

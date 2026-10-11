@@ -322,7 +322,7 @@ export function TraceTable({ evaluation, compact }: { evaluation: TraceEvaluatio
           <section key={d}>
             <div className="mb-1.5 flex items-baseline justify-between">
               <h4 className="text-sm font-semibold text-slate-900">{d}</h4>
-              <span className="text-xs text-slate-500">{yes} of {applicable} behaviours observed</span>
+              <span className="text-xs text-slate-500">{yes} of {applicable} behaviors observed</span>
             </div>
             <ul className="divide-y divide-slate-100 rounded-lg border border-slate-200 bg-white">
               {items.map(({ def, r }) => (

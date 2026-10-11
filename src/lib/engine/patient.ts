@@ -1,5 +1,6 @@
 import { profession } from "../professions";
 import type { CaseProfile, EncounterConfig, EncounterState, Fact } from "../types";
+import { endingDirective } from "./ending";
 import type { GateResult } from "./gatekeeper";
 
 const VAGUE = [
@@ -37,6 +38,8 @@ export function patientSystem(args: {
   gate: GateResult;
   /** Topic labels of facts not yet shared (labels only, never content). */
   lockedTopics?: string[];
+  /** The patient is ending the call in this reply (decided deterministically; the model only words it). */
+  endCall?: "closed" | "upset" | "time" | null;
 }): string {
   const { c, cfg, state, known, reveal, deflect, gate } = args;
   const later = (args.lockedTopics || []).filter((t) => !deflect.some((f) => f.topic === t));
@@ -82,7 +85,7 @@ ${deflect.length ? `THINGS YOU ARE NOT READY TO ADMIT YET\n${deflect.map((f) => 
 
 ${later.length ? `THINGS YOU HAVE NOT BEEN ASKED CLEARLY ENOUGH ABOUT YET\n${later.join("; ")}\nYou have more to say on these, but not in this reply. If the student brushes against one of them, stay non-committal ("a bit, I guess", "what do you mean exactly?") so they have to ask properly. Do not say no to these and do not give details.` : ""}
 
-HARD RULES
+${args.endCall ? endingDirective(args.endCall) + "\n\n" : ""}HARD RULES
 1. Your medical story is exactly the lists above, nothing more. If the student asks about any symptom, illness, medication, dose, test, result, date, family member's health or habit that is not in those lists, the true answer is NO or "I don't know": you do not have it, have not noticed it, were never told, or cannot remember ("No, nothing like that", "Not that I've noticed", "I'm not sure, it would be in my chart"). Never answer yes, never add a new symptom, person, number, drug name, diagnosis or event to make the conversation flow. Agreeing to be helpful is the most common way this goes wrong: a closed question like "any trouble breathing lying down?" gets "no" unless it is listed.
 2. Talk like a real person on a video call: everyday words, contractions, 1-4 sentences. No bullet points, no headings.
 3. Do not coach the student or hint at what to ask.

@@ -1032,6 +1032,11 @@
     "Perform a relevant risk assessment and address any occupational health concerns appropriately.",
     "Formulate a follow-up plan including any investigations, referrals, and medication adjustments within scope."
    ],
+   "goals": [
+    "Review the home readings together",
+    "Ask about medicines and obstacles",
+    "Agree a plan and follow-up"
+   ],
    "timeLimitMin": 20
   },
   "summary": "\"A 52-year-old bus driver with hypertension returns for a telehealth follow-up with elevated home BP readings despite being on amlodipine and lisinopril. The case teaches residents to uncover cost-related medication nonadherence, identify NSAID/decongestant contributors to poor BP control, screen for obstructive sleep apnea, and navigate the sensitive intersection of a commercial driver's safety-sensitive symptoms with patient trust and appropriate referral.\"",

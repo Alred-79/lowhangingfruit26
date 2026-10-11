@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/Brand";
 import JourneyChartTab from "@/components/journey/JourneyChartTab";
 import type { ChartView } from "@/lib/engine/encounter";
+import type { ComfortReason, PatientEnded } from "@/lib/types";
 import ChartPanel from "./ChartPanel";
 import { envelopeMouth, levelAt, parseMouth, type MouthTimeline } from "./mouth";
 import TalkingPortrait from "./TalkingPortrait";
@@ -14,6 +15,8 @@ interface Msg {
   turn: number;
   speaker: "student" | "patient" | "system" | "instructor" | "coach" | "clinician";
   text: string;
+  /** Why the comfort meter moved on this patient reply (only when the meter is shown). */
+  comfort?: { delta: number; reasons: ComfortReason[] };
 }
 interface VisitData {
   id: string;
@@ -34,6 +37,8 @@ interface VisitData {
   journeyRunId: string | null;
   priorContext: string | null;
   chart: ChartView;
+  endedBy: PatientEnded | null;
+  showComfort: boolean;
   messages: Msg[];
 }
 
@@ -50,6 +55,15 @@ interface SpeechRec {
   onerror: ((e: { error: string }) => void) | null;
 }
 
+// How long the student must stop talking before the microphone sends their turn.
+const SILENCE_MS = 2200;
+const ENDED_WHY: Record<PatientEnded["reason"], string> = {
+  closed: "The visit came to a natural close.",
+  upset: "The patient chose to stop the visit.",
+  time: "The patient had to go; the visit ran well past its time.",
+};
+const COMFORT_HELP =
+  "Comfort is how much the patient trusts you right now. It rises when you introduce yourself, show empathy, name their feelings or ask gently, and falls when you sound dismissive, judgmental, rushed or use jargon. Some details only come out once comfort is high enough.";
 const MODE_LABEL: Record<string, string> = { practice: "Practice", adaptive: "Adaptive practice", homework: "Homework", exam: "Exam", journey: "Care journey" };
 const fmt = (s: number) => `${Math.floor(Math.max(0, s) / 60)}:${String(Math.max(0, s) % 60).padStart(2, "0")}`;
 const initials = (n: string) => n.split(/\s+/).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
@@ -72,6 +86,40 @@ const ICON = {
   cc: "M3 6h18v12H3zM7.5 13.5a2 2 0 1 1 0-3M14.5 13.5a2 2 0 1 1 0-3",
   hang: "M3 14c5-5 13-5 18 0l-2 3-4-1.5v-2.2a9 9 0 0 0-6 0v2.2L5 17l-2-3Z",
 };
+
+/** An ordered test or exam coming back into the conversation: one row per result, abnormal ones flagged. */
+function ResultCard({ text, results, onView }: { text: string; results: ChartView["results"]; onView: () => void }) {
+  const [head, ...lines] = text.split("\n");
+  const rows = lines.map((l) => {
+    const i = l.indexOf(": ");
+    return i > 0 ? { name: l.slice(0, i), result: l.slice(i + 2) } : { name: "", result: l };
+  });
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800 shadow-sm">
+      <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{head.replace(/^Requested:\s*/, "Requested: ")}</div>
+      <div className="space-y-1.5">
+        {rows.map((r, i) => {
+          if (/no approved result is available/i.test(r.result)) return <div key={i} className="text-slate-600"><span className="font-semibold text-slate-800">{r.name}</span>: no approved result for this in the case file.</div>;
+          const abnormal = !!r.name && results.some((x) => x.name === r.name && x.abnormal);
+          return (
+            <div key={i}>
+              <div className="flex flex-wrap items-center gap-2">
+                {r.name && <span className="font-semibold text-slate-900">{r.name}</span>}
+                {abnormal && <span className="rounded-full bg-rose-100 px-2 py-0.5 text-xs font-semibold text-rose-800">Abnormal</span>}
+              </div>
+              <div className="leading-snug text-slate-700">{r.result}</div>
+            </div>
+          );
+        })}
+      </div>
+      {rows.some((r) => r.name && results.some((x) => x.name === r.name)) && (
+        <button type="button" onClick={onView} className="mt-2 text-sm font-medium text-brand-700 underline decoration-dotted underline-offset-2 hover:text-brand-600">
+          View in chart
+        </button>
+      )}
+    </div>
+  );
+}
 
 export default function Visit({ id, viewerName }: { id: string; viewerName: string }) {
   const router = useRouter();
@@ -96,16 +144,29 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
   const [wrapOpen, setWrapOpen] = useState(false);
   const [wrap, setWrap] = useState<Record<string, string>>({});
   const [scoring, setScoring] = useState(false);
-  const [lastDelta, setLastDelta] = useState(0);
+  // Why comfort moved on the latest turn; `fade` turns are cleared after a few seconds, restored ones stay until the next turn.
+  const [turnComfort, setTurnComfort] = useState<{ delta: number; reasons: ComfortReason[]; fade: boolean } | null>(null);
+  const [chartFocus, setChartFocus] = useState<{ tab: "results" | "orders"; key: number } | undefined>(undefined);
+  const [callEnd, setCallEnd] = useState<PatientEnded | null>(null); // the patient hung up
   const [recTick, setRecTick] = useState(0);
+  const [frozenAt, setFrozenAt] = useState<number | null>(null); // clock stops here once the student opens the wrap-up
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const recRef = useRef<SpeechRec | null>(null);
   const selfRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const logRef = useRef<HTMLDivElement | null>(null);
+  const restored = useRef(false);
+  const goodbyeShown = useRef(false);
   const live = useRef({ busy: false });
   live.current = { busy };
+
+  // The patient hung up: the clock stops and the mic goes quiet.
+  const hangUp = useCallback((e: PatientEnded) => {
+    setCallEnd(e);
+    setFrozenAt((f) => f ?? Date.now());
+    setMicOn(false);
+  }, []);
 
   const load = useCallback(async () => {
     const res = await fetch(`/api/encounters/${id}`, { cache: "no-store" });
@@ -116,8 +177,14 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
     // Keep optimistic local messages while a turn is in flight.
     setMessages((m) => (live.current.busy ? m : d.messages));
     if (d.messages.length) setJoined(true);
+    if (d.endedBy) hangUp(d.endedBy);
+    if (!restored.current) {
+      restored.current = true;
+      const last = [...d.messages].reverse().find((m) => m.speaker === "patient");
+      if (d.showComfort && last?.comfort && (last.comfort.delta !== 0 || last.comfort.reasons.length)) setTurnComfort({ ...last.comfort, fade: false });
+    }
     return d;
-  }, [id]);
+  }, [id, hangUp]);
 
   useEffect(() => {
     load();
@@ -145,15 +212,26 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
   const ended = data?.status === "submitted" || data?.status === "scored";
   const utc = (t: string) => new Date(t.replace(" ", "T") + "Z").getTime();
   // The clock does not run in the waiting room or while an instructor has the visit paused.
-  const clockNow = data?.pausedAt ? utc(data.pausedAt) : now;
+  // It also stops the moment End visit is clicked and stays stopped through the write-up and scoring.
+  const clockNow = frozenAt ?? (data?.pausedAt ? utc(data.pausedAt) : now);
   const elapsed = data && joined ? Math.max(0, Math.floor((clockNow - utc(data.startedAt)) / 1000)) : 0;
   const remaining = data?.timeLimitMin ? data.timeLimitMin * 60 - elapsed : null;
 
   // When the clock runs out, open the write-up; the student can still go back for a closing sentence.
   const timeUp = remaining !== null && remaining <= 0;
   useEffect(() => {
-    if (timeUp && joined && !ended) setWrapOpen(true);
+    if (timeUp && joined && !ended) {
+      setWrapOpen(true);
+      setFrozenAt((f) => f ?? Date.now());
+    }
   }, [timeUp, joined, ended]);
+
+  // A short-lived "why comfort moved" note fades away by itself.
+  useEffect(() => {
+    if (!turnComfort?.fade) return;
+    const t = setTimeout(() => setTurnComfort(null), 9000);
+    return () => clearTimeout(t);
+  }, [turnComfort]);
 
   // Speech is synthesised sentence by sentence so the patient starts talking while the reply is still arriving.
   const voice = useRef<{ gen: number; queue: Promise<string | null>[]; playing: boolean }>({ gen: 0, queue: [], playing: false });
@@ -216,11 +294,24 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
     pump();
   }
 
+  // Once the goodbye has been heard, open the write-up exactly as End visit does. A reload opens it at once.
+  useEffect(() => {
+    if (!callEnd || wrapOpen || busy || speaking || !joined) return;
+    const t = setTimeout(() => setWrapOpen(true), goodbyeShown.current ? 2200 : 600);
+    return () => clearTimeout(t);
+  }, [callEnd, wrapOpen, busy, speaking, joined]);
+
+  function openWrap() {
+    setFrozenAt((f) => f ?? Date.now());
+    setWrapOpen(true);
+  }
+
   const send = useCallback(
     async (raw: string) => {
       const text = raw.trim();
-      if (!text || live.current.busy) return;
+      if (!text || live.current.busy || callEnd) return;
       setError(null);
+      setTurnComfort(null);
       setBusy(true);
       setInput("");
       setInterim("");
@@ -230,7 +321,19 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
       setPending("");
       try {
         const res = await fetch(`/api/encounters/${id}/message`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
-        if (!res.ok || !res.body) throw new Error((await res.json().catch(() => ({}))).error || "The message could not be sent.");
+        if (!res.ok || !res.body) {
+          const j = await res.json().catch(() => ({}));
+          if (res.status === 409 && j.code === "call_ended") {
+            // The patient had already hung up (another tab, or a stale page): go to the wrap-up.
+            setPending(null);
+            setMessages((m) => m.filter((x) => x.id > 0));
+            hangUp(j.endedBy);
+            setWrapOpen(true);
+            load();
+            return;
+          }
+          throw new Error(j.error || "The message could not be sent.");
+        }
         const reader = res.body.getReader();
         const dec = new TextDecoder();
         let buf = "";
@@ -263,7 +366,12 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
               const after: ChartView = ev.chart;
               setFresh(new Set([...after.sections.flatMap((s) => s.items.map((x) => x.id)), ...after.artifacts.map((a) => a.id)].filter((x) => !before.has(x))));
               setChart(after);
-              setLastDelta(ev.rapportDelta);
+              const reasons: ComfortReason[] = ev.comfortReasons || [];
+              setTurnComfort(after.showComfort && (ev.rapportDelta !== 0 || reasons.length) ? { delta: ev.rapportDelta, reasons, fade: true } : null);
+              if (ev.callEnded) {
+                goodbyeShown.current = true;
+                hangUp(ev.callEnded);
+              }
               speak(acc.slice(spokenTo));
             } else if (ev.type === "error") {
               throw new Error(ev.message);
@@ -281,28 +389,43 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [id, chart, speakerOn],
+    [id, chart, speakerOn, callEnd],
   );
 
   // Hands-free mic: listen whenever the patient is not talking and nothing is in flight.
   useEffect(() => {
-    const idle = micOn && joined && !busy && !speaking && !paused && !ended && !wrapOpen;
+    const idle = micOn && joined && !busy && !speaking && !paused && !ended && !wrapOpen && !callEnd;
     if (!idle) return;
     const w = window as unknown as { SpeechRecognition?: new () => SpeechRec; webkitSpeechRecognition?: new () => SpeechRec };
     const Ctor = w.SpeechRecognition || w.webkitSpeechRecognition;
     if (!Ctor) return;
     const rec = new Ctor();
     rec.lang = "en-US";
-    rec.continuous = false;
+    // Keep listening across the browser's own end-of-speech cut-offs; the visit sends after a pause of SILENCE_MS.
+    rec.continuous = true;
     rec.interimResults = true;
     let finalText = "";
+    let latest = "";
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const flush = () => {
+      timer = null;
+      const text = latest.trim();
+      if (!text) return;
+      rec.onend = null;
+      rec.abort();
+      recRef.current = null;
+      send(text);
+    };
     rec.onresult = (e) => {
       let live = "";
       for (let i = e.resultIndex; i < e.results.length; i++) {
         if (e.results[i].isFinal) finalText += e.results[i][0].transcript;
         else live += e.results[i][0].transcript;
       }
-      setInterim(finalText + live);
+      latest = finalText + live;
+      setInterim(latest);
+      if (timer) clearTimeout(timer);
+      if (latest.trim()) timer = setTimeout(flush, SILENCE_MS);
     };
     rec.onerror = (e) => {
       if (e.error === "not-allowed" || e.error === "service-not-allowed") {
@@ -311,9 +434,10 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
       }
     };
     rec.onend = () => {
+      // The browser stopped on its own (long silence or its time limit): send what we have, or listen again.
+      if (timer) clearTimeout(timer);
       recRef.current = null;
-      if (finalText.trim()) send(finalText);
-      // Silence timed out: start listening again.
+      if (latest.trim()) send(latest);
       else setRecTick((n) => n + 1);
     };
     recRef.current = rec;
@@ -321,11 +445,12 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
       rec.start();
     } catch {}
     return () => {
+      if (timer) clearTimeout(timer);
       rec.onend = null;
       rec.abort();
       recRef.current = null;
     };
-  }, [micOn, joined, busy, speaking, paused, ended, wrapOpen, send, recTick]);
+  }, [micOn, joined, busy, speaking, paused, ended, wrapOpen, callEnd, send, recTick]);
 
   async function toggleCam() {
     if (camOn) {
@@ -433,19 +558,19 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
         <span className="truncate text-slate-700">
           Video visit with <span className="font-medium text-slate-900">{p.name}</span>
         </span>
-        <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[11px] font-medium text-slate-600">{MODE_LABEL[data.mode] || data.mode}</span>
-        <span className="hidden rounded bg-slate-100 px-1.5 py-0.5 text-[11px] text-slate-600 sm:inline">Difficulty: Level {data.level}</span>
-        {data.visitNumber > 1 ? <span className="hidden rounded bg-sky-100 px-1.5 py-0.5 text-[11px] font-medium text-sky-800 sm:inline">Follow-up · visit {data.visitNumber}</span> : data.attempt > 1 && <span className="hidden rounded bg-slate-100 px-1.5 py-0.5 text-[11px] text-slate-600 sm:inline">Attempt {data.attempt}</span>}
-        <span className={`hidden rounded px-1.5 py-0.5 text-[11px] font-medium md:inline ${data.recorded ? "bg-violet-100 text-violet-800" : "bg-slate-100 text-slate-600"}`}>{data.recorded ? "Recorded for instructor" : "Private practice"}</span>
-        {data.liveAssist && <span className="hidden rounded bg-violet-100 px-1.5 py-0.5 text-[11px] font-medium text-violet-800 md:inline">Instructor can join</span>}
+        <span className="rounded bg-slate-100 px-1.5 py-0.5 text-xs font-medium text-slate-600">{MODE_LABEL[data.mode] || data.mode}</span>
+        <span className="hidden rounded bg-slate-100 px-1.5 py-0.5 text-xs text-slate-600 sm:inline">Difficulty: Level {data.level}</span>
+        {data.visitNumber > 1 ? <span className="hidden rounded bg-sky-100 px-1.5 py-0.5 text-xs font-medium text-sky-800 sm:inline">Follow-up · visit {data.visitNumber}</span> : data.attempt > 1 && <span className="hidden rounded bg-slate-100 px-1.5 py-0.5 text-xs text-slate-600 sm:inline">Attempt {data.attempt}</span>}
+        <span className={`hidden rounded px-1.5 py-0.5 text-xs font-medium md:inline ${data.recorded ? "bg-violet-100 text-violet-800" : "bg-slate-100 text-slate-600"}`}>{data.recorded ? "Recorded for instructor" : "Private practice"}</span>
+        {data.liveAssist && <span className="hidden rounded bg-violet-100 px-1.5 py-0.5 text-xs font-medium text-violet-800 md:inline">Instructor can join</span>}
         <div className="flex-1" />
         <span className={`tabular-nums ${remaining !== null && remaining < 120 ? "font-semibold text-rose-600" : "text-slate-600"}`}>{remaining !== null ? `${fmt(remaining)} left` : fmt(elapsed)}</span>
-        {data.hints && joined && (
+        {data.hints && joined && !callEnd && (
           <button onClick={askHint} disabled={busy} className="rounded-md border border-amber-300 bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-900 hover:bg-amber-100">
             Coach hint
           </button>
         )}
-        <button onClick={() => setWrapOpen(true)} disabled={!joined} className="rounded-md bg-rose-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-700 disabled:bg-slate-300">
+        <button onClick={openWrap} disabled={!joined} className="rounded-md bg-rose-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-700 disabled:bg-slate-300">
           End visit
         </button>
       </header>
@@ -462,32 +587,56 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
               </div>
             )}
             <div className={`pointer-events-none absolute inset-0 rounded-lg transition-shadow ${patientTalking ? "shadow-[inset_0_0_0_3px_rgba(52,211,153,0.9)]" : ""}`} />
-            <div className="absolute left-3 top-3 flex items-center gap-2">
-              <span className="flex items-center gap-1.5 rounded bg-black/55 px-2 py-1 text-[11px] font-medium text-white">
-                <span className="h-1.5 w-1.5 rounded-full bg-rose-500" /> LIVE
-              </span>
-              {chart.rapport !== null && joined && (
-                <span className="flex items-center gap-2 rounded bg-black/55 px-2 py-1 text-[11px] text-white" title="How comfortable the patient is with you. Shown in practice only.">
-                  Comfort
-                  <span className="h-1.5 w-20 overflow-hidden rounded-full bg-white/25">
-                    <span className={`block h-full rounded-full transition-all duration-700 ${chart.rapport >= 60 ? "bg-emerald-400" : chart.rapport >= 40 ? "bg-amber-400" : "bg-rose-400"}`} style={{ width: `${chart.rapport}%` }} />
-                  </span>
-                  {lastDelta !== 0 && <span className={lastDelta > 0 ? "text-emerald-300" : "text-rose-300"}>{lastDelta > 0 ? "+" : ""}{lastDelta}</span>}
+            <div className="absolute left-3 top-3 flex max-w-[60%] flex-col items-start gap-1.5">
+              <div className="flex items-center gap-2">
+                <span className="flex items-center gap-1.5 rounded bg-black/55 px-2 py-1 text-xs font-medium text-white">
+                  <span className="h-1.5 w-1.5 rounded-full bg-rose-500" /> LIVE
                 </span>
+                {chart.showComfort && chart.rapport !== null && joined && (
+                  <span className="group relative">
+                    <span tabIndex={0} aria-label={COMFORT_HELP} className="flex cursor-help items-center gap-2 rounded bg-black/55 px-2 py-1 text-xs text-white outline-none focus-visible:ring-2 focus-visible:ring-white/70">
+                      Comfort
+                      <span className="h-1.5 w-20 overflow-hidden rounded-full bg-white/25">
+                        <span className={`block h-full rounded-full transition-all duration-700 ${chart.rapport >= 60 ? "bg-emerald-400" : chart.rapport >= 40 ? "bg-amber-400" : "bg-rose-400"}`} style={{ width: `${chart.rapport}%` }} />
+                      </span>
+                      {turnComfort && turnComfort.delta !== 0 && <span className={`font-semibold ${turnComfort.delta > 0 ? "text-emerald-300" : "text-rose-300"}`}>{turnComfort.delta > 0 ? "+" : "\u2212"}{Math.abs(turnComfort.delta)}</span>}
+                    </span>
+                    <span role="tooltip" className="pointer-events-none absolute left-0 top-full z-10 mt-2 hidden w-72 rounded-md bg-slate-900/95 p-3 text-sm leading-snug text-white shadow-lg group-focus-within:block group-hover:block">
+                      {COMFORT_HELP}
+                    </span>
+                  </span>
+                )}
+              </div>
+              {chart.showComfort && turnComfort && turnComfort.reasons.length > 0 && (
+                <div className="flex flex-wrap gap-1">
+                  {turnComfort.reasons.map((r, i) => (
+                    <span key={i} className={`rounded-full px-2 py-0.5 text-xs font-medium ${r.delta >= 0 ? "bg-emerald-100/95 text-emerald-900" : "bg-rose-100/95 text-rose-900"}`}>
+                      {r.delta >= 0 ? "+" : "\u2212"} {r.label}
+                    </span>
+                  ))}
+                </div>
               )}
             </div>
             {/* Self view */}
             <div className="absolute right-3 top-3 h-20 w-28 overflow-hidden rounded-md border border-white/20 bg-slate-800">
               {camOn ? <video ref={selfRef} autoPlay muted playsInline className="h-full w-full -scale-x-100 object-cover" /> : <div className="grid h-full place-items-center text-lg font-semibold text-slate-400">{initials(viewerName)}</div>}
-              <span className="absolute bottom-0.5 left-1 text-[10px] text-white/80">You</span>
+              <span className="absolute bottom-0.5 left-1 text-xs text-white/80">You</span>
             </div>
+            {callEnd && (
+              <div className="absolute inset-0 grid place-items-center bg-slate-950/55 px-4 pb-16 pt-14 text-center">
+                <div>
+                  <div className="text-lg font-semibold text-white">{firstName} ended the call</div>
+                  <div className="mt-1 text-[15px] text-white/85">{ENDED_WHY[callEnd.reason]}</div>
+                </div>
+              </div>
+            )}
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent px-4 pb-3 pt-10">
               {captionsOn && caption && <p className="mb-2 text-[15px] leading-snug text-white">{(() => { const t = stripCues(caption); return t.length > 190 ? "… " + t.slice(t.length - 190).replace(/^\S*\s/, "") : t || "…"; })()}</p>}
-              {micOn && !patientTalking && !busy && <p className="mb-2 text-sm italic text-emerald-200">{interim ? `You: ${interim}` : "Listening… speak to the patient"}</p>}
+              {micOn && !patientTalking && !busy && !callEnd && <p className="mb-2 text-sm italic text-emerald-200">{interim ? `You: ${interim}` : "Listening… speak to the patient"}</p>}
               <div className="flex items-center justify-between">
                 <div className="text-sm font-medium text-white">
                   {p.name}
-                  <span className="ml-2 text-xs font-normal text-white/70">{patientTalking ? "speaking" : busy ? "thinking…" : chart.emotion}</span>
+                  <span className="ml-2 text-xs font-normal text-white/70">{callEnd && !patientTalking ? "call ended" : patientTalking ? "speaking" : busy ? "thinking…" : chart.emotion}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   {[
@@ -500,7 +649,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
                       <Icon d={c.on ? c.a : c.b} />
                     </button>
                   ))}
-                  <button onClick={() => setWrapOpen(true)} title="End visit" aria-label="End visit" className="grid h-9 w-11 place-items-center rounded-full bg-rose-600 text-white hover:bg-rose-700">
+                  <button onClick={openWrap} title="End visit" aria-label="End visit" className="grid h-9 w-11 place-items-center rounded-full bg-rose-600 text-white hover:bg-rose-700">
                     <Icon d={ICON.hang} />
                   </button>
                 </div>
@@ -516,32 +665,35 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
                 m.speaker === "student" ? (
                   <div key={m.id} className="group flex justify-end gap-2">
                     {data.canRewind && m.id > 0 && !busy && (
-                      <button onClick={() => rewindTo(m.turn - 1)} className="self-center whitespace-nowrap text-[11px] text-slate-400 underline decoration-dotted hover:text-brand-600">
+                      <button onClick={() => rewindTo(m.turn - 1)} className="self-center whitespace-nowrap text-xs text-slate-400 underline decoration-dotted hover:text-brand-600">
                         Try this again
                       </button>
                     )}
-                    <div className="max-w-[80%] rounded-2xl rounded-br-sm bg-brand-600 px-3.5 py-2 text-sm text-white">{m.text}</div>
+                    <div className="max-w-[80%] rounded-2xl rounded-br-sm bg-brand-600 px-3.5 py-2 text-[15px] text-white">{m.text}</div>
                   </div>
                 ) : m.speaker === "patient" ? (
                   <div key={m.id} className="flex">
-                    <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-slate-100 px-3.5 py-2 text-sm text-slate-900">
+                    <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-slate-100 px-3.5 py-2 text-[15px] text-slate-900">
                       {m.text.split(/(\*[^*]+\*)/).map((part, i) => (part.startsWith("*") ? <em key={i} className="text-slate-500">{part.slice(1, -1)} </em> : <span key={i}>{part}</span>))}
                     </div>
                   </div>
+                ) : m.speaker === "system" && m.text.startsWith("Requested:") ? (
+                  <ResultCard key={m.id} text={m.text} results={chart.results} onView={() => setChartFocus({ tab: "results", key: Date.now() })} />
                 ) : (
-                  <div key={m.id} className={`whitespace-pre-wrap rounded-md border px-3 py-2 text-[13px] ${m.speaker === "coach" ? "border-amber-200 bg-amber-50 text-amber-900" : m.speaker === "instructor" ? "border-violet-200 bg-violet-50 text-violet-900" : "border-slate-200 bg-slate-50 font-mono text-[12px] text-slate-700"}`}>
-                    <span className="mr-1.5 font-sans text-[10px] font-semibold uppercase tracking-wide opacity-70">{m.speaker === "coach" ? "Coach" : m.speaker === "instructor" ? "Instructor" : m.speaker === "clinician" ? "Colleague" : "Chart"}</span>
+                  <div key={m.id} className={`whitespace-pre-wrap rounded-md border px-3 py-2 text-sm ${m.speaker === "coach" ? "border-amber-200 bg-amber-50 text-amber-900" : m.speaker === "instructor" ? "border-violet-200 bg-violet-50 text-violet-900" : "border-slate-200 bg-slate-50 text-slate-700"}`}>
+                    <span className="mr-1.5 text-xs font-semibold uppercase tracking-wide opacity-70">{m.speaker === "coach" ? "Coach" : m.speaker === "instructor" ? "Instructor" : m.speaker === "clinician" ? "Colleague" : "Chart"}</span>
                     {m.text}
                   </div>
                 ),
               )}
               {pending !== null && (
                 <div className="flex">
-                  <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-slate-100 px-3.5 py-2 text-sm text-slate-900">{stripCues(pending) || <span className="text-slate-400">{firstName} is thinking…</span>}</div>
+                  <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-slate-100 px-3.5 py-2 text-[15px] text-slate-900">{stripCues(pending) || <span className="text-slate-400">{firstName} is thinking…</span>}</div>
                 </div>
               )}
             </div>
-            {error && <div className="border-t border-rose-200 bg-rose-50 px-3 py-1.5 text-xs text-rose-700">{error}</div>}
+            {error && <div className="border-t border-rose-200 bg-rose-50 px-3 py-1.5 text-sm text-rose-700">{error}</div>}
+            {callEnd && <div className="border-t border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-600">{firstName} ended the call. Write up the visit when you are ready; the chart stays open to review.</div>}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -552,12 +704,12 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                disabled={busy || paused || !joined}
-                placeholder={paused ? "Paused by your instructor" : micOn ? "Speak, or type here" : `Say something to ${firstName}`}
-                className="min-w-0 flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200 disabled:bg-slate-100"
+                disabled={busy || paused || !joined || !!callEnd}
+                placeholder={callEnd ? `${firstName} ended the call` : paused ? "Paused by your instructor" : micOn ? "Speak, or type here" : `Say something to ${firstName}`}
+                className="min-w-0 flex-1 rounded-md border border-slate-300 px-3 py-2 text-[15px] focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200 disabled:bg-slate-100"
                 autoFocus
               />
-              <button disabled={busy || paused || !input.trim()} className="rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:bg-slate-300">
+              <button disabled={busy || paused || !!callEnd || !input.trim()} className="rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:bg-slate-300">
                 Send
               </button>
             </form>
@@ -565,7 +717,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
         </div>
 
         {/* RIGHT: the chart */}
-        <ChartPanel chart={chart} fresh={fresh} onOrder={order} ordering={ordering} locked={paused || !joined} teamTab={data.journeyRunId ? <JourneyChartTab runId={data.journeyRunId} encounterId={id} /> : undefined} />
+        <ChartPanel focus={chartFocus} chart={chart} fresh={fresh} onOrder={order} ordering={ordering} locked={paused || !joined} teamTab={data.journeyRunId ? <JourneyChartTab runId={data.journeyRunId} encounterId={id} /> : undefined} />
       </div>
 
       {/* Waiting room */}
@@ -579,23 +731,23 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
             </h1>
             <p className="mt-0.5 text-sm text-slate-500">You are joining as the {data.role.roleTitle}.</p>
             <p className="mt-4 text-sm leading-relaxed text-slate-700">{chart.brief}</p>
-            {chart.tasks.length > 0 && (
+            {(chart.goals.length > 0 || chart.tasks.length > 0) && (
               <>
-                <h2 className="mt-4 text-xs font-semibold uppercase tracking-wide text-slate-500">In this visit</h2>
+                <h2 className="mt-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Session goals</h2>
                 <ul className="mt-1 list-disc space-y-0.5 pl-5 text-sm text-slate-700">
-                  {chart.tasks.map((t, i) => (
+                  {(chart.goals.length > 0 ? chart.goals : chart.tasks).map((t, i) => (
                     <li key={i}>{t}</li>
                   ))}
                 </ul>
               </>
             )}
-            <div className="mt-4 rounded-md bg-slate-50 p-3 text-[13px] text-slate-600">
+            <div className="mt-4 rounded-md bg-slate-50 p-3 text-sm text-slate-600">
               {data.timeLimitMin ? `You have ${data.timeLimitMin} minutes. ` : "No time limit. "}
-              Talk by microphone or type. The chart on the right fills in as you learn things; request exams, tests and records from its Results tab. When you are done, end the visit and write your {data.role.noteFormat} wrap-up.
-              {data.mode === "exam" && " This is an exam: no hints, and the comfort meter is hidden."}
+              Talk by microphone or type. The chart on the right fills in as you learn things; request exams, tests and records from its Orders tab. When you are done, end the visit and write your {data.role.noteFormat} wrap-up.
+              {data.mode === "exam" && " This is an exam: no hints."}
               {data.liveAssist && " Your instructor may watch this visit, pause it, or send you a note."}
             </div>
-            <p className={`mt-3 text-[13px] ${data.recorded ? "text-violet-800" : "text-slate-600"}`}>
+            <p className={`mt-3 text-sm ${data.recorded ? "text-violet-800" : "text-slate-600"}`}>
               {data.recorded ? "Recorded: your instructor can see this visit, its transcript and its score." : "Private practice: only you see this visit and its feedback. It still updates your own progress."}
             </p>
            </div>
@@ -630,7 +782,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
           <div className="w-full max-w-md rounded-xl bg-white p-6 text-center shadow-xl">
             <div className="text-xs font-semibold uppercase tracking-wide text-violet-700">Paused by your instructor</div>
             <p className="mt-3 whitespace-pre-wrap text-slate-800">{data.pauseNote || "Take a moment. Your instructor will resume the visit shortly."}</p>
-            <p className="mt-4 text-xs text-slate-500">The clock is stopped. The visit continues when they resume it.</p>
+            <p className="mt-4 text-sm text-slate-500">The clock is stopped. The visit continues when they resume it.</p>
           </div>
         </div>
       )}
@@ -647,23 +799,30 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
               </div>
             ) : (
               <>
-                <h2 className="text-lg font-semibold text-slate-900">{timeUp ? "Time is up. Write up the visit" : "End the visit and write up"}</h2>
+                <h2 className="text-lg font-semibold text-slate-900">{callEnd ? `${firstName} ended the call. Write up the visit` : timeUp ? "Time is up. Write up the visit" : "End the visit and write up"}</h2>
+                {callEnd && <p className="mt-1 text-sm text-slate-600">{ENDED_WHY[callEnd.reason]}</p>}
                 <p className="mt-1 text-sm text-slate-600">
-                  {data.role.noteFormat} for {p.name}. Your write-up is assessed along with the conversation. Before you leave: did you summarise, check understanding and agree next steps with {firstName}?
+                  {data.role.noteFormat} for {p.name}. Your write-up is assessed along with the conversation.{!callEnd && ` Before you leave: did you summarize, check understanding and agree next steps with ${firstName}?`}
                 </p>
                 <div className="mt-4 space-y-3">
                   {data.role.wrapUp.map((f) => (
                     <div key={f.id}>
-                      <label className="mb-1 block text-xs font-medium text-slate-600">{f.label}</label>
+                      <label className="mb-1 block text-sm font-medium text-slate-600">{f.label}</label>
                       <textarea value={wrap[f.id] || ""} onChange={(e) => setWrap((w) => ({ ...w, [f.id]: e.target.value }))} placeholder={f.placeholder} rows={3} className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200" />
                     </div>
                   ))}
                 </div>
                 {error && <p className="mt-3 rounded bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</p>}
                 <div className="mt-5 flex justify-end gap-2">
-                  <button onClick={() => setWrapOpen(false)} className="rounded-md border border-slate-300 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">
-                    Back to the patient
-                  </button>
+                  {callEnd ? (
+                    <button onClick={() => setWrapOpen(false)} className="rounded-md border border-slate-300 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">
+                      Review the chart
+                    </button>
+                  ) : (
+                    <button onClick={() => (setWrapOpen(false), setFrozenAt(null))} className="rounded-md border border-slate-300 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">
+                      Back to the patient
+                    </button>
+                  )}
                   <button onClick={submit} className="rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700">
                     Submit for feedback
                   </button>

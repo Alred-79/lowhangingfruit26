@@ -805,6 +805,11 @@
     "Identify environmental and trigger factors",
     "Formulate and communicate an asthma action plan and follow-up plan appropriate to a pediatric resident's scope"
    ],
+   "goals": [
+    "Take a focused history",
+    "Observe inhaler technique on camera",
+    "Agree an action plan"
+   ],
    "timeLimitMin": 25
   },
   "chartAtStart": [

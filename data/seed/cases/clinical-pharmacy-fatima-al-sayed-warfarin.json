@@ -855,6 +855,11 @@
     "Apply anticoagulation protocol to recommend a management plan",
     "Communicate the plan clearly and address the patient's concerns"
    ],
+   "goals": [
+    "Take a full medication history",
+    "Check for any bleeding",
+    "Recommend and explain the plan"
+   ],
    "timeLimitMin": 25
   },
   "summary": "A 56-year-old woman with a mechanical mitral valve on long-term warfarin presents to an anticoagulation clinic telehealth visit with a home INR of 5.4 confirmed by venous draw, minor mucocutaneous bleeding, and no major bleeding signs. The case teaches pharmacy learners to identify a classic multifactorial cause (undisclosed TMP-SMX antibiotic interaction plus reduced dietary vitamin K intake and an unreported herbal supplement), perform a remote bleeding assessment, and apply a collaborative practice protocol for supratherapeutic INR management with appropriate escalation to the cardiology/prescribing team.",

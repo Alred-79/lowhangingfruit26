@@ -969,6 +969,11 @@
     "Perform a telehealth-appropriate mental status exam and brief cognitive screen",
     "Formulate a diagnosis and agree on a treatment plan with appropriate follow-up"
    ],
+   "goals": [
+    "Take a psychiatric history",
+    "Assess safety and risk",
+    "Agree a plan and follow-up"
+   ],
    "timeLimitMin": 30
   },
   "setting": "Telehealth video visit, patient at home in her living room in a small town in Vermont",

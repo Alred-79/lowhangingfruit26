@@ -6,6 +6,7 @@ import { getRubric } from "../rubrics";
 import type { DomainScore, EncounterConfig, Fact, Feedback, Rubric } from "../types";
 import { loadEncounter, messagesOf, type MessageRow } from "./encounter";
 import { caseFacts } from "./gatekeeper";
+import { startVisible } from "./startVisible";
 
 const str = { type: "string" };
 const noted = { type: "array", items: { type: "object", required: ["text"], properties: { text: str, turn: { type: "integer" } } } };
@@ -76,7 +77,7 @@ Rules:
 - Score strictly from the transcript. Every score needs evidence: a turn number and an exact quote copied from that turn.
 - Use N/A (null) only when the scenario truly offered no opportunity to show the domain.
 - Judge clinical accuracy only against the case answer key and the supplied knowledge sources. If something is outside them, say it could not be verified rather than calling it wrong.
-- Judge the student against what their profession is expected to do; do not penalise a dietetics student for not forming a medical differential.
+- Judge the student against what their profession is expected to do; do not penalize a dietetics student for not forming a medical differential.
 - Feedback is addressed to the student as "you". Be concrete: say what was said, why it mattered, and what to say instead.
 - A short or abandoned encounter gets low scores, not N/A.`;
 
@@ -109,7 +110,15 @@ export async function scoreEncounter(encId: string): Promise<Feedback> {
   const wrap = parse<Record<string, string>>(row.wrapup, {});
 
   // ----- Deterministic part: what was and was not elicited comes from the disclosure ledger -----
-  const facts = caseFacts(c, cfg.knobs).filter((f) => !f.distractor);
+  // Anything already placed in the chart before the visit is not the student's to find: it is left out
+  // of both "elicited" and "missed" so the totals stay coherent.
+  const sv = startVisible(c);
+  const allFacts = caseFacts(c, cfg.knobs).filter((f) => !f.distractor);
+  const facts = allFacts.filter((f) => !sv.factIds.has(f.id));
+  const inChart = {
+    facts: allFacts.filter((f) => sv.factIds.has(f.id)).map((f) => ({ id: f.id, chart: f.chart })),
+    actions: c.actions.filter((a) => sv.actionIds.has(a.id)).map((a) => ({ id: a.id, name: a.name })),
+  };
   const elicited = facts.filter((f) => state.disclosed[f.id]).map((f) => ({ id: f.id, chart: f.chart, importance: f.importance, turn: state.disclosed[f.id].turn }));
   // Near-identical fact wording within one case counts as one finding: elicited if either was, missed once.
   const toks = (t: string) => new Set(t.toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter((w) => w.length > 2));
@@ -133,12 +142,15 @@ export async function scoreEncounter(encId: string): Promise<Feedback> {
   const rank = { critical: 0, important: 1, minor: 2 };
   missed.sort((a, b) => rank[a.importance] - rank[b.importance]);
   const actionsDone = c.actions.filter((a) => state.actions[a.id]).map((a) => ({ id: a.id, name: a.name, importance: a.importance }));
-  const actionsMissed = c.actions.filter((a) => !state.actions[a.id] && a.importance !== "minor").map((a) => ({ id: a.id, name: a.name, importance: a.importance }));
+  const actionsMissed = c.actions.filter((a) => !state.actions[a.id] && !sv.actionIds.has(a.id) && a.importance !== "minor").map((a) => ({ id: a.id, name: a.name, importance: a.importance }));
   const unnecessaryOrders = state.unmatchedOrders.map((u) => u.request);
 
   const objectiveStatus = c.objectives.map((o) => {
-    const refs = o.factIds.length + o.actionIds.length;
-    const hit = o.factIds.filter((id) => state.disclosed[id]).length + o.actionIds.filter((id) => state.actions[id]).length;
+    // Items already in the chart at the start neither help nor hurt an objective.
+    const factIds = o.factIds.filter((id) => !sv.factIds.has(id));
+    const actionIds = o.actionIds.filter((id) => !sv.actionIds.has(id));
+    const refs = factIds.length + actionIds.length;
+    const hit = factIds.filter((id) => state.disclosed[id]).length + actionIds.filter((id) => state.actions[id]).length;
     return { id: o.id, text: o.text, refs, hit };
   });
 
@@ -183,11 +195,12 @@ Elicited: ${elicited.map((f) => `[T${f.turn}] ${f.chart}`).join("; ") || "none"}
 Missed: ${missed.map((f) => `(${f.importance}) ${f.chart}`).join("; ") || "none"}
 Exams/orders done: ${actionsDone.map((a) => a.name).join("; ") || "none"}
 Important exams/orders not done: ${actionsMissed.map((a) => a.name).join("; ") || "none"}
+ALREADY IN THE CHART FROM THE START (the student could read these before the visit; they are neither credited nor missed, and not having asked about or ordered them is not a gap): ${[...inChart.actions.map((a) => a.name), ...inChart.facts.map((f) => f.chart)].join("; ") || "none"}
 Requests with no approved result: ${unnecessaryOrders.join("; ") || "none"}
 Question mix: ${st.open} open, ${st.focused} focused, ${st.closed} closed, ${st.leading} leading, ${st.multiple} stacked. Empathic statements: ${st.empathy}. Unexplained jargon: ${st.jargon}. Judgmental/dismissive moments: ${st.judgmental}.
 Patient comfort (0-100) over time: ${state.rapportHistory.join(" → ")}
 Coach hints used: ${state.hintsUsed}
-
+${state.endedBy ? `THE PATIENT ENDED THE CALL at turn ${state.endedBy.turn}: ${{ closed: "naturally, after the student wrapped up the visit", upset: "because the student's tone had left the patient feeling disrespected over several turns", time: "because the visit ran well past its time limit" }[state.endedBy.reason]}. Comment on it where relevant (for example, how the visit was closed, or the effect of tone on trust); do not change how the rubric is applied.\n` : ""}
 TRANSCRIPT
 ${transcript || "(the student did not say anything)"}
 
@@ -200,6 +213,8 @@ ${role.wrapUp.map((f) => `${f.label}:\n${wrap[f.id] || "(left blank)"}`).join("\
     mismatches?: { id: string; noticed: boolean; comment: string }[];
   } & Pick<Feedback, "interview" | "strengths" | "improvements" | "safetyConcerns" | "accuracyIssues" | "wrapUpReview" | "nextAttempt" | "summary">;
 
+  // The patient's memory of this visit does not depend on the scoring, so it runs alongside it.
+  const remembered = !row.parent_id && cfg.mode !== "journey" ? rememberVisit(encId).catch((e) => console.error("rememberVisit", e)) : Promise.resolve();
   let raw!: Raw;
   // A reply without usable domain scores is a failed scoring, not a zero: retry, then fail loudly.
   for (let attempt = 0; attempt < 3; attempt++) {
@@ -249,6 +264,8 @@ ${role.wrapUp.map((f) => `${f.label}:\n${wrap[f.id] || "(left blank)"}`).join("\
     actionsDone,
     actionsMissed,
     unnecessaryOrders,
+    inChart,
+    callEndedBy: state.endedBy,
     objectives: objectiveStatus.map((o) => {
       const r = raw.objectives?.find((x) => x.id === o.id);
       // Objectives linked to facts/actions are decided by the ledger; the model only comments.
@@ -274,7 +291,7 @@ ${role.wrapUp.map((f) => `${f.label}:\n${wrap[f.id] || "(left blank)"}`).join("\
   };
 
   run("UPDATE encounters SET feedback = ?, score = ?, status = 'scored', ended_at = COALESCE(ended_at, datetime('now')) WHERE id = ?", JSON.stringify(feedback), percent, encId);
-  if (!row.parent_id && cfg.mode !== "journey") await rememberVisit(encId).catch((e) => console.error("rememberVisit", e));
+  await remembered;
   // Rewound branches do not move the adaptive rating a second time.
   if (!row.parent_id) recordSkill(row.user_id, cfg.professionId, encId, cfg.knobs.level, rubric.type === "domain4" ? domains : []);
   return feedback;

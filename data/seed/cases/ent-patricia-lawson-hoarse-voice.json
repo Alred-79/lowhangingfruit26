@@ -880,6 +880,11 @@
     "Determine and communicate the next steps in management",
     "Address the patient's concerns with empathy"
    ],
+   "goals": [
+    "Take a focused history",
+    "Examine the throat by camera",
+    "Agree next steps for care"
+   ],
    "timeLimitMin": 22
   },
   "setting": "Telehealth video visit, patient at home at her kitchen table",

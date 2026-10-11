@@ -18,33 +18,33 @@ export const artifactTypeLabel = (t: Artifact["type"]) => TYPE_LABEL[t] || "Docu
 
 // Categorical series colours in fixed order (validated for colour-vision deficiency on a light surface).
 const SERIES = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100"];
-const FLAG: Record<string, string> = { H: "text-rose-700 font-semibold", L: "text-sky-700 font-semibold", A: "text-amber-700 font-semibold" };
+const FLAG: Record<string, string> = { H: "text-[#b00000] font-bold", L: "text-[#0b3f8f] font-bold", A: "text-[#b00000] font-bold" };
 
 function DataTable({ table }: { table: NonNullable<Artifact["table"]> }) {
   // Some tables already carry their own flag column; do not add a second one.
   const ownFlag = table.columns.some((c) => /flag|status/i.test(c));
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full border-collapse text-left text-[13px]">
+    <div className="overflow-x-auto border border-[#b9c4d1]">
+      <table className="w-full border-collapse text-left text-sm">
         <thead>
-          <tr className="border-b border-slate-200 text-xs text-slate-500">
+          <tr className="border-b border-[#b9c4d1] bg-[#eef2f6] text-xs uppercase tracking-wide text-[#44556b]">
             {table.columns.map((c, i) => (
-              <th key={i} className="px-2 py-1.5 font-medium">
+              <th key={i} className="px-2 py-1 font-semibold">
                 {c}
               </th>
             ))}
-            {!ownFlag && <th className="w-8 px-2 py-1.5 font-medium">Flag</th>}
+            {!ownFlag && <th className="w-8 px-2 py-1 font-semibold">Flag</th>}
           </tr>
         </thead>
         <tbody>
           {table.rows.map((r, i) => (
-            <tr key={i} className={`border-b border-slate-100 ${r.flag ? "bg-amber-50/50" : ""}`}>
+            <tr key={i} className={`border-b border-[#e3e9ef] ${r.flag ? "bg-[#fdeeee]" : i % 2 ? "bg-[#f5f8fb]" : "bg-white"}`}>
               {r.cells.map((c, j) => (
-                <td key={j} className={`px-2 py-1.5 tabular-nums ${r.flag && (j === 1 || (ownFlag && /flag|status/i.test(table.columns[j] || ""))) ? FLAG[r.flag] : "text-slate-800"}`}>
+                <td key={j} className={`px-2 py-1 tabular-nums ${r.flag && (j === 1 || (ownFlag && /flag|status/i.test(table.columns[j] || ""))) ? FLAG[r.flag] : "text-[#1a1a1a]"}`}>
                   {c}
                 </td>
               ))}
-              {!ownFlag && <td className={`px-2 py-1.5 ${r.flag ? FLAG[r.flag] : ""}`}>{r.flag === "H" ? "High" : r.flag === "L" ? "Low" : r.flag === "A" ? "Abnormal" : ""}</td>}
+              {!ownFlag && <td className={`px-2 py-1 ${r.flag ? FLAG[r.flag] : ""}`}>{r.flag === "H" ? "High" : r.flag === "L" ? "Low" : r.flag === "A" ? "Abnormal" : ""}</td>}
             </tr>
           ))}
         </tbody>
@@ -121,22 +121,22 @@ export function TrendChart({ chart }: { chart: ArtifactChart }) {
         {ticks.map((t) => (
           <g key={t}>
             <line x1={L} x2={W - R} y1={py(t)} y2={py(t)} stroke="#e5e9ee" strokeWidth={1} />
-            <text x={L - 6} y={py(t) + 3.5} textAnchor="end" fontSize={10} fill="#64748b">
+            <text x={L - 6} y={py(t) + 3.5} textAnchor="end" fontSize={12} fill="#475569">
               {t}
             </text>
           </g>
         ))}
         {xs.map((x, i) =>
           xs.length <= 12 || i % Math.ceil(xs.length / 12) === 0 ? (
-            <text key={x + i} x={px(i)} y={H - B + 14} textAnchor="middle" fontSize={10} fill="#64748b">
+            <text key={x + i} x={px(i)} y={H - B + 14} textAnchor="middle" fontSize={12} fill="#475569">
               {x.length > 12 ? x.slice(0, 11) + "…" : x}
             </text>
           ) : null,
         )}
-        <text x={L} y={H - 4} fontSize={10} fill="#94a3b8">
+        <text x={L} y={H - 4} fontSize={12} fill="#64748b">
           {chart.xLabel}
         </text>
-        <text x={W - R} y={H - 4} fontSize={10} fill="#94a3b8" textAnchor="end">
+        <text x={W - R} y={H - 4} fontSize={12} fill="#64748b" textAnchor="end">
           {chart.yLabel}
           {chart.refLow !== undefined && chart.refHigh !== undefined ? ` · shaded: reference ${chart.refLow}–${chart.refHigh}` : ""}
         </text>
@@ -201,10 +201,10 @@ export function TrendChart({ chart }: { chart: ArtifactChart }) {
 export default function ArtifactView({ artifact: a }: { artifact: Artifact }) {
   const isImage = a.fileUrl && !/\.pdf($|\?)/i.test(a.fileUrl);
   return (
-    <article className="text-sm">
+    <article className="text-[15px]">
       <header className="mb-2 flex flex-wrap items-baseline justify-between gap-x-3 border-b border-slate-200 pb-2">
         <div>
-          <div className="text-[11px] font-medium uppercase tracking-wide text-slate-500">{artifactTypeLabel(a.type)}</div>
+          <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">{artifactTypeLabel(a.type)}</div>
           <h3 className="font-semibold text-slate-900">{a.title}</h3>
         </div>
         <div className="text-right text-xs text-slate-500">
@@ -231,7 +231,7 @@ export default function ArtifactView({ artifact: a }: { artifact: Artifact }) {
           <DataTable table={a.table} />
         </div>
       )}
-      {a.body && <div className={`whitespace-pre-wrap leading-relaxed text-slate-800 ${a.type === "ecg" || a.type === "imaging" ? "font-mono text-[12.5px]" : ""}`}>{a.body}</div>}
+      {a.body && <div className={`whitespace-pre-wrap leading-relaxed text-slate-800 ${a.type === "ecg" || a.type === "imaging" ? "font-mono text-[13px]" : ""}`}>{a.body}</div>}
     </article>
   );
 }

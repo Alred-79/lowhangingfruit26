@@ -732,6 +732,11 @@
     "Collaborate with the patient to set one or two goals in her own words",
     "Identify and offer at least one concrete community resource matched to an identified barrier"
    ],
+   "goals": [
+    "Build rapport and screen needs",
+    "Explore barriers without judgment",
+    "Connect to one concrete resource"
+   ],
    "timeLimitMin": 25
   },
   "answerKey": {

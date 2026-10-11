@@ -98,7 +98,7 @@ Two consequences worth knowing:
 
 `data/professions.json` holds 63 roles in 10 groups. A role defines its scope, typical encounter
 types, the kinds of action it uses, its note format, the fields of its written wrap-up and what the
-rubric should emphasise. The case drafter is scoped by it, the patient is told what kind of
+rubric should emphasize. The case drafter is scoped by it, the patient is told what kind of
 clinician it is talking to, the wrap-up form is built from it, and the feedback scorer is told what
 is expected of that role (so a dietetics student is not marked down for not forming a medical
 differential).
@@ -152,7 +152,7 @@ start from an empty profile (`components/studio/NewCaseWizard.tsx`).
      days a month" and the real figure lives only in a document; that gap is the mismatch.
    - **Actions are things the learner does or reviews** (an examination, a measurement, a named
      screening instrument, a record review), never an interview question.
-3. **Normalise.** `normalizeCase()` repairs ids, removes references to items that do not exist,
+3. **Normalize.** `normalizeCase()` repairs ids, removes references to items that do not exist,
    repairs release rules that point nowhere and makes action-to-document links symmetrical, so the
    engine can trust the profile.
 4. **Store as a draft** with `origin = 'ai_draft'` and `reviewed = 0`. The interface shows
@@ -328,7 +328,7 @@ Stated as precisely as the code allows.
   wording of a fact, the `result` of an action, the documents in the case. No model writes to the
   chart during a visit. (That text is faculty-approved only if a faculty member reviewed the case;
   see "Not guaranteed". On a class-shared patient the chart also holds earlier students' write-ups
-  as notes, labelled with the author and role; those are student text, not case text.)
+  as notes, labeled with the author and role; those are student text, not case text.)
 - An exam, test or record request can only return the `result` of an action in the case (section 7).
 - A document appears only when its release rule fires.
 - A fact can only be filed in the chart if it is a fact of the case. The reconciliation step can
@@ -379,7 +379,7 @@ aliases) and asks which it clearly means; ids it returns that are not in the cas
 - answers anything unmatched with "no approved result is available for this in the case file" and
   records it, so feedback can list "Requested but not part of this case".
 
-The model's only job is to recognise that "CBC" means "Complete blood count". No result text is
+The model's only job is to recognize that "CBC" means "Complete blood count". No result text is
 generated. Because every visit is framed as a telehealth call, physical exams are written into
 cases as guided remote exams with a fixed finding.
 
@@ -390,11 +390,11 @@ Difficulty never changes the clinical facts. It changes how hard the patient is 
 
 | Level | Starting rapport | Reluctant at | Guarded at | Facts per reply | Volunteers related facts | Vagueness (0-3) | Emotion (0-3) | Distractors | Hints | Time limit |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 Foundational | 62 | 55 | 70 | 4 | yes | 0 | 0 | no | yes | none |
-| 2 Developing | 55 | 60 | 74 | 3 | yes | 1 | 1 | no | yes | none |
-| 3 Proficient | 48 | 64 | 78 | 3 | no | 1 | 1 | yes | yes | case limit + 5 min |
+| 1 Foundational | 62 | 55 | 70 | 4 | yes | 0 | 0 | no | yes | case limit |
+| 2 Developing | 55 | 60 | 74 | 3 | yes | 1 | 1 | no | yes | case limit |
+| 3 Proficient | 48 | 64 | 78 | 3 | no | 1 | 1 | yes | yes | case limit |
 | 4 Advanced | 42 | 68 | 82 | 2 | no | 2 | 2 | yes | no | case limit |
-| 5 Expert | 36 | 72 | 86 | 2 | no | 3 | 3 | yes | no | case limit - 5 min (at least 8) |
+| 5 Expert | 36 | 72 | 86 | 2 | no | 3 | 3 | yes | no | case limit |
 
 At level 1 the patient already trusts the student enough to share reluctant facts when asked
 directly; at level 5 the student has to gain 36 points of rapport first, two facts at a time, from
@@ -405,12 +405,20 @@ Three further sources of variation, all of which keep the answer key valid:
 - **Persona variations** (`PERTURBATIONS`, 7 of them: in a hurry, more anxious, talkative, withdrawn,
   skeptical, family pressure, having a bad day). Each is an extra instruction to the patient model
   about mood and delivery and, for some, a small change to rapport or facts per reply. On repeat
-  attempts one is chosen by attempt number, so a student who memorised the last transcript still
+  attempts one is chosen by attempt number, so a student who memorized the last transcript still
   has to listen.
 - **Variants.** A faculty-approved set of overrides on persona, fact wording or tier, and results
   that no document reports. Drafted by the model on request, inactive until approved, applied to a
   copy of the case when an encounter is created.
-- **Exam mode** turns hints off and hides the comfort meter.
+- **Exam mode** turns hints off. The comfort meter is a per-visit setting (`config.showComfort`):
+  on for practice and adaptive sessions, off for exams, and a checkbox in the assignment settings.
+  When it is off, `chartView` returns `rapport: null` and no comfort reasons reach the client.
+- **The patient can end the call** (`lib/engine/ending.ts`, decided by rules, worded by the model):
+  after a clear goodbye from the student (turn 4 or later, no question pending), after sustained
+  mistreatment at the bottom comfort band, or well past the time limit. Stored as
+  `state.endedBy`; the message route then answers 409. Never for the AI clinician in a journey.
+- **Already in the chart** (`lib/engine/startVisible.ts`): facts and review actions whose content is
+  on the start chart or in a start-released document are not scored as missed.
 
 Practice-mode hints (`hint()` in `lib/engine/encounter.ts`) are computed without a model from the
 ledger and the question-mix counters, and never state the content of a fact.
@@ -439,8 +447,8 @@ Choosing the next session (`recommend()`):
 
 1. Overall rating = mean of the domain ratings.
 2. Level = the level whose expected outcome for that rating is closest to 0.70. A student with no
-   history starts at level 2.
-3. The weakest domain biases the patient's behaviour: for example, weak rapport or cue-response
+   history is rated 1200, which gives level 1.
+3. The weakest domain biases the patient's behavior: for example, weak rapport or cue-response
    gets a more emotional, more guarded patient; weak information gathering gets a vaguer patient
    who volunteers nothing; weak clinical reasoning gets a case with distractors.
 4. The case is the published case for the student's profession with the lowest cost, where
@@ -450,7 +458,7 @@ The student is shown the reason in words, including the expected score.
 
 Trade-offs: the input is the rubric score, which comes from a model (section 10), so the rating
 inherits that noise; the constants are reasoned defaults and have not been calibrated against real
-students. Only 4-point domain rubrics feed the model; checklist rubrics do not. The behaviour bias
+students. Only 4-point domain rubrics feed the model; checklist rubrics do not. The behavior bias
 is keyed to the default rubric's domain keys, so a custom rubric gets level selection but a
 balanced patient.
 
@@ -514,8 +522,8 @@ snapshot, the wrap-up, the feedback JSON and the score; `messages` holds every l
 decision metadata for that turn. Faculty can add a note and an adjusted score, and for exams
 feedback can be held until released.
 
-Trade-off: the rubric scores are a model's judgement and have not been compared with human raters.
-The design reduces how much rests on that judgement (ledger for findings and objectives, quote
+Trade-off: the rubric scores are a model's judgment and have not been compared with human raters.
+The design reduces how much rests on that judgment (ledger for findings and objectives, quote
 verification, review flags, a faculty override), but it does not remove it.
 
 ### The running score, turn by turn
@@ -617,7 +625,7 @@ two or more judgmental or dismissive moments, six turns with two or fewer facts 
 more deflected topics. The console (`components/courses/LiveConsole.tsx`) refreshes every three
 seconds and shows the transcript and chart so far. The instructor can pause the visit with a note
 (the student sees an overlay and cannot send messages) and can send a coaching note that appears in
-the student's transcript labelled "Instructor". Both are stored as messages, so they are part of
+the student's transcript labeled "Instructor". Both are stored as messages, so they are part of
 the record the scorer and later reviewers see. The console also shows the running score for the
 visit so far (section 10).
 
@@ -637,7 +645,7 @@ a time limit.
   The voice is picked from pools grouped by sex and age band (women under and over 38; men under
   32, 32 to 61, and 62 and over) and then by a hash of the patient's name, so a 72-year-old does
   not sound 25 and a patient always sounds the same. On any ElevenLabs error or a 12-second
-  timeout, and whenever no key is set, the same sentence is synthesised by Amazon Polly with the
+  timeout, and whenever no key is set, the same sentence is synthesized by Amazon Polly with the
   generative engine, with the voice chosen by sex and name hash. Audio is cached in memory per
   speaker and sentence.
 - **Sentence by sentence.** The visit screen (`components/visit/Visit.tsx`) sends each finished
@@ -824,7 +832,7 @@ Collected from the sections above so they can be read in one place.
 - A deflected fact's true wording is in the patient's prompt for that turn, so keeping it back
   depends on the model following the instruction (sections 5 and 6).
 - The gatekeeper and the order matcher are models and can mis-match (sections 5 and 7).
-- Rubric scores are a model's judgement, unverified against human raters; the adaptive model
+- Rubric scores are a model's judgment, unverified against human raters; the adaptive model
   inherits that (sections 9 and 10).
 - No case in the library has been reviewed by a clinician. The 73 AI-drafted patients and the 8
   sample patients are all stored with `reviewed = false`; AI-drafted cases are internally checked
@@ -841,7 +849,7 @@ Collected from the sections above so they can be read in one place.
 - Three sequential model calls per turn (gatekeeper, patient, audit) add latency before the first
   word and after the last one. Measured on the deployed server, a reply starts in about 3 to 5
   seconds; the chart updates after the audit returns.
-- One process, one SQLite file, in-memory caches for synthesised speech (section 15). A deploy
+- One process, one SQLite file, in-memory caches for synthesized speech (section 15). A deploy
   restarts that process (section 16).
 - Anyone can register, including as faculty; there is no SSO (section 15).
 - The chart is an Epic-style layout drawn from case data. It is not connected to any real health

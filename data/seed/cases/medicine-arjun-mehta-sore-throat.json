@@ -744,6 +744,11 @@
     "Formulate a working diagnosis and differential, and counsel the patient on management",
     "Address the patient's concerns and agree on a plan with safety-netting"
    ],
+   "goals": [
+    "Take a focused history",
+    "Guide a remote throat exam",
+    "Agree a plan and safety net"
+   ],
    "timeLimitMin": 20
   },
   "answerKey": {

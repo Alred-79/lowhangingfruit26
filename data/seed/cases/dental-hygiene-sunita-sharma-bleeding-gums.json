@@ -762,6 +762,11 @@
     "Screen for tobacco and substance use as part of a comprehensive oral health risk assessment",
     "Provide oral hygiene instruction and prevention counseling, and determine what findings should be referred to the dentist"
    ],
+   "goals": [
+    "Take an oral health history",
+    "Guide the camera mouth exam",
+    "Teach home care and referral"
+   ],
    "timeLimitMin": 20
   },
   "answerKey": {

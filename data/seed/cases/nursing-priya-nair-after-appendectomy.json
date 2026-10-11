@@ -399,7 +399,7 @@
    "ethnicity": "Indian-American",
    "occupation": "Graphic designer",
    "language": "English",
-   "appearance": "A young woman with shoulder-length dark hair pulled into a loose bun, sitting propped up on pillows on her couch wearing a loose grey t-shirt. The room is softly lit with daylight through a window; she shifts position a few times during the call and holds a hand loosely over her lower abdomen when she laughs or moves.",
+   "appearance": "A young woman with shoulder-length dark hair pulled into a loose bun, sitting propped up on pillows on her couch wearing a loose gray t-shirt. The room is softly lit with daylight through a window; she shifts position a few times during the call and holds a hand loosely over her lower abdomen when she laughs or moves.",
    "portrait": "/portraits/nursing-priya-nair-after-appendectomy.jpg"
   },
   "persona": {
@@ -432,6 +432,11 @@
     "Provide teaching on pain management and bowel function.",
     "Provide teaching on incision care and activity restrictions.",
     "Determine whether any findings require SBAR escalation to the surgical provider."
+   ],
+   "goals": [
+    "Do a focused post-surgery check",
+    "Review medicines and give teaching",
+    "Decide whether to escalate"
    ],
    "timeLimitMin": 20
   },

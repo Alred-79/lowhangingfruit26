@@ -953,6 +953,11 @@
     "Formulate a PES statement and begin negotiating one or two small, patient-chosen behavior changes using motivational interviewing",
     "Discuss appropriate interprofessional referrals (e.g., diabetes education, social work, PT) and close the visit with a collaborative plan"
    ],
+   "goals": [
+    "Take a diet and nutrition history",
+    "Explore barriers and review medicines",
+    "Agree changes and referrals"
+   ],
    "timeLimitMin": 30
   },
   "setting": "Telehealth video visit; patient at home in his living room recliner, Suburban two-bedroom apartment",
