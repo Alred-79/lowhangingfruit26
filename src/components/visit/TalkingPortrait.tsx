@@ -10,6 +10,10 @@ export interface Mouth {
   x: number;
   y: number;
   w: number;
+  /** Mouth width, as a fraction of the image width. */
+  mw: number;
+  /** False when the keypoints were too noisy to trust the lip line: stretch only, no dark slit. */
+  slit: boolean;
 }
 
 // Portraits are AI-generated photos with the face anywhere from 25% to 45% down the frame, so the mouth is
@@ -40,10 +44,36 @@ async function locateMouth(img: HTMLImageElement): Promise<Mouth | null> {
   if (found.has(key)) return found.get(key)!;
   let m: Mouth | null = null;
   try {
-    const d = await (await loadDetector())?.detect(img).detections[0];
+    const det = await loadDetector();
+    let d = det?.detect(img).detections[0];
+    let refined = false;
+    if (det && d?.boundingBox && d.boundingBox.width / img.naturalWidth < 0.28) {
+      // Small faces get noisy keypoints: look again at an upscaled crop around the first hit and map back.
+      const bb = d.boundingBox as { originX?: number; originY?: number; width: number; height?: number };
+      const side = Math.min(img.naturalWidth, bb.width * 2.6);
+      const cx = (bb.originX ?? 0) + bb.width / 2, cy = (bb.originY ?? 0) + (bb.height ?? bb.width) / 2;
+      const x0 = Math.max(0, Math.min(img.naturalWidth - side, cx - side / 2)), y0 = Math.max(0, Math.min(img.naturalHeight - side, cy - side / 2));
+      const c = document.createElement("canvas");
+      c.width = c.height = 384;
+      c.getContext("2d")?.drawImage(img, x0, y0, side, side, 0, 0, 384, 384);
+      const d2 = det.detect(c as unknown as HTMLImageElement).detections[0];
+      if (d2?.boundingBox && d2.keypoints?.length) {
+        const k = side / 384;
+        refined = true;
+        d = {
+          boundingBox: { width: d2.boundingBox.width * k },
+          keypoints: d2.keypoints.map((p) => ({ x: (x0 + p.x * 384 * k) / img.naturalWidth, y: (y0 + p.y * 384 * k) / img.naturalHeight })),
+        };
+      }
+    }
     const mouth = d?.keypoints?.[3]; // BlazeFace order: eyes, nose, mouth, ears
     if (d && mouth && d.boundingBox) {
-      m = { x: mouth.x, y: mouth.y, w: d.boundingBox.width / img.naturalWidth };
+      const w = d.boundingBox.width / img.naturalWidth;
+      const [e1, e2] = [d.keypoints?.[0], d.keypoints?.[1]];
+      // Mouth width from the eye distance when we have it (about 0.85x), else a fraction of the face.
+      const eyes = e1 && e2 ? Math.hypot((e1.x - e2.x) * img.naturalWidth, (e1.y - e2.y) * img.naturalHeight) / img.naturalWidth : 0;
+      const mw = eyes > 0.05 ? Math.min(0.62 * w, Math.max(0.3 * w, eyes * 0.85)) : 0.45 * w;
+      m = { x: mouth.x, y: mouth.y, w, mw, slit: !refined };
       if (m.x < 0.2 || m.x > 0.8 || m.y < 0.15 || m.y > 0.7 || m.w < 0.1 || m.w > 0.7) m = null; // implausible, stay still
     }
   } catch {
@@ -78,9 +108,11 @@ export default function TalkingPortrait({ src, alt, talking, enabled, level }: {
     img.current = el;
     if (el?.complete && el.naturalWidth) setNatural((n) => n || { w: el.naturalWidth, h: el.naturalHeight });
   }, []);
+  const mouthRef = useRef<Mouth | null>(null);
   const live = useRef({ level, mouth, geo });
   useEffect(() => {
     live.current = { level, mouth, geo };
+    mouthRef.current = mouth;
   });
 
   // Lay the stage over exactly the area the cropped photo occupies (object-cover, anchored 50% / 30%).
@@ -92,13 +124,16 @@ export default function TalkingPortrait({ src, alt, talking, enabled, level }: {
       if (!W || !H) return;
       const s = Math.max(W / natural.w, H / natural.h);
       const w = natural.w * s, h = natural.h * s;
-      setGeo({ w, h, l: (W - w) * 0.5, t: (H - h) * 0.3, ar: natural.w / natural.h });
+      // Before the mouth is found, the plain 50% / 30% crop. After, slide the crop (inside the image) so the
+      // mouth sits above the captions and call controls along the bottom.
+      const t = mouthRef.current ? Math.min(0, Math.max(H - h, H * 0.5 - mouthRef.current.y * h)) : (H - h) * 0.3;
+      setGeo({ w, h, l: (W - w) * 0.5, t, ar: natural.w / natural.h });
     };
     fit();
     const ro = new ResizeObserver(fit);
     ro.observe(el);
     return () => ro.disconnect();
-  }, [natural]);
+  }, [natural, mouth]);
 
   useEffect(() => {
     if (!enabled || !natural || !img.current) return;
@@ -129,10 +164,14 @@ export default function TalkingPortrait({ src, alt, talking, enabled, level }: {
         st.style.transform = `translateY(${(-cur * 1.2).toFixed(2)}px) rotate(${rot.toFixed(3)}deg) scale(${(1.012 + cur * 0.006).toFixed(4)})`;
       }
       if (mouth && geo && jw && gp) {
-        const drop = cur * mouth.w * geo.w * 0.05; // px the lower face slides down
-        jw.style.transform = `translateY(${drop.toFixed(2)}px)`;
-        gp.style.opacity = String(Math.min(0.6, Math.max(0, cur - 0.2) * 1.1));
-        gp.style.transform = `translate(-50%, calc(-50% + ${(drop * 0.3).toFixed(2)}px)) scaleY(${(0.1 + cur).toFixed(3)})`;
+        // The lower face stretches down from the lip line (nothing moves at the line itself), and a thin
+        // dark slit opens on it.
+        const lv = reduce ? 0 : cur;
+        const fw = mouth.w * geo.w;
+        jw.style.transform = `scaleY(${(1 + lv * 0.1).toFixed(4)})`;
+        gp.style.opacity = String(Math.min(0.9, Math.max(0, lv - 0.08) * 1.5));
+        gp.style.transform = `translate(-50%, -50%) scaleY(${Math.max(0.05, lv).toFixed(3)})`;
+        gp.style.height = `${(fw * 0.035).toFixed(2)}px`;
       }
       raf = requestAnimationFrame(frame);
     };
@@ -148,6 +187,12 @@ export default function TalkingPortrait({ src, alt, talking, enabled, level }: {
 
   const fw = mouth && geo ? mouth.w * geo.w : 0; // face width in px
   const place: React.CSSProperties = geo ? { left: geo.l, top: geo.t, width: geo.w, height: geo.h } : { inset: 0 };
+  if (geo && mouth) place.transition = "top 400ms ease-in-out";
+  const lipY = mouth && geo ? mouth.y * geo.h - fw * 0.03 : 0; // the keypoint sits a little below the line between the lips
+  const cx = mouth && geo ? mouth.x * geo.w : 0;
+  const half = fw * 0.42, feather = fw * 0.14;
+  // Hard top edge exactly at the lip line; feathered at the sides and bottom only.
+  const mask = `linear-gradient(to bottom, transparent ${lipY}px, #000 ${lipY}px, #000 ${lipY + fw * 0.3}px, transparent ${lipY + fw * 0.62}px), linear-gradient(to right, transparent ${cx - half}px, #000 ${cx - half + feather}px, #000 ${cx + half - feather}px, transparent ${cx + half}px)`;
 
   return (
     <div ref={box} className="absolute inset-0 overflow-hidden">
@@ -155,33 +200,32 @@ export default function TalkingPortrait({ src, alt, talking, enabled, level }: {
         <Photo src={src} alt={alt} fill={!!geo} imgRef={imgRef} onLoad={(e) => setNatural({ w: e.currentTarget.naturalWidth, h: e.currentTarget.naturalHeight })} />
         {mouth && geo && (
           <>
-            {/* The lower face again, softly masked and slid down with the jaw. */}
+            {/* The lower face again, opaque from the lip line down, stretched from the lip line. */}
             <div
               ref={jaw}
               aria-hidden
               className="pointer-events-none absolute inset-0"
-              style={{
-                WebkitMaskImage: `radial-gradient(ellipse ${fw * 0.6}px ${fw * 0.34}px at ${mouth.x * geo.w}px ${mouth.y * geo.h + fw * 0.2}px, #000 40%, transparent 100%)`,
-                maskImage: `radial-gradient(ellipse ${fw * 0.6}px ${fw * 0.34}px at ${mouth.x * geo.w}px ${mouth.y * geo.h + fw * 0.2}px, #000 40%, transparent 100%)`,
-              }}
+              style={{ transformOrigin: `50% ${lipY}px`, WebkitMaskImage: mask, maskImage: mask, WebkitMaskComposite: "source-in", maskComposite: "intersect" }}
             >
               <Photo src={src} alt="" fill={!!geo} />
             </div>
-            {/* The dark of an open mouth, between the lips. */}
-            <div
+            {/* The dark of an open mouth, on the lip line. */}
+            {mouth.slit && <div
               ref={gap}
               aria-hidden
-              className="pointer-events-none absolute rounded-[50%] opacity-0"
+              className="pointer-events-none absolute opacity-0"
               style={{
-                left: mouth.x * geo.w,
-                top: mouth.y * geo.h,
-                width: fw * 0.15,
-                height: fw * 0.05,
-                transform: "translate(-50%, -50%) scaleY(0.15)",
-                background: "radial-gradient(ellipse at center, rgba(20,6,8,0.9) 25%, rgba(45,15,18,0.55) 65%, transparent 100%)",
-                filter: "blur(1px)",
+                left: cx,
+                top: lipY,
+                width: mouth.mw * geo.w * 0.7,
+                height: fw * 0.035,
+                borderRadius: "50%",
+                transform: "translate(-50%, -50%) scaleY(0.05)",
+                transformOrigin: "50% 50%",
+                background: "radial-gradient(ellipse at center, rgba(34,10,12,0.95) 30%, rgba(34,10,12,0.5) 70%, transparent 100%)",
+                filter: "blur(0.6px)",
               }}
-            />
+            />}
           </>
         )}
       </div>
