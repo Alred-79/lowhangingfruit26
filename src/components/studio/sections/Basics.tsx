@@ -187,10 +187,10 @@ export function LinkPicker({ label, options, selected, onChange, empty }: { labe
         {selected.map((id) => {
           const o = options.find((x) => x.id === id);
           return (
-            <span key={id} className={`inline-flex items-center gap-1 rounded border px-1.5 py-0.5 text-xs ${o ? "border-slate-200 bg-slate-50 text-slate-800" : "border-rose-200 bg-rose-50 text-rose-800"}`}>
-              <span className="font-mono text-[10px] text-slate-400">{id}</span>
+            <span key={id} className={`inline-flex max-w-full items-center gap-1 rounded-full border px-2 py-0.5 text-xs ${o ? "border-line bg-surface-2 text-ink" : "border-rose-200 bg-rose-50 text-rose-800"}`}>
+              <span className="font-mono text-[10px] opacity-60">{id}</span>
               {o ? o.label : "no longer exists"}
-              <button type="button" aria-label={`Unlink ${id}`} className="ml-0.5 text-slate-400 hover:text-rose-700" onClick={() => onChange(selected.filter((x) => x !== id))}>
+              <button type="button" aria-label={`Unlink ${id}`} className="ml-0.5 grid min-h-6 min-w-6 place-items-center rounded-full opacity-70 hover:bg-rose-100 hover:text-rose-700 hover:opacity-100" onClick={() => onChange(selected.filter((x) => x !== id))}>
                 x
               </button>
             </span>
@@ -199,7 +199,7 @@ export function LinkPicker({ label, options, selected, onChange, empty }: { labe
         {!selected.length && <span className="text-xs text-amber-700">{empty}</span>}
         {free.length > 0 && (
           <select
-            className="rounded border border-slate-300 bg-white px-1.5 py-1 text-xs text-slate-700"
+            className="min-h-8 w-full max-w-full rounded-full border border-brand-200 bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-800 sm:w-auto sm:max-w-xs pointer-coarse:min-h-11"
             value=""
             aria-label={`Add to ${label}`}
             onChange={(e) => e.target.value && onChange([...selected, e.target.value])}
@@ -240,7 +240,7 @@ export function ObjectivesSection({ p, set }: SectionProps) {
               <Area className="flex-1" minRows={1} value={o.text} placeholder="The student should be able to..." onChange={(v) => up(o.id, { text: v })} />
               <RemoveButton onClick={() => set((c) => ({ ...c, objectives: c.objectives.filter((x) => x.id !== o.id) }))} />
             </div>
-            <div className="mt-2 grid gap-3 pl-7 lg:grid-cols-2">
+            <div className="mt-2 grid gap-3 sm:pl-7 lg:grid-cols-2">
               <LinkPicker label="Facts that demonstrate it" options={factOpts} selected={o.factIds} onChange={(ids) => up(o.id, { factIds: ids })} empty="No facts linked." />
               <LinkPicker label="Actions that demonstrate it" options={actionOpts} selected={o.actionIds} onChange={(ids) => up(o.id, { actionIds: ids })} empty="No actions linked." />
             </div>

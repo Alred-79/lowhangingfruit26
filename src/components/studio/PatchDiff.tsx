@@ -34,19 +34,19 @@ function wordDiff(a: string, b: string): { before: { t: string; ch: boolean }[];
 
 function Change({ v }: { v: OpView }) {
   const d = useMemo(() => (v.verb === "Change" && v.before && v.after ? wordDiff(v.before, v.after) : null), [v]);
-  const box = "whitespace-pre-wrap break-words rounded border px-2 py-1.5 text-[12.5px] leading-snug";
+  const box = "whitespace-pre-wrap break-words rounded-xl border px-2.5 py-1.5 text-[12.5px] leading-snug";
   return (
     <div className="space-y-1">
       {v.verb !== "Add" && (
-        <div className={cx(box, "border-rose-200 bg-rose-50 text-slate-800")}>
+        <div className={cx(box, "border-rose-200 bg-rose-50 text-rose-950")}>
           <span className="mr-1.5 text-[10px] font-semibold uppercase tracking-wide text-rose-700">{v.verb === "Remove" ? "Removed" : "Now"}</span>
-          {d ? d.before.map((w, k) => (w.ch && w.t.trim() ? <del key={k} className="bg-rose-200 decoration-rose-700">{w.t}</del> : <span key={k}>{w.t}</span>)) : v.before || <em className="text-slate-400">empty</em>}
+          {d ? d.before.map((w, k) => (w.ch && w.t.trim() ? <del key={k} className="bg-rose-200 decoration-rose-700">{w.t}</del> : <span key={k}>{w.t}</span>)) : v.before || <em className="opacity-60">empty</em>}
         </div>
       )}
       {v.verb !== "Remove" && (
-        <div className={cx(box, "border-emerald-200 bg-emerald-50 text-slate-800")}>
+        <div className={cx(box, "border-emerald-200 bg-emerald-50 text-emerald-950")}>
           <span className="mr-1.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-700">{v.verb === "Add" ? "Added" : "Proposed"}</span>
-          {d ? d.after.map((w, k) => (w.ch && w.t.trim() ? <ins key={k} className="bg-emerald-200 no-underline">{w.t}</ins> : <span key={k}>{w.t}</span>)) : v.after || <em className="text-slate-400">empty</em>}
+          {d ? d.after.map((w, k) => (w.ch && w.t.trim() ? <ins key={k} className="bg-emerald-200 no-underline">{w.t}</ins> : <span key={k}>{w.t}</span>)) : v.after || <em className="opacity-60">empty</em>}
         </div>
       )}
     </div>
@@ -59,10 +59,10 @@ export default function PatchDiff({ views, picked, onPick }: { views: OpView[]; 
     <ol className="space-y-2.5">
       {views.map((v, i) => (
         <li key={i}>
-          <label className="mb-1 flex items-start gap-1.5 text-xs font-medium text-slate-700">
+          <label className="mb-1 flex items-start gap-1.5 text-xs font-semibold text-ink-2">
             {picked && onPick && <input type="checkbox" className="mt-0.5" checked={picked[i]} onChange={(e) => onPick(i, e.target.checked)} aria-label={`Include change ${i + 1}`} />}
             <span>
-              <span className={cx("mr-1", v.verb === "Add" ? "text-emerald-700" : v.verb === "Remove" ? "text-rose-700" : "text-slate-500")}>{v.verb}</span>
+              <span className={cx("mr-1", v.verb === "Add" ? "text-emerald-700" : v.verb === "Remove" ? "text-rose-700" : "text-ink-3")}>{v.verb}</span>
               {v.where}
             </span>
           </label>
