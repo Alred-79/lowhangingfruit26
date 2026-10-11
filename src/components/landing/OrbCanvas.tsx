@@ -58,6 +58,7 @@ function Orb() {
   const litAttr = useRef<THREE.BufferAttribute>(null);
   const pulse = useRef<THREE.LineLoop>(null);
   const pulseMat = useRef<THREE.LineBasicMaterial>(null);
+  const pointsMat = useRef<THREE.ShaderMaterial>(null);
   const clock = useRef(0);
 
   const data = useMemo(() => {
@@ -93,7 +94,7 @@ function Orb() {
     const dt = Math.min(delta, 0.05);
     clock.current = (clock.current + dt) % CYCLE;
     const t = clock.current;
-    uniforms.uPixelRatio.value = state.gl.getPixelRatio();
+    if (pointsMat.current) pointsMat.current.uniforms.uPixelRatio.value = state.gl.getPixelRatio();
     if (group.current) group.current.rotation.y += dt * 0.14;
 
     // The rapport sweep: grows outward, holds, then the shells settle back for the next interview.
@@ -101,12 +102,17 @@ function Orb() {
     const sweepR = (1 - Math.pow(1 - sweepT, 3)) * MAX_R;
     const settling = t > SWEEP + HOLD;
     const k = 1 - Math.exp(-dt * (settling ? 1.6 : 7));
-    const { lit, radius, unlocks, jitter, n } = data;
-    for (let i = 0; i < n - 1; i++) {
-      const target = !settling && unlocks[i] && sweepR >= radius[i] * (1 + jitter[i] * 0.08) ? 1 : 0;
-      lit[i] += (target - lit[i]) * k;
+    const { radius, unlocks, jitter, n } = data;
+    const attr = litAttr.current;
+    if (attr) {
+      // The attribute owns the typed array; it is mutated in place (no allocation per frame).
+      const lit = attr.array as Float32Array;
+      for (let i = 0; i < n - 1; i++) {
+        const target = !settling && unlocks[i] && sweepR >= radius[i] * (1 + jitter[i] * 0.08) ? 1 : 0;
+        lit[i] += (target - lit[i]) * k;
+      }
+      attr.needsUpdate = true;
     }
-    if (litAttr.current) litAttr.current.needsUpdate = true;
 
     if (pulse.current && pulseMat.current) {
       const s = Math.max(0.001, sweepR);
@@ -139,7 +145,7 @@ function Orb() {
             <bufferAttribute attach="attributes-aSize" args={[data.size, 1]} />
             <bufferAttribute ref={litAttr} attach="attributes-aLit" args={[data.lit, 1]} usage={THREE.DynamicDrawUsage} />
           </bufferGeometry>
-          <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms} transparent depthWrite={false} />
+          <shaderMaterial ref={pointsMat} vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms} transparent depthWrite={false} />
         </points>
       </group>
     </>
