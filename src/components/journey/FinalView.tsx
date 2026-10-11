@@ -19,12 +19,12 @@ const GROUPS: { title: string; kinds: string[] }[] = [
 // ---------- (b) influence chains ----------
 
 const STEP_STYLE: Record<string, { bar: string; tag: string }> = {
-  discovered: { bar: "border-l-slate-400", tag: "text-slate-600" },
-  handed_off: { bar: "border-l-violet-400", tag: "text-violet-700" },
-  asked: { bar: "border-l-sky-500", tag: "text-sky-700" },
-  new_information: { bar: "border-l-orange-400", tag: "text-orange-700" },
-  incorporated: { bar: "border-l-brand-500", tag: "text-brand-700" },
-  plan: { bar: "border-l-emerald-500", tag: "text-emerald-700" },
+  discovered: { bar: "bg-slate-400", tag: "text-slate-600" },
+  handed_off: { bar: "bg-violet-400", tag: "text-violet-700" },
+  asked: { bar: "bg-sky-500", tag: "text-sky-700" },
+  new_information: { bar: "bg-orange-400", tag: "text-orange-700" },
+  incorporated: { bar: "bg-brand-500", tag: "text-brand-700" },
+  plan: { bar: "bg-emerald-500", tag: "text-emerald-700" },
 };
 
 function Arrow() {
@@ -47,7 +47,10 @@ function ChainFlow({ chain, onOpen, stages }: { chain: Chain; onOpen: (id: strin
           const st = STEP_STYLE[s.kind];
           const body = (
             <>
-              <div className={cx("text-[11px] font-semibold uppercase tracking-wide", st.tag)}>{s.label}</div>
+              <div className={cx("flex items-center gap-1.5 text-[12px] font-semibold", st.tag)}>
+                <span className={cx("h-2 w-2 shrink-0 rounded-full", st.bar)} aria-hidden />
+                {s.label}
+              </div>
               <div className="mt-0.5 line-clamp-4 text-[13px] leading-snug text-slate-800">{s.kind === "asked" ? `“${s.detail}”` : s.detail}</div>
               <div className="mt-1 text-[11px] text-slate-500">{s.who}{s.stageOrder > 0 && s.stageOrder <= stages ? ` · encounter ${s.stageOrder}` : ""}</div>
             </>
@@ -56,9 +59,9 @@ function ChainFlow({ chain, onOpen, stages }: { chain: Chain; onOpen: (id: strin
             <div key={i} className="flex items-stretch">
               {i > 0 && <Arrow />}
               {s.entryId ? (
-                <button onClick={() => onOpen(s.entryId!)} className={cx("w-48 shrink-0 rounded-md border border-l-4 border-slate-200 bg-white p-2 text-left hover:bg-slate-50", st.bar)}>{body}</button>
+                <button onClick={() => onOpen(s.entryId!)} className="w-48 shrink-0 rounded-xl border border-line bg-surface p-2.5 text-left transition-colors hover:bg-slate-50">{body}</button>
               ) : (
-                <div className={cx("w-48 shrink-0 rounded-md border border-l-4 border-slate-200 bg-slate-50 p-2", st.bar)}>{body}</div>
+                <div className="w-48 shrink-0 rounded-xl border border-line bg-surface-2 p-2.5">{body}</div>
               )}
             </div>
           );
@@ -371,7 +374,7 @@ export default function FinalView({ view, onOpen, refresh }: { view: RunView; on
           <div className="space-y-3">
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-500">
               {[["discovered", "Recorded"], ["handed_off", "Handed off"], ["asked", "Asked because of it"], ["new_information", "New information"], ["incorporated", "Built on"], ["plan", "Care plan"]].map(([k, l]) => (
-                <span key={k} className="inline-flex items-center gap-1.5"><span className={cx("h-3 border-l-4", STEP_STYLE[k].bar)} />{l}</span>
+                <span key={k} className="inline-flex items-center gap-1.5"><span className={cx("h-2 w-2 rounded-full", STEP_STYLE[k].bar)} aria-hidden />{l}</span>
               ))}
             </div>
             {view.chains.map((c) => <ChainFlow key={c.id} chain={c} onOpen={onOpen} stages={view.stages.length} />)}

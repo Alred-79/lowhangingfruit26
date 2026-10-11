@@ -52,7 +52,7 @@ const TIME_CHOICES = [10, 15, 20, 25, 30, 45, 60];
 function GuideNote({ children }: { children: React.ReactNode }) {
   if (!children) return null;
   return (
-    <p className="mt-1.5 rounded border-l-2 border-brand-500 bg-brand-50 px-2 py-1 text-xs text-slate-700">
+    <p className="mt-1.5 rounded-lg bg-brand-50 px-2.5 py-1.5 text-xs text-slate-700 ring-1 ring-inset ring-brand-200">
       <span className="font-medium text-brand-700">Guide: </span>
       {children}
     </p>

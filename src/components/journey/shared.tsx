@@ -236,7 +236,7 @@ export function ProvenancePanel({ view, entryId, onOpen, onClose }: { view: RunV
           <div className="mt-4">
             <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500">Evidence</h3>
             <p className="mt-1 text-xs text-slate-500">{evidenceWhere(e)}{e.evidence.verified === false ? " · the cited words could not be found, so this entry was downgraded" : e.evidence.quote ? " · quote verified against the source" : ""}</p>
-            {e.evidence.quote && <blockquote className="mt-1 border-l-2 border-brand-500 bg-slate-50 px-3 py-2 text-sm italic text-slate-700">{e.evidence.quote}</blockquote>}
+            {e.evidence.quote && <blockquote className="mt-1.5 rounded-xl bg-brand-50 px-3.5 py-2.5 text-[14px] italic leading-relaxed text-ink ring-1 ring-inset ring-brand-200">&ldquo;{e.evidence.quote}&rdquo;</blockquote>}
           </div>
         )}
         {(e.meta?.unverifiedValues?.length || e.meta?.flags?.length || e.meta?.owner) && (
@@ -338,7 +338,7 @@ export function TraceTable({ evaluation, compact }: { evaluation: TraceEvaluatio
                   </div>
                   <div className="min-w-0 text-sm">
                     {r!.location && <div className="text-xs text-slate-500">Evidence: <span className="font-medium text-slate-700">{r!.location.replace("->", "→")}</span></div>}
-                    {r!.quote && <blockquote className="mt-1 border-l-2 border-slate-300 pl-2 text-[13px] italic text-slate-600">&ldquo;{r!.quote}&rdquo;</blockquote>}
+                    {r!.quote && <blockquote className="mt-1 rounded-lg bg-surface-2 px-2.5 py-1.5 text-[13px] italic text-ink-2">&ldquo;{r!.quote}&rdquo;</blockquote>}
                     <p className="mt-1 text-slate-800">{r!.feedback}</p>
                   </div>
                 </li>
