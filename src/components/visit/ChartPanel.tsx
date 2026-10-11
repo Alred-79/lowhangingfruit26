@@ -12,7 +12,7 @@ const KIND_LABEL: Record<string, string> = { exam: "Remote exam", vitals: "Vital
 function Stamp({ turn, how }: { turn: number; how?: string }) {
   const rec = how === "record";
   return (
-    <span className={`mt-0.5 inline-flex h-5 min-w-8 shrink-0 items-center justify-center rounded px-1 font-mono text-[11px] tabular-nums ${rec ? "bg-sky-50 text-sky-800 ring-1 ring-inset ring-sky-200" : "bg-slate-100 text-ink-3"}`} title={rec ? "Already on record from an earlier encounter" : `Turn ${turn}`}>
+    <span className={`mt-0.5 inline-flex h-5 min-w-8 shrink-0 items-center justify-center rounded-md px-1 font-mono text-[11px] font-semibold tabular-nums ${rec ? "bg-sky-100 text-sky-900" : "bg-ink text-white"}`} title={rec ? "Already on record from an earlier encounter" : `Turn ${turn}`}>
       {rec ? "REC" : `T${turn}`}
     </span>
   );
@@ -104,13 +104,19 @@ export default function ChartPanel({
   }
 
   return (
-    <section aria-label="Patient chart" className="flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-line bg-surface">
+    <section aria-label="Patient chart" className="flex h-full min-h-0 flex-col overflow-hidden rounded-[22px] bg-surface shadow-e3">
       {/* Patient banner */}
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-line bg-surface-2 px-4 py-3">
-        <div>
-          <div className="text-[15.5px] font-semibold leading-tight text-ink">{chart.patient.name}</div>
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-line bg-gradient-to-r from-brand-50 via-surface to-[var(--color-xp-soft)] px-4 py-3">
+        <div className="flex items-center gap-3">
+          {chart.patient.portrait ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={chart.patient.portrait} alt="" className="h-11 w-11 shrink-0 rounded-2xl object-cover ring-2 ring-white shadow-e1" />
+          ) : null}
+          <div>
+          <div className="font-display text-[17px] font-extrabold leading-tight text-ink">{chart.patient.name}</div>
           <div className="mt-0.5 text-[12.5px] text-ink-3">
             {chart.patient.age} y · {chart.patient.sex} · {chart.patient.pronouns}
+          </div>
           </div>
         </div>
         <div className="min-w-0 flex-1 text-[12.5px]">
@@ -119,7 +125,7 @@ export default function ChartPanel({
             {chart.chiefComplaint}
           </div>
         </div>
-        <div className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[12.5px] ${allergyAlert ? "bg-rose-600 font-medium text-white" : "bg-surface text-ink-2 ring-1 ring-inset ring-line"}`}>
+        <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12.5px] ${allergyAlert ? "bg-rose-600 font-bold text-white shadow-[0_6px_14px_-6px_rgb(225_29_72/0.7)]" : "bg-surface font-medium text-ink-2 ring-1 ring-inset ring-line"}`}>
           {allergyAlert && <AlertTriangle className="h-3.5 w-3.5" aria-hidden />}
           <span className={allergyAlert ? "opacity-90" : "text-ink-3"}>Allergies:</span>
           {allergies ? allergies.value : "Not on file"}
@@ -127,20 +133,20 @@ export default function ChartPanel({
       </div>
 
       {/* The ledger strip: what this visit has put in the chart so far. */}
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b border-line/70 px-4 py-2 text-[12.5px] text-ink-3">
-        <span className="font-medium text-ink-2">Filed this visit</span>
-        <span>
-          <span className="font-mono font-semibold tabular-nums text-ink">{filedFacts}</span> {filedFacts === 1 ? "finding" : "findings"}
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 border-b border-line/70 px-4 py-2 text-[12.5px] text-ink-2">
+        <span className="mr-1 font-bold text-ink">Filed this visit</span>
+        <span key={`f${filedFacts}`} className="pop-spring inline-flex items-center gap-1 rounded-full bg-[var(--color-xp)] px-2 py-0.5 font-semibold text-ink">
+          <span className="font-mono font-bold tabular-nums">{filedFacts}</span> {filedFacts === 1 ? "finding" : "findings"}
         </span>
-        <span>
-          <span className="font-mono font-semibold tabular-nums text-ink">{chart.results.length}</span> {chart.results.length === 1 ? "result" : "results"}
+        <span className="inline-flex items-center gap-1 rounded-full bg-[var(--color-tier-reluctant-soft)] px-2 py-0.5 font-semibold text-[var(--color-tier-reluctant-ink)]">
+          <span className="font-mono font-bold tabular-nums">{chart.results.length}</span> {chart.results.length === 1 ? "result" : "results"}
         </span>
-        <span>
-          <span className="font-mono font-semibold tabular-nums text-ink">{chart.artifacts.length}</span> {chart.artifacts.length === 1 ? "document" : "documents"}
+        <span className="inline-flex items-center gap-1 rounded-full bg-[var(--color-mastery-soft)] px-2 py-0.5 font-semibold text-[var(--color-mastery-ink)]">
+          <span className="font-mono font-bold tabular-nums">{chart.artifacts.length}</span> {chart.artifacts.length === 1 ? "document" : "documents"}
         </span>
         {onRecord > 0 && (
-          <span>
-            <span className="font-mono font-semibold tabular-nums text-ink">{onRecord}</span> already on record
+          <span className="inline-flex items-center gap-1 rounded-full bg-sky-100 px-2 py-0.5 font-semibold text-sky-950">
+            <span className="font-mono font-bold tabular-nums">{onRecord}</span> already on record
           </span>
         )}
         <span className="ml-auto hidden text-[12px] sm:inline">Findings use the case&apos;s own wording, never the patient&apos;s</span>
@@ -155,12 +161,12 @@ export default function ChartPanel({
               role="tab"
               aria-selected={tab === t.id}
               onClick={() => open(t.id)}
-              className={`relative -mb-px flex min-h-10 items-center gap-1.5 whitespace-nowrap border-b-2 px-3 text-[13px] pointer-coarse:min-h-11 ${tab === t.id ? "border-brand-600 font-semibold text-ink" : "border-transparent text-ink-3 hover:bg-slate-50 hover:text-ink"}`}
+              className={`relative -mb-px flex min-h-10 items-center gap-1.5 whitespace-nowrap border-b-[3px] px-3 text-[13px] pointer-coarse:min-h-11 ${tab === t.id ? "border-brand-600 font-bold text-ink" : "border-transparent font-medium text-ink-3 hover:bg-brand-50/60 hover:text-ink"}`}
             >
               <t.Icon className={`h-3.5 w-3.5 ${tab === t.id ? "text-brand-600" : ""}`} aria-hidden />
               {t.label}
               {n > 0 && (
-                <span key={n} className="pop-in rounded-full bg-brand-600 px-1.5 font-mono text-[10.5px] font-semibold leading-4 text-white" aria-label={`${n} new`}>
+                <span key={n} className="pop-spring rounded-full bg-[var(--color-xp)] px-1.5 font-mono text-[10.5px] font-bold leading-4 text-ink ring-1 ring-ink/20" aria-label={`${n} new`}>
                   {n}
                 </span>
               )}
@@ -196,9 +202,9 @@ export default function ChartPanel({
             )}
             {chart.sections.map((s) => (
               <section key={s.category}>
-                <h3 className="mb-1.5 flex items-center justify-between border-b border-line pb-1 text-[12.5px] font-semibold text-ink-2">
+                <h3 className="mb-1.5 flex items-center justify-between border-b border-line pb-1 font-display text-[13.5px] font-extrabold text-ink">
                   {s.label}
-                  <span className="font-mono text-[11px] font-normal text-ink-3">{s.items.length}</span>
+                  <span className="rounded-full bg-surface-2 px-1.5 font-mono text-[11px] font-semibold text-ink-2">{s.items.length}</span>
                 </h3>
                 <ul className="space-y-0.5">
                   {s.items.map((it, i) => (
@@ -206,10 +212,11 @@ export default function ChartPanel({
                       key={it.id}
                       data-chart-turn={it.turn}
                       style={{ "--i": i } as React.CSSProperties}
-                      className={`flex items-start gap-2.5 rounded-lg px-2 py-1.5 text-[13.5px] leading-relaxed ${fresh.has(it.id) ? "flash-new" : ""} ${highlight !== null && it.turn === highlight && it.how !== "record" ? "bg-brand-50 ring-1 ring-inset ring-brand-300" : ""}`}
+                      className={`flex items-start gap-2.5 rounded-xl px-2 py-1.5 text-[13.5px] leading-relaxed ${fresh.has(it.id) ? "unlock bg-[var(--color-xp-soft)] ring-1 ring-inset ring-[var(--color-xp)]" : ""} ${highlight !== null && it.turn === highlight && it.how !== "record" ? "bg-brand-50 ring-1 ring-inset ring-brand-300" : ""}`}
                     >
                       <Stamp turn={it.turn} how={it.how} />
-                      <span className="text-ink">{it.text}</span>
+                      <span className="min-w-0 flex-1 text-ink">{it.text}</span>
+                      {fresh.has(it.id) && <span className="mt-0.5 shrink-0 rounded-full bg-ink px-1.5 font-mono text-[10.5px] font-bold text-[var(--color-xp)]">NEW</span>}
                     </li>
                   ))}
                 </ul>
@@ -220,7 +227,7 @@ export default function ChartPanel({
 
         {tab === "results" && (
           <div className="space-y-4">
-            <form onSubmit={submitOrder} className="rounded-xl border border-line bg-surface-2 p-3.5">
+            <form onSubmit={submitOrder} className="rounded-2xl border border-line bg-surface-2 p-3.5">
               <label htmlFor="order-input" className="mb-1.5 block text-[13px] font-semibold text-ink-2">
                 Request an exam, test or record
               </label>
@@ -242,7 +249,7 @@ export default function ChartPanel({
             {chart.results.length === 0 && chart.unmatched.length === 0 && <p className="text-[13.5px] text-ink-3">No results yet.</p>}
             <ul className="space-y-2">
               {chart.results.map((r, i) => (
-                <li key={r.id} style={{ "--i": i } as React.CSSProperties} className={`rounded-xl border p-3.5 ${r.abnormal ? "border-amber-300 bg-amber-50/60" : "border-line"} ${fresh.has(r.id) ? "flash-new" : ""}`}>
+                <li key={r.id} style={{ "--i": i, "--glow": "var(--color-tier-reluctant)" } as React.CSSProperties} className={`rounded-2xl border p-3.5 ${r.abnormal ? "border-amber-300 bg-amber-50/60" : "border-line"} ${fresh.has(r.id) ? "unlock" : ""}`}>
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <span className="text-[14px] font-semibold text-ink">{r.name}</span>
                     <span className="flex items-center gap-1.5 text-[12px] text-ink-3">

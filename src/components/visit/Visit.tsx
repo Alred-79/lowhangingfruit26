@@ -1,6 +1,6 @@
 "use client";
 
-import { Captions, CaptionsOff, Check, Clock, History, FlaskConical, Lightbulb, MessageSquareText, Mic, MicOff, PhoneOff, RotateCcw, SendHorizontal, ShieldAlert, Users, Video, VideoOff, Volume2, VolumeX } from "lucide-react";
+import { Captions, CaptionsOff, Check, Clock, History, FlaskConical, Lightbulb, MessageSquareText, Mic, MicOff, PhoneOff, RotateCcw, SendHorizontal, ShieldAlert, Stethoscope, Users, Video, VideoOff, Volume2, VolumeX } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
@@ -9,6 +9,9 @@ import JourneyChartTab from "@/components/journey/JourneyChartTab";
 import TrustLabel from "@/components/TrustLabel";
 import type { ChartView } from "@/lib/engine/encounter";
 import ErrorNote from "@/components/ErrorNote";
+import Aurora from "@/components/game/Aurora";
+import { HoldButton } from "@/components/game/controls";
+import TrustHud from "./TrustHud";
 import ChartPanel from "./ChartPanel";
 
 interface Msg {
@@ -61,33 +64,6 @@ const OUTSIDE = "Outside the case record";
 const noop = () => () => {};
 const hasSpeech = () => "SpeechRecognition" in window || "webkitSpeechRecognition" in window;
 
-/** Patient comfort on the stage: the number, a banded bar and the last change. Practice only. */
-function ComfortGauge({ value, delta }: { value: number; delta: number }) {
-  const tone = value >= 60 ? "bg-emerald-400" : value >= 40 ? "bg-amber-400" : "bg-rose-400";
-  const word = value >= 60 ? "at ease" : value >= 40 ? "guarded" : "uneasy";
-  return (
-    <div
-      className="flex items-center gap-2.5 rounded-full bg-black/45 py-1.5 pl-3 pr-2 text-white ring-1 ring-white/10 backdrop-blur-sm"
-      title="How comfortable the patient is with you. It rises with empathy, clear purpose and open questions, and falls with judgment, jargon or rushing. Reluctant facts need it. Shown in practice only."
-    >
-      <span className="text-[11.5px] text-white/75">Comfort</span>
-      <span className="relative h-1.5 w-14 overflow-hidden rounded-full bg-white/20 sm:w-24" role="meter" aria-label="Patient comfort" aria-valuemin={0} aria-valuemax={100} aria-valuenow={value}>
-        <span className={`absolute inset-y-0 left-0 w-full origin-left rounded-full transition-transform duration-700 ease-[var(--ease-in-out-ui)] ${tone}`} style={{ transform: `scaleX(${value / 100})` }} />
-        <span className="absolute inset-y-0 left-[40%] w-px bg-black/40" aria-hidden />
-        <span className="absolute inset-y-0 left-[60%] w-px bg-black/40" aria-hidden />
-      </span>
-      <span className="font-mono text-[12.5px] tabular-nums">{value}</span>
-      <span className="hidden text-[11.5px] text-white/65 sm:inline">{word}</span>
-      {delta !== 0 && (
-        <span key={`${value}-${delta}`} className={`pop-in rounded-full px-1.5 font-mono text-[11.5px] font-semibold tabular-nums ${delta > 0 ? "bg-emerald-400/20 text-emerald-200" : "bg-rose-400/20 text-rose-200"}`}>
-          {delta > 0 ? "+" : ""}
-          {delta}
-        </span>
-      )}
-    </div>
-  );
-}
-
 function CallButton({ on, onClick, label, disabled, children }: { on: boolean; onClick: () => void; label: string; disabled?: boolean; children: React.ReactNode }) {
   return (
     <button
@@ -106,9 +82,9 @@ function CallButton({ on, onClick, label, disabled, children }: { on: boolean; o
 /** A patient line that also says what it put in the chart, linked to the chart. */
 function FiledChip({ n, onClick }: { n: number; onClick: () => void }) {
   return (
-    <button onClick={onClick} className="fade-in mt-1 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-2 py-0.5 text-[11.5px] font-medium text-brand-800 ring-1 ring-inset ring-brand-200 hover:bg-brand-100">
-      <span className="h-1.5 w-1.5 rounded-full bg-brand-500" aria-hidden />
-      Filed {n} {n === 1 ? "finding" : "findings"} to the chart
+    <button onClick={onClick} className="pop-spring press mt-1.5 inline-flex min-h-8 items-center gap-1.5 rounded-full bg-[var(--color-xp)] py-0.5 pl-1 pr-2.5 text-[12px] font-bold text-ink shadow-[0_6px_14px_-8px_oklch(0.6_0.2_128)] hover:brightness-105 pointer-coarse:min-h-11">
+      <span className="grid h-5 min-w-5 place-items-center rounded-full bg-ink px-1 font-mono text-[11px] text-[var(--color-xp)]">+{n}</span>
+      {n === 1 ? "finding" : "findings"} filed to the chart
     </button>
   );
 }
@@ -117,13 +93,18 @@ function SystemNote({ m }: { m: Msg }) {
   if (m.speaker === "system" && m.text.startsWith(OUTSIDE)) {
     const body = m.text.slice(OUTSIDE.length).replace(/^:\s*/, "");
     return (
-      <div role="note" className="fade-in rounded-xl border border-rose-200 bg-rose-50 px-3.5 py-2.5 text-[13px] text-rose-900">
-        <div className="mb-0.5 flex items-center gap-1.5 font-semibold">
-          <ShieldAlert className="h-4 w-4 text-rose-600" aria-hidden />
-          {OUTSIDE}
-          <span className="ml-auto font-mono text-[11px] font-normal text-rose-700/80">T{m.turn}</span>
+      <div role="note" className="pop-spring flex gap-3 rounded-2xl bg-rose-50 p-3 text-[13px] text-rose-950 ring-2 ring-inset ring-rose-300">
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-rose-600 text-white shadow-[0_6px_14px_-6px_rgb(225_29_72/0.7)]">
+          <ShieldAlert className="h-5 w-5" aria-hidden />
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2 font-display text-[14.5px] font-extrabold">
+            {OUTSIDE}
+            <span className="ml-auto rounded-md bg-rose-100 px-1.5 font-mono text-[11px] font-semibold text-rose-800">T{m.turn}</span>
+          </div>
+          <p className="mt-0.5 leading-relaxed">{body}</p>
+          <p className="mt-1 text-[12px] font-semibold text-rose-800">Guardrail: checked against the approved case, not filed to the chart.</p>
         </div>
-        <p className="leading-relaxed">{body}</p>
       </div>
     );
   }
@@ -153,7 +134,7 @@ function SystemNote({ m }: { m: Msg }) {
   );
 }
 
-export default function Visit({ id, viewerName }: { id: string; viewerName: string }) {
+export default function Visit({ id, viewerName, hud }: { id: string; viewerName: string; hud?: { history: number[]; gates: { reluctantAt: number; hiddenAt: number } | null } }) {
   const router = useRouter();
   const [data, setData] = useState<VisitData | null>(null);
   const [messages, setMessages] = useState<Msg[]>([]);
@@ -178,6 +159,9 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
   const [wrap, setWrap] = useState<Record<string, string>>({});
   const [scoring, setScoring] = useState(false);
   const [lastDelta, setLastDelta] = useState(0);
+  // Comfort over the visit, for the HUD sparkline and combo: the stored history, then each new turn.
+  const [comfort, setComfort] = useState<number[]>(() => hud?.history || []);
+  const [composeMode, setComposeMode] = useState<"talk" | "order">("talk");
   const [recTick, setRecTick] = useState(0);
   const [focus, setFocus] = useState<{ turn: number; key: number } | null>(null);
 
@@ -333,6 +317,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
               setFresh(new Set([...after.sections.flatMap((s) => s.items.map((x) => x.id)), ...after.artifacts.map((a) => a.id)].filter((x) => !before.has(x))));
               setChart(after);
               setLastDelta(ev.rapportDelta);
+              if (typeof after.rapport === "number") setComfort((h) => [...h, after.rapport as number]);
               speak(acc.slice(spokenTo));
             } else if (ev.type === "error") {
               throw new Error(ev.message);
@@ -500,7 +485,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
     return (
       <div className="grid h-dvh place-items-center bg-stage text-white/70">
         <div className="flex items-center gap-3 text-sm">
-          <span className="live-dot h-2 w-2 rounded-full bg-[oklch(0.82_0.15_168)]" aria-hidden />
+          <span className="live-dot h-2 w-2 rounded-full bg-[var(--color-xp)]" aria-hidden />
           Connecting to the visit…
         </div>
       </div>
@@ -529,54 +514,57 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
     return t.length > 190 ? "… " + t.slice(t.length - 190).replace(/^\S*\s/, "") : t || "…";
   })();
   const lowTime = remaining !== null && remaining < 120;
+  const factIds = new Set(chart.sections.flatMap((x) => x.items.filter((i) => i.how !== "record").map((i) => i.id)));
+  const newFacts = [...fresh].filter((x) => factIds.has(x)).length;
 
   return (
-    <div className="flex min-h-dvh flex-col bg-canvas lg:h-dvh">
+    <div className="relative flex min-h-dvh flex-col bg-stage lg:h-dvh">
+      <Aurora dark />
       <audio ref={audioRef} onEnded={onAudioDone} onError={onAudioDone} hidden />
 
       {/* Top bar */}
-      <header className="flex min-h-14 shrink-0 flex-wrap items-center gap-x-3 gap-y-1.5 border-b border-line bg-surface px-3 py-2 sm:px-4">
+      <header className="relative z-10 flex min-h-14 shrink-0 flex-wrap items-center gap-x-3 gap-y-1.5 border-b border-white/10 bg-white/[0.04] px-3 py-2 text-white backdrop-blur-md sm:px-4">
         <Link href="/" aria-label="Poscere home" className="shrink-0">
           <Mark className="h-7 w-7" />
         </Link>
         <div className="min-w-0 flex-1">
-          <div className="truncate text-[14px] text-ink-2">
-            Video visit with <span className="font-semibold text-ink">{p.name}</span>
+          <div className="truncate text-[14px] text-white/80">
+            Video visit with <span className="font-display text-[16px] font-extrabold text-white">{p.name}</span>
           </div>
           <div className="mt-0.5 hidden flex-wrap items-center gap-1.5 sm:flex">
             <TrustLabel kind={data.recorded ? "recorded" : "private"} />
-            <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[11.5px] font-medium text-ink-2">{MODE_LABEL[data.mode] || data.mode}</span>
-            <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[11.5px] text-ink-2">Level {data.level}</span>
-            {data.visitNumber > 1 ? <span className="rounded-md bg-sky-50 px-1.5 py-0.5 text-[11.5px] font-medium text-sky-800 ring-1 ring-inset ring-sky-200">Follow-up · visit {data.visitNumber}</span> : data.attempt > 1 && <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[11.5px] text-ink-2">Attempt {data.attempt}</span>}
-            {data.liveAssist && <span className="rounded-md bg-violet-50 px-1.5 py-0.5 text-[11.5px] font-medium text-violet-800 ring-1 ring-inset ring-violet-200">Instructor can join</span>}
+            <span className="rounded-full bg-white/12 px-2 py-0.5 text-[11.5px] font-semibold text-white ring-1 ring-white/15">{MODE_LABEL[data.mode] || data.mode}</span>
+            <span className="rounded-full bg-[var(--color-xp)] px-2 py-0.5 text-[11.5px] font-bold text-ink">Level {data.level}</span>
+            {data.visitNumber > 1 ? <span className="rounded-full bg-sky-100 px-2 py-0.5 text-[11.5px] font-semibold text-sky-950">Follow-up · visit {data.visitNumber}</span> : data.attempt > 1 && <span className="rounded-full bg-white/12 px-2 py-0.5 text-[11.5px] text-white ring-1 ring-white/15">Attempt {data.attempt}</span>}
+            {data.liveAssist && <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[11.5px] font-semibold text-violet-950">Instructor can join</span>}
           </div>
         </div>
-        <span className={`inline-flex items-center gap-1.5 rounded-md px-2 py-1 font-mono text-[13px] tabular-nums ${lowTime ? "bg-rose-50 font-semibold text-rose-700" : "text-ink-2"}`} aria-label={remaining !== null ? `${fmt(remaining)} left` : `${fmt(elapsed)} elapsed`}>
+        <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[13px] tabular-nums ${lowTime ? "bg-rose-100 font-semibold text-rose-800" : "bg-white/10 text-white"}`} aria-label={remaining !== null ? `${fmt(remaining)} left` : `${fmt(elapsed)} elapsed`}>
           <Clock className="h-3.5 w-3.5" aria-hidden />
           {remaining !== null ? `${fmt(remaining)} left` : fmt(elapsed)}
         </span>
         {data.hints && joined && (
-          <button onClick={askHint} disabled={busy} className="press inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-amber-50 px-2.5 text-[13px] font-medium text-amber-900 ring-1 ring-inset ring-amber-300 hover:bg-amber-100 disabled:opacity-50">
+          <button onClick={askHint} disabled={busy} className="press inline-flex min-h-9 items-center gap-1.5 rounded-full bg-[var(--color-flame-2)] px-3 text-[13px] font-bold text-ink hover:brightness-105 disabled:opacity-50 pointer-coarse:min-h-11">
             <Lightbulb className="h-3.5 w-3.5" aria-hidden />
             <span className="max-sm:sr-only">Coach hint</span>
           </button>
         )}
-        <button onClick={() => setWrapOpen(true)} disabled={!joined} className="press inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-rose-600 px-3 text-[13px] font-medium text-white hover:bg-rose-700 disabled:bg-slate-300">
+        <button onClick={() => setWrapOpen(true)} disabled={!joined} className="press inline-flex min-h-9 items-center gap-1.5 rounded-full bg-rose-600 px-3.5 text-[13px] font-bold text-white hover:bg-rose-500 disabled:bg-slate-500 pointer-coarse:min-h-11">
           <PhoneOff className="h-3.5 w-3.5" aria-hidden />
           <span className="max-sm:sr-only">End visit</span>
         </button>
         <div className="flex w-full flex-wrap items-center gap-1.5 sm:hidden">
           <TrustLabel kind={data.recorded ? "recorded" : "private"} />
-          <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[11.5px] text-ink-2">
+          <span className="rounded-full bg-white/12 px-2 py-0.5 text-[11.5px] font-semibold text-white">
             {MODE_LABEL[data.mode] || data.mode} · Level {data.level}
           </span>
         </div>
       </header>
 
-      <div className="grid flex-1 grid-cols-[minmax(0,1fr)] gap-3 p-3 lg:min-h-0 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
+      <div className="relative grid flex-1 grid-cols-[minmax(0,1fr)] gap-3 p-3 lg:min-h-0 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
         {/* LEFT: the call */}
         <div className="flex flex-col gap-3 lg:min-h-0">
-          <div className="relative h-[300px] shrink-0 overflow-hidden rounded-2xl bg-stage sm:h-[340px] lg:h-[46%] lg:min-h-[260px]" onPointerMove={onStageMove} onPointerLeave={onStageLeave}>
+          <div className="relative h-[300px] shrink-0 overflow-hidden rounded-[24px] bg-stage shadow-e3 ring-1 ring-white/10 sm:h-[340px] lg:h-[40%] lg:min-h-[240px]" onPointerMove={onStageMove} onPointerLeave={onStageLeave}>
             <div ref={tiltRef} className="absolute inset-0 transition-transform duration-500 ease-[var(--ease-out-ui)]">
               {p.portrait ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -588,12 +576,11 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
               )}
             </div>
             {/* Speaking state: an outline, not a glow. */}
-            <div className={`pointer-events-none absolute inset-0 rounded-2xl transition-shadow duration-200 ${patientTalking ? "shadow-[inset_0_0_0_3px_oklch(0.82_0.15_168/0.9)]" : ""}`} />
+            <div className={`pointer-events-none absolute inset-0 rounded-[24px] ${patientTalking ? "visit-speaking" : ""}`} />
             <div className="absolute left-3 top-3 flex flex-wrap items-center gap-2">
               <span className="flex items-center gap-1.5 rounded-full bg-black/45 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-white ring-1 ring-white/10 backdrop-blur-sm">
                 <span className="live-dot h-1.5 w-1.5 rounded-full bg-rose-500" aria-hidden /> LIVE
               </span>
-              {chart.rapport !== null && joined && <ComfortGauge value={chart.rapport} delta={lastDelta} />}
             </div>
             {/* Self view */}
             <div className="absolute right-3 top-3 h-16 w-[5.5rem] overflow-hidden rounded-xl bg-stage-2 ring-1 ring-white/15 sm:h-24 sm:w-32">
@@ -639,10 +626,12 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
             </div>
           </div>
 
+          {joined && <TrustHud rapport={chart.rapport} delta={lastDelta} history={chart.rapport !== null ? (comfort.length ? comfort : [chart.rapport]) : []} gates={hud?.gates || null} facts={ledger?.facts || 0} newFacts={newFacts} />}
+
           {/* Conversation */}
-          <section aria-label="Conversation" className="flex h-[58dvh] flex-col overflow-hidden rounded-2xl border border-line bg-surface lg:h-auto lg:min-h-0 lg:flex-1">
+          <section aria-label="Conversation" className="flex h-[58dvh] flex-col overflow-hidden rounded-[22px] bg-surface shadow-e3 lg:h-auto lg:min-h-0 lg:flex-1">
             <div className="flex items-center justify-between border-b border-line/70 px-4 py-2">
-              <h2 className="text-[13px] font-semibold text-ink">Conversation</h2>
+              <h2 className="font-display text-[15px] font-extrabold text-ink">Conversation</h2>
               {ledger && (
                 <span className="text-[12px] text-ink-3">
                   Turn <span className="font-mono tabular-nums text-ink-2">{chart.turn}</span>
@@ -667,11 +656,11 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
                         Try this again
                       </button>
                     )}
-                    <div className="max-w-[80%] rounded-2xl rounded-br-md bg-brand-600 px-3.5 py-2 text-[14px] leading-relaxed text-white">{m.text}</div>
+                    <div className="max-w-[80%] rounded-[18px] rounded-br-md bg-brand-600 px-3.5 py-2 text-[14px] leading-relaxed text-white shadow-[0_6px_16px_-10px_oklch(0.45_0.24_266)]">{m.text}</div>
                   </div>
                 ) : m.speaker === "patient" ? (
                   <div key={m.id} className="flex flex-col items-start">
-                    <div className="max-w-[85%] rounded-2xl rounded-bl-md bg-surface-2 px-3.5 py-2 text-[14px] leading-relaxed text-ink">
+                    <div className="max-w-[85%] rounded-[18px] rounded-bl-md bg-surface-2 px-3.5 py-2 text-[14px] leading-relaxed text-ink ring-1 ring-inset ring-line/70">
                       {m.text.split(/(\*[^*]+\*)/).map((part, i) => (part.startsWith("*") ? <em key={i} className="text-ink-3">{part.slice(1, -1)} </em> : <span key={i}>{part}</span>))}
                     </div>
                     {(filedByTurn.get(m.turn) || 0) > 0 && <FiledChip n={filedByTurn.get(m.turn)!} onClick={() => setFocus({ turn: m.turn, key: Date.now() })} />}
@@ -698,26 +687,80 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
               )}
             </div>
             {error && <ErrorNote message={error} className="mx-3 mb-1 mt-2" title={/microphone|camera/i.test(error) ? error.split(".")[0] + "." : undefined} kept={/microphone|camera/i.test(error) ? "" : "Nothing was lost; anything you typed is back in the box."} />}
+            {/* Compound composer: talk or order in one box, with the mic and the coach beside it. */}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                send(input);
+                if (composeMode === "order") {
+                  const t = input.trim();
+                  if (!t || ordering) return;
+                  setInput("");
+                  order(t);
+                } else send(input);
               }}
-              className="flex gap-2 border-t border-line/70 p-2.5"
+              className="border-t border-line/70 p-2.5"
             >
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                disabled={busy || paused || !joined}
-                placeholder={paused ? "Paused by your instructor" : micOn ? "Speak, or type here" : `Say something to ${firstName}`}
-                aria-label={`Message to ${firstName}`}
-                ref={inputRef}
-                className="min-h-11 min-w-0 flex-1 rounded-xl border border-line-strong/60 bg-surface px-3.5 text-[14px] text-ink placeholder:text-slate-500 focus:border-brand-500 focus:outline-none focus:ring-3 focus:ring-brand-500/20 disabled:bg-slate-50"
-              />
-              <button disabled={busy || paused || !input.trim()} className="press inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-brand-600 px-4 text-[14px] font-medium text-white hover:bg-brand-700 disabled:bg-slate-200 disabled:text-slate-500">
-                Send
-                <SendHorizontal className="h-4 w-4" aria-hidden />
-              </button>
+              <div className="mb-2 flex flex-wrap items-center gap-1.5">
+                <div role="radiogroup" aria-label="What the box does" className="inline-flex rounded-full bg-surface-2 p-0.5 ring-1 ring-line">
+                  {(
+                    [
+                      ["talk", "Talk", MessageSquareText],
+                      ["order", "Order or examine", Stethoscope],
+                    ] as const
+                  ).map(([k, label, Icon]) => (
+                    <button
+                      key={k}
+                      type="button"
+                      role="radio"
+                      aria-checked={composeMode === k}
+                      onClick={() => {
+                        setComposeMode(k);
+                        inputRef.current?.focus();
+                      }}
+                      className={`inline-flex min-h-8 items-center gap-1.5 rounded-full px-3 text-[12.5px] font-bold transition-colors pointer-coarse:min-h-10 ${composeMode === k ? (k === "talk" ? "bg-brand-600 text-white" : "bg-ink text-white") : "text-ink-2 hover:text-ink"}`}
+                    >
+                      <Icon className="h-3.5 w-3.5" aria-hidden />
+                      {label}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setMicOn((v) => !v)}
+                  disabled={!micSupported || composeMode === "order"}
+                  aria-pressed={micOn}
+                  title={micSupported ? (micOn ? "Mute microphone" : "Talk with your microphone") : "Voice input needs Chrome, Edge or Safari"}
+                  className={`press inline-flex min-h-8 items-center gap-1.5 rounded-full px-3 text-[12.5px] font-bold ring-1 transition-colors disabled:opacity-40 pointer-coarse:min-h-10 ${micOn ? "bg-[var(--color-xp)] text-ink ring-transparent" : "bg-surface text-ink-2 ring-line hover:ring-brand-300"}`}
+                >
+                  {micOn ? <Mic className="h-3.5 w-3.5" aria-hidden /> : <MicOff className="h-3.5 w-3.5" aria-hidden />}
+                  {micOn ? "Mic on" : "Mic off"}
+                </button>
+                {data.hints && (
+                  <button type="button" onClick={askHint} disabled={busy || !joined} className="press inline-flex min-h-8 items-center gap-1.5 rounded-full bg-[var(--color-flame-soft)] px-3 text-[12.5px] font-bold text-[var(--color-flame-ink)] ring-1 ring-[var(--color-flame-2)] hover:brightness-105 disabled:opacity-50 pointer-coarse:min-h-10">
+                    <Lightbulb className="h-3.5 w-3.5" aria-hidden />
+                    Hint
+                  </button>
+                )}
+                <span className="ml-auto hidden text-[11.5px] text-ink-3 md:inline">{composeMode === "order" ? "Only results approved for this case can come back." : "Enter sends"}</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  disabled={(composeMode === "talk" ? busy : ordering) || paused || !joined}
+                  placeholder={paused ? "Paused by your instructor" : composeMode === "order" ? "e.g. home blood pressure reading, guided throat exam, pharmacy refill history" : micOn ? "Speak, or type here" : `Say something to ${firstName}`}
+                  aria-label={composeMode === "order" ? "Request an exam, test or record" : `Message to ${firstName}`}
+                  ref={inputRef}
+                  className="min-h-11 min-w-0 flex-1 rounded-2xl border border-line-strong/50 bg-surface px-3.5 text-[14px] text-ink placeholder:text-slate-500 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/20 disabled:bg-slate-50"
+                />
+                <button
+                  disabled={(composeMode === "talk" ? busy : ordering) || paused || !input.trim()}
+                  className={`press inline-flex min-h-11 items-center gap-1.5 rounded-2xl px-4 text-[14px] font-bold text-white disabled:bg-slate-200 disabled:text-slate-500 ${composeMode === "order" ? "bg-ink hover:bg-slate-800" : "bg-brand-600 hover:bg-brand-500"}`}
+                >
+                  {composeMode === "order" ? (ordering ? "Sending" : "Request") : "Send"}
+                  <SendHorizontal className="h-4 w-4" aria-hidden />
+                </button>
+              </div>
             </form>
           </section>
         </div>
@@ -731,27 +774,27 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
       {/* Waiting room */}
       {!joined && (
         <div className="scrim-in fixed inset-0 z-40 grid place-items-center overflow-y-auto bg-stage/80 p-4 backdrop-blur-sm">
-          <div role="dialog" aria-modal="true" aria-labelledby="wr-title" className="pop-in grid max-h-full w-full max-w-3xl overflow-hidden rounded-2xl bg-surface shadow-e3 md:grid-cols-[15rem_minmax(0,1fr)]">
+          <div role="dialog" aria-modal="true" aria-labelledby="wr-title" className="pop-spring grid max-h-full w-full max-w-4xl overflow-hidden rounded-[28px] bg-surface shadow-e3 md:grid-cols-[17rem_minmax(0,1fr)]">
             <div className="relative hidden bg-stage md:block">
               {p.portrait ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={p.portrait} alt="" className="h-full w-full object-cover object-[50%_28%] opacity-90" />
+                <img src={p.portrait} alt="" className="float-idle h-full w-full scale-105 object-cover object-[50%_28%]" />
               ) : (
                 <div className="grid h-full place-items-center">
                   <div className="grid h-24 w-24 place-items-center rounded-full bg-brand-700 font-display text-3xl font-semibold text-white">{initials(p.name)}</div>
                 </div>
               )}
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3 text-[12px] text-white/80">
-                <span className="live-dot mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-4 text-[13px] font-semibold text-white">
+                <span className="live-dot mr-2 inline-block h-2 w-2 rounded-full bg-[var(--color-xp)]" aria-hidden />
                 {firstName} is in the waiting room
               </div>
             </div>
-            <div className="flex min-h-0 flex-col">
+            <div className="flex max-h-[calc(100dvh-2rem)] min-h-0 flex-col">
               <div className="scroll-quiet min-h-0 flex-1 overflow-y-auto p-6 pb-3">
-                <div className="flex flex-wrap items-center gap-1.5 text-[12.5px] font-medium text-brand-700">
+                <div className="inline-flex flex-wrap items-center gap-1.5 rounded-full bg-brand-100 px-2.5 py-1 text-[12.5px] font-bold text-brand-800">
                   Waiting room · {MODE_LABEL[data.mode] || data.mode}
                 </div>
-                <h1 id="wr-title" className="mt-1 font-display text-[24px] font-semibold leading-tight text-ink">
+                <h1 id="wr-title" className="mt-2 font-display text-[32px] font-black leading-[1.02] tracking-[-0.03em] text-ink">
                   {p.name}, {p.age}
                 </h1>
                 <p className="mt-0.5 text-[14px] text-ink-3">You are joining as the {data.role.roleTitle}.</p>
@@ -763,52 +806,75 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
                     </span>
                   </p>
                 )}
-                <p className="mt-4 whitespace-pre-line text-[14.5px] leading-relaxed text-ink">{chart.brief}</p>
+                <p className="mt-4 whitespace-pre-line rounded-2xl bg-surface-2 px-4 py-3 text-[14.5px] leading-relaxed text-ink">{chart.brief}</p>
                 {chart.tasks.length > 0 && (
                   <>
-                    <h2 className="mt-5 text-[13px] font-semibold text-ink-2">In this visit</h2>
-                    <ul className="mt-1.5 space-y-1">
+                    <h2 className="mt-5 font-display text-[16px] font-extrabold text-ink">In this visit</h2>
+                    <ol className="mt-2 space-y-1.5">
                       {chart.tasks.map((t, i) => (
-                        <li key={i} className="flex gap-2 text-[14px] leading-relaxed text-ink">
-                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" aria-hidden />
+                        <li key={i} className="rise flex gap-2.5 text-[14px] leading-relaxed text-ink" style={{ ["--i" as string]: i + 2 }}>
+                          <span className="grid h-6 w-6 shrink-0 place-items-center rounded-lg bg-[var(--color-xp)] font-display text-[12.5px] font-black text-ink" aria-hidden>
+                            {i + 1}
+                          </span>
                           {t}
                         </li>
                       ))}
-                    </ul>
+                    </ol>
                   </>
                 )}
-                <div className="mt-5 rounded-xl bg-surface-2 p-3.5 text-[13px] leading-relaxed text-ink-2">
-                  {data.timeLimitMin ? `You have ${data.timeLimitMin} minutes. ` : "No time limit. "}
-                  Talk by microphone or type. The chart on the right fills in as you learn things; request exams, tests and records from its Results tab. When you are done, end the visit and write your {data.role.noteFormat} wrap-up.
-                  {data.mode === "exam" && " This is an exam: no hints, and the comfort meter is hidden."}
-                  {data.liveAssist && " Your instructor may watch this visit, pause it, or send you a note."}
-                </div>
-                <div className={`mt-3 flex items-start gap-2 rounded-xl p-3 text-[13px] leading-relaxed ${data.recorded ? "bg-violet-50 text-violet-900" : "bg-slate-100 text-ink-2"}`}>
+                <ul className="mt-5 grid gap-2 text-[13px] leading-relaxed text-ink-2 sm:grid-cols-2">
+                  <li className="flex gap-2 rounded-2xl bg-[var(--color-flame-soft)] p-3">
+                    <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-flame-ink)]" aria-hidden />
+                    <span>{data.timeLimitMin ? `You have ${data.timeLimitMin} minutes. ` : "No time limit. "}Talk by microphone or type.</span>
+                  </li>
+                  <li className="flex gap-2 rounded-2xl bg-[var(--color-xp-soft)] p-3">
+                    <FlaskConical className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-xp-ink)]" aria-hidden />
+                    <span>The chart on the right fills in as you learn things; request exams, tests and records from its Results tab.</span>
+                  </li>
+                  <li className="flex gap-2 rounded-2xl bg-[var(--color-mastery-soft)] p-3 sm:col-span-2">
+                    <PhoneOff className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-mastery-ink)]" aria-hidden />
+                    <span>
+                      When you are done, end the visit and write your {data.role.noteFormat} wrap-up.
+                      {data.mode === "exam" && " This is an exam: no hints, and the comfort meter is hidden."}
+                      {data.liveAssist && " Your instructor may watch this visit, pause it, or send you a note."}
+                    </span>
+                  </li>
+                </ul>
+                <div className={`mt-3 flex items-start gap-2 rounded-2xl p-3 text-[13px] leading-relaxed ${data.recorded ? "bg-violet-50 text-violet-950" : "bg-slate-100 text-ink-2"}`}>
                   <TrustLabel kind={data.recorded ? "recorded" : "private"} className="mt-px shrink-0" />
                   <span>{data.recorded ? "Your instructor can see this visit, its transcript and its score." : "Only you see this visit and its feedback. It still updates your own progress."}</span>
                 </div>
               </div>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-3 border-t border-line px-6 py-4">
-                <button
-                  onClick={() => {
-                    fetch(`/api/encounters/${id}/start`, { method: "POST" }).then(load).catch(() => {});
-                    setJoined(true);
-                    // Unlock audio playback inside the click.
-                    audioRef.current?.play().catch(() => {});
-                  }}
-                  className="press inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand-600 px-6 text-[15px] font-semibold text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.14)] hover:bg-brand-700"
-                >
-                  <Video className="h-4 w-4" aria-hidden />
-                  Join visit
-                </button>
-                {micSupported && (
-                  <label className="flex min-h-11 cursor-pointer items-center gap-2 text-[14px] text-ink-2">
-                    <input type="checkbox" className="h-4 w-4 accent-[var(--color-brand-600)]" checked={micOn} onChange={(e) => setMicOn(e.target.checked)} /> Use my microphone
+              {/* Compound start unit: what kind of visit, how you will talk, and the door in. */}
+              <div className="border-t border-line px-6 py-4">
+                <div className="flex flex-wrap items-center gap-2 rounded-[22px] bg-surface-2 p-2 ring-1 ring-line">
+                  <span className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-surface px-3 text-[12.5px] font-bold text-ink ring-1 ring-line">
+                    {MODE_LABEL[data.mode] || data.mode}
+                    <span className="rounded-full bg-[var(--color-xp)] px-1.5 text-[11.5px] text-ink">Level {data.level}</span>
+                  </span>
+                  {micSupported && (
+                    <label className={`press inline-flex min-h-10 cursor-pointer items-center gap-1.5 rounded-full px-3 text-[13px] font-bold ring-1 transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-brand-500 ${micOn ? "bg-[var(--color-xp)] text-ink ring-transparent" : "bg-surface text-ink-2 ring-line"}`}>
+                      <input type="checkbox" className="sr-only" checked={micOn} onChange={(e) => setMicOn(e.target.checked)} />
+                      {micOn ? <Mic className="h-4 w-4" aria-hidden /> : <MicOff className="h-4 w-4" aria-hidden />} Use my microphone
+                    </label>
+                  )}
+                  <label className={`press inline-flex min-h-10 cursor-pointer items-center gap-1.5 rounded-full px-3 text-[13px] font-bold ring-1 transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-brand-500 ${speakerOn ? "bg-[var(--color-mastery-soft)] text-[var(--color-mastery-ink)] ring-transparent" : "bg-surface text-ink-2 ring-line"}`}>
+                    <input type="checkbox" className="sr-only" checked={speakerOn} onChange={(e) => setSpeakerOn(e.target.checked)} />
+                    {speakerOn ? <Volume2 className="h-4 w-4" aria-hidden /> : <VolumeX className="h-4 w-4" aria-hidden />} Patient voice
                   </label>
-                )}
-                <label className="flex min-h-11 cursor-pointer items-center gap-2 text-[14px] text-ink-2">
-                  <input type="checkbox" className="h-4 w-4 accent-[var(--color-brand-600)]" checked={speakerOn} onChange={(e) => setSpeakerOn(e.target.checked)} /> Patient voice
-                </label>
+                  <button
+                    onClick={() => {
+                      fetch(`/api/encounters/${id}/start`, { method: "POST" }).then(load).catch(() => {});
+                      setJoined(true);
+                      // Unlock audio playback inside the click.
+                      audioRef.current?.play().catch(() => {});
+                    }}
+                    className="press ml-auto inline-flex min-h-12 items-center gap-2 rounded-2xl bg-brand-600 px-6 text-[15.5px] font-bold text-white shadow-[inset_0_1.5px_0_rgb(255_255_255/0.22),0_10px_22px_-10px_oklch(0.45_0.24_266/0.8)] hover:bg-brand-500"
+                  >
+                    <Video className="h-4 w-4" aria-hidden />
+                    Join visit
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -857,13 +923,11 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
                   ))}
                   {error && <ErrorNote message={error} title="Scoring did not finish." kept="Your visit and notes are saved; submit again." />}
                 </div>
-                <div className="flex flex-wrap justify-end gap-2 border-t border-line px-6 py-4">
+                <div className="flex flex-wrap items-start justify-end gap-2 border-t border-line px-6 py-4">
                   <button onClick={closeWrap} className="press inline-flex min-h-11 items-center rounded-xl px-4 text-[14px] font-medium text-ink-2 ring-1 ring-inset ring-slate-300 hover:bg-slate-50">
                     Back to the patient
                   </button>
-                  <button onClick={submit} className="press inline-flex min-h-11 items-center rounded-xl bg-brand-600 px-5 text-[14px] font-semibold text-white hover:bg-brand-700">
-                    Submit for feedback
-                  </button>
+                  <HoldButton label="Submit for feedback" holdingLabel="Keep holding to submit" onConfirm={submit} ms={1100} />
                 </div>
               </>
             )}
@@ -884,7 +948,7 @@ function ScoringSteps() {
   }, []);
   const steps = [
     { label: "Findings elicited and missed", detail: "Read straight from the disclosure ledger. No model involved.", done: t > 1.2 },
-    { label: "Seven rubric domains scored", detail: "A model scores each domain and must quote your transcript with a turn number.", done: false },
+    { label: "Each rubric area scored", detail: "A model scores each area of the rubric and must quote your transcript with a turn number.", done: false },
     { label: "Every quote checked", detail: "Code looks each quote up in the transcript; a quote that is not there is dropped.", done: false },
   ];
   const pct = Math.min(95, (t / 60) * 100);
