@@ -1,16 +1,69 @@
 @import "tailwindcss";
 
+/* Rounds design tokens. See ui-overhaul-plan/03-design-system.md.
+   Tailwind's slate and brand scales are remapped here so every page inherits the tinted neutrals
+   and the refined teal, whether or not it has been rebuilt yet. */
+
 @theme inline {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-  --color-brand-50: #effaf8;
-  --color-brand-100: #d7f2ee;
-  --color-brand-200: #afe4dc;
-  --color-brand-500: #14857a;
-  --color-brand-600: #0f6f66;
-  --color-brand-700: #0d5a53;
-  --color-brand-900: #0a3b37;
-  --color-ink: #16212b;
+}
+
+@theme {
+  --color-canvas: oklch(0.983 0.004 200);
+  --color-surface: oklch(1 0 0);
+  --color-surface-2: oklch(0.962 0.006 200);
+  --color-line: oklch(0.905 0.008 205);
+  --color-line-strong: oklch(0.7 0.015 225);
+  --color-ink: oklch(0.235 0.022 232);
+  --color-ink-2: oklch(0.43 0.022 232);
+  --color-ink-3: oklch(0.535 0.018 232);
+  --color-signal: oklch(0.82 0.15 168);
+  --color-stage: oklch(0.185 0.02 235);
+  --color-stage-2: oklch(0.245 0.022 235);
+  --color-stage-3: oklch(0.31 0.022 235);
+
+  --color-slate-50: oklch(0.984 0.003 215);
+  --color-slate-100: oklch(0.962 0.006 210);
+  --color-slate-200: oklch(0.922 0.008 212);
+  --color-slate-300: oklch(0.868 0.011 218);
+  --color-slate-400: oklch(0.64 0.016 225);
+  --color-slate-500: oklch(0.535 0.018 232);
+  --color-slate-600: oklch(0.45 0.02 232);
+  --color-slate-700: oklch(0.375 0.022 232);
+  --color-slate-800: oklch(0.29 0.022 232);
+  --color-slate-900: oklch(0.235 0.022 232);
+  --color-slate-950: oklch(0.17 0.02 235);
+
+  --color-brand-50: oklch(0.975 0.018 182);
+  --color-brand-100: oklch(0.94 0.04 182);
+  --color-brand-200: oklch(0.88 0.07 182);
+  --color-brand-300: oklch(0.8 0.1 182);
+  --color-brand-400: oklch(0.7 0.12 182);
+  --color-brand-500: oklch(0.585 0.11 182);
+  --color-brand-600: oklch(0.505 0.095 183);
+  --color-brand-700: oklch(0.44 0.08 184);
+  --color-brand-800: oklch(0.37 0.065 185);
+  --color-brand-900: oklch(0.3 0.05 186);
+  --color-brand-950: oklch(0.22 0.035 188);
+
+  /* Disclosure tiers: the same four hues wherever tiers appear. */
+  --color-tier-initial: oklch(0.62 0.13 160);
+  --color-tier-discoverable: oklch(0.6 0.13 240);
+  --color-tier-reluctant: oklch(0.72 0.14 70);
+  --color-tier-hidden: oklch(0.62 0.17 15);
+
+  --ease-out-ui: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-ui: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --shadow-e1: 0 1px 2px 0 oklch(0.235 0.022 232 / 0.06);
+  --shadow-e2: 0 8px 24px -8px oklch(0.235 0.022 232 / 0.18), 0 1px 2px 0 oklch(0.235 0.022 232 / 0.06);
+  --shadow-e3: 0 24px 64px -16px oklch(0.235 0.022 232 / 0.3), 0 2px 6px 0 oklch(0.235 0.022 232 / 0.08);
+
+  --animate-rise-in: rise-in 420ms var(--ease-out-ui) both;
+  --animate-fade-in: fade-in 240ms var(--ease-out-ui) both;
 }
 
 html,
@@ -18,18 +71,166 @@ body {
   height: 100%;
 }
 body {
-  background: #f4f6f8;
+  background: var(--color-canvas);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  font-feature-settings: "ss01" 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
+}
+::selection {
+  background: var(--color-brand-200);
+  color: var(--color-ink);
 }
 
+/* One visible focus treatment everywhere. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+}
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Pressable things acknowledge the press. */
+.press {
+  transition: transform 120ms var(--ease-out-ui);
+}
+.press:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
 @keyframes fadein {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
-.fade-in { animation: fadein 0.35s ease-out; }
+.fade-in {
+  animation: fadein 0.35s var(--ease-out-ui);
+}
+
+/* A chart item that arrived this turn: rises in and carries a brief brand wash. */
 @keyframes flash {
-  from { background-color: #fef3c7; }
-  to { background-color: transparent; }
+  from {
+    background-color: var(--color-brand-100);
+  }
+  to {
+    background-color: transparent;
+  }
 }
-.flash-new { animation: flash 2.5s ease-out; }
+.flash-new {
+  animation:
+    rise-in 420ms var(--ease-out-ui) both,
+    flash 2.4s var(--ease-out-ui);
+  animation-delay: calc(var(--i, 0) * 50ms), calc(var(--i, 0) * 50ms);
+}
+
+@keyframes live-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.live-dot {
+  animation: live-dot 1.6s ease-in-out infinite;
+}
+
+@keyframes speak-ring {
+  0% {
+    box-shadow: 0 0 0 0 oklch(0.82 0.15 168 / 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 14px oklch(0.82 0.15 168 / 0);
+  }
+}
+.speak-ring {
+  animation: speak-ring 1.2s var(--ease-out-ui) infinite;
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: var(--len, 1000);
+  }
+}
+.draw-in {
+  stroke-dasharray: var(--len, 1000);
+  animation: draw 900ms var(--ease-in-out-ui) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+.orb-fade-in {
+  animation: fade-in 900ms var(--ease-out-ui) both;
+}
+
+/* Sheets and dialogs: enter from their edge, leave faster. */
+.sheet-in {
+  animation: sheet-in 320ms var(--ease-drawer) both;
+}
+@keyframes sheet-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+.pop-in {
+  animation: pop-in 200ms var(--ease-out-ui) both;
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(4px);
+  }
+}
+.scrim-in {
+  animation: fade-in 200ms ease both;
+}
+
+/* Thin, quiet scrollbars inside panels. */
+.scroll-quiet {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-slate-300) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
