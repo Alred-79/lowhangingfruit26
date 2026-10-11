@@ -36,9 +36,9 @@ const fragment = /* glsl */ `
     float d = length(c);
     float a = smoothstep(0.5, 0.08, d);
     float core = smoothstep(0.2, 0.0, d);
-    vec3 dim = mix(vec3(0.24, 0.31, 0.35), vColor, 0.3);
-    vec3 col = mix(dim, vColor, vLit) + core * 0.4 * vLit;
-    gl_FragColor = vec4(col, a * mix(0.5, 1.0, vLit));
+    vec3 dim = mix(vec3(0.3, 0.32, 0.55), vColor, 0.42);
+    vec3 col = mix(dim, vColor, vLit) + core * 0.55 * vLit;
+    gl_FragColor = vec4(col, a * mix(0.55, 1.0, vLit));
   }
 `;
 
@@ -53,8 +53,9 @@ function circle(radius: number, segments = 96) {
   return arr;
 }
 
-function Orb() {
+function Orb({ pointer }: { pointer: { current: { x: number; y: number } } }) {
   const group = useRef<THREE.Group>(null);
+  const tilt = useRef<THREE.Group>(null);
   const litAttr = useRef<THREE.BufferAttribute>(null);
   const pulse = useRef<THREE.LineLoop>(null);
   const pulseMat = useRef<THREE.LineBasicMaterial>(null);
@@ -95,7 +96,13 @@ function Orb() {
     clock.current = (clock.current + dt) % CYCLE;
     const t = clock.current;
     if (pointsMat.current) pointsMat.current.uniforms.uPixelRatio.value = state.gl.getPixelRatio();
-    if (group.current) group.current.rotation.y += dt * 0.14;
+    if (group.current) group.current.rotation.y += dt * 0.16;
+    // Pointer parallax: ease the tilt toward the pointer (a spring-like lerp; refs only, no state).
+    if (tilt.current) {
+      const kk = 1 - Math.exp(-dt * 3.2);
+      tilt.current.rotation.x += (pointer.current.y * 0.28 - tilt.current.rotation.x) * kk;
+      tilt.current.rotation.y += (pointer.current.x * 0.38 - tilt.current.rotation.y) * kk;
+    }
 
     // The rapport sweep: grows outward, holds, then the shells settle back for the next interview.
     const sweepT = Math.min(1, t / SWEEP);
@@ -127,15 +134,16 @@ function Orb() {
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[data.pulse, 3]} />
         </bufferGeometry>
-        <lineBasicMaterial ref={pulseMat} color="#40e3b1" transparent opacity={0} depthWrite={false} />
+        <lineBasicMaterial ref={pulseMat} color="#c6f36a" transparent opacity={0} depthWrite={false} />
       </lineLoop>
+      <group ref={tilt}>
       <group ref={group} rotation={[0.38, 0, 0.12]}>
         {data.rings.map((ring, i) => (
           <lineLoop key={i} rotation={[Math.PI / 2, 0, 0]}>
             <bufferGeometry>
               <bufferAttribute attach="attributes-position" args={[ring, 3]} />
             </bufferGeometry>
-            <lineBasicMaterial color={ORB_TIERS[i].hex} transparent opacity={0.16} depthWrite={false} />
+            <lineBasicMaterial color={ORB_TIERS[i].hex} transparent opacity={0.34} depthWrite={false} blending={THREE.AdditiveBlending} />
           </lineLoop>
         ))}
         <points>
@@ -145,18 +153,19 @@ function Orb() {
             <bufferAttribute attach="attributes-aSize" args={[data.size, 1]} />
             <bufferAttribute ref={litAttr} attach="attributes-aLit" args={[data.lit, 1]} usage={THREE.DynamicDrawUsage} />
           </bufferGeometry>
-          <shaderMaterial ref={pointsMat} vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms} transparent depthWrite={false} />
+          <shaderMaterial ref={pointsMat} vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms} transparent depthWrite={false} blending={THREE.AdditiveBlending} />
         </points>
+      </group>
       </group>
     </>
   );
 }
 
-export default function OrbCanvas({ active, onLost }: { active: boolean; onLost: () => void }) {
+export default function OrbCanvas({ active, onLost, pointer }: { active: boolean; onLost: () => void; pointer: { current: { x: number; y: number } } }) {
   return (
     <Canvas
       frameloop={active ? "always" : "never"}
-      dpr={[1, 1.75]}
+      dpr={[1, 1.5]}
       flat
       camera={{ position: [0, 0, 7.4], fov: 42, near: 0.1, far: 50 }}
       gl={{ antialias: false, alpha: true, powerPreference: "low-power" }}
@@ -168,7 +177,7 @@ export default function OrbCanvas({ active, onLost }: { active: boolean; onLost:
       }}
       aria-hidden
     >
-      <Orb />
+      <Orb pointer={pointer} />
     </Canvas>
   );
 }

@@ -28,19 +28,19 @@ export default function OrbPoster({ className }: { className?: string }) {
     <svg viewBox="-200 -200 400 400" className={className} role="img" aria-label="Four shells of patient facts around the patient. Inner shells light up first; the outer, guarded shell needs the most trust.">
       <defs>
         <radialGradient id="orb-core" r="0.5">
-          <stop offset="0" stopColor="#dcfaf2" stopOpacity="1" />
-          <stop offset="1" stopColor="#40e3b1" stopOpacity="0" />
+          <stop offset="0" stopColor="#f4ffd9" stopOpacity="1" />
+          <stop offset="1" stopColor="#c6f36a" stopOpacity="0" />
         </radialGradient>
       </defs>
       {ORB_TIERS.map((t) => (
-        <ellipse key={t.id} cx={0} cy={0} rx={t.radius * SCALE * 1.02} ry={t.radius * SCALE * 0.38} fill="none" stroke={t.hex} strokeOpacity={0.18} strokeWidth={1} transform="rotate(-7)" />
+        <ellipse key={t.id} cx={0} cy={0} rx={t.radius * SCALE * 1.02} ry={t.radius * SCALE * 0.38} fill="none" stroke={t.hex} strokeOpacity={0.36} strokeWidth={1} transform="rotate(-7)" />
       ))}
       {pts.map((pt, i) => {
         const r = Math.round((pt.unlocks ? 3.1 : 2.1) * pt.p * 100) / 100;
-        return <circle key={i} cx={pt.x} cy={pt.y} r={r} fill={pt.unlocks ? ORB_TIERS[pt.tier].hex : "#3c4d55"} fillOpacity={pt.unlocks ? 0.95 : 0.7} />;
+        return <circle key={i} cx={pt.x} cy={pt.y} r={r} fill={pt.unlocks ? ORB_TIERS[pt.tier].hex : "#4a4f86"} fillOpacity={pt.unlocks ? 0.95 : 0.7} />;
       })}
       <circle cx={0} cy={0} r={26} fill="url(#orb-core)" />
-      <circle cx={0} cy={0} r={6} fill="#dcfaf2" />
+      <circle cx={0} cy={0} r={6} fill="#f4ffd9" />
     </svg>
   );
 }

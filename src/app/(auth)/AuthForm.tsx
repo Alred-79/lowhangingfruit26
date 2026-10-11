@@ -1,13 +1,15 @@
 "use client";
 
-import { ArrowRight, GraduationCap, Stethoscope } from "lucide-react";
+import { Apple, ArrowRight, GraduationCap, HeartPulse, Presentation, Stethoscope } from "lucide-react";
 import Link from "next/link";
 import { startTransition, useActionState, useRef, useState } from "react";
 import { Button, Input, Label, Select, cx } from "@/components/ui";
 import { login, register } from "./actions";
 
 type Group = { group: string; items: { id: string; name: string }[] };
-type Demo = { label: string; email: string; password: string };
+type Demo = { label: string; email: string; password: string; tone?: "violet" | "brand" | "lime" | "pink" };
+const DEMO_TONE = { violet: "bg-[var(--color-mastery)] text-white", brand: "bg-brand-600 text-white", lime: "bg-[var(--color-xp)] text-ink", pink: "bg-[var(--color-tier-hidden)] text-white" };
+const DEMO_ICON = { violet: Presentation, brand: Stethoscope, lime: Apple, pink: HeartPulse };
 
 export default function AuthForm({ mode, groups, next, demo }: { mode: "login" | "register"; groups?: Group[]; next?: string; demo?: Demo[] }) {
   const [error, action, pending] = useActionState(mode === "login" ? login : register, null);
@@ -122,26 +124,37 @@ export default function AuthForm({ mode, groups, next, demo }: { mode: "login" |
         </p>
       </form>
       {demo && demo.length > 0 && (
-        <div className="mt-8 rounded-xl border border-line bg-surface-2 p-3">
-          <div className="mb-2 flex items-baseline justify-between px-1">
-            <span className="text-[13px] font-semibold text-ink">Demo accounts</span>
+        <div className="mt-7">
+          <div className="mb-2.5 flex items-baseline justify-between gap-2">
+            <span className="font-display text-[15px] font-bold text-ink">Jump in with a demo account</span>
             <span className="text-[12px] text-ink-3">password poscere-demo</span>
           </div>
-          <ul className="space-y-1.5">
-            {demo.map((d) => (
-              <li key={d.email}>
-                <button type="button" onClick={() => fillDemo(d)} disabled={pending} className="press flex min-h-11 w-full items-center justify-between gap-3 rounded-lg bg-surface px-3 py-2 text-left ring-1 ring-inset ring-line transition-colors hover:ring-brand-300">
-                  <span className="min-w-0">
-                    <span className="block text-[13.5px] font-medium text-ink">{d.label}</span>
-                    <span className="block truncate font-mono text-[12px] text-ink-3">
-                      {d.email} / {d.password}
+          <ul className="grid grid-cols-2 gap-2">
+            {demo.map((d, i) => {
+              const tone = d.tone || "brand";
+              const Icon = DEMO_ICON[tone];
+              return (
+                <li key={d.email} className="pop-spring flex" style={{ ["--i" as string]: i + 6 }}>
+                  <button
+                    type="button"
+                    onClick={() => fillDemo(d)}
+                    disabled={pending}
+                    title={`${d.email} / ${d.password}`}
+                    className="press lift group flex min-h-[4.5rem] w-full flex-col items-start justify-between gap-2 rounded-2xl bg-surface-2 p-3 text-left ring-1 ring-inset ring-line transition-colors hover:ring-brand-300 disabled:opacity-60"
+                  >
+                    <span className={cx("grid h-8 w-8 place-items-center rounded-xl clay transition-transform duration-300 ease-[var(--ease-spring)] group-hover:-rotate-6 group-hover:scale-110", DEMO_TONE[tone])}>
+                      <Icon className="h-4 w-4" aria-hidden />
                     </span>
-                  </span>
-                  <span className="shrink-0 text-[12.5px] font-medium text-brand-700">Sign in</span>
-                </button>
-              </li>
-            ))}
+                    <span className="block text-[13px] font-bold leading-tight text-ink">{d.label}</span>
+                    <span className="sr-only">
+                      Sign in as {d.email}, password {d.password}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
           </ul>
+          <p className="mt-2 text-[12px] text-ink-3">One tap signs you in. Emails: faculty@, student@, dietetics@, nursing@poscere.demo.</p>
         </div>
       )}
     </>

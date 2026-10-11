@@ -14,11 +14,12 @@ export interface OrbTier {
   hex: string;
 }
 
+// The tier hues (globals.css --color-tier-*), lifted in lightness so the points glow on the dark stage.
 export const ORB_TIERS: OrbTier[] = [
-  { id: "initial", label: "Volunteered", radius: 0.95, count: 22, unlocks: 1, rgb: [0.13, 0.78, 0.55], hex: "#22c78c" },
-  { id: "discoverable", label: "When asked", radius: 1.45, count: 32, unlocks: 0.85, rgb: [0.27, 0.62, 0.95], hex: "#459ef2" },
-  { id: "reluctant", label: "Needs trust", radius: 1.95, count: 40, unlocks: 0.55, rgb: [0.96, 0.66, 0.2], hex: "#f5a833" },
-  { id: "hidden", label: "Guarded", radius: 2.45, count: 48, unlocks: 0.3, rgb: [0.95, 0.36, 0.45], hex: "#f25c73" },
+  { id: "initial", label: "Volunteered", radius: 0.95, count: 22, unlocks: 1, rgb: [0.2, 0.86, 0.79], hex: "#33dbca" },
+  { id: "discoverable", label: "When asked", radius: 1.45, count: 32, unlocks: 0.85, rgb: [0.36, 0.64, 1], hex: "#5ca3ff" },
+  { id: "reluctant", label: "Needs trust", radius: 1.95, count: 40, unlocks: 0.55, rgb: [1, 0.7, 0.18], hex: "#ffb22e" },
+  { id: "hidden", label: "Guarded", radius: 2.45, count: 48, unlocks: 0.3, rgb: [1, 0.36, 0.62], hex: "#ff5c9e" },
 ];
 
 export interface OrbPoint {
