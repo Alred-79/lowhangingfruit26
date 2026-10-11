@@ -66,6 +66,14 @@
   --animate-fade-in: fade-in 240ms var(--ease-out-ui) both;
 }
 
+/* A grid without explicit columns gets one shrinkable column instead of sizing to its widest
+   child (which pushed phones into horizontal scroll). Any grid-cols-* utility still wins. */
+@layer base {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 html,
 body {
   height: 100%;
