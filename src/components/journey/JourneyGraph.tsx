@@ -51,12 +51,13 @@ export default function JourneyGraph({ view, onOpen }: { view: RunView; onOpen: 
       });
     }
     const links = view.links.filter((l) => pos.has(l.from) && pos.has(l.to));
+    const empty = new Set(cols.map((_, i) => i).filter((i) => !perCol.has(i)));
     const W = PAD_X * 2 + cols.length * COL_W;
     const H = TOP + maxRows * ROW_H + 18;
-    return { cols, pos, links, W, H };
+    return { cols, pos, links, W, H, empty };
   }, [view]);
 
-  const { cols, pos, links, W, H } = layout;
+  const { cols, pos, links, W, H, empty } = layout;
   const active = hover ? new Set([hover, ...links.filter((l) => l.from === hover || l.to === hover).flatMap((l) => [l.from, l.to])]) : null;
   const hovered = hover ? pos.get(hover)?.e : null;
   const counts = links.reduce<Record<string, number>>((m, l) => ((m[l.relation] = (m[l.relation] || 0) + 1), m), {});
@@ -75,6 +76,11 @@ export default function JourneyGraph({ view, onOpen }: { view: RunView; onOpen: 
               <text x={PAD_X + i * COL_W + COL_W / 2} y={39} textAnchor="middle" fontSize={11} fill={c.you ? "var(--color-brand-700)" : "var(--color-ink-3)"} fontWeight={c.you ? 600 : 400}>
                 {c.sub.length > 26 ? c.sub.slice(0, 25) + "…" : c.sub}
               </text>
+              {empty.has(i) && (
+                <text x={PAD_X + i * COL_W + COL_W / 2} y={TOP + 24} textAnchor="middle" fontSize={11} fill="var(--color-ink-3)">
+                  {c.you ? "Your visit adds here" : "Not seen yet"}
+                </text>
+              )}
             </g>
           ))}
           {links.map((l, k) => {
