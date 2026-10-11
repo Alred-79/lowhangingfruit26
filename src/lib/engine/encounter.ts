@@ -268,7 +268,8 @@ export function chartView(c: CaseProfile, cfg: EncounterConfig, state: Encounter
         : c.scenario.studentBrief,
     chiefComplaint: cfg.journey?.reason || c.scenario.chiefComplaint,
     tasks: cfg.journey?.tasks?.length ? cfg.journey.tasks : cfg.journey?.brief ? [] : c.scenario.tasks,
-    atStart: c.chartAtStart,
+    // In a care journey the chart header and summary show this stage's own reason, not the source case's booked reason.
+    atStart: cfg.journey?.reason ? c.chartAtStart.map((x) => (/^reason for visit$/i.test(x.label.trim()) ? { ...x, value: cfg.journey!.reason! } : x)) : c.chartAtStart,
     sections,
     results,
     unmatched: state.unmatchedOrders,
@@ -386,6 +387,7 @@ export async function* runTurn(encId: string, text: string): AsyncGenerator<Turn
   releaseArtifacts(c, state);
   const inserted = addMessage(encId, state.turn, "patient", reply, {
     unsupported,
+    audited: !audit.failed,
     revealed: d.reveal.map((f) => f.id),
     deflected: d.deflect.map((f) => f.id),
     questionType: gate.question_type,

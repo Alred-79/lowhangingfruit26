@@ -16,7 +16,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "STOP-BANG obstructive sleep apnea screening",
-    "result": "Snoring: no (0). Tiredness: occasional, attributed to work shifts, scored as no (0). Observed apnea: no bed partner report of pauses (0). Pressure (BP): borderline per home cuff but not meeting hypertension threshold, scored as no (0). BMI >35: no (BMI 33) (0). Age >50: no (0). Neck circumference: patient reports collar size 14in (~35.5cm), not large (0). Gender male: no (0). Score 0/8, low risk for OSA.",
+    "result": "Snoring: no (0). Tiredness: occasional, attributed to work shifts, scored as no (0). Observed apnea: no bed partner report of pauses (0). Pressure (BP): borderline per home cuff but not meeting hypertension threshold, scored as no (0). BMI >35: borderline (BMI 35.3) (0). Age >50: no (0). Neck circumference: patient reports collar size 14in (~35.5cm), not large (0). Gender male: no (0). Score 0/8, low risk for OSA.",
     "importance": "important",
     "artifactIds": []
    },
@@ -34,7 +34,7 @@
     "id": "a4",
     "kind": "vitals",
     "name": "Current vital signs via home device (BP cuff, pulse ox, scale)",
-    "result": "BP 126/80 mmHg, HR 74 bpm regular, SpO2 98% room air, Temp 98.2F (36.8C) oral, Weight 212 lb (96.2 kg), Height 5'5\" (165 cm), BMI 33.",
+    "result": "BP 126/80 mmHg, HR 74 bpm regular, SpO2 98% room air, Temp 98.2F (36.8C) oral, Weight 212 lb (96.2 kg), Height 5'5\" (165 cm), BMI 35.",
     "importance": "important",
     "artifactIds": []
    },
@@ -145,14 +145,14 @@
     "Malignant hyperthermia susceptibility (family history suggestive, unconfirmed) requiring escalation to the anesthesia care team and collaborative decision-making about anesthetic technique",
     "High risk for postoperative nausea and vomiting given prior sedation history",
     "Delayed gastric emptying risk from weekly semaglutide affecting aspiration risk and NPO timing",
-    "Obesity-related airway and ventilation considerations (BMI 33, otherwise reassuring airway exam)",
+    "Obesity-related airway and ventilation considerations (BMI 35, otherwise reassuring airway exam)",
     "Herbal supplement (ginkgo, fish oil) related bleeding risk requiring perioperative hold"
    ],
    "keyFindings": [
     "Maternal uncle had a near-fatal hyperthermic reaction during anesthesia for appendectomy; cousin advised to wear a medical alert bracelet — classic red flag for MH susceptibility, never previously documented or explained to patient",
     "History of severe nausea/vomiting after wisdom tooth sedation — significant PONV risk factor, used here as a surrogate for the classic Apfel 'history of PONV/motion sickness' criterion",
     "Weekly semaglutide, last dose 5 days prior to this visit (approximately 11 days before surgery), no current GI symptoms — satisfies current ASA guidance to hold the weekly dose for a full week before surgery, but standard aspiration precautions should still be applied if any uncertainty remains",
-    "BMI 33 with reassuring airway exam, low STOP-BANG score, good functional capacity",
+    "BMI 35 with reassuring airway exam, low STOP-BANG score, good functional capacity",
     "Daily ginkgo biloba and high-dose fish oil, both with antiplatelet/bleeding-risk potential, not yet addressed for perioperative hold",
     "No prior personal anesthesia complications other than PONV; this would be her first general anesthetic exposure since dental sedation"
    ],
@@ -484,7 +484,7 @@
    },
    {
     "label": "Problem list",
-    "value": "Migraine without aura; Obesity (BMI 33); Right knee medial meniscus tear"
+    "value": "Migraine without aura; Obesity (BMI 35); Right knee medial meniscus tear"
    },
    {
     "label": "Medications",
@@ -496,7 +496,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "BP 124/78 mmHg, HR 72 bpm, SpO2 99%, Weight 212 lb, Height 65 in, BMI 33 (recorded at pre-op lab visit 3 weeks ago)"
+    "value": "BP 124/78 mmHg, HR 72 bpm, SpO2 99%, Weight 212 lb, Height 65 in, BMI 35 (recorded at pre-op lab visit 3 weeks ago)"
    },
    {
     "label": "Immunizations",

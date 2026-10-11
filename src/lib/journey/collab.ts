@@ -1,3 +1,4 @@
+import { isMedSafetyConcern, medSafetyRank } from "./support";
 import { run as sql } from "../db";
 import { messagesOf } from "../engine/encounter";
 import { chatJSON, MODELS } from "../llm";
@@ -8,6 +9,11 @@ import { professionsOf, statusBoard, type Huddle, type HuddleItem, type Stage, t
 const str = { type: "string" };
 const labels = { type: "array", items: str };
 const OPEN = ["uncertain", "disputed", "open_question"];
+/** A hedged statement is a judgement, not a settled fact. */
+const HEDGE = /\b(likely|probabl[ey]|possibl[ey]|suspect|may be|might|could (?:be|represent|indicate|reflect)|appears? to|seems? to|unclear|not (?:yet )?(?:confirmed|established))\b/i;
+/** Words that report an action as already done. */
+const DONE = /\b(ordered|initiated|started|arranged|scheduled|prescribed|completed|booked|dispensed|delivered|implemented)\b/i;
+const PLAN = /\b(will|going to|plan(?:s|ned)? to|arrange|obtain|order|schedule|refer|recommend|follow[- ]up|to (?:find|check|confirm|assess|review|clarify)|make sure|ask)\b/i;
 
 /** Where in the journey the learner currently is, for stamping out-of-sequence messages. */
 function currentStage(run: LoadedRun): Stage {
@@ -39,7 +45,7 @@ const CONSULT_SCHEMA = {
     reply_act: { type: "string", enum: ["answer", "readback", "request", "confirmation", "correction", "clarifying_question"], description: "readback = you repeat back a request or information to confirm you received it correctly; confirmation = the learner's check-back was right; correction = the learner's check-back was partly wrong and you put it right" },
     cites: { ...labels, description: "Labels of the shared-state entries your reply relies on" },
     answers: { type: "string", description: "Label of ONE unanswered question or uncertain entry for which your reply states the missing information itself, from the record or your own visit. A plan, a recommendation or an offer to find out is NOT an answer. Empty string if none (the usual case)." },
-    state_entry: { type: "string", description: "If, and only if, your reply adds something clinically meaningful to the team's shared picture of the patient (an interpretation, a recommendation, a clarification of what you recorded, a safety concern), write it as ONE clean chart statement in the third person, e.g. 'Cardiology interprets the irregular pulse as needing a rhythm check before any beta-blocker change.' No greeting, no thanks, no 'asked by', no logistics. Empty string when the exchange is an acknowledgement, a read-back, thanks, scheduling, or only repeats what the record already says." },
+    state_entry: { type: "string", description: "If, and only if, your reply adds something clinically meaningful to the team's shared picture of the patient (an interpretation, a recommendation, a clarification of what you recorded, a safety concern), write it as ONE clean chart statement in the third person, e.g. 'Cardiology interprets the irregular pulse as needing a rhythm check before any beta-blocker change.' No greeting, no thanks, no 'asked by', no logistics. Keep hedges ('possible', 'could', 'likely') exactly as you said them; never upgrade them to 'confirmed'. Refer to the learner by professional role, never as 'the student'. Empty string when the exchange is an acknowledgement, a read-back, thanks, scheduling, or only repeats what the record already says." },
   },
 };
 
@@ -112,7 +118,7 @@ ${text}`,
 
   // Only clinically meaningful content joins the shared state, as a clean statement attributed to the
   // colleague and linked to what it drew on. Acknowledgements, thanks and logistics stay in the thread.
-  const statement = clean(out.state_entry);
+  const statement = clean(out.state_entry).replace(/\b(?:the )?(?:student|learner)(?:'s)?\b/gi, (m) => (/'s$/i.test(m) ? "the clinician's" : "the clinician"));
   if (statement && statement.split(/\s+/).length >= 5 && !["readback", "confirmation", "clarifying_question"].includes(out.reply_act)) {
     const unverified = unverifiedValues(statement, corpus);
     const answered = resolve(out.answers);
@@ -121,7 +127,7 @@ ${text}`,
       runId,
       kind: "consult",
       text: statement,
-      status: !seen || unverified.length || !cites.length ? "uncertain" : "established",
+      status: !seen || unverified.length || !cites.length || isMedSafetyConcern(statement) || HEDGE.test(statement) ? "uncertain" : "established",
       source: "consult",
       contributorRole: to.roleTitle,
       contributorName: cl.name,
@@ -148,11 +154,13 @@ export async function callOut(runId: string, text: string) {
   const others = run.stages.filter((s) => s.id !== me.id);
   const entries = entriesOf(runId);
   addMessage(runId, { thread: "callout", kind: "callout", fromRole: me.roleTitle, fromName: student, fromIsAi: false, toRole: "Whole team", text, meta: { act: "callout", duringStage: at.id, loop: "opened" } });
-  const entryId = addEntry({
+  // Only a call-out that carries clinical content joins the shared state; "can you hear me?" stays in the thread.
+  const substantive = text.trim().split(/\s+/).length >= 6 && !/^\s*(?:please\s+)?(?:confirm|can you (?:hear|confirm)|do you (?:hear|copy)|are you (?:there|ready)|did you (?:hear|get))\b[^.]{0,40}$/i.test(text);
+  const entryId = substantive ? addEntry({
     runId,
     kind: "callout",
-    text: `Call-out to the team: ${text}`,
-    status: "established",
+    text,
+    status: isMedSafetyConcern(text) ? "uncertain" : "established",
     source: "clinician",
     contributorRole: me.roleTitle,
     contributorName: student,
@@ -161,7 +169,7 @@ export async function callOut(runId: string, text: string) {
     stageOrder: at.order,
     simTime: `${at.simTime} (call-out)`,
     evidence: { where: "consult", quote: text.slice(0, 400), ref: "callout", verified: true },
-  });
+  }) : undefined;
   const out = await chatJSON<{ acks: { stage: string; text: string }[] }>({
     model: MODELS.chat,
     maxTokens: 700,
@@ -194,6 +202,16 @@ const saveHuddle = (runId: string, h: Huddle) => sql("UPDATE journey_runs SET hu
  * agenda, then each AI colleague states a position on the items that touch their role, citing
  * entries. Anything the model picks must be one of the candidates; gaps are filled deterministically.
  */
+/**
+ * Deterministic agenda order, safety first: a medication-safety concern, then status
+ * (disputed, unanswered, uncertain), then stated importance, then the order raised.
+ * Exported so the rule can be tested without a model.
+ */
+export function rankHuddleCandidates<T extends { effectiveStatus: string; text: string; stageOrder: number; meta: { importance?: string } | null }>(list: T[], rank: Record<string, number>, high: (e: T) => number): T[] {
+  const safety = (e: T) => medSafetyRank(e.text);
+  return [...list].sort((a, b) => safety(a) - safety(b) || rank[a.effectiveStatus] - rank[b.effectiveStatus] || high(a) - high(b) || a.stageOrder - b.stageOrder);
+}
+
 export async function startHuddle(runId: string): Promise<Huddle> {
   const run = loadRun(runId);
   if (!run) throw new Error("Run not found");
@@ -207,10 +225,11 @@ export async function startHuddle(runId: string): Promise<Huddle> {
   // disagreement entry carries the entry it contradicts.
   const board = statusBoard(entries, links);
   const openIds = new Set([...board.groups.disputed, ...board.groups.open_question, ...board.groups.uncertain].map((e) => e.id));
-  const candidates = entries
-    .filter((e) => openIds.has(e.id) && OPEN.includes(e.status) && e.kind !== "consult")
-    .sort((a, b) => rank[a.effectiveStatus] - rank[b.effectiveStatus] || high(a) - high(b) || a.stageOrder - b.stageOrder)
-    .slice(0, 30);
+  const candidates = rankHuddleCandidates(
+    entries.filter((e) => openIds.has(e.id) && OPEN.includes(e.status) && (e.kind !== "consult" || isMedSafetyConcern(e.text))),
+    rank,
+    high,
+  ).slice(0, 30);
   const ai = run.stages.filter((s) => s.id !== run.row.student_stage_id);
   const { toAlias, resolve } = aliasing(entries);
   const student = studentNameOf(run.row.user_id);
@@ -276,6 +295,19 @@ ${learnerLine(student, studentStage(run).roleTitle)}`,
       }
       items.push(item);
     }
+    // The model's order is advisory; a medication-safety item that it left out or ranked low goes first, deterministically.
+    const isSafety = (id: string) => isMedSafetyConcern(candidates.find((c) => c.id === id)?.text || "");
+    for (const e of candidates) {
+      if (!isMedSafetyConcern(e.text) || items.some((x) => x.entryId === e.id)) continue;
+      if (items.length >= size) {
+        const drop = [...items].reverse().findIndex((x) => !isSafety(x.entryId));
+        if (drop < 0) break;
+        items.splice(items.length - 1 - drop, 1);
+      }
+      items.push({ entryId: e.id, reason: e.effectiveStatus as HuddleItem["reason"], positions: [] });
+    }
+    const sr = (id: string) => medSafetyRank(candidates.find((c) => c.id === id)?.text || "");
+    items = items.map((x, i) => ({ x, i })).sort((a, b) => sr(a.x.entryId) - sr(b.x.entryId) || a.i - b.i).map((o) => o.x);
     // If the model returned too few, the remaining places go to the deterministic order.
     for (const e of candidates) {
       if (items.length >= Math.min(size, candidates.length)) break;
@@ -329,6 +361,7 @@ export async function resolveHuddleItem(runId: string, entryId: string, text: st
 
 "resolved" means the question is actually answered or the disagreement actually settled by what is already in the record. Agreeing a plan to find out ("the pharmacist will call the prescriber", "obtain a repeat echocardiogram") does NOT resolve an unanswered question: that is "still_open", recorded with what remains unknown, the agreed next step and its owner. A good plan for an open item is a good outcome; it is still open.
 Every encounter was an outpatient telehealth visit; the team recommends and assigns follow-up, it has not admitted the patient or changed medicines.
+The "recorded" sentence may state only what the participants actually said or agreed. Never write that something was ordered, initiated, started, arranged or completed unless the learner said it was already done; a commitment is written as "X will ...". Do not add details (quantities, products, dates) that nobody said.
 ${learnerLine(student, me.roleTitle)}`,
     messages: [
       {
@@ -347,8 +380,14 @@ ${learnerLine(student, me.roleTitle)}`,
   const corpus = approvedCorpus(run.c, entries) + " " + entries.map((e) => e.text).join(" ") + " " + text;
   const unverified = unverifiedValues(out.recorded || "", corpus);
   // An unanswered question or an uncertainty is only resolved by an outcome that supplies the answer; a plan keeps it open, with an owner.
-  const needsAnswer = entry.kind === "open_question" || entry.kind === "uncertainty" || entry.effectiveStatus === "open_question";
-  const decision = out.decision === "resolved" && !unverified.length && (!needsAnswer || out.supplies_information === true) ? "resolved" : "still_open";
+  // Any item that is still open (whatever kind of entry raised it) needs an outcome that supplies the answer; a plan keeps it open.
+  const needsAnswer = entry.kind === "open_question" || entry.kind === "uncertainty" || ["open_question", "uncertain", "disputed"].includes(entry.effectiveStatus);
+  // Outcome text may only say what the participants said: an action reported as done ("ordered", "initiated") that the learner did not
+  // say is done is invented, and an outcome that is only a plan does not supply information.
+  const invented = DONE.test(out.recorded || "") && !DONE.test(text);
+  const planOnly = PLAN.test(text) && !/\b(is|are|was|were|has|have|had)\b/i.test(out.recorded || "");
+  const decision = out.decision === "resolved" && !unverified.length && !invented && (!needsAnswer || (out.supplies_information === true && !planOnly)) ? "resolved" : "still_open";
+  if (decision === "still_open" && invented) out.recorded = `Proposed in the huddle: ${text.slice(0, 300)}`;
   const order = run.stages.length + 1;
   const newId = addEntry({
     runId,

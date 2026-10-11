@@ -75,6 +75,10 @@ Rules:
 - Every action cites the entry labels it rests on (in restsOn only; never write a label such as E12 inside any text) and names owner roles from the team list.
 - Respect the patient's stated goals and constraints (money, energy, independence, preferences).
 - Attribution: each entry line says which ROLE contributed it and in which encounter. When you credit a finding to someone, use the role on that entry's own line and nothing else. Never credit a role with something another role's entry contains, and never refer to a person by name or by anything other than their role in this journey.
+- Keep the entry's own certainty: an entry that says "possible", "could" or "likely", or a concern that "needs review", is never described in the plan as confirmed, established or agreed. Only an entry marked Resolved or Established with an explicit confirmation may be called confirmed.
+- A medication-safety item (a possible duplication, interaction, contraindication, wrong dose, or a prescriber review that is still open) is never deferred behind an unrelated assessment or an in-person visit. Make it its own early action: name who clarifies it with the prescriber (the role that raised it, or the one whose scope covers prescribing review) and when (the first timeframe in the plan, for example "within 1 to 2 days"), and say what stays unchanged until the prescriber answers.
+- Credit as contributing only the roles in the TEAM list, who took part in an encounter or the huddle. A specialty that appears only in a document on file (an endoscopy report, a specialist letter) is part of the record, not a member of this team; do not list it among the professions that contributed.
+- Refer to every clinician by professional role. Never write "the student", "the learner" or "the simulation".
 - Every encounter was an outpatient telehealth visit. Nobody admitted the patient, ordered tests beyond the listed results, or changed a medicine. Do not write actions that assume otherwise (for example "confirm whether he was admitted"). Recommendations in the entries are recommendations, not things already done.`,
     messages: [
       {
@@ -92,6 +96,7 @@ ${links.map((l) => `${toAlias.get(l.from)} ${l.relation} ${toAlias.get(l.to)}`).
   });
 
   const corpus = approvedCorpus(run.c, entries) + " " + entries.map((e) => e.text).join(" ");
+  const role = (t: string) => clean(t).replace(/\b(?:the )?(?:student|learner)(?:'s)?\b/gi, (m) => (/'s$/i.test(m) ? "the clinician's" : "the clinician"));
   const stageIds = run.stages.map((s) => s.id);
   let dropped = 0;
   type RawItem = { action: string; ownerRoles: string[]; timeframe: string; rationale: string; restsOn: string[] };
@@ -100,13 +105,13 @@ ${links.map((l) => `${toAlias.get(l.from)} ${l.relation} ${toAlias.get(l.to)}`).
     id: `p${pi + 1}`,
     title: clean(p.title),
     patientGoal: clean(p.patientGoal),
-    summary: clean(p.summary),
+    summary: role(p.summary),
     items: arr<RawItem>(p.items)
       .map((it, ii) => {
         const restsOn = [...new Set(arr(it.restsOn).map(resolve).filter((x): x is string => !!x))];
         // Professions are the journey roles whose entries the action rests on; the record and the huddle are not professions.
         const professions = professionsOf(restsOn, entries, stageIds);
-        return { id: `p${pi + 1}i${ii + 1}`, action: clean(it.action), ownerRoles: arr<string>(it.ownerRoles).map(String), timeframe: it.timeframe || "", rationale: attribution(clean(it.rationale), restsOn, byId, run), restsOn, professions };
+        return { id: `p${pi + 1}i${ii + 1}`, action: role(it.action), ownerRoles: arr<string>(it.ownerRoles).map(String), timeframe: it.timeframe || "", rationale: attribution(role(it.rationale), restsOn, byId, run), restsOn, professions };
       })
       .filter((it) => {
         // An action with no real entry behind it, or with a value found nowhere in the state, is not shown.
@@ -117,7 +122,7 @@ ${links.map((l) => `${toAlias.get(l.from)} ${l.relation} ${toAlias.get(l.to)}`).
       }),
   }));
   const out: Synthesis = {
-    patientSummary: clean(raw.patientSummary),
+    patientSummary: role(raw.patientSummary),
     summaryCites: [...new Set(arr(raw.summaryCites).map(resolve).filter((x): x is string => !!x))],
     problems: problems.filter((p) => p.items.length),
     droppedItems: dropped,
@@ -128,7 +133,7 @@ ${links.map((l) => `${toAlias.get(l.from)} ${l.relation} ${toAlias.get(l.to)}`).
 
 /** An entry as the plan writer sees it: status, kind, and the ROLE that contributed it (no personal names, which models mistake for roles). */
 function line(e: StateEntry, alias: string): string {
-  const by = e.stageId === RECORD_STAGE ? "existing record" : e.stageId === "huddle" ? "team huddle" : `contributed by the ${e.contributorRole}${e.contributorIsAi ? "" : " (the student)"}, encounter ${e.stageOrder}`;
+  const by = e.stageId === RECORD_STAGE ? "existing record" : e.stageId === "huddle" ? "team huddle" : `contributed by the ${e.contributorRole}, encounter ${e.stageOrder}`;
   return `[${alias}] (${STATUS_LABEL[e.effectiveStatus]}; ${e.kind.replace("_", " ")}; ${by}) ${e.text}`;
 }
 

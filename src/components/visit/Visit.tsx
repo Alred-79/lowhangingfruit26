@@ -13,6 +13,8 @@ import Aurora from "@/components/game/Aurora";
 import { HoldButton } from "@/components/game/controls";
 import TrustHud from "./TrustHud";
 import ChartPanel from "./ChartPanel";
+import { envelopeMouth, levelAt, parseMouth, type MouthTimeline } from "./mouth";
+import TalkingPortrait from "./TalkingPortrait";
 
 interface Msg {
   id: number;
@@ -224,11 +226,14 @@ export default function Visit({ id, viewerName, hud }: { id: string; viewerName:
 
   // Speech is synthesised sentence by sentence so the patient starts talking while the reply is still arriving.
   const voice = useRef<{ gen: number; queue: Promise<string | null>[]; playing: boolean }>({ gen: 0, queue: [], playing: false });
+  // Lip-sync timelines by clip URL; filled when the clip arrives (from the server's alignment, or decoded loudness).
+  const mouths = useRef(new Map<string, MouthTimeline | null>());
   function stopVoice() {
     voice.current.gen += 1;
     voice.current.queue = [];
     voice.current.playing = false;
     audioRef.current?.pause();
+    mouths.current.clear();
     setSpeaking(false);
   }
   function pump() {
@@ -258,13 +263,24 @@ export default function Visit({ id, viewerName, hud }: { id: string; viewerName:
     const gen = voice.current.gen;
     voice.current.queue.push(
       fetch("/api/tts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ e: id, text }) })
-        .then((r) => (r.ok && r.status !== 204 ? r.blob() : null))
-        .then((b) => (b && gen === voice.current.gen ? URL.createObjectURL(b) : null))
+        .then(async (r) => {
+          if (!r.ok || r.status === 204) return null;
+          const b = await r.blob();
+          if (gen !== voice.current.gen) return null;
+          const url = URL.createObjectURL(b);
+          const tl = parseMouth(r.headers.get("X-Mouth"));
+          mouths.current.set(url, tl);
+          // No alignment (fallback voice): derive the mouth from the audio's loudness without delaying playback.
+          if (!tl) envelopeMouth(b).then((e) => mouths.current.has(url) && mouths.current.set(url, e));
+          return url;
+        })
         .catch(() => null),
     );
     pump();
   }
   function onAudioDone() {
+    const src = audioRef.current?.src;
+    if (src) mouths.current.delete(src);
     voice.current.playing = false;
     pump();
   }
@@ -506,6 +522,12 @@ export default function Visit({ id, viewerName, hud }: { id: string; viewerName:
   }
 
   const p = chart.patient;
+  // Mouth openness for the clip that is playing right now, read from the audio clock.
+  const mouthLevel = () => {
+    const a = audioRef.current;
+    const tl = a && !a.paused ? mouths.current.get(a.src) : null;
+    return tl ? levelAt(tl, a!.currentTime) : 0;
+  };
   const caption = pending !== null ? pending : speaking ? [...messages].reverse().find((m) => m.speaker === "patient")?.text || "" : "";
   const patientTalking = speaking || (pending !== null && pending.length > 0);
   const firstName = p.name.split(" ")[0];
@@ -534,7 +556,7 @@ export default function Visit({ id, viewerName, hud }: { id: string; viewerName:
           <div className="mt-0.5 hidden flex-wrap items-center gap-1.5 sm:flex">
             <TrustLabel kind={data.recorded ? "recorded" : "private"} />
             <span className="rounded-full bg-white/12 px-2 py-0.5 text-[11.5px] font-semibold text-white ring-1 ring-white/15">{MODE_LABEL[data.mode] || data.mode}</span>
-            <span className="rounded-full bg-[var(--color-xp)] px-2 py-0.5 text-[11.5px] font-bold text-ink">Level {data.level}</span>
+            <span className="rounded-full bg-[var(--color-xp)] px-2 py-0.5 text-[11.5px] font-bold text-ink">Difficulty: Level {data.level}</span>
             {data.visitNumber > 1 ? <span className="rounded-full bg-sky-100 px-2 py-0.5 text-[11.5px] font-semibold text-sky-950">Follow-up · visit {data.visitNumber}</span> : data.attempt > 1 && <span className="rounded-full bg-white/12 px-2 py-0.5 text-[11.5px] text-white ring-1 ring-white/15">Attempt {data.attempt}</span>}
             {data.liveAssist && <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[11.5px] font-semibold text-violet-950">Instructor can join</span>}
           </div>
@@ -556,7 +578,7 @@ export default function Visit({ id, viewerName, hud }: { id: string; viewerName:
         <div className="flex w-full flex-wrap items-center gap-1.5 sm:hidden">
           <TrustLabel kind={data.recorded ? "recorded" : "private"} />
           <span className="rounded-full bg-white/12 px-2 py-0.5 text-[11.5px] font-semibold text-white">
-            {MODE_LABEL[data.mode] || data.mode} · Level {data.level}
+            {MODE_LABEL[data.mode] || data.mode} · Difficulty: Level {data.level}
           </span>
         </div>
       </header>
@@ -567,8 +589,7 @@ export default function Visit({ id, viewerName, hud }: { id: string; viewerName:
           <div className="relative h-[300px] shrink-0 overflow-hidden rounded-[24px] bg-stage shadow-e3 ring-1 ring-white/10 sm:h-[340px] lg:h-[40%] lg:min-h-[240px]" onPointerMove={onStageMove} onPointerLeave={onStageLeave}>
             <div ref={tiltRef} className="absolute inset-0 transition-transform duration-500 ease-[var(--ease-out-ui)]">
               {p.portrait ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={p.portrait} alt={p.name} className={`h-full w-full object-cover object-[50%_28%] transition-transform duration-700 ${patientTalking ? "scale-[1.015]" : ""}`} />
+                <TalkingPortrait src={p.portrait} alt={p.name} talking={speaking} enabled={speakerOn} level={mouthLevel} />
               ) : (
                 <div className="grid h-full place-items-center bg-[radial-gradient(circle_at_50%_40%,var(--color-stage-3),var(--color-stage))]">
                   <div className={`grid h-28 w-28 place-items-center rounded-full bg-brand-700 font-display text-4xl font-semibold text-white ${patientTalking ? "speak-ring" : ""}`}>{initials(p.name)}</div>
@@ -850,7 +871,7 @@ export default function Visit({ id, viewerName, hud }: { id: string; viewerName:
                 <div className="flex flex-wrap items-center gap-2 rounded-[22px] bg-surface-2 p-2 ring-1 ring-line">
                   <span className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-surface px-3 text-[12.5px] font-bold text-ink ring-1 ring-line">
                     {MODE_LABEL[data.mode] || data.mode}
-                    <span className="rounded-full bg-[var(--color-xp)] px-1.5 text-[11.5px] text-ink">Level {data.level}</span>
+                    <span className="rounded-full bg-[var(--color-xp)] px-1.5 text-[11.5px] text-ink">Difficulty: Level {data.level}</span>
                   </span>
                   {micSupported && (
                     <label className={`press inline-flex min-h-10 cursor-pointer items-center gap-1.5 rounded-full px-3 text-[13px] font-bold ring-1 transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-brand-500 ${micOn ? "bg-[var(--color-xp)] text-ink ring-transparent" : "bg-surface text-ink-2 ring-line"}`}>

@@ -111,7 +111,7 @@
     "id": "a12",
     "kind": "test",
     "name": "Administer STOP-BANG obstructive sleep apnea screening questionnaire",
-    "result": "Patient endorses loud snoring, witnessed apneas (per wife), daytime sleepiness, and hypertension on direct questioning; BMI 29.7 (not >35), age 61 (not >50 threshold not met for this component per standard cutoff... ) - components should be tallied from the interview; no validated composite score has been calculated or recorded in the chart.",
+    "result": "Patient endorses loud snoring, witnessed apneas (per wife), daytime sleepiness, and hypertension on direct questioning; BMI 29.7 (not >35), age 61 (>50, criterion met) - components should be tallied from the interview; no validated composite score has been calculated or recorded in the chart.",
     "importance": "important",
     "abnormal": false,
     "artifactIds": []

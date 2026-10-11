@@ -9,11 +9,13 @@ type Tab = "summary" | "visit" | "results" | "documents" | "activity" | "team";
 
 const KIND_LABEL: Record<string, string> = { exam: "Remote exam", vitals: "Vitals", lab: "Lab", imaging: "Imaging", test: "Test", record: "Record", assessment: "Assessment", procedure: "Procedure" };
 
-function Stamp({ turn, how }: { turn: number; how?: string }) {
+function Stamp({ turn, how, after }: { turn: number; how?: string; after?: boolean }) {
   const rec = how === "record";
+  const earlier = !rec && turn <= 0;
+  const text = rec ? "REC" : earlier ? "earlier" : after ? `after T${turn}` : `T${turn}`;
   return (
-    <span className={`mt-0.5 inline-flex h-5 min-w-8 shrink-0 items-center justify-center rounded-md px-1 font-mono text-[11px] font-semibold tabular-nums ${rec ? "bg-sky-100 text-sky-900" : "bg-ink text-white"}`} title={rec ? "Already on record from an earlier encounter" : `Turn ${turn}`}>
-      {rec ? "REC" : `T${turn}`}
+    <span className={`mt-0.5 inline-flex h-5 min-w-8 shrink-0 items-center justify-center whitespace-nowrap rounded-md px-1.5 font-mono text-[11px] font-semibold tabular-nums ${rec ? "bg-sky-100 text-sky-900" : earlier ? "bg-surface-2 text-ink-2 ring-1 ring-inset ring-line" : "bg-ink text-white"}`} title={rec ? "Already on record from an earlier encounter" : earlier ? "From an earlier visit" : after ? `Came back after turn ${turn}` : `Turn ${turn}`}>
+      {text}
     </span>
   );
 }
@@ -260,7 +262,7 @@ export default function ChartPanel({
                         </span>
                       )}
                       {KIND_LABEL[r.kind] || r.kind}
-                      <Stamp turn={r.turn} />
+                      <Stamp turn={r.turn} after />
                     </span>
                   </div>
                   <p className="mt-1.5 whitespace-pre-wrap text-[13.5px] leading-relaxed text-ink">{r.result}</p>
@@ -307,7 +309,7 @@ export default function ChartPanel({
               {chart.log.map((l, i) => (
                 <li key={i} className="relative flex items-start gap-2.5 text-[13.5px]">
                   <span className={`absolute -left-[21px] top-2 h-2 w-2 rounded-full ring-2 ring-surface ${l.kind === "fact" ? "bg-brand-500" : l.kind === "result" ? "bg-amber-500" : "bg-violet-500"}`} aria-hidden />
-                  <Stamp turn={l.turn} />
+                  <Stamp turn={l.turn} after={l.kind === "result"} />
                   <span className={`mt-0.5 w-[4.5rem] shrink-0 text-[12px] font-semibold ${l.kind === "fact" ? "text-brand-700" : l.kind === "result" ? "text-amber-800" : "text-violet-700"}`}>{l.kind === "fact" ? "History" : l.kind === "result" ? "Result" : "Document"}</span>
                   <span className="text-ink">{l.text}</span>
                 </li>

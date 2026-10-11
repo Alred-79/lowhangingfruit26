@@ -3,6 +3,7 @@ import { chatJSON, MODELS } from "../llm";
 import { get } from "../db";
 import type { Artifact } from "../types";
 import { aliasing, approvedCorpus, arr, clean, entryLine, unverifiedValues } from "./context";
+import { factSupported, isMedSafetyConcern } from "./support";
 import { addEntry, addLink, entriesOf, norm, quoteIn, RECORD_STAGE, studentNameOf, who, type LoadedRun } from "./store";
 import type { EntryKind, EntrySource, EntryStatus, Evidence, Relation, Stage } from "./types";
 
@@ -105,6 +106,9 @@ Rules:
 - "answers" and "resolves" are only for an entry that itself states the missing information. A recommendation, referral, plan or intention to find out ("recommend a repeat echocardiogram") does NOT answer or resolve anything: link it with "uses" and leave the question open.
 - CHART lines that begin "Outside the case record" list words of the simulated patient that are not in the approved case. Never base an entry on those words.
 - The simulated patient sometimes says clinical things that are not in the case file. The lists of recorded entries are the only confirmed clinical facts. If a clinician's conclusion depends on a symptom or event that appears only in the patient's words and not in any recorded entry, either leave it out or record it as "uncertain" and say in the text that it is not confirmed in the record.
+- Never add to the text an attribution, cause, emotion or detail the speaker did not state. If the patient reported dizziness on standing, do not write that he "fears" it or that a medicine "causes" it; write what was said. Refer to the clinician by professional role, never as "the student" or "the learner".
+- Never record that the patient agreed to, accepted, committed to or will try something unless the PATIENT said so in a turn you can quote. A clinician's proposal or suggestion is a "recommendation" or "plan_item" with the clinician's own words as the quote, never a patient goal or agreement.
+- A medication-safety concern (duplication, interaction, contraindication, wrong dose, "needs prescriber review", "intent unconfirmed") is "uncertain" or "open_question" until someone supplies the answer; never "established". Keep the clinician's own hedge: "possible" or "could" stays "possible" or "could", never "confirmed".
 - Status: "established" only for something the clinician states firmly; "uncertain" for hedged or provisional judgements; "open_question" for things nobody knows yet; "disputed" for disagreements.
 - Every entry needs a quote copied exactly from the stated turn or from the note. If you cannot quote it, do not record it.
 - "uses": list every turn where the clinician's question or statement is clearly ABOUT the subject of a specific earlier entry (the same medicine, symptom, test, habit or document). Be strict: the link must be recognisable from the words used, and a question on a different subject asked later in the visit is not a use. Fewer, true links are better than many.
@@ -139,6 +143,13 @@ export async function extractStage(run: LoadedRun, stage: Stage, encounterId: st
     const d = enc.state.disclosed[f.id];
     if (!d || d.how === "record" || d.turn <= 0) continue; // on record from an earlier stage
     if (already.some((e) => e.factId === f.id)) continue;
+    // The ledger can mark a fact as given when the cited reply never said it. Only attribute it to the
+    // patient when the patient's words in that turn actually support it.
+    const said = patientAt(d.turn)?.text || "";
+    if (!factSupported(said, f)) {
+      stats.dropped++;
+      continue;
+    }
     addEntry({
       ...base,
       kind: f.category === "goals" ? "goal" : "finding",
@@ -147,7 +158,7 @@ export async function extractStage(run: LoadedRun, stage: Stage, encounterId: st
       status: "patient_reported",
       source: "patient",
       factId: f.id,
-      evidence: { where: "visit", turn: d.turn, speaker: "patient", quote: (patientAt(d.turn)?.text || f.says).slice(0, 400), verified: true },
+      evidence: { where: "visit", turn: d.turn, speaker: "patient", quote: said.slice(0, 400), verified: true },
       meta: { importance: f.importance, flags: d.how === "volunteered" ? ["volunteered"] : [] },
     });
     stats.deterministic++;
@@ -248,13 +259,14 @@ ${note.trim() || "(none)"}`,
   };
 
   // ----- Pass 1: shape every proposed entry and relation; collect the relations that need checking -----
+  const HEDGED = /\b(likely|probabl[ey]|possibl[ey]|suspect|may be|might|could (?:be|represent|indicate|reflect)|appears? to|seems? to|unclear|not (?:yet )?(?:confirmed|established))\b/i;
   const NO_ANSWER_KINDS = ["recommendation", "referral", "plan_item", "open_question", "uncertainty", "goal"];
   const cands: LinkCandidate[] = [];
   const seen = new Set(mine.map((e) => norm(e.text)));
   type Pending = { kind: EntryKind; text: string; status: EntryStatus; ev: Evidence; relatesTo: string | null; relation: Relation | null; cand?: number; flagged: string[] };
   const pending: Pending[] = [];
   for (const r of arr<RawEntry>(raw.entries)) {
-    r.text = clean(r.text);
+    r.text = clean(r.text).replace(/\b(?:the )?(?:student|learner)(?:'s)?\b/gi, (m) => (/'s$/i.test(m) ? "the clinician's" : "the clinician"));
     if (!MODEL_KINDS.includes(r.kind as (typeof MODEL_KINDS)[number]) || !r.text) continue;
     const key = norm(r.text);
     if (seen.has(key)) continue;
@@ -262,6 +274,12 @@ ${note.trim() || "(none)"}`,
     // A judgement must rest on the clinician's own words (in the visit or the note). If the quoted words
     // are the patient's, it is a patient statement in disguise, and those only enter through the ledger.
     let ev = locate(r.where, r.turn, r.quote || "", kind !== "goal");
+    // Anything attributed to the patient (a goal, an agreement) needs the PATIENT's own words in a visit turn that support it.
+    // A quote from the clinician's note can only support a clinician-sourced entry.
+    if (kind === "goal" && !(ev && ev.where === "visit" && ev.speaker === "patient" && factSupported(ev.quote || "", { chart: r.text }))) {
+      stats.dropped++;
+      continue;
+    }
     if (!ev && kind !== "goal" && locate(r.where, r.turn, r.quote || "")) {
       stats.dropped++;
       continue;
@@ -297,6 +315,8 @@ ${note.trim() || "(none)"}`,
       stats.dropped++;
       continue;
     }
+    // A medication-safety concern stays a question until someone answers it; a hedged judgement stays hedged.
+    if (status === "established" && ["assessment", "interpretation", "consult"].includes(kind) && (isMedSafetyConcern(r.text) || HEDGED.test(r.text))) status = "uncertain";
     if (unverifiedValues(r.text, corpus + " " + note + " " + transcript).length) {
       // A value that appears nowhere: not in the case, not even in what the clinician said. Never stored.
       stats.dropped++;

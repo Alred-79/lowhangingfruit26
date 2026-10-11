@@ -24,7 +24,7 @@
     "id": "a3",
     "kind": "record",
     "name": "Review pharmacy refill history",
-    "result": "Amlodipine 5 mg last filled 10 weeks ago (90-day supply, should have run out ~4 weeks ago). Lisinopril 20 mg last filled 2 weeks ago, on time.",
+    "result": "Amlodipine 5 mg last filled 17 weeks ago (90-day supply, should have run out ~4 weeks ago). Lisinopril 20 mg last filled 2 weeks ago, on time.",
     "importance": "critical",
     "artifactIds": [
      "d6"
@@ -351,7 +351,7 @@
         "Amlodipine",
         "5 mg",
         "Once daily",
-        "10 weeks ago"
+        "17 weeks ago"
        ],
        "flag": "H"
       },
@@ -560,7 +560,7 @@
      "when": "action",
      "ref": "a3"
     },
-    "body": "Amlodipine 5 mg tablets, 90-day supply, quantity 90: last dispensed 10 weeks ago. Based on days-supply, patient should have run out approximately 4 weeks ago with no refill since. Lisinopril 20 mg tablets, 90-day supply: last dispensed 2 weeks ago, consistent with regular use. No other antihypertensive fills on record."
+    "body": "Amlodipine 5 mg tablets, 90-day supply, quantity 90: last dispensed 17 weeks ago. Based on days-supply, patient should have run out approximately 4 weeks ago with no refill since. Lisinopril 20 mg tablets, 90-day supply: last dispensed 2 weeks ago, consistent with regular use. No other antihypertensive fills on record."
    },
    {
     "id": "d7",
@@ -895,7 +895,7 @@
     "factId": "f3",
     "artifactId": "d6",
     "patientClaim": "Patient states he takes both blood pressure medications every day without missing doses.",
-    "recordEvidence": "Pharmacy refill history shows amlodipine 5mg (90-day supply) was last filled 10 weeks ago, meaning it should have run out about 4 weeks ago with no refill since; lisinopril refill is on time.",
+    "recordEvidence": "Pharmacy refill history shows amlodipine 5mg (90-day supply) was last filled 17 weeks ago, meaning it should have run out about 4 weeks ago with no refill since; lisinopril refill is on time.",
     "teachingPoint": "Self-reported adherence often overestimates actual medication-taking; refill history is an objective adherence check, and uncovering a cost-related nonadherence barrier (rather than assuming simple forgetfulness) changes the management plan - here, addressing copay/access matters more than adding a new drug."
    },
    {
@@ -1050,7 +1050,7 @@
    ],
    "keyFindings": [
     "Home BP log averaging 156/96 over 3 weeks with correct cuff technique confirmed on camera",
-    "Pharmacy refill history reveals amlodipine stretched (last filled 10 weeks ago for a 90-day supply) despite patient's belief that he takes it daily; lisinopril refilled on time",
+    "Pharmacy refill history reveals amlodipine stretched (last filled 17 weeks ago for a 90-day supply) despite patient's belief that he takes it daily; lisinopril refilled on time",
     "Near-daily OTC ibuprofen use for chronic shoulder pain and frequent pseudoephedrine use for allergies, both of which can raise blood pressure",
     "Positive STOP-BANG (6/8: snoring, tiredness, observed apnea, high BP, age >50, male sex) and Epworth (14/24) screens indicating high risk for obstructive sleep apnea, with witnessed apneas and a near-miss drowsy-driving event at a red light",
     "Patient has not disclosed sleep symptoms or the near-miss driving event to anyone, including his DOT medical examiner, and is anxious about his CDL status",

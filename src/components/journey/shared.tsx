@@ -221,7 +221,7 @@ export function EntryRow({ entry, onOpen, showWho = true, dense, lit }: { entry:
         <span className={cx("text-[13.5px] leading-snug text-ink", entry.text.length > 260 && "line-clamp-3")} title={entry.text.length > 260 ? "Select to read the whole entry" : undefined}>{entry.text}</span>
         <span className="mt-0.5 flex flex-wrap items-center gap-x-2 text-[11.5px] text-ink-3">
           <span>{KIND_LABEL[entry.kind] || entry.kind}</span>
-          <span className="font-semibold" style={{ color: "var(--color-ink-2)" }}>{STATUS_LABEL[entry.effectiveStatus]}</span>
+          {STATUS_LABEL[entry.effectiveStatus] !== (KIND_LABEL[entry.kind] || entry.kind) && <span className="font-semibold" style={{ color: "var(--color-ink-2)" }}>{STATUS_LABEL[entry.effectiveStatus]}</span>}
           {showWho && entry.stageId !== "record" && <span>{entry.contributorName}</span>}
           {entry.meta?.unverifiedValues?.length ? <span className="font-semibold text-amber-800">value not in case file</span> : null}
           {entry.evidence && entry.evidence.verified === false ? <span className="font-semibold text-amber-800">evidence not verified</span> : null}
@@ -428,7 +428,7 @@ export function TraceTable({ evaluation, compact }: { evaluation: TraceEvaluatio
             </div>
             <ul className="grid gap-1.5 xl:grid-cols-2">
               {items.map(({ def, r }, i) => {
-                const o = OBS[r!.observed];
+                const o = r!.observed === "yes" && !r!.verified ? { ...OBS.yes, label: "Observed, unverified", tile: "bg-amber-500 text-white", pill: "bg-amber-100 text-amber-900" } : r!.observed === "no" && r!.quote ? { ...OBS.no, label: "Partly observed", tile: "bg-amber-500 text-white", pill: "bg-amber-100 text-amber-900" } : OBS[r!.observed];
                 return (
                   <li key={def.key} className="rise grid grid-cols-[2rem_minmax(0,1fr)] gap-3 rounded-2xl bg-surface px-3 py-2.5 ring-1 ring-inset ring-line/80" style={v({ "--i": i })}>
                     <span className={cx("mt-0.5 grid h-8 w-8 place-items-center rounded-full clay", o.tile)}>

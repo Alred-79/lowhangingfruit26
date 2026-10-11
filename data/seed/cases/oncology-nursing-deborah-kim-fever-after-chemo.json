@@ -98,7 +98,7 @@
     "id": "a11",
     "kind": "record",
     "name": "Review most recent CBC with differential (post-cycle 1 nadir)",
-    "result": "ANC 0.6 x10^9/L (severe neutropenia) drawn on day 10 after cycle 1, approximately 23 days before cycle 2 (i.e., about 32 days ago); no growth factor support ordered at that time",
+    "result": "ANC 0.6 x10^9/L (severe neutropenia) drawn on day 10 after cycle 1, approximately 11 days before cycle 2 (i.e., about 20 days ago); no growth factor support ordered at that time",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": [
@@ -151,7 +151,7 @@
     "type": "lab_report",
     "title": "CBC with Differential - Post Cycle 1, Day 10",
     "author": "Quest Diagnostics / Oncology Clinic Lab",
-    "date": "approx. 32 days ago",
+    "date": "approx. 20 days ago",
     "release": {
      "when": "action",
      "ref": "a11"
@@ -349,7 +349,7 @@
     "type": "note",
     "title": "Prior Oncology Visit - Growth Factor Discussion (after Cycle 1 nadir)",
     "author": "Oncology NP",
-    "date": "approx. 32 days ago (day 10 after cycle 1)",
+    "date": "approx. 20 days ago (day 10 after cycle 1)",
     "release": {
      "when": "action",
      "ref": "a11"
@@ -858,7 +858,7 @@
     "Heart rate 108 bpm by patient self-palpation at wrist — an imprecise screening measurement, not an exam-grade vital; should be corroborated with other signs (dizziness on standing, respiratory status, overall clinical picture) and confirmed on in-person arrival rather than used alone as a hard red flag",
     "Erythema and tenderness around implanted port site, no drainage",
     "Day 9 after cycle 2 AC chemotherapy, within expected ANC nadir window",
-    "Prior cycle 1 nadir ANC 0.6 x10^9/L (severe neutropenia), drawn ~23 days before cycle 2 (about 32 days ago); no growth factor given due to cost/deferral",
+    "Prior cycle 1 nadir ANC 0.6 x10^9/L (severe neutropenia), drawn ~11 days before cycle 2 (about 20 days ago); no growth factor given due to cost/deferral",
     "Poor oral intake x2 days from mucositis, mild dizziness on standing, one episode loose stool",
     "Patient minimized and delayed reporting fever due to not wanting to 'bother' the team and business demands"
    ],

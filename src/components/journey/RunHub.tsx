@@ -563,7 +563,8 @@ export default function RunHub({ runId }: { runId: string }) {
   const current = step || follow || view.stages[0].stage.id;
   const sv = view.stages.find((s) => s.stage.id === current);
   const me = view.stages.find((s) => s.isStudent);
-  const unresolved = statusBoard(view.entries, view.links).unresolved;
+  const board = statusBoard(view.entries, view.links);
+  const unresolved = board.unresolved;
   const n = view.next;
   const spinning = n.kind === "wait" || n.kind === "finish";
   const stops = stopsOf(view);
@@ -601,8 +602,8 @@ export default function RunHub({ runId }: { runId: string }) {
                 <div><dd className="font-display text-[15px] font-extrabold leading-none">{stopsDone} of {stops.length}</dd><dt className="mt-1 text-white/80">stops done</dt></div>
               </div>
               <div className="rounded-2xl bg-white px-3.5 py-2 text-ink">
-                <dd className="font-display text-[26px] font-black leading-none tracking-[-0.03em] tabular"><CountUp value={view.entries.length} /></dd>
-                <dt className="mt-1 text-ink-3">entries in shared state</dt>
+                <dd className="font-display text-[26px] font-black leading-none tracking-[-0.03em] tabular"><CountUp value={board.total} /></dd>
+                <dt className="mt-1 text-ink-3">items in shared state</dt>
               </div>
               <div className={cx("rounded-2xl px-3.5 py-2", unresolved ? "bg-[var(--color-flame-2)] text-ink" : "bg-[var(--color-xp)] text-ink")}>
                 <dd className="font-display text-[26px] font-black leading-none tracking-[-0.03em] tabular"><CountUp value={unresolved} /></dd>

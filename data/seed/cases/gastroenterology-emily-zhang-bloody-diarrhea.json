@@ -59,7 +59,7 @@
     "id": "a7",
     "kind": "lab",
     "name": "Review CBC with differential",
-    "result": "Hemoglobin 10.8 g/dL (L), MCV 76 fL (L), WBC 9.8 x10^9/L (H), platelets 468 x10^9/L (H)",
+    "result": "Hemoglobin 10.8 g/dL (L), MCV 76 fL (L), WBC 9.8 x10^9/L, platelets 468 x10^9/L (H)",
     "importance": "critical",
     "abnormal": true,
     "artifactIds": [
@@ -203,7 +203,7 @@
         "x10^9/L",
         "4.0-11.0"
        ],
-       "flag": "H"
+       "flag": ""
       },
       {
        "cells": [

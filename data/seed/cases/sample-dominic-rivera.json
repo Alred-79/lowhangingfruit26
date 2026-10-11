@@ -16,7 +16,7 @@
     "id": "a2",
     "kind": "assessment",
     "name": "Calculate BMI from height/weight",
-    "result": "Height 5'9\" (175 cm), Weight 178 lb (80.7 kg) → BMI 27.8 kg/m² (overweight range)",
+    "result": "Height 5'9\" (175 cm), Weight 178 lb (80.7 kg) → BMI 26.3 kg/m² (overweight range)",
     "importance": "important",
     "artifactIds": []
    },
@@ -246,7 +246,7 @@
         "3 months ago",
         "173",
         "5'9\"",
-        "26.9",
+        "25.5",
         "124/80",
         "76"
        ],
@@ -257,7 +257,7 @@
         "6 weeks ago",
         "176",
         "5'9\"",
-        "27.4",
+        "26.0",
         "126/80",
         "80"
        ],
@@ -268,7 +268,7 @@
         "Today",
         "178",
         "5'9\"",
-        "27.8",
+        "26.3",
         "128/82",
         "78"
        ],
@@ -542,7 +542,7 @@
    },
    {
     "label": "Last vitals",
-    "value": "BP 128/82 mmHg, HR 78 bpm, Temp 98.6°F, RR 16/min, Weight 178 lb, Height 5'9\", BMI 27.8"
+    "value": "BP 128/82 mmHg, HR 78 bpm, Temp 98.6°F, RR 16/min, Weight 178 lb, Height 5'9\", BMI 26.3"
    },
    {
     "label": "Insurance",
@@ -913,7 +913,7 @@
    "keyFindings": [
     "HbA1c 9.8% (goal <7%) and fasting glucose 180 mg/dL indicate poorly controlled T2DM",
     "Elevated total cholesterol 220, LDL 142, low HDL 38, elevated triglycerides 190",
-    "5 lb weight gain over 3 months (173→178 lb), BMI 27.8 (overweight)",
+    "5 lb weight gain over 3 months (173→178 lb), BMI 26.3 (overweight)",
     "Positive food insecurity screen (Hunger Vital Sign)",
     "Pharmacy refill record shows ~38 days without metformin on hand despite patient describing adherence as only 'occasional' lapses (mismatch)",
     "High intake of sugar-sweetened beverages (piña juice, soda), low water intake",

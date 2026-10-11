@@ -130,7 +130,7 @@
    ],
    "keyFindings": [
     "All four Kanavel signs positive: fusiform swelling, flexed resting posture, tenderness along flexor sheath, pain with passive extension",
-    "Low-grade fever 38.0 C and tachycardia 96 bpm consistent with early systemic response",
+    "Low-grade fever 38.0 C and heart rate 96 bpm (upper-normal) consistent with early systemic response",
     "Mechanism: penetrating barbed-wire injury 3 days ago with delayed/inadequate wound care (water rinse only)",
     "No spreading cellulitis/lymphangitic streaking yet, but infection is sheath-contained and can progress to tendon necrosis rapidly",
     "Tetanus booster overdue (last dose ~10 years ago, booster recommended at 10 years for clean wound but this is a contaminated wound requiring booster if >5 years)"
@@ -221,7 +221,7 @@
         "16",
         "98"
        ],
-       "flag": "H,H,,,"
+       "flag": "H"
       }
      ]
     }
@@ -634,7 +634,7 @@
     "factId": "f21",
     "artifactId": "d2",
     "patientClaim": "Patient insists this is a routine infected cut that just needs a phone-in antibiotic, downplaying severity",
-    "recordEvidence": "Today's vitals show fever (38.0 C) and tachycardia (96 bpm) with physical exam findings (fusiform swelling, flexed posture, sheath tenderness, pain on passive extension) all documented as positive, reflecting a surgical emergency rather than a simple infected laceration",
+    "recordEvidence": "Today's vitals show fever (38.0 C) and heart rate 96 bpm (upper-normal) with physical exam findings (fusiform swelling, flexed posture, sheath tenderness, pain on passive extension) all documented as positive, reflecting a surgical emergency rather than a simple infected laceration",
     "teachingPoint": "Patient self-assessment of severity can be inaccurate, especially in those who minimize pain; objective exam and vital sign findings must guide triage decisions, not the patient's own framing of the problem."
    }
   ],

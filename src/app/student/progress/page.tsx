@@ -119,7 +119,10 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
       const attempts = attemptHistory(user.id, caseId)
         .filter((a) => !held.has(meta.get(a.id)?.assignment_id || ""))
         .map((a) => ({ ...a, percent: meta.get(a.id)?.faculty_score ?? a.percent }));
-      return { caseId, title: labels.get(caseId) || "Patient", attempts };
+      const base = labels.get(caseId) || "Patient";
+      const played = attempts.find((a) => a.roleTitle)?.roleTitle;
+      // A care-journey visit is labelled with the role the student played, not the case's own profession.
+      return { caseId, title: played ? `${base.split(" · ")[0]} · ${played}` : base, attempts };
     })
     .filter((c) => c.attempts.length);
   const heldCount = mine.filter((m) => m.assignment_id && held.has(m.assignment_id)).length;
@@ -579,11 +582,11 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
                               </td>
                               <td className="whitespace-nowrap px-3 py-2.5 text-right">
                                 <div className="font-mono font-bold tabular-nums text-ink">{Math.round(a.percent)}%</div>
-                                {delta !== null && <div className="text-xs tabular-nums text-ink-2">{delta > 0 ? `+${delta}` : delta === 0 ? "no change" : `−${Math.abs(delta)}`}</div>}
+                                {delta !== null && <div className="text-xs tabular-nums text-ink-2">{delta > 0 ? `+${delta} percentage points` : delta === 0 ? "no change" : `−${Math.abs(delta)} percentage points`}</div>}
                               </td>
                               <td className="px-3 py-2.5 text-xs text-ink-2">
                                 <div className="flex flex-wrap items-center gap-1">
-                                  <Badge tone="teal">Level {a.level}</Badge>
+                                  <Badge tone="teal">Difficulty: Level {a.level}</Badge>
                                   <Badge>{MODE_LABEL[a.mode] || a.mode}</Badge>
                                 </div>
                                 {a.variation && <div className="mt-1">Patient variation: {a.variation}</div>}

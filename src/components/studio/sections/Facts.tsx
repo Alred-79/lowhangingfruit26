@@ -121,7 +121,7 @@ export function FactsSection({ p, set }: SectionProps) {
         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <div>
             <p className="font-display text-[44px] font-black leading-[0.85] tracking-[-0.04em] text-ink">{p.facts.length}</p>
-            <p className="mt-1 text-[13px] font-bold text-ink-2">facts across four tiers</p>
+            <p className="mt-1 text-[13px] font-bold text-ink-2">{p.facts.length === 1 ? "fact" : "facts"} across four tiers</p>
           </div>
           <TierBar counts={counts as TierCounts} legend height={14} className="min-w-0 flex-1 basis-72" />
         </div>

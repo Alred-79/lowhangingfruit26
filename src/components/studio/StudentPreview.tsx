@@ -113,7 +113,7 @@ export default function StudentPreview({ p, roleTitle }: { p: CaseProfile; roleT
             <p className="text-xs font-semibold text-slate-600">To be elicited or ordered</p>
             <TierBar counts={tierCounts(p.facts)} height={10} className="mt-2" />
             <div className="mt-2 flex flex-wrap gap-1.5">
-              <Badge tone="green">{p.facts.filter((f) => f.tier === "initial").length} facts volunteered</Badge>
+              <Badge tone="green">{p.facts.filter((f) => f.tier === "initial").length} {p.facts.filter((f) => f.tier === "initial").length === 1 ? "fact" : "facts"} volunteered</Badge>
               <Badge tone="blue">{p.facts.filter((f) => f.tier === "discoverable").length} when asked</Badge>
               <Badge tone="amber">{p.facts.filter((f) => f.tier === "reluctant").length} need trust</Badge>
               <Badge tone="red">{p.facts.filter((f) => f.tier === "hidden").length} guarded</Badge>

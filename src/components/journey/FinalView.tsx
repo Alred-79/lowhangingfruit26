@@ -360,7 +360,7 @@ export default function FinalView({ view, onOpen, refresh }: { view: RunView; on
           </div>
           <dl className="grid grid-cols-2 gap-2 self-start sm:grid-cols-4 lg:w-[25rem]">
             {([
-              [view.entries.length, "entries in the shared state", "bg-white/10"],
+              [sb.total, "items in the shared state", "bg-white/10"],
               [view.links.length, "recorded relations", "bg-white/10"],
               [view.chains.length, "cross-encounter chains", "bg-white/10"],
               [unresolved, "uncertain, disputed or unanswered", unresolved ? "bg-[var(--color-flame-2)] text-ink" : "bg-[var(--color-xp)] text-ink"],

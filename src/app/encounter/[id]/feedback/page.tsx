@@ -35,11 +35,12 @@ const SECTIONS = [
   { id: "coaching", label: "Strengths and next steps" },
   { id: "writeup", label: "Interview and write-up" },
   { id: "attempts", label: "Attempts" },
+  { id: "added", label: "Added details" },
   { id: "transcript", label: "Transcript" },
 ];
 
 function TurnLink({ turn }: { turn?: number }) {
-  if (turn === undefined || turn === null) return null;
+  if (turn === undefined || turn === null || turn < 1) return null;
   return (
     <a href={`#t${turn}`} className="ml-1.5 inline-flex items-center whitespace-nowrap rounded bg-slate-100 px-1 font-mono text-[11px] font-medium tabular-nums text-ink-2 hover:bg-brand-100 hover:text-brand-800">
       T{turn}
@@ -131,7 +132,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
       <div className="flex flex-wrap items-center gap-1.5">
         <Badge tone="teal">{assignment ? assignment.title : cfg.mode === "adaptive" ? "Adaptive practice" : "Practice"}</Badge>
         <Badge>
-          Level {cfg.knobs.level} · {LEVEL_NAMES[cfg.knobs.level]}
+          Difficulty: Level {cfg.knobs.level} ({LEVEL_NAMES[cfg.knobs.level]})
         </Badge>
         <Badge>Attempt {row.attempt}</Badge>
         {(cfg.visitNumber || 1) > 1 && <Badge tone="blue">Follow-up · visit {cfg.visitNumber}</Badge>}
@@ -144,7 +145,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
         {!own && student ? <span className="text-ink-3"> · {student.name}</span> : ""}
       </h1>
       <p className="mt-1 text-[14.5px] text-ink-2">
-        {role.name} · {state.turn} turns · <When at={row.ended_at} />
+        {cfg.journey?.roleTitle || role.name} · {state.turn} turns · <When at={row.ended_at} />
       </p>
     </div>
   );
@@ -174,6 +175,10 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
   const tl = timeline(c, cfg, msgs);
   const critMissed = f.missed.filter((m) => m.importance === "critical");
   const meta = (m: (typeof msgs)[number]) => parse<{ revealed?: string[]; deflected?: string[]; rapportDelta?: number; questionType?: string }>(m.meta, {});
+  const addedByPatient = msgs
+    .filter((m) => m.speaker === "patient")
+    .flatMap((m) => (parse<{ unsupported?: string[] }>(m.meta, {}).unsupported || []).map((u) => ({ turn: m.turn, claim: u })));
+  const unaudited = msgs.filter((m) => m.speaker === "patient" && parse<{ audited?: boolean }>(m.meta, {}).audited === false).length;
   const factText = (fid: string) => c.facts.find((x) => x.id === fid);
   const naCount = f.domains.filter((d) => d.score === null).length;
 
@@ -233,7 +238,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
               {prev && (
                 <div className={cx("pop-spring mt-1 inline-flex rounded-full px-2.5 py-0.5 font-mono text-[13px] font-bold tabular-nums", f.percent >= prev.percent ? "bg-[var(--color-xp)] text-ink" : "bg-rose-100 text-rose-800")}>
                   {f.percent >= prev.percent ? "+" : ""}
-                  {f.percent - prev.percent} pts vs attempt {prev.attempt}
+                  {f.percent - prev.percent} percentage points vs attempt {prev.attempt}
                 </div>
               )}
               <p className="mt-1.5 max-w-[22rem] text-[12.5px] leading-relaxed text-ink-3">
@@ -653,6 +658,33 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
               </Card>
             </section>
           )}
+
+          <section id="added" className="scroll-mt-6">
+            <Card>
+              <CardHeader title="Details the patient added that are not in the case file" subtitle="Flagged automatically by a second check on each reply. It can miss some and flag harmless ones, so treat it as a prompt to look, not a verdict." />
+              <div className="p-4 text-[13.5px] text-ink sm:p-5">
+                {addedByPatient.length === 0 ? (
+                  <p className="flex items-center gap-2 text-ink-3">
+                    <CheckCircle2 className="h-4 w-4 text-[var(--color-xp-ink)]" aria-hidden />
+                    None flagged.
+                  </p>
+                ) : (
+                  <ul className="space-y-2">
+                    {addedByPatient.map((a, i) => (
+                      <li key={i} className="flex items-start gap-2.5 rounded-2xl bg-amber-50 px-3 py-2.5 leading-relaxed text-amber-950 ring-1 ring-inset ring-amber-200">
+                        <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-700" aria-hidden />
+                        <span>
+                          &ldquo;{a.claim}&rdquo;
+                          <TurnLink turn={a.turn} />
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {unaudited > 0 && <p className="mt-3 text-[12.5px] font-semibold text-amber-800">The check could not run on {unaudited} {unaudited === 1 ? "reply" : "replies"}, so {unaudited === 1 ? "that one was" : "those were"} not checked.</p>}
+              </div>
+            </Card>
+          </section>
 
           <section id="transcript" className="scroll-mt-6">
             <Card>

@@ -35,10 +35,47 @@ function personaFamily(cl: ClinicianInfo): string {
   if (/\bPA(-C)?\b/.test(cred)) return "physician-assistant";
   return cl.id.startsWith("generic:") ? "generic" : "other";
 }
-/** True when the persona's own profession fits the stage's role. Generic clinicians fit anything. */
+/** Physician specialties: how a role is recognised in a stage, and how the same specialty reads in a persona's role and specialty text. */
+const SPECIALTIES: { id: string; role: RegExp; persona: RegExp }[] = [
+  { id: "emergency-medicine", role: /emergen|\bED\b|urgent/i, persona: /emergen/i },
+  { id: "cardiology", role: /cardio|heart/i, persona: /cardio/i },
+  { id: "internal-medicine", role: /internal|hospitalist|hospital medicine/i, persona: /internal medicine|hospitalist|hospital medicine/i },
+  { id: "family-medicine", role: /family|primary care|general practi|\bPCP\b/i, persona: /family|primary care|general practi/i },
+  { id: "geriatrics", role: /geriatr|older adult/i, persona: /geriatr/i },
+  { id: "endocrinology", role: /endocrin|diabet/i, persona: /endocrin/i },
+  { id: "gastroenterology", role: /gastro|\bGI\b|hepatol/i, persona: /gastro|hepatol/i },
+  { id: "nephrology", role: /nephrol|kidney|renal/i, persona: /nephrol/i },
+  { id: "pulmonology", role: /pulmon|respirat|critical care/i, persona: /pulmon|critical care/i },
+  { id: "neurology", role: /neurolog/i, persona: /neurolog/i },
+  { id: "psychiatry", role: /psychiat/i, persona: /psychiat/i },
+  { id: "oncology", role: /oncolog/i, persona: /oncolog/i },
+  { id: "palliative-care", role: /palliat/i, persona: /palliat/i },
+  { id: "pediatrics", role: /pediatr|paediatr/i, persona: /pediatr|paediatr/i },
+  { id: "obgyn", role: /obstet|gyn/i, persona: /obstet|gyn/i },
+];
+
+/** The specialties a stage's role calls for: from its catalog profession id and from the words of its title. Empty for a general physician role. */
+function requiredSpecialties(professionId: string, roleTitle: string) {
+  const id = resolveProfession({ professionId, roleTitle }).id;
+  const byTitle = SPECIALTIES.filter((sp) => sp.role.test(roleTitle));
+  return byTitle.length ? byTitle : SPECIALTIES.filter((sp) => sp.id === professionId || sp.id === id);
+}
+
+/**
+ * True when the persona's own profession AND specialty fit the stage's role: a cardiologist does not play a
+ * geriatrician or a primary care physician, a hospitalist does not play a primary care physician. A general
+ * physician role ("Medicine") accepts any physician persona. Generic clinicians fit anything.
+ */
 export function personaFits(clinicianId: string, professionId: string, roleTitle: string): boolean {
   if (clinicianId.startsWith("generic:")) return true;
-  return personaFamily(clinician(clinicianId)) === roleFamily(professionId, roleTitle);
+  const cl = clinician(clinicianId);
+  const family = roleFamily(professionId, roleTitle);
+  if (personaFamily(cl) !== family) return false;
+  if (family !== "physician") return true;
+  const need = requiredSpecialties(professionId, roleTitle);
+  if (!need.length) return true;
+  const text = `${cl.role} ${cl.specialty}`;
+  return need.some((sp) => sp.persona.test(text));
 }
 const GENERIC_NAMES = ["Jordan Ellis", "Morgan Reyes", "Casey Whitfield", "Avery Okafor", "Riley Sandoval", "Quinn Abernathy"];
 
@@ -101,7 +138,9 @@ Every encounter is an outpatient telehealth video visit with the patient at home
 
 Personas: use only the supplied clinician personas, and only in a role of their own profession. Never cast a physician persona as a nurse, pharmacist, dietitian or therapist, or the reverse. If no persona fits a role you want, use clinicianId "generic" and the system will supply a plain named clinician of that profession.
 
-Student-facing text (summary, brief, tasks, reason) and the patient's reason for the visit must be written only from the record at start: name topics to explore, never findings, behaviours, attitudes, medicines or results that the patient has not yet disclosed, and never tell a later professional what an earlier one will have found.`,
+Student-facing text (summary, brief, tasks, reason) and the patient's reason for the visit must be written only from the record at start: name topics to explore, never findings, behaviours, attitudes, medicines or results that the patient has not yet disclosed, and never tell a later professional what an earlier one will have found.
+
+Student-facing text must give a neutral role and purpose only. It must not assert any finding, medicine, symptom, diagnosis, treatment status or history (for example do not write "including his anticoagulant" or "his chest pain"; do not restate the presenting story). Describe what the professional will review or explore in general terms ("review current medicines", "explore eating patterns"), and let the student discover the rest.`,
       messages: [
         {
           role: "user",

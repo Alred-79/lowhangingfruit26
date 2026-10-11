@@ -227,6 +227,8 @@ export interface Audit {
   notConveyed: string[];
   /** ids of still-locked facts the patient stated anyway (they are true, so they are filed). */
   alsoConveyed: string[];
+  /** true when the audit call itself failed, so nothing was checked for this reply. */
+  failed?: boolean;
 }
 
 /**
@@ -248,7 +250,7 @@ export async function auditReply(args: { reply: string; known: Fact[]; reveal: F
       schema: AUDIT_SCHEMA,
       system: `You reconcile a simulated patient's reply with the case file of a medical education simulator. The case facts are the whole clinical truth about this patient.
 
-unsupported: concrete clinical details the reply asserts as true that are in NO case fact (any of the three lists) or that CONTRADICT one: a different drug, dose, amount, frequency, duration, symptom, diagnosis, test result or family history. Quote the patient. Do NOT list: denials or "I don't know"; vague or non-committal answers; feelings, opinions and worries; everyday non-medical life details; minimising without specifics ("a drink now and then"); rewording of a case fact; or the patient repeating what a clinician told them. If unsure, leave it out.
+unsupported: concrete details the reply asserts as true that are in NO case fact (any of the three lists), in NON-MEDICAL BACKGROUND, in the patient's reason for visit or in ALLOWED CONTEXT, or that CONTRADICT one. This covers (a) clinical details: a different drug, dose, amount, frequency, duration, symptom, diagnosis, test result, family history, and also added clinical qualifiers such as a time-of-day pattern, a trigger, a severity, an onset or a course ("worse when I wake up", "in remission since my teens") that no fact states; and (b) invented personal specifics: a named relative or a family name, a vehicle, an address, a named employer, a named pet, a date or a number about the patient's life that is not given in the background. Quote the patient. Do NOT list: denials or "I don't know"; vague or non-committal answers; feelings, opinions and worries; ordinary life details that ARE in the background; minimising without specifics ("a drink now and then"); rewording of a case fact; or the patient repeating what a clinician told them. If the detail is a concrete specific not found in any of the sources above, list it.
 
 not_conveyed: for each fact under NEW THIS TURN, did the reply communicate its substance (paraphrase and partial detail count)? List the ids that were not communicated at all.
 
@@ -268,6 +270,6 @@ also_conveyed: ids under NOT YET SHARED whose substance the reply stated with it
       alsoConveyed: (res.also_conveyed || []).filter((id) => lockedIds.has(id)),
     };
   } catch {
-    return { unsupported: [], notConveyed: [], alsoConveyed: [] };
+    return { unsupported: [], notConveyed: [], alsoConveyed: [], failed: true };
   }
 }

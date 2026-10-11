@@ -504,7 +504,7 @@ export default async function StudentHome() {
                           {e.status !== "paused" && <span className="live-dot absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-[var(--color-flame)] ring-2 ring-surface" aria-hidden />}
                         </span>
                         <div className="min-w-0">
-                          <div className="truncate text-[14px] font-bold text-ink">{labels.get(e.case_id) || "Visit"}</div>
+                          <div className="truncate text-[14px] font-bold text-ink">{cfg.journey?.roleTitle ? `${(labels.get(e.case_id) || "Visit").split(" · ")[0]} · ${cfg.journey.roleTitle}` : labels.get(e.case_id) || "Visit"}</div>
                           <div className="text-[12.5px] text-ink-3">
                             {(e.assignment && decodeEntities(e.assignment)) || MODE_LABEL[cfg.mode || "practice"]} · turn {st.turn ?? 0} · started <When at={e.started_at} />
                             {e.status === "paused" && " · paused by your instructor"}
@@ -550,7 +550,7 @@ export default async function StudentHome() {
                   const body = (
                     <>
                       <div className="min-w-0">
-                        <div className="truncate text-[14px] font-bold text-ink">{labels.get(e.case_id) || "Visit"}</div>
+                        <div className="truncate text-[14px] font-bold text-ink">{cfg.journey?.roleTitle ? `${(labels.get(e.case_id) || "Visit").split(" · ")[0]} · ${cfg.journey.roleTitle}` : labels.get(e.case_id) || "Visit"}</div>
                         <div className="text-[12.5px] text-ink-3">
                           {(e.assignment && decodeEntities(e.assignment)) || MODE_LABEL[cfg.mode || "practice"]} · attempt {e.attempt} · level {cfg.knobs?.level ?? "?"} · <When at={e.ended_at} />
                           {!hidden && e.faculty_note && " · instructor note"}
