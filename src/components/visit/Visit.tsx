@@ -1,6 +1,6 @@
 "use client";
 
-import { Captions, CaptionsOff, Check, Clock, FlaskConical, Lightbulb, MessageSquareText, Mic, MicOff, PhoneOff, RotateCcw, SendHorizontal, ShieldAlert, Users, Video, VideoOff, Volume2, VolumeX } from "lucide-react";
+import { Captions, CaptionsOff, Check, Clock, History, FlaskConical, Lightbulb, MessageSquareText, Mic, MicOff, PhoneOff, RotateCcw, SendHorizontal, ShieldAlert, Users, Video, VideoOff, Volume2, VolumeX } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
@@ -755,6 +755,14 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
                   {p.name}, {p.age}
                 </h1>
                 <p className="mt-0.5 text-[14px] text-ink-3">You are joining as the {data.role.roleTitle}.</p>
+                {data.visitNumber > 1 && (
+                  <p className="mt-3 flex items-start gap-2 rounded-xl bg-sky-50 px-3.5 py-2.5 text-[13.5px] leading-relaxed text-sky-950 ring-1 ring-inset ring-sky-200">
+                    <History className="mt-0.5 h-4 w-4 shrink-0 text-sky-700" aria-hidden />
+                    <span>
+                      <span className="font-semibold">Visit {data.visitNumber}: {firstName} remembers you.</span> What they told you before is already in the chart, earlier results are on file, and their trust starts where you left it.
+                    </span>
+                  </p>
+                )}
                 <p className="mt-4 whitespace-pre-line text-[14.5px] leading-relaxed text-ink">{chart.brief}</p>
                 {chart.tasks.length > 0 && (
                   <>
