@@ -8,6 +8,12 @@ export default async function LivePage() {
   return (
     <AppShell user={user}>
       <PageHeader
+        eyebrow={
+          <>
+            <span className="live-dot h-2 w-2 rounded-full bg-[var(--color-live)]" aria-hidden />
+            Live assist
+          </>
+        }
         title="Live visits"
         subtitle="Visits in progress right now. Only visits from assignments with live assist turned on appear here; students are told when an instructor can watch."
       />
