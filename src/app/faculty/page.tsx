@@ -218,23 +218,29 @@ export default async function FacultyHome() {
         </Card>
       </div>
 
-      <h2 className="mb-3 mt-8 text-[14px] font-semibold text-ink-2">Go to</h2>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {LINKS.map((l) => (
-          <Link key={l.href} href={l.href} className="press group flex gap-3 rounded-xl border border-line bg-surface p-4 transition-colors hover:border-brand-300">
-            <l.Icon className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" aria-hidden />
-            <span className="min-w-0">
-              <span className="flex items-center gap-1 text-[14px] font-semibold text-ink">
-                {l.title}
-                <ArrowRight className="h-3.5 w-3.5 text-ink-3 transition-transform group-hover:translate-x-0.5" aria-hidden />
-              </span>
-              <span className="mt-0.5 block text-[12.5px] leading-relaxed text-ink-3">{l.text}</span>
-              {l.href === "/faculty/cases" && <span className="mt-1.5 block text-[12.5px] font-medium text-ink-2">{published} published patient{published === 1 ? "" : "s"}</span>}
-              {l.href === "/faculty/live" && <span className="mt-1.5 block text-[12.5px] font-medium text-ink-2">{live} in progress</span>}
-            </span>
-          </Link>
-        ))}
-      </div>
+      <nav aria-label="Go to" className="mt-8">
+        <h2 className="mb-2 text-[14px] font-semibold text-ink-2">Go to</h2>
+        <ul className="divide-y divide-line/70 overflow-hidden rounded-2xl border border-line bg-surface sm:grid sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4">
+          {LINKS.map((l) => (
+            <li key={l.href} className="sm:border-r sm:border-line/70 sm:last:border-r-0">
+              <Link href={l.href} className="group flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-slate-50">
+                <l.Icon className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden />
+                <span className="min-w-0">
+                  <span className="flex items-center gap-1 text-[14px] font-semibold text-ink">
+                    {l.title}
+                    <ArrowRight className="h-3.5 w-3.5 text-ink-3 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                  </span>
+                  <span className="mt-0.5 block text-[12.5px] leading-relaxed text-ink-3">
+                    {l.text}
+                    {l.href === "/faculty/cases" && <span className="font-medium text-ink-2"> {published} published patient{published === 1 ? "" : "s"}.</span>}
+                    {l.href === "/faculty/live" && <span className="font-medium text-ink-2"> {live} in progress.</span>}
+                  </span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </AppShell>
   );
 }
