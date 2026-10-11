@@ -8,12 +8,20 @@ export default function ScoreRing({ total, max, percent, size = 148 }: { total: 
   return (
     <div className="relative shrink-0" style={{ width: size, height: size }}>
       <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90" role="img" aria-label={`Rubric total ${total} of ${max}, ${percent} percent`}>
-        <circle cx="50" cy="50" r={r} fill="none" stroke="var(--color-slate-200)" strokeWidth="7" />
-        <circle cx="50" cy="50" r={r} fill="none" stroke="var(--color-brand-500)" strokeWidth="7" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={offset} className="ring-fill" style={{ "--from": c } as React.CSSProperties} />
+        <defs>
+          <linearGradient id="score-ring-g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="var(--color-brand-500)" />
+            <stop offset="1" stopColor="var(--color-mastery)" />
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r={r} fill="none" stroke="var(--color-brand-100)" strokeWidth="9" />
+        <circle cx="50" cy="50" r={r} fill="none" stroke="url(#score-ring-g)" strokeWidth="9" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={offset} className="ring-fill" style={{ "--from": c } as React.CSSProperties} />
+        <circle cx="50" cy="50" r="49" fill="none" stroke="var(--color-mastery)" strokeOpacity="0.3" strokeWidth="1" className="orbit-dash" />
       </svg>
       <div className="absolute inset-0 grid place-items-center text-center" aria-hidden>
         <div>
-          <div className="count-up font-display text-[40px] font-semibold leading-none tabular text-ink" style={{ "--to": Math.round(total) } as React.CSSProperties} />
+          <div className="count-up font-display text-[46px] font-black leading-none tracking-[-0.04em] tabular text-ink" style={{ "--to": Math.round(total) } as React.CSSProperties} />
+          <span className="sr-only">{Math.round(total)}</span>
           <div className="mt-1 font-mono text-[12.5px] tabular-nums text-ink-3">
             of {max} · {percent}%
           </div>

@@ -1,10 +1,13 @@
-import { AlertTriangle, ArrowLeft, CheckCircle2, CircleDashed, Flag, MessageSquareQuote, ShieldAlert } from "lucide-react";
+import { AlertTriangle, ArrowLeft, CheckCircle2, CircleDashed, Flag, ShieldAlert } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import AppShell from "@/components/AppShell";
 import FacultyReview from "@/components/courses/FacultyReview";
 import When from "@/components/courses/When";
+import EvidenceChip from "@/components/feedback/EvidenceChip";
+import { CollectionBoard, RewardReveal } from "@/components/feedback/Reveal";
 import ScoreRing from "@/components/feedback/ScoreRing";
+import { visitReward } from "@/components/game/derive";
 import VisitReplay, { type ReplayTurn } from "@/components/feedback/VisitReplay";
 import TrustLabel from "@/components/TrustLabel";
 import { Badge, Card, CardHeader, cx, LinkButton } from "@/components/ui";
@@ -58,36 +61,23 @@ function Spark({ values }: { values: number[] }) {
   );
 }
 
-/** One cell per finding in the case: filled when elicited, outlined when missed. Read from the ledger. */
-function FindingsLedger({ f }: { f: Feedback }) {
-  const order = { critical: 0, important: 1, minor: 2 } as const;
-  const cells = [...f.elicited.map((e) => ({ id: e.id, got: true, imp: e.importance, text: e.chart })), ...f.missed.map((m) => ({ id: m.id, got: false, imp: m.importance, text: `${m.topic}: ${m.chart}` }))].sort((a, b) => order[a.imp] - order[b.imp] || Number(b.got) - Number(a.got));
-  const tone = { critical: "bg-rose-500 ring-rose-500", important: "bg-amber-500 ring-amber-500", minor: "bg-slate-400 ring-slate-400" } as const;
+/** The question mix as one stacked bar (open is what the rubric rewards), with the counts as text. */
+function QuestionMix({ stats }: { stats: { open: number; focused: number; closed: number; leading: number; multiple: number } }) {
+  const parts = [
+    { k: "open", n: stats.open, c: "var(--color-tier-initial)" },
+    { k: "focused", n: stats.focused, c: "var(--color-tier-discoverable)" },
+    { k: "closed", n: stats.closed, c: "var(--color-tier-reluctant)" },
+    { k: "leading/stacked", n: stats.leading + stats.multiple, c: "var(--color-tier-hidden)" },
+  ];
+  const total = Math.max(1, parts.reduce((a, p) => a + p.n, 0));
   return (
     <div>
-      <div className="flex flex-wrap gap-1" role="list" aria-label={`${f.elicited.length} of ${cells.length} findings elicited`}>
-        {cells.map((c) => (
-          <span key={c.id} role="listitem" title={`${c.got ? "Elicited" : "Missed"} (${c.imp}): ${c.text}`} className={cx("h-5 w-3.5 rounded-[4px] ring-[1.5px] ring-inset", c.imp === "critical" && "h-6", c.got ? tone[c.imp] : `bg-transparent ${tone[c.imp].split(" ")[1]} opacity-70`)} />
-        ))}
+      <div className="mt-1 flex h-3 gap-[2px] overflow-hidden rounded-full" aria-hidden>
+        {parts.map((p) => p.n > 0 && <span key={p.k} className="bar-grow h-full first:rounded-l-full last:rounded-r-full" style={{ width: `${(p.n / total) * 100}%`, background: p.c }} />)}
       </div>
-      <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-ink-3">
-        <span className="inline-flex items-center gap-1.5">
-          <span className="h-3 w-2.5 rounded-[3px] bg-slate-500" aria-hidden /> elicited
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="h-3 w-2.5 rounded-[3px] ring-[1.5px] ring-inset ring-slate-500" aria-hidden /> missed
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-rose-500" aria-hidden /> critical
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-amber-500" aria-hidden /> important
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-slate-400" aria-hidden /> minor
-        </span>
-        <span>From the disclosure record, not from a model&apos;s impression.</span>
-      </div>
+      <p className="mt-1.5 text-[12.5px] leading-snug text-ink-2">
+        <span className="font-bold tabular text-ink">{stats.open}</span> open, <span className="font-bold tabular text-ink">{stats.focused}</span> focused, <span className="font-bold tabular text-ink">{stats.closed}</span> closed, <span className="font-bold tabular text-ink">{stats.leading + stats.multiple}</span> leading/stacked
+      </p>
     </div>
   );
 }
@@ -96,7 +86,7 @@ function Pips({ score, max = 4 }: { score: number; max?: number }) {
   return (
     <span className="inline-flex gap-1" aria-hidden>
       {Array.from({ length: max }, (_, i) => (
-        <span key={i} className={cx("h-2 w-5 rounded-full", i < score ? (score >= 3 ? "bg-brand-500" : score === 2 ? "bg-amber-500" : "bg-rose-500") : "bg-slate-200")} />
+        <span key={i} className={cx("h-2.5 w-6 rounded-full", i < score ? (score >= 3 ? "pop-spring bg-[var(--color-tier-initial)]" : score === 2 ? "pop-spring bg-[var(--color-tier-reluctant)]" : "pop-spring bg-[var(--color-tier-hidden)]") : "bg-slate-200")} style={{ ["--i" as string]: i }} />
       ))}
     </span>
   );
@@ -129,10 +119,12 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
   const prev = idx > 0 ? history[idx - 1] : null;
   const prevElicited = new Set(prev?.elicitedIds || []);
   const recorded = !!(row.assignment_id || row.journey_run_id);
+  // The reveal belongs to the student who did the visit (faculty and teammates see the feedback only).
+  const reward = own && !withheld && f ? visitReward(user.id, id) : null;
 
   const header = (
     <div className="mb-6">
-      <Link href={faculty && !own ? "/faculty/courses" : "/student"} className="mb-4 inline-flex min-h-9 items-center gap-1.5 rounded-md text-[13.5px] font-medium text-ink-3 hover:text-ink">
+      <Link href={faculty && !own ? "/faculty/courses" : "/student"} className="press mb-4 inline-flex min-h-9 items-center gap-1.5 rounded-full bg-surface px-3 text-[13.5px] font-semibold text-ink-2 shadow-e1 ring-1 ring-line hover:text-ink pointer-coarse:min-h-11">
         <ArrowLeft className="h-4 w-4" aria-hidden />
         Back
       </Link>
@@ -147,7 +139,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
         {cfg.perturbation && <Badge tone="violet">Patient variation: {cfg.perturbation.label}</Badge>}
         {row.parent_id && <Badge tone="blue">Rewound branch</Badge>}
       </div>
-      <h1 className="mt-3 font-display text-[28px] font-semibold leading-tight text-ink sm:text-[32px]">
+      <h1 className="rise mt-3 font-display text-[32px] font-black leading-[1.02] tracking-[-0.03em] text-ink sm:text-[42px]">
         Visit with {c.patient.name}
         {!own && student ? <span className="text-ink-3"> · {student.name}</span> : ""}
       </h1>
@@ -231,67 +223,68 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
         </div>
       )}
 
-      {/* Hero: the score, the summary and the ledger of findings. */}
-      <Card className="overflow-hidden">
-        <div className="grid gap-6 p-5 sm:p-6 lg:grid-cols-[auto_minmax(0,1fr)]">
-          <div className="flex flex-col items-center gap-3 sm:flex-row lg:flex-col lg:items-start">
-            <ScoreRing total={f.total} max={f.max} percent={f.percent} />
-            <div className="text-center sm:text-left">
-              <div className="text-[13px] font-semibold text-ink-2">{f.rubricType === "domain4" ? "Rubric total" : "Points"}</div>
+      {/* Hero: the score and summary beside the reward reveal. */}
+      <div className="grid gap-4 lg:grid-cols-12">
+        <Card className={cx("rise overflow-hidden p-5 sm:p-6", reward ? "lg:col-span-7" : "lg:col-span-12")}>
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+            <ScoreRing total={f.total} max={f.max} percent={f.percent} size={164} />
+            <div className="min-w-0">
+              <div className="text-[13px] font-bold text-ink-2">{f.rubricType === "domain4" ? "Rubric total" : "Points"}</div>
               {prev && (
-                <div className={cx("mt-0.5 font-mono text-[13px] font-semibold tabular-nums", f.percent >= prev.percent ? "text-emerald-700" : "text-rose-700")}>
+                <div className={cx("pop-spring mt-1 inline-flex rounded-full px-2.5 py-0.5 font-mono text-[13px] font-bold tabular-nums", f.percent >= prev.percent ? "bg-[var(--color-xp)] text-ink" : "bg-rose-100 text-rose-800")}>
                   {f.percent >= prev.percent ? "+" : ""}
                   {f.percent - prev.percent} pts vs attempt {prev.attempt}
                 </div>
               )}
-              <p className="mt-1 max-w-[16rem] text-[12.5px] leading-relaxed text-ink-3">
+              <p className="mt-1.5 max-w-[22rem] text-[12.5px] leading-relaxed text-ink-3">
                 {f.percent}%{naCount ? `, ${naCount} domain(s) not applicable` : ""}. A discussion aid, not a pass or fail grade.
               </p>
             </div>
           </div>
-          <div className="min-w-0">
-            <p className="max-w-3xl text-[16px] leading-relaxed text-ink">{f.summary}</p>
-            <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4">
-              <div>
-                <div className="font-display text-[26px] font-semibold leading-none tabular text-ink">
-                  {f.elicited.length}
-                  <span className="text-[16px] text-ink-3"> / {f.elicited.length + f.missed.length}</span>
-                </div>
-                <div className="mt-1 text-[12.5px] text-ink-3">findings elicited</div>
-              </div>
-              <div>
-                <div className={cx("font-display text-[26px] font-semibold leading-none tabular", critMissed.length ? "text-rose-700" : "text-ink")}>{critMissed.length}</div>
-                <div className="mt-1 text-[12.5px] text-ink-3">critical missed</div>
-              </div>
-              <div>
-                <div className="flex items-end gap-2">
-                  <span className="font-display text-[26px] font-semibold leading-none tabular text-ink">{state.rapport}</span>
-                  <Spark values={state.rapportHistory} />
-                </div>
-                <div className="mt-1 text-[12.5px] text-ink-3">
-                  patient comfort, from {state.rapportHistory[0]} to {state.rapport}
-                </div>
-              </div>
-              <div>
-                <div className="text-[13.5px] leading-snug text-ink-2">
-                  <span className="font-semibold tabular text-ink">{state.stats.open}</span> open, <span className="font-semibold tabular text-ink">{state.stats.focused}</span> focused, <span className="font-semibold tabular text-ink">{state.stats.closed}</span> closed, <span className="font-semibold tabular text-ink">{state.stats.leading + state.stats.multiple}</span> leading/stacked
-                </div>
-                <div className="mt-1 text-[12.5px] text-ink-3">Questions{state.hintsUsed > 0 ? ` · ${state.hintsUsed} coach hint${state.hintsUsed === 1 ? "" : "s"} used` : ""}</div>
-              </div>
+          <p className="mt-5 max-w-3xl rounded-2xl bg-surface-2 px-4 py-3 text-[16px] leading-relaxed text-ink">{f.summary}</p>
+          <dl className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="rounded-2xl bg-[var(--color-xp-soft)] p-3">
+              <dt className="text-[12px] font-bold text-[var(--color-xp-ink)]">findings elicited</dt>
+              <dd className="font-display text-[28px] font-black leading-none tabular text-ink">
+                {f.elicited.length}
+                <span className="text-[15px] text-ink-3"> / {f.elicited.length + f.missed.length}</span>
+              </dd>
             </div>
-            <div className="mt-5 border-t border-line pt-4">
-              <FindingsLedger f={f} />
+            <div className={cx("rounded-2xl p-3", critMissed.length ? "bg-[var(--color-tier-hidden-soft)]" : "bg-surface-2")}>
+              <dt className={cx("text-[12px] font-bold", critMissed.length ? "text-[var(--color-tier-hidden-ink)]" : "text-ink-3")}>critical missed</dt>
+              <dd className={cx("font-display text-[28px] font-black leading-none tabular", critMissed.length ? "text-[var(--color-tier-hidden-ink)]" : "text-ink")}>{critMissed.length}</dd>
             </div>
+            <div className="rounded-2xl bg-[var(--color-mastery-soft)] p-3">
+              <dt className="text-[12px] font-bold text-[var(--color-mastery-ink)]">patient comfort, from {state.rapportHistory[0]} to {state.rapport}</dt>
+              <dd className="flex items-end gap-2">
+                <span className="font-display text-[28px] font-black leading-none tabular text-ink">{state.rapport}</span>
+                <Spark values={state.rapportHistory} />
+              </dd>
+            </div>
+            <div className="rounded-2xl bg-surface-2 p-3">
+              <dt className="text-[12px] font-bold text-ink-3">Questions{state.hintsUsed > 0 ? ` · ${state.hintsUsed} coach hint${state.hintsUsed === 1 ? "" : "s"} used` : ""}</dt>
+              <dd>
+                <QuestionMix stats={state.stats} />
+              </dd>
+            </div>
+          </dl>
+        </Card>
+        {reward && (
+          <div className="rise lg:col-span-5" style={{ ["--i" as string]: 2 }}>
+            <RewardReveal reward={reward} />
           </div>
-        </div>
+        )}
+      </div>
+
+      <Card className="mt-4 overflow-hidden">
         {own && assignment?.type !== "exam" && (
-          <div className="border-t border-line bg-surface-2 px-5 py-5 sm:px-6">
-            <h2 className="text-[14.5px] font-semibold text-ink">For your next attempt</h2>
+          <div className="bg-gradient-to-r from-brand-50 to-[var(--color-xp-soft)] px-5 py-5 sm:px-6">
+            <h2 className="font-display text-[18px] font-extrabold text-ink">For your next attempt</h2>
             <p className="mt-0.5 max-w-3xl text-[13px] text-ink-3">Start over to practise the same visit again (optionally with the patient in a different mood), or book a follow-up where the patient remembers you and this conversation.</p>
             <ol className="mb-4 mt-3 grid gap-2 sm:grid-cols-2">
               {f.nextAttempt.map((n, i) => (
-                <li key={i} className="flex gap-2.5 rounded-xl bg-surface px-3 py-2.5 text-[13.5px] leading-relaxed text-ink ring-1 ring-inset ring-line">
-                  <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-100 font-mono text-[11px] font-semibold text-brand-800">{i + 1}</span>
+                <li key={i} className="rise flex gap-2.5 rounded-2xl bg-surface px-3 py-2.5 text-[13.5px] leading-relaxed text-ink shadow-e1 ring-1 ring-inset ring-line" style={{ ["--i" as string]: i }}>
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-lg bg-[var(--color-xp)] font-display text-[12.5px] font-black text-ink">{i + 1}</span>
                   {n}
                 </li>
               ))}
@@ -307,7 +300,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
           <ol className="sticky top-6 space-y-0.5 border-l border-line">
             {shownSections.map((s) => (
               <li key={s.id}>
-                <a href={`#${s.id}`} className="-ml-px block border-l-2 border-transparent py-1 pl-3 text-[13px] text-ink-3 hover:border-brand-500 hover:text-ink">
+                <a href={`#${s.id}`} className="-ml-px block border-l-[3px] border-transparent py-1.5 pl-3 text-[13px] font-semibold text-ink-3 hover:border-[var(--color-xp)] hover:text-ink">
                   {s.label}
                 </a>
               </li>
@@ -330,11 +323,11 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
           <section id="rubric" className="scroll-mt-6">
             <Card>
               <CardHeader title={f.rubricType === "domain4" ? "Rubric, with the evidence for each score" : "Checklist, with the evidence for each item"} subtitle="Every score points at the turn it came from. Each quote below was found in your transcript by code before it was shown. Select a turn to jump to it." />
-              <div className="divide-y divide-line/70">
-                {f.domains.map((d) => (
-                  <div key={d.key} className="grid gap-3 p-4 sm:p-5 md:grid-cols-[15rem_minmax(0,1fr)]">
+              <div className="grid gap-3 p-4 sm:p-5">
+                {f.domains.map((d, di) => (
+                  <div key={d.key} className="rise grid gap-3 rounded-2xl bg-surface-2 p-4 ring-1 ring-inset ring-line/70 md:grid-cols-[15rem_minmax(0,1fr)]" style={{ ["--i" as string]: di }}>
                     <div>
-                      <div className="text-[14.5px] font-semibold text-ink">{d.name}</div>
+                      <div className="font-display text-[16px] font-extrabold leading-tight text-ink">{d.name}</div>
                       <div className="mt-2 flex flex-wrap items-center gap-2">
                         {d.score === null ? (
                           <Badge>Not applicable</Badge>
@@ -355,21 +348,11 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
                     <div className="text-[14px]">
                       <p className="leading-relaxed text-ink">{d.rationale}</p>
                       {d.evidence.length > 0 && (
-                        <ul className="mt-3 space-y-2">
+                        <ul className="mt-3 space-y-2.5">
                           {d.evidence.map((e, i) => (
-                            <li key={i} className="rounded-xl bg-surface-2 px-3.5 py-2.5">
-                              {e.quote && (
-                                <div className="flex flex-wrap items-start gap-x-2 gap-y-1">
-                                  <MessageSquareQuote className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden />
-                                  <span className="min-w-0 flex-1 italic leading-relaxed text-ink">“{e.quote}”</span>
-                                  <span className="inline-flex shrink-0 items-center gap-1 text-[11.5px] text-emerald-700">
-                                    <CheckCircle2 className="h-3.5 w-3.5" aria-hidden />
-                                    found in transcript
-                                    <TurnLink turn={e.turn} />
-                                  </span>
-                                </div>
-                              )}
-                              <div className={cx("leading-relaxed text-ink-2", e.quote && "mt-1 pl-6")}>
+                            <li key={i} className="rounded-2xl bg-surface px-3 py-2.5 ring-1 ring-inset ring-line">
+                              {e.quote && <EvidenceChip quote={e.quote} turn={e.turn} />}
+                              <div className={cx("leading-relaxed text-ink-2", e.quote && "mt-1.5")}>
                                 {e.note}
                                 {!e.quote && <TurnLink turn={e.turn} />}
                               </div>
@@ -385,47 +368,9 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
           </section>
 
           <section id="findings" className="scroll-mt-6 space-y-6">
-            <div className="grid gap-6 lg:grid-cols-2">
-              <Card>
-                <CardHeader title={`Findings you elicited (${f.elicited.length})`} subtitle="From the disclosure record, not from a model's impression." />
-                <ul className="space-y-1.5 p-4 text-[13.5px]">
-                  {f.elicited.length === 0 && <li className="text-ink-3">None.</li>}
-                  {f.elicited.map((e) => (
-                    <li key={e.id} className="flex items-start gap-2">
-                      <Badge tone={IMP[e.importance]} className="mt-0.5 shrink-0">
-                        {e.importance}
-                      </Badge>
-                      <span className="leading-relaxed text-ink">
-                        {e.chart}
-                        <TurnLink turn={e.turn} />
-                        {prev && !prevElicited.has(e.id) && (
-                          <Badge tone="green" className="ml-1.5">
-                            new
-                          </Badge>
-                        )}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-              <Card>
-                <CardHeader title={`Findings you missed (${f.missed.length})`} subtitle="Most important first." />
-                <ul className="space-y-1.5 p-4 text-[13.5px]">
-                  {f.missed.length === 0 && <li className="text-ink-3">Nothing missed.</li>}
-                  {f.missed.map((m) => (
-                    <li key={m.id} className="flex items-start gap-2">
-                      <Badge tone={IMP[m.importance]} className="mt-0.5 shrink-0">
-                        {m.importance}
-                      </Badge>
-                      <span className="leading-relaxed text-ink">
-                        <span className="font-semibold">{m.topic}:</span> {m.chart}
-                        {state.deflected[m.id] ? <span className="ml-1 text-amber-800">(you asked; the patient was not ready to say)</span> : null}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-            </div>
+            <Card className="p-5 sm:p-6">
+              <CollectionBoard f={f} prevElicited={prevElicited} deflected={state.deflected} hasPrev={!!prev} />
+            </Card>
 
             {!!f.mismatches?.length && (
               <Card>
@@ -455,6 +400,11 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
           <section id="objectives" className="scroll-mt-6 grid gap-6 lg:grid-cols-2">
             <Card>
               <CardHeader title="Learning objectives" subtitle="Set by the faculty author of this case. Met only when the disclosure record and the examiner agree." />
+              <div className="flex gap-1 px-4 pt-3" aria-hidden>
+                {f.objectives.map((o) => (
+                  <span key={o.id} className={cx("bar-grow h-2.5 flex-1 rounded-full", o.met === "met" ? "bg-[var(--color-tier-initial)]" : o.met === "partial" ? "bg-[var(--color-tier-reluctant)]" : "bg-[var(--color-tier-hidden)]")} />
+                ))}
+              </div>
               <ul className="divide-y divide-line/70">
                 {f.objectives.map((o) => (
                   <li key={o.id} className="p-4 text-[13.5px]">
@@ -516,12 +466,12 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
 
           <section id="coaching" className="scroll-mt-6 space-y-6">
             <div className="grid gap-6 lg:grid-cols-2">
-              <Card>
+              <Card className="bg-[var(--color-xp-soft)]">
                 <CardHeader title="What went well" />
                 <ul className="space-y-2.5 p-4 text-[13.5px] leading-relaxed text-ink">
                   {f.strengths.map((s, i) => (
                     <li key={i} className="flex gap-2">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden />
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-[var(--color-xp)] p-0.5 text-ink" aria-hidden />
                       <span>
                         {s.text}
                         <TurnLink turn={s.turn} />
@@ -530,12 +480,12 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
                   ))}
                 </ul>
               </Card>
-              <Card>
+              <Card className="bg-[var(--color-flame-soft)]">
                 <CardHeader title="What to work on" />
                 <ul className="space-y-2.5 p-4 text-[13.5px] leading-relaxed text-ink">
                   {f.improvements.map((s, i) => (
                     <li key={i} className="flex gap-2">
-                      <CircleDashed className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" aria-hidden />
+                      <CircleDashed className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-flame-ink)]" aria-hidden />
                       <span>
                         {s.text}
                         <TurnLink turn={s.turn} />
@@ -546,7 +496,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
               </Card>
             </div>
             {(f.safetyConcerns.length > 0 || f.accuracyIssues.length > 0) && (
-              <Card className="border-rose-200">
+              <Card className="border-2 border-rose-300 bg-rose-50/60">
                 <CardHeader title="Safety and accuracy" subtitle="Checked against the case answer key and the faculty's knowledge sources only." />
                 <ul className="space-y-2.5 p-4 text-[13.5px] leading-relaxed text-ink">
                   {f.safetyConcerns.map((s, i) => (
@@ -712,7 +662,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
                   const x = meta(m);
                   if (m.speaker === "student")
                     return (
-                      <div key={m.id} id={`t${m.turn}`} className="flex scroll-mt-20 gap-3 rounded-lg target:bg-amber-50 target:ring-1 target:ring-amber-200">
+                      <div key={m.id} id={`t${m.turn}`} className="flex scroll-mt-20 gap-3 rounded-xl px-1 py-0.5 target:bg-amber-50 target:ring-1 target:ring-amber-200">
                         <span className="mt-0.5 w-8 shrink-0 text-right font-mono text-[11px] tabular-nums text-ink-3">T{m.turn}</span>
                         <div className="text-[14px] leading-relaxed">
                           <span className="font-semibold text-brand-700">{own ? "You" : "Student"}:</span> <span className="text-ink">{m.text}</span>
@@ -734,7 +684,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
                               </span>
                             )}
                             {(x.revealed || []).map((fid) => (
-                              <span key={fid} className="rounded bg-brand-50 px-1.5 py-0.5 text-brand-800">
+                              <span key={fid} className="rounded-full bg-[var(--color-xp-soft)] px-2 py-0.5 font-semibold text-[var(--color-xp-ink)] ring-1 ring-inset ring-[var(--color-xp)]">
                                 unlocked: {factText(fid)?.topic}
                               </span>
                             ))}

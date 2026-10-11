@@ -198,8 +198,15 @@ export function deriveGame(userId: string, professionId: string): GameState {
   const profile = skillProfile(userId, professionId);
   const mastery = profile.domains.map((d) => ({ key: d.domain, label: domainLabel(d.domain), value: masteryPct(d.rating), n: d.n }));
 
-  // Achievements: only from data that exists. Case snapshots are read here, on the server, for the
-  // tier of facts the student actually uncovered; nothing from them leaves this function but booleans.
+  const achievements = achievementsOf(rows, held, streak.best);
+
+  return { xp, rank: rankFor(xp), streak, visits: rows.length, mastery, achievements, log, weekXp };
+}
+
+
+/** Achievements from stored visits only. Case snapshots are read here, on the server, for the tier of
+ *  facts the student actually uncovered; nothing from them leaves this function but booleans. */
+function achievementsOf(rows: Row[], held: Set<string>, bestStreak: number): Achievement[] {
   const visible = rows.filter((r) => r.status === "scored" && !(r.assignment_id && held.has(r.assignment_id)));
   const best = Math.max(0, ...visible.map((r) => r.faculty_score ?? r.score ?? 0));
   const cfgs = rows.map((r) => parse<Partial<EncounterConfig>>(r.config, {}));
@@ -215,24 +222,22 @@ export function deriveGame(userId: string, professionId: string): GameState {
     }
   }
   const n = rows.length;
-  const achievements: Achievement[] = [
+  return [
     { id: "first", title: "First patient", detail: "Finish your first visit", got: n >= 1, icon: "spark", tone: "xp" },
     { id: "five", title: "Five visits", detail: "Finish five visits", got: n >= 5, icon: "five", tone: "xp" },
     { id: "ten", title: "Ten visits", detail: "Finish ten visits", got: n >= 10, icon: "ten", tone: "xp" },
-    { id: "streak3", title: "On a roll", detail: "Practise three days in a row", got: streak.best >= 3, icon: "flame", tone: "flame" },
-    { id: "streak7", title: "Week-long streak", detail: "Practise seven days in a row", got: streak.best >= 7, icon: "blaze", tone: "flame" },
+    { id: "streak3", title: "On a roll", detail: "Practise three days in a row", got: bestStreak >= 3, icon: "flame", tone: "flame" },
+    { id: "streak7", title: "Week-long streak", detail: "Practise seven days in a row", got: bestStreak >= 7, icon: "blaze", tone: "flame" },
     { id: "trust", title: "Trust earned", detail: "Uncover a fact the patient only shares once they trust you", got: trust, icon: "key", tone: "tier" },
     { id: "score85", title: "Top marks", detail: "Score 85 or more on a visit with released feedback", got: best >= 85, icon: "star", tone: "mastery" },
     { id: "hard", title: "Hard mode", detail: "Finish a visit at difficulty level 4 or 5", got: cfgs.some((c) => (c.knobs?.level ?? 0) >= 4), icon: "mountain", tone: "mastery" },
     { id: "followup", title: "They remembered you", detail: "Finish a follow-up visit with a patient you have seen", got: cfgs.some((c) => (c.visitNumber || 1) > 1), icon: "repeat", tone: "tier" },
     { id: "journey", title: "Team player", detail: "Finish your encounter in a care journey", got: rows.some((r) => !!r.journey_run_id), icon: "route", tone: "tier" },
   ];
-
-  return { xp, rank: rankFor(xp), streak, visits: n, mastery, achievements, log, weekXp };
 }
 
-/** XP for one visit plus the rank before and after it: the feedback page's results reveal. */
-export function visitReward(userId: string, encounterId: string): { visit: VisitXp; before: RankInfo; after: RankInfo; xpBefore: number; xpAfter: number } | null {
+/** XP for one visit, the rank before and after it, and the badges this visit unlocked: the results reveal. */
+export function visitReward(userId: string, encounterId: string): { visit: VisitXp; before: RankInfo; after: RankInfo; xpBefore: number; xpAfter: number; unlocked: Achievement[] } | null {
   const rows = all<Row>(
     `SELECT id, case_id, status, score, faculty_score, ended_at, started_at, config, state, assignment_id, journey_run_id
      FROM encounters WHERE user_id = ? AND status IN ('submitted','scored') AND parent_id IS NULL ORDER BY COALESCE(ended_at, started_at)`,
@@ -242,7 +247,15 @@ export function visitReward(userId: string, encounterId: string): { visit: Visit
   let xpBefore = 0;
   for (const r of rows) {
     const v = visitXp(r, held);
-    if (r.id === encounterId) return { visit: v, before: rankFor(xpBefore), after: rankFor(xpBefore + v.xp), xpBefore, xpAfter: xpBefore + v.xp };
+    if (r.id === encounterId) {
+      const k = rows.indexOf(r);
+      const prior = rows.slice(0, k);
+      const through = rows.slice(0, k + 1);
+      const was = achievementsOf(prior, held, streakFrom(prior.map((x) => x.ended_at || x.started_at)).best);
+      const now = achievementsOf(through, held, streakFrom(through.map((x) => x.ended_at || x.started_at)).best);
+      const unlocked = now.filter((a) => a.got && !was.find((b) => b.id === a.id)?.got);
+      return { visit: v, before: rankFor(xpBefore), after: rankFor(xpBefore + v.xp), xpBefore, xpAfter: xpBefore + v.xp, unlocked };
+    }
     xpBefore += v.xp;
   }
   return null;

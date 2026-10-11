@@ -2,6 +2,7 @@
 
 import { Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import "./feedback.css";
 
 export interface ReplayTurn {
   turn: number;
@@ -35,7 +36,7 @@ function eventOf(t: ReplayTurn): EventKind {
   return "quiet";
 }
 const EVENT = {
-  found: { cls: "fill-brand-500", label: "New findings" },
+  found: { cls: "fill-[var(--color-xp-ink)]", label: "New findings" },
   deflect: { cls: "fill-amber-500", label: "Patient deflected" },
   flag: { cls: "fill-rose-500", label: "Flag: judgment, dismissal or outside the case record" },
   quiet: { cls: "fill-slate-300", label: "No new findings" },
@@ -67,6 +68,17 @@ export default function VisitReplay({ turns }: { turns: ReplayTurn[] }) {
     return () => clearInterval(t);
   }, [playing, n]);
 
+  // Once the student moves the cursor, the same turn lights up in the transcript and its findings on
+  // the collection board (DOM classes only; nothing re-renders outside this component).
+  const touched = useRef(false);
+  const turnNow = turns[i]?.turn;
+  useEffect(() => {
+    if (!touched.current || turnNow === undefined) return;
+    const lit = [...document.querySelectorAll(`#t${turnNow}, [data-fact-turn="${turnNow}"]`)];
+    lit.forEach((el) => el.classList.add("replay-now"));
+    return () => lit.forEach((el) => el.classList.remove("replay-now"));
+  }, [turnNow]);
+
   if (n < 2) return null;
   const slot = (W - L - R) / n;
   const x = (k: number) => L + slot * (k + 0.5);
@@ -75,9 +87,9 @@ export default function VisitReplay({ turns }: { turns: ReplayTurn[] }) {
   const scorePath = line(turns.map((t) => t.score), yMain);
   const area = `${scorePath} L${x(n - 1)},${MAIN_H - 10} L${x(0)},${MAIN_H - 10} Z`;
   const rows = [
-    { key: "coverage", label: "Findings covered", vals: turns.map((t) => t.coverage) },
-    { key: "communication", label: "Communication", vals: turns.map((t) => t.communication) },
-    { key: "comfort", label: "Patient comfort", vals: turns.map((t) => t.comfort) },
+    { key: "coverage", label: "Findings covered", vals: turns.map((t) => t.coverage), color: "var(--color-tier-initial)" },
+    { key: "communication", label: "Communication", vals: turns.map((t) => t.communication), color: "var(--color-mastery)" },
+    { key: "comfort", label: "Patient comfort", vals: turns.map((t) => t.comfort), color: "var(--color-tier-hidden)" },
   ] as const;
   const top = MAIN_H + 10;
   const trackY = top + rows.length * (ROW_H + GAP) + 2;
@@ -90,10 +102,12 @@ export default function VisitReplay({ turns }: { turns: ReplayTurn[] }) {
     const r = el.getBoundingClientRect();
     const sx = ((clientX - r.left) / r.width) * W;
     const k = Math.floor((sx - L) / slot);
+    touched.current = true;
     setI(Math.max(0, Math.min(n - 1, k)));
   }
   function onKey(e: React.KeyboardEvent) {
     const step = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1 }[e.key as string];
+    if (step || e.key === "Home" || e.key === "End") touched.current = true;
     if (step) {
       e.preventDefault();
       setPlaying(false);
@@ -118,9 +132,10 @@ export default function VisitReplay({ turns }: { turns: ReplayTurn[] }) {
               onClick={() => {
                 if (playing) return setPlaying(false);
                 if (i >= n - 1) setI(0);
+                touched.current = true;
                 setPlaying(true);
               }}
-              className="press inline-flex min-h-9 items-center gap-1.5 rounded-lg px-2.5 text-[13px] font-medium text-brand-800 ring-1 ring-inset ring-brand-200 hover:bg-brand-50"
+              className="press inline-flex min-h-10 items-center gap-1.5 rounded-full bg-brand-600 px-3.5 text-[13px] font-bold text-white hover:bg-brand-500 pointer-coarse:min-h-11"
             >
               {playing ? <Pause className="h-3.5 w-3.5" aria-hidden /> : <Play className="h-3.5 w-3.5" aria-hidden />}
               {playing ? "Pause" : "Replay the visit"}
@@ -184,7 +199,7 @@ export default function VisitReplay({ turns }: { turns: ReplayTurn[] }) {
           >
             <defs>
               <linearGradient id="replay-area" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0" stopColor="var(--color-brand-500)" stopOpacity="0.18" />
+                <stop offset="0" stopColor="var(--color-brand-500)" stopOpacity="0.32" />
                 <stop offset="1" stopColor="var(--color-brand-500)" stopOpacity="0" />
               </linearGradient>
             </defs>
@@ -220,7 +235,7 @@ export default function VisitReplay({ turns }: { turns: ReplayTurn[] }) {
                   <text x={L - 10} y={y0 + ROW_H / 2 + 4} textAnchor="end" fontSize={11.5} fill="var(--color-ink-2)">
                     {r.label}
                   </text>
-                  <path d={line([...r.vals], y)} fill="none" stroke="var(--color-slate-500)" strokeWidth={1.75} strokeLinejoin="round" />
+                  <path d={line([...r.vals], y)} fill="none" stroke={r.color} strokeWidth={2} strokeLinejoin="round" />
                   <circle cx={x(i)} cy={y(r.vals[i])} r={3.5} fill="var(--color-ink)" />
                   <text x={W - R + 6} y={y0 + ROW_H / 2 + 4} fontSize={11.5} fontWeight={700} fill="var(--color-ink)">
                     {pct(r.vals[i])}
@@ -260,7 +275,7 @@ export default function VisitReplay({ turns }: { turns: ReplayTurn[] }) {
       </div>
 
       {/* The selected turn */}
-      <div className="grid gap-4 rounded-xl border border-line bg-surface-2 p-4 md:grid-cols-[minmax(0,1fr)_15rem]" aria-live="polite">
+      <div className="grid gap-4 rounded-2xl bg-surface-2 p-4 ring-1 ring-inset ring-line md:grid-cols-[minmax(0,1fr)_15rem]" aria-live="polite">
         <div className="min-w-0">
         <div className="flex items-baseline justify-between">
           <a href={`#t${cur.turn}`} className="font-mono text-[13px] font-semibold text-brand-700 hover:underline">

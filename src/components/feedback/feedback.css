@@ -1,0 +1,11 @@
+/* Feedback: the replay cursor lights up the same turn in the transcript and its collected findings. */
+.replay-now {
+  background: var(--color-xp-soft) !important;
+  box-shadow: 0 0 0 3px var(--color-xp);
+  transition:
+    background-color 200ms var(--ease-out-ui),
+    box-shadow 200ms var(--ease-out-ui);
+}
+.collect-card.replay-now {
+  transform: translateY(-2px);
+}
