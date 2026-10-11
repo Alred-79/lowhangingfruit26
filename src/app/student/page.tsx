@@ -6,11 +6,11 @@ import JoinCourse from "@/components/courses/JoinCourse";
 import StartVisit from "@/components/courses/StartVisit";
 import When from "@/components/courses/When";
 import { GameLayerSwitch, TiltCard } from "@/components/game/controls";
-import { deriveGame, domainLabel } from "@/components/game/derive";
+import { deriveGame, domainLabel, releasedSkills } from "@/components/game/derive";
 import { AchievementBadge, Count, GameCell, MasteryRadar, QuestPips, RankRing, StreakPanel, XpBar, XpRules } from "@/components/game/hud";
 import TrustLabel from "@/components/TrustLabel";
 import { Badge, Card, CardHeader, cx, LinkButton } from "@/components/ui";
-import { recommend } from "@/lib/adaptive";
+import { expectedScore, recommend } from "@/lib/adaptive";
 import { requireUser } from "@/lib/auth";
 import { all, get, parse } from "@/lib/db";
 import { decodeEntities } from "@/lib/courses/save";
@@ -89,7 +89,14 @@ export default async function StudentHome() {
   const questTotal = quest ? (quest.a.journey_id ? 2 : Math.max(1, quest.cases.length)) : 0;
   const got = game.achievements.filter((a) => a.got);
   const shelf = [...got, ...game.achievements.filter((a) => !a.got)].slice(0, 6);
-  const weakest = rec.profile.weakest ? domainLabel(rec.profile.weakest) : null;
+  // Shown ratings stop before a visit whose feedback is held (derive.ts releasedSkills), so a held
+  // grade cannot be read back out of them. The recommendation itself still uses every visit.
+  const rs = releasedSkills(user.id, role.id);
+  const shownProfile = rs.held ? { overall: rs.overall, sessions: rs.sessions, weakest: rs.weakest, expectedAtLevel: expectedScore(rs.overall, rec.level) } : rec.profile;
+  const reason = rs.held
+    ? "Some of your feedback is held by your instructor, so the ratings shown here stop at the visit before it. The level is still chosen from all of your visits, and no language model is involved in the choice."
+    : rec.reason;
+  const weakest = shownProfile.weakest ? domainLabel(shownProfile.weakest) : null;
   // More patients written for this role: unseen first, then nearest the recommended level. Only the
   // student-safe card and the portrait path are read (as on the practice page).
   const seen = new Map(all<{ case_id: string; n: number }>("SELECT case_id, COUNT(*) AS n FROM encounters WHERE user_id = ? AND status IN ('submitted','scored') GROUP BY case_id", user.id).map((r) => [r.case_id, r.n]));
@@ -243,14 +250,14 @@ export default async function StudentHome() {
                       <TrendingUp className="h-3.5 w-3.5" aria-hidden />
                       Your rating
                     </p>
-                    <p className="font-display text-[24px] font-black leading-tight text-ink">{rec.profile.sessions > 0 ? Math.round(rec.profile.overall) : "New"}</p>
+                    <p className="font-display text-[24px] font-black leading-tight text-ink">{shownProfile.sessions > 0 ? Math.round(shownProfile.overall) : "New"}</p>
                   </li>
                   <li className="rounded-2xl bg-[var(--color-tier-initial-soft)] p-3">
                     <p className="flex items-center gap-1.5 text-[12px] font-bold text-[var(--color-tier-initial-ink)]">
                       <Gauge className="h-3.5 w-3.5" aria-hidden />
                       Expected score
                     </p>
-                    <p className="font-display text-[24px] font-black leading-tight text-ink">{rec.profile.sessions > 0 ? `${Math.round(rec.profile.expectedAtLevel * 100)}%` : "Level 2 start"}</p>
+                    <p className="font-display text-[24px] font-black leading-tight text-ink">{shownProfile.sessions > 0 ? `${Math.round(shownProfile.expectedAtLevel * 100)}%` : "Level 2 start"}</p>
                   </li>
                   <li className="rounded-2xl bg-[var(--color-tier-hidden-soft)] p-3">
                     <p className="flex items-center gap-1.5 text-[12px] font-bold text-[var(--color-tier-hidden-ink)]">
@@ -265,12 +272,12 @@ export default async function StudentHome() {
                     <ChevronRight className="h-4 w-4 transition-transform group-open:rotate-90" aria-hidden />
                     Why this patient and level?
                   </summary>
-                  <p className="pop-in mt-1.5 max-w-2xl leading-relaxed text-ink-2">{rec.reason}</p>
+                  <p className="pop-in mt-1.5 max-w-2xl leading-relaxed text-ink-2">{reason}</p>
                   <p className="mt-1.5 text-[12.5px] text-ink-3">The next patient and difficulty are chosen from your results so far. No language model is involved in the choice.</p>
                 </details>
                 <div className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
                   <p className="text-[13px] text-ink-3">
-                    {rec.profile.sessions > 0 ? `Based on ${rec.profile.sessions} scored visit${rec.profile.sessions === 1 ? "" : "s"}. ` : ""}
+                    {shownProfile.sessions > 0 ? `Based on ${shownProfile.sessions} scored visit${shownProfile.sessions === 1 ? "" : "s"}${rs.held ? " with released feedback" : ""}. ` : ""}
                     <Link href="/student/progress" className="font-semibold text-brand-700 hover:underline">
                       See your skill ratings and how the level is chosen
                     </Link>

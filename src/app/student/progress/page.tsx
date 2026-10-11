@@ -1,11 +1,11 @@
-import { ArrowRight, ChevronRight, Gauge, Hash, Layers, ListChecks, Scale, Target, TrendingUp } from "lucide-react";
+import { ArrowRight, ChevronRight, Gauge, Hash, Layers, ListChecks, Scale, Target, TrendingUp, Lock } from "lucide-react";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import AppShell from "@/components/AppShell";
 import { SkillDots } from "@/components/courses/charts";
 import RatingHistory, { type HistorySeries } from "@/components/courses/RatingHistory";
 import When from "@/components/courses/When";
-import { deriveGame, RANKS, rankFor } from "@/components/game/derive";
+import { deriveGame, RANKS, rankFor, releasedSkills } from "@/components/game/derive";
 import { Count, GameCell, RankRing, XpRules, FlameIcon } from "@/components/game/hud";
 import AchievementGallery, { type GalleryItem } from "@/components/history/AchievementGallery";
 import ScoreTrend, { type ScorePoint } from "@/components/history/ScoreTrend";
@@ -13,7 +13,7 @@ import StoryReel, { type Story } from "@/components/history/StoryReel";
 import StreakCalendar, { type CalDay } from "@/components/history/StreakCalendar";
 import XpClimb, { RankPath, type ClimbPoint } from "@/components/history/XpClimb";
 import { Badge, Card, cx, Empty, LinkButton } from "@/components/ui";
-import { skillProfile } from "@/lib/adaptive";
+import { expectedScore, skillProfile } from "@/lib/adaptive";
 import { requireUser } from "@/lib/auth";
 import { all } from "@/lib/db";
 import { feedbackUrl, heldAssignmentIds, studentCaseLabels, toDate } from "@/lib/courses";
@@ -62,7 +62,13 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
   const role = profession(professionId);
   const roleTabs = [...new Set([own, ...rated])];
 
-  const profile = skillProfile(user.id, professionId);
+  const engineProfile = skillProfile(user.id, professionId);
+  // What the student may see: ratings as they stood before the first visit whose feedback is held
+  // (derive.ts releasedSkills). When nothing is held this equals the engine's profile.
+  const released = releasedSkills(user.id, professionId);
+  const profile = released.held
+    ? { ...engineProfile, domains: released.domains, overall: released.overall, sessions: released.sessions, weakest: released.weakest, expectedAtLevel: expectedScore(released.overall, engineProfile.level) }
+    : engineProfile;
   const names = new Map((getRubric("default").domains || []).map((d) => [d.key, d.name]));
   const nameOf = (k: string) => names.get(k) || k.replace(/_/g, " ");
   const order = [...names.keys()];
@@ -72,13 +78,7 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
   const ticks = [1, 2, 3, 4, 5].map((level) => ({ level, rating: LEVEL_RATING[level] }));
 
   // ----- Rating history from the event log -----
-  const events = all<{ encounter_id: string; domain: string; level: number; outcome: number; before: number; after: number; created_at: string; case_id: string | null }>(
-    `SELECT s.encounter_id, s.domain, s.level, s.outcome, s.before, s.after, s.created_at, e.case_id
-     FROM skill_events s LEFT JOIN encounters e ON e.id = s.encounter_id
-     WHERE s.user_id = ? AND s.profession_id = ? ORDER BY s.id`,
-    user.id,
-    professionId,
-  );
+  const events = released.events;
   // Students never see the faculty case title; it usually names the diagnosis.
   const labels = studentCaseLabels([...events.map((e) => e.case_id || ""), ...all<{ case_id: string }>("SELECT DISTINCT case_id FROM encounters WHERE user_id = ?", user.id).map((r) => r.case_id)]);
   const visits: { id: string; level: number; date: string; title: string; after: Map<string, number> }[] = [];
@@ -246,6 +246,13 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
           <ArrowRight className="h-4 w-4" aria-hidden />
         </LinkButton>
       </div>
+
+      {released.held && (
+        <p role="note" className="mb-4 flex items-start gap-2 rounded-2xl bg-[var(--color-mastery-soft)] px-4 py-3 text-[13.5px] leading-relaxed text-[var(--color-mastery-ink)]">
+          <Lock className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+          <span>Your instructor is still holding feedback for an assignment visit, so your skill ratings here stop at the visit before it. The rest appear once that feedback is released.</span>
+        </p>
+      )}
 
       {/* ---------- The climb (XP and rank over visits) + the story reel ---------- */}
       <div className="grid gap-4 lg:grid-cols-12">
