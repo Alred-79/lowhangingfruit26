@@ -90,6 +90,16 @@ export default async function StudentHome() {
   const got = game.achievements.filter((a) => a.got);
   const shelf = [...got, ...game.achievements.filter((a) => !a.got)].slice(0, 6);
   const weakest = rec.profile.weakest ? domainLabel(rec.profile.weakest) : null;
+  // More patients written for this role: unseen first, then nearest the recommended level. Only the
+  // student-safe card and the portrait path are read (as on the practice page).
+  const seen = new Map(all<{ case_id: string; n: number }>("SELECT case_id, COUNT(*) AS n FROM encounters WHERE user_id = ? AND status IN ('submitted','scored') GROUP BY case_id", user.id).map((r) => [r.case_id, r.n]));
+  const rank = (a: { id: string; difficulty: number }, b: { id: string; difficulty: number }) => (seen.get(a.id) || 0) - (seen.get(b.id) || 0) || Math.abs(a.difficulty - rec.level) - Math.abs(b.difficulty - rec.level) || a.id.localeCompare(b.id);
+  const pool = publishedCaseCards().filter((c) => c.id !== rec.caseId);
+  // This role's patients first; if there are fewer than three, patients written for other roles fill in (labelled).
+  const more = [...pool.filter((c) => c.professions.includes(role.id)).sort(rank), ...pool.filter((c) => !c.professions.includes(role.id)).sort(rank)].slice(0, 3);
+  const morePortraits = new Map(
+    more.length ? all<{ id: string; p: string | null }>(`SELECT id, json_extract(profile, '$.patient.portrait') AS p FROM cases WHERE id IN (${more.map(() => "?").join(",")})`, ...more.map((c) => c.id)).map((r) => [r.id, r.p]) : [],
+  );
 
   return (
     <AppShell user={user}>
@@ -292,7 +302,65 @@ export default async function StudentHome() {
         </Card>
       </div>
 
-      <div className="mt-4 grid gap-4 lg:grid-cols-12">
+      {more.length > 0 && (
+        <section aria-labelledby="more-patients" className="mt-6">
+          <div className="mb-3 flex items-end justify-between gap-3">
+            <h2 id="more-patients" className="font-display text-[24px] font-black tracking-[-0.025em] text-ink">
+              More patients for you
+            </h2>
+            <Link href="/student/practice" className="text-[13.5px] font-bold text-brand-700 hover:underline">
+              All patients
+            </Link>
+          </div>
+          <ul className="grid gap-4 sm:grid-cols-3">
+            {more.map((c, i) => {
+              const portrait = morePortraits.get(c.id);
+              const xp = 100 + 40 * (rec.level - 1);
+              return (
+                <li key={c.id} className="rise" style={v({ "--i": 6 + i })}>
+                  <TiltCard className="h-full rounded-[24px]">
+                    <div className="flex h-full flex-col overflow-hidden rounded-[24px] bg-surface shadow-e2 ring-1 ring-line/80">
+                      <div className="relative h-40 overflow-hidden bg-stage">
+                        {portrait ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={portrait} alt="" loading="lazy" className="float-idle h-full w-full scale-105 object-cover object-[50%_25%]" style={v({ "--i": i })} />
+                        ) : (
+                          <div className="grid h-full place-items-center font-display text-[44px] font-black text-white/80">{c.patientFirstName.slice(0, 1)}</div>
+                        )}
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-4 pb-3 pt-10 text-white">
+                          <p className="font-display text-[20px] font-black leading-tight">
+                            {c.patientFirstName}
+                            {c.age ? `, ${c.age}` : ""}
+                          </p>
+                        </div>
+                        <span className="absolute right-3 top-3 rounded-full bg-[var(--color-xp)] px-2.5 py-1 font-mono text-[12px] font-bold text-ink">+{xp} XP</span>
+                        {!seen.get(c.id) && <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11.5px] font-bold text-ink">New to you</span>}
+                      </div>
+                      <div className="flex flex-1 flex-col gap-2 p-4">
+                        <p className="text-[13.5px] font-semibold leading-snug text-ink-2">
+                          {c.encounterType.charAt(0).toUpperCase() + c.encounterType.slice(1)} · {c.specialty}
+                        </p>
+                        {!c.professions.includes(role.id) && <span className="w-fit rounded-full bg-[var(--color-mastery-soft)] px-2.5 py-0.5 text-[11.5px] font-bold text-[var(--color-mastery-ink)]">Written for another role</span>}
+                        {c.aiDraft && <TrustLabel kind="ai-draft" />}
+                        <div className="mt-auto flex items-end justify-between gap-2 pt-1">
+                          <div>
+                            <p className="text-[11.5px] font-bold text-ink-3">Your level</p>
+                            <LevelSteps level={rec.level} />
+                          </div>
+                          <StartVisit size="sm" label="Start visit" body={{ caseId: c.id, mode: "practice", level: rec.level, perturb: !!seen.get(c.id) }} />
+                        </div>
+                      </div>
+                    </div>
+                  </TiltCard>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="mt-2 text-[12px] text-ink-3">XP shown is for finishing at your level, plus 5 per fact you uncover. Practice visits are private to you.</p>
+        </section>
+      )}
+
+      <div className="mt-6 grid gap-4 lg:grid-cols-12">
         {/* ---------- Assignments, as quests ---------- */}
         <Card id="assignments" className="rise scroll-mt-6 lg:col-span-7" style={v({ "--i": 6 })}>
           <CardHeader title="Quests from your courses" subtitle={assignments.length ? `${open.length} to do, ${doneAssignments.length} submitted` : undefined} />
