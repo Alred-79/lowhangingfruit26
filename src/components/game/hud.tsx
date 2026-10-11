@@ -51,10 +51,10 @@ export function XpBar({ rank, xp, className, dark = false, from = 0 }: { rank: R
   return (
     <div className={className}>
       <div className="flex items-baseline justify-between gap-3">
-        <span className={cx("font-mono text-[13px] font-semibold", dark ? "text-white" : "text-ink")}>
+        <span className={cx("whitespace-nowrap font-mono text-[13px] font-semibold", dark ? "text-white" : "text-ink")}>
           <Count value={xp} /> XP
         </span>
-        <span className={cx("text-[12.5px] font-medium", dark ? "text-white/80" : "text-ink-3")}>{rank.next ? `${toGo} XP to ${rank.nextTitle}` : "Top rank"}</span>
+        <span className={cx("text-right text-[12.5px] font-medium", dark ? "text-white/80" : "text-ink-3")}>{rank.next ? `${toGo} XP to ${rank.nextTitle}` : "Top rank"}</span>
       </div>
       <div
         role="meter"
@@ -262,7 +262,7 @@ export function QuestPips({ done, total, dark = false }: { done: number; total: 
 /** The compact game strip for the app shell (students). */
 export function ShellHud({ game }: { game: GameState }) {
   return (
-    <div className="flex items-center gap-3 rounded-2xl bg-surface/80 p-2.5 shadow-e1 ring-1 ring-line backdrop-blur">
+    <div className="game-layer flex items-center gap-3 rounded-2xl bg-surface/80 p-2.5 shadow-e1 ring-1 ring-line backdrop-blur">
       <RankRing rank={game.rank} size={46} label={false} />
       <div className="min-w-0 flex-1">
         <div className="truncate text-[12.5px] font-bold text-ink">{game.rank.title}</div>

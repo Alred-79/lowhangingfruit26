@@ -691,3 +691,17 @@ html[data-tab-hidden] .ambient * {
     grid-template-areas: "head form" "show form";
   }
 }
+
+/* Game layer preference (per device). Minimal: no ambient or idle motion. Off: also no XP, ranks,
+   streaks or badges (anything marked .game-layer); every clinical and course feature stays. */
+html[data-game="minimal"] .aurora,
+html[data-game="off"] .aurora {
+  display: none;
+}
+html[data-game="minimal"] :is(.breathe, .float-idle, .flicker, .spin-slow, .orbit-dash, .shimmer::after),
+html[data-game="off"] :is(.breathe, .float-idle, .flicker, .spin-slow, .orbit-dash, .shimmer::after) {
+  animation: none !important;
+}
+html[data-game="off"] .game-layer {
+  display: none !important;
+}

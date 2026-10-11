@@ -79,7 +79,16 @@ function visitXp(r: Row, held: Set<string>): VisitXp {
   return { id: r.id, at: r.ended_at || r.started_at, xp: parts.reduce((n, [, v]) => n + v, 0), parts, held: isHeld, privatePractice: !r.assignment_id && !r.journey_run_id };
 }
 
-const day = (s: string) => s.slice(0, 10); // SQLite datetime('now') is UTC "YYYY-MM-DD HH:MM:SS"
+// Streak days are calendar days in one product timezone (the deployment serves Rutgers, US Eastern).
+// Stored times are UTC ("YYYY-MM-DD HH:MM:SS" from SQLite datetime('now')); a visit at 9 pm Eastern
+// belongs to that Eastern day, not to the next UTC day.
+const TZ = "America/New_York";
+const fmtDay = new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" });
+const day = (s: string) => {
+  const d = new Date(/[zZ]|[+-]\d\d:?\d\d$/.test(s) ? s : s.replace(" ", "T") + "Z");
+  return isNaN(d.getTime()) ? s.slice(0, 10) : fmtDay.format(d);
+};
+const todayDay = () => fmtDay.format(new Date());
 const addDays = (d: string, n: number) => {
   const t = new Date(d + "T00:00:00Z");
   t.setUTCDate(t.getUTCDate() + n);
@@ -96,7 +105,7 @@ export interface Streak {
   week: { date: string; label: string; done: boolean; grace: boolean; isToday: boolean }[];
 }
 
-export function streakFrom(dates: string[], todayIso = new Date().toISOString().slice(0, 10)): Streak {
+export function streakFrom(dates: string[], todayIso = todayDay()): Streak {
   const done = new Set(dates.map(day));
   const today = done.has(todayIso);
   let cursor = today ? todayIso : addDays(todayIso, -1);
@@ -183,7 +192,7 @@ export function deriveGame(userId: string, professionId: string): GameState {
   const log = rows.map((r) => visitXp(r, held));
   const xp = log.reduce((n, v) => n + v.xp, 0);
   const streak = streakFrom(rows.map((r) => r.ended_at || r.started_at));
-  const weekStart = addDays(new Date().toISOString().slice(0, 10), -6);
+  const weekStart = addDays(todayDay(), -6);
   const weekXp = log.filter((v) => day(v.at) >= weekStart).reduce((n, v) => n + v.xp, 0);
 
   const profile = skillProfile(userId, professionId);
