@@ -29,13 +29,19 @@ export default async function JourneyIntro({ params, searchParams }: { params: P
       <PageHeader title={heading.title} subtitle={heading.subtitle} action={<LinkButton href="/student/journeys" variant="secondary" size="sm">All care journeys</LinkButton>} />
       <div className="grid gap-5 lg:grid-cols-[1fr_20rem]">
         <div>
-          <h2 className="mb-2 text-sm font-semibold text-slate-900">Choose the professional you will be</h2>
+          <h2 className="mb-3 text-[15px] font-semibold text-ink">Choose the professional you will be</h2>
           <JoinButtons journeyId={j.row.id} assignmentId={assignment} stages={stages.map((s, i) => ({ ...s, suggested: s.suggested && i === firstSuggested }))} />
         </div>
         <div className="space-y-4">
           <Card className="p-4">
-            <h2 className="text-sm font-semibold text-slate-900">The patient</h2>
-            <p className="mt-1 text-sm text-slate-700">{c.patient?.name}, {c.patient?.age}, {c.patient?.sex}</p>
+            <h2 className="text-[14px] font-semibold text-ink">The patient</h2>
+            <div className="mt-2 flex items-center gap-3">
+              {c.patient?.portrait ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={c.patient.portrait} alt="" className="h-14 w-14 shrink-0 rounded-xl object-cover object-[50%_25%] ring-1 ring-line" />
+              ) : null}
+              <p className="text-[14.5px] font-semibold text-ink">{c.patient?.name}, {c.patient?.age}, {c.patient?.sex}</p>
+            </div>
             <dl className="mt-2 space-y-1.5 text-[13px]">
               {(c.chartAtStart || []).slice(0, 4).map((x) => (
                 <div key={x.label}>
