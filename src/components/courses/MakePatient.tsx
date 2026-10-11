@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import ErrorNote from "@/components/ErrorNote";
 import { Button, Select, Textarea } from "@/components/ui";
 
 const IDEAS = [
@@ -72,7 +73,7 @@ export default function MakePatient({ roleName }: { roleName: string }) {
         </Button>
         <span className="text-[12.5px] text-ink-3">Private to you. Written by AI and not reviewed by faculty.</span>
       </div>
-      {error && <p className="text-sm text-rose-700">{error}</p>}
+      {error && <ErrorNote message={error} title="The patient could not be created." kept="Your description is kept; try again." />}
     </div>
   );
 }

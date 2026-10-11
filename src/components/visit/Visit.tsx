@@ -8,6 +8,7 @@ import { Mark } from "@/components/Brand";
 import JourneyChartTab from "@/components/journey/JourneyChartTab";
 import TrustLabel from "@/components/TrustLabel";
 import type { ChartView } from "@/lib/engine/encounter";
+import ErrorNote from "@/components/ErrorNote";
 import ChartPanel from "./ChartPanel";
 
 interface Msg {
@@ -696,11 +697,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
                 </div>
               )}
             </div>
-            {error && (
-              <div role="alert" className="border-t border-rose-200 bg-rose-50 px-4 py-2 text-[12.5px] text-rose-800">
-                {error}
-              </div>
-            )}
+            {error && <ErrorNote message={error} className="mx-3 mb-1 mt-2" title={/microphone|camera/i.test(error) ? error.split(".")[0] + "." : undefined} kept={/microphone|camera/i.test(error) ? "" : "Nothing was lost; anything you typed is back in the box."} />}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -850,11 +847,7 @@ export default function Visit({ id, viewerName }: { id: string; viewerName: stri
                       <textarea id={`wrap-${f.id}`} value={wrap[f.id] || ""} onChange={(e) => setWrap((w) => ({ ...w, [f.id]: e.target.value }))} placeholder={f.placeholder} rows={3} className="w-full rounded-xl border border-line-strong/60 px-3.5 py-2.5 text-[14px] leading-relaxed text-ink placeholder:text-slate-500 focus:border-brand-500 focus:outline-none focus:ring-3 focus:ring-brand-500/20" />
                     </div>
                   ))}
-                  {error && (
-                    <p role="alert" className="rounded-xl bg-rose-50 px-3.5 py-2.5 text-[13px] text-rose-800 ring-1 ring-inset ring-rose-200">
-                      {error}
-                    </p>
-                  )}
+                  {error && <ErrorNote message={error} title="Scoring did not finish." kept="Your visit and notes are saved; submit again." />}
                 </div>
                 <div className="flex flex-wrap justify-end gap-2 border-t border-line px-6 py-4">
                   <button onClick={closeWrap} className="press inline-flex min-h-11 items-center rounded-xl px-4 text-[14px] font-medium text-ink-2 ring-1 ring-inset ring-slate-300 hover:bg-slate-50">
