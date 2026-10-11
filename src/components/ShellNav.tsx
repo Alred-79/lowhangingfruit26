@@ -1,11 +1,12 @@
 "use client";
 
-import { ArrowLeftRight, GraduationCap, History, House, Library, LogOut, Menu, Radio, Route, Stethoscope, TrendingUp, UserRoundPen, X, type LucideIcon } from "lucide-react";
+import { ArrowLeftRight, GraduationCap, History, House, Library, LogOut, Menu, Radio, Route, Search, Stethoscope, TrendingUp, UserRoundPen, X, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { logout } from "@/app/(auth)/actions";
 import { Logo } from "./Brand";
+import CommandPalette, { type Command } from "./CommandPalette";
 
 type Item = { href: string; label: string; Icon: LucideIcon; short?: string };
 
@@ -24,6 +25,15 @@ const STUDENT_NAV: Item[] = [
   { href: "/student/progress", label: "Progress", Icon: TrendingUp },
   { href: "/episodes", label: "My visits", Icon: History, short: "Visits" },
 ];
+
+const EXTRA: Record<"faculty" | "student", Command[]> = {
+  faculty: [
+    { label: "New patient", href: "/faculty/cases/new", hint: "Patient Studio, drafted in about 80 seconds" },
+    { label: "New care journey", href: "/faculty/journeys/new", hint: "Care Journeys" },
+    { label: "Student view", href: "/student", hint: "See what students see" },
+  ],
+  student: [{ label: "Make your own practice patient", href: "/student/practice", hint: "Practice" }],
+};
 
 const isActive = (path: string, href: string) => (href === "/student" || href === "/faculty" ? path === href : path === href || path.startsWith(href + "/"));
 
@@ -63,6 +73,8 @@ export default function ShellNav({ faculty, name, roleLabel }: { faculty: boolea
   const path = usePathname() || "";
   const nav = faculty ? FACULTY_NAV : STUDENT_NAV;
   const [open, setOpen] = useState(false);
+  const [palette, setPalette] = useState(false);
+  const commands: Command[] = [...nav.map((n) => ({ label: n.label, href: n.href })), ...EXTRA[faculty ? "faculty" : "student"]];
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
@@ -80,6 +92,13 @@ export default function ShellNav({ faculty, name, roleLabel }: { faculty: boolea
           <Link href={faculty ? "/faculty" : "/student"} aria-label="Rounds home">
             <Logo />
           </Link>
+        </div>
+        <div className="px-3 pb-3">
+          <button onClick={() => setPalette(true)} className="flex min-h-10 w-full items-center gap-2.5 rounded-lg bg-surface px-3 text-[13.5px] text-ink-3 ring-1 ring-inset ring-line transition-colors hover:text-ink hover:ring-slate-300">
+            <Search className="h-4 w-4" aria-hidden />
+            <span className="flex-1 text-left">Go to</span>
+            <kbd className="rounded border border-line bg-surface-2 px-1 font-mono text-[11px]">⌘K</kbd>
+          </button>
         </div>
         <nav aria-label="Main" className="flex-1 space-y-0.5 overflow-y-auto px-3">
           {nav.map((n) => (
@@ -127,6 +146,8 @@ export default function ShellNav({ faculty, name, roleLabel }: { faculty: boolea
           </div>
         </div>
       )}
+
+      <CommandPalette commands={commands} open={palette} setOpen={setPalette} />
 
       {/* Students on phones: bottom tab bar */}
       {!faculty && (
