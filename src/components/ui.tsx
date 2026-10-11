@@ -15,7 +15,7 @@ const BTN = {
   subtle: "bg-brand-50 text-brand-800 ring-1 ring-inset ring-brand-200 hover:bg-brand-100 disabled:text-slate-400",
 };
 const SIZE = {
-  sm: "min-h-8 px-2.5 text-[13px] gap-1.5 rounded-md pointer-coarse:min-h-10",
+  sm: "min-h-8 px-2.5 text-[13px] gap-1.5 rounded-md pointer-coarse:min-h-11",
   md: "min-h-9 px-3.5 text-sm gap-2 rounded-lg pointer-coarse:min-h-11",
   lg: "min-h-11 px-5 text-[15px] gap-2 rounded-lg",
 };

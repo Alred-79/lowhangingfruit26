@@ -189,7 +189,7 @@ function CaseCard({ c, onOpen }: { c: PracticeCase; onOpen: () => void }) {
   return (
     <button onClick={onOpen} className="press group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface text-left transition-[border-color,box-shadow] hover:border-brand-300 hover:shadow-e2">
       <div className="relative aspect-[4/3.6] w-full overflow-hidden bg-stage">
-        <Portrait c={c} className="transition-transform duration-500 ease-[var(--ease-out-ui)] group-hover:scale-[1.03]" />
+        <Portrait c={c} className="transition-transform duration-300 ease-[var(--ease-out-ui)] group-hover:scale-[1.03]" />
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-3 pb-2.5 pt-10">
           <div className="font-display text-[19px] font-semibold leading-tight text-white">
             {c.patientFirstName}

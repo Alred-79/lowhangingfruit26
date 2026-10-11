@@ -155,7 +155,7 @@ export default function ChartPanel({
               role="tab"
               aria-selected={tab === t.id}
               onClick={() => open(t.id)}
-              className={`relative -mb-px flex min-h-10 items-center gap-1.5 whitespace-nowrap border-b-2 px-3 text-[13px] ${tab === t.id ? "border-brand-600 font-semibold text-ink" : "border-transparent text-ink-3 hover:bg-slate-50 hover:text-ink"}`}
+              className={`relative -mb-px flex min-h-10 items-center gap-1.5 whitespace-nowrap border-b-2 px-3 text-[13px] pointer-coarse:min-h-11 ${tab === t.id ? "border-brand-600 font-semibold text-ink" : "border-transparent text-ink-3 hover:bg-slate-50 hover:text-ink"}`}
             >
               <t.Icon className={`h-3.5 w-3.5 ${tab === t.id ? "text-brand-600" : ""}`} aria-hidden />
               {t.label}
