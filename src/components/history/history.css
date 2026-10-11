@@ -1,0 +1,182 @@
+/* History area (progress + episodes). Prefixed .hist-; imported once from a history component.
+   Ambient loops are low amplitude, never move text, pause with the tab and stop under reduced motion. */
+
+/* The newest point on a trail breathes: a ring that expands and fades behind the dot. */
+@keyframes hist-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+.hist-ping {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hist-ping 2.6s var(--ease-out-ui) infinite;
+}
+
+/* The XP climb's line glows in slowly along its length, then a highlight travels it forever. */
+@keyframes hist-travel {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -400;
+  }
+}
+.hist-travel {
+  stroke-dasharray: 18 382;
+  animation: hist-travel 7s linear infinite;
+}
+
+/* Calendar cells pop in by column, so the weeks fill left to right like a meter. */
+@keyframes hist-cell {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+.hist-cell {
+  animation: hist-cell 420ms var(--ease-spring) both;
+  animation-delay: calc(var(--c, 0) * 28ms + 120ms);
+}
+
+/* Story reel progress: a lime bar that fills while a card is on screen (paused on hover/focus). */
+@keyframes hist-story {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.hist-story-fill {
+  transform-origin: left center;
+  animation: hist-story var(--story-ms, 6000ms) linear both;
+}
+.hist-story-paused .hist-story-fill {
+  animation-play-state: paused;
+}
+
+/* A story card slides in from the side it came from. */
+@keyframes hist-card-in {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--dir, 1) * 28px)) scale(0.98);
+    filter: blur(2px);
+  }
+}
+.hist-card-in {
+  animation: hist-card-in 360ms var(--ease-out-ui) both;
+}
+
+/* Bars in a trend grow from the baseline. */
+@keyframes hist-grow-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+.hist-grow-y {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: hist-grow-y 700ms var(--ease-spring) both;
+  animation-delay: calc(min(var(--i, 0), 16) * 35ms + 150ms);
+}
+
+/* Timeline dots (episodes) drop onto their lane. */
+@keyframes hist-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.7);
+  }
+}
+.hist-drop {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hist-drop 520ms var(--ease-spring) both;
+  animation-delay: calc(min(var(--i, 0), 30) * 18ms + 120ms);
+}
+.hist-dot {
+  transition:
+    opacity 220ms var(--ease-out-ui),
+    transform 220ms var(--ease-out-ui);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.hist-dot[data-off="true"] {
+  opacity: 0.12;
+}
+@media (hover: hover) and (pointer: fine) {
+  .hist-dot-link:hover .hist-dot,
+  .hist-dot-link:focus-visible .hist-dot {
+    transform: scale(1.35);
+  }
+}
+.hist-dot-link:focus-visible {
+  outline: none;
+}
+.hist-dot-link:focus-visible .hist-focus {
+  stroke: var(--color-ink);
+  stroke-width: 2.5;
+}
+
+/* Episode rows reflow when filters change (enter only; leaving rows are removed at once). */
+@keyframes hist-row-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+.hist-row-in {
+  animation: hist-row-in 300ms var(--ease-out-ui) both;
+  animation-delay: calc(min(var(--i, 0), 10) * 30ms);
+}
+
+/* A locked achievement's lock wobbles once in a while: there is something to win here. */
+@keyframes hist-wobble {
+  0%,
+  86%,
+  100% {
+    transform: rotate(0);
+  }
+  89% {
+    transform: rotate(-12deg);
+  }
+  93% {
+    transform: rotate(10deg);
+  }
+  96% {
+    transform: rotate(-5deg);
+  }
+}
+.hist-wobble {
+  animation: hist-wobble 6s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.9s);
+}
+
+html[data-tab-hidden] .hist-ping,
+html[data-tab-hidden] .hist-travel,
+html[data-tab-hidden] .hist-wobble,
+html[data-tab-hidden] .hist-story-fill {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hist-ping,
+  .hist-travel,
+  .hist-wobble {
+    animation: none !important;
+  }
+  .hist-ping,
+  .hist-travel {
+    display: none;
+  }
+  .hist-story-fill {
+    animation: none !important;
+    transform: scaleX(1);
+  }
+}
