@@ -1,0 +1,177 @@
+/* Practice area styles (page agent: practice). Prefixed `practice-` so nothing leaks into other pages.
+   Motion rules (emil-design-eng): transform/opacity/clip-path only, custom ease-out, interaction motion
+   under 300 ms, ambient loops off under reduced motion, hover motion gated to pointer-fine devices. */
+
+/* ---------- Difficulty slider: a native range input, restyled. Keyboard: arrows, Home, End, PgUp/PgDn. */
+.practice-range {
+  --p: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 44px;
+  background: transparent;
+  cursor: pointer;
+  touch-action: pan-y;
+}
+.practice-range:focus {
+  outline: none;
+}
+.practice-range::-webkit-slider-runnable-track {
+  height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-xp) 0 var(--p), transparent var(--p)), rgb(255 255 255 / 0.14);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.35);
+}
+.practice-range::-moz-range-track {
+  height: 14px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.14);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.35);
+}
+.practice-range::-moz-range-progress {
+  height: 14px;
+  border-radius: 999px;
+  background: var(--color-xp);
+}
+.practice-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 34px;
+  height: 34px;
+  margin-top: -10px;
+  border-radius: 12px;
+  background: #fff;
+  border: 3px solid var(--color-xp);
+  box-shadow:
+    inset 0 -3px 0 rgb(0 0 40 / 0.12),
+    0 6px 14px -4px rgb(0 0 0 / 0.55);
+  transition: transform 160ms var(--ease-out-ui);
+}
+.practice-range::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 12px;
+  background: #fff;
+  border: 3px solid var(--color-xp);
+  box-shadow: 0 6px 14px -4px rgb(0 0 0 / 0.55);
+  transition: transform 160ms var(--ease-out-ui);
+}
+.practice-range:active::-webkit-slider-thumb {
+  transform: scale(0.94);
+}
+.practice-range:active::-moz-range-thumb {
+  transform: scale(0.94);
+}
+.practice-range:focus-visible::-webkit-slider-thumb {
+  box-shadow:
+    0 0 0 4px var(--color-stage),
+    0 0 0 7px var(--color-brand-300);
+}
+.practice-range:focus-visible::-moz-range-thumb {
+  box-shadow:
+    0 0 0 4px var(--color-stage),
+    0 0 0 7px var(--color-brand-300);
+}
+
+/* ---------- The mood face: features morph between levels with CSS `d` where supported (the `d`
+   attribute stays as the fallback, so Safari still draws the right face, just without the morph). */
+.practice-face path,
+.practice-face g {
+  transition:
+    d 280ms var(--ease-out-ui),
+    transform 280ms var(--ease-out-ui);
+}
+.practice-face .practice-face-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+/* An idle blink every few seconds: the face is alive at rest. */
+@keyframes practice-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+.practice-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: practice-blink 4.8s ease-in-out infinite;
+}
+
+/* A value that changed springs once (key-remounted elements). */
+@keyframes practice-tick {
+  from {
+    transform: translateY(6px) scale(0.92);
+    opacity: 0.2;
+  }
+}
+.practice-tick {
+  animation: practice-tick 320ms var(--ease-spring) both;
+}
+
+/* ---------- Generator wait: an estimated stage bar and a portrait being "drawn". */
+.practice-scan {
+  position: relative;
+  overflow: hidden;
+}
+.practice-scan::after {
+  content: "";
+  position: absolute;
+  inset: -20% 0 auto 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent, rgb(166 226 46 / 0.55), transparent);
+  animation: practice-scan 2.4s var(--ease-in-out-ui) infinite;
+  pointer-events: none;
+}
+@keyframes practice-scan {
+  from {
+    transform: translateY(-40%);
+  }
+  to {
+    transform: translateY(300%);
+  }
+}
+.practice-progress {
+  transform-origin: left center;
+  transition: transform 900ms linear;
+}
+
+/* ---------- Library reflow: cards glide to their new place when a filter changes (View Transitions). */
+::view-transition-group(*) {
+  animation-duration: 280ms;
+  animation-timing-function: var(--ease-out-ui);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 180ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .practice-blink,
+  .practice-scan::after,
+  .practice-tick {
+    animation: none !important;
+  }
+  .practice-scan::after {
+    display: none;
+  }
+  .practice-face path,
+  .practice-face g {
+    transition: none;
+  }
+  .practice-progress {
+    transition: none;
+  }
+}
+html[data-tab-hidden] .practice-blink,
+html[data-tab-hidden] .practice-scan::after {
+  animation-play-state: paused;
+}
+html:is([data-game="minimal"], [data-game="off"]) .practice-blink,
+html:is([data-game="minimal"], [data-game="off"]) .practice-scan::after {
+  animation: none;
+}
