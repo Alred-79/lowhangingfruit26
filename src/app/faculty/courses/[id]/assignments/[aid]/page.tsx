@@ -1,23 +1,21 @@
+import { ChevronRight, ClipboardCheck, Download, Eye, EyeOff, FileText, Pencil, Target, Users } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { CSSProperties } from "react";
 import AppShell from "@/components/AppShell";
 import { BarList } from "@/components/courses/charts";
 import { DeleteAssignment, ReleaseFeedback } from "@/components/courses/CourseTools";
 import When from "@/components/courses/When";
-import { Badge, Card, CardHeader, LinkButton, PageHeader } from "@/components/ui";
+import GradebookTable from "@/components/faculty/GradebookTable";
+import { HeatCell, HeatLegend, QuestStack, ScoreRing } from "@/components/faculty/viz";
+import { Count, GameCell } from "@/components/game/hud";
+import { domainLabel } from "@/components/game/derive";
+import { Badge, Card, CardHeader, cx, LinkButton } from "@/components/ui";
 import { requireUser } from "@/lib/auth";
 import { get } from "@/lib/db";
-import { assignmentFor, describeSettings, feedbackUrl, gradebook, TYPE_LABEL } from "@/lib/courses";
+import { assignmentFor, describeSettings, gradebook, TYPE_LABEL } from "@/lib/courses";
 
-function Stat({ label, value, note }: { label: string; value: string; note?: string }) {
-  return (
-    <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-      <div className="text-xs text-slate-500">{label}</div>
-      <div className="mt-1 text-2xl font-semibold text-slate-900">{value}</div>
-      {note && <div className="mt-1 text-xs text-slate-500">{note}</div>}
-    </div>
-  );
-}
+const v = (o: Record<string, string | number>) => o as CSSProperties;
 
 export default async function AssignmentPage({ params }: { params: Promise<{ id: string; aid: string }> }) {
   const user = await requireUser("faculty");
@@ -36,23 +34,30 @@ export default async function AssignmentPage({ params }: { params: Promise<{ id:
   const held = !a.feedback_released;
   const started = g.rows.some((r) => r.attempts.length || r.inProgress);
   const multiCase = new Set(g.rows.map((r) => r.caseId)).size > 1;
+  // Class quest progress: patients each enrolled student has finished (a finished attempt on that patient).
+  const patients = Math.max(1, new Set(g.rows.map((r) => r.caseId)).size);
+  const seenBy = new Map<string, number>();
+  for (const r of enrolledRows) seenBy.set(r.userId, (seenBy.get(r.userId) || 0) + (r.attempts.some((x) => x.final !== null || x.score !== null) ? 1 : 0));
+  const buckets = Array.from({ length: patients + 1 }, () => 0);
+  for (const n of seenBy.values()) buckets[Math.min(patients, n)]++;
 
   return (
     <AppShell user={user}>
-      <div className="mb-2 text-xs text-slate-500">
+      <nav aria-label="Breadcrumb" className="mb-2 flex flex-wrap items-center gap-1 text-[12.5px] font-semibold text-ink-3">
         <Link href="/faculty/courses" className="hover:text-brand-700">
           Courses
-        </Link>{" "}
-        /{" "}
+        </Link>
+        <ChevronRight className="h-3.5 w-3.5" aria-hidden />
         <Link href={`/faculty/courses/${course.id}`} className="hover:text-brand-700">
           {course.name}
-        </Link>{" "}
-        / {a.title}
-      </div>
-      <PageHeader
-        title={a.title}
-        subtitle={
-          <span className="flex flex-wrap items-center gap-1.5">
+        </Link>
+        <ChevronRight className="h-3.5 w-3.5" aria-hidden />
+        <span className="text-ink-2">{a.title}</span>
+      </nav>
+      <div className="mb-5 flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
+        <div className="min-w-0">
+          <h1 className="rise font-display text-[30px] font-black leading-[1.04] tracking-[-0.035em] text-ink sm:text-[40px]">{a.title}</h1>
+          <div className="rise mt-2 flex flex-wrap items-center gap-1.5 text-[14px] text-ink-2" style={v({ "--i": 1 })}>
             <Badge tone={a.type === "exam" ? "violet" : a.type === "practice" ? "slate" : "blue"}>{TYPE_LABEL[a.type]}</Badge>
             {journey && <Badge tone="teal">Care journey: {journey.title}</Badge>}
             <span>{describeSettings(a.settings)}</span>
@@ -66,189 +71,184 @@ export default async function AssignmentPage({ params }: { params: Promise<{ id:
                 "No due date"
               )}
             </span>
-          </span>
-        }
-        action={
-          <div className="flex flex-wrap items-center gap-2">
-            {!started && <DeleteAssignment assignmentId={a.id} courseId={course.id} />}
-            <LinkButton href={`/faculty/courses/${course.id}/assignments/${a.id}/edit`} variant="secondary" size="sm">
-              Edit
-            </LinkButton>
-            <a href={`/api/assignments/${a.id}/csv`} download className="inline-flex items-center rounded-md border border-slate-300 bg-white px-2.5 py-1 text-xs font-medium text-slate-800 hover:bg-slate-50">
-              Export grades (CSV)
-            </a>
-            {(a.settings.feedbackRelease === "manual" || held) && <ReleaseFeedback assignmentId={a.id} released={!held} />}
           </div>
-        }
-      />
-
-      {held && (
-        <div className="mb-4 rounded-md border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-900">
-          Feedback is held. Students can submit, but they cannot see scores or feedback until you press Release feedback.
         </div>
-      )}
-      {a.instructions && <p className="mb-4 max-w-3xl whitespace-pre-line text-sm text-slate-700">{a.instructions}</p>}
-
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <Stat label="Students submitted" value={`${studentsDone} of ${students}`} note={students === 0 ? "No students enrolled yet" : undefined} />
-        <Stat label="Average best score" value={avg === null ? "–" : `${avg}%`} note={bests.length ? `Across ${bests.length} scored ${bests.length === 1 ? "submission" : "submissions"}` : "Nothing scored yet"} />
-        <Stat label="Needs your review" value={String(g.needsReview)} note="Flagged by the rubric, no note yet" />
-        <Stat label="Feedback" value={held ? "Held" : "Released"} note={a.settings.feedbackRelease === "manual" ? "Released by you" : "Shown as soon as a visit is scored"} />
+        <div className="flex flex-wrap items-center gap-2">
+          {!started && <DeleteAssignment assignmentId={a.id} courseId={course.id} />}
+          <LinkButton href={`/faculty/courses/${course.id}/assignments/${a.id}/edit`} variant="secondary" size="sm">
+            <Pencil className="h-3.5 w-3.5" aria-hidden />
+            Edit
+          </LinkButton>
+          <a href={`/api/assignments/${a.id}/csv`} download className="press inline-flex min-h-8 items-center gap-1.5 rounded-[10px] bg-surface px-3 text-[13px] font-semibold text-ink shadow-e1 ring-1 ring-inset ring-line-strong/50 hover:bg-brand-50 hover:ring-brand-300 pointer-coarse:min-h-11">
+            <Download className="h-3.5 w-3.5" aria-hidden />
+            Export grades (CSV)
+          </a>
+          {(a.settings.feedbackRelease === "manual" || held) && <ReleaseFeedback assignmentId={a.id} released={!held} />}
+        </div>
       </div>
 
-      <h2 className="mb-2 mt-6 text-sm font-semibold text-slate-900">What to reteach</h2>
+      {held && (
+        <div className="rise mb-4 flex items-start gap-3 rounded-2xl bg-[var(--color-tier-reluctant-soft)] px-4 py-3 text-[14px] text-ink" style={v({ "--i": 2 })}>
+          <EyeOff className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-tier-reluctant-ink)]" aria-hidden />
+          <p>Feedback is held. Students can submit, but they cannot see scores or feedback until you press Release feedback.</p>
+        </div>
+      )}
+      {a.instructions && (
+        <div className="rise mb-5 flex max-w-4xl gap-3 rounded-2xl bg-surface px-4 py-3.5 ring-1 ring-inset ring-line" style={v({ "--i": 2 })}>
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[var(--color-tier-discoverable-soft)] text-[var(--color-tier-discoverable-ink)]">
+            <FileText className="h-4.5 w-4.5" aria-hidden />
+          </span>
+          <div>
+            <p className="text-[12.5px] font-bold text-ink-3">Instructions shown to students</p>
+            <p className="mt-0.5 whitespace-pre-line text-[14px] leading-relaxed text-ink-2">{a.instructions}</p>
+          </div>
+        </div>
+      )}
+
+      {/* ---------- The four numbers, visualized ---------- */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-12">
+        <GameCell tone="brand" className="lg:col-span-4" i={3}>
+          <p className="flex items-center gap-2 text-[13px] font-bold text-white/85">
+            <Users className="h-4 w-4" aria-hidden />
+            Students submitted
+          </p>
+          <p className="mt-1 font-display text-[52px] font-black leading-[0.95] tracking-[-0.04em]">
+            <Count value={studentsDone} />
+            <span className="text-[24px] text-white/70"> of {students}</span>
+          </p>
+          {students === 0 ? (
+            <p className="text-[12.5px] text-white/80">No students enrolled yet</p>
+          ) : (
+            <div className="mt-3 rounded-xl bg-white/10 p-2.5">
+              <QuestStack buckets={buckets} total={students} />
+              <p className="mt-1.5 text-[12px] font-semibold text-white/85">
+                {buckets[patients]} saw all {patients} patient{patients === 1 ? "" : "s"} · {buckets[0]} none yet
+              </p>
+            </div>
+          )}
+        </GameCell>
+        <GameCell tone="ink" className="lg:col-span-3" i={4}>
+          <p className="flex items-center gap-2 text-[13px] font-bold text-white/85">
+            <Target className="h-4 w-4 text-[var(--color-xp)]" aria-hidden />
+            Average best score
+          </p>
+          <div className="mt-2 flex items-center gap-3">
+            {avg === null ? <span className="font-display text-[52px] font-black leading-none">–</span> : <ScoreRing value={avg} size={84} label={`${avg}%`} className="[&_circle:first-child]:stroke-white/15 [&>span]:text-white" />}
+            <p className="text-[12.5px] text-white/75">{bests.length ? `Across ${bests.length} scored ${bests.length === 1 ? "submission" : "submissions"}` : "Nothing scored yet"}</p>
+          </div>
+        </GameCell>
+        <GameCell tone={g.needsReview ? "flame" : "xp"} className="lg:col-span-2" i={5}>
+          <p className="flex items-center gap-2 text-[13px] font-bold">
+            <ClipboardCheck className="h-4 w-4" aria-hidden />
+            Needs your review
+          </p>
+          <p className="mt-1 font-display text-[52px] font-black leading-[0.95] tracking-[-0.04em]">
+            <Count value={g.needsReview} />
+          </p>
+          <p className="text-[12.5px] font-semibold">Flagged by the rubric, no note yet</p>
+        </GameCell>
+        <section className={cx("rise relative overflow-hidden rounded-[26px] p-5 ring-1 ring-inset sm:p-6 lg:col-span-3", held ? "bg-[var(--color-tier-reluctant-soft)] ring-[color-mix(in_oklch,var(--color-tier-reluctant)_30%,transparent)]" : "bg-[var(--color-tier-initial-soft)] ring-[color-mix(in_oklch,var(--color-tier-initial)_30%,transparent)]")} style={v({ "--i": 6 })}>
+          <p className="text-[13px] font-bold text-ink-2">Feedback</p>
+          <p className={cx("mt-1 flex items-center gap-2 font-display text-[34px] font-black leading-none tracking-[-0.03em]", held ? "text-[var(--color-tier-reluctant-ink)]" : "text-[var(--color-tier-initial-ink)]")}>
+            {held ? <EyeOff className="h-7 w-7" aria-hidden /> : <Eye className="h-7 w-7" aria-hidden />}
+            {held ? "Held" : "Released"}
+          </p>
+          <p className="mt-2 text-[12.5px] text-ink-2">{a.settings.feedbackRelease === "manual" ? "Released by you" : "Shown as soon as a visit is scored"}</p>
+        </section>
+      </div>
+
+      <h2 className="mb-3 mt-8 font-display text-[22px] font-extrabold tracking-[-0.02em] text-ink">What to reteach</h2>
       {insights.scored === 0 ? (
-        <Card>
-          <p className="px-4 py-6 text-sm text-slate-500">The class summary appears once the first visit has been scored. It shows which rubric domains are weakest and which findings students most often miss.</p>
+        <Card className="flex items-center gap-3 p-5">
+          <span className="float-idle grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-[var(--color-mastery-soft)] text-[var(--color-mastery-ink)]">
+            <Target className="h-5 w-5" aria-hidden />
+          </span>
+          <p className="text-[14px] text-ink-3">The class summary appears once the first visit has been scored. It shows which rubric domains are weakest and which findings students most often miss.</p>
         </Card>
       ) : (
-        <div className="grid items-start gap-5 lg:grid-cols-2">
-          <Card>
-            <CardHeader title="Rubric domains, weakest first" subtitle={`Class average for each domain as a percentage of full marks, from each student's latest scored visit (${insights.scored} in total).`} />
-            <div className="p-2">
-              <BarList
-                unit="Class average by rubric domain"
-                items={insights.domains.map((d) => ({
-                  key: d.key,
-                  label: d.name,
-                  sub: d.low ? `${d.low} of ${d.n} scored in the bottom half` : undefined,
-                  value: d.avgPct,
-                  display: `${d.avgPct}%`,
-                  detail: `Average of ${d.n} scored visit${d.n === 1 ? "" : "s"}`,
-                }))}
-              />
+        <>
+          {/* Rubric domain heat strip: one cell per domain, weakest first, the class average as text. */}
+          <Card className="rise mb-5 p-5" style={v({ "--i": 7 })}>
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <p className="text-[13px] font-bold text-ink-2">Rubric domains at a glance, weakest first</p>
+              <HeatLegend />
+            </div>
+            <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4 lg:grid-cols-7">
+              {insights.domains.map((d, i) => (
+                <HeatCell key={d.key} pct={d.avgPct} i={i} className="!flex min-h-[4.5rem] w-full flex-col items-start justify-between !rounded-2xl p-2.5 text-left" tip={`${d.name}: class average ${d.avgPct}% from ${d.n} scored visit${d.n === 1 ? "" : "s"}`}>
+                  <span className="font-sans text-[12px] font-bold leading-tight opacity-90">{domainLabel(d.key)}</span>
+                  <span className="font-display text-[24px] font-black leading-none">{d.avgPct}%</span>
+                </HeatCell>
+              ))}
             </div>
           </Card>
-          <Card>
-            <CardHeader title="Findings most often missed" subtitle="Critical and important findings the patient never disclosed, by share of scored students. Taken from the disclosure record, not from a model's judgement." />
-            <div className="p-2">
-              {insights.missed.length === 0 ? (
-                <p className="px-2 py-4 text-sm text-slate-500">No critical or important finding was missed.</p>
-              ) : (
+          <div className="grid items-start gap-5 lg:grid-cols-2">
+            <Card className="rise" style={v({ "--i": 8 })}>
+              <CardHeader title="Rubric domains, weakest first" subtitle={`Class average for each domain as a percentage of full marks, from each student's latest scored visit (${insights.scored} in total).`} />
+              <div className="p-2">
                 <BarList
-                  unit="Share of students who missed each finding"
-                  items={insights.missed.slice(0, 6).map((m) => ({
-                    key: m.key,
-                    label: m.chart,
-                    sub: multiCase ? m.caseTitle : `Topic: ${m.topic}`,
-                    tag: { text: m.importance === "critical" ? "Critical" : "Important", tone: m.importance === "critical" ? "red" : "amber" },
-                    value: (m.count / m.of) * 100,
-                    display: `${m.count} of ${m.of}`,
-                    detail: `Missed by ${Math.round((m.count / m.of) * 100)}% of students scored on this patient`,
-                  }))}
-                />
-              )}
-              {insights.missed.length > 6 && <p className="px-2 pb-1 pt-2 text-xs text-slate-500">{insights.missed.length - 6} more findings were missed by fewer students.</p>}
-            </div>
-            {insights.actionsMissed.length > 0 && (
-              <div className="border-t border-slate-100 p-2">
-                <div className="px-2 pb-1 pt-2 text-xs font-medium text-slate-600">Exams and orders most often skipped</div>
-                <BarList
-                  unit="Share of students who skipped each exam or order"
-                  items={insights.actionsMissed.slice(0, 4).map((m) => ({
-                    key: m.key,
-                    label: m.name,
-                    sub: multiCase ? m.caseTitle : undefined,
-                    tag: { text: m.importance === "critical" ? "Critical" : "Important", tone: m.importance === "critical" ? "red" : "amber" },
-                    value: (m.count / m.of) * 100,
-                    display: `${m.count} of ${m.of}`,
+                  unit="Class average by rubric domain"
+                  items={insights.domains.map((d) => ({
+                    key: d.key,
+                    label: d.name,
+                    sub: d.low ? `${d.low} of ${d.n} scored in the bottom half` : undefined,
+                    value: d.avgPct,
+                    display: `${d.avgPct}%`,
+                    detail: `Average of ${d.n} scored visit${d.n === 1 ? "" : "s"}`,
                   }))}
                 />
               </div>
-            )}
-          </Card>
-        </div>
+            </Card>
+            <Card className="rise" style={v({ "--i": 9 })}>
+              <CardHeader title="Findings most often missed" subtitle="Critical and important findings the patient never disclosed, by share of scored students. Taken from the disclosure record, not from a model's judgement." />
+              <div className="p-2">
+                {insights.missed.length === 0 ? (
+                  <p className="px-2 py-4 text-[14px] text-ink-3">No critical or important finding was missed.</p>
+                ) : (
+                  <BarList
+                    unit="Share of students who missed each finding"
+                    items={insights.missed.slice(0, 6).map((m) => ({
+                      key: m.key,
+                      label: m.chart,
+                      sub: multiCase ? m.caseTitle : `Topic: ${m.topic}`,
+                      tag: { text: m.importance === "critical" ? "Critical" : "Important", tone: m.importance === "critical" ? "red" : "amber" },
+                      value: (m.count / m.of) * 100,
+                      display: `${m.count} of ${m.of}`,
+                      detail: `Missed by ${Math.round((m.count / m.of) * 100)}% of students scored on this patient`,
+                    }))}
+                  />
+                )}
+                {insights.missed.length > 6 && <p className="px-2 pb-1 pt-2 text-[12.5px] text-ink-3">{insights.missed.length - 6} more findings were missed by fewer students.</p>}
+              </div>
+              {insights.actionsMissed.length > 0 && (
+                <div className="border-t border-line/70 p-2">
+                  <div className="px-2 pb-1 pt-2 text-[12.5px] font-bold text-ink-2">Exams and orders most often skipped</div>
+                  <BarList
+                    unit="Share of students who skipped each exam or order"
+                    items={insights.actionsMissed.slice(0, 4).map((m) => ({
+                      key: m.key,
+                      label: m.name,
+                      sub: multiCase ? m.caseTitle : undefined,
+                      tag: { text: m.importance === "critical" ? "Critical" : "Important", tone: m.importance === "critical" ? "red" : "amber" },
+                      value: (m.count / m.of) * 100,
+                      display: `${m.count} of ${m.of}`,
+                    }))}
+                  />
+                </div>
+              )}
+            </Card>
+          </div>
+        </>
       )}
 
-      <h2 className="mb-2 mt-6 text-sm font-semibold text-slate-900">Gradebook</h2>
-      <Card>
+      <h2 className="mb-3 mt-8 font-display text-[22px] font-extrabold tracking-[-0.02em] text-ink">Gradebook</h2>
+      <Card className="rise overflow-hidden" style={v({ "--i": 10 })}>
         {g.rows.length === 0 ? (
-          <p className="px-4 py-6 text-sm text-slate-500">No students are enrolled in this course yet. Share the join code from the course page.</p>
+          <p className="px-5 py-6 text-[14px] text-ink-3">No students are enrolled in this course yet. Share the join code from the course page.</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-slate-200 text-left align-bottom text-xs text-slate-500">
-                  <th className="px-4 py-2 font-medium">Student</th>
-                  {multiCase && <th className="px-3 py-2 font-medium">Patient</th>}
-                  <th className="px-3 py-2 font-medium">Attempts</th>
-                  <th className="px-3 py-2 text-right font-medium">Best</th>
-                  <th className="px-3 py-2 text-right font-medium">Latest</th>
-                  {g.domainCols.map((d) => (
-                    <th key={d.key} className="min-w-[6.5rem] px-2 py-2 text-right font-medium leading-tight">
-                      {d.name}
-                    </th>
-                  ))}
-                  <th className="px-3 py-2 font-medium">Review</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {g.rows.map((r) => {
-                  const last = r.attempts[r.attempts.length - 1];
-                  const reasons = [...new Set(r.attempts.flatMap((x) => x.reviewReasons))];
-                  return (
-                    <tr key={r.userId + r.caseId} className="align-top">
-                      <td className="px-4 py-2.5">
-                        <div className="whitespace-nowrap font-medium text-slate-900">{r.student}</div>
-                        {!r.enrolled && <div className="text-xs text-slate-500">Not on the roster</div>}
-                      </td>
-                      {multiCase && <td className="max-w-[14rem] px-3 py-2.5 text-xs text-slate-600">{r.caseTitle}</td>}
-                      <td className="px-3 py-2.5">
-                        {r.attempts.length === 0 && r.inProgress === 0 && <span className="text-xs text-slate-400">Not started</span>}
-                        <div className="flex flex-wrap gap-1">
-                          {r.attempts.map((x, i) => (
-                            <Link
-                              key={x.id}
-                              href={feedbackUrl(x.id)}
-                              title={`Attempt ${i + 1}: level ${x.level}${x.variation ? `, patient variation: ${x.variation}` : ""}${x.facultyScore !== null ? `, adjusted from ${Math.round(x.score ?? 0)}%` : ""}. Open feedback.`}
-                              className="inline-flex items-center gap-1 rounded border border-slate-200 bg-white px-1.5 py-0.5 text-xs tabular-nums text-slate-700 hover:border-brand-500 hover:text-brand-700"
-                            >
-                              <span className="text-slate-400">{i + 1}</span>
-                              {x.final === null ? "scoring" : `${Math.round(x.final)}%`}
-                              {x.facultyScore !== null && <span className="text-slate-400">adj.</span>}
-                            </Link>
-                          ))}
-                          {r.inProgress > 0 && <Badge tone="blue">In progress</Badge>}
-                        </div>
-                      </td>
-                      <td className="px-3 py-2.5 text-right font-medium tabular-nums text-slate-900">{r.best === null ? <span className="font-normal text-slate-400">–</span> : `${Math.round(r.best)}%`}</td>
-                      <td className="px-3 py-2.5 text-right tabular-nums text-slate-700">{r.latest === null ? <span className="text-slate-400">–</span> : `${Math.round(r.latest)}%`}</td>
-                      {g.domainCols.map((d) => {
-                        const s = r.domains[d.key];
-                        return (
-                          <td key={d.key} className="px-2 py-2.5 text-right tabular-nums text-slate-700">
-                            {!s ? <span className="text-slate-300">–</span> : s.score === null ? <span className="text-xs text-slate-400">N/A</span> : (
-                              <>
-                                {s.score}
-                                <span className="text-slate-400">/{s.max}</span>
-                              </>
-                            )}
-                          </td>
-                        );
-                      })}
-                      <td className="px-3 py-2.5">
-                        {reasons.length > 0 ? (
-                          <div className="space-y-1">
-                            {r.needsReview ? <Badge tone="red">Needs review</Badge> : <Badge tone="green">Reviewed</Badge>}
-                            <div className="max-w-[12rem] text-xs text-slate-500">{reasons.join("; ")}</div>
-                          </div>
-                        ) : last?.hasNote || last?.facultyScore != null ? (
-                          <Badge tone="green">Reviewed</Badge>
-                        ) : null}
-                        {last && (
-                          <Link href={feedbackUrl(last.id)} className="mt-1 block text-xs font-medium text-brand-700 hover:underline">
-                            Open feedback
-                          </Link>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          <GradebookTable rows={g.rows} domainCols={g.domainCols} multiCase={multiCase} />
         )}
-        <p className="border-t border-slate-100 px-4 py-2 text-xs text-slate-500">
+        <p className="border-t border-line/70 bg-surface-2/50 px-5 py-2.5 text-[12.5px] text-ink-3">
           Domain columns show the latest scored attempt. Scores are a percentage of rubric marks; when you set an adjusted score on a visit it replaces the rubric score here and in the export.
         </p>
       </Card>

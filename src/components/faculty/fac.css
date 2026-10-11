@@ -51,7 +51,7 @@
   }
 }
 .fac-cell {
-  animation: fac-cell 420ms var(--ease-spring) both;
+  animation: fac-cell 380ms var(--ease-out-ui) both;
   animation-delay: calc(min(var(--i, 0), 14) * 30ms);
 }
 /* Vertical bars grow from the baseline. */
@@ -62,7 +62,7 @@
 }
 .fac-col {
   transform-origin: 50% 100%;
-  animation: fac-col 700ms var(--ease-spring) both;
+  animation: fac-col 650ms var(--ease-out-ui) both;
   animation-delay: calc(min(var(--i, 0), 14) * 35ms);
 }
 /* A highlighted transcript turn (scrubbed from the running-score chart). Color only: text never moves. */

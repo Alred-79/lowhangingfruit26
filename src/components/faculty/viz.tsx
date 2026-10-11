@@ -93,7 +93,7 @@ export const heatStep = (pct: number) => HEAT[Math.max(0, Math.min(HEAT.length -
 export function HeatCell({ pct, children, tip, i = 0, className, below = false }: { pct: number | null; children: ReactNode; tip: ReactNode; i?: number; className?: string; below?: boolean }) {
   const st = pct === null ? { bg: "var(--color-surface-2)", fg: "var(--color-ink-3)" } : heatStep(pct);
   return (
-    <span tabIndex={0} className={cx("fac-cell group relative inline-grid min-h-9 min-w-12 place-items-center rounded-[10px] px-1.5 font-mono text-[12.5px] font-bold tabular-nums outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2", className)} style={v({ background: st.bg, color: st.fg, "--i": i })}>
+    <span tabIndex={0} className={cx("fac-cell group relative inline-grid min-h-9 min-w-12 whitespace-nowrap place-items-center rounded-[10px] px-1.5 font-mono text-[12.5px] font-bold tabular-nums outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2", className)} style={v({ background: st.bg, color: st.fg, "--i": i })}>
       {children}
       <span role="tooltip" className={cx("pointer-events-none absolute left-1/2 z-20 hidden", below ? "top-full mt-1.5" : "bottom-full mb-1.5", " w-max max-w-[16rem] -translate-x-1/2 rounded-xl bg-ink px-2.5 py-1.5 text-left font-sans text-[12px] font-medium text-white shadow-e2 group-hover:block group-focus-visible:block")}>
         {tip}
