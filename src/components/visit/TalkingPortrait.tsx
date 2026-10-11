@@ -163,15 +163,17 @@ export default function TalkingPortrait({ src, alt, talking, enabled, level }: {
         const rot = Math.sin(sec * 1.1) * 0.35 + cur * 0.25 * Math.sin(sec * 2.3);
         st.style.transform = `translateY(${(-cur * 1.2).toFixed(2)}px) rotate(${rot.toFixed(3)}deg) scale(${(1.012 + cur * 0.006).toFixed(4)})`;
       }
-      if (mouth && geo && jw && gp) {
+      if (mouth && geo && jw) {
         // The lower face stretches down from the lip line (nothing moves at the line itself), and a thin
-        // dark slit opens on it.
+        // dark slit opens on it. The slit is absent for faces whose lip line could not be placed reliably.
         const lv = reduce ? 0 : cur;
         const fw = mouth.w * geo.w;
         jw.style.transform = `scaleY(${(1 + lv * 0.1).toFixed(4)})`;
-        gp.style.opacity = String(Math.min(0.9, Math.max(0, lv - 0.08) * 1.5));
-        gp.style.transform = `translate(-50%, -50%) scaleY(${Math.max(0.05, lv).toFixed(3)})`;
-        gp.style.height = `${(fw * 0.035).toFixed(2)}px`;
+        if (gp) {
+          gp.style.opacity = String(Math.min(0.9, Math.max(0, lv - 0.08) * 1.5));
+          gp.style.transform = `translate(-50%, -50%) scaleY(${Math.max(0.05, lv).toFixed(3)})`;
+          gp.style.height = `${(fw * 0.035).toFixed(2)}px`;
+        }
       }
       raf = requestAnimationFrame(frame);
     };
