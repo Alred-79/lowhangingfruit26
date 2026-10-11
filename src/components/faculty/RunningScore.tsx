@@ -21,9 +21,9 @@ export interface TimelinePoint {
  * 2px lines, 8px end dots with a 2px surface ring; crosshair + tooltip on hover and on arrow keys; table view.
  */
 export const SERIES = [
-  { key: "score", name: "Running score", color: "#3b4cf0", dash: undefined, width: 3 },
-  { key: "coverage", name: "Findings covered", color: "#11a39b", dash: undefined, width: 2 },
-  { key: "communication", name: "Communication", color: "#a33fc4", dash: undefined, width: 2 },
+  { key: "score", name: "Running score", color: "#0a7f8f", dash: undefined, width: 3 },
+  { key: "coverage", name: "Findings covered", color: "#2fa457", dash: undefined, width: 2 },
+  { key: "communication", name: "Communication", color: "#d98e04", dash: undefined, width: 2 },
   { key: "comfort", name: "Comfort", color: "#eb6834", dash: "5 4", width: 2 },
 ] as const;
 type Key = (typeof SERIES)[number]["key"];

@@ -29,7 +29,7 @@ export function RewardReveal({ reward }: { reward: { visit: VisitXp; before: Ran
   const from = rankedUp ? 0 : before.progress / Math.max(0.0001, after.progress);
   return (
     <div className="game-layer relative overflow-hidden rounded-[26px] bg-ink p-5 text-white clay sm:p-6">
-      <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full opacity-60 spin-slow [background:conic-gradient(from_0deg,transparent,oklch(0.86_0.2_128/0.35),transparent_35%,oklch(0.6_0.22_293/0.35),transparent_70%)]" aria-hidden />
+      <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full opacity-60 spin-slow [background:conic-gradient(from_0deg,transparent,oklch(0.86_0.2_128/0.35),transparent_35%,oklch(0.6_0.121_70/0.35),transparent_70%)]" aria-hidden />
       <div className="relative flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-[12.5px] font-bold text-[var(--color-xp)]">Visit complete</p>

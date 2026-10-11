@@ -13,8 +13,8 @@ const REL: Record<Relation, { color: string; label: string; dash?: string }> = {
   confirms: { color: "#1baf7a", label: "confirms" },
   contradicts: { color: "#e5484d", label: "contradicts", dash: "4 3" },
   updates: { color: "#2a78d6", label: "updates" },
-  answers: { color: "#8e4ec6", label: "answers" },
-  resolves: { color: "#8e4ec6", label: "resolves", dash: "1 3" },
+  answers: { color: "#0e8a96", label: "answers" },
+  resolves: { color: "#0e8a96", label: "resolves", dash: "1 3" },
 };
 
 const COL_W = 168;

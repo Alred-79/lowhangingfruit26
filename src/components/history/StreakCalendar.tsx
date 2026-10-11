@@ -17,7 +17,7 @@ const NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const long = (d: string) => new Date(d + "T12:00:00Z").toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" });
 const short = (d: string) => new Date(d + "T12:00:00Z").toLocaleDateString(undefined, { month: "short", day: "numeric", timeZone: "UTC" });
 // Sequential ramp, one hue (ink, hue 271) light to dark, solid steps on the flame cell: more visits, darker day.
-const shade = (n: number) => (n <= 0 ? "bg-white/45" : n === 1 ? "bg-[oklch(0.62_0.14_271)]" : n === 2 ? "bg-[oklch(0.44_0.13_271)]" : "bg-ink");
+const shade = (n: number) => (n <= 0 ? "bg-white/45" : n === 1 ? "bg-[oklch(0.62_0.077_198)]" : n === 2 ? "bg-[oklch(0.44_0.072_198)]" : "bg-ink");
 
 function readout(d: CalDay) {
   if (d.future) return `${long(d.date)}: still ahead`;

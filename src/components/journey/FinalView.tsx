@@ -21,7 +21,7 @@ const GROUPS: { title: string; kinds: string[] }[] = [
 
 const STEP_STYLE: Record<string, { dot: string; tag: string; soft: string }> = {
   discovered: { dot: "bg-slate-500", tag: "text-slate-700", soft: "bg-slate-50" },
-  handed_off: { dot: "bg-violet-500", tag: "text-violet-800", soft: "bg-violet-50" },
+  handed_off: { dot: "bg-sky-500", tag: "text-sky-800", soft: "bg-sky-50" },
   asked: { dot: "bg-sky-500", tag: "text-sky-800", soft: "bg-sky-50" },
   new_information: { dot: "bg-orange-500", tag: "text-orange-800", soft: "bg-orange-50" },
   incorporated: { dot: "bg-brand-500", tag: "text-brand-800", soft: "bg-brand-50" },

@@ -10,7 +10,7 @@ const cx = (...a: (string | false | null | undefined)[]) => a.filter(Boolean).jo
 // Clay buttons: chunky, an inner top highlight, a colored drop that deepens on hover.
 const BTN = {
   primary:
-    "bg-brand-600 text-white shadow-[inset_0_1.5px_0_rgb(255_255_255/0.22),inset_0_-2px_0_rgb(0_0_40/0.18),0_8px_18px_-8px_oklch(0.45_0.24_266/0.7)] hover:bg-brand-500 hover:shadow-[inset_0_1.5px_0_rgb(255_255_255/0.22),inset_0_-2px_0_rgb(0_0_40/0.18),0_12px_24px_-8px_oklch(0.5_0.25_266/0.75)] disabled:bg-slate-200 disabled:text-slate-500 disabled:shadow-none",
+    "bg-brand-600 text-white shadow-[inset_0_1.5px_0_rgb(255_255_255/0.22),inset_0_-2px_0_rgb(0_24_30/0.18),0_8px_18px_-8px_oklch(0.45_0.132_198/0.7)] hover:bg-brand-500 hover:shadow-[inset_0_1.5px_0_rgb(255_255_255/0.22),inset_0_-2px_0_rgb(0_24_30/0.18),0_12px_24px_-8px_oklch(0.5_0.138_198/0.75)] disabled:bg-slate-200 disabled:text-slate-500 disabled:shadow-none",
   secondary: "bg-surface text-ink ring-1 ring-inset ring-line-strong/50 shadow-e1 hover:bg-brand-50 hover:ring-brand-300 disabled:bg-surface disabled:text-slate-400 disabled:ring-slate-200",
   danger: "bg-rose-600 text-white shadow-[inset_0_1.5px_0_rgb(255_255_255/0.2),0_8px_18px_-8px_rgb(225_29_72/0.6)] hover:bg-rose-500 disabled:bg-rose-200 disabled:text-rose-800 disabled:shadow-none",
   ghost: "text-ink-2 hover:bg-brand-50 hover:text-brand-800 disabled:text-slate-400 disabled:hover:bg-transparent",
@@ -53,7 +53,7 @@ const TONES = {
   red: "bg-rose-100/80 text-rose-900 ring-rose-300/70",
   blue: "bg-sky-100/80 text-sky-900 ring-sky-300/70",
   teal: "bg-brand-100 text-brand-800 ring-brand-300/70",
-  violet: "bg-violet-100/80 text-violet-900 ring-violet-300/70",
+  violet: "bg-sky-100/80 text-sky-900 ring-sky-300/70",
 };
 export function Badge({ tone = "slate", className, ...p }: ComponentProps<"span"> & { tone?: keyof typeof TONES }) {
   return <span {...p} className={cx("inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11.5px] font-semibold leading-4 ring-1 ring-inset", TONES[tone], className)} />;

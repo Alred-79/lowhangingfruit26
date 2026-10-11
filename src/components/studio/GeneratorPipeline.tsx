@@ -60,7 +60,7 @@ function Stage({ state, title, detail, Icon, children, className }: { state: Sta
       className={cx(
         "relative rounded-[18px] p-3.5 ring-1 ring-inset transition-[background-color,box-shadow] duration-300",
         state === "done" && "bg-white/10 ring-[var(--color-xp)]/45",
-        state === "active" && "studio-scan bg-brand-500/20 shadow-[0_0_0_1px_oklch(0.68_0.2_268/0.7),0_18px_40px_-18px_oklch(0.6_0.24_268/0.9)] ring-brand-300/60",
+        state === "active" && "studio-scan bg-brand-500/20 shadow-[0_0_0_1px_oklch(0.68_0.11_198/0.7),0_18px_40px_-18px_oklch(0.6_0.132_198/0.9)] ring-brand-300/60",
         state === "todo" && "bg-white/[0.04] ring-white/10",
         state === "failed" && "bg-rose-500/15 ring-rose-400/70",
         className,
@@ -86,7 +86,7 @@ function Stage({ state, title, detail, Icon, children, className }: { state: Sta
 
 /** A connector that flows (moving dashes) while the stage it feeds is working. */
 function Wire({ state, vertical = false }: { state: State; vertical?: boolean }) {
-  const color = state === "done" ? "var(--color-xp)" : state === "active" ? "oklch(0.79 0.14 268)" : state === "failed" ? "oklch(0.7 0.19 18)" : "oklch(1 0 0 / 0.18)";
+  const color = state === "done" ? "var(--color-xp)" : state === "active" ? "oklch(0.79 0.077 198)" : state === "failed" ? "oklch(0.7 0.19 18)" : "oklch(1 0 0 / 0.18)";
   return vertical ? (
     <svg className="mx-auto h-6 w-3 md:hidden" viewBox="0 0 12 24" aria-hidden>
       <line x1="6" y1="0" x2="6" y2="24" stroke={color} strokeWidth="3" strokeLinecap="round" className={state === "active" ? "studio-flow" : undefined} />
@@ -111,7 +111,7 @@ function Clock({ t, saved, failed }: { t: number; saved: boolean; failed: boolea
       <div className="relative h-[76px] w-[76px] shrink-0">
         <svg viewBox="0 0 76 76" className="absolute inset-0 -rotate-90" aria-hidden>
           <circle cx="38" cy="38" r={r} fill="none" stroke="oklch(1 0 0 / 0.12)" strokeWidth="7" />
-          <circle cx="38" cy="38" r={r} fill="none" stroke={failed ? "oklch(0.7 0.19 18)" : saved ? "var(--color-xp)" : "oklch(0.79 0.14 268)"} strokeWidth="7" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * (1 - p)} style={{ transition: "stroke-dashoffset 1s linear" }} />
+          <circle cx="38" cy="38" r={r} fill="none" stroke={failed ? "oklch(0.7 0.19 18)" : saved ? "var(--color-xp)" : "oklch(0.79 0.077 198)"} strokeWidth="7" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * (1 - p)} style={{ transition: "stroke-dashoffset 1s linear" }} />
           {!saved && !failed && <circle cx="38" cy="38" r="36.5" fill="none" stroke="oklch(1 0 0 / 0.35)" strokeWidth="1" className="orbit-dash" />}
         </svg>
         <span className="absolute inset-0 grid place-items-center font-mono text-[12px] font-bold text-white/85">{saved ? "100%" : `${Math.round(p * 100)}%`}</span>
@@ -147,7 +147,7 @@ export default function GeneratorPipeline({ elapsed, saved, failed, counts }: { 
   return (
     <div className="relative isolate overflow-hidden rounded-[26px] bg-stage p-5 text-white clay sm:p-6">
       {/* Ambient: two slow glows behind the stage. */}
-      <div className="studio-glow pointer-events-none absolute -left-24 -top-28 -z-10 h-80 w-80 rounded-full bg-[radial-gradient(closest-side,oklch(0.52_0.26_268/0.7),transparent)]" aria-hidden />
+      <div className="studio-glow pointer-events-none absolute -left-24 -top-28 -z-10 h-80 w-80 rounded-full bg-[radial-gradient(closest-side,oklch(0.52_0.143_198/0.7),transparent)]" aria-hidden />
       <div className="studio-glow pointer-events-none absolute -bottom-32 right-0 -z-10 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,oklch(0.6_0.2_200/0.35),transparent)] [animation-delay:-6s]" aria-hidden />
 
       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -187,7 +187,7 @@ export default function GeneratorPipeline({ elapsed, saved, failed, counts }: { 
         <div className="hidden md:block">
           <svg className="h-full w-full" viewBox="0 0 40 200" preserveAspectRatio="none" aria-hidden>
             {[30, 70, 130, 170].map((y) => (
-              <path key={y} d={`M0 ${y} C 20 ${y}, 20 100, 40 100`} fill="none" stroke={linking === "done" ? "var(--color-xp)" : linking === "active" ? "oklch(0.79 0.14 268)" : linking === "failed" ? "oklch(0.7 0.19 18)" : "oklch(1 0 0 / 0.18)"} strokeWidth="2.5" vectorEffect="non-scaling-stroke" className={linking === "active" ? "studio-flow" : undefined} />
+              <path key={y} d={`M0 ${y} C 20 ${y}, 20 100, 40 100`} fill="none" stroke={linking === "done" ? "var(--color-xp)" : linking === "active" ? "oklch(0.79 0.077 198)" : linking === "failed" ? "oklch(0.7 0.19 18)" : "oklch(1 0 0 / 0.18)"} strokeWidth="2.5" vectorEffect="non-scaling-stroke" className={linking === "active" ? "studio-flow" : undefined} />
             ))}
           </svg>
         </div>

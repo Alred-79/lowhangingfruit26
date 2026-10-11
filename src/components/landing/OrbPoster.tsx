@@ -37,7 +37,7 @@ export default function OrbPoster({ className }: { className?: string }) {
       ))}
       {pts.map((pt, i) => {
         const r = Math.round((pt.unlocks ? 3.1 : 2.1) * pt.p * 100) / 100;
-        return <circle key={i} cx={pt.x} cy={pt.y} r={r} fill={pt.unlocks ? ORB_TIERS[pt.tier].hex : "#4a4f86"} fillOpacity={pt.unlocks ? 0.95 : 0.7} />;
+        return <circle key={i} cx={pt.x} cy={pt.y} r={r} fill={pt.unlocks ? ORB_TIERS[pt.tier].hex : "#3f6670"} fillOpacity={pt.unlocks ? 0.95 : 0.7} />;
       })}
       <circle cx={0} cy={0} r={26} fill="url(#orb-core)" />
       <circle cx={0} cy={0} r={6} fill="#f4ffd9" />

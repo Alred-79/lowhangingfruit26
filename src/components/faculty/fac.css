@@ -95,7 +95,7 @@
   height: 26px;
   border-radius: 999px;
   background: #fff;
-  box-shadow: 0 0 0 3px var(--color-ink), 0 6px 14px -4px oklch(0.3 0.1 270 / 0.5);
+  box-shadow: 0 0 0 3px var(--color-ink), 0 6px 14px -4px oklch(0.3 0.055 198 / 0.5);
   transition: transform 140ms var(--ease-out-ui);
 }
 .fac-range::-moz-range-thumb {

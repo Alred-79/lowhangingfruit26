@@ -2,9 +2,9 @@
 
 /* Poscere design tokens: "Pulse Arcade" (second pass). See ui-overhaul-plan/07-second-pass-plan.md.
    Tailwind's slate and brand scales are remapped here so every page inherits the brand-tinted
-   neutrals (hue 268, never cream) and the electric brand blue, whether or not it has been rebuilt.
+   neutrals (hue 215, never cream) and the deep-teal brand, whether or not it has been rebuilt.
    Six vivid accents each carry exactly one meaning: XP (lime), streak (flame), rank and mastery
-   (violet), the four disclosure tiers (teal, blue, amber, pink: dataviz-validated), live (red). */
+   (bronze), the four disclosure tiers (green, blue, amber, coral: dataviz-validated), live (red). */
 
 @theme inline {
   --font-sans: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
@@ -13,42 +13,42 @@
 }
 
 @theme {
-  --color-canvas: oklch(0.968 0.014 272);
+  --color-canvas: oklch(0.968 0.014 215);
   --color-surface: oklch(1 0 0);
-  --color-surface-2: oklch(0.953 0.02 272);
-  --color-line: oklch(0.9 0.026 272);
-  --color-line-strong: oklch(0.72 0.05 272);
-  --color-ink: oklch(0.255 0.095 271);
-  --color-ink-2: oklch(0.4 0.075 271);
-  --color-ink-3: oklch(0.5 0.055 271);
+  --color-surface-2: oklch(0.953 0.02 215);
+  --color-line: oklch(0.9 0.026 215);
+  --color-line-strong: oklch(0.72 0.05 215);
+  --color-ink: oklch(0.255 0.095 215);
+  --color-ink-2: oklch(0.4 0.075 215);
+  --color-ink-3: oklch(0.5 0.055 215);
   --color-signal: oklch(0.87 0.2 128);
-  --color-stage: oklch(0.17 0.06 276);
-  --color-stage-2: oklch(0.225 0.07 276);
-  --color-stage-3: oklch(0.29 0.075 276);
+  --color-stage: oklch(0.17 0.06 215);
+  --color-stage-2: oklch(0.225 0.07 215);
+  --color-stage-3: oklch(0.29 0.075 215);
 
-  --color-slate-50: oklch(0.982 0.008 272);
-  --color-slate-100: oklch(0.958 0.016 272);
-  --color-slate-200: oklch(0.918 0.024 272);
-  --color-slate-300: oklch(0.862 0.032 272);
-  --color-slate-400: oklch(0.67 0.045 272);
-  --color-slate-500: oklch(0.52 0.055 271);
-  --color-slate-600: oklch(0.45 0.065 271);
-  --color-slate-700: oklch(0.38 0.075 271);
-  --color-slate-800: oklch(0.31 0.085 271);
-  --color-slate-900: oklch(0.255 0.095 271);
-  --color-slate-950: oklch(0.18 0.08 273);
+  --color-slate-50: oklch(0.982 0.008 215);
+  --color-slate-100: oklch(0.958 0.016 215);
+  --color-slate-200: oklch(0.918 0.024 215);
+  --color-slate-300: oklch(0.862 0.032 215);
+  --color-slate-400: oklch(0.67 0.045 215);
+  --color-slate-500: oklch(0.52 0.055 215);
+  --color-slate-600: oklch(0.45 0.065 215);
+  --color-slate-700: oklch(0.38 0.075 215);
+  --color-slate-800: oklch(0.31 0.085 215);
+  --color-slate-900: oklch(0.255 0.095 215);
+  --color-slate-950: oklch(0.18 0.08 215);
 
-  --color-brand-50: oklch(0.97 0.022 268);
-  --color-brand-100: oklch(0.935 0.05 268);
-  --color-brand-200: oklch(0.875 0.09 268);
-  --color-brand-300: oklch(0.79 0.14 268);
-  --color-brand-400: oklch(0.68 0.2 268);
-  --color-brand-500: oklch(0.585 0.235 267);
-  --color-brand-600: oklch(0.515 0.245 266);
-  --color-brand-700: oklch(0.45 0.22 266);
-  --color-brand-800: oklch(0.38 0.18 266);
-  --color-brand-900: oklch(0.31 0.14 268);
-  --color-brand-950: oklch(0.22 0.1 270);
+  --color-brand-50: oklch(0.97 0.022 198);
+  --color-brand-100: oklch(0.935 0.05 198);
+  --color-brand-200: oklch(0.875 0.09 198);
+  --color-brand-300: oklch(0.79 0.077 198);
+  --color-brand-400: oklch(0.68 0.11 198);
+  --color-brand-500: oklch(0.585 0.129 198);
+  --color-brand-600: oklch(0.515 0.135 198);
+  --color-brand-700: oklch(0.45 0.121 198);
+  --color-brand-800: oklch(0.38 0.099 198);
+  --color-brand-900: oklch(0.31 0.077 198);
+  --color-brand-950: oklch(0.22 0.055 198);
 
   /* Game accents. Fills use the bright value with ink text; text uses the -ink value. */
   --color-xp: oklch(0.86 0.2 128);
@@ -58,25 +58,25 @@
   --color-flame-2: oklch(0.82 0.17 75);
   --color-flame-soft: oklch(0.95 0.05 60);
   --color-flame-ink: oklch(0.5 0.16 42);
-  --color-mastery: oklch(0.545 0.235 293);
-  --color-mastery-soft: oklch(0.95 0.035 293);
-  --color-mastery-ink: oklch(0.47 0.2 293);
+  --color-mastery: oklch(0.55 0.125 68);
+  --color-mastery-soft: oklch(0.95 0.04 85);
+  --color-mastery-ink: oklch(0.44 0.1 66);
   --color-live: oklch(0.64 0.23 18);
 
   /* Disclosure tiers: the same four hues wherever tiers appear (validated: all six dataviz checks pass, light and dark). */
-  --color-tier-initial: #11a39b;
+  --color-tier-initial: #2fa457;
   --color-tier-discoverable: #2a78e8;
   --color-tier-reluctant: #cc7a00;
-  --color-tier-hidden: #e23a7c;
+  --color-tier-hidden: #e0453a;
   /* Labels in a tier's color: soft tint behind deep text (small text never sits on a full tier fill). */
-  --color-tier-initial-soft: oklch(0.95 0.045 185);
-  --color-tier-initial-ink: oklch(0.46 0.09 185);
-  --color-tier-discoverable-soft: oklch(0.95 0.035 258);
-  --color-tier-discoverable-ink: oklch(0.47 0.17 258);
+  --color-tier-initial-soft: oklch(0.95 0.045 155);
+  --color-tier-initial-ink: oklch(0.46 0.1 155);
+  --color-tier-discoverable-soft: oklch(0.95 0.035 240);
+  --color-tier-discoverable-ink: oklch(0.47 0.15 245);
   --color-tier-reluctant-soft: oklch(0.95 0.06 75);
   --color-tier-reluctant-ink: oklch(0.49 0.12 60);
-  --color-tier-hidden-soft: oklch(0.95 0.035 355);
-  --color-tier-hidden-ink: oklch(0.5 0.19 355);
+  --color-tier-hidden-soft: oklch(0.95 0.035 12);
+  --color-tier-hidden-ink: oklch(0.5 0.19 12);
   --color-live-ink: oklch(0.52 0.21 20);
 
   --ease-out-ui: cubic-bezier(0.23, 1, 0.32, 1);
@@ -85,11 +85,11 @@
   /* A short spring (about 5% overshoot) for game objects only: unlocks, rank-ups, XP fills. */
   --ease-spring: linear(0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%, 0.721 25.3%, 0.849 31.5%, 0.937 38.1%, 0.968 41.8%, 0.991 45.7%, 1.006 50.1%, 1.015 55%, 1.017 63.9%, 1.001 85.5%, 1);
 
-  --shadow-e1: 0 1px 2px 0 oklch(0.255 0.095 271 / 0.07);
-  --shadow-e2: 0 10px 28px -10px oklch(0.4 0.18 268 / 0.28), 0 1px 2px 0 oklch(0.255 0.095 271 / 0.07);
-  --shadow-e3: 0 28px 70px -18px oklch(0.35 0.2 268 / 0.38), 0 2px 6px 0 oklch(0.255 0.095 271 / 0.1);
+  --shadow-e1: 0 1px 2px 0 oklch(0.255 0.095 215 / 0.07);
+  --shadow-e2: 0 10px 28px -10px oklch(0.4 0.099 198 / 0.28), 0 1px 2px 0 oklch(0.255 0.095 215 / 0.07);
+  --shadow-e3: 0 28px 70px -18px oklch(0.35 0.11 198 / 0.38), 0 2px 6px 0 oklch(0.255 0.095 215 / 0.1);
   /* Clay: a soft colored drop plus an inner top highlight, for game objects and primary buttons. */
-  --shadow-clay: inset 0 1.5px 0 oklch(1 0 0 / 0.55), inset 0 -3px 0 oklch(0.255 0.095 271 / 0.08), 0 12px 26px -14px oklch(0.4 0.2 268 / 0.45);
+  --shadow-clay: inset 0 1.5px 0 oklch(1 0 0 / 0.55), inset 0 -3px 0 oklch(0.255 0.095 215 / 0.08), 0 12px 26px -14px oklch(0.4 0.11 198 / 0.45);
 
   --animate-rise-in: rise-in 420ms var(--ease-out-ui) both;
   --animate-fade-in: fade-in 240ms var(--ease-out-ui) both;
@@ -338,13 +338,13 @@ p {
 .aurora > i:nth-child(1) {
   left: -18vmax;
   top: -26vmax;
-  background: radial-gradient(closest-side, oklch(0.75 0.17 268 / 0.55), transparent 72%);
+  background: radial-gradient(closest-side, oklch(0.75 0.094 198 / 0.55), transparent 72%);
   animation: drift-a 34s ease-in-out infinite alternate;
 }
 .aurora > i:nth-child(2) {
   right: -22vmax;
   top: -14vmax;
-  background: radial-gradient(closest-side, oklch(0.82 0.15 345 / 0.42), transparent 72%);
+  background: radial-gradient(closest-side, oklch(0.82 0.15 40 / 0.42), transparent 72%);
   animation: drift-b 41s ease-in-out infinite alternate;
 }
 .aurora > i:nth-child(3) {
@@ -365,10 +365,10 @@ p {
   --a: 0.85;
 }
 .aurora-dark > i:nth-child(1) {
-  background: radial-gradient(closest-side, oklch(0.52 0.26 268 / 0.75), transparent 72%);
+  background: radial-gradient(closest-side, oklch(0.52 0.143 198 / 0.75), transparent 72%);
 }
 .aurora-dark > i:nth-child(2) {
-  background: radial-gradient(closest-side, oklch(0.58 0.24 350 / 0.5), transparent 72%);
+  background: radial-gradient(closest-side, oklch(0.58 0.24 12 / 0.5), transparent 72%);
 }
 .aurora-dark > i:nth-child(3) {
   background: radial-gradient(closest-side, oklch(0.7 0.2 140 / 0.38), transparent 72%);
@@ -646,7 +646,7 @@ html[data-tab-hidden] .ambient * {
   background: var(--color-xp);
 }
 .hl-pink::before {
-  background: #ff5c9e;
+  background: #ff6b4a;
   transform: rotate(1.2deg);
   animation-delay: 560ms;
 }

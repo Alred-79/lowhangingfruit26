@@ -45,7 +45,7 @@ export default async function JourneyIntro({ params, searchParams }: { params: P
       {/* ---------- Hero: the patient, the team, the time it takes ---------- */}
       <section className="rise relative mb-6 overflow-hidden rounded-[28px] bg-stage p-5 text-white clay sm:p-7">
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-          <div className="absolute -left-24 -top-32 h-80 w-80 rounded-full spin-slow [background:conic-gradient(from_0deg,transparent,oklch(0.6_0.24_268/0.55),transparent_45%)]" />
+          <div className="absolute -left-24 -top-32 h-80 w-80 rounded-full spin-slow [background:conic-gradient(from_0deg,transparent,oklch(0.6_0.132_198/0.55),transparent_45%)]" />
           <div className="absolute -bottom-40 right-0 h-96 w-96 rounded-full [background:radial-gradient(closest-side,oklch(0.86_0.2_128/0.28),transparent)]" />
         </div>
         <div className="relative grid gap-6 md:grid-cols-[auto_minmax(0,1fr)] md:items-center">

@@ -124,7 +124,7 @@ function SystemNote({ m }: { m: Msg }) {
       </div>
     );
   }
-  const kind = m.speaker === "coach" ? { label: "Coach", cls: "border-amber-200 bg-amber-50 text-amber-950", Icon: Lightbulb, ic: "text-amber-600" } : m.speaker === "instructor" ? { label: "Instructor", cls: "border-violet-200 bg-violet-50 text-violet-950", Icon: MessageSquareText, ic: "text-violet-600" } : m.speaker === "clinician" ? { label: "Colleague", cls: "border-sky-200 bg-sky-50 text-sky-950", Icon: Users, ic: "text-sky-600" } : { label: "Chart", cls: "border-line bg-surface-2 text-ink-2", Icon: FlaskConical, ic: "text-ink-3" };
+  const kind = m.speaker === "coach" ? { label: "Coach", cls: "border-amber-200 bg-amber-50 text-amber-950", Icon: Lightbulb, ic: "text-amber-600" } : m.speaker === "instructor" ? { label: "Instructor", cls: "border-sky-200 bg-sky-50 text-sky-950", Icon: MessageSquareText, ic: "text-sky-600" } : m.speaker === "clinician" ? { label: "Colleague", cls: "border-sky-200 bg-sky-50 text-sky-950", Icon: Users, ic: "text-sky-600" } : { label: "Chart", cls: "border-line bg-surface-2 text-ink-2", Icon: FlaskConical, ic: "text-ink-3" };
   return (
     <div className={`fade-in whitespace-pre-wrap rounded-xl border px-3.5 py-2.5 text-[13px] leading-relaxed ${kind.cls}`}>
       <span className="mb-0.5 flex items-center gap-1.5 text-[12px] font-semibold">
@@ -558,7 +558,7 @@ export default function Visit({ id, viewerName, hud }: { id: string; viewerName:
             <span className="rounded-full bg-white/12 px-2 py-0.5 text-[11.5px] font-semibold text-white ring-1 ring-white/15">{MODE_LABEL[data.mode] || data.mode}</span>
             <span className="rounded-full bg-[var(--color-xp)] px-2 py-0.5 text-[11.5px] font-bold text-ink">Difficulty: Level {data.level}</span>
             {data.visitNumber > 1 ? <span className="rounded-full bg-sky-100 px-2 py-0.5 text-[11.5px] font-semibold text-sky-950">Follow-up · visit {data.visitNumber}</span> : data.attempt > 1 && <span className="rounded-full bg-white/12 px-2 py-0.5 text-[11.5px] text-white ring-1 ring-white/15">Attempt {data.attempt}</span>}
-            {data.liveAssist && <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[11.5px] font-semibold text-violet-950">Instructor can join</span>}
+            {data.liveAssist && <span className="rounded-full bg-sky-100 px-2 py-0.5 text-[11.5px] font-semibold text-sky-950">Instructor can join</span>}
           </div>
         </div>
         <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[13px] tabular-nums ${lowTime ? "bg-rose-100 font-semibold text-rose-800" : "bg-white/10 text-white"}`} aria-label={remaining !== null ? `${fmt(remaining)} left` : `${fmt(elapsed)} elapsed`}>
@@ -677,7 +677,7 @@ export default function Visit({ id, viewerName, hud }: { id: string; viewerName:
                         Try this again
                       </button>
                     )}
-                    <div className="max-w-[80%] rounded-[18px] rounded-br-md bg-brand-600 px-3.5 py-2 text-[14px] leading-relaxed text-white shadow-[0_6px_16px_-10px_oklch(0.45_0.24_266)]">{m.text}</div>
+                    <div className="max-w-[80%] rounded-[18px] rounded-br-md bg-brand-600 px-3.5 py-2 text-[14px] leading-relaxed text-white shadow-[0_6px_16px_-10px_oklch(0.45_0.132_198)]">{m.text}</div>
                   </div>
                 ) : m.speaker === "patient" ? (
                   <div key={m.id} className="flex flex-col items-start">
@@ -861,7 +861,7 @@ export default function Visit({ id, viewerName, hud }: { id: string; viewerName:
                     </span>
                   </li>
                 </ul>
-                <div className={`mt-3 flex items-start gap-2 rounded-2xl p-3 text-[13px] leading-relaxed ${data.recorded ? "bg-violet-50 text-violet-950" : "bg-slate-100 text-ink-2"}`}>
+                <div className={`mt-3 flex items-start gap-2 rounded-2xl p-3 text-[13px] leading-relaxed ${data.recorded ? "bg-sky-50 text-sky-950" : "bg-slate-100 text-ink-2"}`}>
                   <TrustLabel kind={data.recorded ? "recorded" : "private"} className="mt-px shrink-0" />
                   <span>{data.recorded ? "Your instructor can see this visit, its transcript and its score." : "Only you see this visit and its feedback. It still updates your own progress."}</span>
                 </div>
@@ -890,7 +890,7 @@ export default function Visit({ id, viewerName, hud }: { id: string; viewerName:
                       // Unlock audio playback inside the click.
                       audioRef.current?.play().catch(() => {});
                     }}
-                    className="press ml-auto inline-flex min-h-12 items-center gap-2 rounded-2xl bg-brand-600 px-6 text-[15.5px] font-bold text-white shadow-[inset_0_1.5px_0_rgb(255_255_255/0.22),0_10px_22px_-10px_oklch(0.45_0.24_266/0.8)] hover:bg-brand-500"
+                    className="press ml-auto inline-flex min-h-12 items-center gap-2 rounded-2xl bg-brand-600 px-6 text-[15.5px] font-bold text-white shadow-[inset_0_1.5px_0_rgb(255_255_255/0.22),0_10px_22px_-10px_oklch(0.45_0.132_198/0.8)] hover:bg-brand-500"
                   >
                     <Video className="h-4 w-4" aria-hidden />
                     Join visit
@@ -904,12 +904,12 @@ export default function Visit({ id, viewerName, hud }: { id: string; viewerName:
 
       {/* Instructor pause */}
       {paused && (
-        <div className="scrim-in fixed inset-0 z-50 grid place-items-center bg-violet-950/75 p-4 backdrop-blur-sm">
+        <div className="scrim-in fixed inset-0 z-50 grid place-items-center bg-sky-950/75 p-4 backdrop-blur-sm">
           <div role="alertdialog" aria-modal="true" aria-label="Paused by your instructor" className="pop-in w-full max-w-md rounded-2xl bg-surface p-6 text-center shadow-e3">
-            <div className="mx-auto mb-3 grid h-11 w-11 place-items-center rounded-full bg-violet-100 text-violet-700">
+            <div className="mx-auto mb-3 grid h-11 w-11 place-items-center rounded-full bg-sky-100 text-sky-700">
               <MessageSquareText className="h-5 w-5" aria-hidden />
             </div>
-            <div className="text-[13px] font-semibold text-violet-800">Paused by your instructor</div>
+            <div className="text-[13px] font-semibold text-sky-800">Paused by your instructor</div>
             <p className="mt-3 whitespace-pre-wrap text-[15px] leading-relaxed text-ink">{data.pauseNote || "Take a moment. Your instructor will resume the visit shortly."}</p>
             <p className="mt-4 text-[12.5px] text-ink-3">The clock is stopped. The visit continues when they resume it.</p>
           </div>

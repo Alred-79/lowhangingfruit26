@@ -308,9 +308,9 @@ export default function ChartPanel({
             <ol className="relative space-y-1.5 border-l border-line pl-4">
               {chart.log.map((l, i) => (
                 <li key={i} className="relative flex items-start gap-2.5 text-[13.5px]">
-                  <span className={`absolute -left-[21px] top-2 h-2 w-2 rounded-full ring-2 ring-surface ${l.kind === "fact" ? "bg-brand-500" : l.kind === "result" ? "bg-amber-500" : "bg-violet-500"}`} aria-hidden />
+                  <span className={`absolute -left-[21px] top-2 h-2 w-2 rounded-full ring-2 ring-surface ${l.kind === "fact" ? "bg-brand-500" : l.kind === "result" ? "bg-amber-500" : "bg-sky-500"}`} aria-hidden />
                   <Stamp turn={l.turn} after={l.kind === "result"} />
-                  <span className={`mt-0.5 w-[4.5rem] shrink-0 text-[12px] font-semibold ${l.kind === "fact" ? "text-brand-700" : l.kind === "result" ? "text-amber-800" : "text-violet-700"}`}>{l.kind === "fact" ? "History" : l.kind === "result" ? "Result" : "Document"}</span>
+                  <span className={`mt-0.5 w-[4.5rem] shrink-0 text-[12px] font-semibold ${l.kind === "fact" ? "text-brand-700" : l.kind === "result" ? "text-amber-800" : "text-sky-700"}`}>{l.kind === "fact" ? "History" : l.kind === "result" ? "Result" : "Document"}</span>
                   <span className="text-ink">{l.text}</span>
                 </li>
               ))}

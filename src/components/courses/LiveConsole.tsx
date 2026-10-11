@@ -353,7 +353,7 @@ export default function LiveConsole() {
                       <div
                         className={cx(
                           "mt-0.5 whitespace-pre-line rounded-2xl px-3.5 py-2 leading-relaxed",
-                          m.speaker === "student" ? "rounded-tl-md bg-brand-50 text-ink" : m.speaker === "patient" ? "rounded-tr-md bg-surface-2 text-ink" : m.speaker === "instructor" ? "border border-violet-200 bg-violet-50 text-violet-950" : m.text.startsWith("Outside the case record") ? "border border-rose-200 bg-rose-50 text-[13px] text-rose-950" : "border border-line bg-surface text-[12.5px] text-ink-2",
+                          m.speaker === "student" ? "rounded-tl-md bg-brand-50 text-ink" : m.speaker === "patient" ? "rounded-tr-md bg-surface-2 text-ink" : m.speaker === "instructor" ? "border border-sky-200 bg-sky-50 text-sky-950" : m.text.startsWith("Outside the case record") ? "border border-rose-200 bg-rose-50 text-[13px] text-rose-950" : "border border-line bg-surface text-[12.5px] text-ink-2",
                           scrubTurn === m.turn && "fac-turn-hit",
                         )}
                       >

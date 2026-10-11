@@ -338,7 +338,7 @@ export default function CaseLibrary({ initial, professions, portraits = {}, tier
           {/* ---------- Pick up where you left off: your most recent draft ---------- */}
           {resume && (
             <section aria-labelledby="resume" className="studio-card rise relative mb-4 overflow-hidden rounded-[26px] bg-stage p-5 text-white clay sm:p-6" style={v({ "--i": 7 })}>
-              <div className="studio-glow pointer-events-none absolute -right-20 -top-24 h-80 w-80 rounded-full bg-[radial-gradient(closest-side,oklch(0.52_0.26_268/0.7),transparent)]" aria-hidden />
+              <div className="studio-glow pointer-events-none absolute -right-20 -top-24 h-80 w-80 rounded-full bg-[radial-gradient(closest-side,oklch(0.52_0.143_198/0.7),transparent)]" aria-hidden />
               <div className="relative flex flex-wrap items-center gap-5">
                 <Portrait src={portraits[resume.id]} name={resume.patient} size="lg" />
                 <div className="min-w-0 flex-1 basis-72">

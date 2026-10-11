@@ -218,7 +218,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
         </div>
       )}
       {review.faculty_note && (
-        <div className="mb-4 rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 text-[14px] text-violet-950">
+        <div className="mb-4 rounded-xl border border-sky-200 bg-sky-50 px-4 py-3 text-[14px] text-sky-950">
           <span className="font-semibold">From your instructor{review.faculty_score !== null ? ` (adjusted score ${Math.round(review.faculty_score)}%)` : ""}:</span> {review.faculty_note}
         </div>
       )}
@@ -733,7 +733,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ id: s
                   return (
                     <div key={m.id} className="flex gap-3">
                       <span className="w-8 shrink-0" />
-                      <div className={cx("whitespace-pre-wrap rounded-lg px-3 py-2 text-[12.5px] leading-relaxed", outside ? "bg-rose-50 text-rose-900 ring-1 ring-inset ring-rose-200" : m.speaker === "coach" ? "bg-amber-50 text-amber-950" : m.speaker === "instructor" ? "bg-violet-50 text-violet-950" : "bg-surface-2 font-mono text-ink-2")}>
+                      <div className={cx("whitespace-pre-wrap rounded-lg px-3 py-2 text-[12.5px] leading-relaxed", outside ? "bg-rose-50 text-rose-900 ring-1 ring-inset ring-rose-200" : m.speaker === "coach" ? "bg-amber-50 text-amber-950" : m.speaker === "instructor" ? "bg-sky-50 text-sky-950" : "bg-surface-2 font-mono text-ink-2")}>
                         <span className="mr-1.5 font-sans text-[11px] font-semibold uppercase tracking-wide">{outside ? "Guardrail" : m.speaker === "system" ? "Chart" : m.speaker}</span>
                         {m.text}
                       </div>

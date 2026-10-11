@@ -23,7 +23,7 @@ export default function StudentPreview({ p, roleTitle }: { p: CaseProfile; roleT
       <div className="grid gap-4 xl:grid-cols-2">
         <Panel title="Before the visit" subtitle="The brief the student reads before joining the call." icon={<Video className="h-5 w-5" aria-hidden />}>
           <div className="relative overflow-hidden rounded-[22px] bg-stage p-5 text-white">
-            <div className="studio-glow pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,oklch(0.52_0.26_268/0.7),transparent)]" aria-hidden />
+            <div className="studio-glow pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,oklch(0.52_0.143_198/0.7),transparent)]" aria-hidden />
             <p className="relative flex items-center gap-2 text-[12px] font-bold text-white/80">
               <span className="live-dot h-2 w-2 rounded-full bg-[var(--color-live)]" aria-hidden />
               Telehealth visit · you are the {roleTitle}

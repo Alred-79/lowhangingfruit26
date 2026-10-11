@@ -8,7 +8,7 @@ const KINDS = {
   "ai-reviewed": { text: "AI-drafted, faculty-reviewed", Icon: ShieldCheck, cls: "bg-emerald-100 text-emerald-950 ring-emerald-300", tile: "bg-emerald-500 text-white" },
   sample: { text: "Sample", Icon: BookOpen, cls: "bg-sky-100 text-sky-950 ring-sky-300", tile: "bg-sky-500 text-white" },
   private: { text: "Private practice", Icon: Lock, cls: "bg-slate-100 text-slate-800 ring-slate-300", tile: "bg-slate-700 text-white" },
-  recorded: { text: "Recorded for instructor", Icon: CircleDot, cls: "bg-violet-100 text-violet-950 ring-violet-300", tile: "bg-violet-600 text-white" },
+  recorded: { text: "Recorded for instructor", Icon: CircleDot, cls: "bg-sky-100 text-sky-950 ring-sky-300", tile: "bg-sky-600 text-white" },
   outside: { text: "Outside the case record", Icon: ShieldAlert, cls: "bg-rose-100 text-rose-950 ring-rose-300", tile: "bg-rose-600 text-white" },
 } as const;
 

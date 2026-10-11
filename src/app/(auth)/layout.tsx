@@ -9,7 +9,7 @@ const TIERS = [
   { label: "Volunteered", c: "#33dbca", w: "100%" },
   { label: "When asked", c: "#5ca3ff", w: "82%" },
   { label: "Needs trust", c: "#ffb22e", w: "55%" },
-  { label: "Guarded", c: "#ff5c9e", w: "28%" },
+  { label: "Guarded", c: "#ff6b4a", w: "28%" },
 ];
 
 /** The three proof points, each with its own small living demonstration (CSS only; still under reduced motion). */
@@ -49,7 +49,7 @@ function ProofTiles() {
       </li>
       <li className="rise rounded-[22px] bg-white/[0.07] p-4 ring-1 ring-white/12" style={v({ "--i": 5 })}>
         <div className="flex items-center gap-2">
-          <span className="grid h-8 w-8 place-items-center rounded-xl bg-[#ff5c9e] text-ink">
+          <span className="grid h-8 w-8 place-items-center rounded-xl bg-[#ff6b4a] text-ink">
             <Quote className="h-4 w-4" aria-hidden />
           </span>
           <span className="text-[14px] font-bold leading-snug">Feedback with evidence</span>

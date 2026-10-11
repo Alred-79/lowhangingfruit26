@@ -13,7 +13,7 @@ export const STATUS_COLOR: Record<EntryStatus, string> = {
   patient_reported: "#eb6834",
   resolved: "#1baf7a",
   uncertain: "#eda100",
-  disputed: "#e87ba4",
+  disputed: "#f08a5d",
   open_question: "#008300",
 };
 /** Each status also has an icon, so it never rests on colour alone (dataviz: status = icon + label). */

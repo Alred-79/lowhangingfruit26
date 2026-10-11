@@ -267,7 +267,7 @@ export default function AssignmentBuilder({
       <div>
         <div className="overflow-hidden rounded-[26px] bg-ink text-white clay lg:sticky lg:top-4">
           <div className="relative px-5 pb-3 pt-5">
-            <div className="pointer-events-none absolute -right-12 -top-16 h-48 w-48 rounded-full bg-[radial-gradient(circle,oklch(0.545_0.235_293/0.55),transparent_65%)] breathe" aria-hidden />
+            <div className="pointer-events-none absolute -right-12 -top-16 h-48 w-48 rounded-full bg-[radial-gradient(circle,oklch(0.545_0.129_70/0.55),transparent_65%)] breathe" aria-hidden />
             <span className="relative grid h-11 w-11 place-items-center rounded-2xl bg-[var(--color-mastery)] clay">
               <Sparkles className={cx("h-5 w-5", guiding && "flicker")} aria-hidden />
             </span>

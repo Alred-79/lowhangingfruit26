@@ -35,7 +35,7 @@ export default function FacultyReview({ encounterId, note, score }: { encounterI
   }
 
   return (
-    <div className="rounded-[22px] bg-[var(--color-mastery-soft)] p-5 ring-1 ring-inset ring-violet-200">
+    <div className="rounded-[22px] bg-[var(--color-mastery-soft)] p-5 ring-1 ring-inset ring-sky-200">
       <h2 className="font-display text-[17px] font-extrabold text-ink">Faculty review</h2>
       <p className="mt-0.5 text-[12.5px] text-[var(--color-mastery-ink)]">Your note is shown to the student with their feedback. An adjusted score replaces the rubric score in the gradebook.</p>
       <div className="mt-3 grid gap-3 sm:grid-cols-[1fr_9rem]">

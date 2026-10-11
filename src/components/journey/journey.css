@@ -5,9 +5,9 @@
 
 :root {
   /* SBAR section hues: identity colors for the four sections (each always paired with its letter). */
-  --jr-s: oklch(0.52 0.22 266);
-  --jr-s-soft: oklch(0.965 0.025 266);
-  --jr-s-ink: oklch(0.42 0.2 266);
+  --jr-s: oklch(0.52 0.121 198);
+  --jr-s-soft: oklch(0.965 0.025 215);
+  --jr-s-ink: oklch(0.42 0.11 198);
   --jr-b: oklch(0.6 0.12 215);
   --jr-b-soft: oklch(0.965 0.03 215);
   --jr-b-ink: oklch(0.43 0.1 220);

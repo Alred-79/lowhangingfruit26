@@ -20,7 +20,7 @@ function VisitLink({ href, small, children }: { href: string; small?: boolean; c
     <a
       href={href}
       className={cx(
-        "press inline-flex items-center justify-center gap-1.5 bg-brand-600 font-bold text-white shadow-[inset_0_1.5px_0_rgb(255_255_255/0.22),inset_0_-2px_0_rgb(0_0_40/0.18),0_8px_18px_-8px_oklch(0.45_0.24_266/0.7)] transition-colors hover:bg-brand-500",
+        "press inline-flex items-center justify-center gap-1.5 bg-brand-600 font-bold text-white shadow-[inset_0_1.5px_0_rgb(255_255_255/0.22),inset_0_-2px_0_rgb(0_24_30/0.18),0_8px_18px_-8px_oklch(0.45_0.132_198/0.7)] transition-colors hover:bg-brand-500",
         small ? "min-h-9 rounded-[12px] px-3.5 text-[13px] pointer-coarse:min-h-11" : "min-h-11 rounded-2xl px-5 text-[14.5px]",
       )}
     >

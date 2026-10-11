@@ -36,7 +36,7 @@ const fragment = /* glsl */ `
     float d = length(c);
     float a = smoothstep(0.5, 0.08, d);
     float core = smoothstep(0.2, 0.0, d);
-    vec3 dim = mix(vec3(0.3, 0.32, 0.55), vColor, 0.42);
+    vec3 dim = mix(vec3(0.28, 0.46, 0.5), vColor, 0.42);
     vec3 col = mix(dim, vColor, vLit) + core * 0.55 * vLit;
     gl_FragColor = vec4(col, a * mix(0.55, 1.0, vLit));
   }

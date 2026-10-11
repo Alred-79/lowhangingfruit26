@@ -34,11 +34,11 @@ export interface EpisodeItem {
 // lightness band, chroma floor, CVD and normal-vision separation, 3:1 contrast all pass). The mode is
 // always printed beside its color too (chips, legend, row pill), never color alone.
 const MODES: { id: string; label: string; color: string; soft: string; ink: string }[] = [
-  { id: "practice", label: "Practice", color: "#11a39b", soft: "var(--color-tier-initial-soft)", ink: "var(--color-tier-initial-ink)" },
+  { id: "practice", label: "Practice", color: "#2fa457", soft: "var(--color-tier-initial-soft)", ink: "var(--color-tier-initial-ink)" },
   { id: "adaptive", label: "Adaptive", color: "#2a78e8", soft: "var(--color-tier-discoverable-soft)", ink: "var(--color-tier-discoverable-ink)" },
   { id: "homework", label: "Homework", color: "#cc7a00", soft: "var(--color-tier-reluctant-soft)", ink: "var(--color-tier-reluctant-ink)" },
-  { id: "exam", label: "Exam", color: "#8b5cf6", soft: "var(--color-mastery-soft)", ink: "var(--color-mastery-ink)" },
-  { id: "journey", label: "Care journey", color: "#e23a7c", soft: "var(--color-tier-hidden-soft)", ink: "var(--color-tier-hidden-ink)" },
+  { id: "exam", label: "Exam", color: "#d9a400", soft: "var(--color-mastery-soft)", ink: "var(--color-mastery-ink)" },
+  { id: "journey", label: "Care journey", color: "#e0453a", soft: "var(--color-tier-hidden-soft)", ink: "var(--color-tier-hidden-ink)" },
 ];
 const OTHER = { id: "", label: "Other", color: "var(--color-ink-3)", soft: "var(--color-surface-2)", ink: "var(--color-ink-2)" };
 const modeOf = (m: string) => MODES.find((x) => x.id === m) || { ...OTHER, id: m, label: m || "Other" };

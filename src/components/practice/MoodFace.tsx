@@ -35,7 +35,7 @@ export default function MoodFace({ knobs, size = 112, className = "" }: { knobs:
       <defs>
         <radialGradient id="pf-skin" cx="40%" cy="32%" r="75%">
           <stop offset="0" stopColor="#f4f5ff" />
-          <stop offset="1" stopColor="#c9cdfb" />
+          <stop offset="1" stopColor="#c4eef0" />
         </radialGradient>
       </defs>
       <circle cx="50" cy="52" r="44" fill="url(#pf-skin)" />
@@ -47,8 +47,8 @@ export default function MoodFace({ knobs, size = 112, className = "" }: { knobs:
         <ellipse cx="35" cy="48" rx="6" ry="7" fill="#fff" />
         <ellipse cx="65" cy="48" rx="6" ry="7" fill="#fff" />
         <g style={{ transform: `translate(${look}px, ${look * 0.35}px)` }}>
-          <circle cx="35" cy="49" r="3.6" fill="#1d1640" />
-          <circle cx="65" cy="49" r="3.6" fill="#1d1640" />
+          <circle cx="35" cy="49" r="3.6" fill="#0d2f33" />
+          <circle cx="65" cy="49" r="3.6" fill="#0d2f33" />
         </g>
       </g>
       <path d={mouth} style={dStyle(mouth)} stroke="#1b2255" strokeWidth="4" strokeLinecap="round" fill="none" />
