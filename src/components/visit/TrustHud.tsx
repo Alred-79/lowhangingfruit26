@@ -134,7 +134,7 @@ export default function TrustHud({
         <ol className="mt-2 grid grid-cols-2 gap-1.5 sm:grid-cols-4" aria-label="Disclosure tiers for this patient">
           {doors.map((d, i) => (
             <li key={d.id} className={cx("relative overflow-hidden rounded-xl px-2 py-1 ring-1", d.open ? "bg-white/12 ring-white/20" : "bg-black/25 ring-white/10")} title={d.open ? `${d.label}: open` : `${d.label}: ${d.note}. A respectful second ask or sensitive framing lowers the bar a little.`}>
-              <span className="absolute inset-y-0 left-0 opacity-35" style={{ width: `${Math.round(d.fill * 100)}%`, background: `var(--color-tier-${d.id})`, transition: "width 700ms var(--ease-spring)" }} aria-hidden />
+              <span className="absolute inset-0 origin-left opacity-35" style={{ transform: `scaleX(${d.fill.toFixed(3)})`, background: `var(--color-tier-${d.id})`, transition: "transform 700ms var(--ease-spring)" }} aria-hidden />
               <span className="relative flex items-center gap-1.5 text-[11.5px] font-bold">
                 <span className="grid h-[18px] w-[18px] shrink-0 place-items-center rounded-md" style={{ background: `var(--color-tier-${d.id})` }}>
                   {d.open ? (i < 2 ? <DoorOpen className="h-3 w-3 text-white" aria-hidden /> : <Sparkles className="h-3 w-3 text-white" aria-hidden />) : <Lock className="h-3 w-3 text-white" aria-hidden />}
