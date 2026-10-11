@@ -137,7 +137,7 @@ function Timeline({ items, shown }: { items: EpisodeItem[]; shown: Set<string> }
           ))}
           {ticks.map((t) => (
             <text key={t} x={xAt(t)} y={H - 6} textAnchor="middle" fontSize={11} fill="var(--color-ink-3)" suppressHydrationWarning>
-              {new Date(t).toLocaleDateString(undefined, { month: "short", day: "numeric" })}
+              {new Date(t).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" })}
             </text>
           ))}
           {items.map((e, i) => {
@@ -291,10 +291,10 @@ export default function EpisodeExplorer({ items, faculty }: { items: EpisodeItem
               <li key={e.id} className="hist-row-in lift grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-2 rounded-[20px] border border-line/80 bg-surface p-3.5 shadow-e1 sm:grid-cols-[auto_minmax(0,1.4fr)_minmax(0,1fr)_auto] sm:items-center sm:p-4" style={{ "--i": i } as CSSProperties}>
                 <span className="row-span-2 grid h-14 w-14 shrink-0 place-content-center rounded-2xl text-center sm:row-span-1" style={{ background: md.soft, color: md.ink }} aria-hidden>
                   <span className="font-display text-[22px] font-black leading-none" suppressHydrationWarning>
-                    {new Date(parse(e.startedAt)).getDate()}
+                    {new Date(parse(e.startedAt)).toLocaleDateString("en-US", { day: "numeric", timeZone: "America/New_York" })}
                   </span>
                   <span className="text-[11px] font-bold uppercase" suppressHydrationWarning>
-                    {new Date(parse(e.startedAt)).toLocaleDateString(undefined, { month: "short" })}
+                    {new Date(parse(e.startedAt)).toLocaleDateString("en-US", { month: "short", timeZone: "America/New_York" })}
                   </span>
                 </span>
                 <div className="min-w-0">

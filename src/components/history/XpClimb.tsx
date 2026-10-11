@@ -26,7 +26,7 @@ export interface ClimbPoint {
 const v = (o: Record<string, string | number>) => o as CSSProperties;
 const fmtDay = (s: string) => {
   const d = new Date(/[zZ]|[+-]\d\d:?\d\d$/.test(s) ? s : s.replace(" ", "T") + "Z");
-  return isNaN(d.getTime()) ? s.slice(0, 10) : d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  return isNaN(d.getTime()) ? s.slice(0, 10) : d.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" });
 };
 
 /**
