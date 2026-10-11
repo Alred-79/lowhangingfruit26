@@ -5,7 +5,7 @@ import "./globals.css";
 // Atkinson Hyperlegible Next for every UI word (distinct l/I/1 and O/0 in a chart full of doses),
 // Bricolage Grotesque for the few display moments, Geist Mono for turn stamps, timers and ids.
 const atkinson = Atkinson_Hyperlegible_Next({ variable: "--font-atkinson", subsets: ["latin"], display: "swap" });
-const bricolage = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: ["latin"], display: "swap", axes: ["opsz"] });
+const bricolage = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: ["latin"], display: "swap", weight: ["600", "700"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
