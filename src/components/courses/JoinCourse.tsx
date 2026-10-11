@@ -23,7 +23,7 @@ export default function JoinCourse() {
   return (
     <form onSubmit={join} className="space-y-2">
       <div className="flex gap-2">
-        <Input value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} placeholder="Join code, e.g. K7M2QP" maxLength={8} aria-label="Course join code" className="font-mono uppercase tracking-widest" />
+        <Input value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} placeholder="Join code, e.g. K7M2QP" maxLength={8} aria-label="Course join code" className="font-mono uppercase tracking-[0.2em] placeholder:font-sans placeholder:normal-case placeholder:tracking-normal" />
         <Button type="submit" variant="secondary" disabled={busy || code.trim().length < 4}>
           Join
         </Button>
