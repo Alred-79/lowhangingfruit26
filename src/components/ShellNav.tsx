@@ -3,27 +3,37 @@
 import { ArrowLeftRight, GraduationCap, History, House, Library, LogOut, Menu, Radio, Route, Search, Stethoscope, TrendingUp, UserRoundPen, X, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { logout } from "@/app/(auth)/actions";
 import { Logo } from "./Brand";
 import CommandPalette, { type Command } from "./CommandPalette";
 
-type Item = { href: string; label: string; Icon: LucideIcon; short?: string };
+type Item = { href: string; label: string; Icon: LucideIcon; short?: string; tone?: string };
 
+// Every destination has its own accent tile, so the nav doubles as color wayfinding.
+const T = {
+  brand: "bg-brand-600 text-white",
+  teal: "bg-[var(--color-tier-initial)] text-white",
+  amber: "bg-[var(--color-flame-2)] text-ink",
+  violet: "bg-[var(--color-mastery)] text-white",
+  pink: "bg-[var(--color-tier-hidden)] text-white",
+  lime: "bg-[var(--color-xp)] text-ink",
+  live: "bg-[var(--color-live)] text-white",
+};
 const FACULTY_NAV: Item[] = [
-  { href: "/faculty", label: "Home", Icon: House },
-  { href: "/faculty/cases", label: "Patient Studio", Icon: UserRoundPen },
-  { href: "/faculty/journeys", label: "Care Journeys", Icon: Route },
-  { href: "/faculty/courses", label: "Courses", Icon: GraduationCap },
-  { href: "/faculty/live", label: "Live Visits", Icon: Radio },
-  { href: "/episodes", label: "Episodes", Icon: Library },
+  { href: "/faculty", label: "Home", Icon: House, tone: T.brand },
+  { href: "/faculty/cases", label: "Patient Studio", Icon: UserRoundPen, tone: T.violet },
+  { href: "/faculty/journeys", label: "Care Journeys", Icon: Route, tone: T.amber },
+  { href: "/faculty/courses", label: "Courses", Icon: GraduationCap, tone: T.teal },
+  { href: "/faculty/live", label: "Live Visits", Icon: Radio, tone: T.live },
+  { href: "/episodes", label: "Episodes", Icon: Library, tone: T.pink },
 ];
 const STUDENT_NAV: Item[] = [
-  { href: "/student", label: "Home", Icon: House },
-  { href: "/student/practice", label: "Practice", Icon: Stethoscope },
-  { href: "/student/journeys", label: "Care Journeys", Icon: Route, short: "Journeys" },
-  { href: "/student/progress", label: "Progress", Icon: TrendingUp },
-  { href: "/episodes", label: "My visits", Icon: History, short: "Visits" },
+  { href: "/student", label: "Home", Icon: House, tone: T.brand },
+  { href: "/student/practice", label: "Practice", Icon: Stethoscope, tone: T.teal },
+  { href: "/student/journeys", label: "Care Journeys", Icon: Route, short: "Journeys", tone: T.amber },
+  { href: "/student/progress", label: "Progress", Icon: TrendingUp, tone: T.violet },
+  { href: "/episodes", label: "My visits", Icon: History, short: "Visits", tone: T.pink },
 ];
 
 const EXTRA: Record<"faculty" | "student", Command[]> = {
@@ -43,10 +53,13 @@ function NavLink({ item, active, onNavigate }: { item: Item; active: boolean; on
       href={item.href}
       onClick={onNavigate}
       aria-current={active ? "page" : undefined}
-      className={`group flex min-h-10 items-center gap-3 rounded-lg px-3 text-[14px] transition-colors ${active ? "bg-surface font-semibold text-ink shadow-e1 ring-1 ring-line" : "text-ink-2 hover:bg-surface/70 hover:text-ink"}`}
+      className={`press group flex min-h-11 items-center gap-3 rounded-2xl px-2 text-[14.5px] transition-[background-color,box-shadow,color] duration-200 ${active ? "bg-surface font-bold text-ink shadow-e2 ring-1 ring-line" : "font-semibold text-ink-2 hover:bg-surface/80 hover:text-ink"}`}
     >
-      <item.Icon className={`h-[18px] w-[18px] shrink-0 ${active ? "text-brand-600" : "text-slate-500 group-hover:text-ink-2"}`} strokeWidth={1.85} aria-hidden />
+      <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-xl transition-transform duration-300 ease-[var(--ease-spring)] group-hover:-rotate-6 group-hover:scale-110 ${active ? `${item.tone || T.brand} clay` : "bg-surface/80 text-ink-2 ring-1 ring-line"}`}>
+        <item.Icon className="h-[17px] w-[17px]" strokeWidth={2.1} aria-hidden />
+      </span>
       {item.label}
+      {active && <span className="ml-auto mr-1 h-2 w-2 rounded-full bg-[var(--color-xp)] ring-2 ring-ink/80" aria-hidden />}
     </Link>
   );
 }
@@ -55,7 +68,7 @@ function Account({ name, roleLabel }: { name: string; roleLabel: string }) {
   const initials = name.split(/\s+/).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
   return (
     <div className="flex items-center gap-2.5 rounded-lg px-2 py-2">
-      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-100 text-[12px] font-semibold text-brand-800">{initials}</span>
+      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[var(--color-flame-2)] to-[var(--color-flame)] font-display text-[13px] font-black text-ink clay">{initials}</span>
       <span className="min-w-0 flex-1 leading-tight">
         <span className="block truncate text-[13.5px] font-medium text-ink">{name}</span>
         <span className="block truncate text-[12px] text-ink-3">{roleLabel}</span>
@@ -69,7 +82,7 @@ function Account({ name, roleLabel }: { name: string; roleLabel: string }) {
   );
 }
 
-export default function ShellNav({ faculty, name, roleLabel }: { faculty: boolean; name: string; roleLabel: string }) {
+export default function ShellNav({ faculty, name, roleLabel, hud }: { faculty: boolean; name: string; roleLabel: string; hud?: ReactNode }) {
   const path = usePathname() || "";
   const nav = faculty ? FACULTY_NAV : STUDENT_NAV;
   const [open, setOpen] = useState(false);
@@ -87,14 +100,15 @@ export default function ShellNav({ faculty, name, roleLabel }: { faculty: boolea
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden border-r border-line bg-surface-2 lg:sticky lg:top-0 lg:flex lg:h-dvh lg:flex-col">
+      <aside className="relative z-10 hidden border-r border-line/70 bg-surface/55 backdrop-blur-xl lg:sticky lg:top-0 lg:flex lg:h-dvh lg:flex-col">
         <div className="px-4 pb-4 pt-5">
           <Link href={faculty ? "/faculty" : "/student"} aria-label="Poscere home">
             <Logo />
           </Link>
         </div>
         <div className="px-3 pb-3">
-          <button onClick={() => setPalette(true)} className="flex min-h-10 w-full items-center gap-2.5 rounded-lg bg-surface px-3 text-[13.5px] text-ink-3 ring-1 ring-inset ring-line transition-colors hover:text-ink hover:ring-slate-300">
+          {hud && <div className="mb-3">{hud}</div>}
+          <button onClick={() => setPalette(true)} className="press flex min-h-10 w-full items-center gap-2.5 rounded-xl bg-surface/80 px-3 text-[13.5px] font-medium text-ink-3 ring-1 ring-inset ring-line transition-colors hover:text-ink hover:ring-brand-300">
             <Search className="h-4 w-4" aria-hidden />
             <span className="flex-1 text-left">Go to</span>
             <kbd className="rounded border border-line bg-surface-2 px-1 font-mono text-[11px]">⌘K</kbd>
@@ -116,7 +130,7 @@ export default function ShellNav({ faculty, name, roleLabel }: { faculty: boolea
       </aside>
 
       {/* Small screens: top bar + menu sheet */}
-      <header className="flex h-14 items-center justify-between border-b border-line bg-surface px-4 lg:hidden">
+      <header className="relative z-10 flex h-14 items-center justify-between border-b border-line/70 bg-surface/70 px-4 backdrop-blur-xl lg:hidden">
         <Link href={faculty ? "/faculty" : "/student"} aria-label="Poscere home">
           <Logo />
         </Link>
@@ -134,6 +148,7 @@ export default function ShellNav({ faculty, name, roleLabel }: { faculty: boolea
                 <X className="h-5 w-5" aria-hidden />
               </button>
             </div>
+            {hud && <div className="px-3 pb-3">{hud}</div>}
             <nav aria-label="Main" className="flex-1 space-y-0.5 overflow-y-auto px-3">
               {nav.map((n) => (
                 <NavLink key={n.href} item={n} active={isActive(path, n.href)} onNavigate={() => setOpen(false)} />
@@ -151,12 +166,14 @@ export default function ShellNav({ faculty, name, roleLabel }: { faculty: boolea
 
       {/* Students on phones: bottom tab bar */}
       {!faculty && (
-        <nav aria-label="Main" className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-5 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
+        <nav aria-label="Main" className="fixed inset-x-2 bottom-2 z-20 grid grid-cols-5 rounded-[22px] bg-ink/95 p-1 pb-[max(0.25rem,env(safe-area-inset-bottom))] shadow-e3 backdrop-blur lg:hidden">
           {nav.map((n) => {
             const active = isActive(path, n.href);
             return (
-              <Link key={n.href} href={n.href} aria-current={active ? "page" : undefined} className={`flex min-h-14 flex-col items-center justify-center gap-0.5 text-[11px] ${active ? "font-semibold text-brand-700" : "text-ink-3"}`}>
-                <n.Icon className="h-5 w-5" strokeWidth={active ? 2.1 : 1.8} aria-hidden />
+              <Link key={n.href} href={n.href} aria-current={active ? "page" : undefined} className={`press flex min-h-14 flex-col items-center justify-center gap-0.5 rounded-[18px] text-[11px] transition-colors ${active ? "font-bold text-white" : "font-medium text-white/70"}`}>
+                <span className={`grid h-7 w-9 place-items-center rounded-xl transition-transform duration-300 ease-[var(--ease-spring)] ${active ? `${n.tone || T.brand} -translate-y-0.5 scale-110` : ""}`}>
+                  <n.Icon className="h-[18px] w-[18px]" strokeWidth={2.1} aria-hidden />
+                </span>
                 {n.short || n.label}
               </Link>
             );
