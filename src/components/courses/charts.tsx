@@ -3,12 +3,12 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 
 // Chart tokens. One series colour throughout (checked with the dataviz palette validator against a
 // white surface); text always uses ink tokens, never the series colour.
-const SERIES = "#2a78d6";
-const SERIES_TRACK = "#dbe9fa";
-const GRID = "#e2e8f0";
-const AXIS = "#cbd5e1";
-const INK = "#0f172a";
-const MUTED = "#64748b";
+const SERIES = "var(--color-brand-600)";
+const SERIES_TRACK = "var(--color-brand-100)";
+const GRID = "var(--color-slate-200)";
+const AXIS = "var(--color-slate-300)";
+const INK = "var(--color-ink)";
+const MUTED = "var(--color-ink-3)";
 
 function Tip({ children }: { children: ReactNode }) {
   return (
