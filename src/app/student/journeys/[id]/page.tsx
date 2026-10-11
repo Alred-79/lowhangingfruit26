@@ -6,6 +6,7 @@ import { isFaculty, requireUser } from "@/lib/auth";
 import { studentJourneyLabel } from "@/lib/courses/label";
 import { get, parse } from "@/lib/db";
 import { clinician, loadJourney, resolveProfession } from "@/lib/journey/store";
+import { stageBrief } from "@/lib/journey/types";
 import type { CaseProfile } from "@/lib/types";
 
 export default async function JourneyIntro({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ assignment?: string }> }) {
@@ -15,10 +16,11 @@ export default async function JourneyIntro({ params, searchParams }: { params: P
   const j = loadJourney(id);
   if (!j || (j.row.status !== "published" && !isFaculty(user))) notFound();
   const c = parse<CaseProfile>(get<{ profile: string }>("SELECT profile FROM cases WHERE id = ?", j.row.case_id)?.profile, {} as CaseProfile);
-  // Only what is on the record before anyone sees the patient is shown here.
+  // Only what is on the record before anyone sees the patient is shown here. Students get each stage's
+  // neutral brief; the faculty-facing focus can name conditions and is not shown to them.
   const stages = j.stages.map((s) => {
     const cl = clinician(s.clinicianId);
-    return { id: s.id, order: s.order, roleTitle: s.roleTitle, clinicianName: cl.name, clinicianRole: cl.role, focus: s.focus, simTime: s.simTime, visitLabel: s.visitLabel, suggested: !!user.profession_id && resolveProfession(s).id === user.profession_id && (s.professionId === user.profession_id || !j.stages.some((o) => o.professionId === user.profession_id)) };
+    return { id: s.id, order: s.order, roleTitle: s.roleTitle, clinicianName: cl.name, clinicianRole: cl.role, focus: isFaculty(user) ? s.focus : stageBrief(s, c.patient?.name || "", j.stages.length), simTime: s.simTime, visitLabel: s.visitLabel, suggested: !!user.profession_id && resolveProfession(s).id === user.profession_id && (s.professionId === user.profession_id || !j.stages.some((o) => o.professionId === user.profession_id)) };
   });
   const firstSuggested = stages.findIndex((s) => s.suggested);
   // The journey title and summary are written for faculty and name the diagnoses; students get the patient and the roles.
@@ -37,7 +39,7 @@ export default async function JourneyIntro({ params, searchParams }: { params: P
             <h2 className="text-sm font-semibold text-slate-900">The patient</h2>
             <p className="mt-1 text-sm text-slate-700">{c.patient?.name}, {c.patient?.age}, {c.patient?.sex}</p>
             <dl className="mt-2 space-y-1.5 text-[13px]">
-              {(c.chartAtStart || []).slice(0, 4).map((x) => (
+              {(c.chartAtStart || []).filter((x) => !/^reason for visit$/i.test(x.label.trim())).slice(0, 4).map((x) => (
                 <div key={x.label}>
                   <dt className="text-xs font-medium text-slate-500">{x.label}</dt>
                   <dd className="text-slate-700">{x.value}</dd>

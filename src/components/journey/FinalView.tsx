@@ -2,14 +2,12 @@
 
 import { useMemo, useState } from "react";
 import { Badge, Button, Card, CardHeader, Textarea, cx } from "@/components/ui";
-import { STATUS_LABEL, type Chain, type EntryStatus, type PlanItem, type RunView, type StateEntry } from "@/lib/journey/types";
+import { STATUS_LABEL, statusBoard, type Chain, type EntryStatus, type PlanItem, type RunView, type StateEntry } from "@/lib/journey/types";
 import { EntryRow, post, Spinner, STATUS_COLOR, STATUS_ORDER, stageLabel } from "./shared";
-
-const OPEN: EntryStatus[] = ["uncertain", "disputed", "open_question"];
 
 const GROUPS: { title: string; kinds: string[] }[] = [
   { title: "Found out from the patient", kinds: ["finding", "goal"] },
-  { title: "Exams, tests and records reviewed", kinds: ["result"] },
+  { title: "Exams, tests and records reviewed", kinds: ["result", "record"] },
   { title: "Assessment and interpretation", kinds: ["assessment", "interpretation", "consult"] },
   { title: "Recommendations and plan", kinds: ["recommendation", "referral", "plan_item", "callout", "plan_change"] },
   { title: "Uncertainty, questions and disagreements raised", kinds: ["uncertainty", "open_question", "disagreement"] },
@@ -48,7 +46,7 @@ function ChainFlow({ chain, onOpen, stages }: { chain: Chain; onOpen: (id: strin
           const body = (
             <>
               <div className={cx("text-[11px] font-semibold uppercase tracking-wide", st.tag)}>{s.label}</div>
-              <div className="mt-0.5 line-clamp-4 text-[13px] leading-snug text-slate-800">{s.kind === "asked" ? `“${s.detail}”` : s.detail}</div>
+              <div className={cx("mt-0.5 text-[13px] leading-snug text-slate-800", s.kind === "asked" ? "line-clamp-[9]" : "line-clamp-5")} title={s.detail}>{s.kind === "asked" ? `“${s.detail}”` : s.detail}</div>
               <div className="mt-1 text-[11px] text-slate-500">{s.who}{s.stageOrder > 0 && s.stageOrder <= stages ? ` · encounter ${s.stageOrder}` : ""}</div>
             </>
           );
@@ -56,9 +54,9 @@ function ChainFlow({ chain, onOpen, stages }: { chain: Chain; onOpen: (id: strin
             <div key={i} className="flex items-stretch">
               {i > 0 && <Arrow />}
               {s.entryId ? (
-                <button onClick={() => onOpen(s.entryId!)} className={cx("w-48 shrink-0 rounded-md border border-l-4 border-slate-200 bg-white p-2 text-left hover:bg-slate-50", st.bar)}>{body}</button>
+                <button onClick={() => onOpen(s.entryId!)} className={cx("w-52 shrink-0 rounded-md border border-l-4 border-slate-200 bg-white p-2 text-left hover:bg-slate-50", st.bar)}>{body}</button>
               ) : (
-                <div className={cx("w-48 shrink-0 rounded-md border border-l-4 border-slate-200 bg-slate-50 p-2", st.bar)}>{body}</div>
+                <div className={cx("w-52 shrink-0 rounded-md border border-l-4 border-slate-200 bg-slate-50 p-2", st.bar)}>{body}</div>
               )}
             </div>
           );
@@ -75,16 +73,10 @@ function Evolution({ view }: { view: RunView }) {
   const rows = useMemo(() => {
     const points = [{ order: 0, label: "Existing record", sub: "Before the journey" }, ...view.stages.filter((s) => view.entries.some((e) => e.stageId === s.stage.id)).map((s) => ({ order: s.stage.order, label: `After encounter ${s.stage.order}`, sub: `${s.stage.roleTitle} · ${s.stage.simTime}` }))];
     if (view.entries.some((e) => e.stageId === "huddle")) points.push({ order: view.stages.length + 1, label: "After the team huddle", sub: "Reconciliation" });
-    const order = new Map(view.entries.map((e) => [e.id, e.stageOrder]));
+    // The same function that fills the header and the board, asked for the state as it stood at each point.
     return points.map((p) => {
-      const counts = Object.fromEntries(STATUS_ORDER.map((s) => [s, 0])) as Record<EntryStatus, number>;
-      const links = view.links.filter((l) => (order.get(l.from) ?? 99) <= p.order);
-      for (const e of view.entries.filter((x) => x.stageOrder <= p.order)) {
-        const inb = links.filter((l) => l.to === e.id);
-        const eff: EntryStatus = inb.some((l) => l.relation === "resolves" || l.relation === "answers") ? "resolved" : inb.some((l) => l.relation === "contradicts") ? "disputed" : e.status;
-        counts[eff]++;
-      }
-      return { ...p, counts, total: Object.values(counts).reduce((a, b) => a + b, 0) };
+      const b = statusBoard(view.entries, view.links, p.order);
+      return { ...p, counts: b.counts, total: b.total };
     });
   }, [view]);
   const max = Math.max(1, ...rows.map((r) => r.total));
@@ -229,16 +221,17 @@ function Section({ id, title, subtitle, children }: { id: string; title: string;
 /** The integrated patient representation. Every item on it opens its provenance. */
 export default function FinalView({ view, onOpen, refresh }: { view: RunView; onOpen: (id: string) => void; refresh: () => void }) {
   const [showAll, setShowAll] = useState<Record<string, boolean>>({});
-  const superseded = new Set(view.links.filter((l) => l.relation === "updates").map((l) => l.to));
+  // One function computes the status of every entry for the header, this board and the evolution chart.
+  const sb = statusBoard(view.entries, view.links);
   const board: { key: string; title: string; hint: string; items: StateEntry[] }[] = [
-    { key: "est", title: "Established", hint: "On the record, from an exam or test, or stated firmly by a clinician", items: view.entries.filter((e) => e.effectiveStatus === "established" && e.kind !== "follow_up") },
-    { key: "pr", title: "Patient-reported", hint: "What the patient said; not independently verified", items: view.entries.filter((e) => e.effectiveStatus === "patient_reported") },
-    { key: "unc", title: "Uncertain", hint: "Provisional judgements and unverified points", items: view.entries.filter((e) => e.effectiveStatus === "uncertain") },
-    { key: "dis", title: "Disputed", hint: "Accounts or interpretations that disagree", items: view.entries.filter((e) => e.effectiveStatus === "disputed") },
-    { key: "open", title: "Still unanswered", hint: "Questions nobody on the team can answer yet", items: view.entries.filter((e) => e.effectiveStatus === "open_question" && !superseded.has(e.id)) },
-    { key: "res", title: "Resolved", hint: "Settled by a later encounter, a consult or the huddle", items: view.entries.filter((e) => e.effectiveStatus === "resolved") },
+    { key: "est", title: "Established", hint: "On the record, from an exam or test, or stated firmly by a clinician", items: sb.groups.established },
+    { key: "pr", title: "Patient-reported", hint: "What the patient said; not independently verified", items: sb.groups.patient_reported },
+    { key: "unc", title: "Uncertain", hint: "Provisional judgements and unverified points", items: sb.groups.uncertain },
+    { key: "dis", title: "Disputed", hint: "Two accounts of the same thing that cannot both be right", items: sb.groups.disputed },
+    { key: "open", title: "Still unanswered", hint: "Questions nobody on the team can answer yet; a plan to find out does not close one", items: sb.groups.open_question },
+    { key: "res", title: "Resolved", hint: "Answered or settled by a later entry that supplies the information", items: sb.groups.resolved },
   ];
-  const unresolved = view.entries.filter((e) => OPEN.includes(e.effectiveStatus) && !superseded.has(e.id)).length;
+  const unresolved = sb.unresolved;
   const syn = view.synthesis;
   const contributors = [{ id: "record", title: "Existing record", name: "Before the journey", isStudent: false }, ...view.stages.map((s) => ({ id: s.stage.id, title: s.stage.roleTitle, name: `${s.clinicianName} · ${s.stage.simTime}`, isStudent: s.isStudent })), ...(view.entries.some((e) => e.stageId === "huddle") ? [{ id: "huddle", title: "Team huddle", name: "Whole team", isStudent: false }] : [])];
 
@@ -270,7 +263,7 @@ export default function FinalView({ view, onOpen, refresh }: { view: RunView; on
               [view.entries.length, "entries in the shared state"],
               [view.links.length, "recorded relations"],
               [view.chains.length, "cross-encounter chains"],
-              [unresolved, "still uncertain or open"],
+              [unresolved, "uncertain, disputed or unanswered"],
             ].map(([n, l]) => (
               <div key={l as string} className="rounded-md border border-slate-200 px-2 py-2">
                 <div className="text-xl font-semibold tabular-nums text-slate-900">{n}</div>
@@ -293,7 +286,7 @@ export default function FinalView({ view, onOpen, refresh }: { view: RunView; on
             <tbody>
               {view.pillars.map((p, i) => (
                 <tr key={p.stageId} className="border-t border-slate-100">
-                  <td className="py-1.5 pr-3"><span className="font-medium text-slate-800">{i + 1}. {p.role}</span> <span className="text-slate-500">· {p.name}</span> {p.isStudent && <Badge tone="teal">Student</Badge>}</td>
+                  <td className="py-1.5 pr-3"><span className="font-medium text-slate-800">{i + 1}. {p.role}</span> <span className="text-slate-500">· {p.isStudent && view.viewerIsOwner ? "you" : p.name}</span> {p.isStudent && !view.viewerIsOwner && <Badge tone="teal">learner</Badge>}</td>
                   <td className="px-2 tabular-nums text-slate-800">{p.used} earlier {p.used === 1 ? "entry" : "entries"}</td>
                   <td className="px-2 tabular-nums text-slate-800">{p.contributed} new</td>
                   <td className="px-2 tabular-nums text-slate-800">{p.identified} open {p.identified === 1 ? "point" : "points"}</td>
@@ -381,7 +374,7 @@ export default function FinalView({ view, onOpen, refresh }: { view: RunView; on
         )}
       </Section>
 
-      <Section id="status" title="What is established, and what is not" subtitle="The team's confidence in each piece of information. Status changes are made by adding linked entries, so the earlier view is never lost.">
+      <Section id="status" title="What is established, and what is not" subtitle={`The team's confidence in each of the ${sb.total} items in the shared state: ${sb.counts.uncertain} uncertain, ${sb.counts.disputed} disputed and ${sb.counts.open_question} unanswered make the ${sb.unresolved} shown at the top.${sb.restated ? ` ${sb.restated} open item${sb.restated === 1 ? " was" : "s were"} restated by a later entry and ${sb.restated === 1 ? "is" : "are"} counted once, under the later entry.` : ""} Status changes are made by adding linked entries, so the earlier view is never lost.`}>
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {board.map((b) => {
             const expanded = showAll[b.key];

@@ -3,7 +3,7 @@
   "title": "Marcus Ramirez: heart failure, new diabetes and weight loss across four professions",
   "caseId": "seed_sample-marcus-ramirez",
   "spec": {
-    "summary": "Marcus Ramirez, 59, has heart failure and newly diagnosed, poorly controlled type 2 diabetes. He is seen in turn by emergency medicine, cardiology, clinical pharmacy and dietetics. Each professional starts from what the others recorded, adds their own findings, and hands off with an SBAR. Join as any one of them; the AI plays the rest.",
+    "summary": "Marcus Ramirez, 59, is seen in turn by emergency medicine, cardiology, clinical pharmacy and dietetics. Each professional starts from what the others recorded, adds their own findings, and hands off with an SBAR. Join as any one of them; the AI plays the rest.",
     "stages": [
       {
         "id": "s1",
@@ -13,7 +13,16 @@
         "clinicianId": "brian_lee",
         "focus": "First contact for the team. Find out how he is right now and what is troubling him most, review his vital signs, check for anything that needs urgent attention, and identify what cardiology, pharmacy and nutrition each need to look at.",
         "simTime": "Week 1, Mon 10:30",
-        "visitLabel": "urgent video triage"
+        "visitLabel": "urgent video triage",
+        "brief": "You are the emergency medicine attending making first contact for the care team, in an urgent video triage call with Marcus Ramirez, 59. Find out how he is right now and what troubles him most, review his vital signs and the record, decide whether anything needs urgent attention, and work out what the cardiologist, the clinical pharmacist and the dietitian each need to look at. This is a telehealth video visit and he is at home: you cannot admit him or change his treatment from here. You assess, advise, and make recommendations to the team.",
+        "tasks": [
+          "Review the existing record and the documents on file before you start (Care team tab)",
+          "Find out how he is right now and what worries him most, and screen for anything that needs urgent attention",
+          "Review his vital signs and any results that matter for triage",
+          "Write an SBAR handoff to the cardiologist: what you found, what you are unsure of, and what you need them to look at"
+        ],
+        "patientReason": "The clinic set up this video call to check on me. I haven't been feeling like myself lately, so they wanted a doctor to see how I'm doing.",
+        "reason": "Urgent video triage: first contact for the care team"
       },
       {
         "id": "s2",
@@ -23,7 +32,16 @@
         "clinicianId": "david_bennet",
         "focus": "Review his heart failure: current symptoms, what limits him day to day, and the cardiac medicines on his list. Follow up on what the triage visit flagged and say what is and is not explained by his heart.",
         "simTime": "Week 1, Wed 14:00",
-        "visitLabel": "cardiology video follow-up"
+        "visitLabel": "cardiology video follow-up",
+        "brief": "You are the cardiologist seeing Marcus Ramirez, 59, by video two days after the emergency medicine attending's triage call. Start from the shared record and the handoff you received. Review his heart-related symptoms, what limits him day to day and the cardiac medicines on his list, follow up on what triage flagged, and say what is and is not explained from a cardiology point of view. This is a telehealth video visit and he is at home: you cannot admit him or change his treatment from here. You assess, advise, and make recommendations to the team.",
+        "tasks": [
+          "Read the handoff from emergency medicine and the shared patient state (Care team tab)",
+          "Explore his symptoms and what limits him day to day, following up on what the triage visit left open",
+          "Review the cardiac medicines on his list and the relevant records with him",
+          "Write an SBAR handoff to the clinical pharmacist: findings, your interpretation, what is uncertain, and what you need from them"
+        ],
+        "patientReason": "They told me the heart doctor wanted to follow up with me after I talked to the other doctor on Monday. So here I am.",
+        "reason": "Cardiology video follow-up after the triage call"
       },
       {
         "id": "s3",
@@ -33,7 +51,16 @@
         "clinicianId": "nasir_mahmoud",
         "focus": "Medication reconciliation and adherence. Find out what he actually takes and when, side effects and fears, supplements and herbal products, and anything on the medication list that looks duplicated or unsafe. Flag concerns for the prescribers.",
         "simTime": "Week 1, Fri 09:15",
-        "visitLabel": "pharmacist medication review by video"
+        "visitLabel": "pharmacist medication review by video",
+        "brief": "You are the clinical pharmacist reviewing Marcus Ramirez's medicines with him by video, after the emergency medicine and cardiology visits. Start from the shared record and the handoff you received. Find out what he actually takes and when, how he feels about his medicines, any supplements or herbal products, and whether anything on the medication list looks duplicated, missing or unsafe. Flag concerns for the prescribers. This is a telehealth video visit and he is at home: you cannot admit him or change his treatment from here. You assess, advise, and make recommendations to the team.",
+        "tasks": [
+          "Read the handoff from cardiology and the shared patient state, including the medication list and refill history (Care team tab)",
+          "Reconcile the list with what he actually takes: each medicine, when, how often it is missed, and why",
+          "Ask about side effects, worries, over-the-counter products, supplements and herbal products",
+          "Write an SBAR handoff to the dietitian, and say clearly what the prescribers need to settle"
+        ],
+        "patientReason": "They said a pharmacist wanted to go over my medicines with me. I wasn't sure why, but okay.",
+        "reason": "Pharmacist medication review by video"
       },
       {
         "id": "s4",
@@ -43,7 +70,16 @@
         "clinicianId": "tasha_dunbar",
         "focus": "Nutrition assessment. Explore his eating pattern, appetite and weight, fluids, food access and beliefs about food, and agree realistic changes that fit both his heart failure and his diabetes and what he wants for himself.",
         "simTime": "Week 2, Tue 11:00",
-        "visitLabel": "telehealth nutrition visit"
+        "visitLabel": "telehealth nutrition visit",
+        "brief": "You are the registered dietitian seeing Marcus Ramirez, 59, for a telehealth nutrition visit, after emergency medicine, cardiology and clinical pharmacy have each seen him. Start from the shared record and the handoff you received. Explore his eating pattern, appetite and weight, fluids, access to food and what he believes about food and his health, and agree realistic changes that fit his conditions and what he wants for himself. You are the last professional before the team huddle. This is a telehealth video visit and he is at home: you cannot admit him or change his treatment from here. You assess, advise, and make recommendations to the team.",
+        "tasks": [
+          "Read the handoff from the pharmacist and the shared patient state, and note what earlier colleagues left open (Care team tab)",
+          "Take a diet history: meal pattern, appetite, fluids, food access, preferences and beliefs",
+          "Review weight, relevant results and anything from earlier encounters that affects what he can eat",
+          "Agree one or two realistic changes with him, then write an SBAR handoff to the whole team ahead of the huddle"
+        ],
+        "patientReason": "Hi. They said I should talk to a dietitian. I get full real fast when I eat, and I'm tired a lot. Not sure food's really the issue though - that's what the pills are for, right?",
+        "reason": "Telehealth nutrition assessment"
       }
     ]
   }

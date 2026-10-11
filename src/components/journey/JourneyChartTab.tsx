@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import ConsultPanel from "./ConsultPanel";
 import { EntryRow, ProvenancePanel, SbarCard, Spinner, STATUS_COLOR, useRun } from "./shared";
-import { STATUS_LABEL, type EntryStatus } from "@/lib/journey/types";
+import { STATUS_LABEL, statusBoard, type EntryStatus } from "@/lib/journey/types";
 
 const OPEN: EntryStatus[] = ["disputed", "open_question", "uncertain"];
 
@@ -12,7 +12,9 @@ const OPEN: EntryStatus[] = ["disputed", "open_question", "uncertain"];
  * state so far with provenance on every line, and a panel to page a colleague.
  */
 export default function JourneyChartTab({ runId, encounterId }: { runId: string; encounterId: string }) {
-  const { view, error, refresh } = useRun(runId, { opened: encounterId });
+  // This tab makes one request when it opens and one after each message the learner sends. It does not poll.
+  const { view, error, refresh: reload } = useRun(runId, { opened: encounterId });
+  const refresh = useCallback(() => reload(true), [reload]);
   const [open, setOpen] = useState<string | null>(null);
   const [filter, setFilter] = useState<"all" | "open">("all");
   if (error) return <p className="text-sm text-rose-700">{error}</p>;
@@ -22,18 +24,21 @@ export default function JourneyChartTab({ runId, encounterId }: { runId: string;
   const order = mine?.stage.order ?? 99;
   const received = mine ? view.handoffs.filter((h) => h.toStage === mine.stage.id).pop() : undefined;
   const prior = view.entries.filter((e) => e.stageOrder < order || (e.stageId === mine?.stage.id && (e.kind === "consult" || e.kind === "callout")));
-  const shown = filter === "open" ? prior.filter((e) => OPEN.includes(e.effectiveStatus)) : prior;
+  // Same status rules as the hub and the final view.
+  const sb = statusBoard(prior, view.links);
+  const openIds = new Set(OPEN.flatMap((k) => sb.groups[k]).map((e) => e.id));
+  const shown = filter === "open" ? prior.filter((e) => openIds.has(e.id)) : prior;
   const groups = [
     { key: "record", title: "Existing record", sub: "Before this journey" },
     ...view.stages.filter((s) => s.stage.order <= order).map((s) => ({ key: s.stage.id, title: `Encounter ${s.stage.order}: ${s.stage.roleTitle}`, sub: `${s.clinicianName} · ${s.stage.simTime}` })),
   ];
-  const openCount = prior.filter((e) => OPEN.includes(e.effectiveStatus)).length;
+  const openCount = sb.unresolved;
 
   return (
     <div className="space-y-5 text-sm">
       {mine && (
         <p className="text-xs text-slate-500">
-          You are the {mine.stage.roleTitle.toLowerCase()} in encounter {mine.stage.order} of {view.stages.length}. {mine.stage.focus}
+          You are the {mine.stage.roleTitle.toLowerCase()} in encounter {mine.stage.order} of {view.stages.length}. Every encounter in this journey is a telehealth visit with the patient at home.
         </p>
       )}
       <section>

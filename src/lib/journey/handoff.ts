@@ -98,7 +98,7 @@ export async function evaluateSbar(run: LoadedRun, handoffId: string): Promise<T
   const mine = entries.filter((e) => e.stageId === stage.id);
   const earlier = entries.filter((e) => e.stageOrder < stage.order);
   // What was open when this handoff was written (later entries are not held against the author).
-  const openThen = entries.filter((e) => e.stageOrder <= stage.order && ["open_question", "disputed", "uncertain"].includes(e.status));
+  const openThen = entries.filter((e) => e.stageOrder <= stage.order && ["open_question", "disputed", "uncertain"].includes(e.effectiveStatus));
   const defs = BEHAVIOURS.filter((b) => b.sbar);
   const voice = h.authorIsAi
     ? `Feedback is written in the third person about ${h.authorName} ("${h.authorName} states...", "the handoff could have..."), because a learner reads it as a worked example. Never address the author as "you".`
@@ -129,7 +129,7 @@ EARLIER ENCOUNTERS (what had already been found, done and recommended before the
 ${renderState(earlier.filter((e) => e.stageOrder > 0), run.stages).slice(0, 6000) || "(none: the author was first)"}
 
 STILL OPEN WHEN THIS HANDOFF WAS WRITTEN (uncertain, disputed or unanswered)
-${openThen.map((e) => `- (${e.status}; raised by ${e.contributorRole}) ${e.text}`).join("\n") || "(nothing)"}
+${openThen.map((e) => `- (${e.effectiveStatus}; raised by ${e.contributorRole}) ${e.text}`).join("\n") || "(nothing)"}
 
 BEHAVIOURS TO EVALUATE (return one result per key, same order)
 ${defs.map((b) => `${b.key}: ${b.label}. ${b.question}`).join("\n")}`,
