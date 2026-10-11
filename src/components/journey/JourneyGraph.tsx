@@ -22,7 +22,7 @@ const ROW_H = 15;
 const TOP = 58;
 const PAD_X = 28;
 
-export default function JourneyGraph({ view, onOpen }: { view: RunView; onOpen: (id: string) => void }) {
+export default function JourneyGraph({ view, onOpen, lit }: { view: RunView; onOpen: (id: string) => void; lit?: string[] | null }) {
   const [hover, setHover] = useState<string | null>(null);
 
   const layout = useMemo(() => {
@@ -58,7 +58,8 @@ export default function JourneyGraph({ view, onOpen }: { view: RunView; onOpen: 
   }, [view]);
 
   const { cols, pos, links, W, H, empty } = layout;
-  const active = hover ? new Set([hover, ...links.filter((l) => l.from === hover || l.to === hover).flatMap((l) => [l.from, l.to])]) : null;
+  // Hovering a dot lights it and its neighbours; otherwise a hovered care-plan action lights the entries it rests on.
+  const active = hover ? new Set([hover, ...links.filter((l) => l.from === hover || l.to === hover).flatMap((l) => [l.from, l.to])]) : lit?.length ? new Set(lit) : null;
   const hovered = hover ? pos.get(hover)?.e : null;
   const counts = links.reduce<Record<string, number>>((m, l) => ((m[l.relation] = (m[l.relation] || 0) + 1), m), {});
   // Same counting as the run header and the status board (restated open items counted once).
@@ -70,11 +71,11 @@ export default function JourneyGraph({ view, onOpen }: { view: RunView; onOpen: 
         <svg viewBox={`0 0 ${W} ${H}`} style={{ minWidth: Math.min(W, 760) }} className="w-full" role="group" aria-label={`Shared patient state: ${view.entries.length} entries and ${links.length} links across ${cols.length} columns`}>
           {cols.map((c, i) => (
             <g key={c.key}>
-              <rect x={PAD_X + i * COL_W + 6} y={4} width={COL_W - 12} height={H - 8} rx={12} fill={c.you ? "var(--color-brand-50)" : "var(--color-surface-2)"} stroke={c.you ? "var(--color-brand-200)" : "none"} />
-              <text x={PAD_X + i * COL_W + COL_W / 2} y={24} textAnchor="middle" fontSize={12} fontWeight={600} fill="var(--color-ink)">
+              <rect x={PAD_X + i * COL_W + 6} y={4} width={COL_W - 12} height={H - 8} rx={16} fill={c.you ? "var(--color-mastery-soft)" : "var(--color-surface-2)"} stroke={c.you ? "var(--color-mastery)" : "none"} strokeOpacity={0.45} strokeWidth={1.5} />
+              <text x={PAD_X + i * COL_W + COL_W / 2} y={24} textAnchor="middle" fontSize={12.5} fontWeight={800} fill="var(--color-ink)" fontFamily="var(--font-display)">
                 {c.title.length > 24 ? c.title.slice(0, 23) + "…" : c.title}
               </text>
-              <text x={PAD_X + i * COL_W + COL_W / 2} y={39} textAnchor="middle" fontSize={11} fill={c.you ? "var(--color-brand-700)" : "var(--color-ink-3)"} fontWeight={c.you ? 600 : 400}>
+              <text x={PAD_X + i * COL_W + COL_W / 2} y={39} textAnchor="middle" fontSize={11} fill={c.you ? "var(--color-mastery-ink)" : "var(--color-ink-3)"} fontWeight={c.you ? 700 : 400}>
                 {c.sub.length > 26 ? c.sub.slice(0, 25) + "…" : c.sub}
               </text>
               {empty.has(i) && (
@@ -108,6 +109,7 @@ export default function JourneyGraph({ view, onOpen }: { view: RunView; onOpen: 
           })}
           {[...pos.values()].map(({ x, y, e }) => {
             const dim = active && !active.has(e.id);
+            const glow = !hover && !!lit?.length && active?.has(e.id);
             return (
               <g
                 key={e.id}
@@ -124,7 +126,8 @@ export default function JourneyGraph({ view, onOpen }: { view: RunView; onOpen: 
                 opacity={dim ? 0.25 : 1}
               >
                 <circle cx={x} cy={y} r={9} fill="transparent" />
-                <circle cx={x} cy={y} r={hover === e.id ? 6.5 : 5} fill={STATUS_COLOR[e.effectiveStatus]} stroke="var(--color-surface)" strokeWidth={1.75} />
+                {glow && <circle cx={x} cy={y} r={9.5} fill="var(--color-xp)" opacity={0.85} />}
+                <circle className="jr-lit" cx={x} cy={y} r={hover === e.id || glow ? 6.5 : 5} fill={STATUS_COLOR[e.effectiveStatus]} stroke="var(--color-surface)" strokeWidth={1.75} />
               </g>
             );
           })}

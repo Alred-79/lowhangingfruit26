@@ -1,0 +1,188 @@
+/* Care journeys: area styles (prefix .jr-). Imported once from shared.tsx.
+   Motion rules (emil-design-eng): transform/opacity/clip-path only, ease-out-ui for arrivals,
+   transitions (not keyframes) for anything the user can retrigger, ambient loops low amplitude and
+   paused under reduced motion / hidden tab / game layer "minimal". Clinical text never animates. */
+
+:root {
+  /* SBAR section hues: identity colors for the four sections (each always paired with its letter). */
+  --jr-s: oklch(0.52 0.22 266);
+  --jr-s-soft: oklch(0.965 0.025 266);
+  --jr-s-ink: oklch(0.42 0.2 266);
+  --jr-b: oklch(0.6 0.12 215);
+  --jr-b-soft: oklch(0.965 0.03 215);
+  --jr-b-ink: oklch(0.43 0.1 220);
+  --jr-a: oklch(0.7 0.17 55);
+  --jr-a-soft: oklch(0.97 0.04 65);
+  --jr-a-ink: oklch(0.48 0.14 50);
+  --jr-r: oklch(0.62 0.17 150);
+  --jr-r-soft: oklch(0.965 0.045 150);
+  --jr-r-ink: oklch(0.42 0.12 150);
+}
+
+/* ---------- Level path ---------- */
+
+/* The trail through the encounters: done part solid and drawn once, the rest dashed and drifting. */
+.jr-trail-done {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: jr-draw 1.2s var(--ease-in-out-ui) both 150ms;
+}
+@keyframes jr-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+.jr-trail-todo {
+  stroke-dasharray: 3 9;
+  animation: jr-march 2.4s linear infinite;
+}
+@keyframes jr-march {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+/* A spark travelling along the done trail to the current node (offset-path; static where unsupported). */
+.jr-spark {
+  offset-rotate: 0deg;
+  animation: jr-spark 3.6s var(--ease-in-out-ui) infinite;
+}
+@keyframes jr-spark {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+/* The current node pulses outward; the learner's node carries a slow violet halo. */
+.jr-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 3px solid var(--color-brand-400);
+  animation: jr-pulse 2.2s var(--ease-out-ui) infinite;
+  pointer-events: none;
+}
+@keyframes jr-pulse {
+  from {
+    transform: scale(0.92);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+.jr-halo {
+  position: absolute;
+  inset: -9px;
+  border-radius: 9999px;
+  background: conic-gradient(from 0deg, var(--color-mastery), transparent 35%, var(--color-mastery) 55%, transparent 85%);
+  animation: spin-slow 9s linear infinite;
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+  mask: radial-gradient(closest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+  pointer-events: none;
+}
+.jr-node {
+  transition:
+    transform 220ms var(--ease-out-ui),
+    box-shadow 220ms var(--ease-out-ui);
+}
+@media (hover: hover) and (pointer: fine) {
+  .jr-stop:hover .jr-node {
+    transform: translateY(-3px) scale(1.04);
+  }
+}
+.jr-stop:active .jr-node {
+  transform: scale(0.96);
+}
+.jr-stop[aria-current="step"] .jr-node {
+  box-shadow:
+    0 0 0 4px var(--color-surface),
+    0 0 0 7px var(--color-brand-500),
+    var(--shadow-e2);
+}
+
+/* ---------- Evidence highlight (care plan -> cited entries) ---------- */
+.jr-lit {
+  transition:
+    opacity 180ms var(--ease-out-ui),
+    transform 180ms var(--ease-out-ui),
+    box-shadow 180ms var(--ease-out-ui),
+    background-color 180ms var(--ease-out-ui);
+}
+.jr-dim {
+  opacity: 0.28;
+}
+.jr-glow {
+  box-shadow:
+    0 0 0 2px var(--color-surface),
+    0 0 0 4px var(--color-xp),
+    0 0 18px 2px oklch(0.86 0.2 128 / 0.65);
+}
+circle.jr-lit {
+  transition:
+    r 180ms var(--ease-out-ui),
+    opacity 180ms var(--ease-out-ui);
+}
+
+/* ---------- Status tiles and bars ---------- */
+.jr-seg {
+  transform-origin: left center;
+  animation: bar-grow 900ms var(--ease-out-ui) both;
+  animation-delay: calc(var(--i, 0) * 60ms + 150ms);
+}
+.jr-count {
+  transition: transform 200ms var(--ease-out-ui);
+}
+
+/* ---------- Seats (journey intro) ---------- */
+.jr-seat-line {
+  transform-origin: top center;
+  transition: transform 320ms var(--ease-out-ui), background-color 200ms ease;
+}
+
+/* Elapsed-time ring on the spinner: a slow arc so waiting visibly moves. */
+.jr-spin {
+  animation: spin-slow 0.9s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jr-trail-done,
+  .jr-trail-todo,
+  .jr-spark,
+  .jr-pulse,
+  .jr-halo,
+  .jr-seg {
+    animation: none !important;
+  }
+  .jr-spark,
+  .jr-pulse {
+    display: none;
+  }
+  .jr-spin {
+    animation: spin-slow 2.4s linear infinite !important;
+    animation-iteration-count: infinite !important;
+    animation-duration: 2.4s !important;
+  }
+}
+html[data-game="minimal"] :is(.jr-trail-todo, .jr-spark, .jr-pulse, .jr-halo),
+html[data-game="off"] :is(.jr-trail-todo, .jr-spark, .jr-pulse, .jr-halo) {
+  animation: none !important;
+}
+html[data-tab-hidden] :is(.jr-trail-todo, .jr-spark, .jr-pulse, .jr-halo) {
+  animation-play-state: paused !important;
+}
+html[data-game="minimal"] .jr-spark-svg,
+html[data-game="off"] .jr-spark-svg {
+  display: none;
+}
