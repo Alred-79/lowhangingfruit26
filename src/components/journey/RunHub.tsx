@@ -1,39 +1,51 @@
 "use client";
 
-import { Check, GitBranch } from "lucide-react";
+import { ArrowRight, Bot, CircleAlert, Eye, EyeOff, GitBranch, Hourglass, Inbox, ListChecks, Map as MapIcon, MessagesSquare, PenLine, Play, RotateCcw, Send, Sparkles, Stethoscope, Trophy, Users } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Badge, Button, Card, CardHeader, Textarea, cx } from "@/components/ui";
-import { SBAR_FIELDS, STATUS_LABEL, statusBoard, type HuddleItem, type RunView, type Sbar, type StageView, type TraceEvaluation } from "@/lib/journey/types";
+import { CountUp } from "@/components/motion";
+import { Badge, Button, Textarea, cx } from "@/components/ui";
+import { BEHAVIOURS, SBAR_FIELDS, STATUS_LABEL, statusBoard, type HuddleItem, type RunView, type Sbar, type StageView, type TraceEvaluation } from "@/lib/journey/types";
 import ConsultPanel from "./ConsultPanel";
 import FinalView from "./FinalView";
 import JourneyGraph from "./JourneyGraph";
-import { EntryRow, post, ProvenancePanel, SbarCard, Spinner, StatusBadge, TraceTable, Transcript, useRun, type Live } from "./shared";
+import LevelPath, { stopsOf } from "./LevelPath";
+import { Avatar, DomainMeter, EntryList, LitCtx, post, ProvenancePanel, SBAR_HUE, SbarCard, SbarLetter, Spinner, StatusBadge, StatusIcon, TraceTable, Transcript, useRun, v, type Live } from "./shared";
 
 type Step = string; // stage id | "huddle" | "final"
 
 /** A plain link styled as a button. Starting or continuing the visit must never wait on a request or on client routing. */
 function VisitLink({ href, small, children }: { href: string; small?: boolean; children: React.ReactNode }) {
   return (
-    <a href={href} className={cx("inline-flex items-center justify-center gap-1.5 rounded-md bg-brand-600 font-medium text-white transition-colors hover:bg-brand-700", small ? "px-3 py-1.5 text-sm" : "px-4 py-2 text-sm")}>
+    <a
+      href={href}
+      className={cx(
+        "press inline-flex items-center justify-center gap-1.5 bg-brand-600 font-bold text-white shadow-[inset_0_1.5px_0_rgb(255_255_255/0.22),inset_0_-2px_0_rgb(0_0_40/0.18),0_8px_18px_-8px_oklch(0.45_0.24_266/0.7)] transition-colors hover:bg-brand-500",
+        small ? "min-h-9 rounded-[12px] px-3.5 text-[13px] pointer-coarse:min-h-11" : "min-h-11 rounded-2xl px-5 text-[14.5px]",
+      )}
+    >
+      <Play className="h-4 w-4 fill-current" aria-hidden />
       {children}
     </a>
   );
 }
 
-function StepDot({ state }: { state: "done" | "now" | "todo" | "error" }) {
+/** A titled block in the hub: icon tile, display heading, lead line. */
+function Panel({ icon: Icon, tone = "bg-brand-600 text-white", title, subtitle, action, children, className }: { icon: typeof Users; tone?: string; title: React.ReactNode; subtitle?: React.ReactNode; action?: React.ReactNode; children?: React.ReactNode; className?: string }) {
   return (
-    <span
-      className={cx(
-        "grid h-5 w-5 shrink-0 place-items-center rounded-full border text-[10px] font-bold",
-        state === "done" && "border-brand-600 bg-brand-600 text-white",
-        state === "now" && "border-brand-600 bg-white text-brand-700",
-        state === "todo" && "border-slate-300 bg-white text-slate-400",
-        state === "error" && "border-rose-500 bg-rose-500 text-white",
-      )}
-    >
-      {state === "done" ? <Check className="h-3 w-3" aria-hidden /> : state === "error" ? "!" : ""}
-    </span>
+    <section className={cx("rise rounded-[22px] border border-line/80 bg-surface shadow-e1", className)}>
+      <header className="flex flex-wrap items-start justify-between gap-3 px-5 pb-3 pt-4">
+        <div className="flex min-w-0 items-start gap-3">
+          <span className={cx("grid h-9 w-9 shrink-0 place-items-center rounded-xl clay", tone)}><Icon className="h-[18px] w-[18px]" aria-hidden /></span>
+          <div className="min-w-0">
+            <h2 className="font-display text-[17px] font-extrabold leading-snug tracking-[-0.02em] text-ink">{title}</h2>
+            {subtitle && <p className="mt-0.5 max-w-3xl text-[13px] leading-relaxed text-ink-3">{subtitle}</p>}
+          </div>
+        </div>
+        {action}
+      </header>
+      {children && <div className="px-5 pb-5">{children}</div>}
+    </section>
   );
 }
 
@@ -54,50 +66,69 @@ function AiStage({ view, s, live, onOpen }: { view: RunView; s: StageView; live:
   const usedTargets = [...new Set(used.map((l) => l.to))].map((id) => view.entries.find((e) => e.id === id)).filter((e) => e && e.stageOrder < s.stage.order);
   return (
     <div className="space-y-4">
-      <Card>
-        <CardHeader
-          title={`${s.clinicianName} sees ${view.patient.name}`}
-          subtitle={`${s.stage.visitLabel || "Telehealth visit"} · ${s.stage.simTime} · an AI colleague playing a faculty-provided persona. The patient's answers come from the same case engine you will use.`}
-          action={lines.length > 0 ? <Button size="sm" variant="secondary" onClick={() => setShowTalk((v) => !v)}>{showTalk ? "Hide the conversation" : "Show the conversation"}</Button> : undefined}
-        />
+      <section className="rise overflow-hidden rounded-[22px] border border-line/80 bg-surface shadow-e1">
+        <header className="flex flex-wrap items-start justify-between gap-3 bg-surface-2/70 px-5 py-4">
+          <div className="flex min-w-0 items-center gap-3">
+            <Avatar name={s.clinicianName} className="h-12 w-12 text-[15px]" />
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded-full bg-ink px-2 py-0.5 font-mono text-[11px] font-bold text-white">Encounter {s.stage.order}</span>
+                <Badge><Bot className="h-3 w-3" aria-hidden />AI colleague</Badge>
+                {isLive && <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-100 px-2 py-0.5 text-[11.5px] font-bold text-rose-900"><span className="live-dot h-2 w-2 rounded-full bg-[var(--color-live)]" aria-hidden />Live</span>}
+              </div>
+              <h2 className="mt-1 font-display text-[19px] font-black leading-tight tracking-[-0.025em] text-ink">{`${s.clinicianName} sees ${view.patient.name}`}</h2>
+              <p className="mt-0.5 max-w-3xl text-[13px] leading-relaxed text-ink-3">{`${s.stage.visitLabel || "Telehealth visit"} · ${s.stage.simTime} · an AI colleague playing a faculty-provided persona. The patient's answers come from the same case engine you will use.`}</p>
+            </div>
+          </div>
+          {lines.length > 0 && (
+            <Button size="sm" variant="secondary" onClick={() => setShowTalk((x) => !x)}>
+              {showTalk ? <EyeOff className="h-3.5 w-3.5" aria-hidden /> : <Eye className="h-3.5 w-3.5" aria-hidden />}
+              {showTalk ? "Hide the conversation" : "Show the conversation"}
+            </Button>
+          )}
+        </header>
         <div className="p-4">
-          {s.status === "pending" && <p className="text-sm text-slate-500">This visit starts when the encounter before it has finished and handed off.</p>}
+          {s.status === "pending" && (
+            <p className="flex items-center gap-2 rounded-2xl border-2 border-dashed border-brand-200 px-4 py-4 text-sm text-ink-3"><Hourglass className="float-idle h-4 w-4 text-brand-500" aria-hidden />This visit starts when the encounter before it has finished and handed off.</p>
+          )}
           {showTalk && lines.length > 0 && (
-            <div ref={box} className="max-h-[26rem] overflow-y-auto pr-1">
+            <div ref={box} className="scroll-quiet max-h-[26rem] overflow-y-auto pr-1">
               <Transcript lines={lines} clinician={s.clinicianName} patient={view.patient.name} />
             </div>
           )}
           {running && s.status !== "pending" && (
-            <div className="mt-3 flex flex-wrap items-center gap-3">
+            <div className="mt-3 flex flex-wrap items-center gap-3 rounded-2xl bg-brand-50 px-3.5 py-2.5">
               <Spinner label={live.stageId === s.stage.id && live.phase ? live.phase : lines.length ? "The visit is in progress" : `${s.clinicianName} is reading the record and the handoff`} hint="A colleague's visit, note and handoff take about two minutes" />
-              <span className="text-xs text-slate-500">You can read along or wait: the visit continues on its own and the handoff appears here when it is done.</span>
+              <span className="text-xs text-ink-3">You can read along or wait: the visit continues on its own and the handoff appears here when it is done.</span>
             </div>
           )}
         </div>
-      </Card>
+      </section>
 
       {s.status === "complete" && (
         <>
           {usedTargets.length > 0 && (
-            <Card>
-              <CardHeader title="Earlier information this encounter drew on" subtitle="Entries from the record or an earlier professional that shaped a question in this visit." />
-              <div className="p-2">{usedTargets.map((e) => <EntryRow key={e!.id} entry={e!} onOpen={onOpen} dense />)}</div>
-            </Card>
+            <Panel icon={GitBranch} tone="bg-surface-2 text-brand-700" title="Earlier information this encounter drew on" subtitle="Entries from the record or an earlier professional that shaped a question in this visit.">
+              <div className="-mx-2"><EntryList entries={usedTargets.map((e) => e!)} onOpen={onOpen} /></div>
+            </Panel>
           )}
-          <Card>
-            <CardHeader title="What this encounter added to the shared patient state" subtitle={`${mine.length} entries. Patient statements and results come from the case file; assessments are ${s.clinicianName}'s and are marked as such.`} />
-            <div className="p-2">{mine.map((e) => <EntryRow key={e.id} entry={e} onOpen={onOpen} showWho={false} dense />)}</div>
-          </Card>
+          <Panel icon={Sparkles} tone="bg-[var(--color-xp)] text-ink" title="What this encounter added to the shared patient state" subtitle={`${mine.length} entries. Patient statements and results come from the case file; assessments are ${s.clinicianName}'s and are marked as such.`}>
+            <div className="-mx-2"><EntryList entries={mine} onOpen={onOpen} showWho={false} /></div>
+          </Panel>
           {handoff && (
             <div className="space-y-2">
               <SbarCard handoff={handoff} />
               {handoff.evaluation ? (
-                <details className="rounded-lg border border-slate-200 bg-white px-4 py-2.5">
-                  <summary className="cursor-pointer text-sm font-medium text-slate-800">Worked example: how this handoff measures up against the communication behaviours</summary>
+                <details className="group rounded-[20px] border border-line/80 bg-surface px-4 py-3 shadow-e1">
+                  <summary className="flex min-h-8 cursor-pointer list-none items-center gap-2 text-[14px] font-bold text-ink [&::-webkit-details-marker]:hidden">
+                    <ListChecks className="h-4 w-4 text-brand-600" aria-hidden />
+                    <span className="flex-1">Worked example: how this handoff measures up against the communication behaviours</span>
+                    <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[11.5px] font-bold text-emerald-900">{handoff.evaluation.behaviours.filter((b) => b.observed === "yes").length} of {handoff.evaluation.behaviours.length} observed</span>
+                  </summary>
                   <div className="mt-3"><TraceTable evaluation={handoff.evaluation} /></div>
                 </details>
               ) : (
-                <p className="text-xs text-slate-400">The communication review of this handoff is being written.</p>
+                <p className="text-xs text-ink-3">The communication review of this handoff is being written.</p>
               )}
             </div>
           )}
@@ -128,32 +159,55 @@ function SbarForm({ view, s, refresh, onSent }: { view: RunView; s: StageView; r
     if (r.error) return setErr(r.error);
     refresh();
   }
+  const filled = 4 - empty.length;
   return (
-    <Card>
-      <CardHeader title={`Write your SBAR handoff to ${next ? `${next.clinicianName}, ${next.stage.roleTitle}` : "the care team"}`} subtitle={next ? `${next.clinicianName} will read this before seeing ${view.patient.name}. What you leave out, they will not know to ask.` : "You are the last professional in this journey. This goes to the whole team ahead of the huddle."} />
-      <div className="space-y-3 p-4">
-        {SBAR_FIELDS.map((f) => (
-          <div key={f.key}>
-            <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-600">{f.label}</label>
-            <Textarea rows={3} value={sbar[f.key]} onChange={(e) => { setSbar({ ...sbar, [f.key]: e.target.value }); setConfirm(false); }} placeholder={f.prompt} />
-          </div>
-        ))}
+    <Panel
+      icon={PenLine}
+      title={`Write your SBAR handoff to ${next ? `${next.clinicianName}, ${next.stage.roleTitle}` : "the care team"}`}
+      subtitle={next ? `${next.clinicianName} will read this before seeing ${view.patient.name}. What you leave out, they will not know to ask.` : "You are the last professional in this journey. This goes to the whole team ahead of the huddle."}
+      action={
+        <span className="flex items-center gap-2" aria-label={`${filled} of 4 sections written`}>
+          {SBAR_FIELDS.map((f) => (
+            <span key={f.key} className={cx("grid h-7 w-7 place-items-center rounded-lg font-display text-[13px] font-black transition-[background-color,color,transform] duration-200", sbar[f.key].trim() ? "scale-100 text-white clay" : "scale-90 bg-surface-2 text-ink-3 ring-1 ring-inset ring-line")} style={sbar[f.key].trim() ? { background: SBAR_HUE[f.key].tile } : undefined} aria-hidden>
+              {f.label[0]}
+            </span>
+          ))}
+          <span className="font-mono text-[12px] font-bold text-ink-2">{filled}/4</span>
+        </span>
+      }
+    >
+      <div className="@container space-y-3">
+        <div className="grid gap-2.5 @2xl:grid-cols-2">
+          {SBAR_FIELDS.map((f) => {
+            const h = SBAR_HUE[f.key];
+            return (
+              <div key={f.key} className="rounded-2xl p-3 transition-shadow focus-within:shadow-e2" style={{ background: h.soft }}>
+                <label htmlFor={`sbar-${f.key}`} className="mb-2 flex items-center gap-2.5">
+                  <SbarLetter k={f.key} label={f.label} className="h-8 w-8 text-[16px]" />
+                  <span className="font-display text-[14.5px] font-extrabold" style={{ color: h.ink }}>{f.label}</span>
+                  <span className="ml-auto font-mono text-[11px] text-ink-3">{sbar[f.key].trim().split(/\s+/).filter(Boolean).length} words</span>
+                </label>
+                <Textarea id={`sbar-${f.key}`} rows={3} value={sbar[f.key]} onChange={(e) => { setSbar({ ...sbar, [f.key]: e.target.value }); setConfirm(false); }} placeholder={f.prompt} className="bg-surface/90" />
+              </div>
+            );
+          })}
+        </div>
         {confirm && empty.length > 0 && (
-          <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">
-            <p><span className="font-semibold">{empty.join(" and ")} {empty.length === 1 ? "is" : "are"} empty.</span> {empty.includes("Recommendation") ? `Without a Recommendation ${next ? next.clinicianName : "the team"} will not know what you need from them. ` : ""}Send the handoff like this?</p>
-            <div className="mt-2 flex gap-2">
+          <div className="pop-in rounded-2xl bg-amber-50 px-4 py-3 text-sm text-amber-950 ring-1 ring-inset ring-amber-300" role="alert">
+            <p className="flex items-start gap-2"><CircleAlert className="mt-0.5 h-4 w-4 shrink-0 text-amber-700" aria-hidden /><span><span className="font-bold">{empty.join(" and ")} {empty.length === 1 ? "is" : "are"} empty.</span> {empty.includes("Recommendation") ? `Without a Recommendation ${next ? next.clinicianName : "the team"} will not know what you need from them. ` : ""}Send the handoff like this?</span></p>
+            <div className="mt-2.5 flex flex-wrap gap-2">
               <Button size="sm" variant="secondary" onClick={() => setConfirm(false)}>Keep writing</Button>
               <Button size="sm" onClick={() => submit(true)}>Send with {empty.length === 1 ? "that section" : "those sections"} empty</Button>
             </div>
           </div>
         )}
         <div className="flex flex-wrap items-center gap-3">
-          <Button onClick={() => submit()} disabled={busy || confirm || !Object.values(sbar).some((v) => v.trim())}>Send handoff</Button>
+          <Button onClick={() => submit()} disabled={busy || confirm || !Object.values(sbar).some((x) => x.trim())}><Send className="h-4 w-4" aria-hidden />Send handoff</Button>
           {busy && <Spinner label="Sending your handoff and reviewing it against the communication behaviours" hint="Usually 20 to 40 seconds" />}
-          {err && <span className="text-sm text-rose-700">{err}</span>}
+          {err && <span className="text-sm font-semibold text-rose-700">{err}</span>}
         </div>
       </div>
-    </Card>
+    </Panel>
   );
 }
 
@@ -167,30 +221,51 @@ function StudentStage({ view, s, onOpen, refresh, onSent, onContinue, phase }: {
   const owner = view.viewerIsOwner;
   return (
     <div className="space-y-4">
-      <Card>
-        <CardHeader title={owner ? `Your encounter: ${s.stage.roleTitle}` : `${s.clinicianName}'s encounter: ${s.stage.roleTitle}`} subtitle={`${s.stage.visitLabel || "Telehealth visit"} · ${s.stage.simTime}`} />
-        <div className="space-y-3 p-4">
-          <p className="text-sm text-slate-700">{s.stage.focus}</p>
-          {s.status === "pending" && <p className="text-sm text-slate-500">{owner ? "Your visit opens when the colleagues before you have finished and handed off." : "Not started yet."}</p>}
+      <section className="rise relative overflow-hidden rounded-[24px] bg-[var(--color-mastery)] p-5 text-white clay sm:p-6">
+        <div className="pointer-events-none absolute -right-12 -top-20 h-60 w-60 rounded-full spin-slow [background:conic-gradient(from_0deg,transparent,rgb(255_255_255/0.18),transparent_40%)]" aria-hidden />
+        <div className="relative flex flex-wrap items-center gap-2">
+          <span className="rounded-full bg-white/20 px-2.5 py-0.5 font-mono text-[11.5px] font-bold">Encounter {s.stage.order} of {view.stages.length}</span>
+          <span className="rounded-full bg-white px-2.5 py-0.5 text-[11.5px] font-extrabold text-[var(--color-mastery-ink)]">{owner ? "Your encounter" : "Learner"}</span>
+        </div>
+        <h2 className="relative mt-2 font-display text-[26px] font-black leading-[1.05] tracking-[-0.03em] sm:text-[30px]">{owner ? `Your encounter: ${s.stage.roleTitle}` : `${s.clinicianName}'s encounter: ${s.stage.roleTitle}`}</h2>
+        <p className="relative mt-1 text-[13.5px] font-semibold text-white/85">{`${s.stage.visitLabel || "Telehealth visit"} · ${s.stage.simTime}`}</p>
+        <p className="relative mt-3 max-w-[68ch] rounded-2xl bg-white/12 px-4 py-3 text-[14.5px] leading-relaxed text-white ring-1 ring-inset ring-white/20">{s.stage.focus}</p>
+        <div className="relative mt-4 space-y-2">
+          {s.status === "pending" && <p className="flex items-center gap-2 text-sm font-semibold text-white/90"><Hourglass className="float-idle h-4 w-4" aria-hidden />{owner ? "Your visit opens when the colleagues before you have finished and handed off." : "Not started yet."}</p>}
           {s.status === "ready" && !scored && s.encounterStatus !== "submitted" && owner && (
             <div className="flex flex-wrap items-center gap-3">
-              <VisitLink href={`/encounter/${s.encounterId}`}>{s.transcript.length ? "Continue your visit" : `Start your visit with ${view.patient.name}`}</VisitLink>
-              <span className="text-xs text-slate-500">The chart has a Care team tab with everything below, and you can page a colleague from there.</span>
+              <a href={`/encounter/${s.encounterId}`} className="press inline-flex min-h-12 items-center gap-2 rounded-2xl bg-[var(--color-xp)] px-5 text-[15px] font-extrabold text-ink clay hover:brightness-105">
+                <Play className="h-4 w-4 fill-current" aria-hidden />
+                {s.transcript.length ? "Continue your visit" : `Start your visit with ${view.patient.name}`}
+              </a>
+              <span className="max-w-md text-xs text-white/85">The chart has a Care team tab with everything below, and you can page a colleague from there.</span>
             </div>
           )}
-          {s.status === "ready" && (scored || s.encounterStatus === "submitted") && (s.error ? <p className="text-sm text-rose-700">Updating the shared state failed: {s.error}. Use &ldquo;Try this stage again&rdquo; above.</p> : <Spinner label={phase || (s.encounterStatus === "submitted" ? "Your visit is being scored; then what you found is added to the shared patient state" : "Reading your visit and note, and adding what you found to the shared patient state")} hint="Usually 30 to 60 seconds" />)}
-          {scored && s.encounterId && owner && <Link href={`/encounter/${s.encounterId}/feedback`} className="text-sm font-medium text-brand-700 hover:underline">See the feedback on your visit with the patient</Link>}
+          {s.status === "ready" && (scored || s.encounterStatus === "submitted") && (
+            <div className="rounded-2xl bg-surface px-3.5 py-2.5 text-ink">
+              {s.error ? <p className="text-sm font-semibold text-rose-700">Updating the shared state failed: {s.error}. Use &ldquo;Try this stage again&rdquo; above.</p> : <Spinner label={phase || (s.encounterStatus === "submitted" ? "Your visit is being scored; then what you found is added to the shared patient state" : "Reading your visit and note, and adding what you found to the shared patient state")} hint="Usually 30 to 60 seconds" />}
+            </div>
+          )}
+          {scored && s.encounterId && owner && (
+            <Link href={`/encounter/${s.encounterId}/feedback`} className="press inline-flex min-h-10 items-center gap-1.5 rounded-full bg-white/15 px-3.5 text-sm font-bold text-white ring-1 ring-inset ring-white/30 hover:bg-white/25">
+              See the feedback on your visit with the patient
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          )}
         </div>
-      </Card>
+      </section>
 
       {!handoff && s.status !== "complete" && (
         <>
-          {received ? <SbarCard handoff={received} title={`Handoff to you from ${received.authorName}`} /> : s.stage.order === 1 ? <p className="rounded-md border border-dashed border-slate-300 bg-white px-3 py-2 text-sm text-slate-500">You are first in this journey. There is no handoff; you start from the existing record.</p> : null}
+          {received ? (
+            <SbarCard handoff={received} title={`Handoff to you from ${received.authorName}`} />
+          ) : s.stage.order === 1 ? (
+            <p className="flex items-center gap-2 rounded-2xl border-2 border-dashed border-brand-200 bg-surface/70 px-4 py-3 text-sm text-ink-2"><Inbox className="h-4 w-4 text-brand-500" aria-hidden />You are first in this journey. There is no handoff; you start from the existing record.</p>
+          ) : null}
           {s.status !== "pending" && open.length > 0 && (
-            <Card>
-              <CardHeader title="Left open by the professionals before you" subtitle="Uncertain, disputed or unanswered when your visit starts." />
-              <div className="p-2">{open.map((e) => <EntryRow key={e.id} entry={e} onOpen={onOpen} dense />)}</div>
-            </Card>
+            <Panel icon={CircleAlert} tone="bg-[var(--color-flame-2)] text-ink" title="Left open by the professionals before you" subtitle="Uncertain, disputed or unanswered when your visit starts.">
+              <div className="-mx-2"><EntryList entries={open} onOpen={onOpen} /></div>
+            </Panel>
           )}
         </>
       )}
@@ -198,32 +273,34 @@ function StudentStage({ view, s, onOpen, refresh, onSent, onContinue, phase }: {
       {s.status === "awaiting_handoff" && owner && <SbarForm view={view} s={s} refresh={refresh} onSent={onSent} />}
 
       {mine.length > 0 && (
-        <Card>
-          <CardHeader title={owner ? "What your encounter added to the shared patient state" : "What this encounter added to the shared patient state"} subtitle={`${mine.length} entries. Select one to see the words it rests on.`} />
-          <div className="p-2">{mine.map((e) => <EntryRow key={e.id} entry={e} onOpen={onOpen} showWho={false} dense />)}</div>
-        </Card>
+        <Panel icon={Sparkles} tone="bg-[var(--color-xp)] text-ink" title={owner ? "What your encounter added to the shared patient state" : "What this encounter added to the shared patient state"} subtitle={`${mine.length} entries. Select one to see the words it rests on.`}>
+          <div className="-mx-2"><EntryList entries={mine} onOpen={onOpen} showWho={false} /></div>
+        </Panel>
       )}
       {s.transcript.length > 0 && scored && (
-        <details className="rounded-lg border border-slate-200 bg-white px-4 py-2.5">
-          <summary className="cursor-pointer text-sm font-medium text-slate-800">Conversation with the patient</summary>
+        <details className="group rounded-[20px] border border-line/80 bg-surface px-4 py-3 shadow-e1">
+          <summary className="flex min-h-8 cursor-pointer list-none items-center gap-2 text-[14px] font-bold text-ink [&::-webkit-details-marker]:hidden">
+            <MessagesSquare className="h-4 w-4 text-brand-600" aria-hidden />
+            <span className="flex-1">Conversation with the patient</span>
+            <span className="font-mono text-[12px] text-ink-3">{s.transcript.length} lines</span>
+          </summary>
           <div className="mt-3"><Transcript lines={s.transcript} clinician={s.clinicianName} patient={view.patient.name} /></div>
         </details>
       )}
       {handoff && (
         <div className="space-y-3">
           {onContinue && (
-            <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-brand-200 bg-brand-50 px-4 py-2.5 text-sm text-brand-900">
-              <span><span className="font-semibold">Your handoff was sent.</span> {handoff.evaluation ? "The review of your SBAR is below. " : "The review of your SBAR appears below in a moment. "}The journey is already continuing in the background.</span>
-              <Button size="sm" onClick={onContinue}>Continue to what happens next</Button>
+            <div className="pop-in flex flex-wrap items-center justify-between gap-3 rounded-[20px] bg-[var(--color-xp)] px-4 py-3 text-sm text-ink clay">
+              <span className="flex items-start gap-2"><Send className="mt-0.5 h-4 w-4 shrink-0" aria-hidden /><span><span className="font-extrabold">Your handoff was sent.</span> {handoff.evaluation ? "The review of your SBAR is below. " : "The review of your SBAR appears below in a moment. "}The journey is already continuing in the background.</span></span>
+              <Button size="sm" onClick={onContinue}>Continue to what happens next<ArrowRight className="h-3.5 w-3.5" aria-hidden /></Button>
             </div>
           )}
           <SbarCard handoff={handoff} title={owner ? "Your SBAR handoff" : `SBAR handoff from ${handoff.authorName}`} />
           {!handoff.evaluation && owner && <Spinner label="Reviewing your handoff against the communication behaviours" hint="Usually 20 to 40 seconds" />}
           {handoff.evaluation && (
-            <Card>
-              <CardHeader title="Review of the handoff" subtitle="Each communication behaviour, whether it was observed, where, and what to do next time." />
-              <div className="p-4"><TraceTable evaluation={handoff.evaluation} /></div>
-            </Card>
+            <Panel icon={ListChecks} tone="bg-emerald-600 text-white" title="Review of the handoff" subtitle="Each communication behaviour, whether it was observed, where, and what to do next time.">
+              <TraceTable evaluation={handoff.evaluation} />
+            </Panel>
           )}
         </div>
       )}
@@ -233,7 +310,7 @@ function StudentStage({ view, s, onOpen, refresh, onSent, onContinue, phase }: {
 
 // ---------- Huddle ----------
 
-function HuddleItemCard({ view, item, onOpen, refresh }: { view: RunView; item: HuddleItem; onOpen: (id: string) => void; refresh: () => void }) {
+function HuddleItemCard({ view, item, onOpen, refresh, i }: { view: RunView; item: HuddleItem; onOpen: (id: string) => void; refresh: () => void; i: number }) {
   const entry = view.entries.find((e) => e.id === item.entryId);
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
@@ -249,53 +326,65 @@ function HuddleItemCard({ view, item, onOpen, refresh }: { view: RunView; item: 
     refresh();
   }
   return (
-    <div className="rounded-lg border border-slate-200 bg-white">
-      <button onClick={() => onOpen(entry.id)} className="flex w-full items-start gap-3 border-b border-slate-100 px-4 py-3 text-left hover:bg-slate-50">
-        <StatusBadge status={item.reason} />
+    <article className="rise overflow-hidden rounded-[22px] border border-line/80 bg-surface shadow-e1" style={v({ "--i": i })}>
+      <button onClick={() => onOpen(entry.id)} className="flex w-full items-start gap-3 bg-surface-2/70 px-4 py-3.5 text-left hover:bg-brand-50">
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-surface font-display text-[15px] font-black text-ink clay">{i + 1}</span>
         <span className="min-w-0 flex-1">
-          <span className="block text-sm font-medium text-slate-900">{entry.text}</span>
-          <span className="text-[11px] text-slate-500">Raised by {entry.contributorName}, {entry.contributorRole} · {entry.simTime}</span>
+          <StatusBadge status={item.reason} />
+          <span className="mt-1 block font-display text-[15.5px] font-bold leading-snug text-ink">{entry.text}</span>
+          <span className="text-[11.5px] text-ink-3">Raised by {entry.contributorName}, {entry.contributorRole} · {entry.simTime}</span>
         </span>
       </button>
-      <div className="space-y-2 px-4 py-3">
-        {item.positions.map((p, i) => (
-          <div key={i} className="rounded-md bg-slate-50 px-3 py-2 text-sm">
-            <div className="text-[11px] font-semibold text-slate-500">{p.name} · {p.role}</div>
-            <p className="text-slate-800">{p.text}</p>
-            {p.cites.length > 0 && (
-              <div className="mt-1 flex flex-wrap gap-1">
-                {p.cites.map((id) => {
-                  const e = view.entries.find((x) => x.id === id);
-                  return e ? <button key={id} onClick={() => onOpen(id)} className="max-w-[15rem] truncate rounded border border-slate-200 bg-white px-1.5 py-0.5 text-[11px] text-slate-600 hover:bg-slate-100">{e.text}</button> : null;
-                })}
-              </div>
-            )}
+      <div className="space-y-2.5 px-4 py-3.5">
+        {item.positions.map((p, k) => (
+          <div key={k} className="flex items-start gap-2.5">
+            <Avatar name={p.name} className="h-8 w-8 text-[11px]" />
+            <div className="min-w-0 flex-1 rounded-2xl rounded-tl-md bg-surface-2 px-3.5 py-2 text-[13.5px]">
+              <div className="text-[11.5px] font-bold text-ink-3">{p.name} · {p.role}</div>
+              <p className="leading-relaxed text-ink">{p.text}</p>
+              {p.cites.length > 0 && (
+                <div className="mt-1.5 flex flex-wrap gap-1">
+                  {p.cites.map((id) => {
+                    const e = view.entries.find((x) => x.id === id);
+                    return e ? <button key={id} onClick={() => onOpen(id)} className="inline-flex min-h-7 max-w-[15rem] items-center gap-1 rounded-full bg-surface px-2 py-0.5 text-[11.5px] text-ink-2 ring-1 ring-inset ring-line hover:bg-brand-50 pointer-coarse:min-h-11"><StatusIcon status={e.effectiveStatus} className="h-3 w-3 shrink-0" /><span className="truncate">{e.text}</span></button> : null;
+                  })}
+                </div>
+              )}
+            </div>
           </div>
         ))}
         {item.outcome ? (
           <>
-            {proposal && <div className="ml-auto max-w-[92%] rounded-md bg-brand-50 px-3 py-2 text-sm"><div className="text-[11px] font-semibold text-slate-500">{view.viewerIsOwner ? "You" : view.studentName}</div>{proposal.text}</div>}
-            <div className="rounded-md bg-slate-50 px-3 py-2 text-sm"><div className="text-[11px] font-semibold text-slate-500">Team response</div>{item.outcome.teamResponse}</div>
-            <button onClick={() => onOpen(item.outcome!.entryId)} className={cx("w-full rounded-md border px-3 py-2 text-left text-sm", item.outcome.decision === "resolved" ? "border-emerald-200 bg-emerald-50" : "border-amber-200 bg-amber-50")}>
-              <div className="text-[11px] font-semibold uppercase tracking-wide text-slate-600">{item.outcome.decision === "resolved" ? "Recorded as resolved" : "Stays open, with an owner"}</div>
-              <div className="text-slate-900">{item.outcome.text}</div>
-              {item.outcome.owner && <div className="text-[11px] text-slate-600">Owner: {item.outcome.owner}</div>}
+            {proposal && (
+              <div className="ml-auto flex max-w-[92%] flex-row-reverse items-start gap-2.5">
+                <Avatar name={view.studentName} you className="h-8 w-8 text-[11px]" />
+                <div className="rounded-2xl rounded-tr-md bg-[var(--color-mastery-soft)] px-3.5 py-2 text-[13.5px] text-ink"><div className="text-[11.5px] font-bold text-[var(--color-mastery-ink)]">{view.viewerIsOwner ? "You" : view.studentName}</div>{proposal.text}</div>
+              </div>
+            )}
+            <div className="rounded-2xl bg-surface-2 px-3.5 py-2 text-[13.5px] text-ink"><div className="text-[11.5px] font-bold text-ink-3">Team response</div>{item.outcome.teamResponse}</div>
+            <button onClick={() => onOpen(item.outcome!.entryId)} className={cx("press flex w-full items-start gap-3 rounded-2xl px-3.5 py-2.5 text-left text-[13.5px] ring-1 ring-inset", item.outcome.decision === "resolved" ? "bg-emerald-50 ring-emerald-300" : "bg-amber-50 ring-amber-300")}>
+              <span className={cx("grid h-8 w-8 shrink-0 place-items-center rounded-full text-white clay", item.outcome.decision === "resolved" ? "bg-emerald-600" : "bg-amber-600")}><StatusIcon status={item.outcome.decision === "resolved" ? "resolved" : "open_question"} className="h-4 w-4 !text-white" /></span>
+              <span className="min-w-0">
+                <span className="block text-[12px] font-extrabold text-ink">{item.outcome.decision === "resolved" ? "Recorded as resolved" : "Stays open, with an owner"}</span>
+                <span className="block text-ink">{item.outcome.text}</span>
+                {item.outcome.owner && <span className="block text-[11.5px] text-ink-2">Owner: {item.outcome.owner}</span>}
+              </span>
             </button>
           </>
         ) : view.viewerIsOwner && view.huddle?.status === "open" ? (
-          <div className="space-y-2">
-            <Textarea rows={2} value={text} onChange={(e) => setText(e.target.value)} placeholder="How would you settle this? Say what you think, what it rests on, and who should own any follow-up. If it cannot be settled yet, say what is missing." />
-            <div className="flex items-center gap-3">
-              <Button size="sm" onClick={send} disabled={busy || !text.trim()}>Put it to the team</Button>
+          <div className="space-y-2 rounded-2xl bg-[var(--color-mastery-soft)] p-3">
+            <Textarea rows={2} value={text} onChange={(e) => setText(e.target.value)} placeholder="How would you settle this? Say what you think, what it rests on, and who should own any follow-up. If it cannot be settled yet, say what is missing." className="bg-surface" />
+            <div className="flex flex-wrap items-center gap-3">
+              <Button size="sm" onClick={send} disabled={busy || !text.trim()}><Send className="h-3.5 w-3.5" aria-hidden />Put it to the team</Button>
               {busy && <Spinner label="The colleague best placed to answer is responding, and the outcome is being recorded" hint="Usually 10 to 20 seconds" />}
-              {err && <span className="text-xs text-rose-700">{err}</span>}
+              {err && <span className="text-xs font-semibold text-rose-700">{err}</span>}
             </div>
           </div>
         ) : (
-          <p className="text-xs text-slate-500">Not discussed.</p>
+          <p className="text-xs text-ink-3">Not discussed.</p>
         )}
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -312,53 +401,80 @@ function HuddlePanel({ view, onOpen, refresh, phase }: { view: RunView; onOpen: 
     await refresh();
     setBusy("");
   }
-  if (!ready) return <Card className="p-4 text-sm text-slate-500">The huddle opens after the last encounter. The team will reconcile whatever is still disputed, uncertain or unanswered.</Card>;
+  if (!ready)
+    return (
+      <p className="flex items-center gap-3 rounded-[22px] border-2 border-dashed border-brand-200 bg-surface/70 px-5 py-6 text-sm text-ink-2">
+        <Users className="float-idle h-6 w-6 shrink-0 text-brand-500" aria-hidden />
+        The huddle opens after the last encounter. The team will reconcile whatever is still disputed, uncertain or unanswered.
+      </p>
+    );
   if (!h)
     return (
-      <Card>
-        <CardHeader title="Team huddle" subtitle="Everyone who saw the patient, together, outside the handoff order." />
-        <div className="space-y-3 p-4 text-sm text-slate-700">
-          <p>The agenda is drawn from the entries in the shared state that are still disputed, unanswered or uncertain, the most important for the patient&apos;s safety first. Each colleague gives a position; you propose how to settle each item; the outcome is recorded as a new entry linked to the original, so the trail is kept.</p>
+      <Panel icon={Users} title="Team huddle" subtitle="Everyone who saw the patient, together, outside the handoff order.">
+        <div className="space-y-4 text-sm text-ink-2">
+          <ol className="grid gap-2 sm:grid-cols-3">
+            {[
+              ["The agenda", "Drawn from the entries in the shared state that are still disputed, unanswered or uncertain, the most important for the patient's safety first."],
+              ["Positions, then your call", "Each colleague gives a position; you propose how to settle each item."],
+              ["A kept trail", "The outcome is recorded as a new entry linked to the original, so the trail is kept."],
+            ].map(([t, d], i) => (
+              <li key={t} className="rise rounded-2xl bg-surface-2 p-3" style={v({ "--i": i })}>
+                <span className="grid h-7 w-7 place-items-center rounded-lg bg-brand-600 font-display text-[13px] font-black text-white">{i + 1}</span>
+                <p className="mt-2 font-display text-[14px] font-extrabold text-ink">{t}</p>
+                <p className="mt-0.5 text-[13px] leading-relaxed text-ink-2">{d}</p>
+              </li>
+            ))}
+          </ol>
           {view.viewerIsOwner && (
             <div className="flex flex-wrap items-center gap-3">
-              <Button onClick={() => act("start")} disabled={!!busy}>Open the huddle</Button>
+              <Button size="lg" onClick={() => act("start")} disabled={!!busy}><Users className="h-4 w-4" aria-hidden />Open the huddle</Button>
               {busy && <Spinner label="Choosing the agenda by clinical importance; each colleague is preparing a position from the shared record" hint="Usually 30 to 60 seconds" />}
-              {err && <span className="text-rose-700">{err}</span>}
+              {err && <span className="font-semibold text-rose-700">{err}</span>}
             </div>
           )}
         </div>
-      </Card>
+      </Panel>
     );
   const done = h.items.filter((i) => i.outcome).length;
   const writing = h.status === "closed" && view.status !== "complete" && !view.error;
   return (
     <div className="space-y-4">
-      <Card>
-        <CardHeader title="Team huddle" subtitle={`${h.items.length} item${h.items.length === 1 ? "" : "s"} on the agenda · ${done} discussed${h.status === "closed" ? " · closed" : ""}`} />
-        <div className="space-y-3 p-4">
-          {!h.items.length && <p className="text-sm text-slate-600">Nothing in the shared state is disputed, unanswered or uncertain, so there is nothing to reconcile.</p>}
+      <section className="rise rounded-[24px] bg-ink p-5 text-white clay">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="inline-flex items-center gap-2 font-display text-[22px] font-black tracking-[-0.03em]"><Users className="h-5 w-5 text-[var(--color-xp)]" aria-hidden />Team huddle</h2>
+            <p className="mt-0.5 text-[13.5px] text-white/80">{`${h.items.length} item${h.items.length === 1 ? "" : "s"} on the agenda · ${done} discussed${h.status === "closed" ? " · closed" : ""}`}</p>
+          </div>
+          <ol className="flex flex-wrap gap-1.5" aria-label={`${done} of ${h.items.length} discussed`}>
+            {h.items.map((it, i) => (
+              <li key={it.entryId} className={cx("pop-spring grid h-9 w-9 place-items-center rounded-xl font-display text-[15px] font-black", it.outcome ? "bg-[var(--color-xp)] text-ink clay" : "border-2 border-white/40 text-white/85")} style={v({ "--i": i })}>{i + 1}</li>
+            ))}
+          </ol>
+        </div>
+        <div className="mt-3 space-y-3">
+          {!h.items.length && <p className="text-sm text-white/85">Nothing in the shared state is disputed, unanswered or uncertain, so there is nothing to reconcile.</p>}
           {h.status === "open" && view.viewerIsOwner && (
             <div className="flex flex-wrap items-center gap-3">
-              <Button onClick={() => act("close")} disabled={!!busy}>{done < h.items.length ? "Close the huddle with items left open" : "Close the huddle and write the care plan"}</Button>
-              {busy === "close" && <Spinner label="Closing the huddle" />}
-              {err && <span className="text-sm text-rose-700">{err}</span>}
+              <Button onClick={() => act("close")} disabled={!!busy} className="!bg-[var(--color-xp)] !text-ink">{done < h.items.length ? "Close the huddle with items left open" : "Close the huddle and write the care plan"}</Button>
+              {busy === "close" && <span className="rounded-full bg-surface px-3 py-1"><Spinner label="Closing the huddle" /></span>}
+              {err && <span className="text-sm font-semibold text-rose-300">{err}</span>}
             </div>
           )}
           {writing && (
-            <div className="space-y-1">
+            <div className="space-y-1 rounded-2xl bg-surface px-3.5 py-2.5 text-ink">
               <Spinner label={phase || "Writing the integrated care plan and your teamwork evaluation"} hint="Usually 60 to 90 seconds" />
-              <p className="text-xs text-slate-500">The plan is written from the shared state and each action is checked against it; your evaluation is written from your visit, note, SBAR, messages and huddle contributions. This continues on the server if you leave the page.</p>
+              <p className="text-xs text-ink-3">The plan is written from the shared state and each action is checked against it; your evaluation is written from your visit, note, SBAR, messages and huddle contributions. This continues on the server if you leave the page.</p>
             </div>
           )}
           {h.status === "closed" && view.error && view.viewerIsOwner && (
-            <div className="flex flex-wrap items-center gap-3 rounded-md border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-900">
+            <div className="flex flex-wrap items-center gap-3 rounded-2xl bg-rose-50 px-3.5 py-2.5 text-sm text-rose-950">
               <span>Writing the care plan and evaluation did not finish ({view.error}). Nothing you did is lost.</span>
-              <Button size="sm" variant="secondary" onClick={() => act("close")} disabled={!!busy}>Try again</Button>
+              <Button size="sm" variant="secondary" onClick={() => act("close")} disabled={!!busy}><RotateCcw className="h-3.5 w-3.5" aria-hidden />Try again</Button>
             </div>
           )}
         </div>
-      </Card>
-      {h.items.map((i) => <HuddleItemCard key={i.entryId} view={view} item={i} onOpen={onOpen} refresh={refresh} />)}
+      </section>
+      {h.items.map((it, i) => <HuddleItemCard key={it.entryId} i={i} view={view} item={it} onOpen={onOpen} refresh={refresh} />)}
     </div>
   );
 }
@@ -366,11 +482,43 @@ function HuddlePanel({ view, onOpen, refresh, phase }: { view: RunView; onOpen: 
 // ---------- Hub ----------
 
 const TABS = [
-  { key: "journey", label: "Journey" },
-  { key: "state", label: "Integrated patient view" },
-  { key: "team", label: "Team messages" },
-  { key: "evaluation", label: "Teamwork evaluation" },
+  { key: "journey", label: "Journey", icon: MapIcon },
+  { key: "state", label: "Integrated patient view", icon: Stethoscope },
+  { key: "team", label: "Team messages", icon: MessagesSquare },
+  { key: "evaluation", label: "Teamwork evaluation", icon: ListChecks },
 ] as const;
+
+const NEXT_ICON = { wait: Hourglass, start_visit: Play, continue_visit: Play, write_handoff: PenLine, huddle: Users, finish: Hourglass, done: Trophy, error: CircleAlert } as const;
+
+/** The teamwork evaluation's four domains as a scorecard: observed of applicable, as a ring with the count in words. */
+function DomainRings({ evaluation }: { evaluation: TraceEvaluation }) {
+  const domains = [...new Set(BEHAVIOURS.map((b) => b.domain))];
+  return (
+    <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      {domains.map((d, i) => {
+        const items = BEHAVIOURS.filter((b) => b.domain === d).map((b) => evaluation.behaviours.find((x) => x.key === b.key)).filter(Boolean);
+        const yes = items.filter((x) => x!.observed === "yes").length;
+        const app = items.filter((x) => x!.observed !== "na").length;
+        const c = 2 * Math.PI * 16;
+        return (
+          <div key={d} className="rise flex items-center gap-3 rounded-[20px] bg-surface p-3.5 ring-1 ring-inset ring-line" style={v({ "--i": i })}>
+            <span className="relative grid h-14 w-14 shrink-0 place-items-center" aria-hidden>
+              <svg viewBox="0 0 40 40" className="absolute inset-0 -rotate-90">
+                <circle cx="20" cy="20" r="16" fill="none" stroke="var(--color-surface-2)" strokeWidth="5" />
+                <circle cx="20" cy="20" r="16" fill="none" stroke="#059669" strokeWidth="5" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * (1 - (app ? yes / app : 0))} className="ring-fill" style={v({ "--from": c })} />
+              </svg>
+              <span className="font-mono text-[13px] font-bold text-ink">{yes}/{app}</span>
+            </span>
+            <div className="min-w-0">
+              <div className="font-display text-[14px] font-extrabold leading-tight text-ink">{d}</div>
+              <div className="text-[12px] text-ink-3">{yes} of {app} observed</div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 export default function RunHub({ runId }: { runId: string }) {
   const { view, error, live, refresh: reload } = useRun(runId);
@@ -380,6 +528,7 @@ export default function RunHub({ runId }: { runId: string }) {
   const [step, setStep] = useState<Step | null>(null);
   const [open, setOpen] = useState<string | null>(null);
   const [retrying, setRetrying] = useState(false);
+  const [lit, setLit] = useState<string[] | null>(null);
   // Set when the learner sends their SBAR: the hub stays on their encounter so the review is seen.
   const [held, setHeld] = useState(false);
   const follow = view ? (view.next.stageId ? view.next.stageId : view.next.kind === "done" ? "final" : "huddle") : null;
@@ -402,179 +551,209 @@ export default function RunHub({ runId }: { runId: string }) {
     setStep(to);
   };
 
-  if (error && !view) return <p className="text-sm text-rose-700">{error}</p>;
-  if (!view) return <Spinner label="Loading the care journey" />;
+  if (error && !view) return <p className="rounded-2xl bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-800 ring-1 ring-inset ring-rose-200">{error}</p>;
+  if (!view)
+    return (
+      <div className="space-y-4" aria-busy>
+        <Spinner label="Loading the care journey" />
+        <div className="h-36 animate-pulse rounded-[26px] bg-surface-2" />
+        <div className="h-52 animate-pulse rounded-[22px] bg-surface-2" />
+      </div>
+    );
   const current = step || follow || view.stages[0].stage.id;
   const sv = view.stages.find((s) => s.stage.id === current);
   const me = view.stages.find((s) => s.isStudent);
   const unresolved = statusBoard(view.entries, view.links).unresolved;
   const n = view.next;
   const spinning = n.kind === "wait" || n.kind === "finish";
+  const stops = stopsOf(view);
+  const stopsDone = stops.filter((s) => s.state === "done").length;
+  const NextIcon = NEXT_ICON[n.kind] || Hourglass;
+  const teamCount = view.messages.filter((m) => m.thread !== "huddle" && m.thread !== "plan").length;
+  const ringC = 2 * Math.PI * 16;
 
   return (
-    <div>
-      <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <div className="text-[13px] font-medium text-brand-700">Care journey</div>
-          <h1 className="mt-1 font-display text-[28px] font-semibold leading-tight text-ink">{view.journey.title}</h1>
-          <p className="mt-1.5 max-w-3xl text-[14.5px] text-ink-2">
-            {view.patient.name}, {view.patient.age}, {view.patient.sex} · {view.viewerIsOwner ? "You are" : `${view.studentName} is`} the <span className="font-medium text-slate-800">{me?.stage.roleTitle.toLowerCase()}</span> (encounter {me?.stage.order} of {view.stages.length}). The AI plays the patient and the other professionals.
-          </p>
-        </div>
-        <div className="flex gap-2 text-[12.5px] text-ink-3">
-          <div className="rounded-xl border border-line bg-surface px-3.5 py-2"><div className="font-display text-[22px] font-semibold leading-none tabular text-ink">{view.entries.length}</div><div className="mt-1">entries in shared state</div></div>
-          <div className="rounded-xl border border-line bg-surface px-3.5 py-2"><div className={cx("font-display text-[22px] font-semibold leading-none tabular", unresolved ? "text-amber-700" : "text-ink")}>{unresolved}</div><div className="mt-1">uncertain or open</div></div>
-        </div>
-      </div>
-
-      <div className={cx("mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border px-4 py-3 text-[14px]", n.kind === "error" ? "border-rose-200 bg-rose-50 text-rose-950" : "border-brand-200 bg-brand-50 text-brand-950")}>
-        <span className="flex items-center gap-2">
-          {spinning && <span className="h-3.5 w-3.5 shrink-0 animate-spin rounded-full border-2 border-brand-200 border-t-brand-600" />}
-          <span><span className="font-semibold">{n.kind === "done" ? "Complete. " : n.kind === "error" ? "Stopped. " : "Now: "}</span>{n.label}</span>
-        </span>
-        {view.viewerIsOwner && (
-          <span className="flex gap-2">
-            {(n.kind === "start_visit" || n.kind === "continue_visit") && me?.encounterId && <VisitLink small href={`/encounter/${me.encounterId}`}>{n.kind === "start_visit" ? "Start your visit" : "Continue your visit"}</VisitLink>}
-            {n.kind === "error" && (
-              <Button size="sm" variant="secondary" disabled={retrying} onClick={async () => { setRetrying(true); await post(`/api/journeys/runs/${view.id}/retry`, {}); await refresh(); setRetrying(false); }}>{n.stageId ? "Try this stage again" : "Try again"}</Button>
-            )}
-            {(n.kind === "write_handoff" || n.kind === "huddle") && <Button size="sm" onClick={() => { setTab("journey"); go(n.kind === "huddle" ? "huddle" : n.stageId!); }}>{n.kind === "huddle" ? "Go to the huddle" : "Write the handoff"}</Button>}
-            {n.kind === "done" && <Button size="sm" onClick={() => setTab("state")}>Open the integrated patient view</Button>}
-          </span>
-        )}
-      </div>
-
-      {view.entries.length > 0 && (
-        <Card className="mb-6">
-          <CardHeader
-            title={
-              <span className="inline-flex items-center gap-2">
-                <GitBranch className="h-4 w-4 text-brand-600" aria-hidden />
-                Shared patient state
-              </span>
-            }
-            subtitle="Every entry is a dot in the encounter that added it, coloured by its status now; every curve is a typed link from earlier information to what built on it. Nothing is ever overwritten. Select a dot to see who recorded it, when, and the words it rests on."
-          />
-          <div className="p-4">
-            <JourneyGraph view={view} onOpen={setOpen} />
+    <LitCtx.Provider value={{ lit, setLit }}>
+      <div>
+        {/* ---------- Hero ---------- */}
+        <section className="rise relative mb-4 overflow-hidden rounded-[28px] bg-brand-600 p-5 text-white clay sm:p-6">
+          <div className="pointer-events-none absolute -right-16 -top-24 h-72 w-72 rounded-full spin-slow [background:conic-gradient(from_0deg,transparent,rgb(255_255_255/0.16),transparent_40%)]" aria-hidden />
+          <div className="relative flex flex-wrap items-end justify-between gap-4">
+            <div className="flex min-w-0 items-start gap-4">
+              <Avatar name={view.patient.name} className="float-idle hidden h-16 w-16 text-[22px] sm:grid" />
+              <div className="min-w-0">
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-0.5 text-[12.5px] font-bold">Care journey</div>
+                <h1 className="mt-1.5 font-display text-[28px] font-black leading-[1.02] tracking-[-0.035em] sm:text-[36px]">{view.journey.title}</h1>
+                <p className="mt-2 max-w-3xl text-[14.5px] leading-relaxed text-white/90">
+                  {view.patient.name}, {view.patient.age}, {view.patient.sex} · {view.viewerIsOwner ? "You are" : `${view.studentName} is`} the <span className="font-extrabold text-white">{me?.stage.roleTitle.toLowerCase()}</span> (encounter {me?.stage.order} of {view.stages.length}). The AI plays the patient and the other professionals.
+                </p>
+              </div>
+            </div>
+            <dl className="flex flex-wrap gap-2 text-[12.5px]">
+              <div className="flex items-center gap-2.5 rounded-2xl bg-white/12 px-3 py-2 ring-1 ring-inset ring-white/20">
+                <span className="relative grid h-11 w-11 place-items-center" aria-hidden>
+                  <svg viewBox="0 0 40 40" className="absolute inset-0 -rotate-90">
+                    <circle cx="20" cy="20" r="16" fill="none" stroke="rgb(255 255 255 / 0.2)" strokeWidth="5" />
+                    <circle cx="20" cy="20" r="16" fill="none" stroke="var(--color-xp)" strokeWidth="5" strokeLinecap="round" strokeDasharray={ringC} strokeDashoffset={ringC * (1 - stopsDone / stops.length)} className="ring-fill" style={v({ "--from": ringC })} />
+                  </svg>
+                  <span className="font-mono text-[11px] font-bold">{stopsDone}/{stops.length}</span>
+                </span>
+                <div><dd className="font-display text-[15px] font-extrabold leading-none">{stopsDone} of {stops.length}</dd><dt className="mt-1 text-white/80">stops done</dt></div>
+              </div>
+              <div className="rounded-2xl bg-white px-3.5 py-2 text-ink">
+                <dd className="font-display text-[26px] font-black leading-none tracking-[-0.03em] tabular"><CountUp value={view.entries.length} /></dd>
+                <dt className="mt-1 text-ink-3">entries in shared state</dt>
+              </div>
+              <div className={cx("rounded-2xl px-3.5 py-2", unresolved ? "bg-[var(--color-flame-2)] text-ink" : "bg-[var(--color-xp)] text-ink")}>
+                <dd className="font-display text-[26px] font-black leading-none tracking-[-0.03em] tabular"><CountUp value={unresolved} /></dd>
+                <dt className="mt-1">uncertain or open</dt>
+              </div>
+            </dl>
           </div>
-        </Card>
-      )}
+        </section>
 
-      <div role="tablist" aria-label="Journey views" className="mb-5 flex gap-1 overflow-x-auto border-b border-line">
-        {TABS.map((t) => (
-          <button key={t.key} role="tab" aria-selected={tab === t.key} onClick={() => setTab(t.key)} className={cx("-mb-px min-h-10 whitespace-nowrap border-b-2 px-3 text-[14px]", tab === t.key ? "border-brand-600 font-semibold text-ink" : "border-transparent text-ink-3 hover:text-ink")}>
-            {t.label}
-            {t.key === "team" && view.messages.filter((m) => m.thread !== "huddle" && m.thread !== "plan").length > 0 && <span className="ml-1 text-xs text-slate-400">{view.messages.filter((m) => m.thread !== "huddle" && m.thread !== "plan").length}</span>}
-          </button>
-        ))}
-      </div>
+        {/* ---------- What to do now ---------- */}
+        <div className={cx("rise mb-5 flex flex-wrap items-center justify-between gap-3 rounded-[20px] px-4 py-3 text-[14px] shadow-e1 ring-1 ring-inset", n.kind === "error" ? "bg-rose-50 text-rose-950 ring-rose-200" : n.kind === "done" ? "bg-[var(--color-xp-soft)] text-ink ring-[var(--color-xp-ink)]/30" : "bg-surface text-ink ring-line")} style={v({ "--i": 1 })}>
+          <span className="flex items-center gap-3">
+            <span className={cx("relative grid h-10 w-10 shrink-0 place-items-center rounded-xl clay", n.kind === "error" ? "bg-rose-600 text-white" : n.kind === "done" ? "bg-[var(--color-xp)] text-ink" : "bg-brand-600 text-white")}>
+              {spinning ? <span className="jr-spin h-5 w-5 rounded-full border-[3px] border-white/30 border-t-white" aria-hidden /> : <NextIcon className="h-5 w-5" aria-hidden />}
+              {!spinning && n.kind !== "done" && n.kind !== "error" && <span className="jr-pulse !inset-[-4px] !rounded-xl" aria-hidden />}
+            </span>
+            <span><span className="font-extrabold">{n.kind === "done" ? "Complete. " : n.kind === "error" ? "Stopped. " : "Now: "}</span>{n.label}</span>
+          </span>
+          {view.viewerIsOwner && (
+            <span className="flex flex-wrap gap-2">
+              {(n.kind === "start_visit" || n.kind === "continue_visit") && me?.encounterId && <VisitLink small href={`/encounter/${me.encounterId}`}>{n.kind === "start_visit" ? "Start your visit" : "Continue your visit"}</VisitLink>}
+              {n.kind === "error" && (
+                <Button size="sm" variant="secondary" disabled={retrying} onClick={async () => { setRetrying(true); await post(`/api/journeys/runs/${view.id}/retry`, {}); await refresh(); setRetrying(false); }}><RotateCcw className="h-3.5 w-3.5" aria-hidden />{n.stageId ? "Try this stage again" : "Try again"}</Button>
+              )}
+              {(n.kind === "write_handoff" || n.kind === "huddle") && <Button size="sm" onClick={() => { setTab("journey"); go(n.kind === "huddle" ? "huddle" : n.stageId!); }}>{n.kind === "huddle" ? "Go to the huddle" : "Write the handoff"}<ArrowRight className="h-3.5 w-3.5" aria-hidden /></Button>}
+              {n.kind === "done" && <Button size="sm" onClick={() => setTab("state")}>Open the integrated patient view<ArrowRight className="h-3.5 w-3.5" aria-hidden /></Button>}
+            </span>
+          )}
+        </div>
 
-      {tab === "journey" && (
-        <div className="grid gap-5 lg:grid-cols-[17rem_1fr]">
-          <nav aria-label="Encounters">
-            <ol className="space-y-1">
-              {view.stages.map((s) => {
-                const state = s.status === "complete" ? "done" : s.status === "error" ? "error" : s.status === "pending" ? "todo" : "now";
-                return (
-                  <li key={s.stage.id}>
-                    <button onClick={() => go(s.stage.id)} className={cx("flex w-full items-start gap-2.5 rounded-lg border px-3 py-2 text-left", current === s.stage.id ? "border-brand-500 bg-white shadow-sm" : "border-transparent hover:bg-white")}>
-                      <span className="mt-0.5"><StepDot state={state} /></span>
-                      <span className="min-w-0">
-                        <span className="block text-sm font-medium text-slate-900">{s.stage.order}. {s.stage.roleTitle}</span>
-                        <span className="block truncate text-xs text-slate-500">{s.isStudent ? (view.viewerIsOwner ? "You" : view.studentName) : s.clinicianName} · {s.stage.simTime}</span>
-                        <span className="mt-0.5 block">{s.isStudent ? <Badge tone="teal">{view.viewerIsOwner ? "Your encounter" : "Student"}</Badge> : <Badge>AI colleague</Badge>}</span>
-                      </span>
-                    </button>
-                  </li>
-                );
-              })}
-              {[
-                { key: "huddle", label: "Team huddle", sub: "Reconcile what is still open", state: view.huddle?.status === "closed" ? "done" : n.kind === "huddle" ? "now" : "todo" },
-                { key: "final", label: "Integrated patient view", sub: "Care plan and provenance", state: view.status === "complete" ? "done" : "todo" },
-              ].map((x) => (
-                <li key={x.key}>
-                  <button onClick={() => (x.key === "final" ? setTab("state") : go(x.key))} className={cx("flex w-full items-start gap-2.5 rounded-lg border px-3 py-2 text-left", current === x.key ? "border-brand-500 bg-white shadow-sm" : "border-transparent hover:bg-white")}>
-                    <span className="mt-0.5"><StepDot state={x.state as "done" | "now" | "todo"} /></span>
-                    <span>
-                      <span className="block text-sm font-medium text-slate-900">{x.label}</span>
-                      <span className="block text-xs text-slate-500">{x.sub}</span>
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ol>
-            <p className="mt-3 px-3 text-[11px] leading-relaxed text-slate-400">Each encounter starts from the shared patient state, adds to it, and hands off with an SBAR. Nothing in the state is ever overwritten.</p>
-          </nav>
+        {/* ---------- The journey map: a level path of every stop ---------- */}
+        <section className="rise mb-5 rounded-[24px] border border-line/80 bg-surface px-4 pb-3 pt-4 shadow-e1 sm:px-5" style={v({ "--i": 2 })}>
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h2 className="inline-flex items-center gap-2 font-display text-[17px] font-extrabold tracking-[-0.02em] text-ink"><MapIcon className="h-4 w-4 text-brand-600" aria-hidden />Journey map</h2>
+            <p className="text-[12px] text-ink-3">Select a stop to open it · arrow keys move between stops</p>
+          </div>
+          <LevelPath view={view} current={tab === "state" ? "final" : current} lit={lit} onPick={(k) => { setTab("journey"); if (k === "final") setTab("state"); else go(k); }} />
+          <p className="mt-1 text-[11.5px] leading-relaxed text-ink-3">Each encounter starts from the shared patient state, adds to it, and hands off with an SBAR. Nothing in the state is ever overwritten.</p>
+        </section>
+
+        {view.entries.length > 0 && (
+          <Panel
+            className="mb-6"
+            icon={GitBranch}
+            title="Shared patient state"
+            subtitle="Every entry is a dot in the encounter that added it, coloured by its status now; every curve is a typed link from earlier information to what built on it. Nothing is ever overwritten. Select a dot to see who recorded it, when, and the words it rests on."
+          >
+            <JourneyGraph view={view} onOpen={setOpen} lit={lit} />
+          </Panel>
+        )}
+
+        <div role="tablist" aria-label="Journey views" className="scroll-quiet sticky top-2 z-20 mb-5 flex gap-1 overflow-x-auto rounded-2xl bg-surface/90 p-1.5 shadow-e1 ring-1 ring-line backdrop-blur">
+          {TABS.map((t) => {
+            const count = t.key === "team" ? teamCount : t.key === "state" ? view.entries.length : 0;
+            return (
+              <button key={t.key} role="tab" aria-selected={tab === t.key} onClick={() => setTab(t.key)} className={cx("press inline-flex min-h-10 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-xl px-3.5 text-[14px] font-bold transition-colors pointer-coarse:min-h-11", tab === t.key ? "bg-ink text-white shadow-e2" : "text-ink-2 hover:bg-brand-50 hover:text-ink")}>
+                <t.icon className="h-4 w-4" aria-hidden />
+                {t.label}
+                {t.key === "team" && count > 0 && <span className={cx("rounded-full px-1.5 font-mono text-[11.5px]", tab === t.key ? "bg-[var(--color-xp)] text-ink" : "bg-surface-2 text-ink-2")}>{count}</span>}
+              </button>
+            );
+          })}
+        </div>
+
+        {tab === "journey" && (
           <div className="min-w-0">
             {sv && (sv.isStudent ? <StudentStage view={view} s={sv} onOpen={setOpen} refresh={refresh} onSent={() => setHeld(true)} onContinue={held && follow ? () => { setHeld(false); lastFollow.current = follow; setStep(follow); if (follow === "final") setTab("state"); } : null} phase={live.stageId === sv.stage.id ? live.phase : ""} /> : <AiStage key={sv.stage.id} view={view} s={sv} live={live} onOpen={setOpen} />)}
             {current === "huddle" && <HuddlePanel view={view} onOpen={setOpen} refresh={refresh} phase={live.stageId === "huddle" ? live.phase : ""} />}
             {current === "final" && <FinalView view={view} onOpen={setOpen} refresh={refresh} />}
           </div>
-        </div>
-      )}
+        )}
 
-      {tab === "state" && <FinalView view={view} onOpen={setOpen} refresh={refresh} />}
+        {tab === "state" && <FinalView view={view} onOpen={setOpen} refresh={refresh} />}
 
-      {tab === "team" && (
-        <div className="grid gap-5 lg:grid-cols-2">
-          <Card>
-            <CardHeader title={view.viewerIsOwner ? "Page a colleague" : `${view.studentName}'s messages with colleagues`} subtitle={view.viewerIsOwner ? "Reach back for clarification, reach forward with a heads-up, ask for a consult, or call something out to everyone. Replies come from the shared record and that colleague's own visit only." : "Read-only. Threads the student opened outside the handoff order; replies came from the shared record and that colleague's own visit only."} />
-            <div className="p-4"><ConsultPanel view={view} refresh={refresh} /></div>
-          </Card>
-          <Card>
-            <CardHeader title="All messages outside the handoff order" subtitle="Requests, read-backs and check-backs are labelled; a closed loop is marked when the sender confirms the read-back." />
-            <div className="space-y-2 p-4">
-              {view.messages.filter((m) => m.thread !== "huddle" && m.thread !== "plan").map((m) => (
-                <div key={m.id} className={cx("rounded-md px-3 py-2 text-sm", m.fromIsAi ? "bg-slate-50" : "bg-brand-50")}>
-                  <div className="mb-0.5 flex flex-wrap items-center gap-1.5 text-[11px] font-semibold text-slate-500">
-                    {m.fromName} to {m.toRole || "team"}
-                    {m.kind === "callout" && <Badge tone="amber">Call-out</Badge>}
-                    {m.meta?.act && <Badge>{m.meta.act.replace("_", " ")}</Badge>}
-                    {m.meta?.loop === "closed" && <Badge tone="green">Loop closed</Badge>}
-                  </div>
-                  {m.text}
-                </div>
-              ))}
-              {!view.messages.some((m) => m.thread !== "huddle" && m.thread !== "plan") && <p className="text-sm text-slate-500">No messages yet.</p>}
-            </div>
-          </Card>
-        </div>
-      )}
+        {tab === "team" && (
+          <div className="grid gap-5 lg:grid-cols-2">
+            <Panel icon={Send} title={view.viewerIsOwner ? "Page a colleague" : `${view.studentName}'s messages with colleagues`} subtitle={view.viewerIsOwner ? "Reach back for clarification, reach forward with a heads-up, ask for a consult, or call something out to everyone. Replies come from the shared record and that colleague's own visit only." : "Read-only. Threads the student opened outside the handoff order; replies came from the shared record and that colleague's own visit only."}>
+              <ConsultPanel view={view} refresh={refresh} />
+            </Panel>
+            <Panel icon={MessagesSquare} tone="bg-[var(--color-mastery)] text-white" title="All messages outside the handoff order" subtitle="Requests, read-backs and check-backs are labelled; a closed loop is marked when the sender confirms the read-back.">
+              <ol className="space-y-2.5">
+                {view.messages.filter((m) => m.thread !== "huddle" && m.thread !== "plan").map((m, i) => (
+                  <li key={m.id} className={cx("rise flex max-w-[94%] items-start gap-2.5", !m.fromIsAi && "ml-auto flex-row-reverse")} style={v({ "--i": i })}>
+                    <Avatar name={m.fromName} you={!m.fromIsAi} className="h-8 w-8 text-[11px]" />
+                    <div className={cx("min-w-0 rounded-2xl px-3.5 py-2 text-[13.5px] leading-relaxed text-ink", m.fromIsAi ? "rounded-tl-md bg-surface-2" : "rounded-tr-md bg-[var(--color-mastery-soft)]")}>
+                      <div className="mb-0.5 flex flex-wrap items-center gap-1.5 text-[11.5px] font-bold text-ink-3">
+                        {m.fromName} to {m.toRole || "team"}
+                        {m.kind === "callout" && <Badge tone="amber">Call-out</Badge>}
+                        {m.meta?.act && <Badge>{m.meta.act.replace("_", " ")}</Badge>}
+                        {m.meta?.loop === "closed" && <Badge tone="green">Loop closed</Badge>}
+                      </div>
+                      {m.text}
+                    </div>
+                  </li>
+                ))}
+                {!view.messages.some((m) => m.thread !== "huddle" && m.thread !== "plan") && <p className="text-sm text-ink-3">No messages yet.</p>}
+              </ol>
+            </Panel>
+          </div>
+        )}
 
-      {tab === "evaluation" && (
-        <div className="space-y-5">
-          {view.evaluation ? (
-            <Card>
-              <CardHeader title={`Teamwork trace: ${view.evaluation.subject}`} subtitle="TeamSTEPPS-aligned behaviours. Each line says whether the behaviour was observed, where the evidence is, the exact words, and what to do next time. A behaviour is only credited when the quoted words were found at the stated place." />
-              <div className="p-4"><TraceTable evaluation={view.evaluation} /></div>
-            </Card>
-          ) : (
-            <Card className="p-4 text-sm text-slate-600">
-              The full trace (visit, note, SBAR, messages with colleagues and the huddle) is written when the huddle closes.
-              {view.handoffs.find((h) => !h.authorIsAi)?.evaluation ? " The review of the SBAR handoff is already available below." : ""}
-            </Card>
-          )}
-          {!view.evaluation && view.handoffs.filter((h) => !h.authorIsAi && h.evaluation).map((h) => (
-            <Card key={h.id}><CardHeader title="Review of the SBAR handoff" /><div className="p-4"><TraceTable evaluation={h.evaluation!} /></div></Card>
+        {tab === "evaluation" && (
+          <div className="space-y-5">
+            {view.evaluation ? (
+              <>
+                <DomainRings evaluation={view.evaluation} />
+                <Panel icon={ListChecks} tone="bg-emerald-600 text-white" title={`Teamwork trace: ${view.evaluation.subject}`} subtitle="TeamSTEPPS-aligned behaviours. Each line says whether the behaviour was observed, where the evidence is, the exact words, and what to do next time. A behaviour is only credited when the quoted words were found at the stated place.">
+                  <TraceTable evaluation={view.evaluation} />
+                </Panel>
+              </>
+            ) : (
+              <p className="flex items-start gap-3 rounded-[22px] border-2 border-dashed border-brand-200 bg-surface/70 px-5 py-5 text-sm text-ink-2">
+                <Hourglass className="float-idle mt-0.5 h-5 w-5 shrink-0 text-brand-500" aria-hidden />
+                <span>
+                  The full trace (visit, note, SBAR, messages with colleagues and the huddle) is written when the huddle closes.
+                  {view.handoffs.find((h) => !h.authorIsAi)?.evaluation ? " The review of the SBAR handoff is already available below." : ""}
+                </span>
+              </p>
+            )}
+            {!view.evaluation && view.handoffs.filter((h) => !h.authorIsAi && h.evaluation).map((h) => (
+              <Panel key={h.id} icon={ListChecks} tone="bg-emerald-600 text-white" title="Review of the SBAR handoff"><TraceTable evaluation={h.evaluation!} /></Panel>
+            ))}
+            <Panel icon={Bot} tone="bg-surface-2 text-brand-700" title="Colleagues' handoffs as worked examples" subtitle="The same communication behaviours applied to the AI colleagues' SBARs.">
+              <div className="space-y-3">
+                {view.handoffs.filter((h) => h.authorIsAi).map((h) => {
+                  const yes = h.evaluation ? h.evaluation.behaviours.filter((b) => b.observed === "yes").length : 0;
+                  return (
+                    <details key={h.id} className="group rounded-[18px] bg-surface-2/70 px-3.5 py-2.5 ring-1 ring-inset ring-line">
+                      <summary className="flex min-h-9 cursor-pointer list-none flex-wrap items-center gap-2.5 text-[14px] font-bold text-ink [&::-webkit-details-marker]:hidden">
+                        <Avatar name={h.authorName} className="h-7 w-7 text-[10.5px]" />
+                        <span className="flex-1">{h.authorName} to {h.toName}{h.evaluation ? ` · ${yes} of ${h.evaluation.behaviours.length} behaviours observed` : ""}</span>
+                        {h.evaluation && <DomainMeter yes={yes} applicable={h.evaluation.behaviours.length} className="[&>span:last-child]:hidden" />}
+                      </summary>
+                      <div className="mt-3 space-y-3"><SbarCard handoff={h} />{h.evaluation && <TraceTable evaluation={h.evaluation} />}</div>
+                    </details>
+                  );
+                })}
+                {!view.handoffs.some((h) => h.authorIsAi) && <p className="text-sm text-ink-3">No colleague has handed off yet.</p>}
+              </div>
+            </Panel>
+          </div>
+        )}
+
+        {open && <ProvenancePanel view={view} entryId={open} onOpen={setOpen} onClose={() => setOpen(null)} />}
+        <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11.5px] text-ink-3">
+          <span className="font-bold">Status key:</span>
+          {(Object.keys(STATUS_LABEL) as (keyof typeof STATUS_LABEL)[]).map((k) => (
+            <span key={k} className="inline-flex items-center gap-1"><StatusIcon status={k} className="h-3 w-3" />{STATUS_LABEL[k]}</span>
           ))}
-          <Card>
-            <CardHeader title="Colleagues' handoffs as worked examples" subtitle="The same communication behaviours applied to the AI colleagues' SBARs." />
-            <div className="space-y-3 p-4">
-              {view.handoffs.filter((h) => h.authorIsAi).map((h) => (
-                <details key={h.id} className="rounded-lg border border-slate-200 px-3 py-2">
-                  <summary className="cursor-pointer text-sm font-medium text-slate-800">{h.authorName} to {h.toName}{h.evaluation ? ` · ${h.evaluation.behaviours.filter((b) => b.observed === "yes").length} of ${h.evaluation.behaviours.length} behaviours observed` : ""}</summary>
-                  <div className="mt-3 space-y-3"><SbarCard handoff={h} />{h.evaluation && <TraceTable evaluation={h.evaluation} />}</div>
-                </details>
-              ))}
-              {!view.handoffs.some((h) => h.authorIsAi) && <p className="text-sm text-slate-500">No colleague has handed off yet.</p>}
-            </div>
-          </Card>
-        </div>
-      )}
-
-      {open && <ProvenancePanel view={view} entryId={open} onOpen={setOpen} onClose={() => setOpen(null)} />}
-      <p className="mt-6 text-[11px] text-slate-400">Status key: {Object.values(STATUS_LABEL).join(" · ")}.</p>
-    </div>
+        </p>
+      </div>
+    </LitCtx.Provider>
   );
 }
