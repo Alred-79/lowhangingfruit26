@@ -160,8 +160,24 @@ export function deriveGame(userId: string, professionId: string): GameState {
   const weekStart = addDays(todayDay(), -6);
   const weekXp = log.filter((v) => day(v.at) >= weekStart).reduce((n, v) => n + v.xp, 0);
 
+  // Mastery as of the latest visit whose feedback the student may see: a held visit updates the Elo
+  // ratings in the engine, and showing that move would hint at a grade the instructor is holding.
   const profile = skillProfile(userId, professionId);
-  const mastery = profile.domains.map((d) => ({ key: d.domain, label: domainLabel(d.domain), value: masteryPct(d.rating), n: d.n }));
+  const events = all<{ domain: string; after: number; encounter_id: string; assignment_id: string | null }>(
+    `SELECT s.domain, s.after, s.encounter_id, e.assignment_id FROM skill_events s JOIN encounters e ON e.id = s.encounter_id
+     WHERE s.user_id = ? AND s.profession_id = ? ORDER BY s.id`,
+    userId,
+    professionId,
+  );
+  const shown = new Map<string, { rating: number; n: number }>();
+  for (const ev of events) {
+    if (ev.assignment_id && held.has(ev.assignment_id)) continue;
+    const cur = shown.get(ev.domain);
+    shown.set(ev.domain, { rating: ev.after, n: (cur?.n || 0) + 1 });
+  }
+  const mastery = (events.length ? [...shown.entries()].map(([domain, x]) => ({ domain, rating: x.rating, n: x.n })) : profile.domains)
+    .sort((a, b) => a.domain.localeCompare(b.domain))
+    .map((d) => ({ key: d.domain, label: domainLabel(d.domain), value: masteryPct(d.rating), n: d.n }));
 
   const achievements = achievementsOf(rows, held, streak.best);
 

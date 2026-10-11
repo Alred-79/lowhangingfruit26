@@ -8,6 +8,7 @@ import { Activity, Bot, MessageSquareText, Search, Stethoscope, UserRound, Users
 import TrustLabel from "@/components/TrustLabel";
 import { Button, Empty, Input, Label } from "@/components/ui";
 import { isFaculty, requireUser } from "@/lib/auth";
+import { all } from "@/lib/db";
 import { searchEpisodes } from "@/lib/episodes";
 
 const v = (o: Record<string, string | number>) => o as CSSProperties;
@@ -17,6 +18,9 @@ export default async function EpisodesPage({ searchParams }: { searchParams: Pro
   const q = await searchParams;
   const faculty = isFaculty(user);
   const episodes = searchEpisodes(user, { patient: q.patient, participant: q.participant, role: q.role, text: q.text, limit: 60 });
+  // Scores of visits whose assignment feedback the instructor is still holding are not shown to
+  // students here either (the feedback page already withholds them).
+  const heldIds = faculty ? new Set<string>() : new Set(all<{ id: string }>("SELECT e.id FROM encounters e JOIN assignments a ON a.id = e.assignment_id WHERE a.feedback_released = 0").map((r) => r.id));
   const h = await headers();
   const origin = `${h.get("x-forwarded-proto") || "https"}://${h.get("x-forwarded-host") || h.get("host")}`;
   // Only what the old table rendered goes to the browser (no participant ids, findings or levels);
@@ -31,7 +35,7 @@ export default async function EpisodesPage({ searchParams }: { searchParams: Pro
     role: e.role,
     visitNumber: e.visitNumber,
     turns: e.turns,
-    score: e.status === "scored" ? e.score : null,
+    score: e.status === "scored" && !heldIds.has(e.id) ? e.score : null,
     recorded: e.recorded,
     match: e.match,
     caseTitle: faculty ? e.caseTitle : "",
