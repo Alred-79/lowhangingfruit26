@@ -7,6 +7,7 @@ import type { ConsistencyResult, Issue } from "@/lib/studio/checks";
 import { describeOp, wordingWarnings } from "@/lib/studio/patch";
 import { SECTIONS, type SectionId } from "@/lib/studio/profile";
 import { Notice, Panel } from "./fields";
+import ErrorNote from "@/components/ErrorNote";
 import PatchDiff from "./PatchDiff";
 
 const SEV = { high: { tone: "red", label: "High" }, medium: { tone: "amber", label: "Medium" }, low: { tone: "slate", label: "Low" } } as const;
@@ -127,11 +128,7 @@ export default function ConsistencyPanel({
           Structure checks are done in under a second. The clinical review reads the whole case and usually takes 45 to 90 seconds.
         </Notice>
       )}
-      {error && (
-        <Notice tone="red" className="mb-3">
-          {error}
-        </Notice>
-      )}
+      {error && <ErrorNote message={error} title="The check did not run." kept="Nothing in the patient was changed; run it again." className="mb-3" />}
       {!result && !running && <p className="text-sm text-slate-600">This patient has not been checked yet. Run the check before publishing: high-severity findings block publishing until you fix them, dismiss them or confirm that you want to publish anyway.</p>}
       {result && (
         <>

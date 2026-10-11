@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Eye, FlaskConical, MoreHorizontal, Send, ShieldCheck, Sparkles, Undo2 } from "lucide-react";
 import { Button, cx } from "@/components/ui";
 import type { CaseProfile } from "@/lib/types";
 import { openHigh, type ConsistencyResult, type Issue } from "@/lib/studio/checks";
@@ -37,7 +38,7 @@ const AUTOSAVE_MS = 1200;
 
 function MenuItem({ label, onClick }: { label: string; onClick: () => void }) {
   return (
-    <button type="button" className="block w-full px-3 py-1.5 text-left text-slate-700 hover:bg-slate-50" onClick={onClick}>
+    <button type="button" role="menuitem" className="block min-h-9 w-full rounded-md px-3 py-1.5 text-left text-[13.5px] text-ink-2 hover:bg-slate-100 hover:text-ink" onClick={onClick}>
       {label}
     </button>
   );
@@ -357,24 +358,24 @@ export default function CaseEditor({
   const sp = { p: profile, set, go };
   const roleTitle = roles.find((r) => r.id === profile.professions[0])?.roleTitle || "clinician";
   const navBtn = (sid: SectionId, label: string, right?: React.ReactNode) => (
-    <button key={sid} type="button" onClick={() => go(sid)} aria-current={section === sid ? "page" : undefined} className={cx("flex w-full items-center justify-between gap-2 rounded-md px-2.5 py-1.5 text-left text-sm", section === sid ? "bg-brand-600 font-medium text-white" : "text-slate-700 hover:bg-slate-100")}>
+    <button key={sid} type="button" onClick={() => go(sid)} aria-current={section === sid ? "page" : undefined} className={cx("flex min-h-9 w-full items-center justify-between gap-2 rounded-lg px-2.5 py-1.5 text-left text-[13.5px] transition-colors", section === sid ? "bg-brand-50 font-semibold text-brand-900 ring-1 ring-inset ring-brand-200" : "text-ink-2 hover:bg-slate-100 hover:text-ink")}>
       {/* Labels wrap rather than truncate: "Consistency check" beside "out of date" must stay readable. */}
       <span className="min-w-0 leading-snug">{label}</span>
-      {right !== undefined && <span className={cx("shrink-0 whitespace-nowrap text-xs", section === sid ? "text-brand-100" : "text-slate-400")}>{right}</span>}
+      {right !== undefined && <span className={cx("shrink-0 whitespace-nowrap font-mono text-[11.5px] tabular-nums", section === sid ? "text-brand-700" : "text-ink-3")}>{right}</span>}
     </button>
   );
 
   return (
     <div>
       {/* Top bar */}
-      <div className="sticky top-0 z-30 -mx-4 -mt-5 mb-4 border-b border-slate-200 bg-white/95 px-4 py-2.5 backdrop-blur">
+      <div className="sticky top-0 z-30 -mx-4 -mt-5 mb-5 border-b border-line bg-surface/95 px-4 py-3 backdrop-blur">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-1.5 text-xs">
-              <Link href="/faculty/cases" className="text-slate-500 hover:text-slate-900">
+              <Link href="/faculty/cases" className="font-medium text-ink-3 hover:text-ink">
                 Patient Studio
               </Link>
-              <span className="text-slate-300">/</span>
+              <span className="text-slate-300" aria-hidden>/</span>
               <StatusBadges c={meta} />
               <span
                 role="status"
@@ -392,26 +393,38 @@ export default function CaseEditor({
               )}
             </div>
             {/* The patient's name comes first and never truncates; the faculty title follows and may take a second line. */}
-            <h1 className="line-clamp-2 text-base leading-snug text-slate-900" title={profile.title || undefined}>
-              <span className="whitespace-nowrap font-semibold">
-                {profile.patient.name || "Unnamed patient"}, {profile.patient.age}
+            <h1 className="mt-1 flex items-center gap-2.5 leading-snug text-ink" title={profile.title || undefined}>
+              {profile.patient.portrait ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={profile.patient.portrait} alt="" className="h-9 w-9 shrink-0 rounded-lg object-cover object-[50%_25%] ring-1 ring-line" />
+              ) : (
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-stage font-display text-sm font-semibold text-white/80">{(profile.patient.name || "?").slice(0, 2).toUpperCase()}</span>
+              )}
+              <span className="line-clamp-2 min-w-0">
+                <span className="whitespace-nowrap font-display text-[19px] font-semibold">
+                  {profile.patient.name || "Unnamed patient"}, {profile.patient.age}
+                </span>
+                <span className="ml-2 text-[14px] font-normal text-ink-2">{profile.title || "Untitled patient"}</span>
               </span>
-              <span className="ml-2 text-sm font-normal text-slate-600">{profile.title || "Untitled patient"}</span>
             </h1>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
             {undo.length > 0 && (
               <Button variant="ghost" size="sm" onClick={undoLast} title={`Undo: ${undo[undo.length - 1].label}`}>
+                <Undo2 className="h-3.5 w-3.5" aria-hidden />
                 Undo last accepted change
               </Button>
             )}
             <Button variant="secondary" size="sm" onClick={runCheck} disabled={check.running}>
+              <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
               {check.running ? `Checking... ${check.seconds}s` : "Check consistency"}
             </Button>
             <Button variant="secondary" size="sm" onClick={() => go("preview")}>
+              <Eye className="h-3.5 w-3.5" aria-hidden />
               Student preview
             </Button>
-            <Button variant="secondary" size="sm" onClick={testVisit} disabled={busy === "test" || meta.status === "archived"} title="Saves, then starts a visit with this patient as a student would see it. Works for drafts.">
+            <Button variant="subtle" size="sm" onClick={testVisit} disabled={busy === "test" || meta.status === "archived"} title="Saves, then starts a visit with this patient as a student would see it. Works for drafts.">
+              <FlaskConical className="h-3.5 w-3.5" aria-hidden />
               {busy === "test" ? "Starting..." : "Test visit"}
             </Button>
             {meta.status === "published" ? (
@@ -420,15 +433,17 @@ export default function CaseEditor({
               </Button>
             ) : (
               <Button size="sm" disabled={!!busy || meta.status === "archived"} onClick={openPublish}>
+                <Send className="h-3.5 w-3.5" aria-hidden />
                 {busy === "publish" ? "Checking..." : "Publish"}
               </Button>
             )}
             <div className="relative">
-              <Button variant="ghost" size="sm" onClick={() => setMenu(!menu)} aria-expanded={menu}>
+              <Button variant="ghost" size="sm" onClick={() => setMenu(!menu)} aria-expanded={menu} aria-haspopup="menu">
+                <MoreHorizontal className="h-4 w-4" aria-hidden />
                 More
               </Button>
               {menu && (
-                <div className="absolute right-0 z-40 mt-1 w-60 rounded-md border border-slate-200 bg-white py-1 text-sm shadow-lg">
+                <div role="menu" className="pop-in absolute right-0 z-40 mt-1 w-64 origin-top-right rounded-xl border border-line bg-surface p-1 shadow-e2">
                   <MenuItem label={meta.reviewed ? "Remove the faculty-reviewed mark" : "Mark as faculty-reviewed"} onClick={toggleReviewed} />
                   <MenuItem label="Duplicate" onClick={duplicate} />
                   <MenuItem label="Export JSON" onClick={exportJson} />
@@ -437,6 +452,7 @@ export default function CaseEditor({
               )}
             </div>
             <Button variant={guideOpen ? "ghost" : "secondary"} size="sm" onClick={() => setGuideOpen(!guideOpen)}>
+              <Sparkles className="h-3.5 w-3.5 text-brand-600" aria-hidden />
               {guideOpen ? "Hide guide" : "Ask the guide"}
             </Button>
           </div>
@@ -467,10 +483,10 @@ export default function CaseEditor({
 
       <div className={cx("grid items-start gap-4", guideOpen ? "lg:grid-cols-[15rem_minmax(0,1fr)] 2xl:grid-cols-[15rem_minmax(0,1fr)_22rem]" : "lg:grid-cols-[15rem_minmax(0,1fr)]")}>
         {/* Section navigation */}
-        <nav aria-label="Sections" className="rounded-lg border border-slate-200 bg-white p-2 shadow-sm lg:sticky lg:top-[5.75rem] lg:max-h-[calc(100vh-6.5rem)] lg:overflow-y-auto">
-          <p className="px-2.5 pb-1 pt-1 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Patient profile</p>
+        <nav aria-label="Sections" className="rounded-2xl border border-line bg-surface p-2 lg:sticky lg:top-[6.25rem] lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
+          <p className="px-2.5 pb-1.5 pt-1 text-[12px] font-semibold text-ink-3">Patient profile</p>
           {SECTIONS.map((s) => navBtn(s.id, s.label, counts[s.id]))}
-          <p className="mt-2 border-t border-slate-100 px-2.5 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Before publishing</p>
+          <p className="mt-2 border-t border-line px-2.5 pb-1.5 pt-2.5 text-[12px] font-semibold text-ink-3">Before publishing</p>
           {navBtn(
             "consistency",
             "Consistency check",

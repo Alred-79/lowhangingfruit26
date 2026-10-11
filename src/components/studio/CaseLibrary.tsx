@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
+import { FlaskConical, Search, Sparkles } from "lucide-react";
+import TrustLabel from "@/components/TrustLabel";
 import { Badge, Button, Empty, Input, LinkButton, PageHeader, Select } from "@/components/ui";
 import type { LibraryItem } from "@/lib/studio/store";
 import { api, Notice, startTestVisit } from "./fields";
@@ -13,9 +15,9 @@ export function StatusBadges({ c }: { c: { status: string; origin: string; revie
       {c.status === "published" && <Badge tone="green">Published</Badge>}
       {c.status === "draft" && <Badge tone="slate">Draft</Badge>}
       {c.status === "archived" && <Badge tone="slate">Archived</Badge>}
-      {c.origin === "ai_draft" && !c.reviewed && <Badge tone="amber">AI-drafted, not faculty-reviewed</Badge>}
-      {c.origin === "ai_draft" && c.reviewed && <Badge tone="teal">AI-drafted, faculty-reviewed</Badge>}
-      {c.origin === "sample" && <Badge tone="blue">Sample</Badge>}
+      {c.origin === "ai_draft" && !c.reviewed && <TrustLabel kind="ai-draft" />}
+      {c.origin === "ai_draft" && c.reviewed && <TrustLabel kind="ai-reviewed" />}
+      {c.origin === "sample" && <TrustLabel kind="sample" />}
     </>
   );
 }
@@ -29,7 +31,7 @@ const when = (s: string) => {
   return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
 };
 
-export default function CaseLibrary({ initial, professions }: { initial: LibraryItem[]; professions: { id: string; name: string }[] }) {
+export default function CaseLibrary({ initial, professions, portraits = {} }: { initial: LibraryItem[]; professions: { id: string; name: string }[]; portraits?: Record<string, string> }) {
   const router = useRouter();
   const [cases, setCases] = useState(initial);
   const [q, setQ] = useState("");
@@ -77,10 +79,18 @@ export default function CaseLibrary({ initial, professions }: { initial: Library
       <PageHeader
         title="Patient Studio"
         subtitle="Build, review and publish simulated patients. Students only see patients you have published."
-        action={<LinkButton href="/faculty/cases/new">New patient</LinkButton>}
+        action={
+          <LinkButton href="/faculty/cases/new">
+            <Sparkles className="h-4 w-4" aria-hidden />
+            New patient
+          </LinkButton>
+        }
       />
-      <div className="mb-4 grid gap-2 sm:grid-cols-[1fr_auto_auto_auto]">
-        <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by title, patient name or specialty" aria-label="Search patients" />
+      <div className="mb-4 grid gap-2 rounded-2xl border border-line bg-surface p-2.5 sm:grid-cols-[minmax(0,1fr)_auto_auto_auto]">
+        <div className="relative">
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" aria-hidden />
+          <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by title, patient name or specialty" aria-label="Search patients" className="pl-9" />
+        </div>
         <Select value={role} onChange={(e) => setRole(e.target.value)} aria-label="Filter by learner role" className="sm:w-52">
           <option value="">All learner roles</option>
           {professions.map((p) => (
@@ -103,6 +113,9 @@ export default function CaseLibrary({ initial, professions }: { initial: Library
           <option value="ai_unreviewed">AI-drafted, not reviewed</option>
         </Select>
       </div>
+      <p className="mb-3 text-[13px] text-ink-3">
+        <span className="font-semibold text-ink">{shown.length}</span> of {cases.length} patients
+      </p>
       {error && (
         <Notice tone="red" className="mb-3">
           {error}
@@ -116,71 +129,73 @@ export default function CaseLibrary({ initial, professions }: { initial: Library
           </Link>
         </Empty>
       ) : (
-        <ul className="space-y-2">
+        <ul className="overflow-hidden rounded-2xl border border-line bg-surface">
           {shown.map((c) => (
-            <li key={c.id} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div className="min-w-0 flex-1">
-                  <div className="mb-1 flex flex-wrap items-center gap-1.5">
-                    <StatusBadges c={c} />
-                    {c.openHigh > 0 && <Badge tone="red">{c.openHigh} high-severity issue{c.openHigh === 1 ? "" : "s"} open</Badge>}
-                  </div>
-                  <Link href={`/faculty/cases/${c.id}`} className="text-[15px] font-semibold text-slate-900 hover:text-brand-700">
+            <li key={c.id} className="group flex flex-wrap items-start gap-x-4 gap-y-3 border-b border-line/70 px-4 py-4 last:border-b-0 hover:bg-slate-50/60">
+              <Link href={`/faculty/cases/${c.id}`} className="shrink-0" tabIndex={-1} aria-hidden>
+                {portraits[c.id] ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={portraits[c.id]} alt="" loading="lazy" className="h-14 w-14 rounded-xl object-cover object-[50%_25%] ring-1 ring-line" />
+                ) : (
+                  <span className="grid h-14 w-14 place-items-center rounded-xl bg-stage font-display text-lg font-semibold text-white/80">{(c.patient || "?").slice(0, 2).toUpperCase()}</span>
+                )}
+              </Link>
+              <div className="min-w-0 flex-1 basis-72">
+                <div className="flex flex-wrap items-baseline gap-x-2">
+                  <span className="text-[15px] font-semibold text-ink">{c.patient || "Unnamed patient"}</span>
+                  <Link href={`/faculty/cases/${c.id}`} className="min-w-0 text-[14px] text-ink-2 hover:text-brand-700 hover:underline">
                     {c.title}
                   </Link>
-                  <p className="mt-0.5 text-xs text-slate-500">
-                    {[c.patient, c.professions.map(roleName).join(", "), c.specialty, `Difficulty ${c.difficulty} of 5`].filter(Boolean).join("  ·  ")}
-                  </p>
-                  {c.summary && <p className="mt-1.5 line-clamp-2 max-w-4xl text-sm text-slate-600">{c.summary}</p>}
-                  <p className="mt-1.5 text-xs text-slate-400">
-                    {c.counts.facts} facts, {c.counts.actions} exams and orders, {c.counts.artifacts} documents
-                    {c.counts.variants ? `, ${c.counts.variants} approved variant${c.counts.variants === 1 ? "" : "s"}` : ""} · edited {when(c.updatedAt)}
-                  </p>
                 </div>
-                <div className="flex shrink-0 flex-wrap items-center gap-1.5">
-                  <LinkButton href={`/faculty/cases/${c.id}`} variant="secondary" size="sm">
-                    Open
-                  </LinkButton>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    disabled={busy === c.id || c.status === "archived"}
-                    title="Run the visit yourself, exactly as a student would"
-                    onClick={() => act(c.id, async () => router.push(await startTestVisit(c.id)))}
-                  >
-                    Test visit
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    disabled={busy === c.id}
-                    onClick={() =>
-                      act(c.id, async () => {
-                        const { id } = await api<{ id: string }>(`/api/cases/${c.id}/duplicate`, { json: {} });
-                        router.push(`/faculty/cases/${id}`);
-                      })
-                    }
-                  >
-                    Duplicate
-                  </Button>
-                  {c.canEdit &&
-                    (c.status === "archived" ? (
-                      <Button variant="ghost" size="sm" disabled={busy === c.id} onClick={() => setStatusOf(c.id, "restore")}>
-                        Restore
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        disabled={busy === c.id}
-                        onClick={() => {
-                          if (c.status !== "published" || window.confirm("This patient is published. Archiving removes it from students' lists. Archive it?")) setStatusOf(c.id, "archive");
-                        }}
-                      >
-                        Archive
-                      </Button>
-                    ))}
+                <p className="mt-0.5 text-[12.5px] text-ink-3">{[c.professions.map(roleName).join(", "), c.specialty, `Difficulty ${c.difficulty} of 5`].filter(Boolean).join("  ·  ")}</p>
+                <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                  <StatusBadges c={c} />
+                  {c.openHigh > 0 && <Badge tone="red">{c.openHigh} high-severity issue{c.openHigh === 1 ? "" : "s"} open</Badge>}
                 </div>
+                {c.summary && <p className="mt-2 line-clamp-2 max-w-4xl text-[13.5px] leading-relaxed text-ink-2">{c.summary}</p>}
+                <p className="mt-1.5 text-[12.5px] text-ink-3">
+                  {c.counts.facts} facts, {c.counts.actions} exams and orders, {c.counts.artifacts} documents
+                  {c.counts.variants ? `, ${c.counts.variants} approved variant${c.counts.variants === 1 ? "" : "s"}` : ""} · edited {when(c.updatedAt)}
+                </p>
+              </div>
+              <div className="flex shrink-0 flex-wrap items-center gap-1.5">
+                <LinkButton href={`/faculty/cases/${c.id}`} variant="secondary" size="sm">
+                  Open
+                </LinkButton>
+                <Button variant="subtle" size="sm" disabled={busy === c.id || c.status === "archived"} title="Run the visit yourself, exactly as a student would" onClick={() => act(c.id, async () => router.push(await startTestVisit(c.id)))}>
+                  <FlaskConical className="h-3.5 w-3.5" aria-hidden />
+                  Test visit
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  disabled={busy === c.id}
+                  onClick={() =>
+                    act(c.id, async () => {
+                      const { id } = await api<{ id: string }>(`/api/cases/${c.id}/duplicate`, { json: {} });
+                      router.push(`/faculty/cases/${id}`);
+                    })
+                  }
+                >
+                  Duplicate
+                </Button>
+                {c.canEdit &&
+                  (c.status === "archived" ? (
+                    <Button variant="ghost" size="sm" disabled={busy === c.id} onClick={() => setStatusOf(c.id, "restore")}>
+                      Restore
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      disabled={busy === c.id}
+                      onClick={() => {
+                        if (c.status !== "published" || window.confirm("This patient is published. Archiving removes it from students' lists. Archive it?")) setStatusOf(c.id, "archive");
+                      }}
+                    >
+                      Archive
+                    </Button>
+                  ))}
               </div>
             </li>
           ))}

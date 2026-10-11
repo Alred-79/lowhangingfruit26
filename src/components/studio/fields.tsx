@@ -8,7 +8,7 @@ export function Field({ label, hint, children, className }: { label: ReactNode; 
     <div className={className}>
       <Label>{label}</Label>
       {children}
-      {hint && <p className="mt-1 text-xs text-slate-500">{hint}</p>}
+      {hint && <p className="mt-1.5 text-[12.5px] leading-relaxed text-ink-3">{hint}</p>}
     </div>
   );
 }
@@ -27,7 +27,7 @@ export function Text({ label, hint, value, onChange, className, ...p }: { label?
 /** Textarea that grows with its content. */
 export function Area({ label, hint, value, onChange, className, minRows = 2, dense, ...p }: { label?: ReactNode; hint?: ReactNode; value: string; onChange: (v: string) => void; className?: string; minRows?: number; dense?: boolean } & Omit<React.ComponentProps<"textarea">, "value" | "onChange" | "className">) {
   const rows = Math.max(minRows, Math.min(14, value.split("\n").reduce((n, line) => n + Math.max(1, Math.ceil(line.length / 70)), 0)));
-  const area = <Textarea {...p} rows={rows} value={value} onChange={(e) => onChange(e.target.value)} className={cx("[field-sizing:content] resize-y", dense && "px-2 py-1.5 text-[13px] leading-snug")} />;
+  const area = <Textarea {...p} rows={rows} value={value} onChange={(e) => onChange(e.target.value)} style={{ minHeight: `${minRows * (dense ? 1.4 : 1.65) + (dense ? 0.8 : 1.2)}em` }} className={cx("[field-sizing:content] resize-y", dense && "px-2 py-1.5 text-[13px] leading-snug")} />;
   return label ? (
     <Field label={label} hint={hint} className={className}>
       {area}
@@ -60,7 +60,7 @@ export function StringList({ label, hint, items, onChange, placeholder, addLabel
 
 export function RemoveButton({ onClick, label = "Delete" }: { onClick: () => void; label?: string }) {
   return (
-    <button type="button" onClick={onClick} title={label} aria-label={label} className="mt-0.5 shrink-0 rounded px-1.5 py-1 text-xs text-slate-400 hover:bg-rose-50 hover:text-rose-700">
+    <button type="button" onClick={onClick} title={label} aria-label={label} className="mt-0.5 shrink-0 rounded-md px-1.5 py-1 text-xs text-slate-500 hover:bg-rose-50 hover:text-rose-700">
       {label}
     </button>
   );
@@ -68,15 +68,15 @@ export function RemoveButton({ onClick, label = "Delete" }: { onClick: () => voi
 
 export function Panel({ title, subtitle, action, children, className }: { title: ReactNode; subtitle?: ReactNode; action?: ReactNode; children: ReactNode; className?: string }) {
   return (
-    <section className={cx("rounded-lg border border-slate-200 bg-white shadow-sm", className)}>
-      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-slate-100 px-4 py-3">
+    <section className={cx("rounded-2xl border border-line bg-surface", className)}>
+      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-line/70 px-5 py-3.5">
         <div className="min-w-0">
-          <h2 className="text-sm font-semibold text-slate-900">{title}</h2>
-          {subtitle && <p className="mt-0.5 max-w-3xl text-xs leading-relaxed text-slate-500">{subtitle}</p>}
+          <h2 className="text-[15px] font-semibold text-ink">{title}</h2>
+          {subtitle && <p className="mt-0.5 max-w-3xl text-[12.5px] leading-relaxed text-ink-3">{subtitle}</p>}
         </div>
         {action}
       </div>
-      <div className="p-4">{children}</div>
+      <div className="p-5">{children}</div>
     </section>
   );
 }
@@ -88,16 +88,16 @@ export function Dialog({ title, onClose, children, footer, wide }: { title: Reac
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-900/40 p-4 sm:p-8" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
-      <div role="dialog" aria-modal="true" className={cx("w-full rounded-lg bg-white shadow-xl", wide ? "max-w-4xl" : "max-w-xl")}>
-        <div className="flex items-center justify-between gap-3 border-b border-slate-100 px-5 py-3">
-          <h2 className="text-base font-semibold text-slate-900">{title}</h2>
-          <button type="button" onClick={onClose} className="rounded px-2 py-1 text-sm text-slate-500 hover:bg-slate-100">
+    <div className="scrim-in fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-ink/40 p-4 sm:p-8" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+      <div role="dialog" aria-modal="true" className={cx("pop-in w-full rounded-2xl bg-surface shadow-e3", wide ? "max-w-4xl" : "max-w-xl")}>
+        <div className="flex items-center justify-between gap-3 border-b border-line px-6 py-4">
+          <h2 className="font-display text-[19px] font-semibold text-ink">{title}</h2>
+          <button type="button" onClick={onClose} className="press min-h-9 rounded-lg px-2.5 text-[13.5px] text-ink-3 hover:bg-slate-100 hover:text-ink">
             Close
           </button>
         </div>
-        <div className="px-5 py-4">{children}</div>
-        {footer && <div className="flex flex-wrap items-center justify-end gap-2 border-t border-slate-100 px-5 py-3">{footer}</div>}
+        <div className="px-6 py-5">{children}</div>
+        {footer && <div className="flex flex-wrap items-center justify-end gap-2 border-t border-line bg-surface-2/60 px-6 py-4">{footer}</div>}
       </div>
     </div>
   );
@@ -105,13 +105,13 @@ export function Dialog({ title, onClose, children, footer, wide }: { title: Reac
 
 export function Notice({ tone = "slate", children, className }: { tone?: "slate" | "amber" | "red" | "green" | "teal"; children: ReactNode; className?: string }) {
   const tones = {
-    slate: "border-slate-200 bg-slate-50 text-slate-700",
-    amber: "border-amber-200 bg-amber-50 text-amber-900",
-    red: "border-rose-200 bg-rose-50 text-rose-900",
-    green: "border-emerald-200 bg-emerald-50 text-emerald-900",
-    teal: "border-brand-200 bg-brand-50 text-brand-900",
+    slate: "border-line bg-surface-2 text-ink-2",
+    amber: "border-amber-200 bg-amber-50 text-amber-950",
+    red: "border-rose-200 bg-rose-50 text-rose-950",
+    green: "border-emerald-200 bg-emerald-50 text-emerald-950",
+    teal: "border-brand-200 bg-brand-50 text-brand-950",
   };
-  return <div className={cx("rounded-md border px-3 py-2 text-sm", tones[tone], className)}>{children}</div>;
+  return <div className={cx("rounded-xl border px-3.5 py-2.5 text-[14px] leading-relaxed", tones[tone], className)}>{children}</div>;
 }
 
 /** Reads `await res.json()` and throws on { error } or a non-2xx status. */

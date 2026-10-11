@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { Button, cx, Input, PageHeader, Select } from "@/components/ui";
 import type { ClarifyQuestion } from "@/lib/studio/ai";
 import { api, Area, Field, Notice, Panel, Text } from "./fields";
+import ErrorNote from "@/components/ErrorNote";
+import GeneratorPipeline from "./GeneratorPipeline";
 
 type Role = { id: string; name: string; roleTitle: string; encounterTypes: string[] };
 type Way = "describe" | "form" | "import";
@@ -212,48 +214,13 @@ export default function NewCaseWizard({ groups, defaultRole }: { groups: { group
   );
 
   if (stage === "writing" || stage === "failed") {
-    const steps: { label: string; detail?: string; state: "done" | "active" | "todo" | "failed" }[] = [
-      { label: way === "describe" ? "Description read" : `Form read (${formFilled} fields filled in)`, state: "done", detail: understood || undefined },
-      ...(doc ? [{ label: "Source document attached", detail: `${doc.filename}, ${doc.chars.toLocaleString()} characters`, state: "done" as const }] : []),
-      {
-        label: "Writing the patient",
-        detail: "The guide writes the persona, the facts with their disclosure tiers, the exams and orders with their results, the chart documents, the objectives and the answer key together, so they agree with each other. This usually takes one to two minutes and can take longer. There is no partial result to show until it finishes.",
-        state: saved ? "done" : stage === "failed" ? "failed" : "active",
-      },
-      { label: "Checking ids and links, then saving as a draft", state: saved ? "done" : "todo", detail: saved ? `${saved.counts.facts} facts, ${saved.counts.actions} exams and orders, ${saved.counts.artifacts} documents, ${saved.counts.objectives} objectives` : undefined },
-      { label: "Opening the editor for your review", state: saved ? "active" : "todo" },
-    ];
     return (
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-5xl">
         <PageHeader title="Drafting your patient" subtitle="The draft is saved to your library as soon as it is written, even if you close this page." />
-        <Panel title={stage === "failed" ? "The draft was not written" : saved ? saved.title : `Working · ${fmt(elapsed)} elapsed`}>
-          <ol className="space-y-3">
-            {steps.map((s, i) => (
-              <li key={i} className="flex gap-3">
-                <span
-                  className={cx(
-                    "mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full text-[11px] font-semibold",
-                    s.state === "done" && "bg-emerald-100 text-emerald-800",
-                    s.state === "active" && "bg-brand-600 text-white",
-                    s.state === "todo" && "bg-slate-100 text-slate-400",
-                    s.state === "failed" && "bg-rose-100 text-rose-800",
-                  )}
-                >
-                  {s.state === "active" ? <span className="h-2 w-2 animate-pulse rounded-full bg-white" /> : i + 1}
-                </span>
-                <div>
-                  <p className={cx("text-sm font-medium", s.state === "todo" ? "text-slate-400" : "text-slate-900")}>
-                    {s.label}
-                    {s.state === "done" && <span className="ml-2 text-xs font-normal text-emerald-700">done</span>}
-                    {s.state === "active" && i === steps.length - 3 && <span className="ml-2 text-xs font-normal text-slate-500">{fmt(elapsed)}</span>}
-                  </p>
-                  {s.detail && <p className="mt-0.5 text-xs leading-relaxed text-slate-500">{s.detail}</p>}
-                </div>
-              </li>
-            ))}
-          </ol>
+        <Panel title={stage === "failed" ? "The draft was not written" : saved ? saved.title : `Working · ${fmt(elapsed)} elapsed`} subtitle={[way === "describe" ? "Description read" : `Form read (${formFilled} fields filled in)`, understood, doc ? `Source document attached: ${doc.filename}, ${doc.chars.toLocaleString()} characters` : ""].filter(Boolean).join(" · ")}>
+          <GeneratorPipeline elapsed={elapsed} saved={!!saved} failed={stage === "failed"} counts={saved?.counts} />
           {stage === "writing" && !saved && (
-            <p role="status" aria-live="polite" className={cx("mt-4 flex items-start gap-2 rounded-md border px-3 py-2 text-sm", elapsed >= 120 ? "border-amber-200 bg-amber-50 text-amber-900" : "border-slate-200 bg-slate-50 text-slate-700")}>
+            <p role="status" aria-live="polite" className={cx("mt-5 flex items-start gap-2 rounded-xl border px-3.5 py-2.5 text-[14px]", elapsed >= 120 ? "border-amber-200 bg-amber-50 text-amber-950" : "border-line bg-surface-2 text-ink-2")}>
               <span className={cx("mt-1.5 h-2 w-2 shrink-0 animate-pulse rounded-full", elapsed >= 120 ? "bg-amber-500" : "bg-brand-600")} />
               <span>
                 {elapsed < 60 && "Writing. Most patients are ready in one to two minutes."}
@@ -264,9 +231,10 @@ export default function NewCaseWizard({ groups, defaultRole }: { groups: { group
               </span>
             </p>
           )}
+          {saved && <p className="mt-5 text-[14px] text-ink-2">Opening the editor for your review…</p>}
           {stage === "failed" && (
-            <div className="mt-4 space-y-3">
-              <Notice tone="red">{error}</Notice>
+            <div className="mt-5 space-y-3">
+              <ErrorNote message={error || "Unknown error."} title="The draft was not written." kept="Your description is kept; try again, or start from an existing patient in the library." />
               <div className="flex gap-2">
                 <Button onClick={() => write(questions.map((q) => ({ question: q.question, answer: answers[q.id] || "" })))}>Try again</Button>
                 <Button variant="secondary" onClick={() => setStage("input")}>
@@ -345,10 +313,10 @@ export default function NewCaseWizard({ groups, defaultRole }: { groups: { group
               setWay(w.id);
               setError(null);
             }}
-            className={cx("rounded-lg border p-3 text-left transition-colors", way === w.id ? "border-brand-600 bg-brand-50 ring-1 ring-brand-600" : "border-slate-200 bg-white hover:border-slate-300")}
+            className={cx("press rounded-2xl border p-4 text-left transition-colors", way === w.id ? "border-brand-500 bg-brand-50 ring-1 ring-brand-500" : "border-line bg-surface hover:border-slate-300")}
           >
-            <span className="block text-sm font-semibold text-slate-900">{w.title}</span>
-            <span className="mt-0.5 block text-xs leading-relaxed text-slate-600">{w.text}</span>
+            <span className="block text-[14.5px] font-semibold text-ink">{w.title}</span>
+            <span className="mt-1 block text-[12.5px] leading-relaxed text-ink-3">{w.text}</span>
           </button>
         ))}
       </div>
@@ -376,7 +344,7 @@ export default function NewCaseWizard({ groups, defaultRole }: { groups: { group
                   <button
                     key={e.label}
                     type="button"
-                    className="rounded-full border border-slate-300 px-2.5 py-0.5 text-slate-700 hover:bg-slate-50"
+                    className="press rounded-full bg-surface-2 px-2.5 py-1 text-[12.5px] text-ink-2 ring-1 ring-inset ring-line hover:bg-brand-50 hover:text-brand-900 hover:ring-brand-200"
                     onClick={() => {
                       setDescription(e.text);
                       setGoals(e.goals);

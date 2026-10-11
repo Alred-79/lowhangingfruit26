@@ -14,6 +14,7 @@ const TIER_TONE: Record<Tier, string> = {
   reluctant: "border-amber-200 bg-amber-50",
   hidden: "border-rose-200 bg-rose-50",
 };
+const TIER_BAR: Record<Tier, string> = { initial: "bg-emerald-500", discoverable: "bg-sky-500", reluctant: "bg-amber-500", hidden: "bg-rose-500" };
 const SMALL = "w-full rounded border border-slate-300 bg-white px-1.5 py-1 text-xs text-slate-800 focus:border-brand-500 focus:outline-none";
 
 function usesOf(p: CaseProfile, id: string): string[] {
@@ -119,20 +120,32 @@ export function FactsSection({ p, set }: SectionProps) {
         title="How disclosure works"
         subtitle="Each fact is one piece of information the patient can give. The patient can only state what is listed here, and the tier decides when. A fact is written to the student's chart, in the chart wording, at the moment it is disclosed."
       >
-        <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4" role="group" aria-label="Disclosure tiers: select one to filter the facts">
           {TIERS.map((t, i) => (
-            <button key={t.id} type="button" onClick={() => setTier(tier === t.id ? "" : t.id)} className={cx("rounded-md border p-2.5 text-left", TIER_TONE[t.id], tier === t.id && "ring-2 ring-brand-500")}>
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-slate-900">
+            <button
+              key={t.id}
+              type="button"
+              aria-pressed={tier === t.id}
+              onClick={() => setTier(tier === t.id ? "" : t.id)}
+              className={cx("press flex flex-col rounded-xl border p-3 text-left transition-shadow", TIER_TONE[t.id], tier === t.id && "ring-2 ring-brand-500")}
+            >
+              {/* The ladder: each step needs more trust than the one before. */}
+              <div className="mb-2.5 flex h-10 items-end gap-1" aria-hidden>
+                {[0, 1, 2, 3].map((k) => (
+                  <span key={k} className={cx("w-full rounded-sm", k <= i ? TIER_BAR[t.id] : "bg-black/5")} style={{ height: `${(k + 1) * 25}%` }} />
+                ))}
+              </div>
+              <div className="flex items-baseline justify-between gap-2">
+                <span className="text-[14px] font-semibold text-ink">
                   {i + 1}. {t.label}
                 </span>
-                <span className="text-xs text-slate-600">{counts[t.id]} facts</span>
+                <span className="font-mono text-[13px] font-semibold tabular-nums text-ink">{counts[t.id]}</span>
               </div>
-              <p className="mt-1 text-xs leading-relaxed text-slate-700">{t.rule}</p>
+              <p className="mt-1 text-[12.5px] leading-relaxed text-ink-2">{t.rule}</p>
             </button>
           ))}
         </div>
-        <p className="mt-3 text-xs leading-relaxed text-slate-500">
+        <p className="mt-3 text-[12.5px] leading-relaxed text-ink-3">
           Rapport rises when the student is empathic, explains why they are asking and avoids judgment. Higher difficulty levels raise the rapport needed for the last two tiers. Importance drives feedback: missed critical facts are listed first.
           Distractors are plausible but irrelevant findings, used only at higher difficulty.
         </p>
