@@ -1,66 +1,95 @@
 @import "tailwindcss";
 
-/* Poscere design tokens. See ui-overhaul-plan/03-design-system.md.
-   Tailwind's slate and brand scales are remapped here so every page inherits the tinted neutrals
-   and the refined teal, whether or not it has been rebuilt yet. */
+/* Poscere design tokens: "Pulse Arcade" (second pass). See ui-overhaul-plan/07-second-pass-plan.md.
+   Tailwind's slate and brand scales are remapped here so every page inherits the brand-tinted
+   neutrals (hue 268, never cream) and the electric brand blue, whether or not it has been rebuilt.
+   Six vivid accents each carry exactly one meaning: XP (lime), streak (flame), rank and mastery
+   (violet), the four disclosure tiers (teal, blue, amber, pink: dataviz-validated), live (red). */
 
 @theme inline {
   --font-sans: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-bricolage), var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-gabarito), var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 @theme {
-  --color-canvas: oklch(0.983 0.004 200);
+  --color-canvas: oklch(0.968 0.014 272);
   --color-surface: oklch(1 0 0);
-  --color-surface-2: oklch(0.962 0.006 200);
-  --color-line: oklch(0.905 0.008 205);
-  --color-line-strong: oklch(0.7 0.015 225);
-  --color-ink: oklch(0.235 0.022 232);
-  --color-ink-2: oklch(0.43 0.022 232);
-  --color-ink-3: oklch(0.535 0.018 232);
-  --color-signal: oklch(0.82 0.15 168);
-  --color-stage: oklch(0.185 0.02 235);
-  --color-stage-2: oklch(0.245 0.022 235);
-  --color-stage-3: oklch(0.31 0.022 235);
+  --color-surface-2: oklch(0.953 0.02 272);
+  --color-line: oklch(0.9 0.026 272);
+  --color-line-strong: oklch(0.72 0.05 272);
+  --color-ink: oklch(0.255 0.095 271);
+  --color-ink-2: oklch(0.4 0.075 271);
+  --color-ink-3: oklch(0.5 0.055 271);
+  --color-signal: oklch(0.87 0.2 128);
+  --color-stage: oklch(0.17 0.06 276);
+  --color-stage-2: oklch(0.225 0.07 276);
+  --color-stage-3: oklch(0.29 0.075 276);
 
-  --color-slate-50: oklch(0.984 0.003 215);
-  --color-slate-100: oklch(0.962 0.006 210);
-  --color-slate-200: oklch(0.922 0.008 212);
-  --color-slate-300: oklch(0.868 0.011 218);
-  --color-slate-400: oklch(0.64 0.016 225);
-  --color-slate-500: oklch(0.535 0.018 232);
-  --color-slate-600: oklch(0.45 0.02 232);
-  --color-slate-700: oklch(0.375 0.022 232);
-  --color-slate-800: oklch(0.29 0.022 232);
-  --color-slate-900: oklch(0.235 0.022 232);
-  --color-slate-950: oklch(0.17 0.02 235);
+  --color-slate-50: oklch(0.982 0.008 272);
+  --color-slate-100: oklch(0.958 0.016 272);
+  --color-slate-200: oklch(0.918 0.024 272);
+  --color-slate-300: oklch(0.862 0.032 272);
+  --color-slate-400: oklch(0.67 0.045 272);
+  --color-slate-500: oklch(0.52 0.055 271);
+  --color-slate-600: oklch(0.45 0.065 271);
+  --color-slate-700: oklch(0.38 0.075 271);
+  --color-slate-800: oklch(0.31 0.085 271);
+  --color-slate-900: oklch(0.255 0.095 271);
+  --color-slate-950: oklch(0.18 0.08 273);
 
-  --color-brand-50: oklch(0.975 0.018 182);
-  --color-brand-100: oklch(0.94 0.04 182);
-  --color-brand-200: oklch(0.88 0.07 182);
-  --color-brand-300: oklch(0.8 0.1 182);
-  --color-brand-400: oklch(0.7 0.12 182);
-  --color-brand-500: oklch(0.585 0.11 182);
-  --color-brand-600: oklch(0.505 0.095 183);
-  --color-brand-700: oklch(0.44 0.08 184);
-  --color-brand-800: oklch(0.37 0.065 185);
-  --color-brand-900: oklch(0.3 0.05 186);
-  --color-brand-950: oklch(0.22 0.035 188);
+  --color-brand-50: oklch(0.97 0.022 268);
+  --color-brand-100: oklch(0.935 0.05 268);
+  --color-brand-200: oklch(0.875 0.09 268);
+  --color-brand-300: oklch(0.79 0.14 268);
+  --color-brand-400: oklch(0.68 0.2 268);
+  --color-brand-500: oklch(0.585 0.235 267);
+  --color-brand-600: oklch(0.515 0.245 266);
+  --color-brand-700: oklch(0.45 0.22 266);
+  --color-brand-800: oklch(0.38 0.18 266);
+  --color-brand-900: oklch(0.31 0.14 268);
+  --color-brand-950: oklch(0.22 0.1 270);
 
-  /* Disclosure tiers: the same four hues wherever tiers appear. */
-  --color-tier-initial: oklch(0.62 0.13 160);
-  --color-tier-discoverable: oklch(0.6 0.13 240);
-  --color-tier-reluctant: oklch(0.72 0.14 70);
-  --color-tier-hidden: oklch(0.62 0.17 15);
+  /* Game accents. Fills use the bright value with ink text; text uses the -ink value. */
+  --color-xp: oklch(0.86 0.2 128);
+  --color-xp-soft: oklch(0.95 0.09 128);
+  --color-xp-ink: oklch(0.45 0.12 130);
+  --color-flame: oklch(0.7 0.2 42);
+  --color-flame-2: oklch(0.82 0.17 75);
+  --color-flame-soft: oklch(0.95 0.05 60);
+  --color-flame-ink: oklch(0.5 0.16 42);
+  --color-mastery: oklch(0.545 0.235 293);
+  --color-mastery-soft: oklch(0.95 0.035 293);
+  --color-mastery-ink: oklch(0.47 0.2 293);
+  --color-live: oklch(0.64 0.23 18);
+
+  /* Disclosure tiers: the same four hues wherever tiers appear (validated: all six dataviz checks pass, light and dark). */
+  --color-tier-initial: #11a39b;
+  --color-tier-discoverable: #2a78e8;
+  --color-tier-reluctant: #cc7a00;
+  --color-tier-hidden: #e23a7c;
+  /* Labels in a tier's color: soft tint behind deep text (small text never sits on a full tier fill). */
+  --color-tier-initial-soft: oklch(0.95 0.045 185);
+  --color-tier-initial-ink: oklch(0.46 0.09 185);
+  --color-tier-discoverable-soft: oklch(0.95 0.035 258);
+  --color-tier-discoverable-ink: oklch(0.47 0.17 258);
+  --color-tier-reluctant-soft: oklch(0.95 0.06 75);
+  --color-tier-reluctant-ink: oklch(0.49 0.12 60);
+  --color-tier-hidden-soft: oklch(0.95 0.035 355);
+  --color-tier-hidden-ink: oklch(0.5 0.19 355);
+  --color-live-ink: oklch(0.52 0.21 20);
 
   --ease-out-ui: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out-ui: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  /* A short spring (about 5% overshoot) for game objects only: unlocks, rank-ups, XP fills. */
+  --ease-spring: linear(0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%, 0.721 25.3%, 0.849 31.5%, 0.937 38.1%, 0.968 41.8%, 0.991 45.7%, 1.006 50.1%, 1.015 55%, 1.017 63.9%, 1.001 85.5%, 1);
 
-  --shadow-e1: 0 1px 2px 0 oklch(0.235 0.022 232 / 0.06);
-  --shadow-e2: 0 8px 24px -8px oklch(0.235 0.022 232 / 0.18), 0 1px 2px 0 oklch(0.235 0.022 232 / 0.06);
-  --shadow-e3: 0 24px 64px -16px oklch(0.235 0.022 232 / 0.3), 0 2px 6px 0 oklch(0.235 0.022 232 / 0.08);
+  --shadow-e1: 0 1px 2px 0 oklch(0.255 0.095 271 / 0.07);
+  --shadow-e2: 0 10px 28px -10px oklch(0.4 0.18 268 / 0.28), 0 1px 2px 0 oklch(0.255 0.095 271 / 0.07);
+  --shadow-e3: 0 28px 70px -18px oklch(0.35 0.2 268 / 0.38), 0 2px 6px 0 oklch(0.255 0.095 271 / 0.1);
+  /* Clay: a soft colored drop plus an inner top highlight, for game objects and primary buttons. */
+  --shadow-clay: inset 0 1.5px 0 oklch(1 0 0 / 0.55), inset 0 -3px 0 oklch(0.255 0.095 271 / 0.08), 0 12px 26px -14px oklch(0.4 0.2 268 / 0.45);
 
   --animate-rise-in: rise-in 420ms var(--ease-out-ui) both;
   --animate-fade-in: fade-in 240ms var(--ease-out-ui) both;
@@ -95,7 +124,7 @@ p {
   text-wrap: pretty;
 }
 ::selection {
-  background: var(--color-brand-200);
+  background: var(--color-xp);
   color: var(--color-ink);
 }
 
@@ -107,7 +136,6 @@ p {
 
 .font-display {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
   letter-spacing: -0.02em;
 }
 .tabular {
@@ -178,10 +206,10 @@ p {
 
 @keyframes speak-ring {
   0% {
-    box-shadow: 0 0 0 0 oklch(0.82 0.15 168 / 0.55);
+    box-shadow: 0 0 0 0 oklch(0.86 0.2 128 / 0.6);
   }
   100% {
-    box-shadow: 0 0 0 14px oklch(0.82 0.15 168 / 0);
+    box-shadow: 0 0 0 16px oklch(0.86 0.2 128 / 0);
   }
 }
 .speak-ring {
@@ -273,5 +301,317 @@ p {
 @keyframes ring-fill {
   from {
     stroke-dashoffset: var(--from);
+  }
+}
+
+/* =====================================================================================
+   Pulse Arcade: ambient layer (always alive at rest) and game motion (rare, earned).
+   Rules: ambient loops are low amplitude, sit behind content, never move text, pause when the
+   tab is hidden (html[data-tab-hidden]) and stop under reduced motion (the block above collapses
+   every animation to its final frame). Interaction motion uses transform/opacity/clip-path.
+   ===================================================================================== */
+
+/* Clay objects: chunky, tactile, colored drop. */
+.clay {
+  box-shadow: var(--shadow-clay);
+}
+
+/* The aurora: three soft color fields drifting slowly behind the page. Gradients, not filters,
+   so each blob is one composited layer and the drift costs a transform per frame. */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+.aurora > i {
+  position: absolute;
+  display: block;
+  width: 62vmax;
+  height: 62vmax;
+  border-radius: 50%;
+  opacity: var(--a, 0.5);
+  will-change: transform;
+}
+.aurora > i:nth-child(1) {
+  left: -18vmax;
+  top: -26vmax;
+  background: radial-gradient(closest-side, oklch(0.75 0.17 268 / 0.55), transparent 72%);
+  animation: drift-a 34s ease-in-out infinite alternate;
+}
+.aurora > i:nth-child(2) {
+  right: -22vmax;
+  top: -14vmax;
+  background: radial-gradient(closest-side, oklch(0.82 0.15 345 / 0.42), transparent 72%);
+  animation: drift-b 41s ease-in-out infinite alternate;
+}
+.aurora > i:nth-child(3) {
+  left: 18vw;
+  bottom: -40vmax;
+  background: radial-gradient(closest-side, oklch(0.9 0.17 135 / 0.4), transparent 72%);
+  animation: drift-c 47s ease-in-out infinite alternate;
+}
+.aurora > i:nth-child(4) {
+  right: 4vw;
+  bottom: -30vmax;
+  width: 44vmax;
+  height: 44vmax;
+  background: radial-gradient(closest-side, oklch(0.84 0.13 200 / 0.4), transparent 72%);
+  animation: drift-b 53s ease-in-out infinite alternate-reverse;
+}
+.aurora-dark > i:nth-child(1) {
+  background: radial-gradient(closest-side, oklch(0.5 0.24 268 / 0.55), transparent 72%);
+}
+.aurora-dark > i:nth-child(2) {
+  background: radial-gradient(closest-side, oklch(0.55 0.22 345 / 0.38), transparent 72%);
+}
+.aurora-dark > i:nth-child(3) {
+  background: radial-gradient(closest-side, oklch(0.62 0.18 160 / 0.3), transparent 72%);
+}
+.aurora-dark > i:nth-child(4) {
+  background: radial-gradient(closest-side, oklch(0.6 0.16 210 / 0.32), transparent 72%);
+}
+@keyframes drift-a {
+  to {
+    transform: translate3d(14vmax, 9vmax, 0) scale(1.12) rotate(18deg);
+  }
+}
+@keyframes drift-b {
+  to {
+    transform: translate3d(-12vmax, 12vmax, 0) scale(0.9) rotate(-14deg);
+  }
+}
+@keyframes drift-c {
+  to {
+    transform: translate3d(10vmax, -10vmax, 0) scale(1.18);
+  }
+}
+/* Fine grain over the aurora so the color reads as material, not a flat gradient. */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+html[data-tab-hidden] .aurora > i,
+html[data-tab-hidden] .ambient,
+html[data-tab-hidden] .ambient * {
+  animation-play-state: paused !important;
+}
+
+/* One breathing element per page (flame, live dot, rank ring). */
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+.breathe {
+  animation: breathe 3.6s ease-in-out infinite;
+}
+@keyframes float-idle {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-5px);
+  }
+}
+.float-idle {
+  animation: float-idle 5.5s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i, 0) * -1.3s);
+}
+@keyframes flicker {
+  0%,
+  100% {
+    transform: scale(1, 1) rotate(-2deg);
+  }
+  30% {
+    transform: scale(1.04, 0.96) rotate(2deg);
+  }
+  60% {
+    transform: scale(0.97, 1.05) rotate(-1deg);
+  }
+}
+.flicker {
+  transform-origin: 50% 90%;
+  animation: flicker 1.9s ease-in-out infinite;
+}
+/* A highlight that sweeps across progress fills and badges every few seconds. */
+@keyframes sweep {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  55%,
+  100% {
+    transform: translateX(320%) skewX(-18deg);
+  }
+}
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 35%;
+  background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.55), transparent);
+  animation: sweep 3.4s ease-in-out infinite;
+  animation-delay: var(--sd, 0s);
+  pointer-events: none;
+}
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+@keyframes orbit-dash {
+  to {
+    stroke-dashoffset: -60;
+  }
+}
+.orbit-dash {
+  stroke-dasharray: 2 8;
+  animation: orbit-dash 6s linear infinite;
+}
+
+/* Arrival: rises once, staggered by --i (40 ms apart, capped by the caller at 10). */
+.rise {
+  animation: rise-in 520ms var(--ease-out-ui) both;
+  animation-delay: calc(min(var(--i, 0), 10) * 40ms);
+}
+@keyframes pop-spring {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+}
+.pop-spring {
+  animation: pop-spring 520ms var(--ease-spring) both;
+  animation-delay: calc(min(var(--i, 0), 10) * 50ms);
+}
+/* A collectible fact card flipping into the chart, with a glow in its tier color. */
+@keyframes unlock-flip {
+  from {
+    opacity: 0;
+    transform: perspective(700px) rotateX(-62deg) translateY(10px);
+  }
+}
+@keyframes unlock-glow {
+  0% {
+    box-shadow: 0 0 0 0 var(--glow, var(--color-xp)), 0 0 24px 2px var(--glow, var(--color-xp));
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent;
+  }
+}
+.unlock {
+  transform-origin: 50% 0;
+  animation:
+    unlock-flip 560ms var(--ease-spring) both,
+    unlock-glow 1.8s var(--ease-out-ui) both;
+  animation-delay: calc(min(var(--i, 0), 10) * 70ms), calc(min(var(--i, 0), 10) * 70ms + 200ms);
+}
+/* Progress fill that grows from --from (0-1) with the game spring. */
+@keyframes bar-grow {
+  from {
+    transform: scaleX(var(--from, 0));
+  }
+}
+.bar-grow {
+  transform-origin: left center;
+  animation: bar-grow 1.1s var(--ease-spring) both;
+  animation-delay: var(--delay, 200ms);
+}
+/* Twelve-dot burst for real milestones only (visit complete, rank up, streak day added). */
+@keyframes burst-dot {
+  0% {
+    opacity: 1;
+    transform: rotate(var(--r)) translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--r)) translateY(var(--dist, -46px)) scale(0.4);
+  }
+}
+.burst {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  pointer-events: none;
+}
+.burst > i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px;
+  border-radius: 2px;
+  background: var(--c, var(--color-xp));
+  animation: burst-dot 900ms var(--ease-out-ui) both;
+  animation-delay: var(--delay, 300ms);
+}
+@keyframes shake {
+  20%,
+  60% {
+    transform: translateX(-4px);
+  }
+  40%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+.shake {
+  animation: shake 320ms ease-in-out;
+}
+/* Hover lift only on devices that hover (emil: gate hover motion). */
+@media (hover: hover) and (pointer: fine) {
+  .lift {
+    transition:
+      transform 220ms var(--ease-out-ui),
+      box-shadow 220ms var(--ease-out-ui);
+  }
+  .lift:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-e2);
+  }
+}
+/* Hold-to-confirm: the fill grows slowly while held, snaps back fast on release. */
+.hold-fill {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 200ms var(--ease-out-ui);
+}
+.holding .hold-fill {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path var(--hold, 1400ms) linear;
+}
+/* Count-up for decimals-free numbers is above (.count-up). */
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora > i,
+  .breathe,
+  .float-idle,
+  .flicker,
+  .shimmer::after,
+  .spin-slow,
+  .orbit-dash,
+  .burst {
+    animation: none !important;
+  }
+  .burst,
+  .shimmer::after {
+    display: none;
+  }
+  .holding .hold-fill {
+    transition-duration: var(--hold, 1400ms) !important;
   }
 }

@@ -50,3 +50,48 @@ export function CountUp({ value, duration, delay, format = (n) => String(Math.ro
   const v = useCountUp(value, { duration, delay });
   return <>{format(v)}</>;
 }
+
+/**
+ * A critically-damped-ish spring toward `target`, driven by requestAnimationFrame and written
+ * straight to an element's style through `apply` (no React state per frame: emil + r3f rules).
+ * Returns a setter for the target. Reduced motion: jumps straight to the target.
+ */
+export function useSpringValue(apply: (v: number) => void, { stiffness = 170, damping = 18, initial = 0 } = {}) {
+  const state = useRef({ x: initial, v: 0, target: initial, raf: 0, last: 0 });
+  const applyRef = useRef(apply);
+  useEffect(() => {
+    applyRef.current = apply;
+  });
+  useEffect(() => {
+    const s = state.current;
+    return () => cancelAnimationFrame(s.raf);
+  }, []);
+  return (target: number) => {
+    const s = state.current;
+    s.target = target;
+    if (typeof window !== "undefined" && window.matchMedia(QUERY).matches) {
+      s.x = target;
+      s.v = 0;
+      applyRef.current(target);
+      return;
+    }
+    if (s.raf) return;
+    s.last = performance.now();
+    const step = (now: number) => {
+      const dt = Math.min(0.032, (now - s.last) / 1000);
+      s.last = now;
+      const f = -stiffness * (s.x - s.target) - damping * s.v;
+      s.v += f * dt;
+      s.x += s.v * dt;
+      applyRef.current(s.x);
+      if (Math.abs(s.v) < 0.001 && Math.abs(s.x - s.target) < 0.001) {
+        s.x = s.target;
+        applyRef.current(s.x);
+        s.raf = 0;
+        return;
+      }
+      s.raf = requestAnimationFrame(step);
+    };
+    s.raf = requestAnimationFrame(step);
+  };
+}
