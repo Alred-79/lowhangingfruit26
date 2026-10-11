@@ -12,7 +12,7 @@ const BTN = {
   primary:
     "bg-brand-600 text-white shadow-[inset_0_1.5px_0_rgb(255_255_255/0.22),inset_0_-2px_0_rgb(0_0_40/0.18),0_8px_18px_-8px_oklch(0.45_0.24_266/0.7)] hover:bg-brand-500 hover:shadow-[inset_0_1.5px_0_rgb(255_255_255/0.22),inset_0_-2px_0_rgb(0_0_40/0.18),0_12px_24px_-8px_oklch(0.5_0.25_266/0.75)] disabled:bg-slate-200 disabled:text-slate-500 disabled:shadow-none",
   secondary: "bg-surface text-ink ring-1 ring-inset ring-line-strong/50 shadow-e1 hover:bg-brand-50 hover:ring-brand-300 disabled:bg-surface disabled:text-slate-400 disabled:ring-slate-200",
-  danger: "bg-rose-600 text-white shadow-[inset_0_1.5px_0_rgb(255_255_255/0.2),0_8px_18px_-8px_rgb(225_29_72/0.6)] hover:bg-rose-500 disabled:bg-slate-200 disabled:text-slate-500 disabled:shadow-none",
+  danger: "bg-rose-600 text-white shadow-[inset_0_1.5px_0_rgb(255_255_255/0.2),0_8px_18px_-8px_rgb(225_29_72/0.6)] hover:bg-rose-500 disabled:bg-rose-200 disabled:text-rose-800 disabled:shadow-none",
   ghost: "text-ink-2 hover:bg-brand-50 hover:text-brand-800 disabled:text-slate-400 disabled:hover:bg-transparent",
   subtle: "bg-brand-50 text-brand-800 ring-1 ring-inset ring-brand-200 hover:bg-brand-100 disabled:text-slate-400",
 };
