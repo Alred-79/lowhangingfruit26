@@ -1,11 +1,13 @@
 "use client";
 
+import { Check, GitBranch } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Badge, Button, Card, CardHeader, LinkButton, Textarea, cx } from "@/components/ui";
 import { SBAR_FIELDS, STATUS_LABEL, type HuddleItem, type RunView, type Sbar, type StageView, type TraceEvaluation } from "@/lib/journey/types";
 import ConsultPanel from "./ConsultPanel";
 import FinalView from "./FinalView";
+import JourneyGraph from "./JourneyGraph";
 import { EntryRow, post, ProvenancePanel, SbarCard, Spinner, StatusBadge, TraceTable, Transcript, useRun, type Live } from "./shared";
 
 type Step = string; // stage id | "huddle" | "final"
@@ -21,7 +23,7 @@ function StepDot({ state }: { state: "done" | "now" | "todo" | "error" }) {
         state === "error" && "border-rose-500 bg-rose-500 text-white",
       )}
     >
-      {state === "done" ? "✓" : state === "error" ? "!" : ""}
+      {state === "done" ? <Check className="h-3 w-3" aria-hidden /> : state === "error" ? "!" : ""}
     </span>
   );
 }
@@ -363,21 +365,21 @@ export default function RunHub({ runId }: { runId: string }) {
 
   return (
     <div>
-      <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+      <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">Care journey</div>
-          <h1 className="text-xl font-semibold text-slate-900">{view.journey.title}</h1>
-          <p className="mt-1 text-sm text-slate-600">
+          <div className="text-[13px] font-medium text-brand-700">Care journey</div>
+          <h1 className="mt-1 font-display text-[28px] font-semibold leading-tight text-ink">{view.journey.title}</h1>
+          <p className="mt-1.5 max-w-3xl text-[14.5px] text-ink-2">
             {view.patient.name}, {view.patient.age}, {view.patient.sex} · {view.viewerIsOwner ? "You are" : `${view.studentName} is`} the <span className="font-medium text-slate-800">{me?.stage.roleTitle.toLowerCase()}</span> (encounter {me?.stage.order} of {view.stages.length}). The AI plays the patient and the other professionals.
           </p>
         </div>
-        <div className="flex gap-2 text-center text-xs text-slate-500">
-          <div className="rounded-md border border-slate-200 bg-white px-3 py-1.5"><div className="text-base font-semibold tabular-nums text-slate-900">{view.entries.length}</div>entries in shared state</div>
-          <div className="rounded-md border border-slate-200 bg-white px-3 py-1.5"><div className="text-base font-semibold tabular-nums text-slate-900">{unresolved}</div>uncertain or open</div>
+        <div className="flex gap-2 text-[12.5px] text-ink-3">
+          <div className="rounded-xl border border-line bg-surface px-3.5 py-2"><div className="font-display text-[22px] font-semibold leading-none tabular text-ink">{view.entries.length}</div><div className="mt-1">entries in shared state</div></div>
+          <div className="rounded-xl border border-line bg-surface px-3.5 py-2"><div className={cx("font-display text-[22px] font-semibold leading-none tabular", unresolved ? "text-amber-700" : "text-ink")}>{unresolved}</div><div className="mt-1">uncertain or open</div></div>
         </div>
       </div>
 
-      <div className={cx("mb-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border px-4 py-2.5 text-sm", n.kind === "error" ? "border-rose-200 bg-rose-50 text-rose-900" : "border-brand-200 bg-brand-50 text-brand-900")}>
+      <div className={cx("mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border px-4 py-3 text-[14px]", n.kind === "error" ? "border-rose-200 bg-rose-50 text-rose-950" : "border-brand-200 bg-brand-50 text-brand-950")}>
         <span className="flex items-center gap-2">
           {n.kind === "wait" && <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-brand-200 border-t-brand-600" />}
           <span><span className="font-semibold">{n.kind === "done" ? "Complete. " : n.kind === "error" ? "Stopped. " : "Now: "}</span>{n.label}</span>
@@ -394,9 +396,26 @@ export default function RunHub({ runId }: { runId: string }) {
         )}
       </div>
 
-      <div className="mb-4 flex gap-1 border-b border-slate-200">
+      {view.entries.length > 0 && (
+        <Card className="mb-6">
+          <CardHeader
+            title={
+              <span className="inline-flex items-center gap-2">
+                <GitBranch className="h-4 w-4 text-brand-600" aria-hidden />
+                Shared patient state
+              </span>
+            }
+            subtitle="Every entry is a dot in the encounter that added it, coloured by its status now; every curve is a typed link from earlier information to what built on it. Nothing is ever overwritten. Select a dot to see who recorded it, when, and the words it rests on."
+          />
+          <div className="p-4">
+            <JourneyGraph view={view} onOpen={setOpen} />
+          </div>
+        </Card>
+      )}
+
+      <div role="tablist" aria-label="Journey views" className="mb-5 flex gap-1 overflow-x-auto border-b border-line">
         {TABS.map((t) => (
-          <button key={t.key} onClick={() => setTab(t.key)} className={cx("-mb-px border-b-2 px-3 py-2 text-sm", tab === t.key ? "border-brand-600 font-semibold text-brand-700" : "border-transparent text-slate-600 hover:text-slate-900")}>
+          <button key={t.key} role="tab" aria-selected={tab === t.key} onClick={() => setTab(t.key)} className={cx("-mb-px min-h-10 whitespace-nowrap border-b-2 px-3 text-[14px]", tab === t.key ? "border-brand-600 font-semibold text-ink" : "border-transparent text-ink-3 hover:text-ink")}>
             {t.label}
             {t.key === "team" && view.messages.filter((m) => m.thread !== "huddle" && m.thread !== "plan").length > 0 && <span className="ml-1 text-xs text-slate-400">{view.messages.filter((m) => m.thread !== "huddle" && m.thread !== "plan").length}</span>}
           </button>
