@@ -116,7 +116,7 @@ export default async function StudentHome() {
               <ArrowRight className="h-3.5 w-3.5" aria-hidden />
             </Link>
           </div>
-          <p className="relative mt-1 font-display text-[clamp(2rem,3.6vw,2.9rem)] font-black leading-[0.98] tracking-[-0.035em]">Back on shift, {first}.</p>
+          <p className="relative mt-1 font-display text-[clamp(2rem,3.6vw,2.9rem)] font-black leading-[0.98] tracking-[-0.035em]">{game.visits ? `Back on shift, ${first}.` : `Your first shift, ${first}.`}</p>
           <div className="game-layer relative mt-5 flex items-center gap-4">
             <RankRing rank={game.rank} size={88} />
             <div className="min-w-0 flex-1">

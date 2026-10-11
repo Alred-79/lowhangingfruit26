@@ -65,7 +65,7 @@ export function XpBar({ rank, xp, className, dark = false, from = 0 }: { rank: R
         aria-valuenow={xp}
         className={cx("relative mt-1.5 h-4 overflow-hidden rounded-full p-[3px]", dark ? "bg-white/15" : "bg-ink/90")}
       >
-        <div className="shimmer bar-grow h-full rounded-full bg-[var(--color-xp)]" style={v({ width: `${Math.max(4, pct)}%`, "--from": from })} />
+        <div className="shimmer bar-grow h-full rounded-full bg-[var(--color-xp)]" style={v({ width: `${pct > 0 ? Math.max(4, pct) : 0}%`, "--from": from })} />
         <div className="pointer-events-none absolute inset-[3px] flex justify-between" aria-hidden>
           {Array.from({ length: 9 }, (_, i) => (
             <span key={i} className="h-full w-[2px] bg-ink/90" style={{ marginLeft: i === 0 ? "10%" : 0 }} />
@@ -268,7 +268,7 @@ export function ShellHud({ game }: { game: GameState }) {
       <div className="min-w-0 flex-1">
         <div className="truncate text-[12.5px] font-bold text-ink">{game.rank.title}</div>
         <div className="mt-1 h-2 overflow-hidden rounded-full bg-slate-200">
-          <div className="shimmer bar-grow h-full rounded-full bg-[var(--color-xp)]" style={{ width: `${Math.max(4, Math.round(game.rank.progress * 100))}%` }} />
+          <div className="shimmer bar-grow h-full rounded-full bg-[var(--color-xp)]" style={{ width: `${game.rank.progress > 0 ? Math.max(4, Math.round(game.rank.progress * 100)) : 0}%` }} />
         </div>
         <div className="mt-1 font-mono text-[11.5px] text-ink-3">{game.xp} XP</div>
       </div>
