@@ -301,7 +301,7 @@ export default function ConsistencyPanel({
                     "grid h-9 w-9 place-items-center rounded-xl",
                     l.done
                       ? "bg-[var(--color-xp)] text-ink"
-                      : "studio-ping bg-brand-500 text-white",
+                      : "studio-ping bg-brand-600 text-white",
                   )}
                 >
                   {l.done ? (

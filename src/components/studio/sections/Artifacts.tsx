@@ -50,7 +50,7 @@ function TableEditor({ table, onChange }: { table: ArtifactTable; onChange: (t: 
                         type="button"
                         title="Delete this column"
                         aria-label={`Delete column ${c || i + 1}`}
-                        className="px-1 text-xs text-slate-400 hover:text-rose-700"
+                        className="px-1 text-xs text-slate-500 hover:text-rose-700"
                         onClick={() => onChange({ columns: table.columns.filter((_, j) => j !== i), rows: table.rows.map((r) => ({ ...r, cells: r.cells.filter((_, j) => j !== i) })) })}
                       >
                         x
@@ -82,7 +82,7 @@ function TableEditor({ table, onChange }: { table: ArtifactTable; onChange: (t: 
                   </select>
                 </td>
                 <td className="p-0.5">
-                  <button type="button" title="Delete this row" aria-label={`Delete row ${i + 1}`} className="px-1 text-xs text-slate-400 hover:text-rose-700" onClick={() => onChange({ ...table, rows: table.rows.filter((_, j) => j !== i) })}>
+                  <button type="button" title="Delete this row" aria-label={`Delete row ${i + 1}`} className="px-1 text-xs text-slate-500 hover:text-rose-700" onClick={() => onChange({ ...table, rows: table.rows.filter((_, j) => j !== i) })}>
                     x
                   </button>
                 </td>
@@ -186,7 +186,7 @@ function ChartEditor({ chart, onChange }: { chart: ArtifactChart; onChange: (c: 
             <div className="mb-1.5 flex items-center gap-1.5">
               <Input value={s.name} placeholder="Series name, e.g. Systolic BP" aria-label="Series name" onChange={(e) => up({ series: chart.series.map((x, j) => (j === i ? { ...x, name: e.target.value } : x)) })} />
               {chart.series.length > 1 && (
-                <button type="button" className="px-1 text-xs text-slate-400 hover:text-rose-700" onClick={() => up({ series: chart.series.filter((_, j) => j !== i) })}>
+                <button type="button" className="px-1 text-xs text-slate-500 hover:text-rose-700" onClick={() => up({ series: chart.series.filter((_, j) => j !== i) })}>
                   Delete
                 </button>
               )}

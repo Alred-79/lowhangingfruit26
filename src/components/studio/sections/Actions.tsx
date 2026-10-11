@@ -41,7 +41,7 @@ export function ActionsSection({ p, set, go }: SectionProps) {
           return (
             <div key={a.id} className={cx("rounded-md border p-3", a.abnormal ? "border-amber-200" : "border-slate-200")}>
               <div className="grid gap-2 lg:grid-cols-[auto_9.5rem_1fr_8rem_auto]">
-                <span className="mt-2 font-mono text-xs text-slate-400">{a.id}</span>
+                <span className="mt-2 font-mono text-xs text-slate-500">{a.id}</span>
                 <Select value={a.kind} aria-label="Kind" onChange={(e) => up(a.id, { kind: e.target.value as ActionKind })}>
                   {ACTION_KINDS.map((k) => (
                     <option key={k.id} value={k.id}>
@@ -82,12 +82,12 @@ export function ActionsSection({ p, set, go }: SectionProps) {
                     <button type="button" className="hover:underline" onClick={() => go("artifacts")}>
                       {d.title || d.id}
                     </button>
-                    <button type="button" aria-label="Unlink" title="Unlink: the document moves to the start of the visit" className="text-slate-400 hover:text-rose-700" onClick={() => set((c) => setRelease(c, d.id, { when: "start" }))}>
+                    <button type="button" aria-label="Unlink" title="Unlink: the document moves to the start of the visit" className="text-slate-500 hover:text-rose-700" onClick={() => set((c) => setRelease(c, d.id, { when: "start" }))}>
                       x
                     </button>
                   </span>
                 ))}
-                {!linked.length && <span className="text-slate-400">none</span>}
+                {!linked.length && <span className="text-slate-500">none</span>}
                 {free.length > 0 && (
                   <select className="rounded border border-slate-300 bg-white px-1.5 py-1 text-xs text-slate-700" value="" aria-label="Link a document" onChange={(e) => e.target.value && set((c) => setRelease(c, e.target.value, { when: "action", ref: a.id }))}>
                     <option value="">+ Link a document...</option>

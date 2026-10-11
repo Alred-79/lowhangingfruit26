@@ -147,7 +147,7 @@ export function ChartSection({ p, set, go }: SectionProps) {
           <ul className="space-y-1 text-sm text-slate-700">
             {startDocs.map((d) => (
               <li key={d.id}>
-                {d.title} <span className="text-xs text-slate-400">{d.date}</span>
+                {d.title} <span className="text-xs text-slate-500">{d.date}</span>
               </li>
             ))}
           </ul>
@@ -236,7 +236,7 @@ export function ObjectivesSection({ p, set }: SectionProps) {
         {p.objectives.map((o) => (
           <div key={o.id} className="rounded-md border border-slate-200 p-3">
             <div className="flex items-start gap-2">
-              <span className="mt-2 font-mono text-xs text-slate-400">{o.id}</span>
+              <span className="mt-2 font-mono text-xs text-slate-500">{o.id}</span>
               <Area className="flex-1" minRows={1} value={o.text} placeholder="The student should be able to..." onChange={(v) => up(o.id, { text: v })} />
               <RemoveButton onClick={() => set((c) => ({ ...c, objectives: c.objectives.filter((x) => x.id !== o.id) }))} />
             </div>
@@ -282,7 +282,7 @@ export function MismatchesSection({ p, set }: SectionProps) {
           return (
             <div key={m.id} className="rounded-md border border-slate-200 p-3">
               <div className="mb-2 flex items-center justify-between">
-                <span className="font-mono text-xs text-slate-400">{m.id}</span>
+                <span className="font-mono text-xs text-slate-500">{m.id}</span>
                 <RemoveButton onClick={() => set((c) => ({ ...c, mismatches: (c.mismatches || []).filter((x) => x.id !== m.id) }))} />
               </div>
               <div className="grid gap-3 lg:grid-cols-2">

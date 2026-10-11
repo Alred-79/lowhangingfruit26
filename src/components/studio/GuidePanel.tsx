@@ -165,7 +165,7 @@ export default function GuidePanel({ caseId, profileNow, onAccept, onClose }: { 
           }}
         />
         <div className="mt-1.5 flex items-center justify-between">
-          <span className="text-[11px] text-slate-400">Enter to send, Shift+Enter for a new line</span>
+          <span className="text-[11px] text-slate-500">Enter to send, Shift+Enter for a new line</span>
           <Button size="sm" type="submit" disabled={busy || !input.trim()}>
             Ask
           </Button>

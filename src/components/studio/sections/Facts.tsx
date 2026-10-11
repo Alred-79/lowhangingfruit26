@@ -28,7 +28,7 @@ const FactRow = memo(function FactRow({ f, uses, onChange, onDelete }: { f: Fact
   return (
     <tr className="border-b border-slate-100 align-top" id={`fact-${f.id}`}>
       <td className="py-2 pl-3 pr-2">
-        <div className="font-mono text-[11px] text-slate-400">{f.id}</div>
+        <div className="font-mono text-[11px] text-slate-500">{f.id}</div>
         <select className={cx(SMALL, "mt-1")} value={f.category} aria-label="Category" onChange={(e) => onChange(f.id, { category: e.target.value })}>
           {Object.entries(FACT_CATEGORIES).map(([k, v]) => (
             <option key={k} value={k}>

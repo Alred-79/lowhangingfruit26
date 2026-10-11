@@ -34,7 +34,7 @@ function StageIcon({ state, Icon, ping }: { state: State; Icon: typeof Check; pi
       className={cx(
         "grid h-9 w-9 shrink-0 place-items-center rounded-xl transition-[background-color,color] duration-300",
         state === "done" && "bg-[var(--color-xp)] text-ink",
-        state === "active" && cx("bg-brand-500 text-white", ping && "studio-ping"),
+        state === "active" && cx("bg-brand-600 text-white", ping && "studio-ping"),
         state === "todo" && "bg-white/8 text-white/45 ring-1 ring-inset ring-white/15",
         state === "failed" && "bg-rose-500 text-white",
       )}

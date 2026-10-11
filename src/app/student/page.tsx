@@ -373,7 +373,7 @@ export default async function StudentHome() {
           <CardHeader title="Quests from your courses" subtitle={assignments.length ? `${open.length} to do, ${doneAssignments.length} submitted` : undefined} />
           {assignments.length === 0 ? (
             <div className="flex items-start gap-3 px-5 py-6 text-[14px] text-ink-3">
-              <BookOpenCheck className="mt-0.5 h-5 w-5 shrink-0 text-slate-400" aria-hidden />
+              <BookOpenCheck className="mt-0.5 h-5 w-5 shrink-0 text-slate-500" aria-hidden />
               <p>{courses.length ? "Your instructor has not set any assignments yet." : "Join a course with the code from your instructor to see your assignments here."}</p>
             </div>
           ) : (
