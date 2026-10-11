@@ -5,17 +5,13 @@ import { Badge, Button, cx, Input, Select } from "@/components/ui";
 import { FACT_CATEGORIES } from "@/lib/types";
 import type { CaseProfile, Fact, Importance, Tier } from "@/lib/types";
 import { deleteFact, IMPORTANCE, nextId, TIERS } from "@/lib/studio/profile";
+import { LEVEL_NAMES } from "@/lib/engine/difficulty";
+import { Gauge, Layers, Plus } from "lucide-react";
 import { Area, Panel, RemoveButton } from "../fields";
+import { LevelSlider, RapportGates, TIER_STYLE, TierBar, TierSteps, type TierCounts } from "../TierLadder";
 import type { SectionProps } from "./types";
 
-const TIER_TONE: Record<Tier, string> = {
-  initial: "border-emerald-200 bg-emerald-50",
-  discoverable: "border-sky-200 bg-sky-50",
-  reluctant: "border-amber-200 bg-amber-50",
-  hidden: "border-rose-200 bg-rose-50",
-};
-const TIER_BAR: Record<Tier, string> = { initial: "bg-emerald-500", discoverable: "bg-sky-500", reluctant: "bg-amber-500", hidden: "bg-rose-500" };
-const SMALL = "w-full rounded border border-slate-300 bg-white px-1.5 py-1 text-xs text-slate-800 focus:border-brand-500 focus:outline-none";
+const SMALL = "w-full rounded-lg border border-line-strong/50 bg-white px-1.5 py-1 text-xs text-ink focus:border-brand-500 focus:outline-none pointer-coarse:min-h-11";
 
 function usesOf(p: CaseProfile, id: string): string[] {
   const out: string[] = [];
@@ -49,7 +45,7 @@ const FactRow = memo(function FactRow({ f, uses, onChange, onDelete }: { f: Fact
         <Area dense minRows={2} value={f.says} placeholder="How the patient says it" aria-label="Patient wording" onChange={(v) => onChange(f.id, { says: v })} />
       </td>
       <td className="px-2 py-2">
-        <select className={cx(SMALL, TIER_TONE[f.tier])} value={f.tier} aria-label="Disclosure tier" onChange={(e) => onChange(f.id, { tier: e.target.value as Tier })}>
+        <select className={cx(SMALL, "font-semibold")} style={{ background: TIER_STYLE[f.tier]?.soft, color: TIER_STYLE[f.tier]?.ink, borderColor: TIER_STYLE[f.tier]?.fill }} value={f.tier} aria-label="Disclosure tier" onChange={(e) => onChange(f.id, { tier: e.target.value as Tier })}>
           {TIERS.map((t) => (
             <option key={t.id} value={t.id}>
               {t.label}
@@ -79,6 +75,7 @@ export function FactsSection({ p, set }: SectionProps) {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("");
   const [tier, setTier] = useState("");
+  const [gateLevel, setGateLevel] = useState(Math.max(1, Math.min(5, Math.round(p.difficulty || 3))));
 
   const onChange = useCallback(
     (id: string, patch: Partial<Fact>) =>
@@ -118,32 +115,33 @@ export function FactsSection({ p, set }: SectionProps) {
     <div className="space-y-4">
       <Panel
         title="How disclosure works"
+        icon={<Layers className="h-5 w-5" aria-hidden />}
         subtitle="Each fact is one piece of information the patient can give. The patient can only state what is listed here, and the tier decides when. A fact is written to the student's chart, in the chart wording, at the moment it is disclosed."
       >
-        <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4" role="group" aria-label="Disclosure tiers: select one to filter the facts">
-          {TIERS.map((t, i) => (
-            <button
-              key={t.id}
-              type="button"
-              aria-pressed={tier === t.id}
-              onClick={() => setTier(tier === t.id ? "" : t.id)}
-              className={cx("press flex flex-col rounded-xl border p-3 text-left transition-shadow", TIER_TONE[t.id], tier === t.id && "ring-2 ring-brand-500")}
-            >
-              {/* The ladder: each step needs more trust than the one before. */}
-              <div className="mb-2.5 flex h-10 items-end gap-1" aria-hidden>
-                {[0, 1, 2, 3].map((k) => (
-                  <span key={k} className={cx("w-full rounded-sm", k <= i ? TIER_BAR[t.id] : "bg-black/5")} style={{ height: `${(k + 1) * 25}%` }} />
-                ))}
-              </div>
-              <div className="flex items-baseline justify-between gap-2">
-                <span className="text-[14px] font-semibold text-ink">
-                  {i + 1}. {t.label}
-                </span>
-                <span className="font-mono text-[13px] font-semibold tabular-nums text-ink">{counts[t.id]}</span>
-              </div>
-              <p className="mt-1 text-[12.5px] leading-relaxed text-ink-2">{t.rule}</p>
-            </button>
-          ))}
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="font-display text-[44px] font-black leading-[0.85] tracking-[-0.04em] text-ink">{p.facts.length}</p>
+            <p className="mt-1 text-[13px] font-bold text-ink-2">facts across four tiers</p>
+          </div>
+          <TierBar counts={counts as TierCounts} legend height={14} className="min-w-0 flex-1 basis-72" />
+        </div>
+        {/* The ladder: each step needs more trust than the one before. Steps are filter toggles with live counts. */}
+        <TierSteps counts={counts as TierCounts} active={tier} onPick={(t) => setTier(tier === t ? "" : t)} />
+        <div className="mt-4 grid gap-4 rounded-[20px] bg-surface-2/70 p-4 ring-1 ring-inset ring-line lg:grid-cols-[14rem_minmax(0,1fr)]">
+          <div>
+            <label htmlFor="gate-level" className="flex items-center gap-1.5 text-[13.5px] font-bold text-ink">
+              <Gauge className="h-4 w-4 text-brand-600" aria-hidden />
+              Rapport gates at level
+            </label>
+            <p className="mt-0.5 font-display text-[22px] font-black tracking-[-0.02em] text-brand-700">
+              {gateLevel} · {LEVEL_NAMES[gateLevel]}
+            </p>
+            <div className="mt-1">
+              <LevelSlider id="gate-level" value={gateLevel} onChange={setGateLevel} label="Preview rapport gates at difficulty level" />
+            </div>
+            <p className="mt-1 text-[12px] leading-snug text-ink-3">Preview only. This case is set to level {p.difficulty}; assignments can choose another.</p>
+          </div>
+          <RapportGates level={gateLevel} />
         </div>
         <p className="mt-3 text-[12.5px] leading-relaxed text-ink-3">
           Rapport rises when the student is empathic, explains why they are asking and avoids judgment. Higher difficulty levels raise the rapport needed for the last two tiers. Importance drives feedback: missed critical facts are listed first.
@@ -156,6 +154,7 @@ export function FactsSection({ p, set }: SectionProps) {
         subtitle="Topic is a neutral label such as 'alcohol use'. It tells the engine what a question is about, so it must not contain the answer."
         action={
           <Button size="sm" onClick={add}>
+            <Plus className="h-3.5 w-3.5" aria-hidden />
             Add fact
           </Button>
         }
@@ -189,7 +188,7 @@ export function FactsSection({ p, set }: SectionProps) {
               <col className="w-[56px]" />
             </colgroup>
             <thead>
-              <tr className="border-y border-slate-200 bg-slate-50 text-xs text-slate-500">
+              <tr className="border-y border-line bg-surface-2 text-xs font-bold text-ink-2">
                 <th className="py-1.5 pl-3 pr-2 font-medium">Category and topic</th>
                 <th className="px-2 py-1.5 font-medium">Chart wording</th>
                 <th className="px-2 py-1.5 font-medium">Patient wording</th>

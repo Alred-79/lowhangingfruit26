@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
+import { CheckCircle2, Info, OctagonAlert, Trash2, TriangleAlert, X } from "lucide-react";
 import { Button, cx, Input, Label, Textarea } from "@/components/ui";
 
 export function Field({ label, hint, children, className }: { label: ReactNode; hint?: ReactNode; children: ReactNode; className?: string }) {
@@ -60,19 +61,23 @@ export function StringList({ label, hint, items, onChange, placeholder, addLabel
 
 export function RemoveButton({ onClick, label = "Delete" }: { onClick: () => void; label?: string }) {
   return (
-    <button type="button" onClick={onClick} title={label} aria-label={label} className="mt-0.5 shrink-0 rounded-md px-1.5 py-1 text-xs text-slate-500 hover:bg-rose-50 hover:text-rose-700">
+    <button type="button" onClick={onClick} title={label} aria-label={label} className="press mt-0.5 inline-flex min-h-8 shrink-0 items-center gap-1 rounded-lg px-1.5 text-[12px] font-semibold text-ink-3 transition-colors hover:bg-rose-50 hover:text-rose-700 pointer-coarse:min-h-11">
+      <Trash2 className="h-3.5 w-3.5" aria-hidden />
       {label}
     </button>
   );
 }
 
-export function Panel({ title, subtitle, action, children, className }: { title: ReactNode; subtitle?: ReactNode; action?: ReactNode; children: ReactNode; className?: string }) {
+export function Panel({ title, subtitle, action, children, className, icon }: { title: ReactNode; subtitle?: ReactNode; action?: ReactNode; children: ReactNode; className?: string; icon?: ReactNode }) {
   return (
-    <section className={cx("rounded-2xl border border-line bg-surface", className)}>
-      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-line/70 px-5 py-3.5">
-        <div className="min-w-0">
-          <h2 className="text-[15px] font-semibold text-ink">{title}</h2>
-          {subtitle && <p className="mt-0.5 max-w-3xl text-[12.5px] leading-relaxed text-ink-3">{subtitle}</p>}
+    <section className={cx("rise rounded-[22px] border border-line/80 bg-surface shadow-e1", className)}>
+      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-line/70 px-5 py-4">
+        <div className="flex min-w-0 items-start gap-3">
+          {icon && <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-100 text-brand-700">{icon}</span>}
+          <div className="min-w-0">
+            <h2 className="font-display text-[18px] font-extrabold leading-tight tracking-[-0.02em] text-ink">{title}</h2>
+            {subtitle && <p className="mt-1 max-w-3xl text-[13px] leading-relaxed text-ink-3">{subtitle}</p>}
+          </div>
         </div>
         {action}
       </div>
@@ -89,20 +94,24 @@ export function Dialog({ title, onClose, children, footer, wide }: { title: Reac
   }, [onClose]);
   return (
     <div className="scrim-in fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-ink/40 p-4 sm:p-8" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
-      <div role="dialog" aria-modal="true" className={cx("pop-in w-full rounded-2xl bg-surface shadow-e3", wide ? "max-w-4xl" : "max-w-xl")}>
+      <div role="dialog" aria-modal="true" className={cx("pop-in w-full overflow-hidden rounded-[26px] bg-surface shadow-e3", wide ? "max-w-4xl" : "max-w-xl")}>
         <div className="flex items-center justify-between gap-3 border-b border-line px-6 py-4">
-          <h2 className="font-display text-[19px] font-semibold text-ink">{title}</h2>
-          <button type="button" onClick={onClose} className="press min-h-9 rounded-lg px-2.5 text-[13.5px] text-ink-3 hover:bg-slate-100 hover:text-ink">
+          <h2 className="font-display text-[22px] font-black tracking-[-0.025em] text-ink">{title}</h2>
+          <button type="button" onClick={onClose} className="press inline-flex min-h-9 items-center gap-1 rounded-lg px-2.5 text-[13.5px] font-semibold text-ink-3 hover:bg-slate-100 hover:text-ink pointer-coarse:min-h-11">
+            <X className="h-4 w-4" aria-hidden />
             Close
           </button>
         </div>
         <div className="px-6 py-5">{children}</div>
-        {footer && <div className="flex flex-wrap items-center justify-end gap-2 border-t border-line bg-surface-2/60 px-6 py-4">{footer}</div>}
+        {footer && <div className="flex flex-wrap items-start justify-end gap-2 border-t border-line bg-surface-2/60 px-6 py-4">{footer}</div>}
       </div>
     </div>
   );
 }
 
+const NOTICE_ICON = { slate: Info, amber: TriangleAlert, red: OctagonAlert, green: CheckCircle2, teal: Info };
+
+/** A tinted callout with a leading icon in its tone (never a side stripe). */
 export function Notice({ tone = "slate", children, className }: { tone?: "slate" | "amber" | "red" | "green" | "teal"; children: ReactNode; className?: string }) {
   const tones = {
     slate: "border-line bg-surface-2 text-ink-2",
@@ -111,7 +120,14 @@ export function Notice({ tone = "slate", children, className }: { tone?: "slate"
     green: "border-emerald-200 bg-emerald-50 text-emerald-950",
     teal: "border-brand-200 bg-brand-50 text-brand-950",
   };
-  return <div className={cx("rounded-xl border px-3.5 py-2.5 text-[14px] leading-relaxed", tones[tone], className)}>{children}</div>;
+  const iconTone = { slate: "text-ink-3", amber: "text-amber-600", red: "text-rose-600", green: "text-emerald-600", teal: "text-brand-600" };
+  const Icon = NOTICE_ICON[tone];
+  return (
+    <div className={cx("flex gap-2.5 rounded-2xl border px-3.5 py-2.5 text-[14px] leading-relaxed", tones[tone], className)}>
+      <Icon className={cx("mt-[3px] h-4 w-4 shrink-0", iconTone[tone])} aria-hidden />
+      <div className="min-w-0 flex-1">{children}</div>
+    </div>
+  );
 }
 
 /** Reads `await res.json()` and throws on { error } or a non-2xx status. */
