@@ -67,7 +67,6 @@ export default async function FacultyHome() {
     });
   const activity = classActivity(courses.map((c) => c.id));
   const reviewDays = activity.days.map((d) => ({ date: d.date, n: queueAll.filter((q) => q.ended_at && dayOf(q.ended_at) === d.date).length }));
-  const first = user.name.replace(/^Dr\.?\s+/, "").split(" ")[0];
 
   return (
     <AppShell user={user}>
