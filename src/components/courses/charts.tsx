@@ -112,11 +112,11 @@ export function SkillDots({ items, ticks, lo, hi }: { items: SkillDot[]; ticks: 
   return (
     <div>
       <div className={`${cols} pb-1`}>
-        <span className="text-[11px] text-slate-500">Rubric domain</span>
+        <span className="text-[11px] text-slate-500">Rubric domain <span className="text-ink-3">(L1 to L5: the level lines)</span></span>
         <div className="relative h-4">
           {ticks.map((t) => (
-            <span key={t.level} className="absolute -translate-x-1/2 whitespace-nowrap text-[11px] tabular-nums text-slate-500" style={{ left: `${x(t.rating)}%` }}>
-              Level {t.level}
+            <span key={t.level} className="absolute -translate-x-1/2 whitespace-nowrap font-mono text-[11px] tabular-nums text-ink-3" style={{ left: `${x(t.rating)}%` }} title={`Level ${t.level} plays at ${t.rating}`}>
+              L{t.level}
             </span>
           ))}
         </div>

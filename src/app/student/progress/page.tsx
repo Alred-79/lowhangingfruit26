@@ -3,7 +3,7 @@ import AppShell from "@/components/AppShell";
 import { ScoreSpark, SkillDots } from "@/components/courses/charts";
 import RatingHistory, { type HistorySeries } from "@/components/courses/RatingHistory";
 import When from "@/components/courses/When";
-import { Badge, Card, CardHeader, Empty, LinkButton, PageHeader } from "@/components/ui";
+import { Badge, Card, CardHeader, Empty, LinkButton, PageHeader, Stat } from "@/components/ui";
 import { skillProfile } from "@/lib/adaptive";
 import { requireUser } from "@/lib/auth";
 import { all } from "@/lib/db";
@@ -17,16 +17,6 @@ const START = 1200;
 const LO = 900;
 const HI = 1700;
 const MODE_LABEL: Record<string, string> = { practice: "Practice", adaptive: "Adaptive", homework: "Homework", exam: "Exam", journey: "Care journey" };
-
-function Stat({ label, value, note }: { label: string; value: string; note: string }) {
-  return (
-    <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-      <div className="text-xs text-slate-500">{label}</div>
-      <div className="mt-1 text-2xl font-semibold text-slate-900">{value}</div>
-      <div className="mt-1 text-xs text-slate-500">{note}</div>
-    </div>
-  );
-}
 
 export default async function ProgressPage({ searchParams }: { searchParams: Promise<{ profession?: string }> }) {
   const user = await requireUser();
@@ -109,7 +99,7 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
         <div className="mb-4 flex flex-wrap items-center gap-1.5 text-xs">
           <span className="text-slate-500">Ratings are kept per role:</span>
           {roleTabs.map((p) => (
-            <Link key={p} href={`/student/progress?profession=${p}`} aria-current={p === professionId ? "page" : undefined} className={p === professionId ? "rounded-md bg-brand-600 px-2.5 py-1 font-medium text-white" : "rounded-md border border-slate-300 bg-white px-2.5 py-1 text-slate-700 hover:bg-slate-50"}>
+            <Link key={p} href={`/student/progress?profession=${p}`} aria-current={p === professionId ? "page" : undefined} className={p === professionId ? "rounded-lg bg-brand-600 px-3 py-1.5 font-medium text-white" : "rounded-lg bg-surface px-3 py-1.5 text-ink-2 ring-1 ring-inset ring-slate-300 hover:bg-slate-50"}>
               {profession(p).name}
             </Link>
           ))}
@@ -123,12 +113,12 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
         <Stat label="Weakest domain" value={weakest ? weakest.split(/[,(]| and /)[0] : "–"} note={weakest || "Shown after your first scored visit"} />
       </div>
 
-      <Card className="mt-5">
-        <div className="px-4 py-3 text-sm text-slate-700">
-          <span className="font-semibold text-slate-900">How the adaptive level is chosen. </span>
-          After every scored visit, your rating in each rubric domain moves up if you scored better than expected for that visit's level and down if you scored worse, with bigger moves while you have few visits. Your next adaptive session is set at the level where your expected score is closest to 70%, and the patient's behaviour is tuned to exercise your weakest domain.
-        </div>
-      </Card>
+      <details className="group mt-5 rounded-2xl border border-line bg-surface px-5 py-3.5" open>
+        <summary className="cursor-pointer text-[14px] font-semibold text-ink">How the adaptive level is chosen (no language model involved)</summary>
+        <p className="mt-2 max-w-3xl text-[14px] leading-relaxed text-ink-2">
+          After every scored visit, your rating in each rubric domain moves up if you scored better than expected for that visit&apos;s level and down if you scored worse, with bigger moves while you have few visits. Your next adaptive session is set at the level where your expected score is closest to 70%, and the patient&apos;s behaviour is tuned to exercise your weakest domain.
+        </p>
+      </details>
 
       {profile.domains.length === 0 ? (
         <div className="mt-5">
