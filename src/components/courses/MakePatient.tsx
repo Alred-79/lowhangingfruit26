@@ -40,8 +40,8 @@ export default function MakePatient({ roleName }: { roleName: string }) {
   }
   if (busy) {
     return (
-      <div className="flex items-center gap-3 text-sm text-slate-700">
-        <div className="h-5 w-5 animate-spin rounded-full border-2 border-slate-200 border-t-brand-600" />
+      <div role="status" aria-live="polite" className="flex items-center gap-3 rounded-xl bg-brand-50 px-4 py-3 text-[14px] text-brand-950 ring-1 ring-inset ring-brand-200">
+        <div className="h-5 w-5 shrink-0 animate-spin rounded-full border-2 border-brand-200 border-t-brand-600" />
         <span>
           Writing your patient&apos;s history, chart and test results. This usually takes one to two minutes. {Math.floor(secs / 60)}:{String(secs % 60).padStart(2, "0")}
           {secs > 150 ? " — still working; a long case takes longer." : ""}
@@ -51,16 +51,16 @@ export default function MakePatient({ roleName }: { roleName: string }) {
   }
   return (
     <div className="space-y-2">
-      <Textarea value={text} onChange={(e) => setText(e.target.value)} rows={2} maxLength={1500} placeholder={`Describe a patient or a skill you want to practise as a ${roleName.toLowerCase()} student`} />
+      <Textarea aria-label="Describe the practice patient" value={text} onChange={(e) => setText(e.target.value)} rows={2} maxLength={1500} placeholder={`Describe a patient, or a skill you want to practise as ${roleName}`} />
       <div className="flex flex-wrap gap-1.5">
         {IDEAS.map((i) => (
-          <button key={i} type="button" onClick={() => setText(i)} className="rounded-full border border-slate-200 bg-white px-2 py-0.5 text-left text-[11px] text-slate-600 hover:border-brand-500">
+          <button key={i} type="button" onClick={() => setText(i)} className="press rounded-full bg-surface-2 px-2.5 py-1 text-left text-[12.5px] text-ink-2 ring-1 ring-inset ring-line hover:bg-brand-50 hover:text-brand-900 hover:ring-brand-200">
             {i}
           </button>
         ))}
       </div>
       <div className="flex flex-wrap items-center gap-2">
-        <Select value={level} onChange={(e) => setLevel(e.target.value)} className="w-auto">
+        <Select aria-label="Level" value={level} onChange={(e) => setLevel(e.target.value)} className="max-w-40">
           {[1, 2, 3, 4, 5].map((l) => (
             <option key={l} value={l}>
               Level {l}
@@ -70,7 +70,7 @@ export default function MakePatient({ roleName }: { roleName: string }) {
         <Button onClick={go} disabled={text.trim().length < 15}>
           Create and start
         </Button>
-        <span className="text-xs text-slate-500">Private to you. Written by AI and not reviewed by faculty.</span>
+        <span className="text-[12.5px] text-ink-3">Private to you. Written by AI and not reviewed by faculty.</span>
       </div>
       {error && <p className="text-sm text-rose-700">{error}</p>}
     </div>
