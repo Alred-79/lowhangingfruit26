@@ -36,7 +36,7 @@ export interface BarItem {
   /** Extra line in the hover tooltip. */
   detail?: string;
 }
-const TAG = { red: "bg-rose-100 text-rose-800", amber: "bg-amber-100 text-amber-800", slate: "bg-slate-100 text-slate-700" };
+const TAG = { red: "bg-[var(--color-tier-hidden-soft)] text-[var(--color-tier-hidden-ink)]", amber: "bg-[var(--color-tier-reluctant-soft)] text-[var(--color-tier-reluctant-ink)]", slate: "bg-slate-100 text-slate-700" };
 
 export function BarList({ items, max = 100, unit }: { items: BarItem[]; max?: number; unit: string }) {
   return (
@@ -44,17 +44,17 @@ export function BarList({ items, max = 100, unit }: { items: BarItem[]; max?: nu
       {items.map((it) => {
         const pct = Math.max(0, Math.min(100, (it.value / max) * 100));
         return (
-          <li key={it.key} tabIndex={0} className="group grid grid-cols-1 gap-x-4 gap-y-1 rounded-md px-2 py-2 outline-none hover:bg-slate-50 focus-visible:bg-slate-50 focus-visible:ring-2 focus-visible:ring-brand-200 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:items-center">
+          <li key={it.key} tabIndex={0} className="group grid grid-cols-1 gap-x-4 gap-y-1 rounded-xl px-2.5 py-2 outline-none transition-colors hover:bg-brand-50/60 focus-visible:bg-brand-50/60 focus-visible:ring-2 focus-visible:ring-brand-300 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:items-center">
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-1.5 text-sm text-slate-900">
-                {it.tag && <span className={`rounded px-1.5 py-0.5 text-[11px] font-medium ${TAG[it.tag.tone]}`}>{it.tag.text}</span>}
+                {it.tag && <span className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${TAG[it.tag.tone]}`}>{it.tag.text}</span>}
                 <span>{it.label}</span>
               </div>
               {it.sub && <div className="mt-0.5 text-xs text-slate-500">{it.sub}</div>}
             </div>
             <div className="relative flex items-center gap-2">
-              <div className="h-3 flex-1 border-l" style={{ borderColor: AXIS }}>
-                <div className="h-3 rounded-r transition-opacity group-hover:opacity-80" style={{ width: `${pct}%`, minWidth: it.value > 0 ? 2 : 0, background: SERIES }} />
+              <div className="h-3.5 flex-1 rounded-full bg-surface-2">
+                <div className="bar-grow h-3.5 rounded-full transition-opacity group-hover:opacity-80" style={{ width: `${pct}%`, minWidth: it.value > 0 ? 4 : 0, background: SERIES }} />
               </div>
               <span className="w-16 shrink-0 text-right text-xs font-medium tabular-nums text-slate-800">{it.display}</span>
               <Tip>
@@ -75,17 +75,22 @@ export function BarList({ items, max = 100, unit }: { items: BarItem[]; max?: nu
 /** Patient comfort 0-100. The fill colour carries severity and always comes with a word. */
 export function ComfortMeter({ value }: { value: number }) {
   const v = Math.max(0, Math.min(100, Math.round(value)));
-  const state = v < 30 ? { word: "Very low", fill: "#d03b3b", track: "#f6dada" } : v < 45 ? { word: "Low", fill: "#c98500", track: "#f6e7c4" } : { word: v >= 70 ? "High" : "Steady", fill: SERIES, track: SERIES_TRACK };
+  const state =
+    v < 30
+      ? { word: "Very low", fill: "var(--color-tier-hidden)", track: "var(--color-tier-hidden-soft)" }
+      : v < 45
+        ? { word: "Low", fill: "var(--color-tier-reluctant)", track: "var(--color-tier-reluctant-soft)" }
+        : { word: v >= 70 ? "High" : "Steady", fill: v >= 70 ? "var(--color-tier-initial)" : SERIES, track: v >= 70 ? "var(--color-tier-initial-soft)" : SERIES_TRACK };
   return (
     <div>
-      <div className="flex items-baseline justify-between text-xs">
-        <span className="text-slate-500">Patient comfort</span>
-        <span className="font-medium text-slate-800">
-          {v} <span className="font-normal text-slate-500">· {state.word}</span>
+      <div className="flex items-baseline justify-between text-[12px]">
+        <span className="font-semibold text-ink-3">Patient comfort</span>
+        <span className="font-bold text-ink">
+          <span className="font-mono tabular-nums">{v}</span> <span className="font-semibold text-ink-3">· {state.word}</span>
         </span>
       </div>
-      <div className="mt-1 h-2 rounded-full" style={{ background: state.track }} role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={v} aria-label={`Patient comfort ${v} of 100, ${state.word}`}>
-        <div className="h-2 rounded-full" style={{ width: `${v}%`, background: state.fill }} />
+      <div className="mt-1 h-2.5 overflow-hidden rounded-full" style={{ background: state.track }} role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={v} aria-label={`Patient comfort ${v} of 100, ${state.word}`}>
+        <div className="h-full rounded-full transition-[width] duration-500" style={{ width: `${v}%`, background: state.fill }} />
       </div>
     </div>
   );
