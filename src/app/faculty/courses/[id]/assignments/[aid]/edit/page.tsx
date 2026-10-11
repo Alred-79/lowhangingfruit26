@@ -17,16 +17,16 @@ export default async function EditAssignment({ params }: { params: Promise<{ id:
   const started = get<{ n: number }>("SELECT COUNT(*) AS n FROM encounters WHERE assignment_id = ?", a.id)!.n;
   return (
     <AppShell user={user}>
-      <div className="mb-2 text-xs text-slate-500">
+      <nav aria-label="Breadcrumb" className="mb-2 flex flex-wrap items-center gap-1 text-[12.5px] font-semibold text-ink-3">
         <Link href={`/faculty/courses/${course.id}`} className="hover:text-brand-700">
           {course.name}
-        </Link>{" "}
-        /{" "}
+        </Link>
+        <span aria-hidden>›</span>
         <Link href={`/faculty/courses/${course.id}/assignments/${a.id}`} className="hover:text-brand-700">
           {a.title}
-        </Link>{" "}
-        / Edit
-      </div>
+        </Link>
+        <span aria-hidden>›</span> Edit
+      </nav>
       <PageHeader title="Edit assignment" subtitle={started ? `${started} visit${started === 1 ? " has" : "s have"} already been started. Changes apply to visits started from now on.` : "Nobody has started this assignment yet."} />
       <AssignmentBuilder
         courseId={course.id}

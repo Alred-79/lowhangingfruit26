@@ -541,9 +541,9 @@ function LiveScore({ tl, active, onActive }: { tl: TimelinePoint[]; active: numb
         <dl className="grid grid-cols-3 gap-2">
           {SERIES.slice(1).map((s) => (
             <div key={s.key} className="rounded-2xl bg-surface-2 px-3 py-2">
-              <dt className="flex items-center gap-1.5 text-[12px] font-bold text-ink-3">
+              <dt className="flex items-start gap-1.5 text-[12px] font-bold text-ink-3 [overflow-wrap:anywhere]">
                 <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: s.color }} aria-hidden />
-                <span className="truncate">{s.key === "coverage" ? "Findings" : s.name}</span>
+                <span className="min-w-0 break-words leading-tight">{s.key === "coverage" ? "Findings" : s.name}</span>
               </dt>
               <dd className="font-display text-[22px] font-black leading-tight text-ink tabular">{pct(shown[s.key])}</dd>
               <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-surface" aria-hidden>

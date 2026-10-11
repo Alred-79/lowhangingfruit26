@@ -13,16 +13,16 @@ export default async function NewAssignment({ params }: { params: Promise<{ id: 
   if (!course) notFound();
   return (
     <AppShell user={user}>
-      <div className="mb-2 text-xs text-slate-500">
+      <nav aria-label="Breadcrumb" className="mb-2 flex flex-wrap items-center gap-1 text-[12.5px] font-semibold text-ink-3">
         <Link href="/faculty/courses" className="hover:text-brand-700">
           Courses
-        </Link>{" "}
-        /{" "}
+        </Link>
+        <span aria-hidden>›</span>
         <Link href={`/faculty/courses/${course.id}`} className="hover:text-brand-700">
           {course.name}
-        </Link>{" "}
-        / New assignment
-      </div>
+        </Link>
+        <span aria-hidden>›</span> New assignment
+      </nav>
       <PageHeader title="New assignment" subtitle="Ask the guide for a starting point, or fill in the form yourself. Either way you decide every setting." />
       <AssignmentBuilder
         courseId={course.id}
