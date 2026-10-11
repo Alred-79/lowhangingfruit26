@@ -242,3 +242,36 @@ p {
     scroll-behavior: auto !important;
   }
 }
+
+/* Number tickers without JavaScript: an animatable integer drives a CSS counter, so the count runs
+   from first paint (no flash of the final value before hydration) and the reduced-motion rule above
+   collapses it to the final value. Screen readers get the real number from a sibling sr-only span. */
+@property --n {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+.count-up {
+  --n: var(--to);
+  counter-reset: n var(--n);
+  animation: count-up 1s var(--ease-out-ui) both;
+}
+.count-up::after {
+  content: counter(n);
+}
+@keyframes count-up {
+  from {
+    --n: 0;
+  }
+  to {
+    --n: var(--to);
+  }
+}
+.ring-fill {
+  animation: ring-fill 1.1s var(--ease-out-ui) both;
+}
+@keyframes ring-fill {
+  from {
+    stroke-dashoffset: var(--from);
+  }
+}
