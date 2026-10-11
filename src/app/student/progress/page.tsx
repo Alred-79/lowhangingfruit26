@@ -87,7 +87,7 @@ export default async function ProgressPage({ searchParams }: { searchParams: Pro
     if (!v || v.id !== ev.encounter_id) visits.push((v = { id: ev.encounter_id, level: ev.level, date: ev.created_at, title: labels.get(ev.case_id || "") || "Visit", after: new Map() }));
     v.after.set(ev.domain, ev.after);
   }
-  const day = (s: string) => toDate(s).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  const day = (s: string) => toDate(s).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" });
   const series: HistorySeries[] = [];
   if (visits.length) {
     const current = new Map<string, number>();
