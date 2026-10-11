@@ -1,7 +1,8 @@
 import { Award, Flame, Info, KeyRound, Lock, Mountain, Repeat, Route, Sparkles, Star, Trophy } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
 import { cx } from "@/components/ui";
-import { XP_RULES, type Achievement, type GameState, type RankInfo, type Streak } from "./derive";
+import type { Achievement, GameState, Streak } from "./derive";
+import { XP_RULES, type RankInfo } from "./rules";
 
 // Game HUD pieces. Server-renderable: every number is in the HTML at first paint (no flash before
 // hydration), motion is CSS (count-up via @property, bar-grow, flicker, shimmer) and collapses to the
