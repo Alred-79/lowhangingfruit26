@@ -143,7 +143,7 @@ export default async function PracticePage() {
       <div className="flex flex-col">
         {/* ---------- Make your own (students only) ---------- */}
         {isStudent && (
-          <section aria-labelledby="make-own" className="rise order-2 mt-4 overflow-hidden lg:order-1 lg:mb-4 lg:mt-0 rounded-[26px] bg-ink text-white clay" style={v({ "--i": 1 })}>
+          <section aria-labelledby="make-own" className="rise mb-4 overflow-hidden rounded-[26px] bg-ink text-white clay" style={v({ "--i": 1 })}>
             <div className="grid lg:grid-cols-[19rem_minmax(0,1fr)]">
               <div className="relative overflow-hidden p-5 sm:p-6">
                 <div className="pointer-events-none absolute -bottom-16 -left-10 h-48 w-48 rounded-full bg-[var(--color-mastery)]/35 blur-2xl" aria-hidden />
@@ -228,7 +228,7 @@ export default async function PracticePage() {
           </section>
         )}
 
-        <section aria-label="Patient library" className="order-1 lg:order-2">
+        <section aria-label="Patient library">
           <PracticeLibrary cases={cases} professionNames={Object.fromEntries(professions().map((p) => [p.id, p.name]))} myProfession={isStudent ? user.profession_id : null} />
         </section>
       </div>
