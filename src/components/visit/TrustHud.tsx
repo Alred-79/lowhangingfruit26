@@ -2,7 +2,6 @@
 
 import { DoorOpen, Lock, Sparkles } from "lucide-react";
 import "./visit.css";
-import type { CSSProperties } from "react";
 import { cx } from "@/components/ui";
 
 // The visit's game HUD: the patient's comfort as a gauge that springs every turn, a combo for
@@ -12,7 +11,6 @@ import { cx } from "@/components/ui";
 // visit's two trust thresholds, passed by the page as display-only figures. Nothing hints at what is
 // still locked: no counts of hidden facts, ever.
 
-const v = (o: Record<string, string | number>) => o as CSSProperties;
 const word = (x: number) => (x >= 60 ? "at ease" : x >= 40 ? "guarded" : "uneasy");
 
 function Gauge({ value }: { value: number }) {
